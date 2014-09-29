@@ -1,0 +1,104 @@
+Architecture
+•	Client: Android SDK 
+•	Server: J2EE 
+•	Graph database: Neo4j
+
+Use-cases for posting invitations
+Primary actor: user
+Goal: Create and post an invitation to selected friends
+Pre-Condition: The user has logged in
+Main Path:
+1.	Create meal invitation
+2.	Select recipients for invitation 
+3.	Post invitation
+
+1. Create meal invitation
+Primary actor: user
+Goal: Create an invitation to be disseminated amongst friends
+Pre-Condition: The user has logged in
+Main Path:
+1.	The user pushes a "create invitation" button
+2.	The app will show a list of restaurants.
+3.	The user must select: 
+    a.	One restaurant, or
+    b.	Multiple restaurants
+    c.	Input new restaurant name
+4.	The app displays the selected restaurant
+5.	The user selects the start time for availability to begin meal 
+6.	The user selects the end time for availability to begin meal, or selects from a list of duration options (e.g. 30 mins, 1 hour, etc.)
+7.	The user selects the approximate meal duration selects from a list of duration options (e.g. 30 mins, 1 hour, etc.)
+8.	The user optionally sets a meet-up location 
+9.	The user presses the “select friends” button to enter the next phase.
+
+Select recipients for invitation
+Primary actor: user
+Goal: Select friends to which an invitation can be sent
+Pre-Condition: The user has created a meal invitation
+Main Path: 
+1.	The user pushes the “select friends” button
+2.	The app shows a list of friends and preset friend groups
+3.	The user selects which friends and groups of friends will receive the invitation
+4.	The app displays the list of selected friends to which the invitation will be sent
+    a.	The app has an option to save this set as a custom friends group or override an existing friends group
+5.	The user sets the maximum number of friend acceptance before the invitation is closed
+6.	The user sets if this invitation is open to other parties (e.g. invitation to extendable to friends of friends and no more)
+7.	The user presses the “complete post details” button to enter the next phase. 
+
+Post invitation
+Primary actor: user
+Goal: Post the invitation to be seen by selected friends
+Pre-Condition: The user has created invitation post and selected target friends
+Main Path: 
+1.	The user presses the “complete post details” button
+2.	The user selects a start time for invitation post time (default is “now”).
+3.	The user can select an optional invitation expiry time, or select from various options for invitation durations (e.g. 30 mins, 1 hour, etc.)
+4.	The app displays an option to save this invitation under a name for future use
+    a.	If the user types in a name for the invitation and saves
+    b.	The app acknowledges the invitation has been saved
+    c.	If the user does not opt to save, then the invitation will be stored as “current invitation”
+5.	The user presses “post” button to post
+    
+Edit invitation
+Primary actor: user
+Goal: Edit an existing invitation
+Pre-Condition: user has created at least one invitation
+Main Path: 
+1.	The user pushes a "edit invitation" button 
+2.	The app shows the current active invitation (if available) and the list of saved invitations
+3.	The user selects which invitation to edit
+4.	The app returns the “create meal invitation” page with fields filled
+5.	The user edits the fields and continues the process starting at the “create meal invitation” page
+6.	The user saves the invitation
+    a.	The user can also post the invitation
+
+Delete invitation
+Primary actor: user
+Goal: Delete invitation
+Pre-Condition: user has created at least one invitation
+Main Path:
+1.	The user pushes a "edit invitation" button 
+2.	The app shows the current active invitation (if available) and the list of saved invitations
+3.	The user selects which invitation to delete
+4.	The app deletes the invitation and returns “invitation deleted” message
+
+Respond to invitation
+Primary actor: user
+Secondary actor: friend user who sent the invitation
+Goal: Respond to an invitation 
+Pre-Condition: user has received an invitation from a friend 
+Main Path: 
+1.	The user clicks on an active invitation
+2.	The user reads the information on the invitation (see “notification”)
+3.	The user can respond in one of the following cases:
+    a.	Decline the invitation
+        i.	The app sends a decline to the inviter
+        ii.	The app dismisses the invitation from the user’s active invitation list
+    b.	Ignore the invitation
+        i.	The app dismisses the invitation from the user’s active invitation list
+    c.	Accept the invitation
+        i.	If the inviter has set the invitation to “open/extendable” and the maximum number of invitees has not been reached, the app displays a list of friends
+    ii.	The user can select another friend (if that friend is a user of the app) or manually type in the name of the friend (This friend of friend is definitely going)
+    iii.	The app sends the acceptance (with the numbers and names of accepted invitees) back to the inviter
+    
+    
+    
