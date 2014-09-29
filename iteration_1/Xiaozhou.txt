@@ -78,7 +78,7 @@ Main Path:
 	4. User click the button to confirm the deletion
 	5. The app deletes the event label from the setting page 
 
-Automatic turning off of the availability status
+Automatically turning off the availability status
 Primary actor: user
 Secondary actors: server, friends
 Goal: turn off the available status of a user when the app is turned off
@@ -87,7 +87,7 @@ Main Path:
 	2. The server set the user's status to be unavailable 
 	3. The profile of the user on all the friends interface shows "unavailable"
 	
-Automatic turning off of the availability status
+Automatically turning off the availability status
 Primary actor: user
 Secondary actors: server, friends
 Goal: turn off the available status of a user when the app is turned off
