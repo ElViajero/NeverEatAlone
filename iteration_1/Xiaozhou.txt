@@ -1,0 +1,109 @@
+Vision Statement 
+
+Our goal is to develop a mobile application named "Never Eat Alone", which allows the users to post invitations (with conditions) to invite others to have meals together. The users can add friends, see which friends are available and choose to post the invitation to a sub group of friends, and they can also accept the invitation and inform the inviter. This app will also feature data analysis like ranking and recommending restaurantes based on the preferences of friends, recommending friends for meal based on restaurante and geometrical information, etc. We will first focus on the Android platform, and if time allows, we'll extend it to a cross platform app using Java with RoboVM. 
+
+------------------
+
+Actors
+
+User - all users of this app. In an invitation event, they can take one of the following roles:  
+	Inviter - the user who post a invitation to friends
+	friend - the user who receive the invitation 
+Database - where all the user information and restaurant information are stored. 
+Server - manage the accounts and analyze the data.
+
+------------------
+
+Use-cases related to setting Availability 
+
+Turn on availability status
+Primary actor: user
+Secondary actors: friends 
+Goal: set the status to be "available" with a press of button 
+Pre-Condition: user has logged in
+Main Path: 
+	1. User pushes a "friend list" button
+	2. The app shows a list of friends
+	3. User selects friends who will see his/her "available" status
+	4. User clicks the "set available" button
+	5. The availability indicators light up beside the friends name that are chosen
+	6. The profile of the user on the chosen friends interface shows "available" 
+
+Turn off availability status
+Primary actor: user
+Secondary actors: friends 
+Goal: set the status to be "unavailable" with a press of button 
+Pre-Condition: user has logged in
+Main Path: 
+	1. User pushes a "friend list" button
+	2. The app shows a list of friends
+	3. User selects friends who will see his/her "unavailable" status
+	4. User clicks the "set unavailable" button
+	5. The availability indicators go off beside the friends name that are chosen
+	6. The profile of the user on the chosen friends interface shows "unavailable" 
+	
+Create a customized availability status
+Primary actor: user
+Secondary actors: friends 
+Goal: pre-set the availability status in fixed time slots 
+Pre-Condition: user has logged in
+Main Path: 
+	1. User enters the setting page for availability 
+	2. User choose the date, starting and ending points of the time slot 
+	3. (optional) user choose "repeat daily" or "repeat weekly" 
+	4. User pushes a "friend list" button
+	5. The app shows a list of friends
+	6. User selects friends who will see his/her "available" status
+	7. User clicks the "set available" button
+	8. An event label is created with the time slot information
+	5. When the time slot is reached, the availability indicators light up beside the friends name that are chosen
+	6. And the profile of the user on the chosen friends interface shows "available" 
+	7. If the event is not repeating, the app deletes the event label automatically from the setting page of the user 
+Alternative Path:
+	i. User selects friends who will see his/her "unavailable" status
+	ii. User clicks the "set unavailable" button
+	iii. An event label is created with the time slot information
+	iv. When the time slot is reached, the availability indicators go off beside the friends name that are chosen
+	v. And the profile of the user on the chosen friends interface shows "unavailable" 
+
+Delete a customized availability status
+Primary actor: user
+Secondary actors: friends 
+Goal: delete the availability status in fixed time slots 
+Pre-Condition: user has logged in
+Main Path: 
+	1. User enters the setting page for availability 
+	2. User click the "delete" button on the event label 
+	3. A confirmation pops up 
+	4. User click the button to confirm the deletion
+	5. The app deletes the event label from the setting page 
+
+Automatic turning off of the availability status
+Primary actor: user
+Secondary actors: server, friends
+Goal: turn off the available status of a user when the app is turned off
+Main Path:
+	1. User turns off the app
+	2. The server set the user's status to be unavailable 
+	3. The profile of the user on all the friends interface shows "unavailable"
+	
+Automatic turning off of the availability status
+Primary actor: user
+Secondary actors: server, friends
+Goal: turn off the available status of a user when the app is turned off
+Main Path:
+	1. User turns on the app
+	2. The server set the user's status to be available to those who could see the "available" status before the app was turned off
+	3. The profile of the user on those selected friends interface shows "available"
+	
+
+
+
+
+
+
+
+
+
+
+
