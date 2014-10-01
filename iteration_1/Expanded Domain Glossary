@@ -18,8 +18,8 @@ USER ACCOUNT
 Has a : 
 	Account Information
 	Availability Status
-	Contact List
-	Visibility List
+	Contact List 	# List of all contacts the user knows
+	Visibility list 	#List of contacts that see the user as available when status is available
 
 
 ACCOUNT INFORMATION
@@ -40,30 +40,30 @@ CONTACT
 Is a :
 	User
 
-CONTACT GROUP
---------------
-Has :
-	Contacts
-
 
 CONTACT LIST
 ------------
 Has :
-	Contacts
+	Contact Groups  # By default a full contact list has one group (implictit) that has all contacts
+
+CONTACT GROUP
+--------------
+Has :
+	Contacts 	# Collection of contacts
 
 
 VISIBILITY LIST
 ---------------
 Is a :
-	Contact List
+	Contact List 
 
 
 
 NOTIFICATION
 ------------
 Has a:
-	Poster
-	Receiver List
+	Poster 	# creator of the notification
+	Receiver List # contacts that recieve the notification
 	
 
 POSTER
@@ -94,33 +94,33 @@ Has :
 	Duration
 	Start time
 	End time
-	max capacity
-	current capacity
+	max capacity 	# maximum number of people allowed
+	current capacity 	# How many people have accepted
 	Custom message
 	Additional Information
 
 
-CAPACITY UPDATE NOTIFCATION
+CAPACITY UPDATE NOTIFCATION   # pushes capacity status (filled or x remaining) to all contacts that recieved the original meal notification.
 ----------------------------
 Is a :
 	Meal Notification 
 
 
-FRIENDS ATTENDING NOTIFICATION
+FRIENDS ATTENDING NOTIFICATION 
 -------------------------------
 Is a :
 	Meal Notification
-Has :
-	Contact List
+Has : 
+	Contact List   # Subset of the contact list, of a contact who recieved the meal notification.
 
 
-ACCEPTANCE NOTIFICATION
+ACCEPTANCE Notification 	# Just to confirm attendance
 -----------------------
 Is a :
 	Meal Notification
 
 
-CANCELLATION NOTIFICATION
+CANCELLATION NOTIFICATION 	# Cancelled by the poster or to cancel attendance of a contact.
 -------------------------
 Is a :
 	Meal Notification
