@@ -16,7 +16,8 @@ CORE FEATURES :
 • The ability to delete contacts.
 • The ability to separate contacts into groups (friends,family etc.).
 • The ability to set availability status -- A Status that represents whether the user wishes to recieve notifications.
-• The ability to modify visibility list -- The list that controls which contacts of the user can see the user's availability status when enabled(i.e. set to "available"). It is a subset of the user's contacts.
+• The ability to modify visibility list -- The list that controls which contacts of the user can see 
+  the user's availability status when enabled(i.e. set to "available"). It is a subset of the user's contacts.
 • The ability to set availability status at repeated intervals -- The status could be set to available from 3-4 pm every Monday, Wed, Friday.
 
 --- USER/MEAL NOTIFICATION MANAGEMENT FEATURES
@@ -82,17 +83,4 @@ EXTENDED FEATURES:
 • The ability randomly recommend a restaurant (Should pick from restaurants that have decent ratings)
 • The ability to recommend friends for meal at a particular restaurants -- uses contact's ratings for that restaurant.
 • The ability to recommend restaurants for meal with a particular group of friends -- uses common restaurants that are ranked high by the group in question.
-
-
-
-
-
-
-
-
-
-
-
-
-
 
