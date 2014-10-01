@@ -91,11 +91,11 @@ MEAL NOTIFICATION INFORMATION
 -----------------------------
 Has :
 	Location
-	Duration
-	Start time
-	End time
-	max capacity 	# maximum number of people allowed
-	current capacity 	# How many people have accepted
+	Meal Duration
+	Availability Start time #Start time of when you want to leave
+	Availability End time
+	Max Capacity 	# maximum number of people allowed
+	Current Capacity 	# How many people have accepted
 	Custom message
 	Additional Information
 
