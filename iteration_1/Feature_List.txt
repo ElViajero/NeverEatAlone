@@ -1,23 +1,98 @@
-Feature List
+Overhaul of the Feature List.
 
-Standard features:
-• Create and delete account: email is required, username cannot change. 
-• login and logout 	
-• Fill in and modify account information: password, email, (phone number, university/company, true name, gender)
-• Relation management(this one in fact contains several features): Add and delete friend. See friend’s friends. Search friends. like LinkedIn, users have 1st and 2nd connection. Set friend groups. 
-• Users can post status (invitation) for meal, information includes open time slots, location, etc. The user can choose the status to be visible to certain groups of friends or individuals. The invitation expires when the time slot is passed, or when the user closes the status by hand. 
-• The inviter gets push notification when the invitation is open and someone accepts the invitation.
-• “Availability” status: when it’s on, you receive push for each invitation visible to you. The user can choose when to turn it on, by setting a fixed slots each day or just push a button on screen.  The user can set available to certain groups of friends or individuals. The app must be on (in the background) for turning on availability status. When the app is turned off, the user is automatically unavailable. Each user can see availability of each friend. The sender can send post to unavailable friends, when the friend comes online and the invitation is still open, he/she can still see the post.
 
-Extended features:
-• Add comments on posts. 
-• Instant messages
-• Add favorite restaurant
-• Rate restaurant as 1-5 stars
-• Search for restaurants based on location (using geographical information), style, rating. 
-• Rank restaurants based on the ratings, recommendations and attending frequencies among friends. 
-• Recommend restaurants to friends 
-• Randomly pick somewhere to eat, not just restaurants. 
-• Show history of the status of users
-• Recommend friends for eating together based on restaurants
-• Recommend restaurants based on friends that will go eating together 
+
+===================
+CORE FEATURES :
+===================
+
+-- USER MANAGEMENT FEATURES 
+
+• The ability to create user accounts : email is required, username is unique and cannot be changed. 
+• The ability to delete user accounts.
+• The ability to login and logout of user account.
+• The ability to insert and modify account information: password, email, availability status(see below), visibility list(See below).
+• The ability to add contacts - only by inputting the userId of the contact.
+• The ability to delete contacts.
+• The ability to separate contacts into groups (friends,family etc.).
+• The ability to set availability status -- A Status that represents whether the user wishes to recieve notifications.
+• The ability to modify visibility list -- The list that controls which contacts of the user can see the user's availability status when enabled(i.e. set to "available"). It is a subset of the user's contacts.
+• The ability to set availability status at repeated intervals -- The status could be set to available from 3-4 pm every Monday, Wed, Friday.
+
+--- USER/MEAL NOTIFICATION MANAGEMENT FEATURES
+
+• The ability to post meal notifications  -- sent to contacts based on above visibility list.
+• The ability to recieve meal notifications -- from contacts to whom the user is available (Determined by availability and visibility as noted above).
+• The ability to close meal notifications.
+
+
+-- MEAL NOTIFICATION CONTENT FEATURES
+
+• The ability to set the location of the meal (Look at geo location features below) -- This CAN BE a custom location (someone's house for example).
+• The ability to set a duration (optional start and end time) for meal notification -- A user may be open for breakfast for two hours from current time OR 
+  the user says he/she can have breakfast between 8-10 a.m.
+• The ability to set a deffered meal notification post time -- The user can choose when the notification is posted (perhaps at a later time or date).
+• The ability to set maximum size of meal party.
+• The ability to set whether meal is open to extended contacts -- allows friends of friends to join in.
+• The ability to add a custom message or additonal information.
+• The ability to add a list of recipients for meal notification -- Subset of user's contacts.
+• The ability to add a contact who is currently unavailable.
+
+
+
+-- MEAL NOTIFICATION PUSH FEATURES 
+
+• The ability to push notification to all contacts that are recipients of the meal notification and are currently available to the poster or
+  become available to the poster before the notification expires or is closed manually by the poster.
+• The ability to push "open spots" status -- As people accept, other contacts to whom the notification was sent should be informed that the number of 
+  available spots for the notification are decreasing.
+• The ability to push the names of contacts of the recipent of the post that have accepted the notification -- If a friend of one of 
+  the invitees accepts, the invitee should be notified that said friend is attending ( Since this might affect the decision of the invitee).
+• The ability to push a "notification closed" message to notify contacts that the poster is no longer accepting replies.
+• The ability to inform (via push) the poster of the notification of which contacts have accepted and when the notification is closed.
+  
+
+-- GEO LOCATION FEATURES
+
+• The ability to automatically find address of restaurant -- If poster type's subway, the address "Subway restaurant, xyz Street, ..." should automatically 
+  be filled in.  
+• The ability to tag custom locations -- If poster types his/her address, then the app should remember the address for future reference.
+
+==================
+EXTENDED FEATURES:
+==================
+
+-- USER/RESTAURANT RANK MANAGEMENT FEATURES 
+
+• The ability to give a restaurant a star rating (1-5 scale).
+• The ability to favorite a restaurant
+
+-- MEAL NOTIFICATION CONTENT AND PUSH 
+
+• The ability to recommend a restaurant -- one of the recipients can recommend a restaurant if the location is unspecified.
+
+-- GEO LOCATION FEATURES
+
+• The ability to search for restaurants based on proximity.
+
+
+-- PREDICTIVE FEATURES
+
+• The ability to recommend restaurants that are liked by majority users in the area (Uses GEO LOCATION).
+• The ability randomly recommend a restaurant (Should pick from restaurants that have decent ratings)
+• The ability to recommend friends for meal at a particular restaurants -- uses contact's ratings for that restaurant.
+• The ability to recommend restaurants for meal with a particular group of friends -- uses common restaurants that are ranked high by the group in question.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
