@@ -1,9 +1,9 @@
 DOMAIN SKETCH WITH MANY EXTRA DETAILS :
 
-Note, this is provided as a glossary for the use cases. The use cases should use terminlogy mentioned here.
+Note, this is provided as a glossary for the use cases. The use cases should use terminology mentioned here.
 It extracts a lot of information from the feature list.
 
-Information such as locatino name etc. WILL NOT GO INTO THE DOMAIN MODEL.
+Information such as location name etc. WILL NOT GO INTO THE DOMAIN MODEL.
 
 This is for use case reference. The domain model is a strict subset of the information provided here.
 
@@ -63,7 +63,7 @@ NOTIFICATION
 ------------
 Has a:
 	Poster 	# creator of the notification
-	Receiver List # contacts that recieve the notification
+	Receiver List # contacts that receive the notification
 	
 
 POSTER
@@ -71,7 +71,7 @@ POSTER
 Is a:
 	User
 
-RECIEVER LIST
+RECEIVER LIST
 --------------
 Is a :
 	Contact List
@@ -87,7 +87,7 @@ Has :
 
 
 
-MEAL NOTIFICATION INFOMATION
+MEAL NOTIFICATION INFORMATION
 -----------------------------
 Has :
 	Location
@@ -100,7 +100,7 @@ Has :
 	Additional Information
 
 
-CAPACITY UPDATE NOTIFCATION   # pushes capacity status (filled or x remaining) to all contacts that recieved the original meal notification.
+CAPACITY UPDATE NOTIFICATION   # pushes capacity status (filled or x remaining) to all contacts that received the original meal notification.
 ----------------------------
 Is a :
 	Meal Notification 
@@ -111,7 +111,7 @@ FRIENDS ATTENDING NOTIFICATION
 Is a :
 	Meal Notification
 Has : 
-	Contact List   # Subset of the contact list, of a contact who recieved the meal notification.
+	Contact List   # Subset of the contact list, of a contact who received the meal notification.
 
 
 ACCEPTANCE Notification 	# Just to confirm attendance
