@@ -1,0 +1,131 @@
+DOMAIN SKETCH WITH MANY EXTRA DETAILS :
+
+Note, this is provided as a glossary for the use cases. The use cases should use terminlogy mentioned here.
+It extracts a lot of information from the feature list.
+
+Information such as locatino name etc. WILL NOT GO INTO THE DOMAIN MODEL.
+
+This is for use case reference. The domain model is a strict subset of the information provided here.
+
+
+USER
+------
+Has a :
+	User account
+
+USER ACCOUNT
+-------------
+Has a : 
+	Account Information
+	Availability Status
+	Contact List
+	Visibility List
+
+
+ACCOUNT INFORMATION
+--------------------
+Has a :
+	username
+	password
+	email 
+
+	workplace
+	name
+	gender
+	Avatar
+
+
+CONTACT
+-------
+Is a :
+	User
+
+CONTACT GROUP
+--------------
+Has :
+	Contacts
+
+
+CONTACT LIST
+------------
+Has :
+	Contacts
+
+
+VISIBILITY LIST
+---------------
+Is a :
+	Contact List
+
+
+
+NOTIFICATION
+------------
+Has a:
+	Poster
+	Receiver List
+	
+
+POSTER
+-------
+Is a:
+	User
+
+RECIEVER LIST
+--------------
+Is a :
+	Contact List
+
+
+
+MEAL NOTIFICATION
+------------------
+Is a :
+	Notification
+Has :
+	Meal notification Information
+
+
+
+MEAL NOTIFICATION INFOMATION
+-----------------------------
+Has :
+	Location
+	Duration
+	Start time
+	End time
+	max capacity
+	current capacity
+	Custom message
+	Additional Information
+
+
+CAPACITY UPDATE NOTIFCATION
+----------------------------
+Is a :
+	Meal Notification 
+
+
+FRIENDS ATTENDING NOTIFICATION
+-------------------------------
+Is a :
+	Meal Notification
+Has :
+	Contact List
+
+
+ACCEPTANCE NOTIFICATION
+-----------------------
+Is a :
+	Meal Notification
+
+
+CANCELLATION NOTIFICATION
+-------------------------
+Is a :
+	Meal Notification
+
+
+
+
+
