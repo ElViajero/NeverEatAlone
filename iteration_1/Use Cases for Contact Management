@@ -87,7 +87,7 @@ Main Path:
 Use Case to Edit A Group's Details
 --------------------------------------
 Primary actor: user
-Goal: Edit group information for a contact in the user's contact list.
+Goal: Edit group information for a group in the user's contact list.
 Pre-Condition: user has logged in. Group must be present in the user's contact list.
 Main Path: 
 	1. Go to the contacts page
@@ -97,3 +97,6 @@ Main Path:
 	5. Hit edit button.
 	6. Make the requisite changes.
 	6. Press "confirm".
+
+
+
