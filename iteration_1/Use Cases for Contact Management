@@ -1,0 +1,99 @@
+
+USE CASES FOR CONTACT MANAGEMENT
+
+
+Use Case to Add a Contact
+--------------------------
+Primary actor: user
+Goal: Add a contact to the user's list of contacts
+Pre-Condition: user has logged in. Contact must be a valid user of the application.
+Main Path: 
+	1. Go to the contacts page
+	2.	Select the "people" tab	
+	3. Press the "add contact" button.
+	4. On "Add page button" select "search by username".
+	5. Type in contact's username.
+	6. Press search button
+	7. Select right contact from search results.
+	8. Press "confirm" button.
+	9. An Add Contact Notification is sent to contact. If the contact sends an accept contact invitation back then contact is added to contact list.
+Alternate Path: 
+	1. Go to the contacts page
+	2. Select the people tab
+	3. Press the "add contact" button.
+	4. On "Add page button" select "search by email".
+	5. Type in contact's email.
+	6. Press search button
+	7. Select right contact from search results.
+	8. Press "confirm" button.
+	9. An Add Contact Notification is sent to contact. If the contact sends an accept contact invitation back then contact is added to contact list.
+
+
+Use Case to Delete a Contact
+-----------------------------
+Primary actor: user
+Goal: Delete a contact from the user's list of contacts
+Pre-Condition: user has logged in. Contact must be a valid user of the application. Contact must be present in the user's contact list.
+Main Path: 
+	1. Go to the contacts page
+	2. Select the "people" tab
+	3. Search for contact to be deleted.
+	4. Swipe sideways. Delete and edit appear.
+	5. Hit delete button.
+	6. On the prompt that appears, press "confirm".
+
+
+Use Case to Create Groups 
+-------------------------
+Primary actor: user
+Goal: Delete a contact from the user's list of contacts
+Pre-Condition: user has logged in. Contact must be a valid user of the application. Contact must be present in the user's contact list.
+Main Path: 
+	1. Go to the contacts page
+	2. Select "group" tab.
+	3. Click the "add group" (+) button.
+	4. Type group name in the "Group Name" textbox.
+	5. Select contacts from the "Select Friends" list.
+	6. Hit Confirm.
+
+Use Case to Delete Groups
+--------------------------
+Primary actor: user
+Goal: Delete a group from the user's list of contact groups
+Pre-Condition: user has logged in. group must be present in the user's contact groups.
+Main Path: 
+	1. Go to the contacts page
+	2. Select the "group" tab
+	3. Search for group to be deleted.
+	4. Swipe sideways. Delete and edit appear.
+	5. Hit delete button.
+	6. On the prompt that appears, press "confirm".
+
+
+Use Case to Edit A Contact's Details
+--------------------------------------
+Primary actor: user
+Goal: Edit contact information for a contact in the user's contact list.
+Pre-Condition: user has logged in. Contact must be a valid user of the application. Contact must be present in the user's contact list.
+Main Path: 
+	1. Go to the contacts page
+	2. Select the "people" tab
+	3. Search for contact to be edited.
+	4. Swipe sideways. Delete and edit appear.
+	5. Hit edit button.
+	6. Make the requisite changes.
+	6. Press "confirm".
+
+Use Case to Edit A Group's Details
+--------------------------------------
+Primary actor: user
+Goal: Edit group information for a contact in the user's contact list.
+Pre-Condition: user has logged in. Group must be present in the user's contact list.
+Main Path: 
+	1. Go to the contacts page
+	2. Select the "group" tab
+	3. Search for contact to be edited.
+	4. Swipe sideways. Delete and edit appear.
+	5. Hit edit button.
+	6. Make the requisite changes.
+	6. Press "confirm".
