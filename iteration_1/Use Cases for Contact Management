@@ -16,7 +16,7 @@ Main Path:
 	6. Press search button
 	7. Select right contact from search results.
 	8. Press "confirm" button.
-	9. An Add Contact Notification is sent to contact. If the contact sends an accept contact invitation back then contact is added to contact list.
+	9. An Add Contact Request Notification is sent to contact. If the contact sends an Contact Accept Notification back then contact is added to contact list.
 Alternate Path: 
 	1. Go to the contacts page
 	2. Select the people tab
@@ -26,7 +26,7 @@ Alternate Path:
 	6. Press search button
 	7. Select right contact from search results.
 	8. Press "confirm" button.
-	9. An Add Contact Notification is sent to contact. If the contact sends an accept contact invitation back then contact is added to contact list.
+	9. An Add Contact Request Notification is sent to contact. If the contact sends an Contact Accept Notification back then contact is added to contact list.
 
 
 Use Case to Delete a Contact

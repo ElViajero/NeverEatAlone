@@ -90,5 +90,26 @@ Main Path :
 1.	Post a cancellation message to all recipients of the original meal notification.
 
 
+9. Send a Contact Request Notification
+----------------------------------------
+
+Primary Actor : Poster (user)
+Secondary Actor(s) : Recipient (users)
+Precondition : The poster must have added the recipeient as a contact.
+Goal : Send a Contact Request.
+Main Path : 
+1.	Send the Contact Request Notification.
+
+
+10. Recieve a Contact Accept Notification
+------------------------------------------
+Primary Actor : Poster (user)
+Secondary Actor(s) : Recipient (users)
+Precondition : The poster must have added the recipeient as a contact. The contact must have accepted the Contact Request Notifcation and sent the Contact Accept Notification.
+Goal : Recieve A Contact Accept Notification.
+Main Path : 
+1. If Contact Request Notifcation is still active then go to step 2 else RETURN.
+2.	Recieve the Contact Accept Notification.RETURN,
+
 
 
