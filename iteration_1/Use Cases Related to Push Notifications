@@ -41,7 +41,7 @@ Main Path:
 4.	Close meal notification and send completion notification to all recipients of original notification.
 
 
-Post an Update Notification
+4.	Post an Update Notification
 ----------------------------
 Primary actor : Poster (user)
 secondar actor : Recipient (user)
@@ -54,7 +54,7 @@ Main Path:
 
 
 
-Post a Friend Attending Notification
+5.	Post a Friend Attending Notification
 -----------------------------------
 Primary actor : Poster (user)
 secondar actor : Recipient (user)
@@ -64,12 +64,12 @@ Main Path :
 1.  Construct a friend attending notification.
 2.	For all recipients R of the original meal notification that are contacts of the recipient that accepted the notification, 
     send the friend attending notification to R.
-   
 
 
 
 
-4.	Post a Completion Notification
+
+6.	Post a Completion Notification
 ------------------------------------
 Primary Actor : Poster (user)
 Secondary actor(s) : Recipient (user)
@@ -80,7 +80,7 @@ Main Path :
 2.	Send a completion notification to all recipients that are available to the poster.
 
 
-5.	Post a Cancellation Notification	
+7.	Post a Cancellation Notification	
 -------------------------------------
 Primary Actor : Poster (user)
 Secondary Actor(s) : Recipient(s) (users)
