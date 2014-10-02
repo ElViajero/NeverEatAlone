@@ -12,6 +12,7 @@ USER
 ------
 Has a :
 	User account
+	Deffered Notification List (implicit -- not visible to user directly)   # This is used to push notifications when the user becomes available.
 
 USER ACCOUNT
 -------------
@@ -100,21 +101,26 @@ Has :
 	Additional Information
 
 
-CAPACITY UPDATE NOTIFICATION   # pushes capacity status (filled or x remaining) to all contacts that received the original meal notification.
-----------------------------
+UPDATE NOTIFICATION    # notification for general updates to meal notification information.
+--------------------
 Is a :
 	Meal Notification 
 
+CAPACITY UPDATE NOTIFICATION # pushes capacity status (filled or x remaining) to all contacts that received the original meal notification.
+-----------------------------
+Is a :
+	Update Notification
 
 FRIENDS ATTENDING NOTIFICATION 
 -------------------------------
 Is a :
 	Meal Notification
 Has : 
-	Contact List   # Subset of the contact list, of a contact who received the meal notification.
+	Contact    # The contact who is attending
+	
 
 
-ACCEPTANCE Notification 	# Just to confirm attendance
+ACCEPTANCE NOTIFICATION 	# Just to confirm attendance
 -----------------------
 Is a :
 	Meal Notification
@@ -125,7 +131,10 @@ CANCELLATION NOTIFICATION 	# Cancelled by the poster or to cancel attendance of 
 Is a :
 	Meal Notification
 
-
+COMPLETION NOTIFICATION 	# When all recipients have been found.
+-------------------------
+Is a :
+	Meal Notification
 
 
 
