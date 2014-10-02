@@ -1,0 +1,15 @@
+Vision Statement 
+
+Our goal is to develop a mobile application named "Never Eat Alone", which allows the users to post invitations(Meal Notification) to invite others to have meals together. The users can add contacts, see which contacts are available and choose to post the invitation to a sub group of contacts (Receivers). These receivers can choose to accept, decline or ignore the invitation, and if they accept it, they can invite their contacts that are not in the poster’s contact list. This app will also feature data analysis like ranking and recommending restaurants based on the preferences of contacts, recommending contacts for meal based on restaurant and geometrical information, etc. We will first focus on the Android platform, and if time allows, we'll extend it to a cross platform app using Java with RoboVM. 
+
+------------------
+
+Actors
+
+User - all users of this app. In an invitation event, they can take one of the following roles:  
+	Poster - the user who post an invitation to contacts
+	Receiver - the user who receive the invitation 
+Database - where all the user information and restaurant information are stored. 
+Server - manage the accounts and analyze the data.
+
+

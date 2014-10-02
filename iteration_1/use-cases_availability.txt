@@ -1,0 +1,113 @@
+Use-cases related to setting Availability 
+
+Turn on availability status
+Primary actor: user
+Secondary actors: contacts 
+Goal: set the status to be "available" 
+Pre-Condition: user has logged in 
+Main Path: 
+	1. On the “invites” page, user switches the Available Status button to “on”
+		a. If one contact is in the Visibility List, the availability indicator of this user on that contact’s “Contacts” page turns on
+		b. The profile page of the user on that contact’s interface shows "available"
+ 
+
+
+Turn off availability status
+Primary actor: user
+Secondary actors: contacts 
+Goal: set the status to be “unavailable" 
+Pre-Condition: user has logged in 
+Main Path: 
+	1. On the “invites” page, user switches the Available Status button to “off”
+	2. The availability indicator of this user on all contacts’ “Contacts” page turns off
+	3. The profile page of the user on all contacts’ interface shows “unavailable"
+
+
+
+Set Visibility List
+Primary actor: user
+Secondary actors: contacts 
+Goal: set the Visibility List. Only the contacts in the list can see the user as available when user’s status is available 
+Pre-Condition: user has logged in and on the Profile page
+Main Path: 
+	1. User pushes the “Contacts” button to enter the Contacts page
+	2. User check or on check the box for “Set Visibility” on each line of the contacts
+		a. If user’s availability status is currently on, the availability indicator of this user on the “Contacts” page of the chosen contacts turns on
+		b. The profile of the user on the chosen contacts’ interface shows "available" 
+
+
+	
+Schedule availability status
+Primary actor: user
+Secondary actors: contacts 
+Goal: pre-set the availability status in fixed time slots 
+Pre-Condition: user has logged in and on the Profile page
+Main Path: 
+	1. User pushes the “Schedule Availability” button and enters the “Schedule Availability” page 
+	2. User pushes the “Add” button and enters the “Add Schedule” page
+	3. User enters the date, starting(from) and ending(to) points of the time slot 
+	4. User pushes “Available” button 
+		a. User can choose repeat pattern 
+	5. User push “Accept” button
+		a. User can push “Cancel” button to return to the “Schedule Availability” page without saving	
+	6. User return to the “Schedule Availability” page, an event label is created with “Available” and the time slot information
+		a. When the time slot is reached, if one contact is in the Visibility List, the availability indicator of this user on that contact’s “Contacts” page turns on
+		b. The profile page of the user on that contact’s interface shows "available"	
+	7. If the event is not repeating, the app deletes the event label automatically from the setting page of the user when availability time slot is passed 
+
+Alternative Path:
+	4.1. User pushes “Unavailable" button
+	6.1. User return to the “Schedule Availability” page, an event label is created with “Unavailable” and the time slot information
+		a. When the time slot is reached, the availability indicator of this user on all contacts’ “Contacts” page turns off
+		b. The profile page of the user on all contacts’ interface shows “unavailable"	
+
+
+
+Delete a scheduled availability status
+Primary actor: user
+Goal: delete the availability status in fixed time slots 
+Pre-Condition: user has logged in and on the “Schedule Availability” page
+Main Path: 
+	1. User pushes the “Edit” button
+	2. A “Delete” button shows on each event label 
+	3. User click the “Delete" button on an event label 
+	4. A confirmation pops up 
+	5. User click the button to confirm the deletion
+		a. User can click “cancel” and return to step 2
+	6. The app deletes the event label from the setting page 
+
+
+
+Automatically turning off the availability status
+Primary actor: user
+Secondary actors: server, contacts
+Goal: turn off the available status of a user when the app is turned off
+Main Path:
+	1. User turns off the app
+	2. The server set the user's status to be unavailable 
+	3. The availability indicator of this user on all contacts’ “Contacts” page turns off
+	4. The profile of the user on all the contacts’ interface shows "unavailable"
+	
+
+
+Automatically turning on the availability status
+Primary actor: user
+Secondary actors: server, contacts
+Goal: turn off the available status of a user when the app is turned off
+Main Path:
+	1. User turns on the app
+	2. The server set the user's status to be available 
+		a. If one contact is in the Visibility List, the availability indicator of this user on that contact’s “Contacts” page turns on
+		b. The profile page of the user on that contact’s interface shows "available"
+
+
+
+
+
+
+
+
+
+
+
+
