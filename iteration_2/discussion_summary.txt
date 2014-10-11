@@ -1,0 +1,54 @@
+Discussion Summary for all things except GUI design 
+--------------------------
+Changes to Domain Model
+(I may forget or misunderstand some part of this, Tejas and Yueling may modify it as you agreed on):
+
+   * Change "Meal Notification Information”  to "Meal Information”
+   * Change “Deferred Notification List” to “Inactive Notification List” 
+   * Add an “Active Notification List” for received notification
+   * Add a “Wait-to-send Notification List”(or whatever name it is) for scheduled invitation notification 
+
+----------------------------
+Changes to use-cases
+
+* Modify: use-case for creating an account 
+Need to check the availability and validity of the user name; check the consistency and validity of the password.(e.g., we can set the length limit for the password)
+
+* Add: Use-case for Log-in 
+The user can choose the availability status when logging in, if not chosen, use the default status.
+
+* Add: Use-case for Log-out
+When logged out, the availability status should be set to “unavailable”.
+
+* Add: use-case to set default availability status at login 
+
+* Add: use-case to delete(or cancel) an invitation
+
+* Add: use-case to close an invitation
+Any of the 3 conditions can trigger this use case: 
+1, attendance limitation is reached; 
+2, the post ending time is reached;
+3, the user choose to close the invitation manually. 
+
+* Add: use-case to set alias for contacts 
+Alias will override username in display. Can be sorted by last name. 
+
+------------------------
+Extended Features:
+
+   * User who receives a meal notification push can accept or decline it on the lock screen
+   * User who receives a meal notification push and click on the lock screen to see more detailed information of the notification 
+   * Use Facebook or other account information to log in 
+   * Search contacts (for adding) using true name, work place or phone number 
+   * Use geo information to search for contacts (both for adding friend and for searching within contact list) 
+   * Display contacts in different orders in contact list, adding a separate page for choosing sorting methods. 
+   * Schedule availability (remove it from the core feature list) 
+
+------------------------
+Miscellaneous (Only for extended features) 
+
+* Priority of “availability setting” 
+Login choice > Manually click the button > default login status > scheduled availability 
+
+* Scheduled availability is just two actions in implementation: turning on availability at the starting time and turning off availability at the ending time. We can also consider logging in at 3/4 of the scheduled time period, then this period automatically becomes invalid. But that’s for the extended feature. 
+
