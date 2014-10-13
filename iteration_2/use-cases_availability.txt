@@ -1,4 +1,5 @@
-Use-cases related to setting Availability 
+Use-cases related to setting Availability and log in/out
+----------------
 
 Turn on availability status
 Primary actor: user
@@ -6,11 +7,9 @@ Secondary actors: contacts
 Goal: set the status to be "available" 
 Pre-Condition: user has logged in 
 Main Path: 
-	1. On the “invites” page, user switches the Availability Status button to “on”
-	2. The server set the user's status to be available 
-		a. If one contact is in the Visibility List, the availability indicator of this user on that contact’s “Contacts” page turns on
-		b. The View Profile page of the user on that contact’s interface shows "available"
- 
+	1. On the Invites page, user switches the Availability Status button to “on”
+	2. The server sets the user's status to be available 
+		a. If one contact is in the Visibility List, the availability indicator of this user on that contact’s Contacts page turns on (the color of the user's display name turns to black)
 
 
 Turn off availability status
@@ -19,27 +18,61 @@ Secondary actors: contacts
 Goal: set the status to be “unavailable" 
 Pre-Condition: user has logged in 
 Main Path: 
-	1. On the “invites” page, user switches the Available Status button to “off”
-	2. The server set the user's status to be unavailable 
-	3. The availability indicator of this user on all contacts’ “Contacts” page turns off
-	4. The View Profile page of the user on all contacts’ interface shows “unavailable"
-
+	1. On the Invites page, user switches the Available Status button to “off”
+	2. The server sets the user's status to be unavailable 
+	3. The availability indicator of this user on all contacts’ Contacts page turns off (the color of the user's display name turns to gray)
 
 
 Set Visibility List
 Primary actor: user
 Secondary actors: contacts 
 Goal: set the Visibility List. Only the contacts in the list can see the user as available when user’s status is available 
-Pre-Condition: user has logged in and on the Profile page
+Pre-Condition: user has logged in and on the Contacts page
 Main Path: 
-	1. User clicks the “Contacts”/"Set Visibility List" button to enter the Contacts/Set Visibility page
-	2. User check or uncheck the box for “Set Visibility” on each line of the contacts
-		a. If user’s availability status is currently on, the availability indicator of this user on the “Contacts” page of the checked contacts turns on
-		b. The profile of the user on the checked contacts’ interface shows "available"
-		c. The availability indicator of this user on the “Contacts” page of the unchecked contacts turns off
-		d. The profile of the user on the unchecked contacts’ interface shows "unavailable"
-
+	1. User clicks the "Set Visibility" button on the Contacts page
+	2. Checkboxes appear on each line of the contacts
+	3. User checks or unchecks the box for setting "visible" or "invisible" to the contacts 
+		a. If user’s availability status is currently on, the availability indicator of this user on the Contacts page of the checked contacts turns on
+		b. The availability indicator of this user on the Contacts page of the unchecked contacts turns off
+		
+		
+Log in
+Primary actor: user
+Secondary actors: server
+Goal: Log into the app and choose the availability status
+Main Path:
+	1. User enters user name and password in the login page
+		a. User clicks "Available/Unavailable" button to change the login status. (The status shown is the current login status)
+	3. User clicks "Sign In" button
+	4. Server checks the correctness of username and password
+		a. if username and password don't match, show message, user reenter username or password, restart from step 1. 
+	5. Server sets the user's status to be the one shown on the "Available/Unavailable" button when login
+		a. If the user's availability status is on and one contact is in the Visibility List, the availability indicator of this user on that contact’s Contacts page turns on
+	6. App enters the Invites page
 	
+Log out
+Primary actor: user
+Secondary actors: server
+Goal: Log out of the app and turn off the availability status
+Pre-Condition: user has logged and on the Profile page
+Main Path:
+	1. User clicks the button "Log Out"
+	2. App goes the the login page
+	3. Server sets the user's status to be unavailable
+	4. The availability indicator of this user on all contacts’ Contacts page turns off
+
+
+Set default login availability status
+(need GUI!)
+
+
+
+-------------------------------------
+-------------------------------------
+The following are for extended features. Do not include them in the webpage of Iteration 2. 
+-------------------------------------
+-------------------------------------
+
 Schedule availability status
 Primary actor: user
 Secondary actors: contacts 
@@ -77,46 +110,3 @@ Main Path:
 	3. User click the button to confirm the deletion
 		a. User can click “cancel” and return to step 2
 	4. The app deletes the event label from the setting page 
-
-
-
-Automatically turning off the availability status
-Primary actor: user
-Secondary actors: server, contacts
-Goal: turn off the available status of a user when the app is turned off
-Main Path:
-	1. User turns off the app
-	2. The server set the user's status to be unavailable 
-	3. The availability indicator of this user on all contacts’ “Contacts” page turns off
-	4. The profile of the user on all the contacts’ interface shows "unavailable"
-	
-
-
-Automatically turning on the availability status
-Primary actor: user
-Secondary actors: server, contacts
-Goal: turn off the available status of a user when the app is turned off
-Main Path:
-	1. User turns on the app
-	2. The server set the user's status to be available 
-		a. If one contact is in the Visibility List, the availability indicator of this user on that contact’s “Contacts” page turns on
-		b. The profile page of the user on that contact’s interface shows "available"
-
-
-
------------------------
-Suggested changes to GUI
-1. "Set Visible List" -> "Set Visibility List" Do we need a separate page? 
-2. Add availability indicator (color or text) to Contacts page
-3. Add a View Profile page for viewing profile of friends. Include the availability indicator. 
-4. "Edit" button on the Schedule Availability page is not necessary 
-
-
-
-
-
-
-
-
-
-
