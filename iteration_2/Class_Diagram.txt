@@ -1,0 +1,148 @@
+
+Updated according to Friday's discussion 
+
+
+===================
+CORE FEATURES :
+===================
+
+-- USER MANAGEMENT FEATURES 
+
+• The ability to create user accounts : email, username and password is required. Username is unique and cannot be changed.
+  Optional fields include name, gender, workplace and avatar.
+• The ability to delete user accounts.
+• The ability to login and logout of user account.
+• The ability to choose availability status at login. 
+• The ability to insert and modify account information: password, email, availability status(see below), visibility list(See below).
+• The ability to recover a forgotten password.
+• The ability to search and add contacts - by inputting the userId or email address of the contact.
+• The ability to delete contacts.
+• The ability to separate contacts into groups (friends,family etc.).
+• The ability to set availability status -- A Status that represents whether the user wishes to receive notifications.
+• The ability to modify visibility list -- The list that controls which contacts of the user can see the user's availability status when enabled(i.e. set to "available"). It is a subset of the user's contacts.
+
+
+-- USER/MEAL NOTIFICATION MANAGEMENT FEATURES
+
+• The ability to post meal notifications  -- sent to contacts based on above visibility list.
+• The ability to receive meal notifications -- from contacts to whom the user is available (Determined by availability and visibility as noted above).
+• The ability to close a meal notifications. (No longer accept replies) 
+• The ability to cancel a meal notification. (Cancel the event) 
+• The ability to accept a meal invitation. 
+• The ability to decline a meal invitation. 
+
+
+—- NOTIFICATION FEATURES
+• The ability to add a custom message or additional information.
+• The ability to add a list of recipients for notification -- Subset of user's contacts.
+• The ability to add a contact who is currently unavailable.
+
+—- NOTIFICATION
+
+• ATTRIBUTES
+	•Notification ID
+	•Message (OF)			
+	•Poster -> USER (1)
+	•Recipient List -> USER (*)
+	
+• TYPES
+	• Contact Notifications
+	• Meal Notifications
+
+
+
+—- CONTACT NOTIFICATION : NOTIFICATION
+
+•TYPES
+	• Contact Reject Notification (^)
+	• Contact Request Notification (^)
+	• Contact Accept Notification (^)
+
+
+
+
+
+— MEAL NOTIFICATION : NOTIFICATION
+
+
+
+•TYPES
+	• Completion Notification
+	• Acceptance Notification
+	• Friends Attending Notification
+	• Update Notification
+
+
+
+
+
+-- MEAL CONTENT FEATURES
+
+• The ability to set the location of the meal (Look at geo location features below) -- This CAN BE a custom location (someone's house for example).
+• The ability to set a duration (optional start and end time) for meal -- A user may be open for breakfast for two hours from current time OR the user says he/she can have breakfast between 8-10 a.m.
+• The ability to set maximum size of meal party.
+• The ability to set whether meal is open to extended contacts -- allows friends of friends to join in.
+
+
+—- MEAL NOTIFICATION FEATURES : NOTIFICATION FEATURES
+
+• The ability to set meal notification post time -- The user can choose when the notification is posted (perhaps at a later time or date).
+
+
+—- NOTIFICATION PUSH FEATURES
+
+• The ability to push notification to all contacts that are recipients of the notification and are currently available to the poster or become available to the poster before the notification expires or is closed manually by the poster.
+
+
+-- MEAL NOTIFICATION PUSH FEATURES 
+
+• The ability to push "open spots" status -- As people accept, other contacts to whom the meal notification was sent should be informed that the number of available spots for the notification are decreasing.
+• The ability to push the names of contacts of the recipient of the post that have accepted the meal notification -- If a friend of one of the invitees accepts, the invitee should be notified that said friend is attending ( Since this might affect the decision of the invitee).
+
+• The ability to inform (via push) the poster of the notification of which contacts have accepted and when the notification is closed.
+  
+
+-- GEO LOCATION FEATURES
+
+• The ability to automatically find address of restaurant -- If poster type's subway, the address "Subway restaurant, xyz Street, ..." should automatically 
+  be filled in.  
+• The ability to tag custom locations -- If poster types his/her address, then the app should remember the address for future reference.
+
+==================
+EXTENDED FEATURES:
+==================
+
+-- USER/RESTAURANT RANK MANAGEMENT FEATURES 
+
+• The ability to give a restaurant a star rating (1-5 scale).
+• The ability to favorite a restaurant
+
+-- MEAL NOTIFICATION CONTENT AND PUSH 
+
+• The ability to recommend a restaurant -- one of the recipients can recommend a restaurant if the location is unspecified.
+• User who receives a meal notification push can accept or decline it on the lock screen
+• User who receives a meal notification push and click on the lock screen to see more detailed information of the notification 
+
+-- GEO LOCATION FEATURES
+
+• The ability to search for restaurants based on proximity.
+• The ability to use geo information to search for contacts (both for adding friend and for searching within contact list) 
+
+-- PREDICTIVE FEATURES
+
+• The ability to recommend restaurants that are liked by majority users in the area (Uses GEO LOCATION).
+• The ability randomly recommend a restaurant (Should pick from restaurants that have decent ratings)
+• The ability to recommend friends for meal at a particular restaurants -- uses contact's ratings for that restaurant.
+• The ability to recommend restaurants for meal with a particular group of friends -- uses common restaurants that are ranked high by the group in question.
+
+-- ACCOUNT FEATURES
+
+• User can use Facebook or other social media account information to log in 
+
+-- RELATION MANAGEMENT FEATURES
+
+• The ability to search contacts (for adding) using true name, work place or phone number 
+• Display contacts in different orders in contact list. (adding a separate page for choosing sorting methods. )
+• The ability to schedule availability status in advance or at repeated intervals -- The status could be set to available from 3-4 pm every Monday, Wed, Friday. 
+
+
