@@ -1,0 +1,112 @@
+Use-cases related to setting Availability and log in/out
+----------------
+
+Turn on availability status
+Primary actor: user
+Secondary actors: contacts 
+Goal: set the status to be "available" 
+Pre-Condition: user has logged in 
+Main Path: 
+	1. On the Invites page, user switches the Availability Status button to “on”
+	2. The server sets the user's status to be available 
+		a. If one contact is in the Visibility List, the availability indicator of this user on that contact’s Contacts page turns on (the color of the user's display name turns to black)
+
+
+Turn off availability status
+Primary actor: user
+Secondary actors: contacts 
+Goal: set the status to be “unavailable" 
+Pre-Condition: user has logged in 
+Main Path: 
+	1. On the Invites page, user switches the Available Status button to “off”
+	2. The server sets the user's status to be unavailable 
+	3. The availability indicator of this user on all contacts’ Contacts page turns off (the color of the user's display name turns to gray)
+
+
+Set Visibility List
+Primary actor: user
+Secondary actors: contacts 
+Goal: set the Visibility List. Only the contacts in the list can see the user as available when user’s status is available 
+Pre-Condition: user has logged in and on the Contacts page
+Main Path: 
+	1. User clicks the "Set Visibility" button on the Contacts page
+	2. Checkboxes appear on each line of the contacts
+	3. User checks or unchecks the box for setting "visible" or "invisible" to the contacts 
+		a. If user’s availability status is currently on, the availability indicator of this user on the Contacts page of the checked contacts turns on
+		b. The availability indicator of this user on the Contacts page of the unchecked contacts turns off
+		
+		
+Log in
+Primary actor: user
+Secondary actors: server
+Goal: Log into the app and choose the availability status
+Main Path:
+	1. User enters user name and password in the login page
+		a. User clicks "Available/Unavailable" button to change the login status. (The status shown is the current login status)
+	3. User clicks "Sign In" button
+	4. Server checks the correctness of username and password
+		a. if username and password don't match, show message, user reenter username or password, restart from step 1. 
+	5. Server sets the user's status to be the one shown on the "Available/Unavailable" button when login
+		a. If the user's availability status is on and one contact is in the Visibility List, the availability indicator of this user on that contact’s Contacts page turns on
+	6. App enters the Invites page
+	
+Log out
+Primary actor: user
+Secondary actors: server
+Goal: Log out of the app and turn off the availability status
+Pre-Condition: user has logged and on the Profile page
+Main Path:
+	1. User clicks the button "Log Out"
+	2. App goes the the login page
+	3. Server sets the user's status to be unavailable
+	4. The availability indicator of this user on all contacts’ Contacts page turns off
+
+
+Set default login availability status
+(need GUI!)
+
+
+
+-------------------------------------
+-------------------------------------
+The following are for extended features. Do not include them in the webpage of Iteration 2. 
+-------------------------------------
+-------------------------------------
+
+Schedule availability status
+Primary actor: user
+Secondary actors: contacts 
+Goal: pre-set the availability status in fixed time slots 
+Pre-Condition: user has logged in and on the Profile page
+Main Path: 
+	1. User clicks the “Schedule Availability” button and enters the “Schedule Availability” page 
+	2. User clicks the “Add” button and enters the “Add Schedule” page
+	3. User enters the name, date, starting(from) and ending(to) points of the time slot 
+	4. User checks “Available” check box 
+		a. User can choose repeat pattern 
+	5. User clicks “Add” button
+		a. User can click “Cancel” button to return to the “Schedule Availability” page without saving	
+	6. User return to the “Schedule Availability” page, an event label is created with “Available” and the name of the schedule
+		a. When the time slot is reached, the server set the user's status to be available 
+			i. If one contact is in the Visibility List, the availability indicator of this user on that contact’s “Contacts” page turns on
+			ii. The profile page of the user on that contact’s interface shows "available"	
+	7. If the event is not repeating, the app deletes the event label automatically from the setting page of the user when availability time slot is passed 
+
+Alternative Path:
+	4.1. User checks “Unavailable" checkbox 
+	6.1. User return to the “Schedule Availability” page, an event label is created with “Unavailable” and the name of the schedule
+		a. When the time slot is reached, the availability indicator of this user on all contacts’ “Contacts” page turns off
+		b. The profile page of the user on all contacts’ interface shows “unavailable"	
+
+
+
+Delete a scheduled availability status
+Primary actor: user
+Goal: delete the availability status in fixed time slots 
+Pre-Condition: user has logged in and on the “Schedule Availability” page
+Main Path: 
+	1. User click the “Remove" button on an event label 
+	2. A confirmation pops up 
+	3. User click the button to confirm the deletion
+		a. User can click “cancel” and return to step 2
+	4. The app deletes the event label from the setting page 
