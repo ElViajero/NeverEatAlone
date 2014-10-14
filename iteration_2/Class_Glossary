@@ -1,4 +1,10 @@
 
+NOTATIONAL CONVENTIONS
+
+////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////
+
+
 ARGUMENT SYNTAX
 ----------------------
 
@@ -10,7 +16,7 @@ ARGUMENT SYNTAX
 CLASS ATTRIBUTE SYNTAX
 ------------------
 
-<Domain Entity> -> <Implementation Class> [(arg1) (arg2) ..] 
+<Domain Entity> -> <Implementation Class> [<argument>(+)] 
 
 
 
@@ -34,6 +40,8 @@ CLASS DESCRIPTION SYNTAX
 [• FEATURES
 	<class feature>(+)]
 
+////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////
 
 
 
@@ -56,6 +64,14 @@ CORE FEATURES :
 • The ability to separate contacts into groups (friends,family etc.).
 • The ability to set availability status -- A Status that represents whether the user wishes to receive notifications.
 • The ability to modify visibility list -- The list that controls which contacts of the user can see the user's availability status when enabled(i.e. set to "available"). It is a subset of the user's contacts.
+
+
+
+
+
+
+
+
 
 
 -- USER/MEAL NOTIFICATION MANAGEMENT FEATURES
@@ -89,9 +105,9 @@ CORE FEATURES :
 
 
 
---------------------------------------
+======================================
 —- CONTACT NOTIFICATION : NOTIFICATION
---------------------------------------
+======================================
 
 •TYPES
 	• Contact Reject Notification (^)
