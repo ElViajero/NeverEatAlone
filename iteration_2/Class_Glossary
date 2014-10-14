@@ -1,5 +1,41 @@
 
-Updated according to Friday's discussion 
+ARGUMENT SYNTAX
+----------------------
+
+(+) - 1 or more
+(*) - 0 or more
+(n) - Exactly n (n is an integer)
+[x] - denotes that x is an optional field
+
+CLASS ATTRIBUTE SYNTAX
+------------------
+
+<Domain Entity> -> <Implementation Class> [(arg1) (arg2) ..] 
+
+
+
+
+CLASS DESCRIPTION SYNTAX
+-------------------------
+
+===============================================
+-- <implementation class> [: <super class>(+) ] 
+===============================================
+
+[• ATTRIBUTES
+	<class attribute>(+)]
+
+[• OPERATIONS
+	<class operation>(+)]
+
+[• TYPES
+	<sub class>(+)]
+
+[• FEATURES
+	<class feature>(+)]
+
+
+
 
 
 ===================
@@ -32,26 +68,30 @@ CORE FEATURES :
 • The ability to decline a meal invitation. 
 
 
-—- NOTIFICATION FEATURES
-• The ability to add a custom message or additional information.
-• The ability to add a list of recipients for notification -- Subset of user's contacts.
-• The ability to add a contact who is currently unavailable.
-
+=================
 —- NOTIFICATION
+=================
 
 • ATTRIBUTES
 	•Notification ID
-	•Message (OF)			
+	•[Message]
 	•Poster -> USER (1)
-	•Recipient List -> USER (*)
+	•Recipient List -> USER (+)
 	
 • TYPES
 	• Contact Notifications
 	• Meal Notifications
 
+• FEATURES
+	• The ability to add a custom message or additional information.
+	• The ability to add a list of recipients for notification -- Subset of user's contacts.
+	• The ability to add a contact who is currently unavailable.
 
 
+
+--------------------------------------
 —- CONTACT NOTIFICATION : NOTIFICATION
+--------------------------------------
 
 •TYPES
 	• Contact Reject Notification (^)
@@ -61,10 +101,7 @@ CORE FEATURES :
 
 
 
-
 — MEAL NOTIFICATION : NOTIFICATION
-
-
 
 •TYPES
 	• Completion Notification
