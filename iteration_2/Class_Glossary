@@ -63,6 +63,9 @@ CLASS DESCRIPTION SYNTAX
 ////////////////////////////////////////////////////////
 
 
+===========
+
+
 
 ============
 UserAccount
@@ -273,7 +276,7 @@ MealManagementRequestHandler : ManagementRequestHandler
 	
 
 • FEATURES
-	• Handles all contact management requests on the back end.
+	• Handles all meal management requests on the back end.
 
 
 ===============================================================
