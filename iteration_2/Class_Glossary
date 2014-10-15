@@ -22,7 +22,7 @@ ARGUMENT SYNTAX
 (n) - Exactly n (n is an integer)
 [x] - denotes that x is an optional field
 (GET) - used to signal a getter method
-(SET) - user to signal a setter method
+(SET) - used to signal a setter method
 
 ATTRIBUTE SYNTAX
 ------------------
@@ -127,7 +127,7 @@ AccountManager
 
 • ATTRIBUTES
 	• Account -> UserAccount(1)
-	
+
 	
 
 
