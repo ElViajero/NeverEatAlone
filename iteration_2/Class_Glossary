@@ -92,9 +92,9 @@ AccountManager
 
 • OPERATIONS
 	• CreateUserAccount()
-	• DeleteUserAccount( UserAccount(1) )
+	• DeleteUserAccount( UserName(1) )
 	• UpdateUserAccount( UserAccount(1) )
-	• IsValidUser( UserAccount(1) )
+	• IsValidUser( UserName(1) )
 
 • FEATURES
 	• The ability to create user accounts
@@ -213,10 +213,23 @@ LoginManagementRequestHandler
 • OPERATIONS
 	• HandleLoginManagementRequest(Object(*))
 	• AuthenticateAndLoginRequest(UserAccount(1))
-	• LogoutRequest(User.SessionID)
+	• LogoutRequest(SessionID)
 
 • FEATURES
 	• Handles all login management requests on the back end.
+
+===================
+NotificationManager
+===================
+
+• ATTRIBUTES
+	NotificationObject -> Notification(1)
+	NotificationRecipientList -> 
+
+• OPERATIONS
+	• CreateNotificationFromPost(Post(1))
+	• UpdatePostFromNotification(Post(1))	
+	• PushNotification()
 
 
 ===============================
@@ -309,6 +322,7 @@ ContactEventHandler : EventHandler
 • ATTRIBUTES
 	• RequestID -> String(1)
 	• RequestTypeList -> String(+)
+	• ContactPostObject -> ContactPost(1)
 	
 
 • OPERATIONS
@@ -330,8 +344,8 @@ Post
 
 • ATTRIBUTES
 	• PostID	
-	•Poster -> User(1)
-	•RecipientList -> User(+)
+	• Poster -> User(1)
+	• RecipientList -> ContactInfo(+)
 	• StartTime
 	• EndTime
 	• [Message]
@@ -341,6 +355,11 @@ Post
 	• StartTime() (GET) (SET)
 	• EndTime() (GET) (SET)
 	• Message() (GET)(SET)
+
+
+==================
+ContactPost : Post
+==================
 
 
 
@@ -401,8 +420,7 @@ Notification
 
 • ATTRIBUTES
 	•NotificationID	
-	•Poster -> User(1)
-	•RecipientList -> User(+)
+	•Poster -> User(1)	
 
 • OPERATIONS
 	•NotificationID() (GET)(SET)
