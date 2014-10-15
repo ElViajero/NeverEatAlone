@@ -64,16 +64,6 @@ CLASS DESCRIPTION SYNTAX
 
 
 
-
-===================
-CORE FEATURES :
-===================
-
--- USER MANAGEMENT FEATURES 
-
-  
-
-
 ============
 UserAccount
 ============
@@ -176,9 +166,12 @@ ContactInfo
 	• Account -> UserAccount(1)
 	• ContactList -> ContactInfo(*)
 	• AvailabilityStatus -> boolean(1)	
+	• NotificationsList -> Notifications(*)	
+	• MealPostList-> MealPost(*)	
 
 • OPERATIONS
 	• AvailabilityStatus() (GET)(SET)
+	• NotificationsList() (GET)(SET)	
 	• ContactList() (GET)
 	• AddContact(ContactInfo(1))
 	• UpdateContactAlias(ContactInfo(1))
@@ -232,6 +225,7 @@ ContactManagementRequestHandler
 
 • ATTRIBUTES
 	• ContactManagerObject -> ContactManager(1)
+	• NotificationManagerObject -> NotificationManager(1)
 
 • OPERATIONS
 	• HandleContactManagementRequest(Object(*))
@@ -240,8 +234,30 @@ ContactManagementRequestHandler
 	• RemoveContactRequest(UserName(1), User.ContactInfo(1))
 	• AddContactRequest(UserName(1), User.ContactInfo(1))
 
+
 • FEATURES
 	• Handles all contact management requests on the back end.
+
+
+===============================
+MealPostManagementRequestHandler
+===============================
+
+• ATTRIBUTES
+	• MealManagerObject -> MealManager(1)
+	• NotificationManagerObject -> NotificationManager(1)
+
+• OPERATIONS
+	• HandleMealPostManagementRequest(Object(*))
+	• CreateMealPostRequest(UserName(1), User.ContactList(1))
+	• UpdateMealPostRequest(UserName(1), User.ContactInfo(1))
+	• CompleteMealPostRequest(UserName(1), User.ContactInfo(1))
+	• CloseMealPostRequest(UserName(1), User.ContactInfo(1))
+	
+
+• FEATURES
+	• Handles all contact management requests on the back end.
+
 
 
 =================
@@ -249,8 +265,10 @@ RequestDispatcher
 =================
 
 • ATTRIBUTES
-	• AccountManagementRequestHandlerObject -> AccountManagementRequestHandlerObject(1)
-	• LoginManagementRequestHandlerObject -> LoginManagementRequestHandlerObject(1)
+	• AccountManagementRequestHandlerObject -> AccountManagementRequestHandler(1)
+	• LoginManagementRequestHandlerObject -> LoginManagementRequestHandler(1)
+	• ContactManagementRequestHandlerObject -> ContactManagementRequestHandler(1)
+	• MealPostManagementRequestHandlerObject -> MealPostManagementRequestHandler(1)
 
 • OPERATIONS
 	• DispatchRequest(Object(*))
@@ -281,7 +299,7 @@ EventHandler
 
 • TYPES
 	• ContactEventHandler
-	
+
 
 
 ==================================
@@ -294,43 +312,103 @@ ContactEventHandler : EventHandler
 	
 
 • OPERATIONS
-	HandleSearchForContactEvent()
-	HandleAddContactEvent()
-	HandleEditContactEvent()
-	HandleDeleteContactEvent()
+	• HandleSearchForContactEvent()
+	• HandleAddContactEvent()
+	• HandleEditContactEvent()
+	• HandleAcceptContactEvent()
+	• HandleDeclineContactEvent()
+	• HandleDeleteContactEvent()
 
 • FEATURES
-	• The ability to search, add, edit and delete contacts 	
+	• The ability to search, add, edit and delete contacts.
+	• The ability to accept or decline a contact request.
+
+
+====
+Post
+====
+
+• ATTRIBUTES
+	• PostID	
+	•Poster -> User(1)
+	•RecipientList -> User(+)
+	• StartTime
+	• EndTime
+	• [Message]
+
+
+• OPERATIONS
+	• StartTime() (GET) (SET)
+	• EndTime() (GET) (SET)
+	• Message() (GET)(SET)
 
 
 
+===============
+MealPost : Post
+===============
+
+• ATTRIBUTES
+	• Meal
+
+• OPERATIONS
+	• Meal() (GET)(SET)
 
 
 
+==================================
+MealPostEventHandler : EventHandler
+==================================
 
+• ATTRIBUTES
+	• RequestID -> String(1)
+	• RequestTypeList -> String(+)
+	• MealObject -> Meal(1)
+	• MealPostObject -> MealPost(1)
 
+• OPERATIONS
+	• HandleMealCreatedEvent()
+	• HandleMealPostCreatedEvent()
+	• HandleMealPostCompletedEvent()
+	• HandleMealPostClosedEvent()
+	• HandleMealPostUpdatedEvent()	
+
+• OPERATIONS
+	• The ability to create a meal post. (No longer accept replies) 
+	• The ability to update a meal post. (No longer accept replies) 
+	• The ability to close a meal post. (No longer accept replies) 
+	• The ability complete a meal epost. (Cancel the event) 
+	• The ability to accept a meal invitation. 
+	• The ability to decline a meal invitation. 
 
 
 
 -- USER/MEAL NOTIFICATION MANAGEMENT FEATURES
 
-• The ability to post meal notifications  -- sent to contacts based on above visibility list.
+ -- sent to contacts based on above visibility list.
 • The ability to receive meal notifications -- from contacts to whom the user is available (Determined by availability and visibility as noted above).
-• The ability to close a meal notifications. (No longer accept replies) 
-• The ability to cancel a meal notification. (Cancel the event) 
-• The ability to accept a meal invitation. 
-• The ability to decline a meal invitation. 
 
 
-=================
-—- Notification
-=================
+
+============
+
+
+
+
+============
+Notification
+============
 
 • ATTRIBUTES
-	•NotificationID
-	•[Message]
+	•NotificationID	
 	•Poster -> User(1)
-	•Recipient List -> User(+)
+	•RecipientList -> User(+)
+
+• OPERATIONS
+	•NotificationID() (GET)(SET)
+	•Message() (GET)(SET)
+	•RecipientList() (GET)(SET)
+
 	
 • TYPES
 	• Contact Notifications
@@ -344,7 +422,7 @@ ContactEventHandler : EventHandler
 
 
 ======================================
-—- CONTACT NOTIFICATION : NOTIFICATION
+CONTACT NOTIFICATION : NOTIFICATION
 ======================================
 
 
