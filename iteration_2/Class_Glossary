@@ -266,10 +266,10 @@ MealManagementRequestHandler : ManagementRequestHandler
 	• MealManagerObject -> MealManager(1)	
 
 • OPERATIONS	
-	• CreateMealPostRequest(UserName(1), User.ContactList(1))
-	• UpdateMealPostRequest(UserName(1), User.ContactInfo(1))
-	• CompleteMealPostRequest(UserName(1), User.ContactInfo(1))
-	• CloseMealPostRequest(UserName(1), User.ContactInfo(1))
+	• CreateMealPostRequest(UserName(1),Post(1))
+	• UpdateMealPostRequest(UserName(1), Post(1))
+	• CompleteMealPostRequest(UserName(1), Post(1))
+	• CloseMealPostRequest(UserName(1), Post(1))
 	
 
 • FEATURES
