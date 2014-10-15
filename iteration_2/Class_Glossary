@@ -21,6 +21,8 @@ ARGUMENT SYNTAX
 (*) - 0 or more
 (n) - Exactly n (n is an integer)
 [x] - denotes that x is an optional field
+(GET) - used to signal a getter method
+(SET) - user to signal a setter method
 
 ATTRIBUTE SYNTAX
 ------------------
@@ -34,7 +36,7 @@ PARAMETER SYNTAX
 OPERATION SYNTAX
 -----------------
 
-<operation name> (<parameter>(*))
+<operation name> (<parameter>(*)) [(GET)][(SET)]
 
 
 CLASS DESCRIPTION SYNTAX
@@ -69,12 +71,10 @@ CORE FEATURES :
 
 -- USER MANAGEMENT FEATURES 
 
-• The ability to create user accounts : email, username and password is required. Username is unique and cannot be changed.
-  Optional fields include name, gender, workplace and avatar.
+  
 
 
 • The ability to choose availability status at login. 
-• The ability to insert and modify account information: password, email, availability status(see below), visibility list(See below).
 • The ability to recover a forgotten password.
 • The ability to search and add contacts - by inputting the userId or email address of the contact.
 • The ability to delete contacts.
@@ -86,6 +86,19 @@ CORE FEATURES :
 ============
 UserAccount
 ============
+
+• ATTRIBUTES
+	• UserName
+	• Password
+	• UserEmail
+
+• OPERATIONS
+	• UserName()  (GET)(SET)
+	• Password()  (GET)(SET)
+	• UserEmail() (GET)(SET)
+
+• FEATURES
+	• The ability to locally get and set the username, password and user email
 
 
 
@@ -114,6 +127,7 @@ AccountManager
 
 • ATTRIBUTES
 	• Account -> UserAccount(1)
+	
 	
 
 
