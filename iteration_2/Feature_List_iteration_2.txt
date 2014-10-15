@@ -8,7 +8,7 @@ The features to be implemented in the first round
 • The ability to create user accounts
 • The ability to delete user accounts.	
 • The ability to insert and modify account information: password, email, etc.
-• The ability to set availability status -- A Status that represents whether the user wishes to recieve notifications.
+• The ability to set availability status -- A Status that represents whether the user wishes to receive notifications.
 • The ability to recover a forgotten password.
 • The ability to login and logout of user account.
  
@@ -55,7 +55,7 @@ The features to be implemented in the first round
 ===================
 STANDARD FEATURES :
 The features in the basic plan but to be implemented later. 
-(They are included in use-caces and GUI sketch.)
+(They are included in use-cases and GUI sketch.)
 ===================
 
 -- ACCOUNT MANAGEMENT FEATURES 
@@ -85,7 +85,7 @@ The features in the basic plan but to be implemented later.
 —- CONTACT NOTIFICATION PUSH FEATURES
 
 • The ability to push adding contact request to the receiver.
-• The ability to push acception of adding contact request notification to the sender.
+• The ability to push acceptation of adding contact request notification to the sender.
 • The ability to push rejection of adding contact request notification to the sender.
 
 
