@@ -15,7 +15,7 @@ NOTATIONAL CONVENTIONS
 
 
 ARGUMENT SYNTAX
-----------------------
+----------------
 
 (+) - 1 or more
 (*) - 0 or more
@@ -74,13 +74,10 @@ CORE FEATURES :
   
 
 
-• The ability to choose availability status at login. 
+
 • The ability to recover a forgotten password.
-• The ability to search and add contacts - by inputting the userId or email address of the contact.
-• The ability to delete contacts.
-• The ability to separate contacts into groups (friends,family etc.).
-• The ability to set availability status -- A Status that represents whether the user wishes to receive notifications.
-• The ability to modify visibility list -- The list that controls which contacts of the user can see the user's availability status when enabled(i.e. set to "available"). It is a subset of the user's contacts.
+
+ 
 
 
 ============
@@ -88,9 +85,9 @@ UserAccount
 ============
 
 • ATTRIBUTES
-	• UserName
-	• Password
-	• UserEmail
+	• UserName -> String(1)
+	• Password -> String(1)
+	• UserEmail -> String(1)
 
 • OPERATIONS
 	• UserName()  (GET)(SET)
@@ -116,9 +113,57 @@ AccountManager
 
 • FEATURES
 	• The ability to create user accounts
-	• The ability to delete user accounts.
+	• The ability to delete user accounts.	
+	• The ability to insert and modify account information.
+
+
+=================
+ContactManager
+=================
+
+
+• OPERATIONS
+	• UpdateUserVisibilityList(sessionID(1), User.ContactList(1))
+	• UpdateContactInfo(sessionID(1), User.ContactInfo(1))
+	• RemoveContact(sessionID(1), User.ContactInfo(1))
+	• AddContact(sessionID(1), User.ContactInfo(1))
+
+
+• FEATURES
+	• The ability to add a contact.
+	• The ability to delete a contact.
+	• The ability to update contact information.
+	• The ability to modify a user's visibility list.
+
+
+============
+LoginManager
+============
+
+
+
+• FEATURES
 	• The ability to login and logout of user account.
-	• The ability to insert and modify account information
+
+
+
+============
+ContactInfo
+============
+ 
+• ATTRIBUTES
+	• UserName -> UserAccount.UserName (1)
+	• Email -> UserAccount.UserEmail(1)
+	• Alias -> String(1)
+	• Visible -> boolean(1)
+
+• OPERATIONS
+	• Visible() (GET)(SET)
+	• Alias() (GET)(SET)
+
+• FEATURES
+	• Visible() (GET)(SET)
+
 
 
 ========
@@ -127,8 +172,36 @@ AccountManager
 
 • ATTRIBUTES
 	• Account -> UserAccount(1)
+	• ContactList -> ContactInfo(*)
+	• AvailabilityStatus -> boolean(1)	
+
+• OPERATIONS
+	• AvailabilityStatus() (GET)(SET)
+	• ContactList() (GET)
+	• AddContact(ContactInfo(1))
+	• UpdateContactAlias(ContactInfo(1))
+	• SetContactVisibility(ContactInfo(1), boolean(1))
+	• RemoveContact(ContactInfo(1))	
+
+
+• FEATURES
+	• The ability to set availability status locally.
+	• The ability to modify visibility list locally. 
+	• The ability to delete contacts locally.
 
 	
+
+
+
+
+
+-- CONTACT MANAGEMENT FEATURES
+
+• The ability to search and add contacts - by inputting the userId or email address of the contact.
+• The ability to separate contacts into groups (friends,family etc.).
+
+
+
 
 
 
