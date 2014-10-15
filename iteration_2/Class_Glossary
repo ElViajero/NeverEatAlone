@@ -203,15 +203,21 @@ AccountMangementRequestHandler
 • FEATURES
 	• Handles all account management requests on the back end.
 
-=============================
-LoginManagementRequestHandler
-=============================
+========================
+ManagementRequestHandler
+========================
+
+• OPERATIONS	
+	• HandleManagementRequest(Object(*))
+
+========================================================
+LoginManagementRequestHandler : ManagementRequestHandler
+========================================================
 
 • ATTRIBUTES
 	• LoginManagerObject -> LoginManager(1)
 
 • OPERATIONS
-	• HandleLoginManagementRequest(Object(*))
 	• AuthenticateAndLoginRequest(UserAccount(1))
 	• LogoutRequest(SessionID)
 
@@ -234,15 +240,14 @@ NotificationManager
 	• The ability to push notification to all contacts that are recipients of the notification and are currently available to the poster or become available to the poster before the notification expires or is closed manually by the poster.
 	• The ability to inform (via push) the poster of the notification of which contacts have accepted and when the notification is closed.
 
-===============================
-ContactManagementRequestHandler
-===============================
+==========================================================
+ContactManagementRequestHandler : ManagementRequestHandler
+==========================================================
 
 • ATTRIBUTES
 	• ContactManagerObject -> ContactManager(1)
 
 • OPERATIONS
-	• HandleContactManagementRequest(Object(*))
 	• UpdateUserVisibilityListRequest(UserName(1), User.ContactList(1))
 	• UpdateContactInfoRequest(UserName(1), User.ContactInfo(1))
 	• RemoveContactRequest(UserName(1), User.ContactInfo(1))
@@ -253,15 +258,14 @@ ContactManagementRequestHandler
 	• Handles all contact management requests on the back end.
 
 
-================================
-MealManagementRequestHandler
-================================
+=======================================================
+MealManagementRequestHandler : ManagementRequestHandler
+=======================================================
 
 • ATTRIBUTES
 	• MealManagerObject -> MealManager(1)	
 
-• OPERATIONS
-	• HandleMealManagementRequest(Object(*))
+• OPERATIONS	
 	• CreateMealPostRequest(UserName(1), User.ContactList(1))
 	• UpdateMealPostRequest(UserName(1), User.ContactInfo(1))
 	• CompleteMealPostRequest(UserName(1), User.ContactInfo(1))
@@ -272,15 +276,14 @@ MealManagementRequestHandler
 	• Handles all contact management requests on the back end.
 
 
-====================================
-NotificationManagementRequestHandler
-====================================
+===============================================================
+NotificationManagementRequestHandler : ManagementRequestHandler
+===============================================================
 
 • ATTRIBUTES
 	• NotificationManagerObject -> NotificationManager(1)
 
-• OPERATIONS
-	• HandleNotificationManagementRequest(Object(*))
+• OPERATIONS	
 	• CreateNotificationRequest(Post(1))
 	• UpdateNotificationRequest(Post(1))
 	
