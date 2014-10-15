@@ -46,16 +46,16 @@ CLASS DESCRIPTION SYNTAX
 -- <implementation class> [: <super class>(+) ] 
 ===============================================
 
-[• ATTRIBUTES
+[* ATTRIBUTES
 	<attribute>(+)]
 
-[• OPERATIONS
+[* OPERATIONS
 	<operation>(+)]
 
-[• TYPES
+[* TYPES
 	<sub class>(+)]
 
-[• FEATURES
+[* FEATURES
 	<class feature>(+)]
 
 
@@ -67,22 +67,39 @@ CLASS DESCRIPTION SYNTAX
 
 
 
+
+
+
 ============
 UserAccount
 ============
 
-• ATTRIBUTES
-	• UserName -> String(1)
-	• Password -> String(1)
-	• UserEmail -> String(1)
+* ATTRIBUTES
+	* UserName -> String(1)
+	* Password -> String(1)
+	* UserEmail -> String(1)
 
-• OPERATIONS
-	• UserName()  (GET)(SET)
-	• Password()  (GET)(SET)
-	• UserEmail() (GET)(SET)
+* OPERATIONS
+	* UserName()  (GET)(SET)
+	* Password()  (GET)(SET)
+	* UserEmail() (GET)(SET)
 
-• FEATURES
-	• The ability to locally get and set the username, password and user email
+* FEATURES
+	* The ability to locally get and set the username, password and user email
+
+
+
+===========
+MealManager
+===========
+
+* OPERATIONS
+	* CreateMealPost(Post(1))
+	* UpdateMealPost(Post(1))
+	* CompleteMealPost(Post(1))
+	* CloseMealPost(Post(1))
+* FEATURES
+	* The ability to create,update,complete and close a meal post on the back end.
 
 
 
@@ -90,20 +107,17 @@ UserAccount
 AccountManager
 ===============
 
-• ATTRIBUTES
-	• UserAccountList -> UserAccount(*)	
+* OPERATIONS
+	* CreateUserAccount()
+	* DeleteUserAccount( UserName(1) )
+	* UpdateUserAccount( UserAccount(1) )
+	* IsValidUser( UserName(1) )
 
-• OPERATIONS
-	• CreateUserAccount()
-	• DeleteUserAccount( UserName(1) )
-	• UpdateUserAccount( UserAccount(1) )
-	• IsValidUser( UserName(1) )
-
-• FEATURES
-	• The ability to create user accounts
-	• The ability to delete user accounts.	
-	• The ability to insert and modify account information.
-	• The ability to verify user account credentials.
+* FEATURES
+	* The ability to create user accounts
+	* The ability to delete user accounts.	
+	* The ability to insert and modify account information.
+	* The ability to verify user account credentials.
 
 
 =================
@@ -111,18 +125,18 @@ ContactManager
 =================
 
 
-• OPERATIONS
-	• UpdateUserVisibilityList(UserName(1), User.ContactList(1))
-	• UpdateContactInfo(UserName(1), User.ContactInfo(1))
-	• RemoveContact(UserName(1), User.ContactInfo(1))
-	• AddContact(UserName(1), User.ContactInfo(1))
+* OPERATIONS
+	* UpdateUserVisibilityList(UserName(1), User.ContactList(1))
+	* UpdateContactInfo(UserName(1), User.ContactInfo(1))
+	* RemoveContact(UserName(1), User.ContactInfo(1))
+	* AddContact(UserName(1), User.ContactInfo(1))
 
 
-• FEATURES
-	• The ability to add a contact.
-	• The ability to delete a contact.
-	• The ability to update contact information.
-	• The ability to modify a user's visibility list.
+* FEATURES
+	* The ability to add a contact.
+	* The ability to delete a contact.
+	* The ability to update contact information.
+	* The ability to modify a user's visibility list.
 
 
 ============
@@ -130,14 +144,14 @@ LoginManager
 ============
 
 
-• OPERATIONS
-	• Login(User.UserName)
-	• GetUserName(SessionID(1))
-	• Logout(sessionID(1))
+* OPERATIONS
+	* Login(User.UserName)
+	* GetUserName(SessionID(1))
+	* Logout(sessionID(1))
 
-• FEATURES
-	• The ability to login and logout of user account.
-	• The ability to retrieve user name of user that corresponds to a sessionID.
+* FEATURES
+	* The ability to login and logout of user account.
+	* The ability to retrieve user name of user that corresponds to a sessionID.
 
 
 
@@ -145,19 +159,19 @@ LoginManager
 ContactInfo
 ============
  
-• ATTRIBUTES
-	• UserName -> UserAccount.UserName (1)
-	• Email -> UserAccount.UserEmail(1)
-	• Alias -> String(1)
-	• Visible -> boolean(1)
+* ATTRIBUTES
+	* UserName -> UserAccount.UserName (1)
+	* Email -> UserAccount.UserEmail(1)
+	* Alias -> String(1)
+	* Visible -> boolean(1)
 
-• OPERATIONS
-	• Visible() (GET)(SET)
-	• Alias() (GET)(SET)
+* OPERATIONS
+	* Visible() (GET)(SET)
+	* Alias() (GET)(SET)
 
-• FEATURES
-	• Retrieve and modify contact's visibility status (i.e. whether or not the contact sees you as visible).
-	• Retrieve and modify contact's Alias.
+* FEATURES
+	* Retrieve and modify contact's visibility status (i.e. whether or not the contact sees you as visible).
+	* Retrieve and modify contact's Alias.
 
 
 
@@ -165,51 +179,51 @@ ContactInfo
 -- User
 ========
 
-• ATTRIBUTES
-	• Account -> UserAccount(1)
-	• ContactList -> ContactInfo(*)
-	• AvailabilityStatus -> boolean(1)	
-	• NotificationsList -> Notifications(*)	
-	• MealPostList-> MealPost(*)	
+* ATTRIBUTES
+	* Account -> UserAccount(1)
+	* ContactList -> ContactInfo(*)
+	* AvailabilityStatus -> boolean(1)	
+	* NotificationsList -> Notifications(*)	
+	* MealPostList-> MealPost(*)	
 
-• OPERATIONS
-	• AvailabilityStatus() (GET)(SET)
-	• NotificationsList() (GET)(SET)	
-	• ContactList() (GET)
-	• AddContact(ContactInfo(1))
-	• UpdateContactAlias(ContactInfo(1))
-	• SetContactVisibility(ContactInfo(1), boolean(1))
-	• RemoveContact(ContactInfo(1))	
+* OPERATIONS
+	* AvailabilityStatus() (GET)(SET)
+	* NotificationsList() (GET)(SET)	
+	* ContactList() (GET)
+	* AddContact(ContactInfo(1))
+	* UpdateContactAlias(ContactInfo(1))
+	* SetContactVisibility(ContactInfo(1), boolean(1))
+	* RemoveContact(ContactInfo(1))	
 
 
-• FEATURES
-	• The ability to set availability status locally.
-	• The ability to modify visibility list locally. 
-	• The ability to delete contacts locally.
+* FEATURES
+	* The ability to set availability status locally.
+	* The ability to modify visibility list locally. 
+	* The ability to delete contacts locally.
 
 
 ========================
 ManagementRequestHandler
 ========================
 
-• OPERATIONS	
-	• HandleManagementRequest(Object(*))	
+* OPERATIONS	
+	* HandleManagementRequest(Object(*))	
 
 =========================================================
 AccountMangementRequestHandler : ManagementRequestHandler
 =========================================================
 
-• ATTRIBUTES
-	• AccountManagerObject -> AccountManager(1) 
+* ATTRIBUTES
+	* AccountManagerObject -> AccountManager(1) 
 
-• OPERATIONS	
-	• CreateAccountRequest()
-	• ModifyAccountRequest(UserAccount(1))
-	• DeleteAccountRequest(UserAccount(1))
-	• CheckValidityRequest(UserAccount(1))
+* OPERATIONS	
+	* CreateAccountRequest()
+	* ModifyAccountRequest(UserAccount(1))
+	* DeleteAccountRequest(UserAccount(1))
+	* CheckValidityRequest(UserAccount(1))
 
-• FEATURES
-	• Handles all account management requests on the back end.
+* FEATURES
+	* Handles all account management requests on the back end.
 
 
 
@@ -217,78 +231,78 @@ AccountMangementRequestHandler : ManagementRequestHandler
 LoginManagementRequestHandler : ManagementRequestHandler
 ========================================================
 
-• ATTRIBUTES
-	• LoginManagerObject -> LoginManager(1)
+* ATTRIBUTES
+	* LoginManagerObject -> LoginManager(1)
 
-• OPERATIONS
-	• AuthenticateAndLoginRequest(UserAccount(1))
-	• LogoutRequest(SessionID)
+* OPERATIONS
+	* AuthenticateAndLoginRequest(UserAccount(1))
+	* LogoutRequest(SessionID)
 
-• FEATURES
-	• Handles all login management requests on the back end.
+* FEATURES
+	* Handles all login management requests on the back end.
 
 ===================
 NotificationManager
 ===================
 
-• ATTRIBUTES
+* ATTRIBUTES
 	NotificationObject -> Notification(1)	
 
-• OPERATIONS
-	• CreateNotificationFromPost(Post(1))
-	• UpdatePostFromNotification(Post(1))	
-	• PushNotification()
+* OPERATIONS
+	* CreateNotificationFromPost(Post(1))
+	* UpdatePostFromNotification(Post(1))	
+	* PushNotification()
 
-• FEATURES
-	• The ability to push notification to all contacts that are recipients of the notification and are currently available to the poster or become available to the poster before the notification expires or is closed manually by the poster.
-	• The ability to inform (via push) the poster of the notification of which contacts have accepted and when the notification is closed.
+* FEATURES
+	* The ability to push notification to all contacts that are recipients of the notification and are currently available to the poster or become available to the poster before the notification expires or is closed manually by the poster.
+	* The ability to inform (via push) the poster of the notification of which contacts have accepted and when the notification is closed.
 
 ==========================================================
 ContactManagementRequestHandler : ManagementRequestHandler
 ==========================================================
 
-• ATTRIBUTES
-	• ContactManagerObject -> ContactManager(1)
+* ATTRIBUTES
+	* ContactManagerObject -> ContactManager(1)
 
-• OPERATIONS
-	• UpdateUserVisibilityListRequest(UserName(1), User.ContactList(1))
-	• UpdateContactInfoRequest(UserName(1), User.ContactInfo(1))
-	• RemoveContactRequest(UserName(1), User.ContactInfo(1))
-	• AddContactRequest(UserName(1), User.ContactInfo(1))
+* OPERATIONS
+	* UpdateUserVisibilityListRequest(UserName(1), User.ContactList(1))
+	* UpdateContactInfoRequest(UserName(1), User.ContactInfo(1))
+	* RemoveContactRequest(UserName(1), User.ContactInfo(1))
+	* AddContactRequest(UserName(1), User.ContactInfo(1))
 
 
-• FEATURES
-	• Handles all contact management requests on the back end.
+* FEATURES
+	* Handles all contact management requests on the back end.
 
 
 =======================================================
 MealManagementRequestHandler : ManagementRequestHandler
 =======================================================
 
-• ATTRIBUTES
-	• MealManagerObject -> MealManager(1)	
+* ATTRIBUTES
+	* MealManagerObject -> MealManager(1)	
 
-• OPERATIONS	
-	• CreateMealPostRequest(UserName(1),Post(1))
-	• UpdateMealPostRequest(UserName(1), Post(1))
-	• CompleteMealPostRequest(UserName(1), Post(1))
-	• CloseMealPostRequest(UserName(1), Post(1))
+* OPERATIONS	
+	* CreateMealPostRequest(UserName(1),Post(1))
+	* UpdateMealPostRequest(UserName(1), Post(1))
+	* CompleteMealPostRequest(UserName(1), Post(1))
+	* CloseMealPostRequest(UserName(1), Post(1))
 	
 
-• FEATURES
-	• Handles all meal management requests on the back end.
+* FEATURES
+	* Handles all meal management requests on the back end.
 
 
 ===============================================================
 NotificationManagementRequestHandler : ManagementRequestHandler
 ===============================================================
 
-• ATTRIBUTES
-	• NotificationManagerObject -> NotificationManager(1)
+* ATTRIBUTES
+	* NotificationManagerObject -> NotificationManager(1)
 
-• OPERATIONS	
-	• CreateNotificationRequest(Post(1))
-	• UpdateNotificationRequest(Post(1))
+* OPERATIONS	
+	* CreateNotificationRequest(Post(1))
+	* UpdateNotificationRequest(Post(1))
 	
 
 
@@ -296,18 +310,18 @@ NotificationManagementRequestHandler : ManagementRequestHandler
 RequestDispatcher
 =================
 
-• ATTRIBUTES
-	• AccountManagementRequestHandlerObject -> AccountManagementRequestHandler(1)
-	• LoginManagementRequestHandlerObject -> LoginManagementRequestHandler(1)
-	• ContactManagementRequestHandlerObject -> ContactManagementRequestHandler(1)
-	• MealManagementRequestHandlerObject -> MealManagementRequestHandler(1)
-	• NotificatoinManagementRequestHandlerObject -> NotificationManagementRequestHandler(1)
+* ATTRIBUTES
+	* AccountManagementRequestHandlerObject -> AccountManagementRequestHandler(1)
+	* LoginManagementRequestHandlerObject -> LoginManagementRequestHandler(1)
+	* ContactManagementRequestHandlerObject -> ContactManagementRequestHandler(1)
+	* MealManagementRequestHandlerObject -> MealManagementRequestHandler(1)
+	* NotificatoinManagementRequestHandlerObject -> NotificationManagementRequestHandler(1)
 
-• OPERATIONS
-	• DispatchRequest(Object(*))
+* OPERATIONS
+	* DispatchRequest(Object(*))
 
-• FEATURES
-	• Dispatches the management request to the appropriate handler on the back end.
+* FEATURES
+	* Dispatches the management request to the appropriate handler on the back end.
 
 
 
@@ -316,22 +330,22 @@ RequestDispatcher
 Request
 =======
 
-• ATTRIBUTES
-	• RequestTypes -> Enum
+* ATTRIBUTES
+	* RequestTypes -> Enum
 
-• FEATURES
-	• Properties class that contains the various request types that are handled by the application.
+* FEATURES
+	* Properties class that contains the various request types that are handled by the application.
 
 
 ============
 EventHandler
 ============
 
-• ATTRIBUTES
-	• RequestDispatcherObject -> RequestDispatcher(1)
+* ATTRIBUTES
+	* RequestDispatcherObject -> RequestDispatcher(1)
 
-• TYPES
-	• ContactEventHandler
+* TYPES
+	* ContactEventHandler
 
 
 
@@ -339,52 +353,52 @@ EventHandler
 ContactEventHandler : EventHandler
 ==================================
 
-• ATTRIBUTES
-	• RequestID -> String(1)
-	• RequestTypeList -> String(+)
-	• ContactPostObject -> ContactPost(1)
+* ATTRIBUTES
+	* RequestID -> String(1)
+	* RequestTypeList -> String(+)
+	* ContactPostObject -> ContactPost(1)
 	
 
-• OPERATIONS
-	• HandleSearchForContactEvent()
-	• HandleAddContactEvent()
-	• HandleEditContactEvent()
-	• HandleAcceptContactEvent()
-	• HandleDeclineContactEvent()
-	• HandleDeleteContactEvent()
+* OPERATIONS
+	* HandleSearchForContactEvent()
+	* HandleAddContactEvent()
+	* HandleEditContactEvent()
+	* HandleAcceptContactEvent()
+	* HandleDeclineContactEvent()
+	* HandleDeleteContactEvent()
 
-• FEATURES
-	• The ability to search, add, edit and delete contacts.
-	• The ability to accept or decline a contact request.
+* FEATURES
+	* The ability to search, add, edit and delete contacts.
+	* The ability to accept or decline a contact request.
 
 
 ====
 Post
 ====
 
-• ATTRIBUTES
-	• PostID	
-	• Poster -> User(1)
-	• RecipientList -> ContactInfo(+)
-	• StartTime
-	• EndTime
-	• [Message]
+* ATTRIBUTES
+	* PostID	
+	* Poster -> User(1)
+	* RecipientList -> ContactInfo(+)
+	* StartTime
+	* EndTime
+	* [Message]
 
-• OPERATIONS
-	• StartTime() (GET) (SET)
-	• EndTime() (GET) (SET)
-	• Message() (GET)(SET)
+* OPERATIONS
+	* StartTime() (GET) (SET)
+	* EndTime() (GET) (SET)
+	* Message() (GET)(SET)
 
-• TYPES
-	• MealPost
-	• ContactPost
-	• AcceptancePost
+* TYPES
+	* MealPost
+	* ContactPost
+	* AcceptancePost
 
-• FEATURES
-	• The ability to add a custom message or additional information.
-	• The ability to add a list of recipients who will receive the post -- Subset of user's contacts.
-	• The ability to add a recipient who is currently unavailable.
-	• The ability to set notification post time -- The user can choose when the notification is posted (perhaps at a later time or date).
+* FEATURES
+	* The ability to add a custom message or additional information.
+	* The ability to add a list of recipients who will receive the post -- Subset of user's contacts.
+	* The ability to add a recipient who is currently unavailable.
+	* The ability to set notification post time -- The user can choose when the notification is posted (perhaps at a later time or date).
 
 
 ==================
@@ -395,22 +409,22 @@ ContactPost : Post
 AcceptancePost : Post
 =====================
 
-• ATTRIBUTES
+* ATTRIBUTES
 	IsAccepted -> boolean(1)
 
-• FEATURES
-	• The ability to accept or reject(decline) a post (meal or contact)
+* FEATURES
+	* The ability to accept or reject(decline) a post (meal or contact)
 
 
 ===============
 MealPost : Post
 ===============
 
-• ATTRIBUTES
-	• Meal
+* ATTRIBUTES
+	* Meal
 
-• OPERATIONS
-	• Meal() (GET)(SET)
+* OPERATIONS
+	* Meal() (GET)(SET)
 
 
 
@@ -418,33 +432,33 @@ MealPost : Post
 MealEventHandler : EventHandler
 ==================================
 
-• ATTRIBUTES
-	• RequestID -> String(1)
-	• RequestTypeList -> String(+)
-	• MealObject -> Meal(1)
-	• MealPostObject -> MealPost(1)
+* ATTRIBUTES
+	* RequestID -> String(1)
+	* RequestTypeList -> String(+)
+	* MealObject -> Meal(1)
+	* MealPostObject -> MealPost(1)
 
-• OPERATIONS
-	• HandleMealCreatedEvent()
-	• HandleMealPostCreatedEvent()
-	• HandleMealPostCompletedEvent()
-	• HandleMealPostClosedEvent()
-	• HandleMealPostUpdatedEvent()	
+* OPERATIONS
+	* HandleMealCreatedEvent()
+	* HandleMealPostCreatedEvent()
+	* HandleMealPostCompletedEvent()
+	* HandleMealPostClosedEvent()
+	* HandleMealPostUpdatedEvent()	
 
-• FEATURES
-	• The ability to create a meal post. (No longer accept replies) 
-	• The ability to update a meal post. (No longer accept replies) 
-	• The ability to close a meal post. (No longer accept replies) 
-	• The ability complete a meal epost. (Cancel the event) 
-	• The ability to accept a meal invitation. 
-	• The ability to decline a meal invitation. 
+* FEATURES
+	* The ability to create a meal post. (No longer accept replies) 
+	* The ability to update a meal post. (No longer accept replies) 
+	* The ability to close a meal post. (No longer accept replies) 
+	* The ability complete a meal epost. (Cancel the event) 
+	* The ability to accept a meal invitation. 
+	* The ability to decline a meal invitation. 
 
 
 
 -- USER/MEAL NOTIFICATION MANAGEMENT FEATURES
 
  -- sent to contacts based on above visibility list.
-• The ability to receive meal notifications -- from contacts to whom the user is available (Determined by availability and visibility as noted above).
+* The ability to receive meal notifications -- from contacts to whom the user is available (Determined by availability and visibility as noted above).
 
 
 
@@ -453,7 +467,7 @@ NotificationEventHandler : EventHandler
 =======================================
 
 
-• OPERATIONS
+* OPERATIONS
 	HandleNotificiationAcceptedEvent()
 	HandleNotificiationRejectedEvent()
 
@@ -465,14 +479,14 @@ NotificationEventHandler : EventHandler
 Notification
 ============
 
-• ATTRIBUTES
-	•NotificationID	
-	•Poster -> User(1)	
-	•[Message]
+* ATTRIBUTES
+	*NotificationID	
+	*Poster -> User(1)	
+	*[Message]
 	
-• TYPES
-	• Contact Notifications
-	• Meal Notifications
+* TYPES
+	* Contact Notifications
+	* Meal Notifications
 
 
 	
@@ -480,8 +494,8 @@ Notification
 MealNotification : Notification
 ===============================
 
-• ATTRIBUTES
-	• MealObject -> Meal(1)
+* ATTRIBUTES
+	* MealObject -> Meal(1)
 
 
 
@@ -495,44 +509,44 @@ ContactNotification : Notification
 Meal
 ====
 
-• ATTRIBUTES
+* ATTRIBUTES
 	LocationObject -> Location(1)
 	StartTime -> Time(1)
 	EndTime -> Time(1)
 	MaximumCapacity -> integer(1)
 	IsExtendable -> boolean(1)
 
-• OPERATIONS
+* OPERATIONS
 	LocationObject() (GET)(SET)
 	StartTime() (GET)(SET)
 	EndTime() (GET)(SET)
 	MaximumCapacity() (GET)(SET)
 	IsExtendable() (GET)(SET)
 
-• FEATURES
-	• The ability to set the location of the meal (Look at geo location features below) -- This CAN BE a custom location (someone's house for example).
-	• The ability to set a duration (optional start and end time) for meal -- A user may be open for breakfast for two hours from current time OR the user says he/she can have breakfast between 8-10 a.m.
-	• The ability to set maximum size of meal party.
-	• The ability to set whether meal is open to extended contacts -- allows friends of friends to join in.
+* FEATURES
+	* The ability to set the location of the meal (Look at geo location features below) -- This CAN BE a custom location (someone's house for example).
+	* The ability to set a duration (optional start and end time) for meal -- A user may be open for breakfast for two hours from current time OR the user says he/she can have breakfast between 8-10 a.m.
+	* The ability to set maximum size of meal party.
+	* The ability to set whether meal is open to extended contacts -- allows friends of friends to join in.
   
 
 ========
 Location
 ========
 
-• ATTRIBUTES
-	• LocationName
-	• StreetAddress
+* ATTRIBUTES
+	* LocationName
+	* StreetAddress
 
-• OPERATIONS
+* OPERATIONS
 	LocationName()(GET)(SET)
 	StreetAdress()(GET)(SET)
 
-• USES
+* USES
 	Google Maps Autcomplete API	
 
-• FEATURES
-	•The ability to automatically find address of restaurant -- If poster type's subway, the address "Subway restaurant, xyz Street, ..." should automatically be filled in. 
+* FEATURES
+	*The ability to automatically find address of restaurant -- If poster type's subway, the address "Subway restaurant, xyz Street, ..." should automatically be filled in. 
 
 
 
