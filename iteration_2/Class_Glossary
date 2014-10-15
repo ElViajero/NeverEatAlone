@@ -230,6 +230,9 @@ NotificationManager
 	• UpdatePostFromNotification(Post(1))	
 	• PushNotification()
 
+• FEATURES
+	• The ability to push notification to all contacts that are recipients of the notification and are currently available to the poster or become available to the poster before the notification expires or is closed manually by the poster.
+	• The ability to inform (via push) the poster of the notification of which contacts have accepted and when the notification is closed.
 
 ===============================
 ContactManagementRequestHandler
@@ -370,6 +373,7 @@ Post
 	• The ability to add a custom message or additional information.
 	• The ability to add a list of recipients who will receive the post -- Subset of user's contacts.
 	• The ability to add a recipient who is currently unavailable.
+	• The ability to set notification post time -- The user can choose when the notification is posted (perhaps at a later time or date).
 
 
 ==================
@@ -476,57 +480,49 @@ ContactNotification : Notification
 
 
 
-•TYPES
-	• Contact Reject Notification (^)
-	• Contact Request Notification (^)
-	• Contact Accept Notification (^)
+====
+Meal
+====
 
+• ATTRIBUTES
+	LocationObject -> Location(1)
+	StartTime -> Time(1)
+	EndTime -> Time(1)
+	MaximumCapacity -> integer(1)
+	IsExtendable -> boolean(1)
 
+• OPERATIONS
+	LocationObject() (GET)(SET)
+	StartTime() (GET)(SET)
+	EndTime() (GET)(SET)
+	MaximumCapacity() (GET)(SET)
+	IsExtendable() (GET)(SET)
 
-
-— MEAL NOTIFICATION : NOTIFICATION
-
-•TYPES
-	• Completion Notification
-	• Acceptance Notification
-	• Friends Attending Notification
-	• Update Notification
-
-
-
-
-
--- MEAL CONTENT FEATURES
-
-• The ability to set the location of the meal (Look at geo location features below) -- This CAN BE a custom location (someone's house for example).
-• The ability to set a duration (optional start and end time) for meal -- A user may be open for breakfast for two hours from current time OR the user says he/she can have breakfast between 8-10 a.m.
-• The ability to set maximum size of meal party.
-• The ability to set whether meal is open to extended contacts -- allows friends of friends to join in.
-
-
-—- MEAL NOTIFICATION FEATURES : NOTIFICATION FEATURES
-
-• The ability to set meal notification post time -- The user can choose when the notification is posted (perhaps at a later time or date).
-
-
-—- NOTIFICATION PUSH FEATURES
-
-• The ability to push notification to all contacts that are recipients of the notification and are currently available to the poster or become available to the poster before the notification expires or is closed manually by the poster.
-
-
--- MEAL NOTIFICATION PUSH FEATURES 
-
-• The ability to push "open spots" status -- As people accept, other contacts to whom the meal notification was sent should be informed that the number of available spots for the notification are decreasing.
-• The ability to push the names of contacts of the recipient of the post that have accepted the meal notification -- If a friend of one of the invitees accepts, the invitee should be notified that said friend is attending ( Since this might affect the decision of the invitee).
-
-• The ability to inform (via push) the poster of the notification of which contacts have accepted and when the notification is closed.
+• FEATURES
+	• The ability to set the location of the meal (Look at geo location features below) -- This CAN BE a custom location (someone's house for example).
+	• The ability to set a duration (optional start and end time) for meal -- A user may be open for breakfast for two hours from current time OR the user says he/she can have breakfast between 8-10 a.m.
+	• The ability to set maximum size of meal party.
+	• The ability to set whether meal is open to extended contacts -- allows friends of friends to join in.
   
 
--- GEO LOCATION FEATURES
+========
+Location
+========
 
-• The ability to automatically find address of restaurant -- If poster type's subway, the address "Subway restaurant, xyz Street, ..." should automatically 
-  be filled in.  
-• The ability to tag custom locations -- If poster types his/her address, then the app should remember the address for future reference.
+• ATTRIBUTES
+	• LocationName
+	• StreetAddress
+
+• OPERATIONS
+	LocationName()(GET)(SET)
+	StreetAdress()(GET)(SET)
+
+• USES
+	Google Maps Autcomplete API	
+
+• FEATURES
+	•The ability to automatically find address of restaurant -- If poster type's subway, the address "Subway restaurant, xyz Street, ..." should automatically be filled in. 
+
 
 
 
