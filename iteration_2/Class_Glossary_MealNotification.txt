@@ -1,0 +1,96 @@
+======================================
+—- MEAL NOTIFICATION : NOTIFICATION
+======================================
+
+• ATTRIBUTES
+	• Meal -> Meal(1)
+	• PostTime -> Time(1)
+
+• TYPES
+	• Completion Notification
+	• Cancellation Notification
+	• Acceptance Notification
+	• Friends Attending Notification
+	• Update Notification
+
+• OPERATIONS
+	• PushOpenSpot()
+	• PushParticipant()
+
+• FEATURES
+	• The ability to set meal notification post time -- The user can choose when the notification is posted (perhaps at a later time or date).
+	• The ability to push "open spots" status -- As people accept, other contacts to whom the meal notification was sent should be informed that the number of available spots for the notification are decreasing.
+	• The ability to push the names of contacts of the recipient of the post that have accepted the meal notification -- If a friend of one of the invitees accepts, the invitee should be notified that said friend is attending ( Since this might affect the decision of the invitee).
+	• The ability to inform (via push) the poster of the notification of which contacts have accepted and when the notification is closed.
+
+======================================================
+—- COMPLETION NOTIFICATION : MEAL NOTIFICATION
+======================================================
+
+• OPERATIONS
+	• CloseMeal()
+	• PushNotification()
+
+• FEATURES
+	• The ability to close the meal
+
+======================================================
+—- CANCELLATION NOTIFICATION : MEAL NOTIFICATION
+======================================================
+
+• OPERATIONS
+	• CancelMeal()
+	• PushNotification()
+
+• FEATURES
+	• The ability to cancel the invitation
+
+======================================================
+—- ACCEPTANCE NOTIFICATION : MEAL NOTIFICATION
+======================================================
+
+• OPERATIONS
+	• DecreaseOpenSpot()
+	• PushNotification()
+
+• FEATURES
+	• The ability to accept the invitation
+
+======================================================
+—- FRIENDS ATTENDING NOTIFICATION : MEAL NOTIFICATION
+======================================================
+
+• OPERATIONS
+	• PushNotification()
+
+• FEATURES
+	• The ability to push the friends attending notification
+
+======================================================
+—- UPDATE NOTIFICATION : MEAL NOTIFICATION
+======================================================
+
+• OPERATIONS
+	• UpdateInfo()
+	• CheckConstraints()
+	• PushNotification()
+
+• FEATURES
+	• The ability to update the notification
+
+
+======================================================
+—- CAPACITY UPDATE NOTIFICATION : UPDATE NOTIFICATION
+======================================================
+
+• OPERATIONS
+	• UpdateOpenSpot() (After update it, it will check open spot and send information)
+	• CheckCapacity()
+	• PushNotification()
+
+• FEATURES
+	• The ability to update the capacity
+
+
+
+
