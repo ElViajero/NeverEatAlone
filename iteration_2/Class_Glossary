@@ -325,7 +325,7 @@ EventHandler
 ============
 
 • ATTRIBUTES
-	• RequestHandlerObject -> RequestHandler(1)
+	• RequestDispatcherObject -> RequestDispatcher(1)
 
 • TYPES
 	• ContactEventHandler
@@ -371,6 +371,11 @@ Post
 	• StartTime() (GET) (SET)
 	• EndTime() (GET) (SET)
 	• Message() (GET)(SET)
+
+• TYPES
+	• MealPost
+	• ContactPost
+	• AcceptancePost
 
 • FEATURES
 	• The ability to add a custom message or additional information.
