@@ -162,7 +162,8 @@ ContactInfo
 	• Alias() (GET)(SET)
 
 • FEATURES
-	• Visible() (GET)(SET)
+	• Retrieve and modify contact's visibility status (i.e. whether or not the contact sees you as visible).
+	• Retrieve and modify contact's Alias.
 
 
 
