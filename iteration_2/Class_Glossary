@@ -223,8 +223,7 @@ NotificationManager
 ===================
 
 • ATTRIBUTES
-	NotificationObject -> Notification(1)
-	NotificationRecipientList -> 
+	NotificationObject -> Notification(1)	
 
 • OPERATIONS
 	• CreateNotificationFromPost(Post(1))
@@ -238,7 +237,6 @@ ContactManagementRequestHandler
 
 • ATTRIBUTES
 	• ContactManagerObject -> ContactManager(1)
-	• NotificationManagerObject -> NotificationManager(1)
 
 • OPERATIONS
 	• HandleContactManagementRequest(Object(*))
@@ -252,16 +250,15 @@ ContactManagementRequestHandler
 	• Handles all contact management requests on the back end.
 
 
-===============================
-MealPostManagementRequestHandler
-===============================
+================================
+MealManagementRequestHandler
+================================
 
 • ATTRIBUTES
-	• MealManagerObject -> MealManager(1)
-	• NotificationManagerObject -> NotificationManager(1)
+	• MealManagerObject -> MealManager(1)	
 
 • OPERATIONS
-	• HandleMealPostManagementRequest(Object(*))
+	• HandleMealManagementRequest(Object(*))
 	• CreateMealPostRequest(UserName(1), User.ContactList(1))
 	• UpdateMealPostRequest(UserName(1), User.ContactInfo(1))
 	• CompleteMealPostRequest(UserName(1), User.ContactInfo(1))
@@ -272,6 +269,19 @@ MealPostManagementRequestHandler
 	• Handles all contact management requests on the back end.
 
 
+====================================
+NotificationManagementRequestHandler
+====================================
+
+• ATTRIBUTES
+	• NotificationManagerObject -> NotificationManager(1)
+
+• OPERATIONS
+	• HandleNotificationManagementRequest(Object(*))
+	• CreateNotificationRequest(Post(1))
+	• UpdateNotificationRequest(Post(1))
+	
+
 
 =================
 RequestDispatcher
@@ -281,7 +291,8 @@ RequestDispatcher
 	• AccountManagementRequestHandlerObject -> AccountManagementRequestHandler(1)
 	• LoginManagementRequestHandlerObject -> LoginManagementRequestHandler(1)
 	• ContactManagementRequestHandlerObject -> ContactManagementRequestHandler(1)
-	• MealPostManagementRequestHandlerObject -> MealPostManagementRequestHandler(1)
+	• MealManagementRequestHandlerObject -> MealManagementRequestHandler(1)
+	• NotificatoinManagementRequestHandlerObject -> NotificationManagementRequestHandler(1)
 
 • OPERATIONS
 	• DispatchRequest(Object(*))
@@ -350,17 +361,30 @@ Post
 	• EndTime
 	• [Message]
 
-
 • OPERATIONS
 	• StartTime() (GET) (SET)
 	• EndTime() (GET) (SET)
 	• Message() (GET)(SET)
+
+• FEATURES
+	• The ability to add a custom message or additional information.
+	• The ability to add a list of recipients who will receive the post -- Subset of user's contacts.
+	• The ability to add a recipient who is currently unavailable.
 
 
 ==================
 ContactPost : Post
 ==================
 
+=====================
+AcceptancePost : Post
+=====================
+
+• ATTRIBUTES
+	IsAccepted -> boolean(1)
+
+• FEATURES
+	• The ability to accept or reject(decline) a post (meal or contact)
 
 
 ===============
@@ -376,7 +400,7 @@ MealPost : Post
 
 
 ==================================
-MealPostEventHandler : EventHandler
+MealEventHandler : EventHandler
 ==================================
 
 • ATTRIBUTES
@@ -392,7 +416,7 @@ MealPostEventHandler : EventHandler
 	• HandleMealPostClosedEvent()
 	• HandleMealPostUpdatedEvent()	
 
-• OPERATIONS
+• FEATURES
 	• The ability to create a meal post. (No longer accept replies) 
 	• The ability to update a meal post. (No longer accept replies) 
 	• The ability to close a meal post. (No longer accept replies) 
@@ -409,7 +433,15 @@ MealPostEventHandler : EventHandler
 
 
 
-============
+=======================================
+NotificationEventHandler : EventHandler
+=======================================
+
+
+• OPERATIONS
+	HandleNotificiationAcceptedEvent()
+	HandleNotificiationRejectedEvent()
+
 
 
 
@@ -421,26 +453,25 @@ Notification
 • ATTRIBUTES
 	•NotificationID	
 	•Poster -> User(1)	
-
-• OPERATIONS
-	•NotificationID() (GET)(SET)
-	•Message() (GET)(SET)
-	•RecipientList() (GET)(SET)
-
+	•[Message]
 	
 • TYPES
 	• Contact Notifications
 	• Meal Notifications
 
-• FEATURES
-	• The ability to add a custom message or additional information.
-	• The ability to add a list of recipients for notification -- Subset of user's contacts.
-	• The ability to add a contact who is currently unavailable.
+
+	
+===============================
+MealNotification : Notification
+===============================
+
+• ATTRIBUTES
+	• MealObject -> Meal(1)
 
 
 
 ======================================
-CONTACT NOTIFICATION : NOTIFICATION
+ContactNotification : Notification
 ======================================
 
 
