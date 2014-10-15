@@ -1,4 +1,13 @@
 
+
+CHARACTER CASE CONVENTIONS : # Only the stuff inside a function begins with lower case. Everything else that is part of the class begins with upper case.
+
+	1. Class names begin with upper case.
+	2. Class opereations and attributes begin with upper case
+	3. Types local to operations begin with lower case 
+
+
+
 NOTATIONAL CONVENTIONS
 
 ////////////////////////////////////////////////////////
@@ -36,10 +45,10 @@ CLASS DESCRIPTION SYNTAX
 ===============================================
 
 [• ATTRIBUTES
-	<class attribute>(+)]
+	<attribute>(+)]
 
 [• OPERATIONS
-	<class operation>(+)]
+	<operation>(+)]
 
 [• TYPES
 	<sub class>(+)]
