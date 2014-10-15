@@ -74,12 +74,6 @@ CORE FEATURES :
   
 
 
-
-• The ability to recover a forgotten password.
-
- 
-
-
 ============
 UserAccount
 ============
@@ -110,11 +104,13 @@ AccountManager
 	• CreateUserAccount()
 	• DeleteUserAccount( UserAccount(1) )
 	• UpdateUserAccount( UserAccount(1) )
+	• IsValidUser( UserAccount(1) )
 
 • FEATURES
 	• The ability to create user accounts
 	• The ability to delete user accounts.	
 	• The ability to insert and modify account information.
+	• The ability to verify user account credentials.
 
 
 =================
@@ -123,10 +119,10 @@ ContactManager
 
 
 • OPERATIONS
-	• UpdateUserVisibilityList(sessionID(1), User.ContactList(1))
-	• UpdateContactInfo(sessionID(1), User.ContactInfo(1))
-	• RemoveContact(sessionID(1), User.ContactInfo(1))
-	• AddContact(sessionID(1), User.ContactInfo(1))
+	• UpdateUserVisibilityList(UserName(1), User.ContactList(1))
+	• UpdateContactInfo(UserName(1), User.ContactInfo(1))
+	• RemoveContact(UserName(1), User.ContactInfo(1))
+	• AddContact(UserName(1), User.ContactInfo(1))
 
 
 • FEATURES
@@ -141,9 +137,14 @@ LoginManager
 ============
 
 
+• OPERATIONS
+	• Login(User.UserName)
+	• GetUserName(SessionID(1))
+	• Logout(sessionID(1))
 
 • FEATURES
 	• The ability to login and logout of user account.
+	• The ability to retrieve user name of user that corresponds to a sessionID.
 
 
 
@@ -192,14 +193,118 @@ ContactInfo
 
 	
 
+==============================
+AccountMangementRequestHandler
+==============================
+
+• ATTRIBUTES
+	• AccountManagerObject -> AccountManager(1) 
+
+• OPERATIONS
+	• HandleAccountManagementRequest(Object(*))
+	• CreateAccountRequest()
+	• ModifyAccountRequest(UserAccount(1))
+	• DeleteAccountRequest(UserAccount(1))
+	• CheckValidityRequest(UserAccount(1))
+
+• FEATURES
+	• Handles all account management requests on the back end.
+
+=============================
+LoginManagementRequestHandler
+=============================
+
+• ATTRIBUTES
+	• LoginManagerObject -> LoginManager(1)
+
+• OPERATIONS
+	• HandleLoginManagementRequest(Object(*))
+	• AuthenticateAndLoginRequest(UserAccount(1))
+	• LogoutRequest(User.SessionID)
+
+• FEATURES
+	• Handles all login management requests on the back end.
+
+
+===============================
+ContactManagementRequestHandler
+===============================
+
+• ATTRIBUTES
+	• ContactManagerObject -> ContactManager(1)
+
+• OPERATIONS
+	• HandleContactManagementRequest(Object(*))
+	• UpdateUserVisibilityListRequest(UserName(1), User.ContactList(1))
+	• UpdateContactInfoRequest(UserName(1), User.ContactInfo(1))
+	• RemoveContactRequest(UserName(1), User.ContactInfo(1))
+	• AddContactRequest(UserName(1), User.ContactInfo(1))
+
+• FEATURES
+	• Handles all contact management requests on the back end.
+
+
+=================
+RequestDispatcher
+=================
+
+• ATTRIBUTES
+	• AccountManagementRequestHandlerObject -> AccountManagementRequestHandlerObject(1)
+	• LoginManagementRequestHandlerObject -> LoginManagementRequestHandlerObject(1)
+
+• OPERATIONS
+	• DispatchRequest(Object(*))
+
+• FEATURES
+	• Dispatches the management request to the appropriate handler on the back end.
 
 
 
 
--- CONTACT MANAGEMENT FEATURES
+=======
+Request
+=======
 
-• The ability to search and add contacts - by inputting the userId or email address of the contact.
-• The ability to separate contacts into groups (friends,family etc.).
+• ATTRIBUTES
+	• RequestTypes -> Enum
+
+• FEATURES
+	• Properties class that contains the various request types that are handled by the application.
+
+
+============
+EventHandler
+============
+
+• ATTRIBUTES
+	• RequestHandlerObject -> RequestHandler(1)
+
+• TYPES
+	• ContactEventHandler
+	
+
+
+==================================
+ContactEventHandler : EventHandler
+==================================
+
+• ATTRIBUTES
+	• RequestID -> String(1)
+	• RequestTypeList -> String(+)
+	
+
+• OPERATIONS
+	HandleSearchForContactEvent()
+	HandleAddContactEvent()
+	HandleEditContactEvent()
+	HandleDeleteContactEvent()
+
+• FEATURES
+	• The ability to search, add, edit and delete contacts 	
+
+
+
+
 
 
 
@@ -222,7 +327,7 @@ ContactInfo
 =================
 
 • ATTRIBUTES
-	•Notification ID
+	•NotificationID
 	•[Message]
 	•Poster -> User(1)
 	•Recipient List -> User(+)
@@ -296,41 +401,6 @@ ContactInfo
   be filled in.  
 • The ability to tag custom locations -- If poster types his/her address, then the app should remember the address for future reference.
 
-==================
-EXTENDED FEATURES:
-==================
 
--- USER/RESTAURANT RANK MANAGEMENT FEATURES 
-
-• The ability to give a restaurant a star rating (1-5 scale).
-• The ability to favorite a restaurant
-
--- MEAL NOTIFICATION CONTENT AND PUSH 
-
-• The ability to recommend a restaurant -- one of the recipients can recommend a restaurant if the location is unspecified.
-• User who receives a meal notification push can accept or decline it on the lock screen
-• User who receives a meal notification push and click on the lock screen to see more detailed information of the notification 
-
--- GEO LOCATION FEATURES
-
-• The ability to search for restaurants based on proximity.
-• The ability to use geo information to search for contacts (both for adding friend and for searching within contact list) 
-
--- PREDICTIVE FEATURES
-
-• The ability to recommend restaurants that are liked by majority users in the area (Uses GEO LOCATION).
-• The ability randomly recommend a restaurant (Should pick from restaurants that have decent ratings)
-• The ability to recommend friends for meal at a particular restaurants -- uses contact's ratings for that restaurant.
-• The ability to recommend restaurants for meal with a particular group of friends -- uses common restaurants that are ranked high by the group in question.
-
--- ACCOUNT FEATURES
-
-• User can use Facebook or other social media account information to log in 
-
--- RELATION MANAGEMENT FEATURES
-
-• The ability to search contacts (for adding) using true name, work place or phone number 
-• Display contacts in different orders in contact list. (adding a separate page for choosing sorting methods. )
-• The ability to schedule availability status in advance or at repeated intervals -- The status could be set to available from 3-4 pm every Monday, Wed, Friday. 
 
 
