@@ -1,0 +1,113 @@
+Use-Cases Related to Posting and Responding to Meal Posts
+
+Create meal post
+Primary actor: poster
+Goal: Create an invitation to be disseminated amongst friends
+Pre-Condition: The poster has logged in and is on the “Invites” tab
+Main Path:
+
+1.	The poster pushes a "create invitation" button (or “plus” button) on the Invites page
+2.	The app displays the “Meal Information” page
+3.	The poster selects the start time for the meal meal
+4.	The poster selects the end time for the meal, or selects from a list of duration options (e.g. 30 mins, 1 hour, etc.)
+5.	The poster must select from a list of location options:
+a.	One restaurant,
+b.	Multiple restaurants, or
+c.	Input new restaurant name
+6.	The poster selects the approximate meal duration selects from a list of duration options (e.g. 30 mins, 1 hour, etc.)
+7.	The poster sets the maximum number of friend acceptance before the invitation is closed
+8.	The poster indicates whether this invitation can be forwarded to other friends/parties
+9.	The poster presses the “next” button to enter the next phase “select friends.”
+
+Select recipients for meal post
+Primary actor: poster
+Goal: Select friends to which an invitation can be sent
+Pre-Condition: The poster has created a meal information invitation and is on the “select friends” page
+Main Path: 
+
+1.	The app shows a list of friends and preset friend groups
+2.	The poster selects which friends and groups of friends will receive the invitation
+3.	The poster can select the option to select all friends to receive the invitation
+4.	The poster presses the “next” button to enter the next phase “post information.”
+
+Post meal post
+Primary actor: poster
+Goal: Post the meal post to be seen by selected friends
+Pre-Condition: The poster has created meal post, selected target friends, and is on the “post information” page
+Main Path: 
+
+1.	The poster selects a start time for the post (default is “now”).
+2.	The poster selects an end time for the post (with predetermined default).
+3.	The poster can add additional information (such as meetup location).
+4.	The poster presses “post” button to post
+
+Edit meal post
+Primary actor: poster
+Goal: Edit an existing meal notification
+Pre-Condition: poster has created at least one meal post and is on the “invites” tab
+Main Path: 
+
+1.	The poster clicks on an existing “meal post”
+2.	The app shows the “meal details” page which contains a summary of information (see GUI sketch).
+a.	The poster can select “edit” button on the “meal information” section
+b.	The app shows the “meal information” page
+c.	The user can change the fields on this page
+d.	The user selects “confirm” or “cancel”
+i.	If the user selects “confirm,” the changes are saved.
+e.	The app returns to the “meal details” page
+3.	The poster can select “edit” button on the “friends” section
+a.	The app shows the “meal information” page
+b.	The user can change the fields on this page
+c.	The user selects “confirm” or “cancel”
+i.	If the user selects “confirm,” the changes are saved.
+d.	The app returns to the “meal details” page
+4.	The poster can select “edit” button on the “post information” section
+a.	The app shows the “meal information” page
+b.	The user can change the fields on this page
+c.	The user selects “confirm” or “cancel”
+i.	If the user selects “confirm,” the changes are saved.
+d.	The app returns to the “meal details” page
+5.	When the changes are made, the poser can select the “back” button to return to the “invites” tab
+
+
+Close meal post
+Primary actor: poster
+Goal: Delete meal post
+Pre-Condition: poster has created at least one meal post and is on the “invites” tab
+Main Path:
+
+1.	The poster clicks on an existing “meal post”
+2.	The app shows the “meal details” page which contains a summary of information (see GUI sketch).
+3.	The poster selects “close the meal” button
+4.	The app closes the meal post and returns to the “invites” tab
+
+
+Delete meal post
+Primary actor: poster
+Goal: Delete meal post
+Pre-Condition: poster has created at least one meal post and is on the “invites” tab
+Main Path:
+
+1.	The poster clicks on an existing “meal post”
+2.	The app shows the “meal details” page which contains a summary of information (see GUI sketch).
+3.	The poster selects “delete the meal” button
+4.	The app deletes the meal post and returns to the “invites” tab
+
+Respond to meal post
+Primary actor: recipient
+Secondary actor: poster
+Goal: Respond to an meal post
+Pre-Condition: recipient has received an meal post from a friend and is on the “invites” tab
+Main Path: 
+
+1.	The recipient clicks on an active meal post
+2.	The app shows the “meal details” page which contains a summary of information (see GUI sketch).
+1.	If the poster has allowed the meal post to be forwarded, the recipient can click on the “invite others” button
+3.	The recipient can respond in one of the following cases:
+a.	Decline the meal notification
+i.	The app sends a decline to the inviter
+ii.	The app dismisses the meal post from the recipient’s “invites” tab
+b.	Accept the meal notification
+i.	The app sends the acceptance (with the numbers and names of accepted invitees) back to the inviter
+ii.	The app returns to the “invites” tab
+
