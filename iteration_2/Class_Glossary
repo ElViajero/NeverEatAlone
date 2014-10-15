@@ -184,17 +184,22 @@ ContactInfo
 	• The ability to modify visibility list locally. 
 	• The ability to delete contacts locally.
 
-	
 
-==============================
-AccountMangementRequestHandler
-==============================
+========================
+ManagementRequestHandler
+========================
+
+• OPERATIONS	
+	• HandleManagementRequest(Object(*))	
+
+=========================================================
+AccountMangementRequestHandler : ManagementRequestHandler
+=========================================================
 
 • ATTRIBUTES
 	• AccountManagerObject -> AccountManager(1) 
 
-• OPERATIONS
-	• HandleAccountManagementRequest(Object(*))
+• OPERATIONS	
 	• CreateAccountRequest()
 	• ModifyAccountRequest(UserAccount(1))
 	• DeleteAccountRequest(UserAccount(1))
@@ -203,12 +208,7 @@ AccountMangementRequestHandler
 • FEATURES
 	• Handles all account management requests on the back end.
 
-========================
-ManagementRequestHandler
-========================
 
-• OPERATIONS	
-	• HandleManagementRequest(Object(*))
 
 ========================================================
 LoginManagementRequestHandler : ManagementRequestHandler
