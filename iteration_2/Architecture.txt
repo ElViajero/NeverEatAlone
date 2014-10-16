@@ -1,0 +1,64 @@
+Architecture
+
+Packages with classes:
+
+--------
+edu.jhu.cs.oose.fall2014.group19.foodApp.client
+--------
+User
+UserAccount
+ContactInfo
+Request
+Meal
+Location
+Post
+ContactPost : Post
+AcceptancePost : Post
+MealPost : Post
+Notification
+MealNotification : Notification
+ContactNotification : Notification
+
+--------
+edu.jhu.cs.oose.fall2014.group19.foodApp.client.handlers
+--------
+ManagementRequestHandler
+AccountMangementRequestHandler : ManagementRequestHandler
+LoginManagementRequestHandler : ManagementRequestHandler
+ContactManagementRequestHandler : ManagementRequestHandler
+MealManagementRequestHandler : ManagementRequestHandler
+NotificationManagementRequestHandler : ManagementRequestHandler
+EventHandler
+ContactEventHandler : EventHandler
+MealEventHandler : EventHandler
+NotificationEventHandler : EventHandler
+
+--------
+edu.jhu.cs.oose.fall2014.group19.foodApp.server
+--------
+AccountManager
+ContactManager
+LoginManager
+NotificationManager
+RequestDispatcher
+
+
+
+------------------------------------------------------------------------------------------
+
+Components:
+Client: Android SDK
+Server: J2EE
+Graph database: Neo4j
+
+Deployment: 
+
+
+
+
+
+
+
+
+
+
