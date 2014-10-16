@@ -63,10 +63,45 @@ CLASS DESCRIPTION SYNTAX
 ////////////////////////////////////////////////////////
 
 
-===========
+
+FLOW OVERVIEW :
+
+1.	The GUI triggers a method of some sub-class of the EventHandler class.
+2.	The event handlers all have access to a RequestDispatcher instance (as they derive from the EventHandler class ).
+3.	Each EventHandler has a RequestID which is a field that contains the type of event (MEAL,CONTACT etc.)
+4.	Each EventHandler has a RequestTypeList which denotes the events (eg. create,update, delete) that are possible for the given RequestID.
+5.	The method of the event handler constructs the necessary parameters (including SessionID,RequestID and RequestType) and calls the DispatchRequest method 	 on the RequestDispatcher 	object.
+6.	The DispatchRequest method checks the RequestID and RequestType and calls the HandleManagementRequest method of the appropriate ManagementRequestHandler.
+7.	HandleManagementRequest calls the appropriate Request method of the given ManagementRequestHandler sub-class based on RequestType.
+8.	The Request method calls the appropriate method on the Manager object (that is an attribute of the ManagamentRequestHandler sub-class)
+9.	The method of the Manager class updates the Database layer.
 
 
 
+ADDITIONAL POINTS :
+
+1.	The DispatchRequest method first obtains UserName from SessionID using the same procedure as mentioned above (using the LoginManagementRequestHandler).
+2.	Then all subsequent processing uses UserName instead of SessionID (i.e. steps 6-9 above).
+3.  After the DB update, control returns to the RequestDispatcher and the RequestDispatcher can cause notificaions to be sent out to clients via the same 		process above using the NotificatoinManagementRequestHandler).
+4.	The client's GUI is updated via fetch from the server.
+
+
+POST VS NOTIFICATOIN CONVENTIONS :
+
+1.	A user posts to the server.
+2.	A server sends out notifications to all the recipients.
+3.	A user can accept or decline a notification. The server is notified of acceptance or rejection via a post (ContactAcceptPost).
+
+NOTE :
+
+Interfaces,abstract classes etc. have not been explicitly labelled. 
+These decisions have not been concretly made but have been hinted in the class glossary below
+
+The implementation will program to interfaces.
+
+
+///////////////////////////////////////////////////////
+//////////////////////////////////////////////////////
 
 
 
@@ -176,7 +211,7 @@ ContactInfo
 
 
 ========
--- User
+User
 ========
 
 * ATTRIBUTES
@@ -236,7 +271,8 @@ LoginManagementRequestHandler : ManagementRequestHandler
 
 * OPERATIONS
 	* AuthenticateAndLoginRequest(UserAccount(1))
-	* LogoutRequest(SessionID)
+	* GetUserNameRequest(SessionID(1))
+	* LogoutRequest(SessionID(1))
 
 * FEATURES
 	* Handles all login management requests on the back end.
@@ -322,8 +358,6 @@ RequestDispatcher
 
 * FEATURES
 	* Dispatches the management request to the appropriate handler on the back end.
-
-
 
 
 =======
@@ -468,11 +502,8 @@ NotificationEventHandler : EventHandler
 
 
 * OPERATIONS
-	HandleNotificiationAcceptedEvent()
-	HandleNotificiationRejectedEvent()
-
-
-
+	* HandleNotificiationAcceptedEvent()
+	* HandleNotificiationRejectedEvent()
 
 
 ============
