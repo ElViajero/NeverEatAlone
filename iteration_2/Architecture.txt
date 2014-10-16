@@ -1,0 +1,79 @@
+Architecture
+------------------------------------------------------------------------------------------
+
+Packages with classes:
+
+--------
+edu.jhu.cs.oose.fall2014.group19.foodApp.client
+--------
+User
+UserAccount
+ContactInfo
+Request
+Meal
+Location
+Post
+ContactPost : Post
+AcceptancePost : Post
+MealPost : Post
+Notification
+MealNotification : Notification
+ContactNotification : Notification
+
+--------
+edu.jhu.cs.oose.fall2014.group19.foodApp.client.handlers
+--------
+ManagementRequestHandler
+AccountMangementRequestHandler : ManagementRequestHandler
+LoginManagementRequestHandler : ManagementRequestHandler
+ContactManagementRequestHandler : ManagementRequestHandler
+MealManagementRequestHandler : ManagementRequestHandler
+NotificationManagementRequestHandler : ManagementRequestHandler
+EventHandler
+ContactEventHandler : EventHandler
+MealEventHandler : EventHandler
+NotificationEventHandler : EventHandler
+
+--------
+edu.jhu.cs.oose.fall2014.group19.foodApp.server
+--------
+AccountManager
+ContactManager
+LoginManager
+NotificationManager
+RequestDispatcher
+
+
+
+------------------------------------------------------------------------------------------
+
+Components:
+
+Client: Android SDK
+Server: J2EE
+Graph database: Neo4j
+
+Use Hibernate to communicate between the DBMS and the Java server,
+and JSON-RPC to communicate between the Java server and the Android client.
+The client and the DBMS will not communicate directly. 
+
+------------------------------------------------------------------------------------------
+
+Resources:
+
+Language: Java
+IDE: Eclipse
+UML tool: UML Designer by Obeo
+Graph Database: Neo4j
+Libraries: JDBC, Hibernate, JSON-RPC
+Development Target Platform : Android (possibly cross platform with iOS using RoboVM)
+Geolocation: Google Maps Geolocation API
+
+
+
+
+
+
+
+
+
