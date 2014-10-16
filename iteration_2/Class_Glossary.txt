@@ -407,20 +407,18 @@ ContactEventHandler : EventHandler
 * ATTRIBUTES
 	* RequestID -> String(1)
 	* RequestTypeList -> String(+)
-	* ContactPostObject -> ContactPost(1)
+	* ContactRequestPostObject -> ContactRequestPost(1)
 	
 
 * OPERATIONS
 	* HandleSearchForContactEvent()
 	* HandleAddContactEvent()
 	* HandleEditContactEvent()
-	* HandleAcceptContactEvent()
-	* HandleDeclineContactEvent()
 	* HandleDeleteContactEvent()
 
 * FEATURES
 	* The ability to search, add, edit and delete contacts.
-	* The ability to accept or decline a contact request.
+	
 
 
 ====
@@ -453,7 +451,7 @@ Post
 
 
 ==================
-ContactPost : Post
+ContactRequestPost : Post
 ==================
 
 =====================
@@ -501,8 +499,7 @@ MealEventHandler : EventHandler
 	* The ability to update a meal post. (No longer accept replies) 
 	* The ability to close a meal post. (No longer accept replies) 
 	* The ability complete a meal epost. (Cancel the event) 
-	* The ability to accept a meal invitation. 
-	* The ability to decline a meal invitation. 
+
 
 
 
@@ -521,6 +518,9 @@ NotificationEventHandler : EventHandler
 * OPERATIONS
 	* HandleNotificiationAcceptedEvent()
 	* HandleNotificiationRejectedEvent()
+
+* FEATURES
+	* Ability to accept or decline a notificitation (meal or contact)
 
 
 ============
