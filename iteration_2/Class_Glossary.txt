@@ -77,6 +77,9 @@ FLOW OVERVIEW :
 9.	The method of the Manager class updates the Database layer.
 
 
+To summarize :
+
+GUI -> EVENT HANDLER -> REQUEST DISPATCHER -> MANAGEMENT REQUEST HANDLER -> MANAGER -> DATABASE
 
 ADDITIONAL POINTS :
 
@@ -94,10 +97,19 @@ POST VS NOTIFICATOIN CONVENTIONS :
 
 NOTE :
 
+The manager classes are one layer above the database layer.
+All client to server communication goes to RequestDispatcher.
+
 Interfaces,abstract classes etc. have not been explicitly labelled. 
 These decisions have not been concretly made but have been hinted in the class glossary below
 
 The implementation will program to interfaces.
+
+Also, parameters for EventHandler methods have been omitted. There may be one additional layer (like a method that handles events called HandleEvent() and that then calls methods like CreateMealPostEvent()) of indirection in the event handling mechanism that have not been explicitly stated.
+
+The object of type Time hasn't been explicitly stated. This will be handled during implementation.
+
+Some fields have strings etc. as their type. This is NOT fixed and is subject to change during implementation.
 
 
 ///////////////////////////////////////////////////////
@@ -161,15 +173,17 @@ ContactManager
 
 
 * OPERATIONS
-	* UpdateUserVisibilityList(UserName(1), User.ContactList(1))
-	* UpdateContactInfo(UserName(1), User.ContactInfo(1))
-	* RemoveContact(UserName(1), User.ContactInfo(1))
-	* AddContact(UserName(1), User.ContactInfo(1))
+	* UpdateUserVisibilityList(UserName(1), ContactList(1))
+	* UpdateContactInfo(UserName(1), ContactInfo(1))
+	* RemoveContact(UserName(1), ContactInfo(1))
+	* AddContact(UserName(1), ContactInfo(1))
+	* SearchContact(UserName(1), ContactInfo(1))
 
 
 * FEATURES
 	* The ability to add a contact.
 	* The ability to delete a contact.
+	* The ability to search for a contact.
 	* The ability to update contact information.
 	* The ability to modify a user's visibility list.
 
@@ -301,10 +315,10 @@ ContactManagementRequestHandler : ManagementRequestHandler
 	* ContactManagerObject -> ContactManager(1)
 
 * OPERATIONS
-	* UpdateUserVisibilityListRequest(UserName(1), User.ContactList(1))
-	* UpdateContactInfoRequest(UserName(1), User.ContactInfo(1))
-	* RemoveContactRequest(UserName(1), User.ContactInfo(1))
-	* AddContactRequest(UserName(1), User.ContactInfo(1))
+	* UpdateUserVisibilityListRequest(UserName(1), ContactList(1))
+	* UpdateContactInfoRequest(UserName(1), ContactInfo(1))
+	* RemoveContactRequest(UserName(1), ContactInfo(1))
+	* AddContactRequest(UserName(1), ContactInfo(1))
 
 
 * FEATURES
@@ -380,6 +394,8 @@ EventHandler
 
 * TYPES
 	* ContactEventHandler
+	* MealEventHandler
+	* NotificationEventHandler
 
 
 
@@ -541,22 +557,22 @@ Meal
 ====
 
 * ATTRIBUTES
-	LocationObject -> Location(1)
-	StartTime -> Time(1)
-	EndTime -> Time(1)
-	MaximumCapacity -> integer(1)
-	IsExtendable -> boolean(1)
+	* LocationObject -> Location(1)
+	* StartTime -> Time(1)
+	* EndTime -> Time(1)
+	* MaximumCapacity -> integer(1)
+	* IsExtendable -> boolean(1)
 
 * OPERATIONS
-	LocationObject() (GET)(SET)
-	StartTime() (GET)(SET)
-	EndTime() (GET)(SET)
-	MaximumCapacity() (GET)(SET)
-	IsExtendable() (GET)(SET)
+	* LocationObject() (GET)(SET)
+	* StartTime() (GET)(SET)
+	* EndTime() (GET)(SET)
+	* MaximumCapacity() (GET)(SET)
+	* IsExtendable() (GET)(SET)
 
 * FEATURES
 	* The ability to set the location of the meal (Look at geo location features below) -- This CAN BE a custom location (someone's house for example).
-	* The ability to set a duration (optional start and end time) for meal -- A user may be open for breakfast for two hours from current time OR the user says he/she can have breakfast between 8-10 a.m.
+	* The ability to set a duration (optional start and end time) for meal -- A user may be open for breakfast for two hours from current time OR the user 	  says he/she can have breakfast between 8-10 a.m.
 	* The ability to set maximum size of meal party.
 	* The ability to set whether meal is open to extended contacts -- allows friends of friends to join in.
   
@@ -566,20 +582,18 @@ Location
 ========
 
 * ATTRIBUTES
-	* LocationName
-	* StreetAddress
+	* LocationName -> String(1)
+	* StreetAddress -> String(1)
 
 * OPERATIONS
 	LocationName()(GET)(SET)
-	StreetAdress()(GET)(SET)
+	StreetAdress()(GET)(SET)s
 
 * USES
 	Google Maps Autcomplete API	
 
 * FEATURES
 	*The ability to automatically find address of restaurant -- If poster type's subway, the address "Subway restaurant, xyz Street, ..." should automatically be filled in. 
-
-
 
 
 
