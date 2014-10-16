@@ -354,7 +354,8 @@ NotificationManagementRequestHandler : ManagementRequestHandler
 	* CreateNotificationRequest(Post(1))
 	* UpdateNotificationRequest(Post(1))
 	
-
+* FEATURES
+	* Handles all notification management requests on the back end.
 
 =================
 RequestDispatcher
