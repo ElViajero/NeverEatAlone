@@ -42,7 +42,7 @@ ContactManager
 LoginManager
 NotificationManager
 RequestDispatcher
-
+MealManager
 
 
 ------------------------------------------------------------------------------------------
