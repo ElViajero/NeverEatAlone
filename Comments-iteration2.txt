@@ -1,0 +1,7 @@
+Group 19,
+
+Good job!
+
+The only problem with your submission is that your class diagram is missing information on UI classes.
+
+Iteration 2 Grade: 99
