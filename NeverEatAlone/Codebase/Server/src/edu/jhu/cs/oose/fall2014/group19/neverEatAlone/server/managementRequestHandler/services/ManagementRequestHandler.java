@@ -5,6 +5,11 @@ import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Map;
 
+import javax.ejb.Stateless;
+import javax.enterprise.inject.Any;
+import javax.enterprise.inject.Instance;
+import javax.inject.Inject;
+
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.managementRequestHandler.contracts.IManagementRequestHandler;
 
 /**
@@ -16,27 +21,47 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.managementRequestHa
  * @author tejasvamsingh
  *
  */
+@Stateless
 public class ManagementRequestHandler implements IManagementRequestHandler {
 
+	@Inject
+	@Any
+	Instance<Object> myBeans;
+
+	/**
+	 * This class obtains bean reference from container using the passed string.
+	 * @param className
+	 * @return
+	 * @throws Exception
+	 */
+	private Object getMyBeanFromClassName(String className) throws Exception{    
+	    Class clazz = Class.forName(className);
+	    return myBeans.select(clazz).get();  
+	}
+	
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Map<String,String>> HandleManagementRequest(Map<String, String[]> request) {
 		
 		try {
 			
+			// ********* LOGGING ********* 
 			System.out.println("class name : "+request.get("RequestID")[0]+"ManagementRequestHandler");
+			// ********* LOGGING ********* 
 			
-			// Get class corresponding to RequestID.
-			Class<?> c = Class.forName(
-					"edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.managementRequestHandler.services."
-					+request.get("RequestID")[0]+"ManagementRequestHandler");			
+			// obtain class reference
+			Object c = getMyBeanFromClassName("edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.managementRequestHandler.services."
+					+request.get("RequestID")[0]+"ManagementRequestHandler");
+			
 			
 			// Get method corresponding to RequestType.
-			Method m = c.getDeclaredMethod(request.get("RequestType")[0]+
-							request.get("RequestID")[0]+
-							"Request" , Map.class);
-
+			
+			Method m = ((Class) c.getClass()).getDeclaredMethod(request.get("RequestType")[0]+
+										request.get("RequestID")[0]+
+										"Request" , Map.class);
+			
 			// Invoke the method.
-			return (List<Map<String, String>>) m.invoke(c.newInstance(),request);
+			return (List<Map<String, String>>) m.invoke(c,request);
 			
 			
 			
@@ -63,6 +88,9 @@ public class ManagementRequestHandler implements IManagementRequestHandler {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

@@ -3,6 +3,9 @@ package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.requestDispatcher.
 import java.util.List;
 import java.util.Map;
 
+import javax.ejb.Stateless;
+import javax.inject.Inject;
+
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.managementRequestHandler.contracts.IManagementRequestHandler;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.managementRequestHandler.services.ManagementRequestHandler;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.requestDispatcher.contracts.IRequestDispatcher;
@@ -15,16 +18,20 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.requestDispatcher.c
  *
  */
 
+@Stateless
 public class RequestDispatcher implements IRequestDispatcher {
 
-	IManagementRequestHandler IManagementRequestHandlerObject;
+	@Inject IManagementRequestHandler IManagementRequestHandlerObject;
 	
 	@Override
 	public List<Map<String,String>> DispatchRequest(Map<String, String[]> request) {
+
+		// ********* LOGGING ********* 
 		System.out.println("reached DispatchRequest");
 		System.out.println("Request Keys : ");
 		System.out.println(request.keySet());
-		IManagementRequestHandlerObject = new ManagementRequestHandler();
+		// ********* LOGGING ********* 
+		
 		return IManagementRequestHandlerObject.HandleManagementRequest(request);
 	}	
 	

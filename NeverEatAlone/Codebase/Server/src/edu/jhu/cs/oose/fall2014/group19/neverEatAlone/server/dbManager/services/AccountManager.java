@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.ejb.Stateless;
+
 import org.apache.commons.collections.map.HashedMap;
 import org.neo4j.cypher.ExecutionEngine;
 import org.neo4j.cypher.ExecutionResult;
@@ -13,6 +15,8 @@ import org.neo4j.kernel.impl.util.StringLogger;
 
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.contracts.IAccountManager;
 
+
+@Stateless
 public class AccountManager implements IAccountManager {
 
 	GraphDatabaseService GraphDBInstance;
@@ -27,9 +31,10 @@ public class AccountManager implements IAccountManager {
 	@Override
 	public List<Map<String,String>> CreateAccount(Map<String,String[]> request) {
 		
-		
+		// ********* LOGGING ********* 
 		System.out.println("Reached CreateAccount in AccountManager");
 		System.out.flush();
+		// ********* LOGGING ********* 
 		
 		//create a duplicate map.
 		Map<String,String[]> modifiableRequestMap = new HashMap<String,String[]>(request);
@@ -93,8 +98,10 @@ public class AccountManager implements IAccountManager {
 	@Override
 	public List<Map<String, String>> IsValidAccount(Map<String, String[]> request) {
 		
+		// ********* LOGGING ********* 
 		System.out.println("Reached IsValidAccount in AccountManager");
 		System.out.flush();
+		// ********* LOGGING ********* 
 		
 		//create a duplicate map.
 		Map<String,String[]> modifiableRequestMap = new HashMap<String,String[]>(request);

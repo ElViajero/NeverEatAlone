@@ -63,16 +63,6 @@ public class RequestHandlerTests {
 		    // and ensure it is fully consumed
 		    BufferedReader in = 
 	                new BufferedReader( new InputStreamReader( entity2.getContent() ) );
-
-		    
-		    
-	            //String response=in.readLine();
-	            //assertTrue(response.equals("successful POST request."));
-	            /*
-	            while ( (response = in.readLine()) != null ) {
-	                System.out.println( response );	                
-	                assertTrue(response.equals("successful POST request."));	                
-	            }*/
 	            
 	            in.close();
 		    EntityUtils.consume(entity2);

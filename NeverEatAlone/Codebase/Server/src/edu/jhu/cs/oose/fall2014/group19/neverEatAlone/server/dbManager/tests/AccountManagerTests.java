@@ -96,7 +96,7 @@ public class AccountManagerTests {
 	 */
 	@Test
 	public void IsValidAccountTest(){
-		
+		CreateAccountTest();		
 		//CASE 1 : Account is valid.
 		
 		//popluate data		

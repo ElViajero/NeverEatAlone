@@ -5,6 +5,9 @@ import java.util.Map;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+import javax.ejb.Stateless;
+import javax.inject.Inject;
+
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.contracts.IAccountManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.services.AccountManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.managementRequestHandler.contracts.IManagementRequestHandler;
@@ -19,24 +22,27 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.managementRequestHa
  *
  */
 
-class AccountManagementRequestHandler{
+@Stateless
+public class AccountManagementRequestHandler{
 
-	IAccountManager IAccountManagerObject;
+	@Inject IAccountManager IAccountManagerObject;
 	
-	  List<Map<String,String>> CreateAccountRequest(Map<String,String[]> request){		
+	  public List<Map<String,String>> CreateAccountRequest(Map<String,String[]> request){
 		
+		 // ********* LOGGING ********* 
 		 System.out.println("reached CreateAccountRequest");
-		//redundant. Use for now, but change soon.
-		 IAccountManagerObject = new AccountManager();
+		 System.out.println(IAccountManagerObject);
+		 // ********* LOGGING ********* 
+		 
 		 return IAccountManagerObject.CreateAccount(request);
-		
-	}
+	  }
 	  
-	  List<Map<String,String>> IsValidAccountRequest(Map<String,String[]> request){
+	  public List<Map<String,String>> IsValidAccountRequest(Map<String,String[]> request){
 		  
+		  // ********* LOGGING ********* 
 		  System.out.println("reached IsValidAccountRequest");
-		  //redundant. Use for now, but change soon.
-		  IAccountManagerObject = new AccountManager();
+		  // ********* LOGGING ********* 
+		  
 		  return IAccountManagerObject.IsValidAccount(request);
 	  }
 	 

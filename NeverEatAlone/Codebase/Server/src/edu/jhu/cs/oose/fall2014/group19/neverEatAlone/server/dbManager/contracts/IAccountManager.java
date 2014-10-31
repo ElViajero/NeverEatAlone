@@ -3,6 +3,9 @@ package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.contract
 import java.util.List;
 import java.util.Map;
 
+import javax.ejb.Local;
+
+@Local
 public interface IAccountManager {
 
 	public List<Map<String,String>> CreateAccount(Map<String,String[]> request);
