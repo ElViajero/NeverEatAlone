@@ -21,8 +21,21 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.junit.Test;
 
+/**
+ * This class tests cases related to account creation.
+ * 
+ * @author tejasvamsingh
+ *
+ */
 public class CreateAccountWorkflowTest {
 
+	/**
+	 * 
+	 * This method tests the creations of a valid user account.
+	 * 
+	 * @throws ClientProtocolException
+	 * @throws IOException
+	 */
 	@Test
 	public void CreateValidAccountTest() throws ClientProtocolException, IOException {
 		
