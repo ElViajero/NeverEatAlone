@@ -14,7 +14,9 @@ public class LoginManagementRequestHandler {
 	
 	public List<Map<String,String>> CheckCredentialsLoginRequest(Map<String,String[]> request){
 		
+		// ********* LOGGING ********* 
 		System.out.println("Reached CheckCredentialsLoginRequest.");
+		// ********* LOGGING *********
 		
 		return ILoginManagerObject.CheckCredentials(request);
 	}

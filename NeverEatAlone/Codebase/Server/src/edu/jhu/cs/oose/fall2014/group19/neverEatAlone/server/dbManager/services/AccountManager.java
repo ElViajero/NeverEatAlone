@@ -9,8 +9,10 @@ import javax.ejb.Stateless;
 import org.apache.commons.collections.map.HashedMap;
 import org.neo4j.cypher.ExecutionEngine;
 import org.neo4j.cypher.ExecutionResult;
+import org.neo4j.graphdb.ConstraintViolationException;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Transaction;
+import org.neo4j.kernel.api.exceptions.schema.UniqueConstraintViolationKernelException;
 import org.neo4j.kernel.impl.util.StringLogger;
 
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.contracts.IAccountManager;
@@ -22,7 +24,8 @@ public class AccountManager implements IAccountManager {
 	GraphDatabaseService GraphDBInstance;
 	
 	public AccountManager(){
-		GraphDBInstance = DBManager.GetGraphDBInstance();		
+		GraphDBInstance = DBManager.GetGraphDBInstance();
+		
 	}
 	
 	/**
@@ -63,14 +66,21 @@ public class AccountManager implements IAccountManager {
 			//create cypher query to create node in the dataase.
 			String query = "CREATE(n:User{creationParameters}) RETURN n";
 		
-			//execute the query
-			result = executionEngine.execute(query,parameters);
+			// Check for uniqueness constraint violation.
+			try{
+				//execute the query
+				result = executionEngine.execute(query,parameters);
+				tx.success();
+			}catch(Exception e){
+				result = null;
+				tx.failure();
+			}
 			
 			// This is the data returned.
 			resultMapList = DBManager.GetResultMapList(result);
 			
 			// Sucessful transaction.
-		    tx.success();
+		    
 		    				    
 		}
 		

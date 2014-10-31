@@ -1,15 +1,19 @@
 package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.services;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.neo4j.cypher.ExecutionResult;
+import org.neo4j.graphdb.DynamicLabel;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
+import org.neo4j.graphdb.Transaction;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
 import org.neo4j.helpers.collection.IteratorUtil;
+import org.neo4j.kernel.api.exceptions.schema.AlreadyConstrainedException;
 
 import scala.collection.Iterator;
 
@@ -30,17 +34,52 @@ public class DBManager {
 	 * This method returns a graph database
 	 * instance that is shared by all classes
 	 * that wish to access the database.
+	 * It also registers the instance for clean
+	 * shutdown and defines schema constraints for the first time 
+	 * instantiation. 
 	 * 
 	 * @return
 	 */
+	
 	public static GraphDatabaseService GetGraphDBInstance(){
 		if(GraphDBInstance==null){
+			//initialize the DB instance in embedded mode.
 			GraphDBInstance = new GraphDatabaseFactory().newEmbeddedDatabase( "./DBData" );
-			registerShutdownHook(GraphDBInstance);
+			// Register the instance for clean shutdown.
+			RegisterShutdownHook();
+			// define schema constraints if not already defined.
+			try{
+				SetDBSchema();
+			}catch(AlreadyConstrainedException e){
+				System.out.println("No problem. Schema is already defined.");
+			}			
 		}
 		return GraphDBInstance;
 	}
 	
+	
+	/**
+	 * 
+	 * This method sets constraints on the
+	 * different types of possible nodes in the graph.
+	 * 
+	 * @param graphDBInstance2
+	 */
+	private static void SetDBSchema() throws AlreadyConstrainedException {
+
+		
+		try(Transaction tx = GraphDBInstance.beginTx()){
+		
+			//schema constraints go here
+			
+			GraphDBInstance.schema().
+			constraintFor(DynamicLabel.label("User")).
+			assertPropertyIsUnique("Username").create();			
+			
+			tx.success();
+		}
+	}
+
 	/**
 	 * 
 	 * This method returns a list of Maps for 
@@ -63,6 +102,12 @@ public class DBManager {
 		successMap.put("Status","Failed");
 		
 		resultMapList.add(0, successMap);
+		
+		// Check if result is null. 
+		// This happens in the case of violated
+		// constraints.		
+		if(result ==null )
+			return resultMapList;
 		
 		
 		// retrieve the result as an iterator on nodes.
@@ -148,7 +193,7 @@ public class DBManager {
 	 * when the JVM exits.
 	 * @param graphDb
 	 */
-	private static void registerShutdownHook( final GraphDatabaseService graphDBInstance )
+	private static void RegisterShutdownHook()
 	{
 	    // Registers a shutdown hook for the Neo4j instance so that it
 	    // shuts down nicely when the VM exits (even if you "Ctrl-C" the
@@ -158,7 +203,7 @@ public class DBManager {
 	        @Override
 	        public void run()
 	        {
-	            graphDBInstance.shutdown();
+	            GraphDBInstance.shutdown();
 	        }
 	    } );
 	}
