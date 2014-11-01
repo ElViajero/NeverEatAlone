@@ -1,0 +1,34 @@
+Iteration Plan
+
+Iteration 3: Initial Implement / Test
+Server side: 
+
+
+
+Client side: 
+Using the Android SDK 21, we created a simple GUI, consisting of:
+- Login page 
+- Registration page
+We able to get the user name, email address, password. We have the "login" activity and the "register" activity complemeted. But we have not linked this to the server.
+
+This set up works, but requires proper dependencies in place, including: 
+- TomEE Plume 1.7.1
+- Neo4j Community 2.1.5
+- Apache Httpcomponents Client 4.3.5
+- Java EE 6
+- Android SDK 21 (+ ADT plugin in eclipse)
+- Java SE 1.8
+
+
+Iteration 4: Core Working
+We will connect the client side and server side.
+Functionalities we have hope to complete include:
+- Registration
+- Login
+- Logout
+
+
+Iteration 5: Alpha Release
+
+
+Iteration 6: Project Completion
