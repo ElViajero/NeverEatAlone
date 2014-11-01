@@ -92,7 +92,12 @@ public class AccountManager implements IAccountManager {
 
 	@Override
 	public List<Map<String,String>> UdateAccount(Map<String,String[]> request) {
-		// TODO Auto-generated method stub
+		
+		// ********* LOGGING ********* 
+		System.out.println("Reached UpdateAccount in AccountManager");
+		// ********* LOGGING *********
+		
+		
 		return null;
 		
 	}
