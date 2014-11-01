@@ -72,6 +72,8 @@ public class AccountManager implements IAccountManager {
 				result = executionEngine.execute(query,parameters);
 				tx.success();
 			}catch(Exception e){
+				System.out.println("Constraint violation in create account. :: ");
+				System.out.println(e.getMessage());
 				result = null;
 				tx.failure();
 			}
@@ -95,10 +97,64 @@ public class AccountManager implements IAccountManager {
 		
 	}
 
+	/**
+	 * This method deletes the specified account from the database.
+	 * 
+	 * @param request
+	 * @return
+	 */
 	@Override
 	public List<Map<String,String>> DeleteAccount(Map<String,String[]> request) {
-		// TODO Auto-generated method stub
-		return null;		
+		
+		// ********* LOGGING ********* 
+		System.out.println("Reached DeleteAccount in AccountManager");
+		System.out.flush();
+		// ********* LOGGING ********* 
+		
+		Map<String,String[]> modifiableRequestMap = new HashMap<String,String[]>(request);
+		modifiableRequestMap.remove("RequestType");
+		modifiableRequestMap.remove("RequestID");
+		
+			
+		//format the parameters for the query.		
+		Map<String, String> queryParamterMap = 
+				DBManager.GetQueryParameterMap(modifiableRequestMap);
+		
+		
+		// set up paramters to execute and store the result of query
+		ExecutionEngine executionEngine = new ExecutionEngine(GraphDBInstance,
+				StringLogger.SYSTEM);				
+		ExecutionResult result;
+		List<Map<String,String>> resultMapList;
+		
+		
+		try ( Transaction tx = GraphDBInstance.beginTx() )
+		{
+			//create a params map.
+			Map<String,Object> parameters = new HashMap<String,Object>();
+			parameters.put("Username",queryParamterMap.get("Username"));
+			
+			//create cypher query to delete node from the dataase.
+			String query = "MATCH(n:User) WHERE n.Username={Username} DELETE n ";
+		
+			
+			//execute the query
+			result = executionEngine.execute(query,parameters);
+			
+			System.out.println("result : "+result);
+			System.out.flush();
+			// This is the data returned.
+			resultMapList = DBManager.GetResultMapList(result);
+			
+			// Sucessful transaction.
+		    tx.success();
+		    
+		    //if we reached here then transaction was successful.
+		    resultMapList.get(0).put("Status", "Success");
+		}
+		
+		return resultMapList;
+		
 	}
 
 	/**

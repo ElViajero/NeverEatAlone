@@ -27,6 +27,12 @@ public class AccountManagementRequestHandler{
 
 	@Inject IAccountManager IAccountManagerObject;
 	
+	/**
+	 * This method handles requests to create an account.
+	 * 
+	 * @param request
+	 * @return
+	 */
 	  public List<Map<String,String>> CreateAccountRequest(Map<String,String[]> request){
 		
 		 // ********* LOGGING ********* 
@@ -37,6 +43,12 @@ public class AccountManagementRequestHandler{
 		 return IAccountManagerObject.CreateAccount(request);
 	  }
 	  
+	  /**
+	   * This method handles requests to check the validity of
+	   * a given user account.
+	   * @param request
+	   * @return
+	   */
 	  public List<Map<String,String>> IsValidAccountRequest(Map<String,String[]> request){
 		  
 		  // ********* LOGGING ********* 
@@ -46,6 +58,14 @@ public class AccountManagementRequestHandler{
 		  return IAccountManagerObject.IsValidAccount(request);
 	  }
 	 
+	  public List<Map<String,String>> DeleteAccountRequest(Map<String,String[]> request){
+		  
+		// ********* LOGGING ********* 
+		System.out.println("reached DeleteAccountRequest");
+		// ********* LOGGING ********* 
+		
+		return IAccountManagerObject.DeleteAccount(request);
+	  }
 	 
 	
 	

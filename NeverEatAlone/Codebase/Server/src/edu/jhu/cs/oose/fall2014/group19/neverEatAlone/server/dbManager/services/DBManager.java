@@ -6,10 +6,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.ejb.Stateless;
+
 import org.neo4j.cypher.ExecutionResult;
 import org.neo4j.graphdb.DynamicLabel;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
+import org.neo4j.graphdb.PropertyContainer;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
 import org.neo4j.helpers.collection.IteratorUtil;
@@ -25,7 +28,7 @@ import scala.collection.Iterator;
  * @author tejasvamsingh
  *
  */
-
+@Stateless
 public class DBManager {
 
 	private static GraphDatabaseService GraphDBInstance;
@@ -50,7 +53,7 @@ public class DBManager {
 			// define schema constraints if not already defined.
 			try{
 				SetDBSchema();
-			}catch(AlreadyConstrainedException e){
+			}catch(Exception e){
 				System.out.println("No problem. Schema is already defined.");
 			}			
 		}
@@ -65,7 +68,7 @@ public class DBManager {
 	 * 
 	 * @param graphDBInstance2
 	 */
-	private static void SetDBSchema() throws AlreadyConstrainedException {
+	private static void SetDBSchema() throws Exception {
 
 		
 		try(Transaction tx = GraphDBInstance.beginTx()){
@@ -89,71 +92,94 @@ public class DBManager {
 	 * @return
 	 */		
 	public static List<Map<String,String>> GetResultMapList(ExecutionResult result){
-		
+
 		// initialize the map to return.
 		List<Map<String,String>> resultMapList = 
 				new ArrayList<Map<String,String>>();
-		
-		
+
+
 		//map to determine status of result ( success or failure).
 		Map<String, String> successMap =
 				new HashMap<String,String>();
 		// default status of query is failed.
 		successMap.put("Status","Failed");
-		
+
 		resultMapList.add(0, successMap);
-		
+
 		// Check if result is null. 
 		// This happens in the case of violated
 		// constraints.		
 		if(result ==null )
 			return resultMapList;
-		
-		
+
+
 		// retrieve the result as an iterator on nodes.
-		Iterator<Node> column  = result.columnAs("n");
-		for(Iterator<Node> node : IteratorUtil.asIterable(column)){
-		
+		Iterator<Object> column  = result.columnAs("n");
+		for(Iterator<Object> entry : IteratorUtil.asIterable(column)){
+
 			// initialize map for this entry.
 			Map<String,String> resultMap = new HashMap<String,String>();
-			
+
 			//check if there are no entries.
-			if(node.isEmpty())
+			if(entry.isEmpty())
 				break;
-			
+
 			//for each row in the column..
 			int index=0;
-			while(node.hasNext()){
-				
-				Node currentNode = node.next();
+
+			while(entry.hasNext()){
+
+				System.out.println("Reached here no problem.");
+				Object currentEntry = entry.next();
 				index++; // 0 is for Status
-				
+
+
 				//check if this index exists in the list.
 				if(index>=resultMapList.size())
 					resultMapList.add(new HashMap<String,String>());
+
 				
-				// iterate over all the properties for the current node object.
-				for(String property : currentNode.getPropertyKeys()){				
-				//add the properties. Note the value is returned as string.
-				resultMapList.get(index).
-					put(property, currentNode.getProperty(property).toString());				
 				
+				
+				//This is not the best check.
+				//Maybe change later.
+				if(currentEntry instanceof org.neo4j.graphdb.Node){
+					
+					// ********* LOGGING *********
+					System.out.println("IT IS A NODE");
+					// ********* LOGGING *********
+					
+					Node currentNode = (Node) currentEntry; 
+					// iterate over all the properties for the current node object.
+					for(String property : currentNode.getPropertyKeys()){				
+						//add the properties. Note the value is returned as string.
+						resultMapList.get(index).
+						put(property, currentNode.getProperty(property).toString());				
+
+					}
 				}
-				
-									
-				// add map to list.
-				resultMapList.add(resultMap);
+
+				else{
+					System.out.println("DATA : " + currentEntry.toString());
+					resultMapList.get(index).put("Data",currentEntry.toString());
+				}
+
 			}
+
+
+			// add map to list.
+			resultMapList.add(resultMap);
 		}
-		
+
+
 		// check if we have some result entries.
 		// If so, update the query result status.
 		if(resultMapList.size()>1)			
 			resultMapList.get(0).put("Status", "Success");
-			
+
 		// return the query result.
 		return resultMapList;
-		
+
 	} 
 
 	
