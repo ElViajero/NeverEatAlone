@@ -37,10 +37,9 @@ public class CreateAccountWorkflowTest {
 	 * 
 	 * @throws ClientProtocolException
 	 * @throws IOException
+	 *
 	 */
 	
-	  
-
 	@Test
 	public void CreateValidAccountTest() throws ClientProtocolException, IOException {
 		
@@ -75,6 +74,7 @@ public class CreateAccountWorkflowTest {
 	 * @throws ClientProtocolException
 	 * @throws IOException
 	 */
+	
 	@Test
 	public void CheckUniquenessTest() throws ClientProtocolException, IOException {
 		

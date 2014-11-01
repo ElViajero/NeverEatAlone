@@ -58,6 +58,10 @@ public class RequestHandler extends HttpServlet {
 	}
 
 	/**
+	 * 
+	 * This method accepts post requests, calls the request dispatcher on the request, 
+	 * obtains response and sends the response back to the client.
+	 * 
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

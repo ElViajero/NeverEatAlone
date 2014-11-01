@@ -5,6 +5,13 @@ import java.util.Map;
 
 import javax.ejb.Local;
 
+/**
+ * Interface for all request management handling.
+ * 
+ * @author tejasvamsingh
+ *
+ */
+
 @Local
 public interface IManagementRequestHandler {
 	

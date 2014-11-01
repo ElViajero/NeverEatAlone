@@ -17,19 +17,29 @@ import org.neo4j.kernel.impl.util.StringLogger;
 
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.contracts.IAccountManager;
 
+/**
+ * This class handles account management related database transactions.
+ * 
+ * @author tejasvamsingh
+ *
+ */
 
 @Stateless
 public class AccountManager implements IAccountManager {
 
 	GraphDatabaseService GraphDBInstance;
 	
+	/**
+	 * Constructor gets a database handle.
+	 * 
+	 */
 	public AccountManager(){
 		GraphDBInstance = DBManager.GetGraphDBInstance();
 		
 	}
 	
 	/**
-	 * This method is responsible for creating an account in the database.
+	 * This method is responsible for creating an user account in the database.
 	 */
 	@Override
 	public List<Map<String,String>> CreateAccount(Map<String,String[]> request) {
@@ -90,13 +100,18 @@ public class AccountManager implements IAccountManager {
 		
 	}
 
+	/**
+	 * This method is responsible for account update database transactions.
+	 * 
+	 */
+	
 	@Override
-	public List<Map<String,String>> UdateAccount(Map<String,String[]> request) {
+	public List<Map<String,String>> UpdateAccount(Map<String,String[]> request) {
 		
 		// ********* LOGGING ********* 
 		System.out.println("Reached UpdateAccount in AccountManager");
 		// ********* LOGGING *********
-		
+		//TODO
 		
 		return null;
 		
@@ -163,7 +178,8 @@ public class AccountManager implements IAccountManager {
 	}
 
 	/**
-	 * This method checks if a given user account exists.
+	 * This method checks if a given user 
+	 * account exists in the database object.
 	 * 
 	 */
 	@Override

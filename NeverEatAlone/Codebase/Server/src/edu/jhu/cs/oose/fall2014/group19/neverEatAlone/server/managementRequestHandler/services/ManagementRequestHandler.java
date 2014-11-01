@@ -39,6 +39,14 @@ public class ManagementRequestHandler implements IManagementRequestHandler {
 	    return myBeans.select(clazz).get();  
 	}
 	
+	
+	/**
+	 * 
+	 * This method resolves which ManagementRequestHandler class 
+	 * will handle the request.
+	 * It then passes the request to the specified ManagementRequestHandler class.
+	 * 
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Map<String,String>> HandleManagementRequest(Map<String, String[]> request) {

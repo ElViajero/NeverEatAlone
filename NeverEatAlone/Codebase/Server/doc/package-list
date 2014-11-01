@@ -1,0 +1,12 @@
+edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.contracts
+edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.services
+edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.tests
+edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.managementRequestHandler.contracts
+edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.managementRequestHandler.services
+edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.managementRequestHandler.tests
+edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.requestDispatcher.contracts
+edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.requestDispatcher.services
+edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.requestHandler.services
+edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.requestHandler.tests
+edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.workflow.tests
+edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.workflow.tests.helpers

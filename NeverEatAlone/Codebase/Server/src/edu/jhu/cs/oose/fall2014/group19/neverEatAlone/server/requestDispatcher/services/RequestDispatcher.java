@@ -23,6 +23,10 @@ public class RequestDispatcher implements IRequestDispatcher {
 
 	@Inject IManagementRequestHandler IManagementRequestHandlerObject;
 	
+	
+	/**
+	 * This method dispatches request to the ManagementRequestHandler layer
+	 */
 	@Override
 	public List<Map<String,String>> DispatchRequest(Map<String, String[]> request) {
 
