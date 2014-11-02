@@ -53,17 +53,6 @@ communicate with specific Android/iOS/web portal clients at a later stage.
 	and other facets. They were created for the convenience of the developer.
 	Actual tests are in the edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.workflow.tests
 	package.
-	
-
-
-
-
-
-
-
-
-
-
 
 
 Client side: 
@@ -82,12 +71,45 @@ This set up works, but requires proper dependencies in place, including:
 
 
 Iteration 4: Core Working
-We will connect the client side and server side.
-Functionalities we have hope to complete include:
-- Registration
-- Login
-- Logout
 
+NEXT ACTIONS -- SEVER 
+======================
+
+	1. Implement asynchronous requests
+	2. Implement non-blocking mechanisms
+	3. Implement message driven beans for posts and notifications.
+	4. Implement JMS (Java messaging service) for post and notification transactions
+	5. Create a post workflow
+	6. Create a notificaiton workflow
+	
+	
+NEXT ACTIONS -- CLIENT
+=====================
+
+	1. Define support framework for client workflows.
+	2. Define event handlers for GUI -> controller functionality.
+	3. Define HTTP request/response handlers for client --> server communication
+	
+ADDITIONAL INFORMATION -- OVERALL APPLICATION CONTEXT
+=====================================================
+
+	1. Focus on "cutting the fat". That is keeping the client as thin as possible.
+	2. Focus on proper exception handling, defensive programming (where needed) 
+	3. Look for potential areas for speedup
+	4. Implement security mechanism
+	5. Look at lightweight message passing mechanisms.
+	6. Try going generic in as many layers as possible.
+	
+	
+AMBITIOUS GOAL
+==============
+	
+	* Complete workflows involving core functionality.
+
+
+	
+	
+	 
 
 Iteration 5: Alpha Release
 
