@@ -111,14 +111,24 @@ Iteration 5: Alpha Release
 --------------------------
 
 	* Find and correct bugs in core functionality.
-	* Refine GUI
+	* Complete GUI and possible refine GUI.
 	* Time permitting, look at issues of scalability.
-	* Time permitting, look at extended features list 
-	( This may be parallelized with the task of finding bugs).
+	* Time permitting, look at standard features list. 
+	(This may be parallelized with the task of finding bugs).
 	
 
-
-
-
-
 Iteration 6: Project Completion
+--------------------------------
+
+	*  Fix more bugs.
+	*  Implement all standard functionality.
+	*  Time permitting, look at extended features.
+	*  Finish refining GUI.
+	*  Make sure issues like atomicity, 
+	transactions,scalability, data integrity, are adressed to a satisfactory degree.
+	*  Make sure the app is fast.
+	
+	
+	
+	
+	
