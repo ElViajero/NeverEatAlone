@@ -107,11 +107,18 @@ AMBITIOUS GOAL
 	* Complete workflows involving core functionality.
 
 
-	
-	
-	 
-
 Iteration 5: Alpha Release
+--------------------------
+
+	* Find and correct bugs in core functionality.
+	* Refine GUI
+	* Time permitting, look at issues of scalability.
+	* Time permitting, look at extended features list 
+	( This may be parallelized with the task of finding bugs).
+	
+
+
+
 
 
 Iteration 6: Project Completion
