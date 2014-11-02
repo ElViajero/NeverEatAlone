@@ -1,7 +1,68 @@
 Iteration Plan
 
 Iteration 3: Initial Implement / Test
+
 Server side: 
+
+CONCRETE WORKFLOWS
+==================
+
+
+- Created an account creation workflow that checks for uniqueness on the "Username" field.
+- Created an account deletion workflow that deletes user account if valid.
+- Create an account validity check workflow that checks for the existence of a given user account.
+- Create a login workfow that checks user credentials against the database.
+- Added dependency injection and container bean management support
+
+
+TEST CASES (These are in the edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.workflow.tests)
+==========
+
+- Created tests for the create account workflow.
+- Created tests for the delete account workflow.
+- Created tests for the account validity check workflow.
+- Created tests for the login workflow.
+
+
+SERVER SIDE ARCHITECTURE
+========================
+
+Created support framework for server side workflows.
+----------------------------------------------------
+
+This makes it easier to add new workflows since core backbone classes are in place.
+However, the current implementation of the server workflow support framework is very basic and
+will be refined in future iterations.
+
+Attempt to create a generic server framework for request/response cycle
+------------------------------------------------------------------------
+
+The server is being designed in a manner that will allow it to (hopefully) be useful to develop
+other facets such as perhaps a web portal to go with the android app as well. 
+An attempt is being made to make the server side logic independent of the client by using 
+generic HTTP request/response paradigms.
+
+This is can add a middle-ware/front-end GUI layers that allows to 
+communicate with specific Android/iOS/web portal clients at a later stage. 
+
+
+*** NOTE *** : 
+--------------
+	* The server side code contains more stand alone tests that are used for development. 
+	In order to run these tests, you would need to disable container management, bean annotations
+	and other facets. They were created for the convenience of the developer.
+	Actual tests are in the edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.workflow.tests
+	package.
+	
+
+
+
+
+
+
+
+
+
 
 
 
@@ -12,7 +73,7 @@ Using the Android SDK 21, we created a simple GUI, consisting of:
 We able to get the user name, email address, password. We have the "login" activity and the "register" activity complemeted. But we have not linked this to the server.
 
 This set up works, but requires proper dependencies in place, including: 
-- TomEE Plume 1.7.1
+- Apache TomEE Plume 1.7.1
 - Neo4j Community 2.1.5
 - Apache Httpcomponents Client 4.3.5
 - Java EE 6
