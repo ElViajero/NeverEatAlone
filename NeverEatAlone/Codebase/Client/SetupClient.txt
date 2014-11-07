@@ -1,0 +1,124 @@
+
++-------------------------------------------------------------------------------------------------------------++
++-------------------------------------------------------------------------------------------------------------++
+NOTE                                                                                                          ||
+													      ||										
+AUTHOR : TEJASVAM SINGH											      ||											
+                                                                                                              ||
+These are setup instructions for setting up the client project in eclipse.				      ||				
+Look at the general instructions in the Codebase/SETUP INSTRUCTIONS file first.				      ||			
+For setup instructions related to the server project, consult the SetupServer file in 			      ||		
+Codebase/Server.											      ||											
+													      ||											
+The instructions use mac terminology, but the setup on any other system is similar.			      ||			
+													      ||										
+At the time of writing, the current maven version is 3.2.3 and the current Eclipse version is Luna.	      ||	
+													      ||										
+REMEMBER TO REPLACE <DIR> WITH THE ACTUAL PATH TO DIRECTORY						      ||						
+NOTE                                                                                                          ||
++-------------------------------------------------------------------------------------------------------------++
++-------------------------------------------------------------------------------------------------------------++
+
+
+
++-----------------------------------------------------------------------------------------------------------++
+====================================                                                                        ||
+STEP 1 : ANDROID SDK AND ADT INSTALL                                                                        ||
+====================================                                                                        ||
+                                                                                                            ||
+      													    ||
+1. Go to : https://developer.android.com/sdk/index.html?hl=i 						    ||
+2. Under GET THE SDK FOR AN EXISTING IDE : Click download the stand-alone Android SDK tools for ..	    ||  							
+3. Extract the tools to some directory hereafter referred to as <ANDROID_DIR>				    ||
+4. Open Eclipse 											    ||  										
+5. Go to Help -> Eclipse Marketplace									    ||  										
+6. Search for and install ADT (Android Developer Tools) if not already installed.			    ||  									
+                                                                                                            ||
++-----------------------------------------------------------------------------------------------------------++
++-----------------------------------------------------------------------------------------------------------++
+
+
+
+                                                                                                                               
+-----------------------------------------------------------------------------------------------------------------------------++
+=================================================                                                                            ||
+STEP 2 : DOWNLOAD RELEAVANT ADROID PLATFORM TOOLS                                                                            ||
+==================================================                                                                           ||
+                                                                                                                             ||
+                                                                                                                             ||
+															     ||
+1.  Open eclipse 													     ||  
+2.  Go to window --> Customize Perspective 										     ||
+3.  Select the "Command Groups Availability" tab									     || 								
+4.  Make sure "Android SDK and AVD Manager" checkbox is selected.							     || 									
+5.  Go to window --> Android SDK Manager										     || 								
+6.  Under Tools install Android SDK Tools 23.0.5, Android SDK Platform Tools 21, Android SDK Build Tools 21.1 and 20	     || 		
+7.  Install everything under Android 5.0 API and everything under Android 4.4W.2 (API 20)				     || 						
+8.  Under extras Install Android Support Repository and Android Support Library						     || 							
++----------------------------------------------------------------------------------------------------------------------------++ 								
++----------------------------------------------------------------------------------------------------------------------------++
+                                                                                                                              
+                                                                                                                             
+ ---------------------------------------------------------------------------------------------------------------------------++
+                                                                                                                            ||
+====================================                                                                                        ||
+STEP 3 : SET UP ANDROID SDK DEPLOYER                                                                                        ||
+====================================                                                                                        ||
+                                                                                                                            ||
+                                                                                                                            || 
+1. Go to https://github.com/mosabua/maven-android-sdk-deployer    	  						    ||
+2. Click DOWNLOAD 									        			    ||  									
+3. Extract to some directory hereafter referred to <DEPLOYER_DIR> 			        			    ||  									
+4. Open terminal									        			    ||  								
+5. Type :										        			    ||    								
+	Export ANDROID_HOME=<ADROID_DIR> 					     					    ||										      
+6. Navigate to <DEPLOYER_DIR>												    ||  		
+7. Type :										        			    ||  								
+	mvn install -P 5.0 					  							    ||   								      
+8. Wait for install to finish  												    ||     
+9. Type:										        			    ||
+	mvn install -P 4.4W												    ||    				        
+10. Wait for install to finish								        			    ||  								
+11. Navigate to <DEPLOYER DIR/extras>							        			    ||  
+											        			    || 			
+12. Type :										        			    ||	
+	mvn install -P 5.0 												    ||   							        
+13. Wait for install to finish								  			            ||
+14. Type:										        			    ||									
+	mvn install -P 4.4W 							        			     	    ||   									
+15. Now, navigate to .m2 folder. By default this is in HOME/.m2  (THIS IS A HIDDEN FOLDER) 				    ||
+16. Check that the following Heirarchy is present :					        			    ||  								
+											        			    || 
+	.m2										        			    ||										
+		repository 								        			    ||  						
+			android 							        			    ||  									
+				android 						        			    ||  									
+					4.4W.2_r2 					        			    ||  									
+					5.0_r1 						        			    ||  									
+					... 						        			    ||  								
+				support 						        			    ||  								
+					compatibility-v4				        			    ||  									
+					compatibility-v7  				        			    ||  									
+					compatibility-v7-appcompat			        	 		    ||  			
+					...										    ||
+17. If the Heirarchy is not present, delete the .m2/repository/android folder and repeat a l of the above steps.	    ||  			
+                                                                                                                            ||
+                                                                                                                            ||
++---------------------------------------------------------------------------------------------------------------------------++
++-----------------------------------------------------------------------------------------+---------------------------------++
+
+
+
+
+
+                                                                                                                             
+                                                                                                                             
+                                                                                                                             
+                                                                                                                             
+===========================                                                                                                  
+STEP 4 : GO TO SetupServer                                                                                                   
+===========================                                                                                                  
+                                                                                                                             
+                                                                                                                             
+                                                                                                                             
+                                                                                                                             

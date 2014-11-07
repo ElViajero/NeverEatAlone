@@ -1,0 +1,51 @@
+
+
+                                                                                                                  
+----------------------------------------------------------------------------------------------------------------++
+NOTE                                                                                                            ||
+														||      										
+AUTHOR : TEJASVAM SINGH												||     
+														||      									
+														||     	
+These are setup instructions for setting up the server project in eclipse.					||      			
+Look at the general instructions in the Codebase/SETUP INSTRUCTIONS file first.					||      		
+For setup instructions related to the client project, consult the SetupClient file in 				||      	
+Codebase/Client.												||      										
+														||      										
+The instructions use mac terminology, but the setup on any other system is similar.				||      		
+														||      									
+At the time of writing, the current maven version is 3.2.3 and the current Eclipse version is Luna.		||      
+														||      									
+REMEMBER TO REPLACE <DIR> WITH THE ACTUAL PATH TO DIRECTORY							||      					
+NOTE                                                                                                            ||
++---------------------------------------------------------------------------------------------------------------++
++---------------------------------------------------------------------------------------------------------------++
+
+
+-------------------------------------------------------------------------------------------------------------++
+=====================                                                                                        ||
+STEP 1 : SETUP SERVER                                                                                        ||
+=====================                                                                                        ||
+                                                                                                             ||
+1. Go to http:tomee.apache.org/downloads.html                                                                ||
+2. Download apache-tomee-1.7.1-plume.tar.gz                                                                  ||
+3. Extract to some directory hereafter referred to as <SERVER_DIR>                                           ||
+4. Open Eclipse                                                                                              ||
+5. Go to Window --> Show View --> Other --> Servers                                                          ||
+6. RIght click in servers and select New --> Server                                                          ||
+7. Select Apache --> Tomcat v7.0 Server                                                                      ||
+8. For Server Runtime Environment Under Tomcat Installation Directory, point to <SERVER_DIR>                 ||
+9. Name the server TomEE                                                                                     ||
+10. Hit Finish                                                                                               ||
+11. Double click the server                                                                                  ||
+12. Under "Server Locations" (Look at the file that opens on the top)                                        ||
+13. Select "Use Tomcat Installation"                                                                         ||
+                                                                                                             ||
++------------------------------------------------------------------------------------------------------------++
++------------------------------------------------------------------------------------------------------------++
+
+
+
+===========================================================
+STEP 2 : GO BACK TO SETUP INSTRUCTIONS AND PERFORM STEP 4-6
+===========================================================

@@ -1,0 +1,175 @@
+
+++-------------------------------------------------------------------------------------------------------------++
+++-------------------------------------------------------------------------------------------------------------++
+NOTE                                                                                                           ||
+													       ||       									
+AUTHOR : TEJASVAM SINGH	                      								       ||       		     							             
+These are generic setup instructions for setting up the project in eclipse.				       ||    
+For setup instructions related to specific projects, consult the  SetupClient and SetupServer files in 	       ||
+Codebase/Client and Codebase/Server.									       ||       							
+													       ||       										
+The instructions use mac terminology, but the setup on any other system is similar.			       ||       		
+													       ||       										
+At the time of writing, the current maven version is 3.2.3 and the current Eclipse version is Luna.	       ||       
+													       ||       										
+GUIDE ASSUMES ECLIPSE LUNA IS INSTALLED.								       ||       							
+REMEMBER TO REPLACE <DIR> WITH THE ACTUAL PATH TO DIRECTORY						       ||       					
+                                                                                                               ||
+MOST IMPORTANT : PERFORM STEPS 1-3 FIRST, THEN GO TO SetUpServer and SetUpClient, PERFORM ALL STEPS IN         ||
+THOSE FILES. FINALLY PERFORM STEP 4 IN THIS FILE                                                               ||
+													       ||       										
++--------------------------------------------------------------------------------------------------------------++
++--------------------------------------------------------------------------------------------------------------++
+
+---------------------------------------+
+=====================================  |
+STEP 0 : SET UP NEW ECLIPSE WORKSPACE  |
+=====================================  |
+---------------------------------------+
+1. Open Eclipse                        |
+2. File --> Switch Workspace --> Other |
+3. Select a New workspace.             |
++--------------------------------------+
++--------------------------------------+
+
+ 
+-------------------------------------------------------------------------------------------------------------------------------------++
+======================                                                                                                               ||
+STEP 1 : MAVEN INSTALL                                                                                                               ||
+======================                                                                                                               ||
+-----------------------------------------------------------------------------------------------					     || 				
+NOTE : If you use macports, then you can go ahead and install maven using sudo port install .. 					     || 				
+The instructions below don't use macports.											     || 							
+-----------------------------------------------------------------------------------------------					     || 				
+																     ||								
+1. Download Maven 3.2.3 : http:maven.apache.org/download.cgi									     || 								
+2. Extract the archive in some directory hereafter refered to as <MAVENDIR> (  so path to mavn is <MAVENDIR>/apache-maven-3.2.3)     || 
+3. Open terminal 														     || 				
+4. By default, you should be in the user HOME directory.                                                                             ||
+5. Type vi .bash_profile (for mac, for others it may just be .profile)								     || 							
+6. Type the folowing (follow the exact sequence -- keys are denoted [ESCAPE] : which means press the escape key ) : 		     || 	
+																     || 								
+		[i]														     || 								
+		export M2_HOME=<MAVENDIR>/apache-maven-3.2.apache-maven-3 							     || 								
+		export PATH=$PATH:$M2_HOME/bin											     || 							
+		[ESCAPE]													     || 								
+		[SHIFT + :]wq													     || 							
+		[ENTER]														     || 								
+																     ||	
+7. Close terminal 														     || 							
+8. Reopen terminal 														     || 							
+9. Type : mvn --version														     || 							
+10. If install was successful, you should get a few lines saying that the maven version is 3.2.3				     || 				
++------------------------------------------------------------------------------------------------------------------------------------++ 							+------------------------------------------------------------------------------------------------------------------------------------++
+                                                                                                                                        
+
+
+----------------------------------------------------------------------------------------------------++                                 
+==========================                                                                          ||                                 
+STEP 2 : M2ECLIPSE INSTALL                                                                          ||                                 
+==========================                                                                          ||                                 
+                                                                                                    ||                                 
+                                                                                                    ||                                 
+												    ||  			        						
+1. Open Elipse 											    ||  			        							
+2. Go to Eclipse Marketplace via Help -> Eclipse Marketplace 					    ||  			        								
+3. Search for M2ECLIPSE 									    ||  			        							
+4. If not installed, install the plugin								    ||  												
++---------------------------------------------------------------------------------------------------++  			        							+---------------------------------------------------------------------------------------------------++  																				
+                                                                                                      
+
+---------------------------------------------------------------------------------------------------------------------------------++
+=================================================                                                                                ||
+STEP 3 : ENABLING MAVEN INDEXING AND AUTO-UPDATES                                                                                ||
+=================================================                                                                                ||
+                                                                                                                                 ||
+                                                                                                                                 ||
+											        				 ||    								
+1.  Open eclipse 									        				 ||     								
+2.  Go to preferences (Eclipse preferences) 						        				 ||     					
+3.  From the left hand box, select MAVEN 						        				 ||     							
+4.  Uncheck "Do not automatically update dependencies from remote repositories"		        				 ||     						
+5.  You can check other options such as "Download repository index updates on startup", "Up ate Maven projects on startup"	 ||     	
+6.  NOTE : Enabling checkboxes in step 5 will result in slower project loads.		        				 ||     						
+7.  Go to window --> Show view --> other --> Maven repositories 			        				 ||     								
+8.  Expand global repositories   												 ||     							
+9.  Right click "cenral" 													 ||     							
+10. Select "Minimum" or "Full Index"  												 ||     						
+11. Select update index or rebuild index. THIS STEP TAKES TIME. 								 ||     								
+12. During update, you will see [updating] next to central under global repositories.						 ||     					
+13. Wait for this to finish													 ||     							
+14. Close and restart Eclipse 													 ||     						
+                                                                                                                                 ||
++--------------------------------------------------------------------------------------------------------------------------------++
++--------------------------------------------------------------------------------------------------------------------------------++
+
+=========================
+STEP 4: GO TO SetupClient
+=========================
+
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>++ 
+THESE STEPS ARE DONE AFTER STEPS 1- 3 ABOVE  + STEPS IN SetupClient and Setup Files ||
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<++
+
+ 
+ 
+--------------------------------------------------------------------------------------++
+======================================                                                ||
+STEP 4 : IMPORT PROJECTS AND CONFIGURE                                                ||
+======================================                                                ||
+                                                                                      ||
+1. Clone the repository at https:pl.cs.jhu.edu:8000/oose-14-group-19/project.git      ||
+2. Open Eclipse in the new workspace (set up in step 0 above)                         ||
+3. File --> import --> projects from git --> Existing local repository                ||
+4. Link to the local repo where you cloned in step 1                                  ||
+5. Import Existing projects                                                           ||
+6. Import all 3 projects                                                              || 
++-------------------------------------------------------------------------------------++ 
++-------------------------------------------------------------------------------------++
+
+
+----------------------------------------------------------------------------++
+=============================                                               ||
+STEP 5 : CLIENT PROJECT SETUP                                               ||
+=============================                                               ||
+                                                                            ||
+1. Expand NeverEatAloneClient                                               ||
+2. Right Click NeverEatAloneClient -> Maven -> update Project               ||
+3. Delete the gen folder if it exists                                       ||
+4. Select NeverEatAlone                                                     ||
+5. From the top menu bar select Project --> Clean                           ||
+6. Wait for clean and background tasks to finish                            ||
+7. From the top menu bar select Project --> build                           ||
+8. NOTE : gen folder is re-created. This is correct.                        ||
++---------------------------------------------------------------------------++
++---------------------------------------------------------------------------++
+
+
+
+-----------------------------------------------------------------------------++
+=============================                                                ||
+STEP 6 : SERVER PROJECT SETUP                                                ||
+=============================                                                ||
+                                                                             ||
+                                                                             ||
+1. Expand NeverEatAloneServer                                                ||
+2. Right Click NeverEatAloneServer -> Maven -> update Project                ||
+3. From the top menu bar select Project --> Clean                            ||
+4. Wait for clean and background tasks to finish                             ||
+5. From the top menu bar select Project --> build                            ||
+6. Right click NeverEatAloneServer --> Properties --> Targeted Runtimes      ||
+7. Make sure the correct server (tomEE) is selected.                         ||
+3. From the top menu bar select Project --> Clean                            ||
+4. Wait for clean and background tasks to finish                             ||
+5. From the top menu bar select Project --> build                            ||
+                                                                             ||
++----------------------------------------------------------------------------++
++----------------------------------------------------------------------------++
+ 
+
+
+
+
+
+
