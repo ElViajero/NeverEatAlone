@@ -16,7 +16,7 @@ GUIDE ASSUMES ECLIPSE LUNA IS INSTALLED.								       ||
 REMEMBER TO REPLACE <DIR> WITH THE ACTUAL PATH TO DIRECTORY						       ||       					
                                                                                                                ||
 MOST IMPORTANT : PERFORM STEPS 1-3 FIRST, THEN GO TO SetUpServer and SetUpClient, PERFORM ALL STEPS IN         ||
-THOSE FILES. FINALLY PERFORM STEP 4 IN THIS FILE                                                               ||
+THOSE FILES. FINALLY PERFORM STEPS 5-7 IN THIS FILE                                                            ||
 													       ||       										
 +--------------------------------------------------------------------------------------------------------------++
 +--------------------------------------------------------------------------------------------------------------++
