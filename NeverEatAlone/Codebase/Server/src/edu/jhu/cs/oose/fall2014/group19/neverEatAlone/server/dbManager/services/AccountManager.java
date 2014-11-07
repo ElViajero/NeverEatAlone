@@ -6,7 +6,7 @@ import java.util.Map;
 
 import javax.ejb.Stateless;
 
-import org.apache.commons.collections.map.HashedMap;
+
 import org.neo4j.cypher.ExecutionEngine;
 import org.neo4j.cypher.ExecutionResult;
 import org.neo4j.graphdb.ConstraintViolationException;
