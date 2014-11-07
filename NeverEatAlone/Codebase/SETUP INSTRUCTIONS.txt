@@ -43,15 +43,15 @@ The instructions below don't use macports.											     ||
 -----------------------------------------------------------------------------------------------					     || 				
 																     ||								
 1. Download Maven 3.2.3 : http:maven.apache.org/download.cgi									     || 								
-2. Extract the archive in some directory hereafter refered to as <MAVENDIR> (  so path to mavn is <MAVENDIR>/apache-maven-3.2.3)     || 
+2. Extract the archive in some directory hereafter refered to as <MAVENDIR> (  so path to maven is <MAVENDIR>/apache-maven-3.2.3)    || 
 3. Open terminal 														     || 				
 4. By default, you should be in the user HOME directory.                                                                             ||
 5. Type vi .bash_profile (for mac, for others it may just be .profile)								     || 							
 6. Type the folowing (follow the exact sequence -- keys are denoted [ESCAPE] : which means press the escape key ) : 		     || 	
 																     || 								
 		[i]														     || 								
-		export M2_HOME=<MAVENDIR>/apache-maven-3.2.apache-maven-3 							     || 								
-		export PATH=$PATH:$M2_HOME/bin											     || 							
+		export M2_HOME=<MAVENDIR>/apache-maven-3.2.3									     ||
+		export PATH=$PATH:$M2_HOME/bin											     ||
 		[ESCAPE]													     || 								
 		[SHIFT + :]wq													     || 							
 		[ENTER]														     || 								
