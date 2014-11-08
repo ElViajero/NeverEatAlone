@@ -139,7 +139,7 @@ STEP 6 : CLIENT PROJECT SETUP                                               ||
 1. Expand NeverEatAloneClient                                               ||
 2. Right Click NeverEatAloneClient -> Maven -> update Project               ||
 3. Delete the gen folder if it exists                                       ||
-4. Select NeverEatAlone                                                     ||
+4. Select NeverEatAloneClient                                               ||
 5. From the top menu bar select Project --> Clean                           ||
 6. Wait for clean and background tasks to finish                            ||
 7. From the top menu bar select Project --> build                           ||
