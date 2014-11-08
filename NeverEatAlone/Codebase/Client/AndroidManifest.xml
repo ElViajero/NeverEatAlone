@@ -14,22 +14,22 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.MainActivity"
-           android:label="@string/app_name" >
+            android:name=".gui.activities.MainActivity"
+            android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name="edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.DisplayMessageActivity"
+            android:name=".gui.activities.DisplayMessageActivity"
             android:label="@string/title_activity_display_message"
-            android:parentActivityName="edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.MainActivity" >
+            android:parentActivityName=".gui.activities.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.MainActivity" />
         </activity>
-        
         <activity
             android:name="edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.RegisterActivity"
             android:label="@string/title_activity_register" >

@@ -60,10 +60,12 @@ public class MainActivity extends Activity {
 	}
 
 	/** Called when the user clicks the Sign Up button */
-	public void sendMessage(View view) {
-		Intent intent = new Intent(this, RegisterActivity.class);
-		// Intent intent = new Intent(this, DisplayMessageActivity.class);
-		startActivity(intent);
+	public void sendMessage(View view) {		
+		
+		
+		Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
+		
+		MainActivity.this.startActivity(intent);
 	}
 
 }

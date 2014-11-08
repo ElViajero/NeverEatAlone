@@ -5,11 +5,12 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R.id;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R.layout;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R.menu;
 import android.support.v7.app.ActionBarActivity;
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class RegisterActivity extends ActionBarActivity {
+public class RegisterActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
