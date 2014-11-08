@@ -101,7 +101,7 @@ STEP 3 : SET UP ANDROID SDK DEPLOYER                                            
 					compatibility-v7  				        			    ||  									
 					compatibility-v7-appcompat			        	 		    ||  			
 					...										    ||
-17. If the Heirarchy is not present, delete the .m2/repository/android folder and repeat a l of the above steps.	    ||  			
+17. If the Heirarchy is not present, delete the .m2/repository/android folder and repeat all of the above steps.	    ||  			
                                                                                                                             ||
                                                                                                                             ||
 +---------------------------------------------------------------------------------------------------------------------------++

@@ -47,5 +47,5 @@ STEP 1 : SETUP SERVER                                                           
 
 
 ===========================================================
-STEP 2 : GO BACK TO SETUP INSTRUCTIONS AND PERFORM STEP 4-6
+STEP 2 : GO BACK TO SETUP INSTRUCTIONS AND PERFORM STEP 5-7
 ===========================================================

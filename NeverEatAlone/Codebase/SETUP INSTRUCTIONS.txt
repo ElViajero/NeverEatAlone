@@ -60,7 +60,8 @@ The instructions below don't use macports.											     ||
 8. Reopen terminal 														     || 							
 9. Type : mvn --version														     || 							
 10. If install was successful, you should get a few lines saying that the maven version is 3.2.3				     || 				
-+------------------------------------------------------------------------------------------------------------------------------------++ 							+------------------------------------------------------------------------------------------------------------------------------------++
++------------------------------------------------------------------------------------------------------------------------------------++ 
++------------------------------------------------------------------------------------------------------------------------------------++
                                                                                                                                         
 
 
@@ -75,7 +76,8 @@ STEP 2 : M2ECLIPSE INSTALL                                                      
 2. Go to Eclipse Marketplace via Help -> Eclipse Marketplace 					    ||  			        								
 3. Search for M2ECLIPSE 									    ||  			        							
 4. If not installed, install the plugin								    ||  												
-+---------------------------------------------------------------------------------------------------++  			        							+---------------------------------------------------------------------------------------------------++  																				
++---------------------------------------------------------------------------------------------------++  	
++---------------------------------------------------------------------------------------------------++  																				
                                                                                                       
 
 ---------------------------------------------------------------------------------------------------------------------------------++
@@ -89,7 +91,7 @@ STEP 3 : ENABLING MAVEN INDEXING AND AUTO-UPDATES                               
 2.  Go to preferences (Eclipse preferences) 						        				 ||     					
 3.  From the left hand box, select MAVEN 						        				 ||     							
 4.  Uncheck "Do not automatically update dependencies from remote repositories"		        				 ||     						
-5.  You can check other options such as "Download repository index updates on startup", "Up ate Maven projects on startup"	 ||     	
+5.  You can check other options such as "Download repository index updates on startup", "Update Maven projects on startup"	 ||     	
 6.  NOTE : Enabling checkboxes in step 5 will result in slower project loads.		        				 ||     						
 7.  Go to window --> Show view --> other --> Maven repositories 			        				 ||     								
 8.  Expand global repositories   												 ||     							
@@ -142,6 +144,10 @@ STEP 6 : CLIENT PROJECT SETUP                                               ||
 6. Wait for clean and background tasks to finish                            ||
 7. From the top menu bar select Project --> build                           ||
 8. NOTE : gen folder is re-created. This is correct.                        ||
+9. Right click NeverEatAloneClient —> Properties —> Java Build Path	    ||
+10. Select the source tab						    ||
+11. Click Add folder							    ||
+12. Select res if not already selected					    ||
 +---------------------------------------------------------------------------++
 +---------------------------------------------------------------------------++
 
@@ -167,7 +173,6 @@ STEP 7 : SERVER PROJECT SETUP                                                ||
 +----------------------------------------------------------------------------++
 +----------------------------------------------------------------------------++
  
-
 
 
 
