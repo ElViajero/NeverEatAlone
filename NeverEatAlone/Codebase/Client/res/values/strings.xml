@@ -19,6 +19,8 @@
     <string name="confirm_password">Confirm Password</string>
     <string name="cancel">Cancel</string>
     <string name="register_information">Register Information</string>
-    
-
+    <string name="title_activity_notification_test_ativity">NotificationTestAtivity</string>
+	<string name="recipient">Recipient</string>
+	<string name="post">Post</string>
+	<string name="message">Message</string>
 </resources>

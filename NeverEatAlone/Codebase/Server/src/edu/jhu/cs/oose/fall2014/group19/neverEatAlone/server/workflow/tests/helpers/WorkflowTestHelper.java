@@ -89,7 +89,7 @@ public class WorkflowTestHelper {
 		//get a client handle.
 		CloseableHttpClient httpclient = HttpClients.createDefault();
 		//set up post request.
-		HttpPost httpPost = new HttpPost("http://localhost:8080/NeverEatAloneServer/RequestHandler");
+		HttpPost httpPost = new HttpPost("http://10.188.181.210:8080/NeverEatAloneServer/RequestHandler");
 
 		httpPost.setEntity(new UrlEncodedFormEntity(nvps));
 		

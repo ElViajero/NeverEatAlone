@@ -29,7 +29,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.cont
 public class RequestExecutor extends AsyncTask<List<NameValuePair>, Void, List<Map<String,String>>>  {
 	
 	static HttpClient HttpClientInstance;
-	static String PostRequestURLString = "http://10.0.0.3:8080/NeverEatAloneServer/RequestHandler"; 
+	static String PostRequestURLString = "http://10.188.181.210:8080/NeverEatAloneServer/RequestHandler"; 
 	
 	private HttpClient GetHttpClientInstance(){
 		if(HttpClientInstance==null)
