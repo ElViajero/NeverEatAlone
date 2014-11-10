@@ -1,7 +1,17 @@
 package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities;
 
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ExecutionException;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestExecutor;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,27 +23,51 @@ import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
-	private EditText username = null;
-	private EditText password = null;
+	private EditText Username = null;
+	private EditText Password = null;
+	private String RequestID;
+	private String RequestType;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		username = (EditText) findViewById(R.id.edit_username);
-		password = (EditText) findViewById(R.id.edit_password);
+		Username = (EditText) findViewById(R.id.edit_username);
+		Password = (EditText) findViewById(R.id.edit_password);
+		RequestID = "Login";
+		RequestType = "CheckCredentials";
 	}
 
-	public void login(View view) {
-		if (username.getText().toString().equals("admin")
-				&& password.getText().toString().equals("admin")) {
-			Toast.makeText(getApplicationContext(), "Redirecting...",
-					Toast.LENGTH_SHORT).show();
-		} else {
-			Toast.makeText(getApplicationContext(), "Wrong Credentials",
+	/**
+	 * Event handler for client login requests.
+	 * @param view
+	 */
+	public void OnLoginButtonClick(View view) {
+		
+		String username = Username.getText().toString();
+		String password = Password.getText().toString();
+		
+		ArrayList<NameValuePair> requestList = new ArrayList<NameValuePair>();
+		requestList.add(new BasicNameValuePair("RequestID", RequestID));
+		requestList.add(new BasicNameValuePair("RequestType", RequestType));
+		requestList.add(new BasicNameValuePair("Username", username));
+		requestList.add(new BasicNameValuePair("Password", password));
+		
+		List<Map<String, String>> resultMapList = 
+				RequestHandlerHelper.GetRequestHandlerInstance().HandleRequest(requestList) ;		
+		  
+		if(resultMapList.get(0).get("Status").equals("Success")){
+			Toast.makeText(getApplicationContext(), "Welcome "+username+" !",
 					Toast.LENGTH_SHORT).show();
 		}
+		else{
+			Toast.makeText(getApplicationContext(), "Invalid Credentials",
+					Toast.LENGTH_SHORT).show();
+		}
+		  		
 	}
+	
+	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -60,11 +94,9 @@ public class MainActivity extends Activity {
 	}
 
 	/** Called when the user clicks the Sign Up button */
-	public void sendMessage(View view) {		
-		
+	public void OnSignUpButtonClick(View view) {		
 		
 		Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
-		
 		MainActivity.this.startActivity(intent);
 	}
 

@@ -62,7 +62,7 @@
         android:layout_marginTop="94dp"
         android:layout_toLeftOf="@+id/button_signup"
         android:layout_toStartOf="@+id/button_signup"
-        android:onClick="login"
+        android:onClick="OnLoginButtonClick"
         android:text="@string/login" />
 
     <Button
@@ -73,7 +73,7 @@
         android:layout_alignParentRight="true"
         android:layout_below="@+id/edit_password"
         android:layout_marginTop="94dp"
-        android:onClick="sendMessage"
+        android:onClick="OnSignUpButtonClick"
         android:text="@string/signup" />
 
 

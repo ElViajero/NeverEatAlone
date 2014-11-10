@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.requestDispatcher.contracts.IRequestDispatcher;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.requestDispatcher.services.RequestDispatcher;
 
@@ -69,12 +71,19 @@ public class RequestHandler extends HttpServlet {
 		
 		Map<String, String[]> map = request.getParameterMap();
 		
+		
+		System.out.println("The stuff is :" + map.get("Username")[0] );
+		System.out.flush();
+		
 		//call the beans DispatchRequest method.
 		List<Map<String, String>> result = IRequestDispatcherObject.DispatchRequest(map);
 		
 		// For now just print the status of the query (success or failed).		
 		java.io.Writer w = response.getWriter();
-		w.append(result.get(0).get("Status"));
+		//w.append(result.get(0).get("Status"));
+		
+		Gson gson = new Gson();
+		w.append(gson.toJson(result));
 				
 	}
 

@@ -71,7 +71,7 @@ STEP 3 : SET UP ANDROID SDK DEPLOYER                                            
 3. Extract to some directory hereafter referred to <DEPLOYER_DIR> 			        			    ||  									
 4. Open terminal									        			    ||  								
 5. Type :										        			    ||    								
-	Export ANDROID_HOME=<ADROID_DIR> 					     					    ||										      
+	export ANDROID_HOME=<ADROID_DIR> 					     					    ||										      
 6. Navigate to <DEPLOYER_DIR>												    ||  		
 7. Type :										        			    ||  								
 	mvn install -P 5.0 					  							    ||   								      
