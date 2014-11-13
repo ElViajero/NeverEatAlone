@@ -19,6 +19,9 @@
     <string name="confirm_password">Confirm Password</string>
     <string name="cancel">Cancel</string>
     <string name="register_information">Register Information</string>
-    
+    <string name="title_activity_tab_host">TabHostActivity</string>
+    <string name="title_activity_invites">InvitesActivity</string>
+    <string name="title_activity_contacts">ContactsActivity</string>
+    <string name="title_activity_profile">ProfileActivity</string>
 
 </resources>

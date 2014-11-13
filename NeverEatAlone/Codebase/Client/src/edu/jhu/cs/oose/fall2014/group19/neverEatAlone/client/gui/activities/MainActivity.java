@@ -59,6 +59,9 @@ public class MainActivity extends Activity {
 		if(resultMapList.get(0).get("Status").equals("Success")){
 			Toast.makeText(getApplicationContext(), "Welcome "+username+" !",
 					Toast.LENGTH_SHORT).show();
+			
+			Intent intent = new Intent(MainActivity.this, TabHostActivity.class);
+			MainActivity.this.startActivity(intent);
 		}
 		else{
 			Toast.makeText(getApplicationContext(), "Invalid Credentials",
