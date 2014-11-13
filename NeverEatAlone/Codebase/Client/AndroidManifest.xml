@@ -53,6 +53,10 @@
             android:name="edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.ProfileActivity"
             android:label="@string/title_activity_profile" >
         </activity>
+        <activity
+            android:name="edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.CreateMealInformationActivity"
+            android:label="@string/title_activity_create_meal_information" >
+        </activity>
     </application>
 
 </manifest>

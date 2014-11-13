@@ -18,4 +18,15 @@
         android:layout_marginTop="146dp"
         android:text="CheckBox" />
     
+    <Button
+        android:id="@+id/invites_button_create"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/checkBox1"
+        android:layout_marginTop="20dp"
+        android:onClick="OnCreateButtonClick"
+        android:text="@string/create" />
+    
 </RelativeLayout>

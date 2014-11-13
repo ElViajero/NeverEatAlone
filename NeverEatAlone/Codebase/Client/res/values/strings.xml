@@ -23,5 +23,18 @@
     <string name="title_activity_invites">InvitesActivity</string>
     <string name="title_activity_contacts">ContactsActivity</string>
     <string name="title_activity_profile">ProfileActivity</string>
+    <string name="title_activity_create_meal_information">CreateMealInformationActivity</string>
+    <string name="CreateMealInformation_meal_information">Meal Information</string>
+    <string name="when">When?</string>
+    <string name="start_time">Start Time</string>
+    <string name="end_time">End Time</string>
+    <string name="where">Where?</string>
+    <string name="restaurant">Restaurant</string>
+    <string name="other_information">Other Information</string>
+    <string name="max_number">Maximum Number Attendance</string>
+    <string name="allow_friend_invite">Allow Friends Inviting Others</string>
+    <string name="back">Back</string>
+    <string name="next">Next</string>
+    <string name="create">Create</string>
 
 </resources>
