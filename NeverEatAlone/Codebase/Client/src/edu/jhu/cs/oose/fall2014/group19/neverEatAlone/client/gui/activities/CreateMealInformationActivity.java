@@ -17,13 +17,17 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
 
 public class CreateMealInformationActivity extends Activity {
 
-	Button btnSelectDate, btnSelectTime;
+	Button btnSelectStartDate, btnSelectStartTime, btnSelectEndDate,
+			btnSelectEndTime;
 
-	static final int DATE_DIALOG_ID = 0;
-	static final int TIME_DIALOG_ID = 1;
+	static final int START_DATE_DIALOG_ID = 0;
+	static final int START_TIME_DIALOG_ID = 1;
+	static final int END_DATE_DIALOG_ID = 2;
+	static final int END_TIME_DIALOG_ID = 3;
 
 	// variables to save user selected date and time
-	public int year, month, day, hour, minute;
+	public int yearStart, monthStart, dayStart, hourStart, minuteStart;
+	public int yearEnd, monthEnd, dayEnd, hourEnd, minuteEnd;
 	// declare the variables to Show/Set the date and time when Time and Date
 	// Picker Dialog first appears
 	private int mYear, mMonth, mDay, mHour, mMinute;
@@ -46,52 +50,94 @@ public class CreateMealInformationActivity extends Activity {
 		setContentView(R.layout.activity_create_meal_information);
 
 		// get the references of buttons
-		btnSelectDate = (Button) findViewById(R.id.CreateMealInformation_button_startdate);
-		btnSelectTime = (Button) findViewById(R.id.CreateMealInformation_button_starttime);
+		btnSelectStartDate = (Button) findViewById(R.id.CreateMealInformation_button_startdate);
+		btnSelectStartTime = (Button) findViewById(R.id.CreateMealInformation_button_starttime);
+		btnSelectEndDate = (Button) findViewById(R.id.CreateMealInformation_button_enddate);
+		btnSelectEndTime = (Button) findViewById(R.id.CreateMealInformation_button_endtime);
 
 		// Set ClickListener on btnSelectDate
-		btnSelectDate.setOnClickListener(new View.OnClickListener() {
+		btnSelectStartDate.setOnClickListener(new View.OnClickListener() {
 
 			public void onClick(View v) {
 				// Show the DatePickerDialog
-				showDialog(DATE_DIALOG_ID);
+				showDialog(START_DATE_DIALOG_ID);
+			}
+		});
+		btnSelectEndDate.setOnClickListener(new View.OnClickListener() {
+
+			public void onClick(View v) {
+				// Show the DatePickerDialog
+				showDialog(END_DATE_DIALOG_ID);
 			}
 		});
 
 		// Set ClickListener on btnSelectTime
-		btnSelectTime.setOnClickListener(new View.OnClickListener() {
+		btnSelectStartTime.setOnClickListener(new View.OnClickListener() {
 
 			public void onClick(View v) {
 				// Show the TimePickerDialog
-				showDialog(TIME_DIALOG_ID);
+				showDialog(START_TIME_DIALOG_ID);
+			}
+		});
+		btnSelectEndTime.setOnClickListener(new View.OnClickListener() {
+
+			public void onClick(View v) {
+				// Show the TimePickerDialog
+				showDialog(END_TIME_DIALOG_ID);
 			}
 		});
 
 	}
 
 	// Register DatePickerDialog listener
-	private DatePickerDialog.OnDateSetListener mDateSetListener = new DatePickerDialog.OnDateSetListener() {
+	private DatePickerDialog.OnDateSetListener startDateSetListener = new DatePickerDialog.OnDateSetListener() {
 		// the callback received when the user "sets" the Date in the
 		// DatePickerDialog
 		public void onDateSet(DatePicker view, int yearSelected,
 				int monthOfYear, int dayOfMonth) {
-			year = yearSelected;
-			month = monthOfYear;
-			day = dayOfMonth;
+			yearStart = yearSelected;
+			monthStart = monthOfYear + 1;
+			dayStart = dayOfMonth;
 			// Set the Selected Date in Select date Button
-			btnSelectDate.setText(day + "-" + month + "-" + year);
+			btnSelectStartDate.setText(dayStart + "-" + monthStart + "-"
+					+ yearStart);
+		}
+	};
+	
+	private DatePickerDialog.OnDateSetListener endDateSetListener = new DatePickerDialog.OnDateSetListener() {
+		// the callback received when the user "sets" the Date in the
+		// DatePickerDialog
+		public void onDateSet(DatePicker view, int yearSelected,
+				int monthOfYear, int dayOfMonth) {
+			yearStart = yearSelected;
+			monthStart = monthOfYear + 1;
+			dayStart = dayOfMonth;
+			// Set the Selected Date in Select date Button
+			btnSelectEndDate.setText(dayStart + "-" + monthStart + "-"
+					+ yearStart);
 		}
 	};
 
 	// Register TimePickerDialog listener
-	private TimePickerDialog.OnTimeSetListener mTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
+	private TimePickerDialog.OnTimeSetListener startTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
 		// the callback received when the user "sets" the TimePickerDialog in
 		// the dialog
 		public void onTimeSet(TimePicker view, int hourOfDay, int min) {
-			hour = hourOfDay;
-			minute = min;
+			hourStart = hourOfDay;
+			minuteStart = min;
 			// Set the Selected Date in Select date Button
-			btnSelectTime.setText(hour + ":" + minute);
+			btnSelectStartTime.setText(hourStart + ":" + minuteStart);
+		}
+	};
+	
+	private TimePickerDialog.OnTimeSetListener endTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
+		// the callback received when the user "sets" the TimePickerDialog in
+		// the dialog
+		public void onTimeSet(TimePicker view, int hourOfDay, int min) {
+			hourStart = hourOfDay;
+			minuteStart = min;
+			// Set the Selected Date in Select date Button
+			btnSelectEndTime.setText(hourStart + ":" + minuteStart);
 		}
 	};
 
@@ -99,15 +145,22 @@ public class CreateMealInformationActivity extends Activity {
 	@Override
 	protected Dialog onCreateDialog(int id) {
 		switch (id) {
-		case DATE_DIALOG_ID:
+		case START_DATE_DIALOG_ID:
 			// create a new DatePickerDialog with values you want to show
-			return new DatePickerDialog(this, mDateSetListener, mYear, mMonth,
-					mDay);
+			return new DatePickerDialog(this, startDateSetListener, mYear,
+					mMonth, mDay);
 			// create a new TimePickerDialog with values you want to show
-		case TIME_DIALOG_ID:
-			return new TimePickerDialog(this, mTimeSetListener, mHour, mMinute,
-					false);
-
+		case START_TIME_DIALOG_ID:
+			return new TimePickerDialog(this, startTimeSetListener, mHour,
+					mMinute, false);
+		case END_DATE_DIALOG_ID:
+			// create a new DatePickerDialog with values you want to show
+			return new DatePickerDialog(this, endDateSetListener, mYear,
+					mMonth, mDay);
+			// create a new TimePickerDialog with values you want to show
+		case END_TIME_DIALOG_ID:
+			return new TimePickerDialog(this, endTimeSetListener, mHour,
+					mMinute, false);
 		}
 		return null;
 	}
