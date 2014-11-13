@@ -25,5 +25,11 @@
     <string name="start_time">Start Time</string>
     <string name="end_time">End Time</string>
     <string name="where">Where?</string>
+    <string name="restaurant">Restaurant</string>
+    <string name="other_information">Other Information</string>
+    <string name="max_number">Maximum Number Attendance</string>
+    <string name="allow_friend_invite">Allow Friends Inviting Others</string>
+    <string name="back">Back</string>
+    <string name="next">Next</string>
 
 </resources>

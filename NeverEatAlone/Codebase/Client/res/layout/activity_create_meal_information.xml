@@ -22,8 +22,11 @@
         android:id="@+id/CreateMealInformation_text_when"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/CreateMealInformation_text_mealinformation"
-        android:text="@string/when" />
+        android:text="@string/when"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <LinearLayout
         android:id="@+id/CreateMealInformation_layout_start"
@@ -84,97 +87,115 @@
             android:layout_weight="1"
             android:text="Select Time" />
     </LinearLayout>
-    
+
     <TextView
-        android:id="@+id/username"
+        android:id="@+id/CreateMealInformation_text_where"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/CreateMealInformation_layout_end"
-        android:layout_marginTop="20dp"
-        android:text="@string/username"
+        android:text="@string/where"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <EditText
-        android:id="@+id/edit_username"
+    <LinearLayout
+        android:id="@+id/CreateMealInformation_layout_where"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/username"
-        android:inputType="text" />
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/CreateMealInformation_text_where"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/CreateMealInformation_text_restaurant"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/restaurant" />
+
+        <EditText
+            android:id="@+id/edit_restaurant"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:inputType="text" />
+    </LinearLayout>
 
     <TextView
-        android:id="@+id/email"
+        android:id="@+id/CreateMealInformation_text_other"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/edit_username"
-        android:layout_marginTop="20dp"
-        android:text="@string/email"
+        android:layout_below="@+id/CreateMealInformation_layout_where"
+        android:text="@string/other_information"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <EditText
-        android:id="@+id/edit_email"
+    <LinearLayout
+        android:id="@+id/CreateMealInformation_layout_maxnumber"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/email"
-        android:inputType="textEmailAddress" />
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/CreateMealInformation_text_other"
+        android:orientation="horizontal" >
 
-    <TextView
-        android:id="@+id/password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/edit_email"
-        android:layout_marginTop="20dp"
-        android:text="@string/password"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        <TextView
+            android:id="@+id/CreateMealInformation_text_maxnumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/max_number" />
 
-    <EditText
-        android:id="@+id/edit_password"
+        <EditText
+            android:id="@+id/edit_maxnumber"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:inputType="number" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/CreateMealInformation_layout_allowfriendinvite"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/password"
-        android:inputType="textPassword" />
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/CreateMealInformation_layout_maxnumber"
+        android:orientation="horizontal" >
 
-    <TextView
-        android:id="@+id/confirm_password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/edit_password"
-        android:layout_marginTop="20dp"
-        android:text="@string/confirm_password"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        <TextView
+            android:id="@+id/CreateMealInformation_text_allowfriendinvite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/allow_friend_invite" />
 
-    <EditText
-        android:id="@+id/edit_confirm_password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/confirm_password"
-        android:inputType="textPassword" />
+        <EditText
+            android:id="@+id/edit_allowfriendinvite"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:inputType="number" />
+    </LinearLayout>
 
     <Button
-        android:id="@+id/button_register_register"
+        android:id="@+id/CreateMealInformation_button_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/edit_confirm_password"
+        android:layout_below="@+id/CreateMealInformation_layout_allowfriendinvite"
         android:layout_marginTop="20dp"
-        android:layout_toLeftOf="@+id/button_register_cancel"
-        android:layout_toStartOf="@+id/button_register_register"
+        android:layout_toLeftOf="@+id/CreateMealInformation_button_next"
+        android:layout_toStartOf="@+id/CreateMealInformation_button_next"
         android:onClick="OnRegisterButtonClick"
-        android:text="@string/register" />
+        android:text="@string/back" />
 
     <Button
-        android:id="@+id/button_register_cancel"
+        android:id="@+id/CreateMealInformation_button_next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/edit_confirm_password"
+        android:layout_below="@+id/CreateMealInformation_layout_allowfriendinvite"
         android:layout_marginTop="20dp"
         android:onClick="OnCancelButtonClick"
-        android:text="@string/cancel" />
+        android:text="@string/next" />
 
 </RelativeLayout>
