@@ -19,6 +19,11 @@
     <string name="confirm_password">Confirm Password</string>
     <string name="cancel">Cancel</string>
     <string name="register_information">Register Information</string>
-    
+    <string name="title_activity_create_meal_information">CreateMealInformationActivity</string>
+    <string name="CreateMealInformation_meal_information">Meal Information</string>
+    <string name="when">When?</string>
+    <string name="start_time">Start Time</string>
+    <string name="end_time">End Time</string>
+    <string name="where">Where?</string>
 
 </resources>
