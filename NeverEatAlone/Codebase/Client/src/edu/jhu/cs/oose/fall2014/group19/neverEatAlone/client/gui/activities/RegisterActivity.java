@@ -94,8 +94,7 @@ public class RegisterActivity extends Activity {
 	}
 
 	public void OnCancelButtonClick(View view) {
-		// Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
-		Intent intent = new Intent(RegisterActivity.this, CreateMealInformationActivity.class);
+		Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
 		RegisterActivity.this.startActivity(intent);
 	}
 }
