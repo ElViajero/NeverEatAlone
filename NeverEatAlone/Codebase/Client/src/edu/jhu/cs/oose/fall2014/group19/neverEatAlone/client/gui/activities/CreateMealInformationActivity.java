@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -103,7 +104,7 @@ public class CreateMealInformationActivity extends Activity {
 					+ yearStart);
 		}
 	};
-	
+
 	private DatePickerDialog.OnDateSetListener endDateSetListener = new DatePickerDialog.OnDateSetListener() {
 		// the callback received when the user "sets" the Date in the
 		// DatePickerDialog
@@ -129,7 +130,7 @@ public class CreateMealInformationActivity extends Activity {
 			btnSelectStartTime.setText(hourStart + ":" + minuteStart);
 		}
 	};
-	
+
 	private TimePickerDialog.OnTimeSetListener endTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
 		// the callback received when the user "sets" the TimePickerDialog in
 		// the dialog
@@ -183,4 +184,11 @@ public class CreateMealInformationActivity extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+
+	public void OnBackButtonClick(View view) {
+		Intent intent = new Intent(CreateMealInformationActivity.this,
+				TabHostActivity.class);
+		CreateMealInformationActivity.this.startActivity(intent);
+	}
+
 }

@@ -184,7 +184,7 @@
         android:layout_marginTop="20dp"
         android:layout_toLeftOf="@+id/CreateMealInformation_button_next"
         android:layout_toStartOf="@+id/CreateMealInformation_button_next"
-        android:onClick="OnRegisterButtonClick"
+        android:onClick="OnBackButtonClick"
         android:text="@string/back" />
 
     <Button
@@ -195,7 +195,7 @@
         android:layout_alignParentRight="true"
         android:layout_below="@+id/CreateMealInformation_layout_allowfriendinvite"
         android:layout_marginTop="20dp"
-        android:onClick="OnCancelButtonClick"
+        android:onClick="OnNextButtonClick"
         android:text="@string/next" />
 
 </RelativeLayout>
