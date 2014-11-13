@@ -8,25 +8,43 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.InvitesActivity" >
 
-    <CheckBox
-        android:id="@+id/checkBox1"
+    <TextView
+        android:id="@+id/app_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="62dp"
-        android:layout_marginTop="146dp"
-        android:text="CheckBox" />
-    
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="0dp"
+        android:text="@string/app_name"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
     <Button
         android:id="@+id/invites_button_create"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/checkBox1"
-        android:layout_marginTop="20dp"
+        android:layout_below="@+id/app_name"
         android:onClick="OnCreateButtonClick"
         android:text="@string/create" />
+
+    <ToggleButton
+        android:id="@+id/toggleButton1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/availability_status"
+        android:layout_alignBottom="@+id/availability_status"
+        android:layout_alignRight="@+id/app_name"
+        android:text="ToggleButton" />
+
+    <TextView
+        android:id="@+id/availability_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/invites_button_create"
+        android:layout_marginTop="38dp"
+        android:layout_toLeftOf="@+id/toggleButton1"
+        android:text="Availability Status:"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
     
 </RelativeLayout>
