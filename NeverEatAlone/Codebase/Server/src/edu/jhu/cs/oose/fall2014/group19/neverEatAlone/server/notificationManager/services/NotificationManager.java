@@ -5,17 +5,21 @@ import java.util.List;
 import java.util.Map;
 
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 
 import com.google.gson.Gson;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.configuration.contracts.IConfigurationHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.notificationManager.contracts.INotificationManager;
 
 @Stateless
 public class NotificationManager implements INotificationManager {
 
+	@Inject IConfigurationHelper iConfigurationHelper;
+	
 	@Override
 	public void PushNotification(List<Map<String, String>> notificatonList,
 			List<Map<String,String>> recipientMapList) {
@@ -31,10 +35,10 @@ public class NotificationManager implements INotificationManager {
 		    System.out.println("queName "+queueName);
 			try{
 			
-			System.out.println("reaching here");
-			System.out.flush();
+				System.out.println("reaching PushNotification");
+				System.out.flush();
 			ConnectionFactory factory = new ConnectionFactory();
-			factory.setHost("10.188.181.210");
+			factory.setHost(iConfigurationHelper.GetConfigurationInstance().GetIPAddress());
 			Connection connection = factory.newConnection();
 			Channel channel = connection.createChannel();
 

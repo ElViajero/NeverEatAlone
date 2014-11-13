@@ -1,6 +1,8 @@
 package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities;
 
 
+import java.io.FileNotFoundException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +12,8 @@ import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.configuration.ConfigurationHelper;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.contracts.IRequestHandler;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestExecutor;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
 import android.app.Activity;
@@ -41,8 +45,11 @@ public class MainActivity extends Activity {
 	/**
 	 * Event handler for client login requests.
 	 * @param view
+	 * @throws FileNotFoundException 
+	 * @throws URISyntaxException 
 	 */
-	public void OnLoginButtonClick(View view) {
+	public void OnLoginButtonClick(View view) throws FileNotFoundException, URISyntaxException {
+		
 		
 		String username = Username.getText().toString();
 		String password = Password.getText().toString();
@@ -52,10 +59,13 @@ public class MainActivity extends Activity {
 		requestList.add(new BasicNameValuePair("RequestType", RequestType));
 		requestList.add(new BasicNameValuePair("Username", username));
 		requestList.add(new BasicNameValuePair("Password", password));
+				
+		
 		
 		List<Map<String, String>> resultMapList = 
 				RequestHandlerHelper.GetRequestHandlerInstance().HandleRequest(requestList) ;		
-		  
+		 
+		
 		if(resultMapList.get(0).get("Status").equals("Success")){
 			Toast.makeText(getApplicationContext(), "Welcome "+username+" !",
 					Toast.LENGTH_SHORT).show();
@@ -67,7 +77,7 @@ public class MainActivity extends Activity {
 			Toast.makeText(getApplicationContext(), "Invalid Credentials",
 					Toast.LENGTH_SHORT).show();
 		}
-		  		
+		  	
 	}
 	
 	

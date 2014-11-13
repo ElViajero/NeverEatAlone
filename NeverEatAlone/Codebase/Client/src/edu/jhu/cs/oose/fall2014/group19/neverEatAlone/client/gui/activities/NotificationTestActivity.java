@@ -49,6 +49,7 @@ public class NotificationTestActivity extends Activity {
 		Recipient = (EditText) findViewById(R.id.editRecipient);
 		Username = getIntent().getStringExtra("Username");
 		NotificationExecutorTask= new NotificationExecutor(this).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, Username);
+		System.out.println("ENTERED ON CREATE");
 		
 	}
 
