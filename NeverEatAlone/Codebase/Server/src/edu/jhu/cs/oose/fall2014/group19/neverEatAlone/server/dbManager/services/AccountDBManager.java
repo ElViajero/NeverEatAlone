@@ -15,7 +15,7 @@ import org.neo4j.graphdb.Transaction;
 import org.neo4j.kernel.api.exceptions.schema.UniqueConstraintViolationKernelException;
 import org.neo4j.kernel.impl.util.StringLogger;
 
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.contracts.IAccountManager;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.contracts.IAccountDBManager;
 
 /**
  * This class handles account management related database transactions.
@@ -25,7 +25,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.contracts
  */
 
 @Stateless
-public class AccountManager implements IAccountManager {
+public class AccountDBManager implements IAccountDBManager {
 
 	GraphDatabaseService GraphDBInstance;
 	
@@ -33,7 +33,7 @@ public class AccountManager implements IAccountManager {
 	 * Constructor gets a database handle.
 	 * 
 	 */
-	public AccountManager(){
+	public AccountDBManager(){
 		GraphDBInstance = DBManager.GetGraphDBInstance();
 		
 	}

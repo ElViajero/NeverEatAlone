@@ -6,6 +6,7 @@ import java.util.concurrent.ExecutionException;
 
 import org.apache.http.NameValuePair;
 
+import android.os.AsyncTask;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.contracts.IRequestHandler;
 
 public class RequestHandler implements IRequestHandler {
@@ -26,6 +27,7 @@ public class RequestHandler implements IRequestHandler {
 		// call the asynchronous result executor.
 		List<Map<String, String>> resultMapList=null;
 		try {
+			
 			resultMapList = new RequestExecutor().execute(requestList).get();
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block

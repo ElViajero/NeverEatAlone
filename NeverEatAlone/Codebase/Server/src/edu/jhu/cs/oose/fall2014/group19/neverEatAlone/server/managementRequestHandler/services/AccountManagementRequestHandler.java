@@ -8,8 +8,8 @@ import java.lang.reflect.Method;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.contracts.IAccountManager;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.services.AccountManager;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.contracts.IAccountDBManager;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.services.AccountDBManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.managementRequestHandler.contracts.IManagementRequestHandler;
 
 /**
@@ -25,7 +25,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.managementRequestHa
 @Stateless
 public class AccountManagementRequestHandler{
 
-	@Inject IAccountManager IAccountManagerObject;
+	@Inject IAccountDBManager IAccountManagerObject;
 	
 	/**
 	 * This method handles requests to create an account.

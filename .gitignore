@@ -1,28 +1,22 @@
-*.pydevproject
-.metadata
-.gradle
-bin/
-tmp/
-*.tmp
-*.bak
-*.swp
-*~.nib
-local.properties
-.settings/
-.loadpath
-.externalToolBuilders/
-*.launch
-.cproject
-.buildpath
-.target
-.texlipse
-*.apk 
-*.ap_ 
-*.dex 
+.DS_Store
+
 *.class
-bin/ 
-gen/
-local.properties
-.classpath
-proguard/ 
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+
+# some miscellaneous files in the iteration folders
+
+/NeverEatAlone/Iteration_Documentation/Iteration_2/Class_Diagram.txt
+/NeverEatAlone/Iteration_Documentation/Iteration_2/Class_Glossary
+/NeverEatAlone/Iteration_Documentation/Iteration_1/Implementation Oriented Model.uxf
+/NeverEatAlone/Iteration_Documentation/Iteration_1/NEW_FEATURE_LIST.txt
 

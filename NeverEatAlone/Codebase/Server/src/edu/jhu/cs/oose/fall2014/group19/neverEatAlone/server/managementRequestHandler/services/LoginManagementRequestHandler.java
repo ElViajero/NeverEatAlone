@@ -5,7 +5,7 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.contracts.ILoginManager;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.contracts.ILoginDBManager;
 
 
 /**
@@ -19,7 +19,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.contracts
  */
 public class LoginManagementRequestHandler {
 
-	@Inject ILoginManager ILoginManagerObject;
+	@Inject ILoginDBManager ILoginManagerObject;
 	
 	/**
 	 * This method checks user credentials for a login request.
