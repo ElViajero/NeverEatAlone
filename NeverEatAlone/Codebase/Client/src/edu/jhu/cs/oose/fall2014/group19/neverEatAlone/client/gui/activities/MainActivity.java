@@ -69,6 +69,7 @@ public class MainActivity extends Activity {
 					Toast.LENGTH_SHORT).show();
 			
 			Intent intent = new Intent(MainActivity.this, TabHostActivity.class);
+			intent.putExtra("Username", username);
 			MainActivity.this.startActivity(intent);
 		}
 		else{

@@ -6,8 +6,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.resource.spi.work.WorkListener;
 
@@ -22,6 +24,9 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.junit.Test;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.workflow.tests.helpers.WorkflowTestHelper;
 
@@ -50,6 +55,10 @@ public class LoginWorkflow {
 		WorkflowTestHelper.CreateTestAccount();
 		
 		
+		//create Gson object
+		
+		Gson gson = new Gson();
+		Type stringStringMap = new TypeToken<List<Map<String, String>>>(){}.getType();
 		// Part 2 : Check Credentials
 		
 		
@@ -70,7 +79,10 @@ public class LoginWorkflow {
 			BufferedReader in = 
 					new BufferedReader( new InputStreamReader( entity2.getContent() ) );		    
 			String response=in.readLine();
-			assertTrue(response.equals("Success"));	            	            
+			
+			List<Map<String,String>> result= gson.fromJson(response, stringStringMap);
+					
+			assertTrue(result.get(0).equals("Success"));	            	            
 			in.close();
 			EntityUtils.consume(entity2);
 		} finally {

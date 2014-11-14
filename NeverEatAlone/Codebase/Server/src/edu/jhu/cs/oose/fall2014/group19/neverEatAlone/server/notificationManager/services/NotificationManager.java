@@ -33,10 +33,11 @@ public class NotificationManager implements INotificationManager {
 			// index the queues by username.
 			String queueName = recipientMap.get("Username"); 
 		    System.out.println("queName "+queueName);
-			try{
 			
-				System.out.println("reaching PushNotification");
-				System.out.flush();
+		    try{
+			
+			System.out.println("reaching PushNotification");
+			System.out.flush();
 			ConnectionFactory factory = new ConnectionFactory();
 			factory.setHost(iConfigurationHelper.GetConfigurationInstance().GetIPAddress());
 			Connection connection = factory.newConnection();

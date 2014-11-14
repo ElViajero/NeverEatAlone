@@ -77,7 +77,7 @@ public class NotificationExecutor extends AsyncTask<String, List<Map<String,Stri
 	    factory.setHost(IPAddress);
 	    Connection connection = factory.newConnection();
 	    ChannelObject = connection.createChannel();
-	    System.out.println("username is"+ username);
+	    System.out.println("username is" + username);
 	    ChannelObject.queueDeclare(username, false, false, false, null);
 	    System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
 	 
@@ -133,14 +133,8 @@ public class NotificationExecutor extends AsyncTask<String, List<Map<String,Stri
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if(resultMapList!=null)
-		{
-		System.out.println("In post execute");
-		for(Map<String,String> notification : resultMapList){
-			//PostNotification
-			
-		}
-		}
+		
+		ActivityObject.UpdateNotificationCache(resultMapList);
 		
 		//executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, Username);
 		
