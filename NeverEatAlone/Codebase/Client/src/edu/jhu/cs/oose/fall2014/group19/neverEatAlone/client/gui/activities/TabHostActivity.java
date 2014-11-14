@@ -2,10 +2,13 @@ package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities;
 
 import android.app.TabActivity;//Cannot extends Activity
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.notificationManager.services.NotificationExecutor;
+
 
 public class TabHostActivity extends TabActivity {
 
@@ -38,6 +41,10 @@ public class TabHostActivity extends TabActivity {
             tabHost.addTab(tab_invites);
             tabHost.addTab(tab_contacts);
             tabHost.addTab(tab_profile);
+            
+            // Configure the notifications.
+            //NotificationExecutorTask= new NotificationExecutor(this).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, Username);
+            
 
     }
 }

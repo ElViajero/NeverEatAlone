@@ -19,6 +19,7 @@ import com.rabbitmq.client.impl.AMQImpl.Basic;
 
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.configuration.ConfigurationHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.NotificationTestActivity;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.TabHostActivity;
 import android.app.Activity;
 import android.os.AsyncTask;
 import android.widget.Toast;
@@ -28,7 +29,7 @@ public class NotificationExecutor extends AsyncTask<String, List<Map<String,Stri
 	
 	
 	
-	NotificationTestActivity ActivityObject;
+	TabHostActivity ActivityObject;
 	
 	// If it's being used on a thread separate from the UI thread,
 	//make it static if it has to be global variable.
@@ -40,8 +41,8 @@ public class NotificationExecutor extends AsyncTask<String, List<Map<String,Stri
 	static Gson GsonObject;
 	
 	
-	public NotificationExecutor(NotificationTestActivity notificationTestAtivity){
-		ActivityObject = notificationTestAtivity;
+	public NotificationExecutor(TabHostActivity tabHostActivity){
+		ActivityObject = tabHostActivity;
 		GsonObject = new Gson();
 		//handling the try/catch stuff here makes sense for now.
 		try {
@@ -136,7 +137,7 @@ public class NotificationExecutor extends AsyncTask<String, List<Map<String,Stri
 		{
 		System.out.println("In post execute");
 		for(Map<String,String> notification : resultMapList){
-			ActivityObject.UpdateNotificationList(notification);
+			//PostNotification
 			
 		}
 		}
