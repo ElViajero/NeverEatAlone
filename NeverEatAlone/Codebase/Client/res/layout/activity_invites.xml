@@ -27,24 +27,20 @@
         android:onClick="OnCreateButtonClick"
         android:text="@string/create" />
 
-    <ToggleButton
-        android:id="@+id/toggleButton1"
+    <Switch
+        android:id="@+id/switch_availability_status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/availability_status"
-        android:layout_alignBottom="@+id/availability_status"
-        android:layout_alignRight="@+id/app_name"
-        android:text="ToggleButton" />
-
-    <TextView
-        android:id="@+id/availability_status"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
         android:layout_below="@+id/invites_button_create"
-        android:layout_marginTop="38dp"
-        android:layout_toLeftOf="@+id/toggleButton1"
-        android:text="Availability Status:"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:layout_marginTop="16dp"
+        android:text="Availability Status:" />
+
+    <ListView
+        android:id="@+id/listView_invitations"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/switch_availability_status"
+        android:layout_below="@+id/switch_availability_status" >
+    </ListView>
     
 </RelativeLayout>

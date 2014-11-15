@@ -50,20 +50,20 @@ public class MainActivity extends Activity {
 		requestList.add(new BasicNameValuePair("Username", username));
 		requestList.add(new BasicNameValuePair("Password", password));
 		
-		List<Map<String, String>> resultMapList = 
-				RequestHandlerHelper.GetRequestHandlerInstance().HandleRequest(requestList) ;		
-		  
-		if(resultMapList.get(0).get("Status").equals("Success")){
-			Toast.makeText(getApplicationContext(), "Welcome "+username+" !",
-					Toast.LENGTH_SHORT).show();
+//		List<Map<String, String>> resultMapList = 
+//				RequestHandlerHelper.GetRequestHandlerInstance().HandleRequest(requestList) ;		
+//		  
+//		if(resultMapList.get(0).get("Status").equals("Success")){
+//			Toast.makeText(getApplicationContext(), "Welcome "+username+" !",
+//					Toast.LENGTH_SHORT).show();
 			
 			Intent intent = new Intent(MainActivity.this, TabHostActivity.class);
 			MainActivity.this.startActivity(intent);
-		}
-		else{
-			Toast.makeText(getApplicationContext(), "Invalid Credentials",
-					Toast.LENGTH_SHORT).show();
-		}
+//		}
+//		else{
+//			Toast.makeText(getApplicationContext(), "Invalid Credentials",
+//					Toast.LENGTH_SHORT).show();
+//		}
 		  		
 	}
 	

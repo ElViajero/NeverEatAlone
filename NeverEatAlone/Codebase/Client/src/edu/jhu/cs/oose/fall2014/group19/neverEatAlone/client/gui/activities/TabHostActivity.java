@@ -6,7 +6,11 @@ import android.os.Bundle;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
-
+/**
+ * 
+ * @author Hai Tang
+ *
+ */
 public class TabHostActivity extends TabActivity {
 
 	/** Called when the activity is first created. */
