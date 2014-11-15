@@ -42,5 +42,7 @@
     <string name="message">Message</string>
     <string name="SelectDate">Select Date</string>
     <string name="SelectTime">Select Time</string>
+    <string name="capital_yes">YES</string>
+    <string name="capital_no">NO</string>
 
 </resources>

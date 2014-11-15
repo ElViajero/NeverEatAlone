@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.TimePicker;
 import android.widget.Toast;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
@@ -24,7 +25,7 @@ public class CreateMealInformationActivity extends FragmentActivity {
 
 	private EditText Place;
 	private EditText MaxNumber;
-	private EditText AllowFriendInvite;
+	private Switch AllowFriendInvite;
 
 	// variables to save user selected date and time
 	public int YearStart, MonthStart, DayStart, HourStart, MinuteStart;
@@ -58,7 +59,7 @@ public class CreateMealInformationActivity extends FragmentActivity {
 
 		Place = (EditText) findViewById(R.id.edit_restaurant);
 		MaxNumber = (EditText) findViewById(R.id.edit_maxnumber);
-		AllowFriendInvite = (EditText) findViewById(R.id.edit_allowfriendinvite);
+		AllowFriendInvite = (Switch) findViewById(R.id.switch_allowfriendinvite);
 	}
 
 	@Override
@@ -203,7 +204,12 @@ public class CreateMealInformationActivity extends FragmentActivity {
 
 		String place = Place.getText().toString();
 		String maxnumber = MaxNumber.getText().toString();
-		String allowfriendinvite = AllowFriendInvite.getText().toString();
+		String allowfriendinvite;
+		if (AllowFriendInvite.isChecked()) {
+			allowfriendinvite = "Yes";
+		} else {
+			allowfriendinvite = "No";
+		}
 		Toast.makeText(
 				getApplicationContext(),
 				"Start Time: " + DayStart + "/" + dummymonthstart + "/"
