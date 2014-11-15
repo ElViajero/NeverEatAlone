@@ -12,7 +12,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TimePicker;
+import android.widget.Toast;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
 
 public class CreateMealInformationActivity extends FragmentActivity {
@@ -20,10 +22,9 @@ public class CreateMealInformationActivity extends FragmentActivity {
 	Button BtnSelectStartDate, BtnSelectStartTime, BtnSelectEndDate,
 			BtnSelectEndTime;
 
-	static final int START_DATE_DIALOG_ID = 0;
-	static final int START_TIME_DIALOG_ID = 1;
-	static final int END_DATE_DIALOG_ID = 2;
-	static final int END_TIME_DIALOG_ID = 3;
+	private EditText Place;
+	private EditText MaxNumber;
+	private EditText AllowFriendInvite;
 
 	// variables to save user selected date and time
 	public int YearStart, MonthStart, DayStart, HourStart, MinuteStart;
@@ -55,6 +56,9 @@ public class CreateMealInformationActivity extends FragmentActivity {
 		BtnSelectEndDate = (Button) findViewById(R.id.CreateMealInformation_button_enddate);
 		BtnSelectEndTime = (Button) findViewById(R.id.CreateMealInformation_button_endtime);
 
+		Place = (EditText) findViewById(R.id.edit_restaurant);
+		MaxNumber = (EditText) findViewById(R.id.edit_maxnumber);
+		AllowFriendInvite = (EditText) findViewById(R.id.edit_allowfriendinvite);
 	}
 
 	@Override
@@ -194,6 +198,22 @@ public class CreateMealInformationActivity extends FragmentActivity {
 
 	public void OnNextButtonClick(View view) {
 
+		int dummymonthstart = MonthStart + 1;
+		int dummymonthend = MonthEnd + 1;
+
+		String place = Place.getText().toString();
+		String maxnumber = MaxNumber.getText().toString();
+		String allowfriendinvite = AllowFriendInvite.getText().toString();
+		Toast.makeText(
+				getApplicationContext(),
+				"Start Time: " + DayStart + "/" + dummymonthstart + "/"
+						+ DayStart + " " + HourStart + ":" + MinuteStart + "\n"
+						+ "End Time: " + DayEnd + "/" + dummymonthend + "/"
+						+ DayEnd + " " + HourEnd + ":" + MinuteEnd + "\n"
+						+ "Place: " + place + "\n" + "Max Number: " + maxnumber
+						+ "\n" + "Allow Friend Invite: " + allowfriendinvite,
+				Toast.LENGTH_SHORT).show();
+
 		/*
 		 * ArrayList<NameValuePair> requestList = new
 		 * ArrayList<NameValuePair>(); requestList.add(new
@@ -221,5 +241,4 @@ public class CreateMealInformationActivity extends FragmentActivity {
 		 */
 
 	}
-
 }
