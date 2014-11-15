@@ -7,7 +7,6 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.managementRequestHandler.contracts.IManagementRequestHandler;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.managementRequestHandler.services.ManagementRequestHandler;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.requestDispatcher.contracts.IRequestDispatcher;
 
 /**
@@ -22,8 +21,8 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.requestDispatcher.c
 public class RequestDispatcher implements IRequestDispatcher {
 
 	@Inject IManagementRequestHandler IManagementRequestHandlerObject;
-	
-	
+
+
 	/**
 	 * This method dispatches request to the ManagementRequestHandler layer
 	 */
@@ -35,9 +34,9 @@ public class RequestDispatcher implements IRequestDispatcher {
 		System.out.println("Request Keys : ");
 		System.out.println(request.keySet());
 		// ********* LOGGING ********* 
-		
+
 		return IManagementRequestHandlerObject.HandleManagementRequest(request);
 	}	
-	
-	
+
+
 }

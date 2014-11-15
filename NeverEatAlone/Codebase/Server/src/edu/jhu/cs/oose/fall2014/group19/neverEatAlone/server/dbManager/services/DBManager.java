@@ -1,6 +1,5 @@
 package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.services;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -12,11 +11,9 @@ import org.neo4j.cypher.ExecutionResult;
 import org.neo4j.graphdb.DynamicLabel;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
-import org.neo4j.graphdb.PropertyContainer;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
 import org.neo4j.helpers.collection.IteratorUtil;
-import org.neo4j.kernel.api.exceptions.schema.AlreadyConstrainedException;
 
 import scala.collection.Iterator;
 
@@ -32,7 +29,7 @@ import scala.collection.Iterator;
 public class DBManager {
 
 	private static GraphDatabaseService GraphDBInstance;
-	
+
 	/**
 	 * This method returns a graph database
 	 * instance that is shared by all classes
@@ -43,7 +40,7 @@ public class DBManager {
 	 * 
 	 * @return
 	 */
-	
+
 	public static GraphDatabaseService GetGraphDBInstance(){
 		if(GraphDBInstance==null){
 			//initialize the DB instance in embedded mode.
@@ -59,8 +56,8 @@ public class DBManager {
 		}
 		return GraphDBInstance;
 	}
-	
-	
+
+
 	/**
 	 * 
 	 * This method sets constraints on the
@@ -70,15 +67,15 @@ public class DBManager {
 	 */
 	private static void SetDBSchema() throws Exception {
 
-		
+
 		try(Transaction tx = GraphDBInstance.beginTx()){
-		
+
 			//schema constraints go here
-			
+
 			GraphDBInstance.schema().
 			constraintFor(DynamicLabel.label("User")).
 			assertPropertyIsUnique("Username").create();			
-			
+
 			tx.success();
 		}
 	}
@@ -138,17 +135,17 @@ public class DBManager {
 				if(index>=resultMapList.size())
 					resultMapList.add(new HashMap<String,String>());
 
-				
-				
-				
+
+
+
 				//This is not the best check.
 				//Maybe change later.
 				if(currentEntry instanceof org.neo4j.graphdb.Node){
-					
+
 					// ********* LOGGING *********
 					System.out.println("IT IS A NODE");
 					// ********* LOGGING *********
-					
+
 					Node currentNode = (Node) currentEntry; 
 					// iterate over all the properties for the current node object.
 					for(String property : currentNode.getPropertyKeys()){				
@@ -182,7 +179,7 @@ public class DBManager {
 
 	} 
 
-	
+
 	/**
 	 * This method is used for formatting query parameters.
 	 * Note, this is a generic method that assumes every String[] has 
@@ -196,24 +193,24 @@ public class DBManager {
 	 * @return
 	 */
 	public static Map<String,String> GetQueryParameterMap(Map<String,String[]> request){		 
-		
+
 		Map<String,String> queryParameterMap = new HashMap<String,String>();
-		
+
 		for (Map.Entry<String, String[]> entry : request.entrySet()) {
-		    
+
 			//obtain the key and value for the current entry.
 			String key = entry.getKey();
-		    String[] value = entry.getValue();
+			String[] value = entry.getValue();
 
-		    // Put the first element of String[] into our new map.
-		    // Read method documentation for more details.		    		    
-		    queryParameterMap.put(key, value[0]);		   		   
+			// Put the first element of String[] into our new map.
+			// Read method documentation for more details.		    		    
+			queryParameterMap.put(key, value[0]);		   		   
 		}		
 		return queryParameterMap;
 	}
-	
-	
-	
+
+
+
 	/**
 	 * This method ensures that the database shuts down gracefully
 	 * when the JVM exits.
@@ -221,19 +218,18 @@ public class DBManager {
 	 */
 	private static void RegisterShutdownHook()
 	{
-	    // Registers a shutdown hook for the Neo4j instance so that it
-	    // shuts down nicely when the VM exits (even if you "Ctrl-C" the
-	    // running application).
-	    Runtime.getRuntime().addShutdownHook( new Thread()
-	    {
-	        @Override
-	        public void run()
-	        {
-	            GraphDBInstance.shutdown();
-	        }
-	    } );
+		// Registers a shutdown hook for the Neo4j instance so that it
+		// shuts down nicely when the VM exits (even if you "Ctrl-C" the
+		// running application).
+		Runtime.getRuntime().addShutdownHook( new Thread()
+		{
+			@Override
+			public void run()
+			{
+				GraphDBInstance.shutdown();
+			}
+		} );
 	}
-	
-	
+
+
 }
-	

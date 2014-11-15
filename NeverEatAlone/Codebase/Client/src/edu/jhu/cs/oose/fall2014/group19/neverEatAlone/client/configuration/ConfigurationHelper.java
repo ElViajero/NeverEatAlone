@@ -1,16 +1,10 @@
 package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.configuration;
 
-import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.URISyntaxException;
-import java.net.URL;
 
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 
 import com.google.gson.Gson;
@@ -19,8 +13,8 @@ import com.google.gson.JsonSyntaxException;
 public class ConfigurationHelper {
 
 	static Configuration ConfigurationInstance;
-	
-	
+
+
 	public static Configuration GetConfigurationInstance() throws FileNotFoundException, URISyntaxException{
 		if(ConfigurationInstance==null){
 			Gson gson = new Gson();
@@ -44,9 +38,9 @@ public class ConfigurationHelper {
 				e.printStackTrace();
 			}			
 		}
-		
+
 		return ConfigurationInstance;
-			
+
 	}
-	
+
 }

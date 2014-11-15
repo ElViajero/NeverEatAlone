@@ -1,15 +1,10 @@
 package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.requestHandler.tests;
 
-import static org.junit.Assert.*;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.validation.constraints.AssertTrue;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
@@ -34,7 +29,7 @@ import org.junit.Test;
 
 public class RequestHandlerTests {
 
-	
+
 	/**
 	 * This method tests the sending of a POST request to the servlet and retreiving the 
 	 * appropriate response.
@@ -46,10 +41,10 @@ public class RequestHandlerTests {
 	 * @throws ClientProtocolException
 	 * @throws IOException
 	 */
-	
+
 	@Test
 	public void HttpPostRequestTest() throws ClientProtocolException, IOException {
-	
+
 		CloseableHttpClient httpclient = HttpClients.createDefault();
 		HttpPost httpPost = new HttpPost("http://10.0.0.3:8080/NeverEatAloneServer/RequestHandler");	    
 		List <NameValuePair> nvps = new ArrayList <NameValuePair>();	    
@@ -58,20 +53,20 @@ public class RequestHandlerTests {
 		httpPost.setEntity(new UrlEncodedFormEntity(nvps));	    
 		CloseableHttpResponse response2 = httpclient.execute(httpPost);
 		try {		    
-		    HttpEntity entity2 = response2.getEntity();
-		    // do something useful with the response body
-		    // and ensure it is fully consumed
-		    BufferedReader in = 
-	                new BufferedReader( new InputStreamReader( entity2.getContent() ) );
-	            
-	            in.close();
-		    EntityUtils.consume(entity2);
+			HttpEntity entity2 = response2.getEntity();
+			// do something useful with the response body
+			// and ensure it is fully consumed
+			BufferedReader in = 
+					new BufferedReader( new InputStreamReader( entity2.getContent() ) );
+
+			in.close();
+			EntityUtils.consume(entity2);
 		} finally {
-		    response2.close();
+			response2.close();
 		}
-		
+
 	}
 
-	
-	
+
+
 }

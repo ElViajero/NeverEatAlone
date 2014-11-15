@@ -29,16 +29,16 @@
         android:text="@string/username"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-        <TextView
-            android:id="@+id/profile_alias"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-       	    android:layout_alignParentLeft="true"
-        	android:layout_alignParentStart="true"
-            android:layout_below="@+id/profile_username"
-            android:layout_marginTop="20dp"
-            android:text="Alias"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+    <TextView
+        android:id="@+id/profile_alias"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/profile_username"
+        android:layout_marginTop="20dp"
+        android:text="Alias"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
         android:id="@+id/profile_name"
@@ -49,8 +49,6 @@
         android:text="Name"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-
-
     <TextView
         android:id="@+id/profile_email"
         android:layout_width="wrap_content"
@@ -60,99 +58,97 @@
         android:text="Email"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-        <Button
-            android:id="@+id/button_profile_logout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/button_profile_changepassword"
-            android:layout_marginTop="39dp"
-            android:layout_toLeftOf="@+id/profile"
-            android:text="Log Out" />
+    <Button
+        android:id="@+id/button_profile_logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button_profile_changepassword"
+        android:layout_marginTop="39dp"
+        android:layout_toLeftOf="@+id/profile"
+        android:text="Log Out" />
 
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/button_profile_logout"
-            android:layout_alignBottom="@+id/button_profile_logout"
-            android:layout_alignParentRight="true"
-            android:text="Delete Account" />
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/button_profile_logout"
+        android:layout_alignBottom="@+id/button_profile_logout"
+        android:layout_alignParentRight="true"
+        android:text="Delete Account" />
 
-        <TextView
-            android:id="@+id/textview_profile_edit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/profile"
-            android:layout_toRightOf="@+id/button_profile_changepassword"
-            android:text="Edit"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
+    <TextView
+        android:id="@+id/textview_profile_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/profile"
+        android:layout_toRightOf="@+id/button_profile_changepassword"
+        android:text="Edit"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
 
-        <Button
-            android:id="@+id/button_profile_changepassword"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/profile_workspace"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="46dp"
-            android:text="Change Password" />
+    <Button
+        android:id="@+id/button_profile_changepassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/profile_workspace"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="46dp"
+        android:text="Change Password" />
 
-        <TextView
-            android:id="@+id/textView_alias"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/profile_name"
-            android:layout_alignLeft="@+id/textView1"
-            android:layout_centerHorizontal="true"
-            android:text="HP"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+    <TextView
+        android:id="@+id/textView_alias"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/profile_name"
+        android:layout_alignLeft="@+id/textView1"
+        android:layout_centerHorizontal="true"
+        android:text="HP"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
-        <TextView
-            android:id="@+id/textView_workspace"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/button_profile_changepassword"
-            android:layout_alignLeft="@+id/textView4"
-            android:text="Hogworts"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+    <TextView
+        android:id="@+id/textView_workspace"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/button_profile_changepassword"
+        android:layout_alignLeft="@+id/textView4"
+        android:text="Hogworts"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
-        <TextView
-            android:id="@+id/textView_username"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/profile_username"
-            android:layout_alignBottom="@+id/profile_username"
-            android:layout_centerHorizontal="true"
-            android:text="hpotter1"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+    <TextView
+        android:id="@+id/textView_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/profile_username"
+        android:layout_alignBottom="@+id/profile_username"
+        android:layout_centerHorizontal="true"
+        android:text="hpotter1"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
-        <TextView
-            android:id="@+id/textView_Name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/profile_email"
-            android:layout_centerHorizontal="true"
-            android:text="Harry Potter"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+    <TextView
+        android:id="@+id/textView_Name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/profile_email"
+        android:layout_centerHorizontal="true"
+        android:text="Harry Potter"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
-        <TextView
-            android:id="@+id/textView_email"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/profile_workspace"
-            android:layout_centerHorizontal="true"
-            android:text="harry@jhu.edu"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+    <TextView
+        android:id="@+id/textView_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/profile_workspace"
+        android:layout_centerHorizontal="true"
+        android:text="harry@jhu.edu"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
-        <TextView
-            android:id="@+id/profile_workspace"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/profile_email"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="18dp"
-            android:text="Workspace"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-
+    <TextView
+        android:id="@+id/profile_workspace"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/profile_email"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="18dp"
+        android:text="Workspace"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </RelativeLayout>

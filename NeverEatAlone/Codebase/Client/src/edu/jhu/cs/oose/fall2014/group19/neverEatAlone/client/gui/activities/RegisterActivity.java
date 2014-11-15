@@ -1,16 +1,8 @@
 package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
-
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.contracts.IRequestProperties;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.properties.RegisterRequestProperties;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,6 +11,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.contracts.IRequestProperties;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.properties.RegisterRequestProperties;
 
 /**
  * This class handles controller logic for the registration 
@@ -36,10 +32,6 @@ public class RegisterActivity extends Activity {
 	private EditText ConfirmPassword;
 	private String RequestType;
 	private String RequestID;
-	private List<NameValuePair> requestList;
-	
-	
-	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -78,7 +70,7 @@ public class RegisterActivity extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 
-	
+
 	/**
 	 * Event Handler method for the register button
 	 * 
@@ -92,24 +84,24 @@ public class RegisterActivity extends Activity {
 		String password = Password.getText().toString();
 		String email = Email.getText().toString();
 		String confirmPassword = ConfirmPassword.getText().toString();
-		
+
 		System.out.println(password);
 		System.out.println(confirmPassword);
-		
+
 		if(!password.equals(confirmPassword)){
 			Toast.makeText(getApplicationContext(), 
 					"Passwords Don't Match !", Toast.LENGTH_SHORT).show();
 			return;
 		}
-		
+
 		// Create a properties object.
 		IRequestProperties registerProperties = 
 				new RegisterRequestProperties(username, password, email);
-		
+
 		//Get the request Map 
 		Map<String, List<String>> requestMap = registerProperties.GetRequestMap();
-				
-		
+
+
 		// Initiate the request.
 		List<Map<String, String>> resultMapList = RequestHandlerHelper
 				.GetRequestHandlerInstance().HandleRequest(requestMap,RequestID,RequestType);

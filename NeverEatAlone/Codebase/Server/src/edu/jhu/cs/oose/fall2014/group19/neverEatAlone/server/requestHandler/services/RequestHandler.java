@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.requestDispatcher.contracts.IRequestDispatcher;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.requestDispatcher.services.RequestDispatcher;
 
 /**
  * Servlet implementation class RequestHandler.
@@ -27,27 +26,28 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.requestDispatcher.s
 @WebServlet("/RequestHandler")
 public class RequestHandler extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-	
-	
+
+
+
 	//Inject the bean
 	@Inject IRequestDispatcher IRequestDispatcherObject; 
-	
-	
-	
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public RequestHandler() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+
+
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public RequestHandler() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
+	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {		
-		
+
 		// ********* LOGGING ********* 
 		java.io.Writer w = response.getWriter();
 		w.append("<html>");
@@ -56,7 +56,7 @@ public class RequestHandler extends HttpServlet {
 		w.append("</body>");
 		w.append("</html>");
 		// ********* LOGGING ********* 
-		
+
 	}
 
 	/**
@@ -66,25 +66,26 @@ public class RequestHandler extends HttpServlet {
 	 * 
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
+
+
 		Map<String, String[]> map = request.getParameterMap();
-		
-		
+
+
 		//System.out.println("The stuff is :" + map.get("Username")[0] );
 		//System.out.flush();
-		
+
 		//call the beans DispatchRequest method.
 		List<Map<String, String>> result = IRequestDispatcherObject.DispatchRequest(map);
-		
+
 		// For now just print the status of the query (success or failed).		
 		java.io.Writer w = response.getWriter();
 		//w.append(result.get(0).get("Status"));
-		
+
 		Gson gson = new Gson();
 		w.append(gson.toJson(result));
-				
+
 	}
 
 }

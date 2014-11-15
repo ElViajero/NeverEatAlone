@@ -1,23 +1,14 @@
 package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.workflow.tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.apache.http.HttpEntity;
-import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
-import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.junit.Test;
 
@@ -43,17 +34,17 @@ public class DeleteAccountWorkflowTest {
 	 */
 	@Test
 	public void CreateAndDeleteAccountTest() throws ClientProtocolException, IOException {
-		
-		
+
+
 		//book keeping
 		WorkflowTestHelper.DeleteTestAccount();
-		
+
 		//STEP 1 : Create a test user account.
 		WorkflowTestHelper.CreateTestAccount();
-		
-				
+
+
 		//STEP 2 : Delete a test user account.
-		
+
 		CloseableHttpResponse response2 = WorkflowTestHelper.DeleteTestAccount();		
 		try {		    
 			HttpEntity entity2 = response2.getEntity();
@@ -68,11 +59,11 @@ public class DeleteAccountWorkflowTest {
 		} finally {
 			response2.close();
 		}
-		
+
 		//book keeping
 		WorkflowTestHelper.DeleteTestAccount();
-				
-		
+
+
 
 
 	}

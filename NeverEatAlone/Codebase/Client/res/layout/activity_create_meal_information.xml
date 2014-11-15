@@ -49,14 +49,14 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="OnStartTimeDataButtonClick"
-            android:text="Select Date" />
+            android:text="@string/SelectDate" />
 
         <Button
             android:id="@+id/CreateMealInformation_button_starttime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Select Time" />
+            android:text="@string/SelectTime" />
     </LinearLayout>
 
     <LinearLayout
@@ -79,14 +79,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Select Date" />
+            android:text="@string/SelectDate" />
 
         <Button
             android:id="@+id/CreateMealInformation_button_endtime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Select Time" />
+            android:text="@string/SelectTime" />
     </LinearLayout>
 
     <TextView

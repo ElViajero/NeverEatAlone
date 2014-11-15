@@ -76,5 +76,4 @@
         android:onClick="OnSignUpButtonClick"
         android:text="@string/signup" />
 
-
 </RelativeLayout>

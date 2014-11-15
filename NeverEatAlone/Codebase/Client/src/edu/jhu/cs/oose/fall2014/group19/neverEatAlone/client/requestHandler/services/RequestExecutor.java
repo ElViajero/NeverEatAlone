@@ -3,87 +3,81 @@ package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.ser
 
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
-import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
-import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 
 import android.os.AsyncTask;
-import android.support.v4.app.INotificationSideChannel;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.configuration.Configuration;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.configuration.ConfigurationHelper;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.contracts.IRequestHandler;
 
 public class RequestExecutor extends AsyncTask<List<NameValuePair>, Void, List<Map<String,String>>>  {
-	
+
 	static HttpClient HttpClientInstance;
 
 	static String PostRequestURLString; 
 	static Gson GsonObject;
 
-	
-	
-	
+
+
+
 	private static void InitHttpClienInstance(){
 		if(HttpClientInstance==null){						 
-		HttpClientInstance=new DefaultHttpClient();
-		GsonObject = new Gson();
-		try {
-			Configuration configurationInstance = 
-					ConfigurationHelper.GetConfigurationInstance();
-			PostRequestURLString =
-					configurationInstance.GetProtocol()+
-					configurationInstance.GetIPAddress()+":"+
-					configurationInstance.GetServerPort()+
-					configurationInstance.GetServerURL();
-					
-					
-			System.out.println("string is :"+PostRequestURLString);
-			System.out.flush();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			System.out.println("Cathcing exception in GetHttpClientInstance");
-			e.printStackTrace();
-		}
-		System.out.println("pos string is :"+ PostRequestURLString);
+			HttpClientInstance=new DefaultHttpClient();
+			GsonObject = new Gson();
+			try {
+				Configuration configurationInstance = 
+						ConfigurationHelper.GetConfigurationInstance();
+				PostRequestURLString =
+						configurationInstance.GetProtocol()+
+						configurationInstance.GetIPAddress()+":"+
+						configurationInstance.GetServerPort()+
+						configurationInstance.GetServerURL();
+
+
+				System.out.println("string is :"+PostRequestURLString);
+				System.out.flush();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				System.out.println("Cathcing exception in GetHttpClientInstance");
+				e.printStackTrace();
+			}
+			System.out.println("pos string is :"+ PostRequestURLString);
 		}		
 	}
-	
-	 
-	
-	
+
+
+
+
 	@Override
 	protected List<Map<String, String>> doInBackground(
 			List<NameValuePair>... params) {
-	
+
 		List<NameValuePair> requestList = params[0];
-		
+
 		System.out.println("THE REQUEST LIST ::: "+requestList);
 		System.out.flush();
-		
+
 		List<Map<String,String>> returnMap = null;
-		
+
 		Type stringStringMap = new TypeToken<List<Map<String, String>>>(){}.getType();
-		
+
 		InitHttpClienInstance();
-						
+
 		// Set up post request.
 		System.out.println("STRING IS : "+PostRequestURLString);
 		System.out.println("CLIENT IS : "+HttpClientInstance);
@@ -97,8 +91,8 @@ public class RequestExecutor extends AsyncTask<List<NameValuePair>, Void, List<M
 			System.out.println("YOUR ENCODE DID NOT HAPPEN");
 			System.out.flush();
 		}
-	
-		
+
+
 		HttpResponse response;
 		//process the response.
 		try {
@@ -109,25 +103,25 @@ public class RequestExecutor extends AsyncTask<List<NameValuePair>, Void, List<M
 			// and ensure it is fully consumed
 			BufferedReader in = 
 					new BufferedReader( new InputStreamReader( entity.getContent()));
-			
+
 			// get JSON string.
 			String responseString=in.readLine();				            	            
 			in.close();
-			
+
 			// De-serialize JSON string.
 			returnMap = GsonObject.fromJson(responseString, stringStringMap);
 			entity.consumeContent();			
 		}catch(Exception e){
 			System.out.println("EXCPETION IS :: "+ e.getMessage());
 			System.out.flush();
-			} 
-		
+		} 
+
 		System.out.println(returnMap);
-		
+
 		return returnMap;		
-	
+
 	}
 
-	
+
 
 }

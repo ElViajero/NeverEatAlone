@@ -1,13 +1,10 @@
 package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities;
 
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R.id;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R.layout;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R.menu;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
 
 public class DisplayMessageActivity extends ActionBarActivity {
 

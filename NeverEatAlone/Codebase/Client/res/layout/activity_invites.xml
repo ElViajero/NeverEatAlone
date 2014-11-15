@@ -42,5 +42,5 @@
         android:layout_alignLeft="@+id/switch_availability_status"
         android:layout_below="@+id/switch_availability_status" >
     </ListView>
-    
+
 </RelativeLayout>

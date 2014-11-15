@@ -1,6 +1,6 @@
 package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.workflow.tests;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,11 +10,7 @@ import java.util.List;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.CloseableHttpClient;
-import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.junit.Test;
@@ -36,26 +32,26 @@ public class IsValidAccountWorkflowTest {
 	 */
 	@Test
 	public void CreateAccountAndTestValidity() throws IOException {
-		
-		
-		
+
+
+
 		//book keeping
 		WorkflowTestHelper.DeleteTestAccount();
-		
+
 		//Create accoutn
 		WorkflowTestHelper.CreateTestAccount();
-		
+
 		// now test validity.
-		
-		
-		
+
+
+
 		//populate request headers and data		
 		List <NameValuePair> nvps2 = new ArrayList <NameValuePair>();	    
 		nvps2.add(new BasicNameValuePair("RequestID", "Account"));	    
 		nvps2.add(new BasicNameValuePair("RequestType", "IsValid"));
 		nvps2.add(new BasicNameValuePair("Username", "TestUser"));						
-		
-		
+
+
 		CloseableHttpResponse response2 = WorkflowTestHelper.ExecuteRequest(nvps2);		
 		try {		    
 			HttpEntity entity2 = response2.getEntity();
@@ -70,10 +66,10 @@ public class IsValidAccountWorkflowTest {
 		} finally {
 			response2.close();
 		}
-		
+
 		//book keeping
 		WorkflowTestHelper.DeleteTestAccount();
-				
+
 	}
 
 	/**
@@ -85,24 +81,24 @@ public class IsValidAccountWorkflowTest {
 	 * 
 	 * @throws IOException
 	 */
-	
+
 	@Test
 	public void CreateAccountAndTestInvalidity() throws IOException{
-		
+
 		//book keeping
 		WorkflowTestHelper.DeleteTestAccount();
 		//create account
 		WorkflowTestHelper.CreateTestAccount();
-		
+
 		// now test validity.
-		
-		
+
+
 		//populate request headers and data		
 		List <NameValuePair> nvps2 = new ArrayList <NameValuePair>();	    
 		nvps2.add(new BasicNameValuePair("RequestID", "Account"));	    
 		nvps2.add(new BasicNameValuePair("RequestType", "IsValid"));
 		nvps2.add(new BasicNameValuePair("Username", "SomeOtherUserID"));						
-		
+
 		//execute the request.
 		CloseableHttpResponse response2 = WorkflowTestHelper.ExecuteRequest(nvps2);		
 		try {		    
@@ -118,11 +114,11 @@ public class IsValidAccountWorkflowTest {
 		} finally {
 			response2.close();
 		}
-		
+
 		//book keeping
 		WorkflowTestHelper.DeleteTestAccount();
-		
-		
+
+
 	}
-	
+
 }

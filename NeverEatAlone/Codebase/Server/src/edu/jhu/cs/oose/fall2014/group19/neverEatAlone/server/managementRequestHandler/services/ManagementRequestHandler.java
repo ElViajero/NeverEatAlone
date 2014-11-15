@@ -35,11 +35,11 @@ public class ManagementRequestHandler implements IManagementRequestHandler {
 	 * @throws Exception
 	 */
 	private Object getMyBeanFromClassName(String className) throws Exception{    
-	    Class clazz = Class.forName(className);
-	    return myBeans.select(clazz).get();  
+		Class<?> clazz = Class.forName(className);
+		return myBeans.select(clazz).get();  
 	}
-	
-	
+
+
 	/**
 	 * 
 	 * This method resolves which ManagementRequestHandler class 
@@ -50,41 +50,41 @@ public class ManagementRequestHandler implements IManagementRequestHandler {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Map<String,String>> HandleManagementRequest(Map<String, String[]> request) {
-		
+
 		try {
-			
+
 			// ********* LOGGING ********* 
 			System.out.println("class name : "+request.get("RequestID")[0]+"ManagementRequestHandler");
 			// ********* LOGGING ********* 
-			
+
 			// obtain class reference
 			Object c = getMyBeanFromClassName("edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.managementRequestHandler.services."
 					+request.get("RequestID")[0]+"ManagementRequestHandler");
-			
-			
+
+
 			// Get method corresponding to RequestType.
-			
-			Method m = ((Class) c.getClass()).getDeclaredMethod(request.get("RequestType")[0]+
-										request.get("RequestID")[0]+
-										"Request" , Map.class);
-			
+
+			Method m = ((Class<? extends Object>) c.getClass()).getDeclaredMethod(request.get("RequestType")[0]+
+					request.get("RequestID")[0]+
+					"Request" , Map.class);
+
 			// Invoke the method.
 			return (List<Map<String, String>>) m.invoke(c,request);
-			
-			
-			
-		// Handle exceptions. For now I've just printed fixes
-		// that I had to make in order to get things to work.
-			
+
+
+
+			// Handle exceptions. For now I've just printed fixes
+			// that I had to make in order to get things to work.
+
 		} catch (NoSuchMethodException | SecurityException e) {
 			System.out.println("First parameter is the method name. "
 					+ "Second is the methodParameter.class");
 			e.printStackTrace();
-		
+
 		} catch (IllegalArgumentException e) {
 			System.out.println("Call classObject.newIstance().");
 			e.printStackTrace();
-		
+
 		} catch (ClassNotFoundException e) {
 			System.out.println("use fully qualified class name "
 					+ "(i.e. with package qualification).");
@@ -102,11 +102,11 @@ public class ManagementRequestHandler implements IManagementRequestHandler {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		// if we reach here, then we were unsuccessful
 		// at invoking the method.
 		return null;
-		
+
 	}
 
 }

@@ -1,12 +1,6 @@
 package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities;
 
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -21,15 +15,11 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TimePicker;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
 
 public class CreateMealInformationActivity extends Activity {
 
 	Button btnSelectStartDate, btnSelectStartTime, btnSelectEndDate,
-			btnSelectEndTime;
-
-	private String RequestID;
-	private String RequestType;
+	btnSelectEndTime;
 
 	static final int START_DATE_DIALOG_ID = 0;
 	static final int START_TIME_DIALOG_ID = 1;
@@ -60,9 +50,6 @@ public class CreateMealInformationActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_create_meal_information);
 
-		RequestID = "Notification";
-		RequestType = "Meal";
-
 		// get the references of buttons
 		btnSelectStartDate = (Button) findViewById(R.id.CreateMealInformation_button_startdate);
 		btnSelectStartTime = (Button) findViewById(R.id.CreateMealInformation_button_starttime);
@@ -72,6 +59,7 @@ public class CreateMealInformationActivity extends Activity {
 		// Set ClickListener on btnSelectDate
 		btnSelectStartDate.setOnClickListener(new View.OnClickListener() {
 
+			@Override
 			public void onClick(View v) {
 				// Show the DatePickerDialog
 				showDialog(START_DATE_DIALOG_ID);
@@ -79,6 +67,7 @@ public class CreateMealInformationActivity extends Activity {
 		});
 		btnSelectEndDate.setOnClickListener(new View.OnClickListener() {
 
+			@Override
 			public void onClick(View v) {
 				// Show the DatePickerDialog
 				showDialog(END_DATE_DIALOG_ID);
@@ -88,6 +77,7 @@ public class CreateMealInformationActivity extends Activity {
 		// Set ClickListener on btnSelectTime
 		btnSelectStartTime.setOnClickListener(new View.OnClickListener() {
 
+			@Override
 			public void onClick(View v) {
 				// Show the TimePickerDialog
 				showDialog(START_TIME_DIALOG_ID);
@@ -95,6 +85,7 @@ public class CreateMealInformationActivity extends Activity {
 		});
 		btnSelectEndTime.setOnClickListener(new View.OnClickListener() {
 
+			@Override
 			public void onClick(View v) {
 				// Show the TimePickerDialog
 				showDialog(END_TIME_DIALOG_ID);
@@ -107,6 +98,7 @@ public class CreateMealInformationActivity extends Activity {
 	private DatePickerDialog.OnDateSetListener startDateSetListener = new DatePickerDialog.OnDateSetListener() {
 		// the callback received when the user "sets" the Date in the
 		// DatePickerDialog
+		@Override
 		public void onDateSet(DatePicker view, int yearSelected,
 				int monthOfYear, int dayOfMonth) {
 			yearStart = yearSelected;
@@ -121,6 +113,7 @@ public class CreateMealInformationActivity extends Activity {
 	private DatePickerDialog.OnDateSetListener endDateSetListener = new DatePickerDialog.OnDateSetListener() {
 		// the callback received when the user "sets" the Date in the
 		// DatePickerDialog
+		@Override
 		public void onDateSet(DatePicker view, int yearSelected,
 				int monthOfYear, int dayOfMonth) {
 			yearStart = yearSelected;
@@ -136,6 +129,7 @@ public class CreateMealInformationActivity extends Activity {
 	private TimePickerDialog.OnTimeSetListener startTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
 		// the callback received when the user "sets" the TimePickerDialog in
 		// the dialog
+		@Override
 		public void onTimeSet(TimePicker view, int hourOfDay, int min) {
 			hourStart = hourOfDay;
 			minuteStart = min;
@@ -147,6 +141,7 @@ public class CreateMealInformationActivity extends Activity {
 	private TimePickerDialog.OnTimeSetListener endTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
 		// the callback received when the user "sets" the TimePickerDialog in
 		// the dialog
+		@Override
 		public void onTimeSet(TimePicker view, int hourOfDay, int min) {
 			hourStart = hourOfDay;
 			minuteStart = min;
