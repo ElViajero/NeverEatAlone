@@ -2,10 +2,7 @@ package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities;
 
 import java.util.Calendar;
 
-import android.app.DatePickerDialog;
 import android.app.DatePickerDialog.OnDateSetListener;
-import android.app.Dialog;
-import android.app.TimePickerDialog;
 import android.app.TimePickerDialog.OnTimeSetListener;
 import android.content.Intent;
 import android.os.Bundle;
