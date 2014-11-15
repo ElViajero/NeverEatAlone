@@ -83,7 +83,7 @@ public class NotificationExecutor extends AsyncTask<String, List<Map<String,Stri
 	 
 	
 	    QueueingConsumer consumer = new QueueingConsumer(ChannelObject);
-	    Tag = ChannelObject.basicConsume(username, false, consumer);
+	    Tag = ChannelObject.basicConsume(username, true, consumer);
 	    
 	    	
 	      QueueingConsumer.Delivery delivery = consumer.nextDelivery();  
@@ -136,7 +136,7 @@ public class NotificationExecutor extends AsyncTask<String, List<Map<String,Stri
 		
 		ActivityObject.UpdateNotificationCache(resultMapList);
 		
-		//executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, Username);
+		new NotificationExecutor(ActivityObject).executeOnExecutor(THREAD_POOL_EXECUTOR, Username);
 		
 	}
 

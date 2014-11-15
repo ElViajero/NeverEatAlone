@@ -9,6 +9,9 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+
 import com.google.gson.Gson;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
@@ -24,6 +27,7 @@ import android.widget.TabHost.TabSpec;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.configuration.ConfigurationHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.notificationManager.services.NotificationExecutor;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
 
 
 public class TabHostActivity extends TabActivity {
@@ -54,59 +58,46 @@ public class TabHostActivity extends TabActivity {
             
             //default update the view.
             UpdateView();
-            if(!Username.equals("Tejas")){
-            new Thread(){
+            
+            
+            //  ****************************** NOTIFICATION TEST ******************************
+            
+            if(!NotificationCache.isEmpty()){
+            	Toast.makeText(getApplicationContext(),
+            			"Cache NOT EMPTY !", Toast.LENGTH_SHORT).show();
             	
-            	public void run(){
-            		List<Map<String,String>> notificationList= 
-            				new ArrayList<Map<String,String>>();
-            		
-            		HashMap<String, String> notification =
-            				new HashMap<String,String>();
-            		
-            		Gson gson = new Gson();
-
-            		
-            		notification.put("NotificationID", "1");
-            		notification.put("Message", "Hi there. This is a test");
-            		
-            		notificationList.add(notification);
-            		
-            	    try{
-            			
-            				
-            		ConnectionFactory factory = new ConnectionFactory();
-            		try {
-            			factory.setHost(ConfigurationHelper.GetConfigurationInstance().GetIPAddress());
-            		} catch (URISyntaxException e) {
-            			// TODO Auto-generated catch block
-            			e.printStackTrace();
-            		}
-            		Connection connection = factory.newConnection();
-            		Channel channel = connection.createChannel();
-
-            		
-            		
-            		
-            		
-            		channel.queueDeclare("Tejas", false, false, false, null);
-            		String message = gson.toJson(notificationList); 
-            		channel.basicPublish("", "Tejas", null, message.getBytes());
-            		System.out.println(" [x] Sent '" + message + "'");
-
-            		channel.close();
-            		connection.close();
-            		}catch(IOException e){
-            			System.out.println("An IO Exception occured in PushNotification." + e.getMessage());
-            		}
-            		
-            	}
-            	
-            	
-            	
-            }.start();
             }
+            
+            String message="This is someone.";
+            String recipient="Tejas";
+            
+            
+            if(Username.equals("Tejas")){
+            
+            	 message = "Hi there. This is tejas.";
+        		 recipient = "t";        		
+            	
+            }
+            
+            else if(Username.equals("t")){
+            	message = "Hi there. This is t.";
+        		 recipient = "Tejas";
+            }
+            
+            List<NameValuePair> requestList = new ArrayList<NameValuePair>();
+    		
+    		requestList.add(new BasicNameValuePair("RequestID", "Notification"));
+    		requestList.add(new BasicNameValuePair("RequestType", "Meal"));
+    		requestList.add(new BasicNameValuePair("Username", Username));
+    		requestList.add(new BasicNameValuePair("Message", message));
+    		requestList.add(new BasicNameValuePair("Recipient", recipient));
+    		
+    		
+            
+        //  ****************************** NOTIFICATION TEST ******************************
 
+    		List<Map<String, String>> resultMapList = 
+    				RequestHandlerHelper.GetRequestHandlerInstance().HandleRequest(requestList) ;
             
     }
 
@@ -182,6 +173,8 @@ public class TabHostActivity extends TabActivity {
 		    		notification.get("Message")+"", Toast.LENGTH_SHORT).show();
 
 		}
+		
+		
 		
 		
 		
