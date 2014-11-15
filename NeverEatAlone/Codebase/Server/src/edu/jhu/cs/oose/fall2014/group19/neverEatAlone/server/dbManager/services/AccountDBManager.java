@@ -37,6 +37,7 @@ public class AccountDBManager implements IAccountDBManager {
 
 	/**
 	 * This method is responsible for creating an user account in the database.
+	 * @author tejasvamsingh
 	 */
 	@Override
 	public List<Map<String,String>> CreateAccount(Map<String,String[]> request) {
