@@ -206,6 +206,7 @@ public class CreateMealInformationActivity extends Activity {
 
 	public void OnNextButtonClick(View view) {
 
+		/*
 		ArrayList<NameValuePair> requestList = new ArrayList<NameValuePair>();
 		requestList.add(new BasicNameValuePair("RequestID", RequestID));
 		requestList.add(new BasicNameValuePair("RequestType", RequestType));
@@ -233,6 +234,7 @@ public class CreateMealInformationActivity extends Activity {
 
 		List<Map<String, String>> resultMapList = RequestHandlerHelper
 				.GetRequestHandlerInstance().HandleRequest(requestList);
+		 */
 
 	}
 

@@ -11,6 +11,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.ModelHelper;
 /**
  * 
  * @author Hai Tang
@@ -18,12 +19,12 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
  *If the checkbox is selected the underlying data of the model is changed. 
  *Checkbox gets the corresponding model element assigned via the getTag() method.
  */
-public class InteractiveArrayAdapter extends ArrayAdapter<Model> {
+public class InteractiveArrayAdapter extends ArrayAdapter<ModelHelper> {
 
-  private final List<Model> list;
+  private final List<ModelHelper> list;
   private final Activity context;
 
-  public InteractiveArrayAdapter(Activity context, List<Model> list) {
+  public InteractiveArrayAdapter(Activity context, List<ModelHelper> list) {
     super(context, R.layout.rowbuttonlayout, list);
     this.context = context;
     this.list = list;
@@ -49,7 +50,7 @@ public class InteractiveArrayAdapter extends ArrayAdapter<Model> {
             @Override
             public void onCheckedChanged(CompoundButton buttonView,
                 boolean isChecked) {
-              Model element = (Model) viewHolder.checkbox
+              ModelHelper element = (ModelHelper) viewHolder.checkbox
                   .getTag();
               element.setSelected(buttonView.isChecked());
 

@@ -1,4 +1,4 @@
-package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.meal.properties;
+package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.properties.meal;
 
 import java.util.List;
 import java.util.Map;

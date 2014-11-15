@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.StableArrayAdapterHelper;
 /**
  * 
  * @author Hai Tang
@@ -33,7 +34,7 @@ public class InvitesActivity extends Activity {
 	    for (int i = 0; i < values.length; ++i) {
 	      list.add(values[i]);
 	    }
-	    final StableArrayAdapter adapter = new StableArrayAdapter(this,
+	    final StableArrayAdapterHelper adapter = new StableArrayAdapterHelper(this,
 	        android.R.layout.simple_list_item_1, list);
 	    listview.setAdapter(adapter);
 

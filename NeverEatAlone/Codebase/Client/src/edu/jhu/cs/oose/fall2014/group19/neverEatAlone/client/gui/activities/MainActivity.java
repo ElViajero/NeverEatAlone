@@ -6,6 +6,7 @@ import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
@@ -13,6 +14,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.configuration.ConfigurationHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.contracts.IRequestHandler;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.properties.LoginRequestProperties;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -51,17 +53,15 @@ public class MainActivity extends Activity {
 		String username = Username.getText().toString();
 		String password = Password.getText().toString();
 		
-		ArrayList<NameValuePair> requestList = new ArrayList<NameValuePair>();
-		requestList.add(new BasicNameValuePair("RequestID", RequestID));
-		requestList.add(new BasicNameValuePair("RequestType", RequestType));
-		requestList.add(new BasicNameValuePair("Username", username));
-		requestList.add(new BasicNameValuePair("Password", password));
-				
+		// create the request properties object.
+		LoginRequestProperties loginProperties  = new LoginRequestProperties(username, password);
 		
-		
+		// send the request.
 		List<Map<String, String>> resultMapList = 
-				RequestHandlerHelper.GetRequestHandlerInstance().HandleRequest(requestList) ;		
-		 
+				RequestHandlerHelper.GetRequestHandlerInstance().
+				HandleRequest(loginProperties.GetRequestMap(),RequestID,RequestType) ;		
+		
+		
 		//Controller code for gui update.
 		
 		if(resultMapList.get(0).get("Status").equals("Success")){

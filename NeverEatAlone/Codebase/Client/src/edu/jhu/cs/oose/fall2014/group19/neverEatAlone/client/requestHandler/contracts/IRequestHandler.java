@@ -10,8 +10,22 @@ import javax.xml.ws.AsyncHandler;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 
+/**
+ * Interface that defines the services offered
+ * by the RequestHandler.
+ * 
+ * @author tejasvamsingh
+ *
+ */
 public interface IRequestHandler{
 
-	public List<Map<String,String>> HandleRequest(List<NameValuePair> requestList);
+	/**
+	 * Method to handle all client requests.
+	 * @author tejasvamsingh
+	 * @param requestMap
+	 * @return
+	 */
+	public List<Map<String,String>> HandleRequest(Map<String,List<String>>requestMap,
+			String requestID,String requestType);
 			
 }

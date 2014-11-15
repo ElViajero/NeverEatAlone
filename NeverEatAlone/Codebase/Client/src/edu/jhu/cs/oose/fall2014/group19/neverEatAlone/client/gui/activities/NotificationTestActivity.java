@@ -98,9 +98,10 @@ public class NotificationTestActivity extends Activity {
 		requestList.add(new BasicNameValuePair("Recipient", recipient));
 		
 		NotificationExecutorTask.cancel(true);
+		/*
 		List<Map<String, String>> resultMapList = 
 				RequestHandlerHelper.GetRequestHandlerInstance().HandleRequest(requestList) ;
-		
+		*/
 		
 	}
 	

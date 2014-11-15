@@ -1,4 +1,4 @@
-package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities;
+package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers;
 
 import java.util.List;
 import java.util.HashMap;
@@ -10,10 +10,10 @@ import android.widget.ArrayAdapter;
  * @author Hai Tang
  *
  */
-public class StableArrayAdapter extends ArrayAdapter<String>{
+public class StableArrayAdapterHelper extends ArrayAdapter<String>{
     HashMap<String, Integer> mIdMap = new HashMap<String, Integer>();
 
-    public StableArrayAdapter(Context context, int textViewResourceId,
+    public StableArrayAdapterHelper(Context context, int textViewResourceId,
         List<String> objects) {
       super(context, textViewResourceId, objects);
       for (int i = 0; i < objects.size(); ++i) {

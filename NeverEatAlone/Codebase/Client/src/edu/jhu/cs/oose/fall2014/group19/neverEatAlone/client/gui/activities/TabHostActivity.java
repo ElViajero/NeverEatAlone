@@ -26,9 +26,9 @@ import android.widget.Toast;
 import android.widget.TabHost.TabSpec;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.configuration.ConfigurationHelper;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.meal.properties.MealProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.notificationManager.services.NotificationExecutor;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.properties.meal.MealProperties;
 /**
  * 
  * @author Hai Tang
@@ -41,7 +41,12 @@ public class TabHostActivity extends TabActivity {
 	AsyncTask<String, List<Map<String, String>>, List<Map<String, String>>> NotificationExecutorTask;
 	Map<String,Map<String,String>> NotificationCache;
 	
-	/** Called when the activity is first created. */
+	/**
+	 *  This method intializes the activity.
+	 *  
+	 *  @author tejasvamsingh 
+	 *  */
+	
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
@@ -63,48 +68,6 @@ public class TabHostActivity extends TabActivity {
             
             //default update the view.
             UpdateView();
-            
-            
-            //  ****************************** NOTIFICATION TEST ******************************
-            
-            if(!NotificationCache.isEmpty()){
-            	Toast.makeText(getApplicationContext(),
-            			"Cache NOT EMPTY !", Toast.LENGTH_SHORT).show();
-            	
-            }
-            
-            String message="This is someone.";
-            String recipient="Tejas";
-            
-            
-            if(Username.equals("Tejas")){
-            
-            	 message = "Hi there. This is tejas.";
-        		 recipient = "t";        		
-            	
-            }
-            
-            else if(Username.equals("t")){
-            	message = "Hi there. This is t.";
-        		 recipient = "Tejas";
-            }
-            
-            List<NameValuePair> requestList = new ArrayList<NameValuePair>();
-    		
-    		requestList.add(new BasicNameValuePair("RequestID", "Notification"));
-    		requestList.add(new BasicNameValuePair("RequestType", "Meal"));
-    		requestList.add(new BasicNameValuePair("Username", Username));
-    		requestList.add(new BasicNameValuePair("DayStart", message));
-    		requestList.add(new BasicNameValuePair("Recipient", recipient));
-    		
-    		
-            
-        //  ****************************** NOTIFICATION TEST ******************************
-
-    		List<Map<String, String>> resultMapList = 
-    				RequestHandlerHelper.GetRequestHandlerInstance().HandleRequest(requestList) ;
-    		
-    		MealProperties.GetObjectString();
             
     }
 
@@ -143,7 +106,7 @@ public class TabHostActivity extends TabActivity {
     /**
      * 
      * Method to update notifications
-     * 
+     * @author tejasvamsingh
      */
     public void UpdateNotificationCache(List<Map<String,String>> notificationMapList){
     	
@@ -161,6 +124,7 @@ public class TabHostActivity extends TabActivity {
     /**
      * 
      * Method to refresh the GUI whenever a notification arrives.
+     * @author tejasvamsingh
      * 
      */
 

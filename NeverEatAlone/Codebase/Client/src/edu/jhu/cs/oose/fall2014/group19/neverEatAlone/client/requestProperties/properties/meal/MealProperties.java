@@ -1,4 +1,4 @@
-package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.meal.properties;
+package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.properties.meal;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -33,7 +33,7 @@ public class MealProperties {
 		IsNotificationExtendible.add(isNotificationExtendible);
 	}
 	
-	public static void GetObjectString(){
+	public static void GetRequestMap(){
 		
 		Gson gson = new Gson();
 		String json = gson.toJson(new MealProperties("1","2","3","4","5"));
