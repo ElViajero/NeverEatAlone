@@ -12,8 +12,10 @@ import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.kernel.impl.util.StringLogger;
 
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.contracts.IContactDBManager;
+
 @Stateless
-public class ContactDBManager {
+public class ContactDBManager implements IContactDBManager {
 
 
 	GraphDatabaseService GraphDBInstance;
@@ -32,6 +34,7 @@ public class ContactDBManager {
 	 * This method is responsible for adding a contact in the database.
 	 * @author tejasvamsingh
 	 */
+	@Override
 	public List<Map<String,String>> AddContact(Map<String,String[]> request) {
 
 		// ********* LOGGING ********* 
@@ -50,6 +53,12 @@ public class ContactDBManager {
 				DBManager.GetQueryParameterMap(modifiableRequestMap);
 
 
+		// ************************ LOGGING ************************
+
+		System.out.println("USERNAME :"+queryParamterMap.get("Username"));
+		System.out.println("CONTACT :"+queryParamterMap.get("ContactUsername"));
+
+
 		// set up paramters to execute and store the result of query
 		ExecutionEngine executionEngine = new ExecutionEngine(GraphDBInstance,
 				StringLogger.SYSTEM);				
@@ -65,20 +74,39 @@ public class ContactDBManager {
 			parameters.put("ContactUsername",queryParamterMap.get("ContactUsername"));
 
 			//create cypher query to add a relation in the dataase.
-			String query = "MATCH (a:Person),(n:Person)"
+			String query = "MATCH (a:User),(b:User)"
 					+ " WHERE "
-					+ "a.name = {Username} AND "
-					+ "n.name = {ContactUsername}"
-					+ "CREATE (a)-[r:KNOWS]-(n)"
-					+ "RETURN r";
+					+ "a.Username = {Username} AND "
+					+ "b.Username = {ContactUsername}"
+					+ "CREATE UNIQUE (a)-[n:KNOWS]->(b)"
+					+ "RETURN n";
 
 			// Check for uniqueness constraint violation.
 			try{
 				//execute the query
 				result = executionEngine.execute(query,parameters);
+			}catch(Exception e){
+				System.out.println("Constraint violation in add contact. :: ");
+				System.out.println(e.getMessage());
+				result = null;
+				tx.failure();
+			}
+
+
+			// Fetch the contact via query
+
+			query = "MATCH (a:User)-[r]->(n:User)"
+					+ " WHERE "
+					+ "a.Username = {Username} AND "
+					+ "n.Username = {ContactUsername}"
+					+ "RETURN n ";
+
+			try{
+				//execute the query
+				result = executionEngine.execute(query,parameters);
 				tx.success();
 			}catch(Exception e){
-				System.out.println("Constraint violation in create account. :: ");
+				System.out.println("Constraint violation in add contact. :: ");
 				System.out.println(e.getMessage());
 				result = null;
 				tx.failure();

@@ -21,7 +21,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.contracts
 @Stateless
 public class ContactManagementRequestHandler {
 
-	@Inject IContactDBManager IContactManagerObject;
+	@Inject IContactDBManager IContactDBManagerObject;
 
 	/**
 	 * This method handles requests to add a contact.
@@ -32,8 +32,7 @@ public class ContactManagementRequestHandler {
 	public List<Map<String,String>> AddContactRequest(Map<String,String[]> request){
 
 		System.out.println("Reaching AddContactRequest");
-		IContactManagerObject.AddContact(request);
-		return null;
+		return IContactDBManagerObject.AddContact(request); 
 
 	}
 

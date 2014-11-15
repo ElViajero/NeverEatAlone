@@ -90,6 +90,12 @@ public class DBManager {
 	 */		
 	public static List<Map<String,String>> GetResultMapList(ExecutionResult result){
 
+
+		// ************** LOGGING ************************
+		System.out.println("Inside DBManager");
+		// ************** LOGGING ************************
+
+
 		// initialize the map to return.
 		List<Map<String,String>> resultMapList = 
 				new ArrayList<Map<String,String>>();
@@ -106,8 +112,13 @@ public class DBManager {
 		// Check if result is null. 
 		// This happens in the case of violated
 		// constraints.		
-		if(result ==null )
+		if(result == null ){
+			System.out.println("Result is NULL");
 			return resultMapList;
+		}
+
+		if(result.isEmpty())
+			System.out.println("RESULT IS EMPTY");
 
 
 		// retrieve the result as an iterator on nodes.

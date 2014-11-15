@@ -27,16 +27,41 @@ public class AddContactWorkflowTest {
 	public void AddContactTest() throws ClientProtocolException, IOException {
 
 		//book keeping
-		WorkflowTestHelper.DeleteTestAccount();
+		//WorkflowTestHelper.DeleteTestAccount();
 		WorkflowTestHelper.CreateTestAccount();
+
+
+
 
 		List <NameValuePair> nvps = new ArrayList <NameValuePair>();	    
 		nvps.add(new BasicNameValuePair("RequestID", "Account"));	    
-		nvps.add(new BasicNameValuePair("RequestType", "Create"));
+		nvps.add(new BasicNameValuePair("RequestType", "Delete"));
 		nvps.add(new BasicNameValuePair("Username", "Test2"));
 		nvps.add(new BasicNameValuePair("Password", "TestPass2"));
 		nvps.add(new BasicNameValuePair("Email", "Test@test.com"));
 
+		/*
+		//execute the request.
+		WorkflowTestHelper.ExecuteRequest(nvps);
+
+		nvps = new ArrayList <NameValuePair>();	    
+		nvps.add(new BasicNameValuePair("RequestID", "Account"));	    
+		nvps.add(new BasicNameValuePair("RequestType", "Delete"));
+		nvps.add(new BasicNameValuePair("Username", "Test"));
+		nvps.add(new BasicNameValuePair("Password", "TestPass"));
+		nvps.add(new BasicNameValuePair("Email", "Test@test.com"));
+
+		//execute the request.
+		WorkflowTestHelper.ExecuteRequest(nvps);
+		 */
+
+
+		nvps = new ArrayList <NameValuePair>();	    
+		nvps.add(new BasicNameValuePair("RequestID", "Account"));	    
+		nvps.add(new BasicNameValuePair("RequestType", "Create"));
+		nvps.add(new BasicNameValuePair("Username", "Test"));
+		nvps.add(new BasicNameValuePair("Password", "TestPass"));
+		nvps.add(new BasicNameValuePair("Email", "Test@test.com"));
 
 		//execute the request.
 		WorkflowTestHelper.ExecuteRequest(nvps);
@@ -44,15 +69,14 @@ public class AddContactWorkflowTest {
 		List <NameValuePair> nvps1 = new ArrayList <NameValuePair>();	    
 		nvps1.add(new BasicNameValuePair("RequestID", "Contact"));	    
 		nvps1.add(new BasicNameValuePair("RequestType", "Add"));
-		nvps1.add(new BasicNameValuePair("Username", "Test"));
-		nvps1.add(new BasicNameValuePair("ContactUsername", "Test2"));
+		nvps1.add(new BasicNameValuePair("Username", "TestUser"));
+		nvps1.add(new BasicNameValuePair("ContactUsername", "Test"));
 
 		//execute the request.
 		CloseableHttpResponse response1 = WorkflowTestHelper.ExecuteRequest(nvps1);
 
 		Gson gsonObject = new Gson();
 		Type stringStringMap = new TypeToken<List<Map<String, String>>>(){}.getType();
-
 		List<Map<String,String>> returnMap = null;
 		try {		    
 			HttpEntity entity1 = response1.getEntity();
@@ -62,6 +86,7 @@ public class AddContactWorkflowTest {
 					new BufferedReader( new InputStreamReader( entity1.getContent() ) );		    
 			String responseString=in.readLine();
 			returnMap = gsonObject.fromJson(responseString, stringStringMap);
+
 			in.close();
 			EntityUtils.consume(entity1);
 		} finally {
