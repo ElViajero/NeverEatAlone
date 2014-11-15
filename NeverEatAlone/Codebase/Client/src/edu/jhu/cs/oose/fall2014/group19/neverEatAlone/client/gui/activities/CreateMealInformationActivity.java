@@ -56,42 +56,6 @@ public class CreateMealInformationActivity extends Activity {
 		btnSelectEndDate = (Button) findViewById(R.id.CreateMealInformation_button_enddate);
 		btnSelectEndTime = (Button) findViewById(R.id.CreateMealInformation_button_endtime);
 
-		// Set ClickListener on btnSelectDate
-		btnSelectStartDate.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				// Show the DatePickerDialog
-				showDialog(START_DATE_DIALOG_ID);
-			}
-		});
-		btnSelectEndDate.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				// Show the DatePickerDialog
-				showDialog(END_DATE_DIALOG_ID);
-			}
-		});
-
-		// Set ClickListener on btnSelectTime
-		btnSelectStartTime.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				// Show the TimePickerDialog
-				showDialog(START_TIME_DIALOG_ID);
-			}
-		});
-		btnSelectEndTime.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				// Show the TimePickerDialog
-				showDialog(END_TIME_DIALOG_ID);
-			}
-		});
-
 	}
 
 	// Register DatePickerDialog listener
@@ -199,6 +163,22 @@ public class CreateMealInformationActivity extends Activity {
 		CreateMealInformationActivity.this.startActivity(intent);
 	}
 
+	public void OnStartDataButtonClick(View view) {
+		showDialog(START_DATE_DIALOG_ID);
+	}
+
+	public void OnStartTimeButtonClick(View view) {
+		showDialog(START_TIME_DIALOG_ID);
+	}
+	
+	public void OnEndDataButtonClick(View view) {
+		showDialog(END_DATE_DIALOG_ID);
+	}
+	
+	public void OnEndTimeButtonClick(View view) {
+		showDialog(END_TIME_DIALOG_ID);
+	}
+	
 	public void OnNextButtonClick(View view) {
 
 		/*
