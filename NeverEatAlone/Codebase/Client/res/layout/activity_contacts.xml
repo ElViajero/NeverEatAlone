@@ -8,13 +8,12 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.ContactsActivity" >
 
-    <CheckBox
-        android:id="@+id/checkBox1"
-        android:layout_width="wrap_content"
+    <ListView
+        android:id="@+id/listView_contacts"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="172dp"
-        android:text="CheckBox" />
+        android:layout_centerHorizontal="true" >
+
+    </ListView>
 
 </RelativeLayout>

@@ -34,8 +34,10 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.cont
 public class RequestExecutor extends AsyncTask<List<NameValuePair>, Void, List<Map<String,String>>>  {
 	
 	static HttpClient HttpClientInstance;
+
 	static String PostRequestURLString; 
 	static Gson GsonObject;
+
 	
 	
 	

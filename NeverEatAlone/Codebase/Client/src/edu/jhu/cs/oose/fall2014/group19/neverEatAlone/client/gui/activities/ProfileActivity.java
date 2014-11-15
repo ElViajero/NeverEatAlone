@@ -4,7 +4,11 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R.layout;
 import android.app.Activity;
 import android.os.Bundle;
-
+/**
+ * 
+ * @author Hai Tang
+ *
+ */
 public class ProfileActivity extends Activity{
 	@Override
     public void onCreate(Bundle savedInstanceState)
