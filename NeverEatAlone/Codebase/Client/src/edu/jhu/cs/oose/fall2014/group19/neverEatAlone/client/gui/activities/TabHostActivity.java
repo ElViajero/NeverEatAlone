@@ -26,6 +26,7 @@ import android.widget.Toast;
 import android.widget.TabHost.TabSpec;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.configuration.ConfigurationHelper;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.meal.properties.MealProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.notificationManager.services.NotificationExecutor;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
 
@@ -89,7 +90,7 @@ public class TabHostActivity extends TabActivity {
     		requestList.add(new BasicNameValuePair("RequestID", "Notification"));
     		requestList.add(new BasicNameValuePair("RequestType", "Meal"));
     		requestList.add(new BasicNameValuePair("Username", Username));
-    		requestList.add(new BasicNameValuePair("Message", message));
+    		requestList.add(new BasicNameValuePair("DayStart", message));
     		requestList.add(new BasicNameValuePair("Recipient", recipient));
     		
     		
@@ -98,6 +99,8 @@ public class TabHostActivity extends TabActivity {
 
     		List<Map<String, String>> resultMapList = 
     				RequestHandlerHelper.GetRequestHandlerInstance().HandleRequest(requestList) ;
+    		
+    		MealProperties.GetObjectString();
             
     }
 

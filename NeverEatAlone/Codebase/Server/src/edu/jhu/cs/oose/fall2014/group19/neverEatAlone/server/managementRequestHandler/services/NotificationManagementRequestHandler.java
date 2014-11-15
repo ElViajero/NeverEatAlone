@@ -24,7 +24,7 @@ public class NotificationManagementRequestHandler {
 		
 		//for now just create stubs.
 		Map<String, String> notificationMap = new HashMap<String,String>();
-		notificationMap.put("Message", request.get("Message")[0]);		
+		notificationMap.put("Message", request.get("DayStart")[0]);		
 		List<Map<String, String>> notificationList = new ArrayList<Map<String,String>>();
 		notificationList.add(notificationMap);
 		
