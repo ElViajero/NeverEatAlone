@@ -37,4 +37,10 @@
     <string name="next">Next</string>
     <string name="create">Create</string>
 
+
+    <string name="title_activity_notification_test_ativity">NotificationTestAtivity</string>
+	<string name="recipient">Recipient</string>
+	<string name="post">Post</string>
+	<string name="message">Message</string>
+
 </resources>

@@ -15,7 +15,7 @@ import javax.ejb.Local;
  *
  */
 @Local
-public interface ILoginManager {
+public interface ILoginDBManager {
 	
 	/**
 	 * Method to check user credentials.

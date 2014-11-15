@@ -1,0 +1,66 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.NotificationTestActivity" >
+        <requestFocus />
+    
+
+         
+        
+    <TextView
+        android:id="@+id/recipient"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/button1"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/editRecipient"
+        android:text="@string/recipient"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+   
+    <Button
+        android:id="@+id/post"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="154dp"
+        android:onClick="OnPostButtonClick"
+        android:text="@string/post" />
+
+    <TextView
+        android:id="@+id/message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/button1"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/editMessage"
+        android:text="@string/message"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <EditText
+        android:id="@+id/editMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/recipient"
+        android:layout_alignLeft="@+id/message"
+        android:layout_alignRight="@+id/editRecipient"
+        android:layout_marginBottom="19dp"
+        android:ems="10"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/editRecipient"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/post"
+        android:layout_alignLeft="@+id/message"
+        android:layout_marginBottom="38dp"
+        android:ems="10"
+        android:inputType="text" />
+
+</RelativeLayout>

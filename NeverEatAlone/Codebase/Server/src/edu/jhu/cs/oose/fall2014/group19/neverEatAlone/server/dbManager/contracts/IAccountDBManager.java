@@ -14,7 +14,7 @@ import javax.ejb.Local;
  *
  */
 @Local
-public interface IAccountManager {
+public interface IAccountDBManager {
 
 	/**
 	 * Method to create an user account.

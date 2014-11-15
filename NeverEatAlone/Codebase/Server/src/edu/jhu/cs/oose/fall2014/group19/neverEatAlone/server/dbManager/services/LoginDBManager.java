@@ -12,7 +12,7 @@ import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.kernel.impl.util.StringLogger;
 
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.contracts.ILoginManager;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.contracts.ILoginDBManager;
 
 
 /**
@@ -23,10 +23,10 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.contracts
  *
  */
 @Stateless
-public class LoginManager implements ILoginManager {
+public class LoginDBManager implements ILoginDBManager {
 
 	GraphDatabaseService GraphDBInstance;
-	public LoginManager(){
+	public LoginDBManager(){
 		// for now we get the instance in the constructor.
 		// This may not turn out to be the best way. 
 		GraphDBInstance = 

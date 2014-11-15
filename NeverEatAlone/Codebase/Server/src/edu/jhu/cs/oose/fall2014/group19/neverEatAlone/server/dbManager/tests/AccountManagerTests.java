@@ -16,8 +16,8 @@ import org.neo4j.helpers.collection.IteratorUtil;
 import org.neo4j.kernel.impl.util.StringLogger;
 
 import scala.collection.Iterator;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.contracts.IAccountManager;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.services.AccountManager;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.contracts.IAccountDBManager;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.services.AccountDBManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.services.DBManager;
 
 
@@ -48,7 +48,7 @@ public class AccountManagerTests {
 		requestMap.put("Email",new String[]{"Tea@tea.com"});
 		
 		//create instances and execute account creation logic.
-		IAccountManager iAccountManager = new AccountManager();
+		IAccountDBManager iAccountManager = new AccountDBManager();
 		iAccountManager.CreateAccount(requestMap);
 		
 		GraphDatabaseService graphDBInstance = DBManager.GetGraphDBInstance();
@@ -110,7 +110,7 @@ public class AccountManagerTests {
 		requestMap.put("Username",new String[]{"Tejas"});		
 		
 		//create instances and execute account creation logic.
-		IAccountManager iAccountManager = new AccountManager();
+		IAccountDBManager iAccountManager = new AccountDBManager();
 		List<Map<String, String>> resultMapList =
 				iAccountManager.IsValidAccount(requestMap);
 				
