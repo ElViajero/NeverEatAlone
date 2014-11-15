@@ -1,6 +1,12 @@
 package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -15,11 +21,15 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TimePicker;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
 
 public class CreateMealInformationActivity extends Activity {
 
 	Button btnSelectStartDate, btnSelectStartTime, btnSelectEndDate,
 			btnSelectEndTime;
+
+	private String RequestID;
+	private String RequestType;
 
 	static final int START_DATE_DIALOG_ID = 0;
 	static final int START_TIME_DIALOG_ID = 1;
@@ -49,6 +59,9 @@ public class CreateMealInformationActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_create_meal_information);
+
+		RequestID = "Notification";
+		RequestType = "Meal";
 
 		// get the references of buttons
 		btnSelectStartDate = (Button) findViewById(R.id.CreateMealInformation_button_startdate);
@@ -189,6 +202,38 @@ public class CreateMealInformationActivity extends Activity {
 		Intent intent = new Intent(CreateMealInformationActivity.this,
 				TabHostActivity.class);
 		CreateMealInformationActivity.this.startActivity(intent);
+	}
+
+	public void OnNextButtonClick(View view) {
+
+		ArrayList<NameValuePair> requestList = new ArrayList<NameValuePair>();
+		requestList.add(new BasicNameValuePair("RequestID", RequestID));
+		requestList.add(new BasicNameValuePair("RequestType", RequestType));
+		requestList.add(new BasicNameValuePair("Recipient", "Tejas"));
+		requestList.add(new BasicNameValuePair("YearStart", String
+				.valueOf(yearStart)));
+		requestList.add(new BasicNameValuePair("MonthStart", String
+				.valueOf(monthStart)));
+		requestList.add(new BasicNameValuePair("DayStart", String
+				.valueOf(dayStart)));
+		requestList.add(new BasicNameValuePair("HourStart", String
+				.valueOf(hourStart)));
+		requestList.add(new BasicNameValuePair("MinuteStart", String
+				.valueOf(minuteStart)));
+		requestList.add(new BasicNameValuePair("YearEnd", String
+				.valueOf(yearEnd)));
+		requestList.add(new BasicNameValuePair("MonthEnd", String
+				.valueOf(monthEnd)));
+		requestList
+				.add(new BasicNameValuePair("DayEnd", String.valueOf(dayEnd)));
+		requestList.add(new BasicNameValuePair("HourEnd", String
+				.valueOf(hourEnd)));
+		requestList.add(new BasicNameValuePair("MinuteEnd", String
+				.valueOf(minuteEnd)));
+
+		List<Map<String, String>> resultMapList = RequestHandlerHelper
+				.GetRequestHandlerInstance().HandleRequest(requestList);
+
 	}
 
 }
