@@ -2,12 +2,14 @@ package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities;
 
 import java.util.Calendar;
 
-import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.app.DatePickerDialog.OnDateSetListener;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.app.TimePickerDialog.OnTimeSetListener;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,10 +18,10 @@ import android.widget.DatePicker;
 import android.widget.TimePicker;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
 
-public class CreateMealInformationActivity extends Activity {
+public class CreateMealInformationActivity extends FragmentActivity {
 
 	Button btnSelectStartDate, btnSelectStartTime, btnSelectEndDate,
-	btnSelectEndTime;
+			btnSelectEndTime;
 
 	static final int START_DATE_DIALOG_ID = 0;
 	static final int START_TIME_DIALOG_ID = 1;
@@ -29,20 +31,20 @@ public class CreateMealInformationActivity extends Activity {
 	// variables to save user selected date and time
 	public int yearStart, monthStart, dayStart, hourStart, minuteStart;
 	public int yearEnd, monthEnd, dayEnd, hourEnd, minuteEnd;
-	// declare the variables to Show/Set the date and time when Time and Date
-	// Picker Dialog first appears
-	private int mYear, mMonth, mDay, mHour, mMinute;
-
-	// constructor
 
 	public CreateMealInformationActivity() {
 		// Assign current Date and Time Values to Variables
 		final Calendar c = Calendar.getInstance();
-		mYear = c.get(Calendar.YEAR);
-		mMonth = c.get(Calendar.MONTH);
-		mDay = c.get(Calendar.DAY_OF_MONTH);
-		mHour = c.get(Calendar.HOUR_OF_DAY);
-		mMinute = c.get(Calendar.MINUTE);
+		yearStart = c.get(Calendar.YEAR);
+		yearEnd = yearStart;
+		monthStart = c.get(Calendar.MONTH);
+		monthEnd = monthStart;
+		dayStart = c.get(Calendar.DAY_OF_MONTH);
+		dayEnd = dayStart;
+		hourStart = c.get(Calendar.HOUR_OF_DAY);
+		hourEnd = hourStart;
+		minuteStart = c.get(Calendar.MINUTE);
+		minuteEnd = minuteStart;
 	}
 
 	@Override
@@ -56,86 +58,6 @@ public class CreateMealInformationActivity extends Activity {
 		btnSelectEndDate = (Button) findViewById(R.id.CreateMealInformation_button_enddate);
 		btnSelectEndTime = (Button) findViewById(R.id.CreateMealInformation_button_endtime);
 
-	}
-
-	// Register DatePickerDialog listener
-	private DatePickerDialog.OnDateSetListener startDateSetListener = new DatePickerDialog.OnDateSetListener() {
-		// the callback received when the user "sets" the Date in the
-		// DatePickerDialog
-		@Override
-		public void onDateSet(DatePicker view, int yearSelected,
-				int monthOfYear, int dayOfMonth) {
-			yearStart = yearSelected;
-			monthStart = monthOfYear + 1;
-			dayStart = dayOfMonth;
-			// Set the Selected Date in Select date Button
-			btnSelectStartDate.setText(dayStart + "-" + monthStart + "-"
-					+ yearStart);
-		}
-	};
-
-	private DatePickerDialog.OnDateSetListener endDateSetListener = new DatePickerDialog.OnDateSetListener() {
-		// the callback received when the user "sets" the Date in the
-		// DatePickerDialog
-		@Override
-		public void onDateSet(DatePicker view, int yearSelected,
-				int monthOfYear, int dayOfMonth) {
-			yearStart = yearSelected;
-			monthStart = monthOfYear + 1;
-			dayStart = dayOfMonth;
-			// Set the Selected Date in Select date Button
-			btnSelectEndDate.setText(dayStart + "-" + monthStart + "-"
-					+ yearStart);
-		}
-	};
-
-	// Register TimePickerDialog listener
-	private TimePickerDialog.OnTimeSetListener startTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
-		// the callback received when the user "sets" the TimePickerDialog in
-		// the dialog
-		@Override
-		public void onTimeSet(TimePicker view, int hourOfDay, int min) {
-			hourStart = hourOfDay;
-			minuteStart = min;
-			// Set the Selected Date in Select date Button
-			btnSelectStartTime.setText(hourStart + ":" + minuteStart);
-		}
-	};
-
-	private TimePickerDialog.OnTimeSetListener endTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
-		// the callback received when the user "sets" the TimePickerDialog in
-		// the dialog
-		@Override
-		public void onTimeSet(TimePicker view, int hourOfDay, int min) {
-			hourStart = hourOfDay;
-			minuteStart = min;
-			// Set the Selected Date in Select date Button
-			btnSelectEndTime.setText(hourStart + ":" + minuteStart);
-		}
-	};
-
-	// Method automatically gets Called when you call showDialog() method
-	@Override
-	protected Dialog onCreateDialog(int id) {
-		switch (id) {
-		case START_DATE_DIALOG_ID:
-			// create a new DatePickerDialog with values you want to show
-			return new DatePickerDialog(this, startDateSetListener, mYear,
-					mMonth, mDay);
-			// create a new TimePickerDialog with values you want to show
-		case START_TIME_DIALOG_ID:
-			return new TimePickerDialog(this, startTimeSetListener, mHour,
-					mMinute, false);
-		case END_DATE_DIALOG_ID:
-			// create a new DatePickerDialog with values you want to show
-			return new DatePickerDialog(this, endDateSetListener, mYear,
-					mMonth, mDay);
-			// create a new TimePickerDialog with values you want to show
-		case END_TIME_DIALOG_ID:
-			return new TimePickerDialog(this, endTimeSetListener, mHour,
-					mMinute, false);
-		}
-		return null;
 	}
 
 	@Override
@@ -163,52 +85,142 @@ public class CreateMealInformationActivity extends Activity {
 		CreateMealInformationActivity.this.startActivity(intent);
 	}
 
+	private void showStartDatePicker() {
+		DatePickerFragment startdate = new DatePickerFragment();
+		// Set selected date into dialog. Default current date.
+		Bundle args = new Bundle();
+		args.putInt("year", yearStart);
+		args.putInt("month", monthStart);
+		args.putInt("day", dayStart);
+		startdate.setArguments(args);
+		// Set Call back to capture selected date
+		startdate.setCallBack(onstartdate);
+		startdate.show(getSupportFragmentManager(), "Date Picker");
+	}
+
+	private void showEndDatePicker() {
+		DatePickerFragment enddate = new DatePickerFragment();
+		// Set selected date into dialog. Default current date.
+		Bundle args = new Bundle();
+		args.putInt("year", yearEnd);
+		args.putInt("month", monthEnd);
+		args.putInt("day", dayEnd);
+		enddate.setArguments(args);
+		// Set Call back to capture selected date
+		enddate.setCallBack(onenddate);
+		enddate.show(getSupportFragmentManager(), "Date Picker");
+	}
+
+	private void showStartTimePicker() {
+		TimePickerFragment starttime = new TimePickerFragment();
+		// Set selected time into dialog. Default current time.
+		Bundle args = new Bundle();
+		args.putInt("hour", hourStart);
+		args.putInt("minute", minuteStart);
+		starttime.setArguments(args);
+		// Set Call back to capture selected date
+		starttime.setCallBack(onstarttime);
+		starttime.show(getSupportFragmentManager(), "Date Picker");
+	}
+
+	private void showEndTimePicker() {
+		TimePickerFragment starttime = new TimePickerFragment();
+		// Set selected time into dialog. Default current time.
+		Bundle args = new Bundle();
+		args.putInt("hour", hourEnd);
+		args.putInt("minute", minuteEnd);
+		starttime.setArguments(args);
+		// Set Call back to capture selected date
+		starttime.setCallBack(onendtime);
+		starttime.show(getSupportFragmentManager(), "Date Picker");
+	}
+
+	OnDateSetListener onstartdate = new OnDateSetListener() {
+		@Override
+		public void onDateSet(DatePicker view, int year, int monthOfYear,
+				int dayOfMonth) {
+			yearStart = year;
+			monthStart = monthOfYear;
+			int dummyMonthStart = monthStart + 1;
+			dayStart = dayOfMonth;
+			btnSelectStartDate.setText(dayStart + "-" + dummyMonthStart + "-"
+					+ yearStart);
+		}
+	};
+
+	OnDateSetListener onenddate = new OnDateSetListener() {
+		@Override
+		public void onDateSet(DatePicker view, int year, int monthOfYear,
+				int dayOfMonth) {
+			yearEnd = year;
+			monthEnd = monthOfYear;
+			int dummyMonthEnd = monthEnd + 1;
+			dayEnd = dayOfMonth;
+			btnSelectEndDate.setText(dayEnd + "-" + dummyMonthEnd + "-"
+					+ yearEnd);
+		}
+	};
+
+	OnTimeSetListener onstarttime = new OnTimeSetListener() {
+		@Override
+		public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+			hourStart = hourOfDay;
+			minuteStart = minute;
+			btnSelectStartTime.setText(hourOfDay + ":" + minute);
+		}
+	};
+
+	OnTimeSetListener onendtime = new OnTimeSetListener() {
+		@Override
+		public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+			hourEnd = hourOfDay;
+			minuteEnd = minute;
+			btnSelectEndTime.setText(hourOfDay + ":" + minute);
+		}
+	};
+
 	public void OnStartDataButtonClick(View view) {
-		showDialog(START_DATE_DIALOG_ID);
+		showStartDatePicker();
 	}
 
 	public void OnStartTimeButtonClick(View view) {
-		showDialog(START_TIME_DIALOG_ID);
+		showStartTimePicker();
 	}
-	
+
 	public void OnEndDataButtonClick(View view) {
-		showDialog(END_DATE_DIALOG_ID);
+		showEndDatePicker();
 	}
-	
+
 	public void OnEndTimeButtonClick(View view) {
-		showDialog(END_TIME_DIALOG_ID);
+		showEndTimePicker();
 	}
-	
+
 	public void OnNextButtonClick(View view) {
 
 		/*
-		ArrayList<NameValuePair> requestList = new ArrayList<NameValuePair>();
-		requestList.add(new BasicNameValuePair("RequestID", RequestID));
-		requestList.add(new BasicNameValuePair("RequestType", RequestType));
-		requestList.add(new BasicNameValuePair("Recipient", "Tejas"));
-		requestList.add(new BasicNameValuePair("YearStart", String
-				.valueOf(yearStart)));
-		requestList.add(new BasicNameValuePair("MonthStart", String
-				.valueOf(monthStart)));
-		requestList.add(new BasicNameValuePair("DayStart", String
-				.valueOf(dayStart)));
-		requestList.add(new BasicNameValuePair("HourStart", String
-				.valueOf(hourStart)));
-		requestList.add(new BasicNameValuePair("MinuteStart", String
-				.valueOf(minuteStart)));
-		requestList.add(new BasicNameValuePair("YearEnd", String
-				.valueOf(yearEnd)));
-		requestList.add(new BasicNameValuePair("MonthEnd", String
-				.valueOf(monthEnd)));
-		requestList
-				.add(new BasicNameValuePair("DayEnd", String.valueOf(dayEnd)));
-		requestList.add(new BasicNameValuePair("HourEnd", String
-				.valueOf(hourEnd)));
-		requestList.add(new BasicNameValuePair("MinuteEnd", String
-				.valueOf(minuteEnd)));
-
-		List<Map<String, String>> resultMapList = RequestHandlerHelper
-				.GetRequestHandlerInstance().HandleRequest(requestList);
+		 * ArrayList<NameValuePair> requestList = new
+		 * ArrayList<NameValuePair>(); requestList.add(new
+		 * BasicNameValuePair("RequestID", RequestID)); requestList.add(new
+		 * BasicNameValuePair("RequestType", RequestType)); requestList.add(new
+		 * BasicNameValuePair("Recipient", "Tejas")); requestList.add(new
+		 * BasicNameValuePair("YearStart", String .valueOf(yearStart)));
+		 * requestList.add(new BasicNameValuePair("MonthStart", String
+		 * .valueOf(monthStart))); requestList.add(new
+		 * BasicNameValuePair("DayStart", String .valueOf(dayStart)));
+		 * requestList.add(new BasicNameValuePair("HourStart", String
+		 * .valueOf(hourStart))); requestList.add(new
+		 * BasicNameValuePair("MinuteStart", String .valueOf(minuteStart)));
+		 * requestList.add(new BasicNameValuePair("YearEnd", String
+		 * .valueOf(yearEnd))); requestList.add(new
+		 * BasicNameValuePair("MonthEnd", String .valueOf(monthEnd)));
+		 * requestList .add(new BasicNameValuePair("DayEnd",
+		 * String.valueOf(dayEnd))); requestList.add(new
+		 * BasicNameValuePair("HourEnd", String .valueOf(hourEnd)));
+		 * requestList.add(new BasicNameValuePair("MinuteEnd", String
+		 * .valueOf(minuteEnd)));
+		 * 
+		 * List<Map<String, String>> resultMapList = RequestHandlerHelper
+		 * .GetRequestHandlerInstance().HandleRequest(requestList);
 		 */
 
 	}
