@@ -29,7 +29,11 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.configuration.Confi
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.meal.properties.MealProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.notificationManager.services.NotificationExecutor;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
-
+/**
+ * 
+ * @author Hai Tang
+ *
+ */
 
 public class TabHostActivity extends TabActivity {
 
