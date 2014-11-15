@@ -14,7 +14,9 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
 /**
  * 
  * @author Hai Tang
- *
+ *This adapter adds a listener on the Checkbox view . 
+ *If the checkbox is selected the underlying data of the model is changed. 
+ *Checkbox gets the corresponding model element assigned via the getTag() method.
  */
 public class InteractiveArrayAdapter extends ArrayAdapter<Model> {
 

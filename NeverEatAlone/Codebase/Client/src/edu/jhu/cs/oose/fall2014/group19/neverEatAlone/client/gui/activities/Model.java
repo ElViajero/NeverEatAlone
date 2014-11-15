@@ -2,7 +2,7 @@ package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities;
 /**
  * 
  * @author Hai Tang
- *
+ * The Model holds the name and the information if the element is currently selected
  */
 public class Model {
 	  private String name;
