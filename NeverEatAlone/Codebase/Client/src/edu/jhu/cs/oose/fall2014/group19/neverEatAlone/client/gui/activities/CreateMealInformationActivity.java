@@ -17,8 +17,8 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
 
 public class CreateMealInformationActivity extends FragmentActivity {
 
-	Button btnSelectStartDate, btnSelectStartTime, btnSelectEndDate,
-			btnSelectEndTime;
+	Button BtnSelectStartDate, BtnSelectStartTime, BtnSelectEndDate,
+			BtnSelectEndTime;
 
 	static final int START_DATE_DIALOG_ID = 0;
 	static final int START_TIME_DIALOG_ID = 1;
@@ -26,22 +26,22 @@ public class CreateMealInformationActivity extends FragmentActivity {
 	static final int END_TIME_DIALOG_ID = 3;
 
 	// variables to save user selected date and time
-	public int yearStart, monthStart, dayStart, hourStart, minuteStart;
-	public int yearEnd, monthEnd, dayEnd, hourEnd, minuteEnd;
+	public int YearStart, MonthStart, DayStart, HourStart, MinuteStart;
+	public int YearEnd, MonthEnd, DayEnd, HourEnd, MinuteEnd;
 
 	public CreateMealInformationActivity() {
 		// Assign current Date and Time Values to Variables
 		final Calendar c = Calendar.getInstance();
-		yearStart = c.get(Calendar.YEAR);
-		yearEnd = yearStart;
-		monthStart = c.get(Calendar.MONTH);
-		monthEnd = monthStart;
-		dayStart = c.get(Calendar.DAY_OF_MONTH);
-		dayEnd = dayStart;
-		hourStart = c.get(Calendar.HOUR_OF_DAY);
-		hourEnd = hourStart;
-		minuteStart = c.get(Calendar.MINUTE);
-		minuteEnd = minuteStart;
+		YearStart = c.get(Calendar.YEAR);
+		YearEnd = YearStart;
+		MonthStart = c.get(Calendar.MONTH);
+		MonthEnd = MonthStart;
+		DayStart = c.get(Calendar.DAY_OF_MONTH);
+		DayEnd = DayStart;
+		HourStart = c.get(Calendar.HOUR_OF_DAY);
+		HourEnd = HourStart;
+		MinuteStart = c.get(Calendar.MINUTE);
+		MinuteEnd = MinuteStart;
 	}
 
 	@Override
@@ -50,10 +50,10 @@ public class CreateMealInformationActivity extends FragmentActivity {
 		setContentView(R.layout.activity_create_meal_information);
 
 		// get the references of buttons
-		btnSelectStartDate = (Button) findViewById(R.id.CreateMealInformation_button_startdate);
-		btnSelectStartTime = (Button) findViewById(R.id.CreateMealInformation_button_starttime);
-		btnSelectEndDate = (Button) findViewById(R.id.CreateMealInformation_button_enddate);
-		btnSelectEndTime = (Button) findViewById(R.id.CreateMealInformation_button_endtime);
+		BtnSelectStartDate = (Button) findViewById(R.id.CreateMealInformation_button_startdate);
+		BtnSelectStartTime = (Button) findViewById(R.id.CreateMealInformation_button_starttime);
+		BtnSelectEndDate = (Button) findViewById(R.id.CreateMealInformation_button_enddate);
+		BtnSelectEndTime = (Button) findViewById(R.id.CreateMealInformation_button_endtime);
 
 	}
 
@@ -86,9 +86,9 @@ public class CreateMealInformationActivity extends FragmentActivity {
 		DatePickerFragment startdate = new DatePickerFragment();
 		// Set selected date into dialog. Default current date.
 		Bundle args = new Bundle();
-		args.putInt("year", yearStart);
-		args.putInt("month", monthStart);
-		args.putInt("day", dayStart);
+		args.putInt("year", YearStart);
+		args.putInt("month", MonthStart);
+		args.putInt("day", DayStart);
 		startdate.setArguments(args);
 		// Set Call back to capture selected date
 		startdate.setCallBack(onstartdate);
@@ -99,9 +99,9 @@ public class CreateMealInformationActivity extends FragmentActivity {
 		DatePickerFragment enddate = new DatePickerFragment();
 		// Set selected date into dialog. Default current date.
 		Bundle args = new Bundle();
-		args.putInt("year", yearEnd);
-		args.putInt("month", monthEnd);
-		args.putInt("day", dayEnd);
+		args.putInt("year", YearEnd);
+		args.putInt("month", MonthEnd);
+		args.putInt("day", DayEnd);
 		enddate.setArguments(args);
 		// Set Call back to capture selected date
 		enddate.setCallBack(onenddate);
@@ -112,8 +112,8 @@ public class CreateMealInformationActivity extends FragmentActivity {
 		TimePickerFragment starttime = new TimePickerFragment();
 		// Set selected time into dialog. Default current time.
 		Bundle args = new Bundle();
-		args.putInt("hour", hourStart);
-		args.putInt("minute", minuteStart);
+		args.putInt("hour", HourStart);
+		args.putInt("minute", MinuteStart);
 		starttime.setArguments(args);
 		// Set Call back to capture selected date
 		starttime.setCallBack(onstarttime);
@@ -124,8 +124,8 @@ public class CreateMealInformationActivity extends FragmentActivity {
 		TimePickerFragment starttime = new TimePickerFragment();
 		// Set selected time into dialog. Default current time.
 		Bundle args = new Bundle();
-		args.putInt("hour", hourEnd);
-		args.putInt("minute", minuteEnd);
+		args.putInt("hour", HourEnd);
+		args.putInt("minute", MinuteEnd);
 		starttime.setArguments(args);
 		// Set Call back to capture selected date
 		starttime.setCallBack(onendtime);
@@ -136,12 +136,12 @@ public class CreateMealInformationActivity extends FragmentActivity {
 		@Override
 		public void onDateSet(DatePicker view, int year, int monthOfYear,
 				int dayOfMonth) {
-			yearStart = year;
-			monthStart = monthOfYear;
-			int dummyMonthStart = monthStart + 1;
-			dayStart = dayOfMonth;
-			btnSelectStartDate.setText(dayStart + "-" + dummyMonthStart + "-"
-					+ yearStart);
+			YearStart = year;
+			MonthStart = monthOfYear;
+			int dummyMonthStart = MonthStart + 1;
+			DayStart = dayOfMonth;
+			BtnSelectStartDate.setText(DayStart + "-" + dummyMonthStart + "-"
+					+ YearStart);
 		}
 	};
 
@@ -149,30 +149,30 @@ public class CreateMealInformationActivity extends FragmentActivity {
 		@Override
 		public void onDateSet(DatePicker view, int year, int monthOfYear,
 				int dayOfMonth) {
-			yearEnd = year;
-			monthEnd = monthOfYear;
-			int dummyMonthEnd = monthEnd + 1;
-			dayEnd = dayOfMonth;
-			btnSelectEndDate.setText(dayEnd + "-" + dummyMonthEnd + "-"
-					+ yearEnd);
+			YearEnd = year;
+			MonthEnd = monthOfYear;
+			int dummyMonthEnd = MonthEnd + 1;
+			DayEnd = dayOfMonth;
+			BtnSelectEndDate.setText(DayEnd + "-" + dummyMonthEnd + "-"
+					+ YearEnd);
 		}
 	};
 
 	OnTimeSetListener onstarttime = new OnTimeSetListener() {
 		@Override
 		public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-			hourStart = hourOfDay;
-			minuteStart = minute;
-			btnSelectStartTime.setText(hourOfDay + ":" + minute);
+			HourStart = hourOfDay;
+			MinuteStart = minute;
+			BtnSelectStartTime.setText(hourOfDay + ":" + minute);
 		}
 	};
 
 	OnTimeSetListener onendtime = new OnTimeSetListener() {
 		@Override
 		public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-			hourEnd = hourOfDay;
-			minuteEnd = minute;
-			btnSelectEndTime.setText(hourOfDay + ":" + minute);
+			HourEnd = hourOfDay;
+			MinuteEnd = minute;
+			BtnSelectEndTime.setText(hourOfDay + ":" + minute);
 		}
 	};
 
