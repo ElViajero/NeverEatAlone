@@ -37,6 +37,7 @@ public class AccountDBManager implements IAccountDBManager {
 
 	/**
 	 * This method is responsible for creating an user account in the database.
+	 * @author tejasvamsingh
 	 */
 	@Override
 	public List<Map<String,String>> CreateAccount(Map<String,String[]> request) {
@@ -152,7 +153,10 @@ public class AccountDBManager implements IAccountDBManager {
 			parameters.put("Username",queryParamterMap.get("Username"));
 
 			//create cypher query to delete node from the dataase.
-			String query = "MATCH(n:User) WHERE n.Username={Username} DELETE n ";
+			String query =""
+					+ "OPTIONAL MATCH (n:User)-[r]-() "
+					+ "WHERE n.Username={Username} "
+					+ "DELETE n,r ";
 
 
 			//execute the query
