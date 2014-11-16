@@ -34,7 +34,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginLeft="17dp"
         android:text="Back"
-        android:onClick="onBackButtonClick" />
+        android:onClick="OnBackButtonClick" />
 
     <TextView
         android:id="@+id/textView_mealdetails_starttime"
@@ -146,7 +146,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:text="Accept" />
+        android:text="Accept"
+        android:onClick="OnAcceptButtonClick" />
 
     <Button
         android:id="@+id/button_mealdetails_decline"
@@ -154,6 +155,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:text="Decline" />
+        android:text="Decline" 
+        android:onClick="OnDeclineButtonClick"/>
 
 </RelativeLayout>

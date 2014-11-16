@@ -1,5 +1,8 @@
 package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,7 +11,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.MealNotificationAdapter;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.adapters.MealNotificationAdapter;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.models.MealNotificationModel;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.models.Tweet;
 
 /**
  * 
@@ -16,7 +21,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.help
  *
  */
 public class InvitesActivity extends ListActivity {
-	private ArrayAdapter MealNotificationArrayAdapter;
+	private ArrayAdapter<MealNotificationModel> MealNotificationArrayAdapter;
 	private TextView tv;
 
 	@Override
@@ -30,7 +35,7 @@ public class InvitesActivity extends ListActivity {
 		setContentView(R.layout.activity_invites);
 
 		MealNotificationArrayAdapter = new MealNotificationAdapter(this,
-				new String[10]);
+				getModel());
 
 		setListAdapter(MealNotificationArrayAdapter);
 	
@@ -63,6 +68,18 @@ public class InvitesActivity extends ListActivity {
 		 */
 
 	}
+	
+    private List<MealNotificationModel> getModel(){
+        List<MealNotificationModel> mealnotifications = new ArrayList<MealNotificationModel>();
+        for ( int i = 0; i < 20; i++ ) {
+        	MealNotificationModel mealnotification = new MealNotificationModel();
+        	mealnotification.setPosterName("Poster " + i);
+        	mealnotification.setStartTime("Start Time " + i);
+        	mealnotification.setResturant("Resturant " + i);
+        	mealnotifications.add(mealnotification);
+        }
+        return mealnotifications;
+    }
 
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {

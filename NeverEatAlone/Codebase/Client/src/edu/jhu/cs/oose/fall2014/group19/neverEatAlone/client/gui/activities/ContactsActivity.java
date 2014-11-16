@@ -7,6 +7,8 @@ import android.app.ListActivity;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.adapters.InteractiveArrayAdapter;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.models.Model;
 /**
  * 
  * @author Hai Tang

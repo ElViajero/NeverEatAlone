@@ -7,7 +7,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
-
+/**
+ * 
+ * @author Hai Tang
+ *
+ */
 public class MealDetailActivity extends Activity {
 
 	@Override
@@ -35,7 +39,17 @@ public class MealDetailActivity extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 	
-	public void onBackButtonClick(View view){
+	public void OnBackButtonClick(View view){
+		Intent intent = new Intent(this, InvitesActivity.class);
+		startActivity(intent);
+	}
+	
+	public void OnAcceptButtonClick(View view){
+		Intent intent = new Intent(this, InvitesActivity.class);
+		startActivity(intent);
+	}
+	
+	public void OnDeclineButtonClick(View view){
 		Intent intent = new Intent(this, InvitesActivity.class);
 		startActivity(intent);
 	}
