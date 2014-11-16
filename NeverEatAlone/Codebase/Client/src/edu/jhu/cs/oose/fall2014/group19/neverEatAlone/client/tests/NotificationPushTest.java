@@ -8,8 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 
-
-
 import android.test.ActivityInstrumentationTestCase2;
 
 import com.google.gson.Gson;
@@ -38,13 +36,14 @@ public class NotificationPushTest extends ActivityInstrumentationTestCase2<TabHo
 	}
 	
 	public void setUP() throws Exception{
+		super.setUp();
 		solo = new Solo(getInstrumentation(),getActivity());
 	}
-	
-	
+		
 	
 	  public void tearDown() throws Exception {
-	    solo.finishOpenedActivities();
+//	    solo.finishOpenedActivities();
+	    super.tearDown();
 	  }
 
 	/**
@@ -56,7 +55,7 @@ public class NotificationPushTest extends ActivityInstrumentationTestCase2<TabHo
 	 *  the notification sent form this method.
 	 */
 	
-	public void GUIUpdateTest(){
+	public void testGUIUpdate(){
 		
 		List<Map<String,String>> notificationList= 
 				new ArrayList<Map<String,String>>();
