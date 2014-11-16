@@ -3,9 +3,7 @@ package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.tests;
 import static org.junit.Assert.*;
 
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.RegisterActivity;
@@ -22,17 +20,10 @@ public class RegisterActivityTest extends ActivityInstrumentationTestCase2<Regis
 		super(RegisterActivity.class);
 	}
 
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-	}
-
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
-	}
-
 	@Before
 	protected void setUp() throws Exception {
 		super.setUp();
+		RegisterActivity ar = new RegisterActivity(); 
 	}
 
 	@After
