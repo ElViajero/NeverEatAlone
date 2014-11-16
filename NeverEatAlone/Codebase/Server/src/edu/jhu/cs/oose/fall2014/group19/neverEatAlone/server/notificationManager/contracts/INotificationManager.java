@@ -9,6 +9,6 @@ import javax.ejb.Local;
 public interface INotificationManager {
 
 	public void PushNotification(List<Map<String,String>> notificationList,
-			List<Map<String,String>> recipientList);
-	
+			List<String> recipientList);
+
 }

@@ -19,45 +19,45 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.notificationManager
 public class NotificationManager implements INotificationManager {
 
 	@Inject IConfigurationHelper iConfigurationHelper;
-	
+
 	@Override
 	public void PushNotification(List<Map<String, String>> notificatonList,
-			List<Map<String,String>> recipientMapList) {
+			List<String> recipientList) {
 
 		Gson gson = new Gson();
-			
+
 		// each notification is to be sent out to all recipients.
 
-		for(Map<String, String> recipientMap : recipientMapList){
-			
+		for(String recipient : recipientList){
+
 			// index the queues by username.
-			String queueName = recipientMap.get("Username"); 
-		    System.out.println("queName "+queueName);
-			
-		    try{
-			
-			System.out.println("reaching PushNotification");
-			System.out.flush();
-			ConnectionFactory factory = new ConnectionFactory();
-			factory.setHost(iConfigurationHelper.GetConfigurationInstance().GetIPAddress());
-			Connection connection = factory.newConnection();
-			Channel channel = connection.createChannel();
+			String queueName = recipient; 
+			System.out.println("queName "+queueName);
 
-			
-			
-			
-			
-			channel.queueDeclare(queueName, false, false, false, null);
-			String message = gson.toJson(notificatonList); 
-			channel.basicPublish("", queueName, null, message.getBytes());
-			System.out.println(" [x] Sent '" + message + "'");
+			try{
 
-			channel.close();
-			connection.close();
+				System.out.println("reaching PushNotification");
+				System.out.flush();
+				ConnectionFactory factory = new ConnectionFactory();
+				factory.setHost(iConfigurationHelper.GetConfigurationInstance().GetIPAddress());
+				Connection connection = factory.newConnection();
+				Channel channel = connection.createChannel();
+
+
+
+
+
+				channel.queueDeclare(queueName, false, false, false, null);
+				String message = gson.toJson(notificatonList); 
+				channel.basicPublish("", queueName, null, message.getBytes());
+				System.out.println(" [x] Sent '" + message + "'");
+
+				channel.close();
+				connection.close();
 			}catch(IOException e){
 				System.out.println("An IO Exception occured in PushNotification." + e.getMessage());
 			}
-			
+
 		}
 
 	}

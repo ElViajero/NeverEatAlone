@@ -28,6 +28,7 @@ public class AccountDBManager implements IAccountDBManager {
 
 	/**
 	 * Constructor gets a database handle.
+	 * @author tejasvamsingh
 	 * 
 	 */
 	public AccountDBManager(){

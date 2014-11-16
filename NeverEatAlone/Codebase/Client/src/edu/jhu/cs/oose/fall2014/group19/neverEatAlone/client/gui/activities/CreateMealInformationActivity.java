@@ -1,6 +1,8 @@
 package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities;
 
 import java.util.Calendar;
+import java.util.List;
+import java.util.Map;
 
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.app.TimePickerDialog.OnTimeSetListener;
@@ -16,11 +18,15 @@ import android.widget.EditText;
 import android.widget.TimePicker;
 import android.widget.Toast;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.helpers.meal.MealPostPropertiesHelper;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.properties.meal.DateAndTimeProperties;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.properties.meal.MealProperties;
 
 public class CreateMealInformationActivity extends FragmentActivity {
 
 	Button BtnSelectStartDate, BtnSelectStartTime, BtnSelectEndDate,
-			BtnSelectEndTime;
+	BtnSelectEndTime;
 
 	private EditText Place;
 	private EditText MaxNumber;
@@ -196,49 +202,61 @@ public class CreateMealInformationActivity extends FragmentActivity {
 		showEndTimePicker();
 	}
 
+
+	/**
+	 * Handler for the meal creation event.
+	 * 
+	 * @author tejasvamsingh
+	 * @param view
+	 */
 	public void OnNextButtonClick(View view) {
 
 		int dummymonthstart = MonthStart + 1;
 		int dummymonthend = MonthEnd + 1;
 
-		String place = Place.getText().toString();
-		String maxnumber = MaxNumber.getText().toString();
-		String allowfriendinvite = AllowFriendInvite.getText().toString();
+		String location = Place.getText().toString();
+		String maxNumberOfInvitees = MaxNumber.getText().toString();
+		String isNotificationExtendible = AllowFriendInvite.getText().toString();
+
 		Toast.makeText(
 				getApplicationContext(),
 				"Start Time: " + DayStart + "/" + dummymonthstart + "/"
-						+ DayStart + " " + HourStart + ":" + MinuteStart + "\n"
+						+ YearStart + " " + HourStart + ":" + MinuteStart + "\n"
 						+ "End Time: " + DayEnd + "/" + dummymonthend + "/"
-						+ DayEnd + " " + HourEnd + ":" + MinuteEnd + "\n"
-						+ "Place: " + place + "\n" + "Max Number: " + maxnumber
-						+ "\n" + "Allow Friend Invite: " + allowfriendinvite,
-				Toast.LENGTH_SHORT).show();
+						+ YearEnd + " " + HourEnd + ":" + MinuteEnd + "\n"
+						+ "Place: " + location + "\n" + "Max Number: " + maxNumberOfInvitees
+						+ "\n" + "Allow Friend Invite: " + isNotificationExtendible,
+						Toast.LENGTH_SHORT).show();
 
-		/*
-		 * ArrayList<NameValuePair> requestList = new
-		 * ArrayList<NameValuePair>(); requestList.add(new
-		 * BasicNameValuePair("RequestID", RequestID)); requestList.add(new
-		 * BasicNameValuePair("RequestType", RequestType)); requestList.add(new
-		 * BasicNameValuePair("Recipient", "Tejas")); requestList.add(new
-		 * BasicNameValuePair("YearStart", String .valueOf(yearStart)));
-		 * requestList.add(new BasicNameValuePair("MonthStart", String
-		 * .valueOf(monthStart))); requestList.add(new
-		 * BasicNameValuePair("DayStart", String .valueOf(dayStart)));
-		 * requestList.add(new BasicNameValuePair("HourStart", String
-		 * .valueOf(hourStart))); requestList.add(new
-		 * BasicNameValuePair("MinuteStart", String .valueOf(minuteStart)));
-		 * requestList.add(new BasicNameValuePair("YearEnd", String
-		 * .valueOf(yearEnd))); requestList.add(new
-		 * BasicNameValuePair("MonthEnd", String .valueOf(monthEnd)));
-		 * requestList .add(new BasicNameValuePair("DayEnd",
-		 * String.valueOf(dayEnd))); requestList.add(new
-		 * BasicNameValuePair("HourEnd", String .valueOf(hourEnd)));
-		 * requestList.add(new BasicNameValuePair("MinuteEnd", String
-		 * .valueOf(minuteEnd)));
-		 * 
-		 * List<Map<String, String>> resultMapList = RequestHandlerHelper
-		 * .GetRequestHandlerInstance().HandleRequest(requestList);
-		 */
+
+
+		// ************************** PAGE ONE REQUEST CREATION STARTS HERE **************************
+
+
+		// Create Date and Time Properties Objects
+		DateAndTimeProperties startDateAndTimeProperties = 
+				new DateAndTimeProperties(DayStart, MonthStart, YearStart, HourStart, MinuteStart);
+
+		DateAndTimeProperties endDateAndTimeProperties = 
+				new DateAndTimeProperties(DayEnd, MonthEnd, YearEnd, HourEnd, MinuteEnd);
+
+		//Create a Meal Object
+		MealProperties mealProperties = new MealProperties(location,
+				maxNumberOfInvitees, isNotificationExtendible); 
+
+		// NOTE FROM TEJAS TO HIMSELF ::: CHANGE RETURN TYPE TO JSON STRING LATER !!!!!!!
+
+		Map<String, List<String>> pageOneMap = MealPostPropertiesHelper.GetPageOneString(mealProperties, 
+				startDateAndTimeProperties, endDateAndTimeProperties);
+
+
+		// Send the Request
+		List<Map<String, String>> resultMapList = 
+				RequestHandlerHelper.GetRequestHandlerInstance().
+				HandleRequest(pageOneMap,"Notification","Meal") ;		
+
+
+
 
 	}
 }

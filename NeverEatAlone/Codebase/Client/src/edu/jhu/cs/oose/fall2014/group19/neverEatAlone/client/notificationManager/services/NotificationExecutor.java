@@ -87,8 +87,7 @@ public class NotificationExecutor extends AsyncTask<String, List<Map<String,Stri
 			String message = new String(delivery.getBody());
 			List<Map<String,String>> resultMapList = GsonObject.fromJson(message,stringStringMap);
 			System.out.println(" [x] Received '" + message + "'");
-			String resultMessage = 	resultMapList.get(0).get("Message");	      
-			System.out.println(resultMessage);	      
+
 
 
 
