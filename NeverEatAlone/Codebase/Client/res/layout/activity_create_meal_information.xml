@@ -48,7 +48,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:onClick="OnStartTimeDataButtonClick"
+            android:onClick="OnStartDataButtonClick"
             android:text="@string/SelectDate" />
 
         <Button
@@ -56,6 +56,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="OnStartTimeButtonClick"
             android:text="@string/SelectTime" />
     </LinearLayout>
 
@@ -79,6 +80,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="OnEndDataButtonClick"
             android:text="@string/SelectDate" />
 
         <Button
@@ -86,6 +88,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="OnEndTimeButtonClick"
             android:text="@string/SelectTime" />
     </LinearLayout>
 
@@ -161,18 +164,15 @@
         android:layout_below="@+id/CreateMealInformation_layout_maxnumber"
         android:orientation="horizontal" >
 
-        <TextView
-            android:id="@+id/CreateMealInformation_text_allowfriendinvite"
+        <Switch
+            android:id="@+id/switch_allowfriendinvite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/allow_friend_invite" />
+            android:layout_marginTop="0dp"
+            android:text="@string/allow_friend_invite"
+            android:textOff="@string/capital_no"
+            android:textOn="@string/capital_yes" />
 
-        <EditText
-            android:id="@+id/edit_allowfriendinvite"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:inputType="number" />
     </LinearLayout>
 
     <Button

@@ -66,10 +66,13 @@ public class MainActivity extends Activity {
 			intent.putExtra("Username", username);
 			MainActivity.this.startActivity(intent);
 		}
+
 		else{
 			Toast.makeText(getApplicationContext(), "Invalid Credentials",
 					Toast.LENGTH_SHORT).show();
 		}
+
+
 
 	}
 

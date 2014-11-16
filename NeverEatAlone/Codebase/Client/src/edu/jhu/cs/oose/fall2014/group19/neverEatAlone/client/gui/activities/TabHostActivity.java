@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import android.app.Activity;
+import android.app.TabActivity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -21,7 +21,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.notificationManager
  *
  */
 
-public class TabHostActivity extends Activity {
+public class TabHostActivity extends TabActivity {
 
 	String Username ;
 	AsyncTask<String, List<Map<String, String>>, List<Map<String, String>>> NotificationExecutorTask;
@@ -33,11 +33,12 @@ public class TabHostActivity extends Activity {
 	 *  @author tejasvamsingh 
 	 *  */
 
+
 	@Override
 	public void onCreate(Bundle savedInstanceState)
 	{
-		super.onCreate(savedInstanceState);
 
+		super.onCreate(savedInstanceState);
 		// Initialize the view and cache.
 		InitView();
 		NotificationCache = new HashMap<String,Map<String,String>>();
@@ -80,10 +81,13 @@ public class TabHostActivity extends Activity {
 		tab_profile.setIndicator("Profile");
 		tab_profile.setContent(new Intent(this,ProfileActivity.class));
 
+
 		/** Add the tabs  to the TabHost to display. */
+
 		tabHost.addTab(tab_invites);
 		tabHost.addTab(tab_contacts);
 		tabHost.addTab(tab_profile);
+
 	}
 
 
@@ -96,12 +100,15 @@ public class TabHostActivity extends Activity {
 	 */
 	public void UpdateNotificationCache(List<Map<String,String>> notificationMapList){
 
-		for(Map<String,String> notification : notificationMapList ){    		
-			NotificationCache.put(notification.get("NotificationID"), notification);
+		notificationMapList.remove(0);
+		for(Map<String,String> notification : notificationMapList ){
+			if(notification.isEmpty())
+				continue;
+			NotificationCache.put(notification.get("PostID"), notification);
 		}
 
 		System.out.println("in UpdateNotificationCache");
-		System.out.println(NotificationCache.get("1"));
+		System.out.println(NotificationCache.get("3"));
 		UpdateView();
 
 	}
@@ -126,7 +133,7 @@ public class TabHostActivity extends Activity {
 
 			//push the notifications to view.. Naive for now.
 			Toast.makeText(getApplicationContext(), 
-					notification.get("Message")+"", Toast.LENGTH_SHORT).show();
+					notification+"", Toast.LENGTH_SHORT).show();
 
 		}
 

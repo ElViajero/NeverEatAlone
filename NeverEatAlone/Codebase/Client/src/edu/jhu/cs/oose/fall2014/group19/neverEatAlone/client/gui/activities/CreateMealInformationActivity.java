@@ -1,48 +1,55 @@
 package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities;
 
 import java.util.Calendar;
+import java.util.List;
+import java.util.Map;
 
-import android.app.Activity;
-import android.app.DatePickerDialog;
-import android.app.Dialog;
-import android.app.TimePickerDialog;
+import android.app.DatePickerDialog.OnDateSetListener;
+import android.app.TimePickerDialog.OnTimeSetListener;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.TimePicker;
+import android.widget.Toast;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.helpers.meal.MealPostPropertiesHelper;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.properties.meal.DateAndTimeProperties;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.properties.meal.MealProperties;
 
-public class CreateMealInformationActivity extends Activity {
+public class CreateMealInformationActivity extends FragmentActivity {
 
-	Button btnSelectStartDate, btnSelectStartTime, btnSelectEndDate,
-	btnSelectEndTime;
+	Button BtnSelectStartDate, BtnSelectStartTime, BtnSelectEndDate,
+	BtnSelectEndTime;
 
-	static final int START_DATE_DIALOG_ID = 0;
-	static final int START_TIME_DIALOG_ID = 1;
-	static final int END_DATE_DIALOG_ID = 2;
-	static final int END_TIME_DIALOG_ID = 3;
+	private EditText Place;
+	private EditText MaxNumber;
+	private Switch AllowFriendInvite;
 
 	// variables to save user selected date and time
-	public int yearStart, monthStart, dayStart, hourStart, minuteStart;
-	public int yearEnd, monthEnd, dayEnd, hourEnd, minuteEnd;
-	// declare the variables to Show/Set the date and time when Time and Date
-	// Picker Dialog first appears
-	private int mYear, mMonth, mDay, mHour, mMinute;
-
-	// constructor
+	public int YearStart, MonthStart, DayStart, HourStart, MinuteStart;
+	public int YearEnd, MonthEnd, DayEnd, HourEnd, MinuteEnd;
 
 	public CreateMealInformationActivity() {
 		// Assign current Date and Time Values to Variables
 		final Calendar c = Calendar.getInstance();
-		mYear = c.get(Calendar.YEAR);
-		mMonth = c.get(Calendar.MONTH);
-		mDay = c.get(Calendar.DAY_OF_MONTH);
-		mHour = c.get(Calendar.HOUR_OF_DAY);
-		mMinute = c.get(Calendar.MINUTE);
+		YearStart = c.get(Calendar.YEAR);
+		YearEnd = YearStart;
+		MonthStart = c.get(Calendar.MONTH);
+		MonthEnd = MonthStart;
+		DayStart = c.get(Calendar.DAY_OF_MONTH);
+		DayEnd = DayStart;
+		HourStart = c.get(Calendar.HOUR_OF_DAY);
+		HourEnd = HourStart;
+		MinuteStart = c.get(Calendar.MINUTE);
+		MinuteEnd = MinuteStart;
 	}
 
 	@Override
@@ -51,127 +58,14 @@ public class CreateMealInformationActivity extends Activity {
 		setContentView(R.layout.activity_create_meal_information);
 
 		// get the references of buttons
-		btnSelectStartDate = (Button) findViewById(R.id.CreateMealInformation_button_startdate);
-		btnSelectStartTime = (Button) findViewById(R.id.CreateMealInformation_button_starttime);
-		btnSelectEndDate = (Button) findViewById(R.id.CreateMealInformation_button_enddate);
-		btnSelectEndTime = (Button) findViewById(R.id.CreateMealInformation_button_endtime);
+		BtnSelectStartDate = (Button) findViewById(R.id.CreateMealInformation_button_startdate);
+		BtnSelectStartTime = (Button) findViewById(R.id.CreateMealInformation_button_starttime);
+		BtnSelectEndDate = (Button) findViewById(R.id.CreateMealInformation_button_enddate);
+		BtnSelectEndTime = (Button) findViewById(R.id.CreateMealInformation_button_endtime);
 
-		// Set ClickListener on btnSelectDate
-		btnSelectStartDate.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				// Show the DatePickerDialog
-				showDialog(START_DATE_DIALOG_ID);
-			}
-		});
-		btnSelectEndDate.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				// Show the DatePickerDialog
-				showDialog(END_DATE_DIALOG_ID);
-			}
-		});
-
-		// Set ClickListener on btnSelectTime
-		btnSelectStartTime.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				// Show the TimePickerDialog
-				showDialog(START_TIME_DIALOG_ID);
-			}
-		});
-		btnSelectEndTime.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				// Show the TimePickerDialog
-				showDialog(END_TIME_DIALOG_ID);
-			}
-		});
-
-	}
-
-	// Register DatePickerDialog listener
-	private DatePickerDialog.OnDateSetListener startDateSetListener = new DatePickerDialog.OnDateSetListener() {
-		// the callback received when the user "sets" the Date in the
-		// DatePickerDialog
-		@Override
-		public void onDateSet(DatePicker view, int yearSelected,
-				int monthOfYear, int dayOfMonth) {
-			yearStart = yearSelected;
-			monthStart = monthOfYear + 1;
-			dayStart = dayOfMonth;
-			// Set the Selected Date in Select date Button
-			btnSelectStartDate.setText(dayStart + "-" + monthStart + "-"
-					+ yearStart);
-		}
-	};
-
-	private DatePickerDialog.OnDateSetListener endDateSetListener = new DatePickerDialog.OnDateSetListener() {
-		// the callback received when the user "sets" the Date in the
-		// DatePickerDialog
-		@Override
-		public void onDateSet(DatePicker view, int yearSelected,
-				int monthOfYear, int dayOfMonth) {
-			yearStart = yearSelected;
-			monthStart = monthOfYear + 1;
-			dayStart = dayOfMonth;
-			// Set the Selected Date in Select date Button
-			btnSelectEndDate.setText(dayStart + "-" + monthStart + "-"
-					+ yearStart);
-		}
-	};
-
-	// Register TimePickerDialog listener
-	private TimePickerDialog.OnTimeSetListener startTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
-		// the callback received when the user "sets" the TimePickerDialog in
-		// the dialog
-		@Override
-		public void onTimeSet(TimePicker view, int hourOfDay, int min) {
-			hourStart = hourOfDay;
-			minuteStart = min;
-			// Set the Selected Date in Select date Button
-			btnSelectStartTime.setText(hourStart + ":" + minuteStart);
-		}
-	};
-
-	private TimePickerDialog.OnTimeSetListener endTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
-		// the callback received when the user "sets" the TimePickerDialog in
-		// the dialog
-		@Override
-		public void onTimeSet(TimePicker view, int hourOfDay, int min) {
-			hourStart = hourOfDay;
-			minuteStart = min;
-			// Set the Selected Date in Select date Button
-			btnSelectEndTime.setText(hourStart + ":" + minuteStart);
-		}
-	};
-
-	// Method automatically gets Called when you call showDialog() method
-	@Override
-	protected Dialog onCreateDialog(int id) {
-		switch (id) {
-		case START_DATE_DIALOG_ID:
-			// create a new DatePickerDialog with values you want to show
-			return new DatePickerDialog(this, startDateSetListener, mYear,
-					mMonth, mDay);
-			// create a new TimePickerDialog with values you want to show
-		case START_TIME_DIALOG_ID:
-			return new TimePickerDialog(this, startTimeSetListener, mHour,
-					mMinute, false);
-		case END_DATE_DIALOG_ID:
-			// create a new DatePickerDialog with values you want to show
-			return new DatePickerDialog(this, endDateSetListener, mYear,
-					mMonth, mDay);
-			// create a new TimePickerDialog with values you want to show
-		case END_TIME_DIALOG_ID:
-			return new TimePickerDialog(this, endTimeSetListener, mHour,
-					mMinute, false);
-		}
-		return null;
+		Place = (EditText) findViewById(R.id.edit_restaurant);
+		MaxNumber = (EditText) findViewById(R.id.edit_maxnumber);
+		AllowFriendInvite = (Switch) findViewById(R.id.switch_allowfriendinvite);
 	}
 
 	@Override
@@ -199,38 +93,180 @@ public class CreateMealInformationActivity extends Activity {
 		CreateMealInformationActivity.this.startActivity(intent);
 	}
 
-	public void OnNextButtonClick(View view) {
-
-		/*
-		ArrayList<NameValuePair> requestList = new ArrayList<NameValuePair>();
-		requestList.add(new BasicNameValuePair("RequestID", RequestID));
-		requestList.add(new BasicNameValuePair("RequestType", RequestType));
-		requestList.add(new BasicNameValuePair("Recipient", "Tejas"));
-		requestList.add(new BasicNameValuePair("YearStart", String
-				.valueOf(yearStart)));
-		requestList.add(new BasicNameValuePair("MonthStart", String
-				.valueOf(monthStart)));
-		requestList.add(new BasicNameValuePair("DayStart", String
-				.valueOf(dayStart)));
-		requestList.add(new BasicNameValuePair("HourStart", String
-				.valueOf(hourStart)));
-		requestList.add(new BasicNameValuePair("MinuteStart", String
-				.valueOf(minuteStart)));
-		requestList.add(new BasicNameValuePair("YearEnd", String
-				.valueOf(yearEnd)));
-		requestList.add(new BasicNameValuePair("MonthEnd", String
-				.valueOf(monthEnd)));
-		requestList
-				.add(new BasicNameValuePair("DayEnd", String.valueOf(dayEnd)));
-		requestList.add(new BasicNameValuePair("HourEnd", String
-				.valueOf(hourEnd)));
-		requestList.add(new BasicNameValuePair("MinuteEnd", String
-				.valueOf(minuteEnd)));
-
-		List<Map<String, String>> resultMapList = RequestHandlerHelper
-				.GetRequestHandlerInstance().HandleRequest(requestList);
-		 */
-
+	private void showStartDatePicker() {
+		DatePickerFragment startdate = new DatePickerFragment();
+		// Set selected date into dialog. Default current date.
+		Bundle args = new Bundle();
+		args.putInt("year", YearStart);
+		args.putInt("month", MonthStart);
+		args.putInt("day", DayStart);
+		startdate.setArguments(args);
+		// Set Call back to capture selected date
+		startdate.setCallBack(onstartdate);
+		startdate.show(getSupportFragmentManager(), "Date Picker");
 	}
 
+	private void showEndDatePicker() {
+		DatePickerFragment enddate = new DatePickerFragment();
+		// Set selected date into dialog. Default current date.
+		Bundle args = new Bundle();
+		args.putInt("year", YearEnd);
+		args.putInt("month", MonthEnd);
+		args.putInt("day", DayEnd);
+		enddate.setArguments(args);
+		// Set Call back to capture selected date
+		enddate.setCallBack(onenddate);
+		enddate.show(getSupportFragmentManager(), "Date Picker");
+	}
+
+	private void showStartTimePicker() {
+		TimePickerFragment starttime = new TimePickerFragment();
+		// Set selected time into dialog. Default current time.
+		Bundle args = new Bundle();
+		args.putInt("hour", HourStart);
+		args.putInt("minute", MinuteStart);
+		starttime.setArguments(args);
+		// Set Call back to capture selected date
+		starttime.setCallBack(onstarttime);
+		starttime.show(getSupportFragmentManager(), "Date Picker");
+	}
+
+	private void showEndTimePicker() {
+		TimePickerFragment starttime = new TimePickerFragment();
+		// Set selected time into dialog. Default current time.
+		Bundle args = new Bundle();
+		args.putInt("hour", HourEnd);
+		args.putInt("minute", MinuteEnd);
+		starttime.setArguments(args);
+		// Set Call back to capture selected date
+		starttime.setCallBack(onendtime);
+		starttime.show(getSupportFragmentManager(), "Date Picker");
+	}
+
+	OnDateSetListener onstartdate = new OnDateSetListener() {
+		@Override
+		public void onDateSet(DatePicker view, int year, int monthOfYear,
+				int dayOfMonth) {
+			YearStart = year;
+			MonthStart = monthOfYear;
+			int dummyMonthStart = MonthStart + 1;
+			DayStart = dayOfMonth;
+			BtnSelectStartDate.setText(DayStart + "-" + dummyMonthStart + "-"
+					+ YearStart);
+		}
+	};
+
+	OnDateSetListener onenddate = new OnDateSetListener() {
+		@Override
+		public void onDateSet(DatePicker view, int year, int monthOfYear,
+				int dayOfMonth) {
+			YearEnd = year;
+			MonthEnd = monthOfYear;
+			int dummyMonthEnd = MonthEnd + 1;
+			DayEnd = dayOfMonth;
+			BtnSelectEndDate.setText(DayEnd + "-" + dummyMonthEnd + "-"
+					+ YearEnd);
+		}
+	};
+
+	OnTimeSetListener onstarttime = new OnTimeSetListener() {
+		@Override
+		public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+			HourStart = hourOfDay;
+			MinuteStart = minute;
+			BtnSelectStartTime.setText(hourOfDay + ":" + minute);
+		}
+	};
+
+	OnTimeSetListener onendtime = new OnTimeSetListener() {
+		@Override
+		public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+			HourEnd = hourOfDay;
+			MinuteEnd = minute;
+			BtnSelectEndTime.setText(hourOfDay + ":" + minute);
+		}
+	};
+
+	public void OnStartDataButtonClick(View view) {
+		showStartDatePicker();
+	}
+
+	public void OnStartTimeButtonClick(View view) {
+		showStartTimePicker();
+	}
+
+	public void OnEndDataButtonClick(View view) {
+		showEndDatePicker();
+	}
+
+	public void OnEndTimeButtonClick(View view) {
+		showEndTimePicker();
+	}
+
+
+	/**
+	 * Handler for the meal creation event.
+	 * 
+	 * @author tejasvamsingh
+	 * @param view
+	 */
+	public void OnNextButtonClick(View view) {
+
+		int dummymonthstart = MonthStart + 1;
+		int dummymonthend = MonthEnd + 1;
+
+		String place = Place.getText().toString();
+		String maxnumber = MaxNumber.getText().toString();
+		String allowfriendinvite;
+		if (AllowFriendInvite.isChecked()) {
+			allowfriendinvite = "Yes";
+		} else {
+			allowfriendinvite = "No";
+		}
+
+		String location = Place.getText().toString();
+		String maxNumberOfInvitees = MaxNumber.getText().toString();
+		String isNotificationExtendible = AllowFriendInvite.getText().toString();
+
+		Toast.makeText(
+				getApplicationContext(),
+				"Start Time: " + DayStart + "/" + dummymonthstart + "/"
+						+ YearStart + " " + HourStart + ":" + MinuteStart + "\n"
+						+ "End Time: " + DayEnd + "/" + dummymonthend + "/"
+						+ YearEnd + " " + HourEnd + ":" + MinuteEnd + "\n"
+						+ "Place: " + location + "\n" + "Max Number: " + maxNumberOfInvitees
+						+ "\n" + "Allow Friend Invite: " + isNotificationExtendible,
+						Toast.LENGTH_SHORT).show();
+
+
+
+		// ************************** PAGE ONE REQUEST CREATION STARTS HERE **************************
+
+
+		// Create Date and Time Properties Objects
+		DateAndTimeProperties startDateAndTimeProperties = 
+				new DateAndTimeProperties(DayStart, MonthStart, YearStart, HourStart, MinuteStart);
+
+		DateAndTimeProperties endDateAndTimeProperties = 
+				new DateAndTimeProperties(DayEnd, MonthEnd, YearEnd, HourEnd, MinuteEnd);
+
+		//Create a Meal Object
+		MealProperties mealProperties = new MealProperties(location,
+				maxNumberOfInvitees, isNotificationExtendible); 
+
+		// NOTE FROM TEJAS TO HIMSELF ::: CHANGE RETURN TYPE TO JSON STRING LATER !!!!!!!
+
+		Map<String, List<String>> pageOneMap = MealPostPropertiesHelper.GetPageOneString(mealProperties, 
+				startDateAndTimeProperties, endDateAndTimeProperties);
+
+
+		// Send the Request
+		List<Map<String, String>> resultMapList = 
+				RequestHandlerHelper.GetRequestHandlerInstance().
+				HandleRequest(pageOneMap,"Notification","Meal") ;		
+
+
+
+
+	}
 }
