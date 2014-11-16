@@ -14,6 +14,13 @@ import org.neo4j.kernel.impl.util.StringLogger;
 
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.contracts.IContactDBManager;
 
+
+/**
+ * This class handles contact management related database transactions.
+ * 
+ * @author tejasvamsingh
+ *
+ */
 @Stateless
 public class ContactDBManager implements IContactDBManager {
 

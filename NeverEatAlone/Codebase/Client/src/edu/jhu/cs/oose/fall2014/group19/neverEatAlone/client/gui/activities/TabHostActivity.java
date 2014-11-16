@@ -33,11 +33,12 @@ public class TabHostActivity extends TabActivity {
 	 *  @author tejasvamsingh 
 	 *  */
 
+
 	@Override
 	public void onCreate(Bundle savedInstanceState)
 	{
-		super.onCreate(savedInstanceState);
 
+		super.onCreate(savedInstanceState);
 		// Initialize the view and cache.
 		InitView();
 		NotificationCache = new HashMap<String,Map<String,String>>();
@@ -99,12 +100,15 @@ public class TabHostActivity extends TabActivity {
 	 */
 	public void UpdateNotificationCache(List<Map<String,String>> notificationMapList){
 
-		for(Map<String,String> notification : notificationMapList ){    		
-			NotificationCache.put(notification.get("NotificationID"), notification);
+		notificationMapList.remove(0);
+		for(Map<String,String> notification : notificationMapList ){
+			if(notification.isEmpty())
+				continue;
+			NotificationCache.put(notification.get("PostID"), notification);
 		}
 
 		System.out.println("in UpdateNotificationCache");
-		System.out.println(NotificationCache.get("1"));
+		System.out.println(NotificationCache.get("3"));
 		UpdateView();
 
 	}
@@ -129,7 +133,7 @@ public class TabHostActivity extends TabActivity {
 
 			//push the notifications to view.. Naive for now.
 			Toast.makeText(getApplicationContext(), 
-					notification.get("Message")+"", Toast.LENGTH_SHORT).show();
+					notification+"", Toast.LENGTH_SHORT).show();
 
 		}
 
