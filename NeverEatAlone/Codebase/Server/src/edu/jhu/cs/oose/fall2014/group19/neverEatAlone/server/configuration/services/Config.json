@@ -1,10 +1,8 @@
 {
-<<<<<<< HEAD
-	"IPAddress" : "10.188.165.87"
-=======
+
+	"IPAddress" : "10.0.0.10"
 	"IPAddress" : "10.0.0.3" ,
 	"Protocol" : "http://" ,
 	"ServerPort" : "8080" ,
 	"ServerURL" : "/NeverEatAloneServer/RequestHandler"
->>>>>>> refs/remotes/origin/master
 }
