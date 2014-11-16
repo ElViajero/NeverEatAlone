@@ -1,0 +1,159 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.MealDetailActivity" >
+
+    <TextView
+        android:id="@+id/textView_mealdetails_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="Meal Details"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/TextView_mealdetails_restaurant"
+        android:layout_centerHorizontal="true" >
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/button_mealdetails_back"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="17dp"
+        android:text="Back"
+        android:onClick="onBackButtonClick" />
+
+    <TextView
+        android:id="@+id/textView_mealdetails_starttime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textView_mealdetails_when"
+        android:layout_marginTop="16dp"
+        android:text="Start Time:"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/textView_mealdetails_endtime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textView_mealdetails_starttime"
+        android:layout_marginTop="16dp"
+        android:text="End Time:"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/TextView_mealdetails_where"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textView_mealdetails_endtime"
+        android:layout_marginTop="26dp"
+        android:text="Where?"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textStyle="bold" />
+
+    <QuickContactBadge
+        android:id="@+id/quickContactBadge1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/TextView_mealdetails_withwhom"
+        android:layout_below="@+id/TextView_mealdetails_withwhom"
+        android:layout_marginTop="20dp" />
+
+    <QuickContactBadge
+        android:id="@+id/quickContactBadge2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/quickContactBadge1"
+        android:layout_toRightOf="@+id/textView_mealdetails_when" />
+
+    <QuickContactBadge
+        android:id="@+id/quickContactBadge3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/linearLayout1"
+        android:layout_alignTop="@+id/quickContactBadge2" />
+
+    <Button
+        android:id="@+id/button_mealdetails_inviteothers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/quickContactBadge3"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/quickContactBadge3"
+        android:text="Invite Others" />
+
+    <TextView
+        android:id="@+id/TextView_mealdetails_restaurant"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/TextView_mealdetails_where"
+        android:layout_below="@+id/TextView_mealdetails_where"
+        android:layout_marginTop="16dp"
+        android:text="Restaurant:"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/TextView_mealdetails_withwhom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/TextView_mealdetails_restaurant"
+        android:layout_below="@+id/TextView_mealdetails_restaurant"
+        android:layout_marginTop="14dp"
+        android:text="With Whom?"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView_mealdetails_when"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView_mealdetails_starttime"
+        android:layout_below="@+id/button_mealdetails_back"
+        android:layout_marginTop="14dp"
+        android:text="When?"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView_mealdetails_additionalinfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/quickContactBadge1"
+        android:layout_marginTop="22dp"
+        android:text="Additional Information:"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <Button
+        android:id="@+id/button_mealdetails_accept"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:text="Accept" />
+
+    <Button
+        android:id="@+id/button_mealdetails_decline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:text="Decline" />
+
+</RelativeLayout>

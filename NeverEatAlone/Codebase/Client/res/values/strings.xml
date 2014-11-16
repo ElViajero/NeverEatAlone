@@ -41,5 +41,7 @@
     <string name="post">Post</string>
     <string name="message">Message</string>
     <string name="title_activity_tweet_list">TweetListActivity</string>
+    <string name="title_activity_meal_detail">MealDetailActivity</string>
+    <string name="title_activity_tweet_detail">TweetDetailActivity</string>
 
 </resources>

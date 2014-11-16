@@ -16,8 +16,8 @@ public class MealNotificationAdapter extends ArrayAdapter {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
+		
 		return inflater.inflate(R.layout.row_meal_notification_layout, parent, false);
 	}
 	
-
 }

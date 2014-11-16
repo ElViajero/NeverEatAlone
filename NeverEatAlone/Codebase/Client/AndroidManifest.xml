@@ -65,8 +65,20 @@
             android:label="@string/title_activity_create_meal_information" >
         </activity>
         <activity
-            android:name="edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.TweetListActivity"
+            android:name=".gui.activities.TweetListActivity"
             android:label="@string/title_activity_tweet_list" >
+        </activity>
+        <activity
+            android:name=".gui.activities.TweetListActivity"
+            android:label="@string/title_activity_tweet_list" >
+        </activity>
+        <activity
+            android:name=".gui.activities.MealDetailActivity"
+            android:label="@string/title_activity_meal_detail" >
+        </activity>
+        <activity
+            android:name="edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.TweetDetailActivity"
+            android:label="@string/title_activity_tweet_detail" >
         </activity>
     </application>
 

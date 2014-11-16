@@ -1,11 +1,12 @@
 package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities;
 
-import android.app.Activity;
+import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.MealNotificationAdapter;
 
@@ -14,9 +15,9 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.help
  * @author Hai Tang
  *
  */
-public class InvitesActivity extends Activity {
-	private ListView MealNotificationListView;
+public class InvitesActivity extends ListActivity {
 	private ArrayAdapter MealNotificationArrayAdapter;
+	private TextView tv;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -30,9 +31,9 @@ public class InvitesActivity extends Activity {
 
 		MealNotificationArrayAdapter = new MealNotificationAdapter(this,
 				new String[10]);
-		MealNotificationListView = (ListView) findViewById(R.id.listView_mealnotification);
-		MealNotificationListView.setAdapter(MealNotificationArrayAdapter);
 
+		setListAdapter(MealNotificationArrayAdapter);
+	
 		/*
 		 * The following code use StableArrayAdapter to show a list of view, disappears after clicking
 		 * 
@@ -62,6 +63,12 @@ public class InvitesActivity extends Activity {
 		 */
 
 	}
+
+    @Override
+    protected void onListItemClick(ListView l, View v, int position, long id) {
+    	Intent intent  = new  Intent(this, MealDetailActivity.class);
+    	startActivity(intent);
+    }
 
 	public void OnCreateButtonClick(View view) {
 		// Intent intent = new Intent(RegisterActivity.this,
