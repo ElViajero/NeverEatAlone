@@ -15,7 +15,9 @@
     <instrumentation
         android:name="android.test.InstrumentationTestRunner"
         android:label="your tests label"
+
         android:targetPackage="edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client" />
+
 
     <application
         android:allowBackup="true"
@@ -23,6 +25,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme"
         tools:ignore="UnusedAttribute" >
+
         <uses-library android:name="android.test.runner" />
 
         <activity
@@ -47,16 +50,24 @@
             android:label="@string/title_activity_invites" >
         </activity>
         <activity
-            android:name="edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.ContactsActivity"
+            android:name=".gui.activities.ContactsActivity"
             android:label="@string/title_activity_contacts" >
         </activity>
         <activity
-            android:name="edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.ProfileActivity"
+            android:name=".gui.activities.ProfileActivity"
             android:label="@string/title_activity_profile" >
         </activity>
         <activity
-            android:name="edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.CreateMealInformationActivity"
+            android:name=".gui.activities.CreateMealInformationActivity"
             android:label="@string/title_activity_create_meal_information" >
+        </activity>
+        <activity
+            android:name=".gui.activities.MealDetailActivity"
+            android:label="@string/title_activity_meal_detail" >
+        </activity>
+        <activity
+            android:name="edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.TweetDetailActivity"
+            android:label="@string/title_activity_tweet_detail" >
         </activity>
     </application>
 

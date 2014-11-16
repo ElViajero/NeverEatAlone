@@ -44,5 +44,8 @@
     <string name="SelectTime">Select Time</string>
     <string name="capital_yes">YES</string>
     <string name="capital_no">NO</string>
+    <string name="title_activity_tweet_list">TweetListActivity</string>
+    <string name="title_activity_meal_detail">MealDetailActivity</string>
+    <string name="title_activity_tweet_detail">TweetDetailActivity</string>
 
 </resources>
