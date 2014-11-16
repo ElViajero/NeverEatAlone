@@ -21,6 +21,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.requestDispatcher.c
  * It is repsonsible for receiving HTTP requests from the client and forwarding them 
  * to the RequestDispatcher for processing.
  * It also is responsible for sending an HTTP response back to the client.
+ * @author tejasvamsingh
  */
 
 @WebServlet("/RequestHandler")
@@ -63,6 +64,7 @@ public class RequestHandler extends HttpServlet {
 	 * 
 	 * This method accepts post requests, calls the request dispatcher on the request, 
 	 * obtains response and sends the response back to the client.
+	 * @author tejasvamsingh
 	 * 
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

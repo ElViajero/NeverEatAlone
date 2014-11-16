@@ -1,16 +1,22 @@
 package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.configuration;
 
+/**
+ * Class that holds configuration properties.
+ * 
+ * @author tejasvamsingh
+ *
+ */
 public class Configuration {
 
 	private String IPAddress;
 	private String Protocol;
 	private String ServerPort;
 	private String ServerURL;
-	
+
 	public String GetIPAddress(){
 		return IPAddress;
 	}
-	
+
 	public void SetIPAdress(String ipAddress){
 		IPAddress=ipAddress;
 	}
@@ -38,9 +44,9 @@ public class Configuration {
 	public void SetServerURL(String serverURL) {
 		ServerURL = serverURL;
 	}
-	
-	
-	
-	
-	
+
+
+
+
+
 }

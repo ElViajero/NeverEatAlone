@@ -1,0 +1,13 @@
+edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client
+edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.configuration
+edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities
+edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers
+edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.notificationManager.services
+edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.contracts
+edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services
+edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.contracts
+edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.helpers
+edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.helpers.meal
+edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.properties
+edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.properties.meal
+edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.tests

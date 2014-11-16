@@ -21,6 +21,14 @@ import com.rabbitmq.client.ShutdownSignalException;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.configuration.ConfigurationHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.TabHostActivity;
 
+/**
+ * 
+ * This class handles asynchronous notification fetches
+ * from a queue.
+ * @author tejasvamsingh
+ *
+ */
+
 public class NotificationExecutor extends AsyncTask<String, List<Map<String,String>>,List<Map<String,String>>> {
 
 
@@ -38,6 +46,14 @@ public class NotificationExecutor extends AsyncTask<String, List<Map<String,Stri
 	static Gson GsonObject;
 
 
+	/**
+	 * 
+	 * Set up method to be called the first time that the app registers
+	 * to be notified.
+	 * 
+	 * @author tejasvamsingh
+	 * @param tabHostActivity
+	 */
 	public NotificationExecutor(TabHostActivity tabHostActivity){
 		ActivityObject = tabHostActivity;
 		GsonObject = new Gson();
@@ -60,6 +76,11 @@ public class NotificationExecutor extends AsyncTask<String, List<Map<String,Stri
 		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * Polling method that monitors queue for messages.
+	 * @author tejasvamsingh
+	 * 
+	 */
 	@Override
 	protected List<Map<String, String>> doInBackground(String... params) {
 
@@ -115,6 +136,7 @@ public class NotificationExecutor extends AsyncTask<String, List<Map<String,Stri
 
 	/**
 	 * Publish partial results to the UI thread.
+	 * @author tejasvamsingh
 	 * @param resultMapList
 	 */
 

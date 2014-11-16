@@ -81,8 +81,8 @@ BUG NOTE :
 
 Sometimes, you may get compile errors even though there are none. The most common source of bugs is the m2eclipse plugin which seems to contradict (sometimes) how eclipse wants to handle the build path.
 Right click --> maven --> update.
-Selecting maven dependencies
-Removing and re-adding src,gen,res
+Selecting maven dependencies in build path order and export,
+Removing and re-adding src,gen,res,
 And project clean and rebuild should fix this.
 
 If not, you may have to restart eclipse.
@@ -93,7 +93,10 @@ If not, you may have to restart eclipse.
 
 FINALLY :
 
-If everything works (including rabbitmq guest access), Please create two accounts :
+If everything works (including rabbitmq guest access), AND IF I’M ABLE TO COMMIT IN TIME (GitLab seems to be down),
+
+
+please create two accounts :
 
 One with username "a"
 One with username "Tejas"

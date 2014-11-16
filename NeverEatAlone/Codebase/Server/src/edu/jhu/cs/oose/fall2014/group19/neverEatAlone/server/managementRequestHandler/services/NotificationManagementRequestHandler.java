@@ -24,6 +24,12 @@ public class NotificationManagementRequestHandler {
 	@Inject INotificationManager INotificationManagerObject;
 	@Inject INotificationDBManager INotificationDBManagerObject;
 
+	/**
+	 * Method that handles meal post and notification requests.
+	 * @author tejasvamsingh
+	 * @param request
+	 * @return
+	 */
 	public List<Map<String,String>> MealNotificationRequest(Map<String,String[]> request){
 
 		System.out.println("reached MealNotificationRequest");

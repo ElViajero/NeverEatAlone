@@ -1,7 +1,9 @@
 package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.configuration.services;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URISyntaxException;
 
 import javax.ejb.Stateless;
 
@@ -13,11 +15,32 @@ import com.google.gson.JsonSyntaxException;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.configuration.contracts.IConfigurationHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.configuration.properties.ConfigurationProperties;
 
+
+/**
+ * Helper class to facilitate easy retrieval of configuration
+ * properties.
+ * 
+ * @author tejasvamsingh
+ *
+ */
+
+
 @Stateless
 public class ConfigurationHelper implements IConfigurationHelper {
 
 	static ConfigurationProperties ConfigurationInstance;
 
+
+	/**
+	 * 
+	 * Method that returns a configuration properties object.
+	 * One for the entire application.
+	 * 
+	 * @author tejasvamsingh
+	 * @return
+	 * @throws FileNotFoundException
+	 * @throws URISyntaxException
+	 */
 	@Override
 	public ConfigurationProperties GetConfigurationInstance(){
 

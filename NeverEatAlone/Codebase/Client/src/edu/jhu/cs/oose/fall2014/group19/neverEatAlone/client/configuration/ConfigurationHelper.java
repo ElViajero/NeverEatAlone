@@ -1,5 +1,6 @@
 package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.configuration;
 
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -10,10 +11,30 @@ import org.apache.commons.io.IOUtils;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 
+
+/**
+ * Helper class to facilitate easy retrieval of configuration
+ * properties.
+ * 
+ * @author tejasvamsingh
+ *
+ */
+
 public class ConfigurationHelper {
 
 	static Configuration ConfigurationInstance;
 
+
+	/**
+	 * 
+	 * Method that returns a configuration properties object.
+	 * One for the entire application.
+	 * 
+	 * @author tejasvamsingh
+	 * @return
+	 * @throws FileNotFoundException
+	 * @throws URISyntaxException
+	 */
 
 	public static Configuration GetConfigurationInstance() throws FileNotFoundException, URISyntaxException{
 		if(ConfigurationInstance==null){
