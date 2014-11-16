@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.tests;
 
 import static org.junit.Assert.*;
@@ -52,3 +53,5 @@ public class RegisterActivityTest extends ActivityInstrumentationTestCase2<Regis
 	}
 
 }
+=======
+>>>>>>> refs/remotes/origin/master
