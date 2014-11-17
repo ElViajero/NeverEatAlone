@@ -1,7 +1,8 @@
 package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities;
 
-import java.util.ArrayList;
+import java.lang.reflect.Type;
 import java.util.List;
+import java.util.Map;
 
 import android.app.ListActivity;
 import android.content.Intent;
@@ -10,83 +11,68 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.google.gson.reflect.TypeToken;
+
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.adapters.MealNotificationAdapter;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.models.MealNotificationModel;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.helpers.GsonHelper;
 
 /**
  * 
+ * This class handles controller operations for the invites tab.
+ * 
+ * @author tejasvamsingh
  * @author Hai Tang
  *
  */
 public class InvitesActivity extends ListActivity {
-	private ArrayAdapter<MealNotificationModel> MealNotificationArrayAdapter;
+	private ArrayAdapter<Map<String,String>> MealNotificationArrayAdapter;
 	private TextView tv;
+	List<Map<String,String>> NotificationList;
 
+	/**
+	 * This constructor is responsible for obtaining 
+	 * notifications and updating the GUT.
+	 * @author tejasvamsingh
+	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+
+		Type stringStringMap = new TypeToken<List<Map<String, String>>>(){}.getType();
+		String x= getIntent().getStringExtra("NotificationMapListJSON");
+		System.out.println("JSON is  : "+x);
+		NotificationList =GsonHelper.GetGsonInstance().
+				fromJson(x,stringStringMap);
 		initView(savedInstanceState);
 
 	}
+
+	/**
+	 * This method updates the GUI.
+	 * @author tejasvamsingh
+	 * @param savedInstanceState
+	 */
 
 	private void initView(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_invites);
 
-
-		MealNotificationArrayAdapter = new MealNotificationAdapter(this,
-				getModel());
-
-
+		MealNotificationArrayAdapter = 
+				new MealNotificationAdapter(this,NotificationList);
 		setListAdapter(MealNotificationArrayAdapter);
-	
-		/*
-		 * The following code use StableArrayAdapter to show a list of view, disappears after clicking
-		 * 
-		 * final ListView listview = (ListView)
-		 * findViewById(R.id.listView_invitations); String[] values = new
-		 * String[] { "Invitation 1", "Invitation2", "Invitation3" };
-		 * 
-		 * final ArrayList<String> list = new ArrayList<String>(); for (int i =
-		 * 0; i < values.length; ++i) { list.add(values[i]); } final
-		 * StableArrayAdapter adapter = new StableArrayAdapter(this,
-		 * android.R.layout.simple_list_item_1, list);
-		 * listview.setAdapter(adapter);
-		 * 
-		 * listview.setOnItemClickListener(new AdapterView.OnItemClickListener()
-		 * {
-		 * 
-		 * @Override public void onItemClick(AdapterView<?> parent, final View
-		 * view, int position, long id) { final String item = (String)
-		 * parent.getItemAtPosition(position);
-		 * view.animate().setDuration(2000).alpha(0) .withEndAction(new
-		 * Runnable() {
-		 * 
-		 * @Override public void run() { list.remove(item);
-		 * adapter.notifyDataSetChanged(); view.setAlpha(1); } }); }
-		 * 
-		 * });
-		 */
+
+
 
 	}
-	
-    private List<MealNotificationModel> getModel(){
-        List<MealNotificationModel> mealnotifications = new ArrayList<MealNotificationModel>();
-        for ( int i = 0; i < 20; i++ ) {
-        	MealNotificationModel mealnotification = new MealNotificationModel();
-        	mealnotification.setPosterName("Poster " + i);
-        	mealnotification.setStartTime("Start Time " + i);
-        	mealnotification.setResturant("Resturant " + i);
-        	mealnotifications.add(mealnotification);
-        }
-        return mealnotifications;
-    }
 
-    @Override
-    protected void onListItemClick(ListView l, View v, int position, long id) {
-    	Intent intent  = new  Intent(this, MealDetailActivity.class);
-    	startActivity(intent);
-    }
+
+
+	@Override
+	protected void onListItemClick(ListView l, View v, int position, long id) {
+		Intent intent  = new  Intent(this, MealDetailActivity.class);
+		startActivity(intent);
+	}
 
 	public void OnCreateButtonClick(View view) {
 		// Intent intent = new Intent(RegisterActivity.this,

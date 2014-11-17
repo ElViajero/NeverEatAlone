@@ -12,8 +12,12 @@ import android.os.Bundle;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 import android.widget.Toast;
+
+import com.google.gson.Gson;
+
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.notificationManager.services.NotificationExecutor;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.helpers.GsonHelper;
 //Cannot extends Activity
 /**
  * 
@@ -27,6 +31,13 @@ public class TabHostActivity extends TabActivity {
 	AsyncTask<String, List<Map<String, String>>, List<Map<String, String>>> NotificationExecutorTask;
 	Map<String,Map<String,String>> NotificationCache;
 
+	TabSpec TabContacts;
+	TabSpec TabInvites;
+	TabSpec TabProfile;
+	TabHost TabHost; 
+	String NotificationMapListJSON; 
+
+
 	/**
 	 *  This method intializes the activity.
 	 *  
@@ -38,6 +49,7 @@ public class TabHostActivity extends TabActivity {
 	public void onCreate(Bundle savedInstanceState)
 	{
 
+		NotificationMapListJSON="[{}]";
 		super.onCreate(savedInstanceState);
 		// Initialize the view and cache.
 		InitView();
@@ -64,30 +76,32 @@ public class TabHostActivity extends TabActivity {
 		setContentView(R.layout.activity_tab_host);
 
 		// create the TabHost that will contain the Tabs
-		TabHost tabHost = (TabHost)findViewById(android.R.id.tabhost);
+		TabHost = (TabHost)findViewById(android.R.id.tabhost);
 
-		TabSpec tab_invites = tabHost.newTabSpec("Invites Tab");
-		TabSpec tab_contacts = tabHost.newTabSpec("Contacts Tab");
-		TabSpec tab_profile = tabHost.newTabSpec("Profile Tab");
+		TabInvites = TabHost.newTabSpec("Invites Tab");
+		TabContacts = TabHost.newTabSpec("Contacts Tab");
+		TabProfile = TabHost.newTabSpec("Profile Tab");
 
 		// Set the Tab name and Activity
 		// that will be opened when particular Tab will be selected
-		tab_invites.setIndicator("Invites");
-		tab_invites.setContent(new Intent(this,InvitesActivity.class));
+		TabInvites.setIndicator("Invites");
+		Intent intent = new Intent(this,InvitesActivity.class);
+		intent.putExtra("NotificationMapListJSON", NotificationMapListJSON);
+		TabInvites.setContent(intent);
 
-		tab_contacts.setIndicator("Contacts");
-		tab_contacts.setContent(new Intent(this,ContactsActivity.class));
+		TabContacts.setIndicator("Contacts");
+		TabContacts.setContent(new Intent(this,ContactsActivity.class));
 
-		tab_profile.setIndicator("Profile");
-		tab_profile.setContent(new Intent(this,ProfileActivity.class));
+		TabProfile.setIndicator("Profile");
+		TabProfile.setContent(new Intent(this,ProfileActivity.class));
 
 
 		/** Add the tabs  to the TabHost to display. */
 
-		tabHost.addTab(tab_invites);
-		tabHost.addTab(tab_contacts);
-		tabHost.addTab(tab_profile);
 
+		TabHost.addTab(TabContacts);
+		TabHost.addTab(TabProfile);
+		TabHost.addTab(TabInvites);
 	}
 
 
@@ -108,7 +122,7 @@ public class TabHostActivity extends TabActivity {
 		}
 
 		System.out.println("in UpdateNotificationCache");
-		System.out.println(NotificationCache.get("3"));
+		System.out.println(NotificationCache.get("2"));
 		UpdateView();
 
 	}
@@ -123,11 +137,12 @@ public class TabHostActivity extends TabActivity {
 
 	private void UpdateView() {
 
+		NotificationMapListJSON = "[";
+		Gson gson = GsonHelper.GetGsonInstance();
+
 		for (Entry<String, Map<String, String>> entry : NotificationCache.entrySet()) {
 
-
 			Map<String,String> notification = entry.getValue();
-
 			System.out.println("In UpdateView");
 			System.out.println(notification);
 
@@ -135,11 +150,23 @@ public class TabHostActivity extends TabActivity {
 			Toast.makeText(getApplicationContext(), 
 					notification+"", Toast.LENGTH_SHORT).show();
 
+			String notificationJSON = gson.toJson(notification);
+			NotificationMapListJSON=NotificationMapListJSON+notificationJSON+",";
+
 		}
 
+		NotificationMapListJSON=NotificationMapListJSON.substring(0, NotificationMapListJSON.length()-1);
+		NotificationMapListJSON+="]";
 
+		System.out.println("THE MAP JSON IS : "+NotificationMapListJSON);
 
+		if(NotificationMapListJSON.equals("]"))
+			return;
 
+		Intent intent = new Intent(this,InvitesActivity.class);
+		intent.putExtra("NotificationMapListJSON", NotificationMapListJSON);
+		TabInvites.setContent(intent);
+		//TabHost.addTab(TabInvites);
 
 	}
 

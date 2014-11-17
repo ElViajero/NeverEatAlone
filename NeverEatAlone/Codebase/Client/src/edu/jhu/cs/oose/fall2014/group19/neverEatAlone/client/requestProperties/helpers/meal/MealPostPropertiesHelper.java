@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.properties.meal.DateAndTimeProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.properties.meal.MealProperties;
@@ -66,7 +67,7 @@ public class MealPostPropertiesHelper {
 
 		}
 
-
+		Random r = new Random();
 
 		// NOTE FROM TEJAS TO HIMSELF :::: REMOVE THIS !!!!!!
 
@@ -75,7 +76,7 @@ public class MealPostPropertiesHelper {
 		List<String> recipientList = new ArrayList<String>();
 		recipientList.add("Tejas");
 		posterList.add("a");
-		postIDList.add("2");
+		postIDList.add(String.valueOf(r.nextInt()));
 		pageOneMap.put("Recipient",recipientList);
 		pageOneMap.put("Poster",posterList);
 		pageOneMap.put("PostID",postIDList);
