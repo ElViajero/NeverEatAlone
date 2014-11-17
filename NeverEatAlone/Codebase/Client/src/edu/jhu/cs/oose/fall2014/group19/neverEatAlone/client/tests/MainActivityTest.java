@@ -54,10 +54,11 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
 		
 		// create a test account if it does not already exist
 		solo.clickOnButton("Sign Up");
+		solo.clearEditText((EditText)solo.getCurrentActivity().findViewById(R.id.edit_username));
 		solo.enterText((EditText)solo.getCurrentActivity().findViewById(R.id.edit_username), "usr_test");
 		solo.enterText((EditText)solo.getCurrentActivity().findViewById(R.id.edit_password), "pw_test");
 		solo.enterText((EditText)solo.getCurrentActivity().findViewById(R.id.edit_confirm_password), "pw_test");
-		solo.enterText((EditText)solo.getCurrentActivity().findViewById(R.id.edit_email), "email_test");
+		solo.enterText((EditText)solo.getCurrentActivity().findViewById(R.id.edit_email), "email@test.com");
 		solo.clickOnButton("Register");
 		if(solo.getCurrentActivity().getClass().equals(RegisterActivity.class))
 			solo.clickOnButton("Cancel"); // TODO: if registered, should go back to main page automatically and don't need this
