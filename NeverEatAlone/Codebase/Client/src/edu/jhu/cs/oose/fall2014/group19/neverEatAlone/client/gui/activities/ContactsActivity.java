@@ -6,26 +6,28 @@ import java.util.List;
 import android.app.ListActivity;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.ModelHelper;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.adapters.InteractiveArrayAdapter;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.models.ContactsModel;
 /**
  * 
  * @author Hai Tang
  *
  */
 public class ContactsActivity extends ListActivity{
+	private ArrayAdapter<ContactsModel> adapter;
 	@Override
 	public void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);      
-		ArrayAdapter<ModelHelper> adapter = new InteractiveArrayAdapter(this,
+		adapter = new InteractiveArrayAdapter(this,
 				getModel());
 		setListAdapter(adapter);
 		//         setContentView(R.layout.activity_contacts);
 
 	}
 
-	private List<ModelHelper> getModel() {
-		List<ModelHelper> list = new ArrayList<ModelHelper>();
+	private List<ContactsModel> getModel() {
+		List<ContactsModel> list = new ArrayList<ContactsModel>();
 		list.add(get("Tejas"));
 		list.add(get("Runze"));
 		list.add(get("Xiaozhou"));
@@ -36,7 +38,7 @@ public class ContactsActivity extends ListActivity{
 		return list;
 	}
 
-	private ModelHelper get(String s) {
-		return new ModelHelper(s);
+	private ContactsModel get(String s) {
+		return new ContactsModel(s);
 	}
 }

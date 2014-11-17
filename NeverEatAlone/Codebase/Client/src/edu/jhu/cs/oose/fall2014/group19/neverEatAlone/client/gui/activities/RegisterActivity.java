@@ -87,12 +87,31 @@ public class RegisterActivity extends Activity {
 
 		System.out.println(password);
 		System.out.println(confirmPassword);
+		
+		if(username.equals("")){
+			Toast.makeText(getApplicationContext(), 
+					"Username Is Empty !", Toast.LENGTH_SHORT).show();
+			return;
+		}
+		
+		if(email.equals("")){
+			Toast.makeText(getApplicationContext(), 
+					"Email Is Empty !", Toast.LENGTH_SHORT).show();
+			return;
+		}
+		
+		if(password.equals("")){
+			Toast.makeText(getApplicationContext(), 
+					"Passwords Is Empty !", Toast.LENGTH_SHORT).show();
+			return;
+		}
 
 		if(!password.equals(confirmPassword)){
 			Toast.makeText(getApplicationContext(), 
 					"Passwords Don't Match !", Toast.LENGTH_SHORT).show();
 			return;
 		}
+		
 
 		// Create a properties object.
 		IRequestProperties registerProperties = 
@@ -110,6 +129,8 @@ public class RegisterActivity extends Activity {
 		if (resultMapList.get(0).get("Status").equals("Success")) {
 			Toast.makeText(getApplicationContext(), "Registration Succesful !",
 					Toast.LENGTH_SHORT).show();
+			Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+			RegisterActivity.this.startActivity(intent);
 		} else {
 			Toast.makeText(getApplicationContext(), "Username already exists",
 					Toast.LENGTH_SHORT).show();
