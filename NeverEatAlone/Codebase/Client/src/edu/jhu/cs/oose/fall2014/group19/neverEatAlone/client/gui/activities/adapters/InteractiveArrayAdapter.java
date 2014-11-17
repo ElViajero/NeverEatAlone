@@ -43,8 +43,8 @@ public class InteractiveArrayAdapter extends ArrayAdapter<ContactsModel> {
       LayoutInflater inflator = context.getLayoutInflater();
       view = inflator.inflate(R.layout.rowbuttonlayout, null);
       final ViewHolder viewHolder = new ViewHolder();
-      viewHolder.text = (TextView) view.findViewById(R.id.label);
-      viewHolder.checkbox = (CheckBox) view.findViewById(R.id.check);
+      viewHolder.text = (TextView) view.findViewById(R.id.contacts_name);
+      viewHolder.checkbox = (CheckBox) view.findViewById(R.id.contacts_check);
       viewHolder.checkbox
           .setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
