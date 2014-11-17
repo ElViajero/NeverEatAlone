@@ -40,17 +40,17 @@ public class MealDetailActivity extends Activity {
 	}
 	
 	public void OnBackButtonClick(View view){
-		Intent intent = new Intent(this, InvitesActivity.class);
+		Intent intent = new Intent(this, TabHostActivity.class);
 		startActivity(intent);
 	}
 	
 	public void OnAcceptButtonClick(View view){
-		Intent intent = new Intent(this, InvitesActivity.class);
+		Intent intent = new Intent(this, TabHostActivity.class);
 		startActivity(intent);
 	}
 	
 	public void OnDeclineButtonClick(View view){
-		Intent intent = new Intent(this, InvitesActivity.class);
+		Intent intent = new Intent(this, TabHostActivity.class);
 		startActivity(intent);
 	}
 }

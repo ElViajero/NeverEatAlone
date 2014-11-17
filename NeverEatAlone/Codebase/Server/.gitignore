@@ -25,7 +25,8 @@ gen/
 local.properties
 .classpath
 proguard/ 
-
+/DBData
 .DS_Store
-
+/DBData
+/.settings
 /target/
