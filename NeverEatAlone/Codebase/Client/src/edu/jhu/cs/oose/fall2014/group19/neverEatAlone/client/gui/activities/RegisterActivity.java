@@ -129,6 +129,8 @@ public class RegisterActivity extends Activity {
 		if (resultMapList.get(0).get("Status").equals("Success")) {
 			Toast.makeText(getApplicationContext(), "Registration Succesful !",
 					Toast.LENGTH_SHORT).show();
+			Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+			RegisterActivity.this.startActivity(intent);
 		} else {
 			Toast.makeText(getApplicationContext(), "Username already exists",
 					Toast.LENGTH_SHORT).show();
