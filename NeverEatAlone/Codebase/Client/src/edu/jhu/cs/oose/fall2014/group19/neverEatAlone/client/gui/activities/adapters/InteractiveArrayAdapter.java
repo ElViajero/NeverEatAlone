@@ -26,7 +26,7 @@ public class InteractiveArrayAdapter extends ArrayAdapter<ContactsModel> {
   private final Activity context;
 
   public InteractiveArrayAdapter(Activity context, List<ContactsModel> list) {
-    super(context, R.layout.rowbuttonlayout, list);
+    super(context, R.layout.row_contact_item_layout, list);
     this.context = context;
     this.list = list;
   }
@@ -41,7 +41,7 @@ public class InteractiveArrayAdapter extends ArrayAdapter<ContactsModel> {
     View view = null;
     if (convertView == null) {
       LayoutInflater inflator = context.getLayoutInflater();
-      view = inflator.inflate(R.layout.rowbuttonlayout, null);
+      view = inflator.inflate(R.layout.row_contact_item_layout, null);
       final ViewHolder viewHolder = new ViewHolder();
       viewHolder.text = (TextView) view.findViewById(R.id.contacts_name);
       viewHolder.checkbox = (CheckBox) view.findViewById(R.id.contacts_check);

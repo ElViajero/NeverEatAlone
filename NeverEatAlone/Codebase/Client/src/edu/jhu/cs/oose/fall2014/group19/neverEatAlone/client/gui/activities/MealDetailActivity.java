@@ -10,7 +10,8 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
 /**
  * 
  * @author Hai Tang
- *
+ * MealDetailActivity class is used to set up the view of the Meal Details page.
+ * And also set up the functions after clicking different buttons.
  */
 public class MealDetailActivity extends Activity {
 
@@ -38,7 +39,7 @@ public class MealDetailActivity extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
+
 	public void OnBackButtonClick(View view){
 		Intent intent = new Intent(this, TabHostActivity.class);
 		startActivity(intent);

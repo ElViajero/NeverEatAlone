@@ -6,7 +6,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
 /**
  * 
  * @author Hai Tang
- *
+ * ProfileActivity is used to set up the view of Profile page
  */
 public class ProfileActivity extends Activity{
 	@Override
