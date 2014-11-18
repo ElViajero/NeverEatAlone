@@ -14,6 +14,8 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
 /**
  * 
  * @author Hai Tang
+ * This class defines the MealNotificationAdapter which takes the List<Map<String,String>> data model
+ * from InvitesActivity.java set up the view for GUI.
  *
  */
 public class MealNotificationAdapter extends ArrayAdapter<Map<String,String>> {
@@ -32,6 +34,7 @@ public class MealNotificationAdapter extends ArrayAdapter<Map<String,String>> {
 	 * handler.
 	 * 
 	 * @author tejasvamsingh
+	 * @author Hai Tang
 	 * @param activity
 	 * @param mealNotifications
 	 */
@@ -50,6 +53,7 @@ public class MealNotificationAdapter extends ArrayAdapter<Map<String,String>> {
 	/**
 	 * Udpdate the view based on the notifications List.
 	 * @author tejasvamsingh
+	 * @author Hai Tang
 	 */
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {

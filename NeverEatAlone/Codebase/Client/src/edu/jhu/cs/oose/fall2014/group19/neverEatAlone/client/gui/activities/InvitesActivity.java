@@ -33,7 +33,7 @@ public class InvitesActivity extends ListActivity {
 
 	/**
 	 * This constructor is responsible for obtaining 
-	 * notifications and updating the GUT.
+	 * notifications and updating the GUI.
 	 * @author tejasvamsingh
 	 */
 	@Override
@@ -42,7 +42,7 @@ public class InvitesActivity extends ListActivity {
 		Type stringStringMap = new TypeToken<List<Map<String, String>>>(){}.getType();
 		String x= getIntent().getStringExtra("NotificationMapListJSON");
 		System.out.println("JSON is  : "+x);
-		NotificationList =GsonHelper.GetGsonInstance().
+		NotificationList = GsonHelper.GetGsonInstance().
 				fromJson(x,stringStringMap);
 		initView(savedInstanceState);
 
@@ -50,6 +50,7 @@ public class InvitesActivity extends ListActivity {
 
 	/**
 	 * This method updates the GUI.
+	 * @author Hai Tang
 	 * @author tejasvamsingh
 	 * @param savedInstanceState
 	 */
@@ -61,8 +62,6 @@ public class InvitesActivity extends ListActivity {
 		MealNotificationArrayAdapter = 
 				new MealNotificationAdapter(this,NotificationList);
 		setListAdapter(MealNotificationArrayAdapter);
-
-
 
 	}
 

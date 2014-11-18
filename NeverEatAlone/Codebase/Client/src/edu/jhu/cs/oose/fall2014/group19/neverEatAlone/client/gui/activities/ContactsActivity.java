@@ -11,7 +11,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.models.Contacts
 /**
  * 
  * @author Hai Tang
- *
+ * This class handles controller operations for the contacts tab
  */
 public class ContactsActivity extends ListActivity{
 	private ArrayAdapter<ContactsModel> adapter;
