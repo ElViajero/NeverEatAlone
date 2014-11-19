@@ -31,8 +31,8 @@ public class ContactsActivity extends ListActivity{
 		list.add(get("Tejas"));
 		list.add(get("Runze"));
 		list.add(get("Xiaozhou"));
-		list.add(get("Yuelin"));
-		list.add(get("Hai Tang"));
+		list.add(get("Yueling"));
+		list.add(get("Hai"));
 		// Initially select one of the items
 		list.get(1).setSelected(true);
 		return list;
