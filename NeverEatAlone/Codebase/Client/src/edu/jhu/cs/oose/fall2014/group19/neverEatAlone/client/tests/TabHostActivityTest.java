@@ -24,4 +24,10 @@ public class TabHostActivityTest extends
 		super.tearDown();
 	}
 	
+	/**
+	 * Tests the tab button  
+	 */
+	public void testView(){
+		
+	}
 }
