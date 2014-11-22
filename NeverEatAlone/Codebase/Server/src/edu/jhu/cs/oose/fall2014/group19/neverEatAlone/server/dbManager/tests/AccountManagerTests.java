@@ -62,7 +62,7 @@ public class AccountManagerTests {
 			Map<String,Object> parameters = new HashMap<String,Object>();
 			parameters.put("Username","Tejas");
 
-			//create cypher query to fetch node from the dataase.
+			//create cypher query to fetch node from the database.
 			String query = "MATCH (n:User) WHERE n.Username={Username} RETURN n";
 
 			//execute the query
