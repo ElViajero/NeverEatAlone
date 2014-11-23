@@ -66,7 +66,7 @@ public class ContactDBManager implements IContactDBManager {
 		System.out.println("CONTACT :"+queryParamterMap.get("ContactUsername"));
 
 
-		// set up paramters to execute and store the result of query
+		// set up parameters to execute and store the result of query
 		ExecutionEngine executionEngine = new ExecutionEngine(GraphDBInstance,
 				StringLogger.SYSTEM);				
 		ExecutionResult result;

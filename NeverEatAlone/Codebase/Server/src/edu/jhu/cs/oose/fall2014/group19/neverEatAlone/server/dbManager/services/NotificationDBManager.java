@@ -76,7 +76,7 @@ public class NotificationDBManager implements INotificationDBManager {
 
 
 
-		// set up paramters to execute and store the result of query
+		// set up parameters to execute and store the result of query
 		ExecutionEngine executionEngine = new ExecutionEngine(GraphDBInstance,
 				StringLogger.SYSTEM);				
 		ExecutionResult result;
@@ -107,7 +107,7 @@ public class NotificationDBManager implements INotificationDBManager {
 			resultMapList = DBManager.GetResultMapList(result);
 
 
-			//step 2 : add an edge fom poster to node.
+			//step 2 : add an edge from poster to node.
 
 			parameters = new HashMap<String,Object>();
 			parameters.put("Username",poster);
