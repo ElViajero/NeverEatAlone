@@ -1,9 +1,14 @@
 package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.workflow.tests.helpers;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.http.HttpEntity;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
@@ -12,6 +17,10 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 public class WorkflowTestHelper {
 
@@ -122,6 +131,37 @@ public class WorkflowTestHelper {
 
 	}
 
+	/**
+	 * This method builds the http response message map from a response
+	 * @param response
+	 * @return List<Map<String,String>>
+	 * @throws IllegalStateException
+	 * @throws IOException
+	 */
+	public static List<Map<String,String>> GetReponseMap(CloseableHttpResponse response) 
+			throws IllegalStateException, IOException{
+
+		// get response message
+		Gson gsonObject = new Gson();
+		Type stringStringMap = new TypeToken<List<Map<String, String>>>(){}.getType();
+		List<Map<String,String>> returnMap = null;
+		try {		    
+			HttpEntity entity1 = response.getEntity();
+			//do something useful with the response body
+			// and ensure it is fully consumed
+			BufferedReader in = 
+					new BufferedReader( new InputStreamReader( entity1.getContent() ) );		    
+			String responseString=in.readLine();
+			returnMap = gsonObject.fromJson(responseString, stringStringMap);
+
+			in.close();
+			EntityUtils.consume(entity1);
+		} finally {
+			response.close();
+		}	
+		
+		return returnMap; 
+	}
 
 
 

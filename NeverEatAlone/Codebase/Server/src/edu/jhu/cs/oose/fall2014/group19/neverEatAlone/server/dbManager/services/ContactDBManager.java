@@ -191,6 +191,7 @@ public class ContactDBManager implements IContactDBManager {
 
 			// This is the data returned.
 			resultMapList = DBManager.GetResultMapList(result);
+			System.out.println(resultMapList);
 
 			// Sucessful transaction.
 
