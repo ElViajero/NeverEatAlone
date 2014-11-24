@@ -11,6 +11,7 @@ import javax.ejb.Local;
  * Accessible to the management request handler layers. 
  * 
  * @author tejasvamsingh
+ * @author Xiaozhou Zhou
  *
  */
 @Local
@@ -22,6 +23,13 @@ public interface IContactDBManager {
 	 * @return
 	 */
 	public List<Map<String,String>> AddContact(Map<String,String[]> request);
+	
+	/**
+	 * method to fetch all contacts of a user
+	 * @param request
+	 * @return
+	 */
+	public List<Map<String,String>> GetAllContacts(Map<String,String[]> request);
 
 
 }

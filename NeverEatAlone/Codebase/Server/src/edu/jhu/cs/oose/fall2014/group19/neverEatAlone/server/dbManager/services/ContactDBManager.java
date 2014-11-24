@@ -19,6 +19,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.contracts
  * This class handles contact management related database transactions.
  * 
  * @author tejasvamsingh
+ * @author Xiaozhou Zhou
  *
  */
 @Stateless
@@ -127,6 +128,79 @@ public class ContactDBManager implements IContactDBManager {
 
 		}
 
+		return resultMapList;
+
+	}
+
+	/**
+	 * method to fetch all contacts of a user
+	 * @author Xiaozhou Zhou
+	 */
+	@Override
+	public List<Map<String, String>> GetAllContacts(Map<String,String[]> request) {
+		
+		// ********* LOGGING ********* 
+		System.out.println("Reached GetAllContacts in ContactDBManager");
+		System.out.flush();
+		// ********* LOGGING ********* 
+
+		//create a duplicate map.
+		Map<String,String[]> modifiableRequestMap = new HashMap<String,String[]>(request);
+		modifiableRequestMap.remove("RequestType");
+		modifiableRequestMap.remove("RequestID");
+
+
+		//format the parameters for the query.		
+		Map<String, String> queryParamterMap = 
+				DBManager.GetQueryParameterMap(modifiableRequestMap);
+
+
+		// ************************ LOGGING ************************
+		System.out.println("USERNAME :"+queryParamterMap.get("Username"));
+		
+		// set up parameters to execute and store the result of query
+		ExecutionEngine executionEngine = new ExecutionEngine(GraphDBInstance,
+				StringLogger.SYSTEM);				
+		ExecutionResult result;
+		List<Map<String,String>> resultMapList;
+		
+		try ( Transaction tx = GraphDBInstance.beginTx() )
+		{
+			//create a params map.
+			Map<String,Object> parameters = new HashMap<String,Object>();
+			parameters.put("Username",queryParamterMap.get("Username"));
+
+
+			// Fetch the contact via query
+
+			String query = "MATCH (a:User)-[:KNOWS]->(n:User)"
+					+ " WHERE "
+					+ "a.Username = {Username}"
+					+ "RETURN n ";
+
+			try{
+				//execute the query
+				result = executionEngine.execute(query,parameters);
+				tx.success();
+			}catch(Exception e){
+				System.out.println("Constraint violation in add contact. :: ");
+				System.out.println(e.getMessage());
+				result = null;
+				tx.failure();
+			}
+
+			// This is the data returned.
+			resultMapList = DBManager.GetResultMapList(result);
+			// Sucessful transaction.
+		}
+		
+		// remove password and email information 
+		for(int i=1; i<resultMapList.size()-1; i++){
+			resultMapList.get(i).remove("Password");
+			resultMapList.get(i).remove("Email");
+		}
+		
+		System.out.println("Contacts Fetched: "+resultMapList);
 		return resultMapList;
 
 	}

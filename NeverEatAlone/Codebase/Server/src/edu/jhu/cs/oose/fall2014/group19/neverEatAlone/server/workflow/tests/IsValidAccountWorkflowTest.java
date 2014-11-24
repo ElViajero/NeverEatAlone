@@ -55,12 +55,15 @@ public class IsValidAccountWorkflowTest {
 		CloseableHttpResponse response2 = WorkflowTestHelper.ExecuteRequest(nvps2);		
 		try {		    
 			HttpEntity entity2 = response2.getEntity();
+			
 			//do something useful with the response body
 			// and ensure it is fully consumed
 			BufferedReader in = 
 					new BufferedReader( new InputStreamReader( entity2.getContent() ) );		    
 			String response=in.readLine();
-			assertTrue(response.equals("Success"));	            	            
+//			System.out.println("get the response: "+response);
+			assertTrue(response.equals("[{\"Status\":\"Success\"},{\"Email\":\"Test@test.com\",\"Username\":\"TestUser\",\"Password\":"
+					+ "\"TestPass\"},{}]"));	            	            
 			in.close();
 			EntityUtils.consume(entity2);
 		} finally {
