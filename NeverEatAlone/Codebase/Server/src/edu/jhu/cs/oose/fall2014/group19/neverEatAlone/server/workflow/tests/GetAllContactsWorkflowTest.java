@@ -75,8 +75,32 @@ public class GetAllContactsWorkflowTest {
 		List<Map<String,String>> returnMap = WorkflowTestHelper.GetReponseMap(response); 
 //		System.out.println(returnMap);
 		assertTrue(returnMap.toString().equals("[{Status=Success}, "
-				+ "{Email=emailB, Username=UserB, Password=pwB}, {Email=emailC, Username=UserC, Password=pwC}, {}]"));
-
+				+ "{Username=UserB}, {Username=UserC}, {}]"));
+		
+		//get all contacts of B
+		nvps = new ArrayList <NameValuePair>();	    
+		nvps.add(new BasicNameValuePair("RequestID", "Contact"));	    
+		nvps.add(new BasicNameValuePair("RequestType", "GetAll"));
+		nvps.add(new BasicNameValuePair("Username", "UserB"));
+		
+		// check the response
+		response = WorkflowTestHelper.ExecuteRequest(nvps);
+		returnMap = WorkflowTestHelper.GetReponseMap(response); 
+		System.out.println(returnMap);
+		assertTrue(returnMap.toString().equals("[{Status=Success}, "
+				+ "{Username=UserA}, {}]"));
+		
+		//get all contacts of C
+		nvps = new ArrayList <NameValuePair>();	    
+		nvps.add(new BasicNameValuePair("RequestID", "Contact"));	    
+		nvps.add(new BasicNameValuePair("RequestType", "GetAll"));
+		nvps.add(new BasicNameValuePair("Username", "UserC"));
+		
+		// check the response
+		response = WorkflowTestHelper.ExecuteRequest(nvps);
+		returnMap = WorkflowTestHelper.GetReponseMap(response); 
+		System.out.println(returnMap);
+		assertTrue(returnMap.toString().equals("[{Status=Failed}]"));
 		
 	}
 }

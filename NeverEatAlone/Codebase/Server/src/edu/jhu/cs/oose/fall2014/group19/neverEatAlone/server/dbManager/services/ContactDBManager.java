@@ -191,13 +191,16 @@ public class ContactDBManager implements IContactDBManager {
 
 			// This is the data returned.
 			resultMapList = DBManager.GetResultMapList(result);
-			System.out.println(resultMapList);
-
 			// Sucessful transaction.
-
-
 		}
-
+		
+		// remove password and email information 
+		for(int i=1; i<resultMapList.size()-1; i++){
+			resultMapList.get(i).remove("Password");
+			resultMapList.get(i).remove("Email");
+		}
+		
+		System.out.println("Contacts Fetched: "+resultMapList);
 		return resultMapList;
 
 	}
