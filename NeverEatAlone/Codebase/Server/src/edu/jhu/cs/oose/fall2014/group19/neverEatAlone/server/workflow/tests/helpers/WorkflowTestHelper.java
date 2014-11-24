@@ -17,7 +17,7 @@ public class WorkflowTestHelper {
 
 	/**
 	 * 
-	 * Helper method to create a test account.
+	 * Helper method to create a default test account.
 	 * @return
 	 * @throws ClientProtocolException
 	 * @throws IOException
@@ -25,12 +25,23 @@ public class WorkflowTestHelper {
 
 	public static CloseableHttpResponse CreateTestAccount() throws ClientProtocolException, IOException{
 
+		return CreateTestAccount("TestUser", "TestPass", "Test@test.com");
+	}
+	
+	/**
+	 * 
+	 * Helper method to create a test account.
+	 * @return
+	 * @throws ClientProtocolException
+	 * @throws IOException
+	 */
+
+	public static CloseableHttpResponse CreateTestAccount(String user, String pw, String email) 
+			throws ClientProtocolException, IOException{
+
 		//get a client handle.
 		CloseableHttpClient httpclient = HttpClients.createDefault();
 		//set up post request.
-
-
-
 
 		HttpPost httpPost = new HttpPost("http://localhost:8080/NeverEatAloneServer/RequestHandler");
 
@@ -38,9 +49,9 @@ public class WorkflowTestHelper {
 		List <NameValuePair> nvps = new ArrayList <NameValuePair>();	    
 		nvps.add(new BasicNameValuePair("RequestID", "Account"));	    
 		nvps.add(new BasicNameValuePair("RequestType", "Create"));
-		nvps.add(new BasicNameValuePair("Username", "TestUser"));
-		nvps.add(new BasicNameValuePair("Password", "TestPass"));
-		nvps.add(new BasicNameValuePair("Email", "Test@test.com"));
+		nvps.add(new BasicNameValuePair("Username", user));
+		nvps.add(new BasicNameValuePair("Password", pw));
+		nvps.add(new BasicNameValuePair("Email", email));
 
 		httpPost.setEntity(new UrlEncodedFormEntity(nvps));
 
@@ -48,6 +59,7 @@ public class WorkflowTestHelper {
 		return httpclient.execute(httpPost);
 
 	}
+
 
 	/**
 	 * Helper method to delete a test account.

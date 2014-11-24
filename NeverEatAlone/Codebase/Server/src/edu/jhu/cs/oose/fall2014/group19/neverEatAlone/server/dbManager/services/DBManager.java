@@ -76,6 +76,11 @@ public class DBManager {
 			constraintFor(DynamicLabel.label("User")).
 			assertPropertyIsUnique("Username").create();			
 
+			
+			GraphDBInstance.schema().
+			constraintFor(DynamicLabel.label("User")).
+			assertPropertyIsUnique("Email").create();			
+
 			/*
 			GraphDBInstance.schema().
 			constraintFor(DynamicLabel.label("Post")).
