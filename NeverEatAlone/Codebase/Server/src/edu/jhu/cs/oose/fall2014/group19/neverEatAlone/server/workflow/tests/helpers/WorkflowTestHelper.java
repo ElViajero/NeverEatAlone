@@ -60,6 +60,16 @@ public class WorkflowTestHelper {
 
 	}
 
+	/**
+	 * Helper method to delete the default test account.
+	 * @return
+	 * @throws ClientProtocolException
+	 * @throws IOException
+	 */
+
+	public static CloseableHttpResponse DeleteTestAccount() throws ClientProtocolException, IOException{
+		return DeleteTestAccount("TestUser"); 
+	}
 
 	/**
 	 * Helper method to delete a test account.
@@ -67,8 +77,7 @@ public class WorkflowTestHelper {
 	 * @throws ClientProtocolException
 	 * @throws IOException
 	 */
-
-	public static CloseableHttpResponse DeleteTestAccount() throws ClientProtocolException, IOException{
+	public static CloseableHttpResponse DeleteTestAccount(String user) throws ClientProtocolException, IOException{
 
 		//get a client handle.
 		CloseableHttpClient httpclient = HttpClients.createDefault();
@@ -79,9 +88,9 @@ public class WorkflowTestHelper {
 		List <NameValuePair> nvps = new ArrayList <NameValuePair>();	    
 		nvps.add(new BasicNameValuePair("RequestID", "Account"));	    
 		nvps.add(new BasicNameValuePair("RequestType", "Delete"));
-		nvps.add(new BasicNameValuePair("Username", "TestUser"));
-		nvps.add(new BasicNameValuePair("Password", "TestPass"));
-		nvps.add(new BasicNameValuePair("Email", "Test@test.com"));
+		nvps.add(new BasicNameValuePair("Username", user));
+//		nvps.add(new BasicNameValuePair("Password", "TestPass"));
+//		nvps.add(new BasicNameValuePair("Email", "Test@test.com"));
 
 		httpPost.setEntity(new UrlEncodedFormEntity(nvps));
 
