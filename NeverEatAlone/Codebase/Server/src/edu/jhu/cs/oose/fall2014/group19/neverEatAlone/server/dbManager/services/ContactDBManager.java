@@ -19,6 +19,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.contracts
  * This class handles contact management related database transactions.
  * 
  * @author tejasvamsingh
+ * @author Xiaozhou Zhou
  *
  */
 @Stateless
@@ -129,6 +130,16 @@ public class ContactDBManager implements IContactDBManager {
 
 		return resultMapList;
 
+	}
+
+	/**
+	 * method to fetch all contacts of a user
+	 * @author Xiaozhou Zhou
+	 */
+	@Override
+	public List<Map<String, String>> GetAllContacts(Map<String,String[]> request) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

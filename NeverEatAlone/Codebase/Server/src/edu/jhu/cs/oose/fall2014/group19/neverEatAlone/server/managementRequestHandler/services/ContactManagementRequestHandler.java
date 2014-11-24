@@ -15,6 +15,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.contracts
  * adding/removing contacts etc.
  * 
  * @author tejasvamsingh
+ * @author Xiaozhou Zhou
  *
  */
 
@@ -34,6 +35,17 @@ public class ContactManagementRequestHandler {
 		System.out.println("Reaching AddContactRequest");
 		return IContactDBManagerObject.AddContact(request); 
 
+	}
+	
+	/**
+	 * This method handles requests to fetch all contacts
+	 * @param request
+	 * @return
+	 */
+	public List<Map<String, String>> GetAllContactRequest(Map<String,String[]> request) {
+		
+		System.out.println("Reaching GetAllContactRequest");
+		return IContactDBManagerObject.GetAllContacts(request); 
 	}
 
 }
