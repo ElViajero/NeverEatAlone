@@ -10,10 +10,20 @@
     tools:context="edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.ContactsActivity" >
 
     <ListView
-        android:id="@+id/listView_contacts"
+        android:id="@android:id/list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/button_contacts_addcontacts"
         android:layout_centerHorizontal="true" >
+
     </ListView>
+
+    <Button
+        android:id="@+id/button_contacts_addcontacts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="Add Contacts" />
 
 </RelativeLayout>
