@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import android.os.AsyncTask;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -117,6 +118,7 @@ public class NotificationExecutor extends AsyncTask<String, List<Map<String,Stri
 
 		}catch(IOException e){
 			System.out.println("IOException in NotificationExecutor." + e.getMessage());
+			return null;
 		} catch (ShutdownSignalException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -149,12 +151,19 @@ public class NotificationExecutor extends AsyncTask<String, List<Map<String,Stri
 			ChannelObject.basicCancel(Tag);
 			ChannelObject.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("IOException in onPostExecute");
+		}
+		catch (NullPointerException e){
+			System.out.println("NullPointer in onPostExecute");
+			Toast.makeText(ActivityObject.getApplicationContext(), 
+					"Could not connect to notification server", Toast.LENGTH_SHORT).show();			
+			new NotificationExecutor(ActivityObject).executeOnExecutor(THREAD_POOL_EXECUTOR, Username);
+			return;
 		}
 
-		ActivityObject.UpdateNotificationCache(resultMapList);
 
+		ActivityObject.UpdateNotificationCache(resultMapList);
+		System.out.println("Reaching here regularly");
 		new NotificationExecutor(ActivityObject).executeOnExecutor(THREAD_POOL_EXECUTOR, Username);
 
 	}

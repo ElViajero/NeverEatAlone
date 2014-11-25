@@ -72,10 +72,10 @@ public class TabHostActivity extends TabActivity {
 	}
 
 
-/**
- * This method is used to initialize the three main Tabs, i.e., Invites, Contacts and Profile
- * @author: Hai Tang
- */
+	/**
+	 * This method is used to initialize the three main Tabs, i.e., Invites, Contacts and Profile
+	 * @author: Hai Tang
+	 */
 	private void InitView() {
 		setContentView(R.layout.activity_tab_host);
 
@@ -102,7 +102,7 @@ public class TabHostActivity extends TabActivity {
 
 		/** Add the tabs  to the TabHost to display. */
 
-		
+
 		TabHost.addTab(TabContacts);
 		TabHost.addTab(TabProfile);
 		TabHost.addTab(TabInvites);
