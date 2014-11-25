@@ -7,7 +7,7 @@
 
     <uses-sdk
         android:minSdkVersion="11"
-        android:targetSdkVersion="21" /> 
+        android:targetSdkVersion="21" />
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -15,9 +15,7 @@
     <instrumentation
         android:name="android.test.InstrumentationTestRunner"
         android:label="your tests label"
-
         android:targetPackage="edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client" />
-
 
     <application
         android:allowBackup="true"
@@ -25,7 +23,6 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme"
         tools:ignore="UnusedAttribute" >
-
         <uses-library android:name="android.test.runner" />
 
         <activity
@@ -66,8 +63,16 @@
             android:label="@string/title_activity_meal_detail" >
         </activity>
         <activity
-            android:name="edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.TweetDetailActivity"
+            android:name=".gui.activities.TweetDetailActivity"
             android:label="@string/title_activity_tweet_detail" >
+        </activity>
+        <activity
+            android:name=".EditProfileActivity"
+            android:label="@string/title_activity_edit_profile" >
+        </activity>
+        <activity
+            android:name=".ChangePasswordActivity"
+            android:label="@string/title_activity_change_password" >
         </activity>
     </application>
 
