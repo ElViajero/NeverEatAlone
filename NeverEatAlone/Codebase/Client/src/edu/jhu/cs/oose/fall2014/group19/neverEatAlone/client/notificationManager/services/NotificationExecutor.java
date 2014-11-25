@@ -161,13 +161,9 @@ public class NotificationExecutor extends AsyncTask<String, List<Map<String,Stri
 			return;
 		}
 
-
 		ActivityObject.UpdateNotificationCache(resultMapList);
 		System.out.println("Reaching here regularly");
 		new NotificationExecutor(ActivityObject).executeOnExecutor(THREAD_POOL_EXECUTOR, Username);
-
 	}
-
-
-
 }
+

@@ -259,11 +259,14 @@ public class CreateMealInformationActivity extends FragmentActivity {
 		Map<String, List<String>> pageOneMap = MealPostPropertiesHelper.GetPageOneString(mealProperties, 
 				startDateAndTimeProperties, endDateAndTimeProperties);
 
-
-		// Send the Request
-		List<Map<String, String>> resultMapList = 
-				RequestHandlerHelper.GetRequestHandlerInstance().
-				HandleRequest(pageOneMap,"Notification","Meal") ;		
+		try{
+			// Send the Request
+			List<Map<String, String>> resultMapList = 
+					RequestHandlerHelper.GetRequestHandlerInstance().
+					HandleRequest(this,pageOneMap,"Notification","Meal") ;
+		}catch(NullPointerException e){
+			return;
+		}
 
 
 

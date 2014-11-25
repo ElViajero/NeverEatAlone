@@ -8,6 +8,8 @@ import java.util.concurrent.ExecutionException;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
+import android.app.Activity;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.MessageToasterHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.contracts.IRequestHandler;
 
 /**
@@ -38,7 +40,7 @@ public class RequestHandler implements IRequestHandler {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Map<String, String>> HandleRequest(
+	public List<Map<String, String>> HandleRequest(Activity activity,
 			Map<String,List<String>> requestMap,String requestID,String requestType) {
 
 
@@ -56,12 +58,20 @@ public class RequestHandler implements IRequestHandler {
 
 			RequestExecutor requestExecutor = new RequestExecutor();			
 			resultMapList = requestExecutor.execute(requestList).get();
+			if(resultMapList==null)
+				throw new NullPointerException();
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (ExecutionException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch(NullPointerException e){		
+			// This is a status that must be added to show that
+			//the server is unreachable.			
+			System.out.println("Null in RequestHandler. Couldn't reach the server.");
+			MessageToasterHelper.toastMessage(activity, "Could not connect to the server.");
+			throw e;
 		}
 
 		return resultMapList;

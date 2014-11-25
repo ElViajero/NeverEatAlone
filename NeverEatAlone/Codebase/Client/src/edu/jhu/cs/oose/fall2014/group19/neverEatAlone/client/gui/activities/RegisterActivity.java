@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.MessageToasterHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.contracts.IRequestProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.properties.RegisterRequestProperties;
@@ -87,19 +88,23 @@ public class RegisterActivity extends Activity {
 
 		System.out.println(password);
 		System.out.println(confirmPassword);
-		
+
+		// ************ THIS WASN'T WRITTEN BY TEJAS. ***************//
+		// *************WHY IS THIS HERE ? !!!! ******************//		
+		// ************* REMOVE THIS !!!!!!!!!!! ****************///
+
 		if(username.equals("")){
 			Toast.makeText(getApplicationContext(), 
 					"Username Is Empty !", Toast.LENGTH_SHORT).show();
 			return;
 		}
-		
+
 		if(email.equals("")){
 			Toast.makeText(getApplicationContext(), 
 					"Email Is Empty !", Toast.LENGTH_SHORT).show();
 			return;
 		}
-		
+
 		if(password.equals("")){
 			Toast.makeText(getApplicationContext(), 
 					"Passwords Is Empty !", Toast.LENGTH_SHORT).show();
@@ -111,7 +116,13 @@ public class RegisterActivity extends Activity {
 					"Passwords Don't Match !", Toast.LENGTH_SHORT).show();
 			return;
 		}
-		
+
+		// ************ THIS WASN'T WRITTEN BY TEJAS. ***************//
+		// *************WHY IS THIS HERE ? !!!! ******************//
+		// ************* REMOVE THIS !!!!!!!!!!! ****************///
+
+
+		// ********** TEJAS' CODE STARTS HERE ******************//
 
 		// Create a properties object.
 		IRequestProperties registerProperties = 
@@ -120,20 +131,16 @@ public class RegisterActivity extends Activity {
 		//Get the request Map 
 		Map<String, List<String>> requestMap = registerProperties.GetRequestMap();
 
-
-		// Initiate the request.
-		List<Map<String, String>> resultMapList = RequestHandlerHelper
-				.GetRequestHandlerInstance().HandleRequest(requestMap,RequestID,RequestType);
-
-		// Handle the result.
-		if (resultMapList.get(0).get("Status").equals("Success")) {
-			Toast.makeText(getApplicationContext(), "Registration Succesful !",
-					Toast.LENGTH_SHORT).show();
+		try{
+			// Initiate the request.
+			List<Map<String, String>> resultMapList = RequestHandlerHelper
+					.GetRequestHandlerInstance().HandleRequest(this,requestMap,RequestID,RequestType);
+			// Handle the result.
+			MessageToasterHelper.toastMessage(this, "Registration Successful");
 			Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
 			RegisterActivity.this.startActivity(intent);
-		} else {
-			Toast.makeText(getApplicationContext(), "Username already exists",
-					Toast.LENGTH_SHORT).show();
+		}catch(NullPointerException e){
+			return;
 		}
 
 	}

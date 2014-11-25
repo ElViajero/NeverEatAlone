@@ -13,8 +13,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.MessageToasterHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.properties.LoginRequestProperties;
 
@@ -37,6 +37,7 @@ public class MainActivity extends Activity {
 
 	/**
 	 * Event handler for client login requests.
+	 * @author tejasvamsingh
 	 * @param view
 	 * @throws FileNotFoundException 
 	 * @throws URISyntaxException 
@@ -49,28 +50,23 @@ public class MainActivity extends Activity {
 
 		// create the request properties object.
 		LoginRequestProperties loginProperties  = new LoginRequestProperties(username, password);
+		try{
+			// send the request.
+			List<Map<String, String>> resultMapList = 
+					RequestHandlerHelper.GetRequestHandlerInstance().
+					HandleRequest(this,loginProperties.GetRequestMap(),RequestID,RequestType) ;		
 
-		// send the request.
-		List<Map<String, String>> resultMapList = 
-				RequestHandlerHelper.GetRequestHandlerInstance().
-				HandleRequest(loginProperties.GetRequestMap(),RequestID,RequestType) ;		
-
-
-		//Controller code for gui update.
-
-		if(resultMapList.get(0).get("Status").equals("Success")){
-			Toast.makeText(getApplicationContext(), "Welcome "+username+" !",
-					Toast.LENGTH_SHORT).show();
-
+			MessageToasterHelper.toastMessage(this, "Welcome "+username);
+			//start the new activity
 			Intent intent = new Intent(MainActivity.this, TabHostActivity.class);
 			intent.putExtra("Username", username);
 			MainActivity.this.startActivity(intent);
-		}
 
-		else{
-			Toast.makeText(getApplicationContext(), "Invalid Credentials",
-					Toast.LENGTH_SHORT).show();
-		}
+		}catch(NullPointerException e){
+			// This is necessary. The exception has
+			//already been handled in the RequestHandler
+			//class
+			return;}
 
 
 

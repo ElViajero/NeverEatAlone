@@ -16,6 +16,9 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.BasicHttpParams;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.params.HttpParams;
 
 import android.os.AsyncTask;
 
@@ -37,7 +40,16 @@ public class RequestExecutor extends AsyncTask<List<NameValuePair>, Void, List<M
 
 	private static void InitHttpClienInstance(){
 		if(HttpClientInstance==null){						 
-			HttpClientInstance=new DefaultHttpClient();
+
+
+			// set timeout parameters
+			HttpParams param = new BasicHttpParams();
+			HttpConnectionParams.setConnectionTimeout(param, 1000);
+			HttpConnectionParams.setSoTimeout(param, 1000);
+			// create an HttpClientInstance
+			HttpClientInstance=new DefaultHttpClient(param);
+
+
 			GsonObject = new Gson();
 			try {
 				Configuration configurationInstance = 
@@ -95,7 +107,8 @@ public class RequestExecutor extends AsyncTask<List<NameValuePair>, Void, List<M
 
 		HttpResponse response;
 		//process the response.
-		try {
+		try {			
+
 			// Execute the request.
 			response = HttpClientInstance.execute(httpPost);	
 			HttpEntity entity = response.getEntity();
@@ -114,11 +127,21 @@ public class RequestExecutor extends AsyncTask<List<NameValuePair>, Void, List<M
 		}catch(Exception e){
 			System.out.println("EXCPETION IS :: "+ e.getMessage());
 			System.out.flush();
+			return null;
 		} 
 
 		System.out.println(returnMap);
 
 		return returnMap;		
+
+	}
+
+	@Override
+	protected void onPostExecute(List<Map<String,String>> resultMapList){
+
+		if(resultMapList==null){
+			System.out.println("The Damn thing is NULL");
+		}
 
 	}
 
