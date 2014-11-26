@@ -4,11 +4,11 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import android.os.AsyncTask;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -21,6 +21,7 @@ import com.rabbitmq.client.ShutdownSignalException;
 
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.configuration.ConfigurationHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.TabHostActivity;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.MessageToasterHelper;
 
 /**
  * 
@@ -45,6 +46,11 @@ public class NotificationExecutor extends AsyncTask<String, List<Map<String,Stri
 	static String Username;
 	static String Tag;
 	static Gson GsonObject;
+	static QueueingConsumer consumerObject;
+	static ConnectionFactory factoryObject;
+	static Connection connectionObject;
+	static boolean cleanBit;
+
 
 
 	/**
@@ -55,9 +61,12 @@ public class NotificationExecutor extends AsyncTask<String, List<Map<String,Stri
 	 * @author tejasvamsingh
 	 * @param tabHostActivity
 	 */
-	public NotificationExecutor(TabHostActivity tabHostActivity){
+	public NotificationExecutor(TabHostActivity tabHostActivity,String username){
 		ActivityObject = tabHostActivity;
-		GsonObject = new Gson();
+		GsonObject = new Gson();	
+		Username = username;
+		cleanBit=false;
+
 		//handling the try/catch stuff here makes sense for now.
 		try {
 			IPAddress = ConfigurationHelper.GetConfigurationInstance().GetIPAddress();
@@ -68,10 +77,11 @@ public class NotificationExecutor extends AsyncTask<String, List<Map<String,Stri
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 		System.out.println("The IP in NotificationExecutor is :" + IPAddress );
 		System.out.flush();
 	}
+
+
 
 	public NotificationExecutor() {
 		// TODO Auto-generated constructor stub
@@ -86,30 +96,24 @@ public class NotificationExecutor extends AsyncTask<String, List<Map<String,Stri
 	protected List<Map<String, String>> doInBackground(String... params) {
 
 
-		String username = params[0];
-		Username=username;
+		//String username = params[0];
+		//Username=username;
 		Type stringStringMap = new TypeToken<List<Map<String, String>>>(){}.getType();
 
 		try{
+			initConsumptionFramework();
 
-			ConnectionFactory factory = new ConnectionFactory();
-			factory.setHost(IPAddress);
-			Connection connection = factory.newConnection();
-			ChannelObject = connection.createChannel();
-			System.out.println("username is" + username);
-			ChannelObject.queueDeclare(username, false, false, false, null);
 			System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
-
-
-			QueueingConsumer consumer = new QueueingConsumer(ChannelObject);
-			Tag = ChannelObject.basicConsume(username, true, consumer);
-
-
-			QueueingConsumer.Delivery delivery = consumer.nextDelivery();  
-			String message = new String(delivery.getBody());
-			List<Map<String,String>> resultMapList = GsonObject.fromJson(message,stringStringMap);
-			System.out.println(" [x] Received '" + message + "'");
-
+			List<Map<String,String>> resultMapList = new ArrayList<Map<String,String>>();
+			while(true){
+				QueueingConsumer.Delivery delivery = consumerObject.nextDelivery(3000);
+				if(delivery==null)						
+					break;
+				String message = new String(delivery.getBody());
+				List<Map<String,String>> currentResultMapList= GsonObject.fromJson(message,stringStringMap);
+				resultMapList.addAll(currentResultMapList);
+				System.out.println(" [x] Received '" + message + "'");
+			}
 
 
 
@@ -145,35 +149,55 @@ public class NotificationExecutor extends AsyncTask<String, List<Map<String,Stri
 	@Override
 	protected void onPostExecute(List<Map<String,String>> resultMapList){
 
+		if(resultMapList==null)
+			MessageToasterHelper.toastMessage(ActivityObject,
+					"Could not connect to notification server.");
+
+		if(!resultMapList.isEmpty())
+			ActivityObject.UpdateNotificationCache(resultMapList);
+		System.out.println("Reaching here regularly");
+		if(!cleanBit)
+			new NotificationExecutor(ActivityObject,Username).executeOnExecutor(THREAD_POOL_EXECUTOR, Username);
+	}
+
+	public static void cleanUp(){		
+		cleanBit=true;
 		try {
-			//ChannelObject.queueDelete(Username);
-			ChannelObject.basicCancel(Tag);
+			//ChannelObject.queueDelete(Username);			
+			ChannelObject.basicCancel(Username);
 			ChannelObject.close();
+			connectionObject.close();
+
 		} catch (IOException e) {
-			System.out.println("IOException in onPostExecute");
+			System.out.println("Username is :" + Username);
+			System.out.println("IOException in cleanUp" + e.getMessage());
+			return;
 		}
 		catch (NullPointerException e){
 			System.out.println("NullPointer in onPostExecute");
-			Toast.makeText(ActivityObject.getApplicationContext(), 
-					"Could not connect to notification server", Toast.LENGTH_SHORT).show();			
-			new NotificationExecutor(ActivityObject).executeOnExecutor(THREAD_POOL_EXECUTOR, Username);
 			return;
 		}
 
-		ActivityObject.UpdateNotificationCache(resultMapList);
-		System.out.println("Reaching here regularly");
-		new NotificationExecutor(ActivityObject).executeOnExecutor(THREAD_POOL_EXECUTOR, Username);
+		ChannelObject=null;
+		consumerObject=null;
+		factoryObject=null;
+
+
 	}
 
-	public static void cleanUp(){
-		try {
-			ChannelObject.basicCancel(Tag);
-			ChannelObject.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+
+	private static void initConsumptionFramework() throws IOException{
+		if(ChannelObject==null){
+			factoryObject = new ConnectionFactory();
+			factoryObject.setHost(IPAddress);
+			connectionObject = factoryObject.newConnection();
+			ChannelObject = connectionObject.createChannel();
+			System.out.println("username is"+Username);
+			ChannelObject.queueDeclare(Username, false, false, false, null);
+			consumerObject =  new QueueingConsumer(ChannelObject);
+			ChannelObject.basicConsume(Username, true,Username,true,true,null, consumerObject);
+
 		}
-		ChannelObject=null;
 	}
 
 }

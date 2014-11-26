@@ -16,7 +16,7 @@ public class NotificationHandler implements INotificationHandler {
 	public void init(TabHostActivity tabHostactivity,String username) {
 		// start the notification framework.
 		notificationExecutorTask= 
-				new NotificationExecutor(tabHostactivity).
+				new NotificationExecutor(tabHostactivity,username).
 				executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, username);
 
 	}
