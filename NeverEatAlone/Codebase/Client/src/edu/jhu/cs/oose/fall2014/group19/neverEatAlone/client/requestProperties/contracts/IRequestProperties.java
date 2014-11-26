@@ -11,13 +11,12 @@ import java.util.Map;
  *
  */
 public interface IRequestProperties {
-
+	
 	/**
 	 * This method returns a map consisting of request data.
-	 * @author tejasvamsingh
 	 * @return
 	 */
-
+	
 	public Map<String,List<String>> GetRequestMap();
 }
 

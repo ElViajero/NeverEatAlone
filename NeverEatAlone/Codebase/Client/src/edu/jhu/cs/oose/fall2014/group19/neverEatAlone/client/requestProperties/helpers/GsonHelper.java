@@ -12,19 +12,18 @@ import com.google.gson.Gson;
 public class GsonHelper {
 
 	static Gson GsonInstance;
-
+	
 	/**
 	 * This method returns the Gson instance
 	 * to be shared by all client requests.
-	 * @author tejasvamsingh
 	 * @return
 	 */
 	public static Gson GetGsonInstance(){
-
+		
 		if(GsonInstance==null)
 			GsonInstance = new Gson();
 		return GsonInstance;
 	}
-
-
+	
+	
 }

@@ -13,7 +13,6 @@ public class MessageToasterHelper {
 
 	/**
 	 * This method toasts messages to the screen.
-	 * @author tejasvamsingh
 	 */
 	public static void toastMessage(Activity activity, String message){
 		Toast.makeText(activity.getApplicationContext(),

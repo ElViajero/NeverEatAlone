@@ -14,13 +14,6 @@ public class NotificationHelper {
 	static INotificationHandler iNotificationHandlerInstance;
 
 
-	/**
-	 * This method is used to start the notifications framework.
-	 * It is called via activity classes.
-	 * @author tejasvamsingh
-	 * @param tabHostactivity
-	 * @param username
-	 */
 	public static void init(
 			TabHostActivity tabHostactivity,
 			String username){
@@ -31,13 +24,6 @@ public class NotificationHelper {
 		iNotificationHandlerInstance.init(tabHostactivity, username);
 	}
 
-	/**
-	 * This method is used to clean up resources related to the notifcations
-	 * framework and is responsible for graceful shutdown.
-	 * It is called directly by the activity classes.
-	 * @author tejasvamsingh
-	 * 
-	 */
 	public static void cleanUp(){
 		iNotificationHandlerInstance.cleanUp();
 	}
