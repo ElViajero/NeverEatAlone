@@ -6,6 +6,8 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.http.impl.execchain.RequestAbortedException;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,6 +17,7 @@ import android.view.View;
 import android.widget.EditText;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.MessageToasterHelper;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.notificationHandler.services.NotificationHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.properties.LoginRequestProperties;
 
@@ -24,6 +27,7 @@ public class MainActivity extends Activity {
 	private EditText Password = null;
 	private String RequestID;
 	private String RequestType;
+	private boolean isCreated=false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +37,8 @@ public class MainActivity extends Activity {
 		Password = (EditText) findViewById(R.id.edit_password);
 		RequestID = "Login";
 		RequestType = "CheckCredentials";
+		System.out.println("inside onCreate in MainAcitivty");
+		MessageToasterHelper.toastMessage(this, "inside oncreate");
 	}
 
 	/**
@@ -62,7 +68,7 @@ public class MainActivity extends Activity {
 			intent.putExtra("Username", username);
 			MainActivity.this.startActivity(intent);
 
-		}catch(NullPointerException e){
+		}catch(RequestAbortedException e){
 			// This is necessary. The exception has
 			//already been handled in the RequestHandler
 			//class
@@ -103,6 +109,24 @@ public class MainActivity extends Activity {
 
 		Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
 		MainActivity.this.startActivity(intent);
+	}
+
+	@Override
+	protected void onResume(){
+		super.onResume();
+		System.out.println("in onResume");
+		cleanUp();
+	}
+
+
+	private void cleanUp() {
+		if(!isCreated){
+			isCreated=true;
+			return;
+		}
+		RequestHandlerHelper.cleanUp();
+		NotificationHelper.cleanUp();
+
 	}
 
 }

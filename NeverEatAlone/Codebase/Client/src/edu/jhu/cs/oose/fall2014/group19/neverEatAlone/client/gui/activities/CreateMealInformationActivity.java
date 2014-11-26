@@ -4,6 +4,8 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.http.impl.execchain.RequestAbortedException;
+
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.app.TimePickerDialog.OnTimeSetListener;
 import android.content.Intent;
@@ -264,7 +266,7 @@ public class CreateMealInformationActivity extends FragmentActivity {
 			List<Map<String, String>> resultMapList = 
 					RequestHandlerHelper.GetRequestHandlerInstance().
 					HandleRequest(this,pageOneMap,"Notification","Meal") ;
-		}catch(NullPointerException e){
+		}catch(RequestAbortedException e){
 			return;
 		}
 

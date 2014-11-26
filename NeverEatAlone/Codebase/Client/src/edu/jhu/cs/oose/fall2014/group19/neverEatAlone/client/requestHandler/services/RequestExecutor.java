@@ -31,7 +31,6 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.configuration.Confi
 public class RequestExecutor extends AsyncTask<List<NameValuePair>, Void, List<Map<String,String>>>  {
 
 	static HttpClient HttpClientInstance;
-
 	static String PostRequestURLString; 
 	static Gson GsonObject;
 
@@ -128,6 +127,7 @@ public class RequestExecutor extends AsyncTask<List<NameValuePair>, Void, List<M
 			System.out.println("EXCPETION IS :: "+ e.getMessage());
 			System.out.flush();
 			return null;
+			//throw new NullPointerException();
 		} 
 
 		System.out.println(returnMap);
@@ -138,13 +138,16 @@ public class RequestExecutor extends AsyncTask<List<NameValuePair>, Void, List<M
 
 	@Override
 	protected void onPostExecute(List<Map<String,String>> resultMapList){
-
+		System.out.println("reaching onPostExecute in RequestExecutor.");
 		if(resultMapList==null){
 			System.out.println("The Damn thing is NULL");
 		}
 
 	}
 
+	public static void cleanUp(){
+		HttpClientInstance=null;
+	}
 
 
 }

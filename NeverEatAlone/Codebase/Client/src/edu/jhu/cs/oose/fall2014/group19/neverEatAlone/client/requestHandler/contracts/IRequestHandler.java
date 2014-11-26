@@ -3,6 +3,8 @@ package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.con
 import java.util.List;
 import java.util.Map;
 
+import org.apache.http.impl.execchain.RequestAbortedException;
+
 import android.app.Activity;
 
 /**
@@ -22,6 +24,8 @@ public interface IRequestHandler{
 	 */
 	public List<Map<String,String>> HandleRequest(Activity activity,
 			Map<String,List<String>>requestMap,
-			String requestID,String requestType);
+			String requestID,String requestType) throws RequestAbortedException;
+
+	public void cleanUp();
 
 }

@@ -3,6 +3,8 @@ package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.http.impl.execchain.RequestAbortedException;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -139,7 +141,7 @@ public class RegisterActivity extends Activity {
 			MessageToasterHelper.toastMessage(this, "Registration Successful");
 			Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
 			RegisterActivity.this.startActivity(intent);
-		}catch(NullPointerException e){
+		}catch(RequestAbortedException e){
 			return;
 		}
 

@@ -1,4 +1,4 @@
-package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.notificationManager.services;
+package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.notificationHandler.services;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -147,7 +147,6 @@ public class NotificationExecutor extends AsyncTask<String, List<Map<String,Stri
 
 		try {
 			//ChannelObject.queueDelete(Username);
-
 			ChannelObject.basicCancel(Tag);
 			ChannelObject.close();
 		} catch (IOException e) {
@@ -165,5 +164,17 @@ public class NotificationExecutor extends AsyncTask<String, List<Map<String,Stri
 		System.out.println("Reaching here regularly");
 		new NotificationExecutor(ActivityObject).executeOnExecutor(THREAD_POOL_EXECUTOR, Username);
 	}
+
+	public static void cleanUp(){
+		try {
+			ChannelObject.basicCancel(Tag);
+			ChannelObject.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ChannelObject=null;
+	}
+
 }
 
