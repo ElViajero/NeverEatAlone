@@ -21,6 +21,11 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.notificationHandler
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.properties.LoginRequestProperties;
 
+/**
+ * This is the main activity that is displayed when the application starts. 
+ * @author tejasvamsingh
+ *
+ */
 public class MainActivity extends Activity {
 
 	private EditText Username = null;
@@ -104,13 +109,19 @@ public class MainActivity extends Activity {
 		}
 	}
 
-	/** Called when the user clicks the Sign Up button */
+	/** 
+	 * Called when the user clicks the Sign Up button 
+	 * */
 	public void OnSignUpButtonClick(View view) {		
 
 		Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
 		MainActivity.this.startActivity(intent);
 	}
 
+	/**
+	 * This method is called when the activity resumes.
+	 * @author tejasvamsingh
+	 */
 	@Override
 	protected void onResume(){
 		super.onResume();
@@ -119,6 +130,12 @@ public class MainActivity extends Activity {
 	}
 
 
+	/**
+	 * This method is used to free resources and gracefully shutdown 
+	 * request/response and notification frameworks when the login page
+	 * is reached.
+	 * @author tejasvamsingh
+	 */
 	private void cleanUp() {
 		if(!isCreated){
 			isCreated=true;
