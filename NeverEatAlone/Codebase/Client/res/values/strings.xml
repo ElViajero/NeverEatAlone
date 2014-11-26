@@ -62,5 +62,10 @@
     <string name="edit_profile">Edit Profile</string>
     <string name="gender">Gender</string>
     <string name="title_activity_change_password">ChangePasswordActivity</string>
+    <string name="title_activity_add_friends">AddFriendsActivity</string>
+    <string name="add_friends">Add Friends</string>
+    <string name="search_by_username">Search By Username</string>
+    <string name="search_by_email">Search By Email</string>
+    <string name="search">Search</string>
 
 </resources>

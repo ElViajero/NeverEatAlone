@@ -74,6 +74,10 @@
             android:name=".ChangePasswordActivity"
             android:label="@string/title_activity_change_password" >
         </activity>
+        <activity
+            android:name=".AddFriendsActivity"
+            android:label="@string/title_activity_add_friends" >
+        </activity>
     </application>
 
 </manifest>
