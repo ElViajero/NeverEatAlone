@@ -7,11 +7,21 @@ import android.os.AsyncTask;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.TabHostActivity;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.notificationHandler.contracts.INotificationHandler;
 
+/**
+ * This class is responsible for the initialization and clean up
+ * of the notifcations framework and related resources.
+ * @author tejasvamsingh
+ *
+ */
 public class NotificationHandler implements INotificationHandler {
 
 	AsyncTask<String, List<Map<String, String>>, 
 	List<Map<String, String>>> notificationExecutorTask;
 
+	/**
+	 * This method is used to initialize the notifications framework.
+	 * @author tejasvamsingh
+	 */
 	@Override
 	public void init(TabHostActivity tabHostactivity,String username) {
 		// start the notification framework.
@@ -21,6 +31,10 @@ public class NotificationHandler implements INotificationHandler {
 
 	}
 
+	/**
+	 * This method is used to clean up resources related to the notifications framework.
+	 * @author tejasvamsingh
+	 */
 	@Override
 	public void cleanUp() {
 		NotificationExecutor.cleanUp();

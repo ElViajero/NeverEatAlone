@@ -165,6 +165,11 @@ public class NotificationExecutor extends AsyncTask<String, List<Map<String,Stri
 		new NotificationExecutor(ActivityObject).executeOnExecutor(THREAD_POOL_EXECUTOR, Username);
 	}
 
+
+	/**
+	 * This method releases resources used by the notification executor.
+	 * @author tejasvamsingh
+	 */
 	public static void cleanUp(){
 		try {
 			ChannelObject.basicCancel(Tag);
