@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.concurrent.ExecutionException;
 
 import org.apache.http.NameValuePair;
+import org.apache.http.impl.execchain.RequestAbortedException;
 import org.apache.http.message.BasicNameValuePair;
 
 import android.app.Activity;
@@ -32,6 +33,7 @@ public class RequestHandler implements IRequestHandler {
 	 * It executes the requests by calling the execute method on RequestExecutor. 
 	 * 
 	 * @author tejasvamsingh
+	 * @throws RequestAbortedException 
 	 */
 
 	// This one SuppressWarning is required.
@@ -41,7 +43,8 @@ public class RequestHandler implements IRequestHandler {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Map<String, String>> HandleRequest(Activity activity,
-			Map<String,List<String>> requestMap,String requestID,String requestType) {
+			Map<String,List<String>> requestMap,String requestID,String requestType) 
+					throws RequestAbortedException {
 
 
 		// Get the name value pair list.
@@ -58,8 +61,12 @@ public class RequestHandler implements IRequestHandler {
 
 			RequestExecutor requestExecutor = new RequestExecutor();			
 			resultMapList = requestExecutor.execute(requestList).get();
-			if(resultMapList==null)
-				throw new NullPointerException();
+
+			if(resultMapList.get(0).get("Status").equals("Failed")){
+				MessageToasterHelper.toastMessage(activity, "Failed");
+				throw new RequestAbortedException("Exception already handled.");
+			}
+
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -71,11 +78,19 @@ public class RequestHandler implements IRequestHandler {
 			//the server is unreachable.			
 			System.out.println("Null in RequestHandler. Couldn't reach the server.");
 			MessageToasterHelper.toastMessage(activity, "Could not connect to the server.");
-			throw e;
+			throw new RequestAbortedException("Exception already handled.");
 		}
 
 		return resultMapList;
 	}
+
+
+
+	@Override
+	public void cleanUp(){
+		RequestExecutor.cleanUp();
+	}
+
 
 
 	/**
