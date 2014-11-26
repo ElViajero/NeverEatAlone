@@ -67,5 +67,6 @@
     <string name="search_by_username">Search By Username</string>
     <string name="search_by_email">Search By Email</string>
     <string name="search">Search</string>
+    <string name="deletehint">Are you sure you want to delete the following account?</string>
 
 </resources>
