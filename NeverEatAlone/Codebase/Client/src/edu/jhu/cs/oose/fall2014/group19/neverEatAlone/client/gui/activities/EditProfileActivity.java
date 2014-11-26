@@ -1,7 +1,9 @@
-package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client;
+package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities;
 
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.ProfileActivity;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.TabHostActivity;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R.id;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R.layout;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R.menu;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;

@@ -1,4 +1,4 @@
-package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client;
+package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,7 +8,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.TabHostActivity;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R.id;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R.layout;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R.menu;
 
 /**
  * This activity is used to set the view and control the logic related to add

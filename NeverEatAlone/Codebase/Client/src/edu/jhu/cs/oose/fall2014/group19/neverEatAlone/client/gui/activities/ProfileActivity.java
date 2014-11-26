@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.ChangePasswordActivity;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.EditProfileActivity;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
 
 /**
