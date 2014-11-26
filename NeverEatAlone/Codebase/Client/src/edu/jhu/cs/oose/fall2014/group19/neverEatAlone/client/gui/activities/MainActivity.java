@@ -66,7 +66,7 @@ public class MainActivity extends Activity {
 			List<Map<String, String>> resultMapList = 
 					RequestHandlerHelper.GetRequestHandlerInstance().
 					HandleRequest(this,loginProperties.GetRequestMap(),RequestID,RequestType) ;		
-
+			isCreated=true;
 			MessageToasterHelper.toastMessage(this, "Welcome "+username);
 			//start the new activity
 			Intent intent = new Intent(MainActivity.this, TabHostActivity.class);
@@ -76,7 +76,7 @@ public class MainActivity extends Activity {
 		}catch(RequestAbortedException e){
 			// This is necessary. The exception has
 			//already been handled in the RequestHandler
-			//class
+			//class.
 			return;}
 
 
@@ -137,8 +137,7 @@ public class MainActivity extends Activity {
 	 * @author tejasvamsingh
 	 */
 	private void cleanUp() {
-		if(!isCreated){
-			isCreated=true;
+		if(!isCreated){			
 			return;
 		}
 		RequestHandlerHelper.cleanUp();
