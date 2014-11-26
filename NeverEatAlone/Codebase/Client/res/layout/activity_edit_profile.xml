@@ -71,7 +71,7 @@
 
     <EditText
         android:id="@+id/editText_editprofile_workspace"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/textView_editprofile_workspace"
         android:layout_alignLeft="@+id/editText_editprofile_gender"
@@ -79,7 +79,7 @@
 
     <EditText
         android:id="@+id/editText_editprofile_gender"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/textView_editprofile_workspace"
         android:layout_alignLeft="@+id/editText_editprofile_email"
@@ -87,7 +87,7 @@
 
     <EditText
         android:id="@+id/editText_editprofile_email"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/textView_editprofile_gender"
         android:layout_alignLeft="@+id/editText_editprofile_name"
@@ -96,7 +96,7 @@
 
     <EditText
         android:id="@+id/editText_editprofile_name"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/textView_editprofile_email"
         android:layout_alignLeft="@+id/editText_editprofile_username"
@@ -105,11 +105,11 @@
 
     <EditText
         android:id="@+id/editText_editprofile_username"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/textView_editprofile_username"
         android:layout_alignBottom="@+id/textView_editprofile_username"
-        android:layout_alignLeft="@+id/textView_Title_Edit_Profile"
+		android:layout_toRightOf="@+id/textView_editprofile_username"
         android:layout_marginLeft="15dp"
         android:ems="10" />
 
