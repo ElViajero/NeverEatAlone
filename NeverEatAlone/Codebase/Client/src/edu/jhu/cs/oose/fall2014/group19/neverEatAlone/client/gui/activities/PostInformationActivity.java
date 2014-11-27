@@ -11,10 +11,23 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+/**
+ * This class is used to control the post information page.
+ * @author Hai Tang
+ *
+ */
 public class PostInformationActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		initView(savedInstanceState);
+	}
+	
+	/**
+	 * Method used to initialize the view
+	 * @author: Hai Tang
+	 */
+	private void initView(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_post_information);
 	}
