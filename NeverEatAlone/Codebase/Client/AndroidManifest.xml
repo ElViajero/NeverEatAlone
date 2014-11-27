@@ -67,16 +67,20 @@
             android:label="@string/title_activity_tweet_detail" >
         </activity>
         <activity
-            android:name="edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.EditProfileActivity"
+            android:name=".gui.activities.EditProfileActivity"
             android:label="@string/title_activity_edit_profile" >
         </activity>
         <activity
-            android:name="edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.ChangePasswordActivity"
+            android:name=".gui.activities.ChangePasswordActivity"
             android:label="@string/title_activity_change_password" >
         </activity>
         <activity
-            android:name="edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.AddFriendsActivity"
+            android:name=".gui.activities.AddFriendsActivity"
             android:label="@string/title_activity_add_friends" >
+        </activity>
+        <activity
+            android:name="edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.SelectFriendsActivity"
+            android:label="@string/title_activity_select_friends" >
         </activity>
     </application>
 

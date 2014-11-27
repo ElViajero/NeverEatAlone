@@ -68,5 +68,8 @@
     <string name="search_by_email">Search By Email</string>
     <string name="search">Search</string>
     <string name="deletehint">Are you sure you want to delete the following account?</string>
+    <string name="title_activity_select_friends">SelectFriendsActivity</string>
+    <string name="select_friends">Select Friends</string>
+    <string name="broadcast_to_all_friends">Broadcast to All Friends</string>
 
 </resources>
