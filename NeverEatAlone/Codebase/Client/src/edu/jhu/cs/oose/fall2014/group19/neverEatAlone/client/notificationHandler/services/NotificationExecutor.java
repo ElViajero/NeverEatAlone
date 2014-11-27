@@ -197,6 +197,7 @@ public class NotificationExecutor extends AsyncTask<String, List<Map<String,Stri
 			consumerObject =  new QueueingConsumer(ChannelObject);
 			ChannelObject.basicConsume(Username, true,Username,true,true,null, consumerObject);
 
+
 		}
 	}
 

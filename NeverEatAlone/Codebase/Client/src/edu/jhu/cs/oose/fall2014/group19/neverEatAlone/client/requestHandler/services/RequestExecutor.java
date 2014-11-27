@@ -27,7 +27,11 @@ import com.google.gson.reflect.TypeToken;
 
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.configuration.Configuration;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.configuration.ConfigurationHelper;
-
+/**
+ * This class executes HttpRequest asynchronously.
+ * @author tejasvamsingh
+ *
+ */
 public class RequestExecutor extends AsyncTask<List<NameValuePair>, Void, List<Map<String,String>>>  {
 
 	static HttpClient HttpClientInstance;
@@ -35,7 +39,13 @@ public class RequestExecutor extends AsyncTask<List<NameValuePair>, Void, List<M
 	static Gson GsonObject;
 
 
-
+	/**
+	 * This method initializes the http 
+	 * instance as well as related objects
+	 *  the first time an http request is sent.
+	 *  Typically called during user log in.
+	 *  @author tejasvamsingh
+	 */
 
 	private static void InitHttpClienInstance(){
 		if(HttpClientInstance==null){						 
@@ -74,6 +84,11 @@ public class RequestExecutor extends AsyncTask<List<NameValuePair>, Void, List<M
 
 
 
+	/**
+	 * This method is responsible for sending an http request and recieving a 
+	 * response asynchronously.
+	 * @author tejasvamsingh
+	 */
 	@Override
 	protected List<Map<String, String>> doInBackground(
 			List<NameValuePair>... params) {
@@ -136,15 +151,23 @@ public class RequestExecutor extends AsyncTask<List<NameValuePair>, Void, List<M
 
 	}
 
+	/**
+	 * This method id called after the http response is obtained.
+	 * @author tejasvamsingh
+	 */
 	@Override
 	protected void onPostExecute(List<Map<String,String>> resultMapList){
 		System.out.println("reaching onPostExecute in RequestExecutor.");
 		if(resultMapList==null){
-			System.out.println("The Damn thing is NULL");
+			System.out.println("The result is NULL");
 		}
 
 	}
 
+	/**
+	 * This method is responsible for freeing up http client related resources.
+	 * @author tejasvamsingh
+	 */
 	public static void cleanUp(){
 		HttpClientInstance=null;
 	}

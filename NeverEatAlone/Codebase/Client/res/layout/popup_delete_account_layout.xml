@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--@author Hai Tang  -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" 
+    android:background="@drawable/grey">
+
+
+    <TextView
+        android:id="@+id/textView_popup_delete_account_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="29dp"
+        android:text="@string/delete_account"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <Button
+        android:id="@+id/button_popup_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/button_popup_confirm"
+        android:layout_alignBottom="@+id/button_popup_confirm"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="37dp"
+        android:text="@string/cancel" />
+
+    <Button
+        android:id="@+id/button_popup_confirm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textView_popup_delete_account_title"
+        android:layout_marginLeft="32dp"
+        android:layout_marginTop="167dp"
+        android:text="@string/confirm" />
+
+    <TextView
+        android:id="@+id/textView_popup_deletehint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView_popup_delete_account_title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="57dp"
+        android:text="@string/deletehint"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <TextView
+        android:id="@+id/textView_popup_accountinfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/textView_popup_deletehint"
+		android:layout_centerHorizontal="true"
+        android:text="(Temp) Wonder: tang@jhu.edu"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+</RelativeLayout>

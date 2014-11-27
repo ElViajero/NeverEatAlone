@@ -271,7 +271,8 @@ public class CreateMealInformationActivity extends FragmentActivity {
 		}
 
 
-
+		Intent intent = new Intent(CreateMealInformationActivity.this, SelectFriendsActivity.class);
+		CreateMealInformationActivity.this.startActivity(intent);
 
 	}
 }

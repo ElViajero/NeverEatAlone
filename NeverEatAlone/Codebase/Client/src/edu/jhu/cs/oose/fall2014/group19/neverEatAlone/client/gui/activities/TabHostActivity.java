@@ -20,6 +20,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.h
 //Cannot extends Activity
 /**
  * 
+ * @author tejasvamsingh
  * @author Hai Tang
  * TabHostActivity is used to create and switch between three main pages: 
  * Invites page, Contacts page and Profile page.
@@ -41,7 +42,6 @@ public class TabHostActivity extends TabActivity {
 
 	/**
 	 *  This method intializes the activity.
-	 *  
 	 *  @author tejasvamsingh 
 	 *  */
 
@@ -71,6 +71,7 @@ public class TabHostActivity extends TabActivity {
 	/**
 	 * This method is used to initialize the three main Tabs, i.e., Invites, Contacts and Profile
 	 * @author: Hai Tang
+	 * @author tejasvamsingh
 	 */
 	private void InitView() {
 		setContentView(R.layout.activity_tab_host);
@@ -98,10 +99,10 @@ public class TabHostActivity extends TabActivity {
 
 		/** Add the tabs  to the TabHost to display. */
 
-
+		TabHost.addTab(TabInvites);
 		TabHost.addTab(TabContacts);
 		TabHost.addTab(TabProfile);
-		TabHost.addTab(TabInvites);
+
 
 	}
 

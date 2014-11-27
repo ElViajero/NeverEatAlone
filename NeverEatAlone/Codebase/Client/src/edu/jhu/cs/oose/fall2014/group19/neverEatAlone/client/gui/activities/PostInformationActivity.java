@@ -1,30 +1,41 @@
 package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities;
 
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R.id;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R.layout;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R.menu;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
+
 /**
- * 
+ * This class is used to control the post information page.
  * @author Hai Tang
- * MealDetailActivity class is used to set up the view of the Meal Details page.
- * And also set up the functions after clicking different buttons.
+ *
  */
-public class MealDetailActivity extends Activity {
+public class PostInformationActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		initView(savedInstanceState);
+	}
+	
+	/**
+	 * Method used to initialize the view
+	 * @author: Hai Tang
+	 */
+	private void initView(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_meal_detail);
+		setContentView(R.layout.activity_post_information);
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.meal_detail, menu);
+		getMenuInflater().inflate(R.menu.post_information, menu);
 		return true;
 	}
 
@@ -39,30 +50,21 @@ public class MealDetailActivity extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-
+	
 	/**
 	 * Method used for back button click
 	 * @author: Hai Tang
 	 */
 	public void OnBackButtonClick(View view){
-		Intent intent = new Intent(this, TabHostActivity.class);
+		Intent intent = new Intent(this, SelectFriendsActivity.class);
 		startActivity(intent);
 	}
 	
 	/**
-	 * Method used for accept button click
+	 * Method used for post button click
 	 * @author: Hai Tang
 	 */
-	public void OnAcceptButtonClick(View view){
-		Intent intent = new Intent(this, TabHostActivity.class);
-		startActivity(intent);
-	}
-	
-	/**
-	 * Method used for decline button click
-	 * @author: Hai Tang
-	 */
-	public void OnDeclineButtonClick(View view){
+	public void OnPostButtonClick(View view){
 		Intent intent = new Intent(this, TabHostActivity.class);
 		startActivity(intent);
 	}

@@ -1,6 +1,7 @@
 package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.adapters;
 
 import java.util.List;
+import java.util.Map;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -16,23 +17,23 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.models.Contacts
 /**
  * 
  * @author Hai Tang
- *This adapter adds a listener on the Checkbox view . 
+ *This adapter adds a listener on the Checkbox view. 
  *If the checkbox is selected the underlying data of the model is changed. 
  *Checkbox gets the corresponding model element assigned via the getTag() method.
  */
-public class InteractiveArrayAdapter extends ArrayAdapter<ContactsModel> {
+public class ContactsInformationAdapter extends ArrayAdapter<ContactsModel> {
 
-  private final List<ContactsModel> list;
-  private final Activity context;
+  private List<ContactsModel> contactInfoList;
+  private Activity context;
 
-  public InteractiveArrayAdapter(Activity context, List<ContactsModel> list) {
-    super(context, R.layout.row_contact_item_layout, list);
-    this.context = context;
-    this.list = list;
+  public ContactsInformationAdapter(Activity activity, List<ContactsModel> contactInfoList) {
+    super(activity, R.layout.row_contact_item_layout, contactInfoList);
+    this.context = activity;
+    this.contactInfoList = contactInfoList;
   }
 
   static class ViewHolder {
-    protected TextView text;
+    protected TextView name;
     protected CheckBox checkbox;
   }
 
@@ -43,29 +44,26 @@ public class InteractiveArrayAdapter extends ArrayAdapter<ContactsModel> {
       LayoutInflater inflator = context.getLayoutInflater();
       view = inflator.inflate(R.layout.row_contact_item_layout, null);
       final ViewHolder viewHolder = new ViewHolder();
-      viewHolder.text = (TextView) view.findViewById(R.id.contacts_name);
+      viewHolder.name = (TextView) view.findViewById(R.id.contacts_name);
       viewHolder.checkbox = (CheckBox) view.findViewById(R.id.contacts_check);
-      viewHolder.checkbox
-          .setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+      viewHolder.checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
             @Override
-            public void onCheckedChanged(CompoundButton buttonView,
-                boolean isChecked) {
-            	ContactsModel element = (ContactsModel) viewHolder.checkbox
-                  .getTag();
-              element.setSelected(buttonView.isChecked());
-
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            	ContactsModel contactelement = (ContactsModel) viewHolder.checkbox.getTag();
+              contactelement.setSelected(buttonView.isChecked());
             }
           });
+      
       view.setTag(viewHolder);
-      viewHolder.checkbox.setTag(list.get(position));
+      viewHolder.checkbox.setTag(contactInfoList.get(position));
     } else {
       view = convertView;
-      ((ViewHolder) view.getTag()).checkbox.setTag(list.get(position));
+      ((ViewHolder) view.getTag()).checkbox.setTag(contactInfoList.get(position));
     }
     ViewHolder holder = (ViewHolder) view.getTag();
-    holder.text.setText(list.get(position).getName());
-    holder.checkbox.setChecked(list.get(position).isSelected());
+    holder.name.setText(contactInfoList.get(position).getName());
+    holder.checkbox.setChecked(contactInfoList.get(position).isSelected());
     return view;
   }
 } 
