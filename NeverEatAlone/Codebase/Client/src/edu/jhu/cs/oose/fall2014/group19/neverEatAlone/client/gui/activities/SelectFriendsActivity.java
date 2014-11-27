@@ -127,4 +127,15 @@ public class SelectFriendsActivity extends ListActivity {
 		}
 		updateView(selectFriendsList);
 	}
+	
+	/**
+	 * Method for next button click
+	 * 
+	 * @author: Hai Tang
+	 */
+	public void OnNextButtonClick(View view) {
+		Intent intent = new Intent(SelectFriendsActivity.this,
+				PostInformationActivity.class);
+		SelectFriendsActivity.this.startActivity(intent);
+	}
 }

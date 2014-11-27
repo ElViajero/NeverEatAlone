@@ -79,8 +79,12 @@
             android:label="@string/title_activity_add_friends" >
         </activity>
         <activity
-            android:name="edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.SelectFriendsActivity"
+            android:name=".gui.activities.SelectFriendsActivity"
             android:label="@string/title_activity_select_friends" >
+        </activity>
+        <activity
+            android:name="edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.PostInformationActivity"
+            android:label="@string/title_activity_post_information" >
         </activity>
     </application>
 

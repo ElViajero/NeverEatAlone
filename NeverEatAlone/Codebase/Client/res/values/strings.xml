@@ -71,5 +71,11 @@
     <string name="title_activity_select_friends">SelectFriendsActivity</string>
     <string name="select_friends">Select Friends</string>
     <string name="broadcast_to_all_friends">Broadcast to All Friends</string>
+    <string name="title_activity_post_information">PostInformationActivity</string>
+    <string name="post_information">Post Information</string>
+    <string name="post_time">Time for the Post</string>
+    <string name="start_post">Start Post</string>
+    <string name="end_post">End Post</string>
+    <string name="additional_info">Additional Information</string>
 
 </resources>
