@@ -21,12 +21,12 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.models.Contacts
  *If the checkbox is selected the underlying data of the model is changed. 
  *Checkbox gets the corresponding model element assigned via the getTag() method.
  */
-public class ContactsInformationAdapter extends ArrayAdapter<Map<String, String>> {
+public class ContactsInformationAdapter extends ArrayAdapter<ContactsModel> {
 
-  private List<Map<String, String>> contactInfoList;
+  private List<ContactsModel> contactInfoList;
   private Activity context;
 
-  public ContactsInformationAdapter(Activity activity, List<Map<String, String>> contactInfoList) {
+  public ContactsInformationAdapter(Activity activity, List<ContactsModel> contactInfoList) {
     super(activity, R.layout.row_contact_item_layout, contactInfoList);
     this.context = activity;
     this.contactInfoList = contactInfoList;
@@ -50,8 +50,8 @@ public class ContactsInformationAdapter extends ArrayAdapter<Map<String, String>
 
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-            	List<Map<String, String>> contactelement = (List<Map<String, String>>) viewHolder.checkbox.getTag();
-//              contactelement.setSelected(buttonView.isChecked());
+            	ContactsModel contactelement = (ContactsModel) viewHolder.checkbox.getTag();
+              contactelement.setSelected(buttonView.isChecked());
             }
           });
       
@@ -62,8 +62,8 @@ public class ContactsInformationAdapter extends ArrayAdapter<Map<String, String>
       ((ViewHolder) view.getTag()).checkbox.setTag(contactInfoList.get(position));
     }
     ViewHolder holder = (ViewHolder) view.getTag();
-//    holder.name.setText(contactInfoList.get(position).get("Name"));
-//    holder.checkbox.setChecked(contactInfoList.get(position).isSelected());
+    holder.name.setText(contactInfoList.get(position).getName());
+    holder.checkbox.setChecked(contactInfoList.get(position).isSelected());
     return view;
   }
 } 
