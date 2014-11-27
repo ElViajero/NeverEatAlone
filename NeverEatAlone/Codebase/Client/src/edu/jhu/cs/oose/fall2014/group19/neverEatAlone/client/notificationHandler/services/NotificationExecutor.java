@@ -153,7 +153,7 @@ public class NotificationExecutor extends AsyncTask<String, List<Map<String,Stri
 			MessageToasterHelper.toastMessage(ActivityObject,
 					"Could not connect to notification server.");
 
-		if(!resultMapList.isEmpty())
+		else if(!resultMapList.isEmpty())
 			ActivityObject.UpdateNotificationCache(resultMapList);
 		System.out.println("Reaching here regularly");
 		if(!cleanBit)
