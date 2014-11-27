@@ -16,7 +16,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="0dp"
-        android:text="Profile"
+        android:text="@string/profile"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/profile"
+        android:layout_below="@+id/imageView_profile_avatar"
         android:layout_marginTop="20dp"
         android:text="@string/username"
         android:textAppearance="?android:attr/textAppearanceMedium" />
@@ -38,7 +38,7 @@
         android:layout_alignParentStart="true"
         android:layout_below="@+id/profile_username"
         android:layout_marginTop="20dp"
-        android:text="Alias"
+        android:text="@string/alias"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
@@ -47,7 +47,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/profile_alias"
         android:layout_marginTop="20dp"
-        android:text="Name"
+        android:text="@string/name"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
@@ -56,18 +56,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/profile_name"
         android:layout_marginTop="20dp"
-        android:text="Email"
+        android:text="@string/email"
         android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <TextView
-        android:id="@+id/textview_profile_edit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/textView_username"
-        android:layout_below="@+id/profile"
-        android:layout_toRightOf="@+id/button_profile_changepassword"
-        android:text="Edit"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <TextView
         android:id="@+id/textView_alias"
@@ -106,15 +96,17 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
-            android:text="Log Out" />
+            android:onClick="onLogoutButtonClick"
+            android:text="@string/logout" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/button_delete_account"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            android:text="Delete Account" />
+            android:onClick="onDeleteAccountButtonClick"
+            android:text="@string/delete_account" />
 
         <Button
             android:id="@+id/button_profile_changepassword"
@@ -123,7 +115,8 @@
             android:layout_above="@+id/button_profile_logout"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="18dp"
-            android:text="Change Password" />
+            android:onClick="OnChangePasswordButtonClick"
+            android:text="@string/change_password" />
 
         <TextView
             android:id="@+id/textView_workspace"
@@ -142,7 +135,7 @@
             android:layout_alignLeft="@+id/profile_email"
             android:layout_below="@+id/profile_email"
             android:layout_marginTop="27dp"
-            android:text="Workspace"
+            android:text="@string/workspace"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
@@ -155,5 +148,23 @@
             android:layout_alignLeft="@+id/textView_Name"
             android:text="harry@jhu.edu"
             android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <Button
+            android:id="@+id/button_profile_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/textView_username"
+            android:layout_alignParentRight="true"
+            android:text="@string/edit"
+            android:onClick="OnEditButtonClick"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <ImageView
+            android:id="@+id/imageView_profile_avatar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/profile"
+            android:src="@drawable/user_profile" />
 
 </RelativeLayout>

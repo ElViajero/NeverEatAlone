@@ -99,9 +99,8 @@ public class TabHostActivity extends TabActivity {
 
 		/** Add the tabs  to the TabHost to display. */
 
-
-		TabHost.addTab(TabContacts);
 		TabHost.addTab(TabProfile);
+		TabHost.addTab(TabContacts);
 		TabHost.addTab(TabInvites);
 
 	}
