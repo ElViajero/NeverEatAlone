@@ -10,9 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.adapters.ContactsInformationAdapter;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.models.ContactsModel;
 
 /**
@@ -25,7 +23,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.models.Contacts
 public class SelectFriendsActivity extends ListActivity {
 
 	private ArrayAdapter<ContactsModel> selectFriendsAdapter;
-	List<ContactsModel> selectFriendsList;
+	List<ContactsModel> friendsList;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -40,24 +38,27 @@ public class SelectFriendsActivity extends ListActivity {
 	private void initView(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_select_friends);
-
-		selectFriendsList = getModel();
+		/*
+		friendsList = getModel();
 		selectFriendsAdapter = new ContactsInformationAdapter(this,
 				selectFriendsList);
 		setListAdapter(selectFriendsAdapter);
+		 */
 	}
-	
+
 	/**
 	 * Method used to update view after clicking the broadcast button
 	 * @author: Hai Tang
 	 */
 	private void updateView(List<ContactsModel> selectFriendsList){
-		selectFriendsList = this.selectFriendsList;
+		//selectFriendsList = this.selectFriendsList;
 		setContentView(R.layout.activity_select_friends);
-
+		/*
 		selectFriendsAdapter = new ContactsInformationAdapter(this,
 				selectFriendsList);
+
 		setListAdapter(selectFriendsAdapter);
+		 */
 	}
 
 	/**
@@ -110,6 +111,7 @@ public class SelectFriendsActivity extends ListActivity {
 	 * 
 	 * @author: Hai Tang
 	 */
+
 	public void OnBackButtonClick(View view) {
 		Intent intent = new Intent(SelectFriendsActivity.this,
 				CreateMealInformationActivity.class);
@@ -121,13 +123,15 @@ public class SelectFriendsActivity extends ListActivity {
 	 * 
 	 * @author: Hai Tang
 	 */
+
+	/*
 	public void OnBroadcastButtonClick(View view) {
 		for (int i = 0; i < selectFriendsList.size(); i++) {
 			selectFriendsList.get(i).setSelected(true);
 		}
 		updateView(selectFriendsList);
-	}
-	
+	}*/
+
 	/**
 	 * Method for next button click
 	 * 

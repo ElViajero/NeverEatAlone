@@ -14,10 +14,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.AccountProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.MessageToasterHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.contracts.IRequestProperties;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.properties.RegisterRequestProperties;
 
 /**
  * This class handles controller logic for the registration 
@@ -127,11 +126,12 @@ public class RegisterActivity extends Activity {
 		// ********** TEJAS' CODE STARTS HERE ******************//
 
 		// Create a properties object.
-		IRequestProperties registerProperties = 
-				new RegisterRequestProperties(username, password, email);
+		AccountProperties registerProperties = 
+				new AccountProperties(username, password,email);
+
 
 		//Get the request Map 
-		Map<String, List<String>> requestMap = registerProperties.GetRequestMap();
+		Map<String, Object> requestMap = registerProperties.toMap();
 
 		try{
 			// Initiate the request.

@@ -16,10 +16,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.AccountProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.MessageToasterHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.notificationHandler.services.NotificationHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.properties.LoginRequestProperties;
 
 /**
  * This is the main activity that is displayed when the application starts. 
@@ -60,14 +60,18 @@ public class MainActivity extends Activity {
 		String password = Password.getText().toString();
 
 		// create the request properties object.
-		LoginRequestProperties loginProperties  = new LoginRequestProperties(username, password);
+		AccountProperties loginProperties  = new AccountProperties(username, password);
 		try{
 			// send the request.
 			List<Map<String, String>> resultMapList = 
 					RequestHandlerHelper.GetRequestHandlerInstance().
-					HandleRequest(this,loginProperties.GetRequestMap(),RequestID,RequestType) ;		
+					HandleRequest(this,loginProperties.toMap(),RequestID,RequestType) ;		
 			isCreated=true;
 			MessageToasterHelper.toastMessage(this, "Welcome "+username);
+
+			//construct the user account.
+			AccountProperties userAccount = new AccountProperties(resultMapList.get(1));
+
 			//start the new activity
 			Intent intent = new Intent(MainActivity.this, TabHostActivity.class);
 			intent.putExtra("Username", username);

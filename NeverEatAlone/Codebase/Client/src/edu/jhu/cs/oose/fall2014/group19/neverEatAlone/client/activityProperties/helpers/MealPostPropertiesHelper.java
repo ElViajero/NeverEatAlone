@@ -1,4 +1,4 @@
-package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.helpers.meal;
+/*package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.helpers;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,25 +9,25 @@ import java.util.Random;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.properties.meal.DateAndTimeProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.properties.meal.MealProperties;
 
-/**
+ *//**
  * This class is a helper class
  * that implements the 3 page approach to meal post creation.
  * @author tejasvamsingh
  *
- */
+ *//*
 
 public class MealPostPropertiesHelper {
 
-	/**
-	 * This method returns a JSON string representing data on the first
-	 * page of meal post creation
-	 * 
-	 * @author tejasvamsingh
-	 * @param mealProperties
-	 * @param startDateAndTimeProperties
-	 * @param endDateAndTimeProperties
-	 * @return
-	 */
+  *//**
+  * This method returns a JSON string representing data on the first
+  * page of meal post creation
+  * 
+  * @author tejasvamsingh
+  * @param mealProperties
+  * @param startDateAndTimeProperties
+  * @param endDateAndTimeProperties
+  * @return
+  *//*
 
 
 	//NOTE :: I'm temporarily returning a MAP since the GUI doesn't 
@@ -94,3 +94,4 @@ public class MealPostPropertiesHelper {
 
 
 }
+   */

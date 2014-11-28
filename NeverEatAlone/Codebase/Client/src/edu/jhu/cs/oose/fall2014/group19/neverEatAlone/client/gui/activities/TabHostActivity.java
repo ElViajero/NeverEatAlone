@@ -85,6 +85,7 @@ public class TabHostActivity extends TabActivity {
 
 		// Set the Tab name and Activity
 		// that will be opened when particular Tab will be selected
+
 		TabInvites.setIndicator("Invites");
 		Intent intent = new Intent(this,InvitesActivity.class);
 		intent.putExtra("NotificationMapListJSON", NotificationMapListJSON);

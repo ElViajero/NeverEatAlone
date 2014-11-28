@@ -1,4 +1,5 @@
-package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.properties.meal;
+package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services;
+/*package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.properties.meal;
 
 import java.util.List;
 import java.util.Map;
@@ -37,3 +38,4 @@ public class MealPostProperties {
 
 
 }
+ */

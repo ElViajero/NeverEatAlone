@@ -1,8 +1,11 @@
 package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.apache.http.impl.execchain.RequestAbortedException;
 
 import android.app.ListActivity;
 import android.content.Intent;
@@ -10,17 +13,24 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.AccountProperties;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.ContactProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.adapters.ContactsInformationAdapter;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.models.ContactsModel;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
 
 /**
  * This class handles controller operations for the contacts tab
  * 
+ * @author tejasvamsingh
  * @author Hai Tang
  */
 public class ContactsActivity extends ListActivity {
-	private ArrayAdapter<ContactsModel> contactsInformationAdapter;
-	List<ContactsModel> contactsInfoList;
+	private ArrayAdapter<ContactProperties> contactsInformationAdapter;
+
+	String requestType;
+	String requestID;
+
+	List<ContactProperties> contactList;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -29,6 +39,7 @@ public class ContactsActivity extends ListActivity {
 
 	/**
 	 * 
+	 * @author tejasvamsingh
 	 * @author: Hai Tang
 	 * @param savedInstanceState
 	 *            This method update the GUI
@@ -37,37 +48,45 @@ public class ContactsActivity extends ListActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_contacts);
 
-		contactsInfoList = getModel();
+		fetchContacts();
 		contactsInformationAdapter = new ContactsInformationAdapter(this,
-				contactsInfoList);
+				contactList);
 		setListAdapter(contactsInformationAdapter);
 	}
 
 	/**
-	 * This method creates the list data model used to show in the contact page
-	 * 
-	 * @author: Hai Tang
+	 * This method fetches contacts from the server if
+	 * the cache is empty.
+	 * @author tejasvamsingh
+	 * @return
 	 */
-	private List<ContactsModel> getModel() {
-		List<ContactsModel> contactsInfoList = new ArrayList<ContactsModel>();
-		contactsInfoList.add(get("Tejas"));
-		contactsInfoList.add(get("Runze"));
-		contactsInfoList.add(get("Xiaozhou"));
-		contactsInfoList.add(get("Yueling"));
-		contactsInfoList.add(get("Hai"));
-		// Initially select one of the items
-		contactsInfoList.get(1).setSelected(true);
-		return contactsInfoList;
+	private void fetchContacts() {
+
+		requestID = "Contact";
+		requestType = "GetAll";
+		Map<String,Object> requestMap = new HashMap<String,Object>();
+		requestMap.put("Username",
+				AccountProperties.getUserAccountInstance().getUsername());
+		contactList = new ArrayList<ContactProperties>();
+		try{
+
+			List<Map<String, String>> resultMapList = 
+					RequestHandlerHelper.GetRequestHandlerInstance().
+					HandleRequest(this,requestMap,requestID,requestType) ;		
+
+
+			for(Map<String,String> result : resultMapList){
+				if(result.isEmpty())
+					continue;
+				contactList.add(new ContactProperties(result));
+			}
+
+		}catch(RequestAbortedException e){
+			System.out.println(e.getMessage());
+		}
+
 	}
 
-	/**
-	 * This method is used to get dummy data string
-	 * 
-	 * @author: Hai Tang
-	 */
-	private ContactsModel get(String s) {
-		return new ContactsModel(s);
-	}
 
 	/**
 	 * Method for add friends button click

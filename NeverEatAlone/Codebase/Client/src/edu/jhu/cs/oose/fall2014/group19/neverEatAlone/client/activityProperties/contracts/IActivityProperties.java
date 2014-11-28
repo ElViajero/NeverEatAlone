@@ -1,6 +1,5 @@
-package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.contracts;
+package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.contracts;
 
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -10,7 +9,7 @@ import java.util.Map;
  * @author tejasvamsingh
  *
  */
-public interface IRequestProperties {
+public interface IActivityProperties {
 
 	/**
 	 * This method returns a map consisting of request data.
@@ -18,6 +17,10 @@ public interface IRequestProperties {
 	 * @return
 	 */
 
-	public Map<String,List<String>> GetRequestMap();
+	public Map<String,Object> toMap();
+
+
+
+
 }
 
