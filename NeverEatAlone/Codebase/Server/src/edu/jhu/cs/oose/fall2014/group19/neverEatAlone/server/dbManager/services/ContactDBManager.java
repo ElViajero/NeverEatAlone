@@ -6,8 +6,7 @@ import java.util.Map;
 
 import javax.ejb.Stateless;
 
-import org.neo4j.cypher.ExecutionEngine;
-import org.neo4j.cypher.ExecutionResult;
+import org.neo4j.cypher.javacompat.*;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.kernel.impl.util.StringLogger;
@@ -153,7 +152,7 @@ public class ContactDBManager implements IContactDBManager {
 		//format the parameters for the query.		
 		Map<String, String> queryParamterMap = 
 				DBManager.GetQueryParameterMap(modifiableRequestMap);
-
+		System.out.println("query parameters: "+queryParamterMap);
 
 		// ************************ LOGGING ************************
 		System.out.println("USERNAME :"+queryParamterMap.get("Username"));
@@ -176,29 +175,29 @@ public class ContactDBManager implements IContactDBManager {
 			String query = "MATCH (a:User)-[:KNOWS]->(n:User)"
 					+ " WHERE "
 					+ "a.Username = {Username}"
-					+ "RETURN n ";
+					+ "RETURN n.Username AS Username";
 
 			try{
 				//execute the query
 				result = executionEngine.execute(query,parameters);
 				tx.success();
 			}catch(Exception e){
-				System.out.println("Constraint violation in add contact. :: ");
+				System.out.println("Constraint violation in fetching contacts. :: ");
 				System.out.println(e.getMessage());
 				result = null;
 				tx.failure();
 			}
-
+//			System.out.println("query result: \n"+result.dumpToString());
 			// This is the data returned.
 			resultMapList = DBManager.GetResultMapList(result);
 			// Sucessful transaction.
 		}
 		
-		// remove password and email information 
-		for(int i=1; i<resultMapList.size()-1; i++){
-			resultMapList.get(i).remove("Password");
-			resultMapList.get(i).remove("Email");
-		}
+//		// remove password and email information 
+//		for(int i=1; i<resultMapList.size()-1; i++){
+//			resultMapList.get(i).remove("Password");
+//			resultMapList.get(i).remove("Email");
+//		}
 		
 		System.out.println("Contacts Fetched: "+resultMapList);
 		return resultMapList;

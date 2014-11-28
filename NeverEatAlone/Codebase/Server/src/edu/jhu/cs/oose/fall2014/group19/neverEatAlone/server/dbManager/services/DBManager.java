@@ -7,15 +7,13 @@ import java.util.Map;
 
 import javax.ejb.Stateless;
 
-import org.neo4j.cypher.ExecutionResult;
+import org.neo4j.cypher.javacompat.ExecutionResult;
 import org.neo4j.graphdb.DynamicLabel;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
+import org.neo4j.graphdb.ResourceIterator;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
-import org.neo4j.helpers.collection.IteratorUtil;
-
-import scala.collection.Iterator;
 
 /**
  * This class is a helper class for database operations.
@@ -76,7 +74,7 @@ public class DBManager {
 			constraintFor(DynamicLabel.label("User")).
 			assertPropertyIsUnique("Username").create();			
 
-			
+
 			GraphDBInstance.schema().
 			constraintFor(DynamicLabel.label("User")).
 			assertPropertyIsUnique("Email").create();			
@@ -103,7 +101,7 @@ public class DBManager {
 
 
 		// ************** LOGGING ************************
-		System.out.println("Inside DBManager");
+		System.out.println("Inside DBManager: getting result maplist");
 		// ************** LOGGING ************************
 
 
@@ -128,47 +126,33 @@ public class DBManager {
 			return resultMapList;
 		}
 
-		if(result.isEmpty())
-			System.out.println("RESULT IS EMPTY");
+		// Iterate over the returned rows
+		// The keys of the map are the column names and the values are the entries
+		ResourceIterator<Map<String,Object>> rows = result.iterator();
+		System.out.println(rows.hasNext());
+		
+		//index of element in the maplist 
+		int index=0;
 
+		while(rows.hasNext()){
 
-		// retrieve the result as an iterator on nodes.
-		Iterator<Object> column  = result.columnAs("n");
-		for(Iterator<Object> entry : IteratorUtil.asIterable(column)){
+			index ++; // 0 is for Status
+			Map<String,Object> currentRow = rows.next();
+			System.out.println("reached row "+index+" : "+currentRow);
+			//check if this index exists in the list.
+			if(index>=resultMapList.size())
+				resultMapList.add(new HashMap<String,String>());
 
-			// initialize map for this entry.
-			Map<String,String> resultMap = new HashMap<String,String>();
+			for(String col : currentRow.keySet()){
+				Object entry = currentRow.get(col); 
 
-			//check if there are no entries.
-			if(entry.isEmpty())
-				break;
-
-			//for each row in the column..
-			int index=0;
-
-			while(entry.hasNext()){
-
-				System.out.println("Reached here no problem.");
-				Object currentEntry = entry.next();
-				index++; // 0 is for Status
-
-
-				//check if this index exists in the list.
-				if(index>=resultMapList.size())
-					resultMapList.add(new HashMap<String,String>());
-
-
-
-
-				//This is not the best check.
-				//Maybe change later.
-				if(currentEntry instanceof org.neo4j.graphdb.Node){
+				if(entry instanceof org.neo4j.graphdb.Node){
 
 					// ********* LOGGING *********
 					System.out.println("IT IS A NODE");
 					// ********* LOGGING *********
 
-					Node currentNode = (Node) currentEntry; 
+					Node currentNode = (Node) entry; 
 					// iterate over all the properties for the current node object.
 					for(String property : currentNode.getPropertyKeys()){				
 						//add the properties. Note the value is returned as string.
@@ -179,17 +163,11 @@ public class DBManager {
 				}
 
 				else{
-					System.out.println("DATA : " + currentEntry.toString());
-					resultMapList.get(index).put("Data",currentEntry.toString());
+					System.out.println("DATA : " + entry.toString());
+					resultMapList.get(index).put(col,entry.toString());
 				}
-
 			}
-
-
-			// add map to list.
-			resultMapList.add(resultMap);
 		}
-
 
 		// check if we have some result entries.
 		// If so, update the query result status.

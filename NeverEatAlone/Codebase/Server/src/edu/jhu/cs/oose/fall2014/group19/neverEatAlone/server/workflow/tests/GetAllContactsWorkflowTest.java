@@ -31,16 +31,19 @@ public class GetAllContactsWorkflowTest {
 	public void GetContacts() throws IOException {
 		
 		// book keeping 
+		System.out.println("deleting all test accounts...");
 		WorkflowTestHelper.DeleteTestAccount("UserA");
 		WorkflowTestHelper.DeleteTestAccount("UserB");
 		WorkflowTestHelper.DeleteTestAccount("UserC");
 
 		// create 3 accounts
+		System.out.println("creating all test accounts...");
 		WorkflowTestHelper.CreateTestAccount("UserA", "pwA", "emailA");
 		WorkflowTestHelper.CreateTestAccount("UserB", "pwB", "emailB");
 		WorkflowTestHelper.CreateTestAccount("UserC", "pwC", "emailC");
 		
 		// create relationships (add contacts)
+		System.out.println("creating relationships...");
 		List <NameValuePair> nvps1 = new ArrayList <NameValuePair>();	    
 		nvps1.add(new BasicNameValuePair("RequestID", "Contact"));	    
 		nvps1.add(new BasicNameValuePair("RequestType", "Add"));
@@ -65,42 +68,53 @@ public class GetAllContactsWorkflowTest {
 		WorkflowTestHelper.ExecuteRequest(nvps3);
 		
 		//get all contacts of A
+		System.out.println("getting all contacts of UserA...");
 		List <NameValuePair> nvps = new ArrayList <NameValuePair>();	    
 		nvps.add(new BasicNameValuePair("RequestID", "Contact"));	    
 		nvps.add(new BasicNameValuePair("RequestType", "GetAll"));
 		nvps.add(new BasicNameValuePair("Username", "UserA"));
 		
 		// check the response
+		System.out.println("checking response for getting all contacts of UserA...");
 		CloseableHttpResponse response = WorkflowTestHelper.ExecuteRequest(nvps);
 		List<Map<String,String>> returnMap = WorkflowTestHelper.GetReponseMap(response); 
-//		System.out.println(returnMap);
+		System.out.println(returnMap);
 		assertTrue(returnMap.toString().equals("[{Status=Success}, "
-				+ "{Username=UserB}, {Username=UserC}, {}]"));
+				+ "{Username=UserB}, {Username=UserC}]"));
 		
 		//get all contacts of B
+		System.out.println("getting all contacts of UserB...");
 		nvps = new ArrayList <NameValuePair>();	    
 		nvps.add(new BasicNameValuePair("RequestID", "Contact"));	    
 		nvps.add(new BasicNameValuePair("RequestType", "GetAll"));
 		nvps.add(new BasicNameValuePair("Username", "UserB"));
 		
 		// check the response
+		System.out.println("checking response for getting all contacts of UserB...");
 		response = WorkflowTestHelper.ExecuteRequest(nvps);
 		returnMap = WorkflowTestHelper.GetReponseMap(response); 
 		System.out.println(returnMap);
 		assertTrue(returnMap.toString().equals("[{Status=Success}, "
-				+ "{Username=UserA}, {}]"));
+				+ "{Username=UserA}]"));
 		
 		//get all contacts of C
+		System.out.println("getting all contacts of UserC...");
 		nvps = new ArrayList <NameValuePair>();	    
 		nvps.add(new BasicNameValuePair("RequestID", "Contact"));	    
 		nvps.add(new BasicNameValuePair("RequestType", "GetAll"));
 		nvps.add(new BasicNameValuePair("Username", "UserC"));
 		
 		// check the response
+		System.out.println("checking response for getting all contacts of UserC...");
 		response = WorkflowTestHelper.ExecuteRequest(nvps);
 		returnMap = WorkflowTestHelper.GetReponseMap(response); 
 		System.out.println(returnMap);
 		assertTrue(returnMap.toString().equals("[{Status=Failed}]"));
 		
+		// book keeping 
+		System.out.println("deleting all test accounts...");
+		WorkflowTestHelper.DeleteTestAccount("UserA");
+		WorkflowTestHelper.DeleteTestAccount("UserB");
+		WorkflowTestHelper.DeleteTestAccount("UserC");
 	}
 }

@@ -7,8 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.junit.Test;
-import org.neo4j.cypher.ExecutionEngine;
-import org.neo4j.cypher.ExecutionResult;
+import org.neo4j.cypher.javacompat.*;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.kernel.impl.util.StringLogger;
