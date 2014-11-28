@@ -63,7 +63,7 @@ public class ContactDBManager implements IContactDBManager {
 		// ************************ LOGGING ************************
 
 		System.out.println("USERNAME :"+queryParamterMap.get("Username"));
-		System.out.println("CONTACT :"+queryParamterMap.get("ContactUsername"));
+		System.out.println("CONTACT :"+queryParamterMap.get("contactUsername"));
 
 
 		// set up parameters to execute and store the result of query
@@ -78,7 +78,7 @@ public class ContactDBManager implements IContactDBManager {
 			//create a params map.
 			Map<String,Object> parameters = new HashMap<String,Object>();
 			parameters.put("Username",queryParamterMap.get("Username"));
-			parameters.put("ContactUsername",queryParamterMap.get("ContactUsername"));
+			parameters.put("ContactUsername",queryParamterMap.get("contactUsername"));
 
 			//create cypher query to add a relation in the dataase.
 			String query = "MATCH (a:User),(b:User)"
@@ -137,7 +137,7 @@ public class ContactDBManager implements IContactDBManager {
 	 */
 	@Override
 	public List<Map<String, String>> GetAllContacts(Map<String,String[]> request) {
-		
+
 		// ********* LOGGING ********* 
 		System.out.println("Reached GetAllContacts in ContactDBManager");
 		System.out.flush();
@@ -156,13 +156,13 @@ public class ContactDBManager implements IContactDBManager {
 
 		// ************************ LOGGING ************************
 		System.out.println("USERNAME :"+queryParamterMap.get("Username"));
-		
+
 		// set up parameters to execute and store the result of query
 		ExecutionEngine executionEngine = new ExecutionEngine(GraphDBInstance,
 				StringLogger.SYSTEM);				
 		ExecutionResult result;
 		List<Map<String,String>> resultMapList;
-		
+
 		try ( Transaction tx = GraphDBInstance.beginTx() )
 		{
 			//create a params map.
@@ -192,13 +192,7 @@ public class ContactDBManager implements IContactDBManager {
 			resultMapList = DBManager.GetResultMapList(result);
 			// Sucessful transaction.
 		}
-		
-//		// remove password and email information 
-//		for(int i=1; i<resultMapList.size()-1; i++){
-//			resultMapList.get(i).remove("Password");
-//			resultMapList.get(i).remove("Email");
-//		}
-		
+
 		System.out.println("Contacts Fetched: "+resultMapList);
 		return resultMapList;
 

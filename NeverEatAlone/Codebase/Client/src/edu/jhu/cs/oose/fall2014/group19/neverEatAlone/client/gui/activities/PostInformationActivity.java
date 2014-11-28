@@ -1,15 +1,12 @@
 package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities;
 
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R.id;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R.layout;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R.menu;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
 
 /**
  * This class is used to control the post information page.
@@ -22,7 +19,7 @@ public class PostInformationActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		initView(savedInstanceState);
 	}
-	
+
 	/**
 	 * Method used to initialize the view
 	 * @author: Hai Tang
@@ -50,7 +47,7 @@ public class PostInformationActivity extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
+
 	/**
 	 * Method used for back button click
 	 * @author: Hai Tang
@@ -59,7 +56,7 @@ public class PostInformationActivity extends Activity {
 		Intent intent = new Intent(this, SelectFriendsActivity.class);
 		startActivity(intent);
 	}
-	
+
 	/**
 	 * Method used for post button click
 	 * @author: Hai Tang

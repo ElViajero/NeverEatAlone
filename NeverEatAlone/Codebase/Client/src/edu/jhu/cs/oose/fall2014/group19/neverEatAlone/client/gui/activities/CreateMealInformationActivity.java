@@ -1,10 +1,7 @@
 package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities;
 
 import java.util.Calendar;
-import java.util.List;
 import java.util.Map;
-
-import org.apache.http.impl.execchain.RequestAbortedException;
 
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.app.TimePickerDialog.OnTimeSetListener;
@@ -21,10 +18,10 @@ import android.widget.Switch;
 import android.widget.TimePicker;
 import android.widget.Toast;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.helpers.meal.MealPostPropertiesHelper;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.properties.meal.DateAndTimeProperties;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.properties.meal.MealProperties;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.DateAndTimeProperties;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.MealProperties;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.helpers.GsonHelper;
+
 
 public class CreateMealInformationActivity extends FragmentActivity {
 
@@ -253,25 +250,16 @@ public class CreateMealInformationActivity extends FragmentActivity {
 				new DateAndTimeProperties(DayEnd, MonthEnd, YearEnd, HourEnd, MinuteEnd);
 
 		//Create a Meal Object
-		MealProperties mealProperties = new MealProperties(location,
-				maxNumberOfInvitees, isNotificationExtendible); 
+		MealProperties mealProperties = new MealProperties(
+				location,
+				maxNumberOfInvitees, isNotificationExtendible,
+				startDateAndTimeProperties,endDateAndTimeProperties); 
 
-		// NOTE FROM TEJAS TO HIMSELF ::: CHANGE RETURN TYPE TO JSON STRING LATER !!!!!!!
-
-		Map<String, List<String>> pageOneMap = MealPostPropertiesHelper.GetPageOneString(mealProperties, 
-				startDateAndTimeProperties, endDateAndTimeProperties);
-
-		try{
-			// Send the Request
-			List<Map<String, String>> resultMapList = 
-					RequestHandlerHelper.GetRequestHandlerInstance().
-					HandleRequest(this,pageOneMap,"Notification","Meal") ;
-		}catch(RequestAbortedException e){
-			return;
-		}
-
+		Map<String, Object> mealPropertiesMap =
+				mealProperties.toMap();
 
 		Intent intent = new Intent(CreateMealInformationActivity.this, SelectFriendsActivity.class);
+		intent.putExtra("MealProperties", GsonHelper.GetGsonInstance().toJson(mealPropertiesMap));
 		CreateMealInformationActivity.this.startActivity(intent);
 
 	}

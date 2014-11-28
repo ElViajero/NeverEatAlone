@@ -27,6 +27,7 @@ import com.google.gson.reflect.TypeToken;
 
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.configuration.Configuration;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.configuration.ConfigurationHelper;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.helpers.GsonHelper;
 /**
  * This class executes HttpRequest asynchronously.
  * @author tejasvamsingh
@@ -57,9 +58,7 @@ public class RequestExecutor extends AsyncTask<List<NameValuePair>, Void, List<M
 			HttpConnectionParams.setSoTimeout(param, 1000);
 			// create an HttpClientInstance
 			HttpClientInstance=new DefaultHttpClient(param);
-
-
-			GsonObject = new Gson();
+			GsonObject = GsonHelper.GetGsonInstance();
 			try {
 				Configuration configurationInstance = 
 						ConfigurationHelper.GetConfigurationInstance();

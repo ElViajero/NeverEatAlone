@@ -1,5 +1,10 @@
 package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities;
 
+import java.util.List;
+import java.util.Map;
+
+import org.apache.http.impl.execchain.RequestAbortedException;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,11 +12,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R.id;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R.layout;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R.menu;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.contracts.IActivityProperties;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.ContactProperties;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.MessageToasterHelper;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
 
 /**
  * This activity is used to set the view and control the logic related to add
@@ -24,6 +29,8 @@ public class AddFriendsActivity extends Activity {
 
 	private EditText Username;
 	private EditText Email;
+	private String requestID;
+	private String requestType;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -56,19 +63,44 @@ public class AddFriendsActivity extends Activity {
 	}
 
 	/**
-	 * Method used for clicking the search button. 
+	 * Method used for clicking the search button.
+	 * @author tejasvamsingh 
 	 * @author: Hai Tang
 	 */
 	public void OnSearchButtonClick(View view) {
+
+		String username = Username.getText().toString();
+		String email = Email.getText().toString();
+
+		requestID = "Contact";
+		requestType="Add";
+		IActivityProperties contact = new ContactProperties(username);
+
+		try{
+
+			List<Map<String, String>> resultMapList = 
+					RequestHandlerHelper.GetRequestHandlerInstance().
+					HandleRequest(this,contact.toMap(),requestID,requestType) ;		
+
+
+			if(resultMapList.get(0).get("Status").equals("Success"))
+				MessageToasterHelper.toastMessage(this, "Contact Added !");
+
+			//start the new activity
+			Intent intent = new Intent(this, TabHostActivity.class);
+			this.startActivity(intent);
+
+
+		}catch(RequestAbortedException e){
+
+		}
+
 		Intent intent = new Intent(AddFriendsActivity.this,
 				TabHostActivity.class);
 		AddFriendsActivity.this.startActivity(intent);
 
-		String username = Username.getText().toString();
-		String email = Email.getText().toString();
-		Toast.makeText(getApplicationContext(),
-				"Username: " + username + "\n" + "Email: " + email + "\n",
-				Toast.LENGTH_SHORT).show();
+
+
 	}
 
 	@Override

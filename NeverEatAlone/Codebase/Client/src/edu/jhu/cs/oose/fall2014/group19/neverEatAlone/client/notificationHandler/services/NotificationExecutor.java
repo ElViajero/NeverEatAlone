@@ -22,6 +22,7 @@ import com.rabbitmq.client.ShutdownSignalException;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.configuration.ConfigurationHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.TabHostActivity;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.MessageToasterHelper;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.helpers.GsonHelper;
 
 /**
  * 
@@ -63,7 +64,7 @@ public class NotificationExecutor extends AsyncTask<String, List<Map<String,Stri
 	 */
 	public NotificationExecutor(TabHostActivity tabHostActivity,String username){
 		ActivityObject = tabHostActivity;
-		GsonObject = new Gson();	
+		GsonObject = GsonHelper.GetGsonInstance();	
 		Username = username;
 		cleanBit=false;
 
@@ -153,7 +154,7 @@ public class NotificationExecutor extends AsyncTask<String, List<Map<String,Stri
 			MessageToasterHelper.toastMessage(ActivityObject,
 					"Could not connect to notification server.");
 
-		if(!resultMapList.isEmpty())
+		else if(!resultMapList.isEmpty())
 			ActivityObject.UpdateNotificationCache(resultMapList);
 		System.out.println("Reaching here regularly");
 		if(!cleanBit)

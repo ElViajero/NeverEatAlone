@@ -1,4 +1,4 @@
-package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.properties.meal;
+package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services;
 
 public class PostProperties {
 

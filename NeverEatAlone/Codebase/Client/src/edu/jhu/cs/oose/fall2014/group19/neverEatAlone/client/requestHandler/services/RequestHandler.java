@@ -43,7 +43,7 @@ public class RequestHandler implements IRequestHandler {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Map<String, String>> HandleRequest(Activity activity,
-			Map<String,List<String>> requestMap,String requestID,String requestType) 
+			Map<String,Object> requestMap,String requestID,String requestType) 
 					throws RequestAbortedException {
 
 
@@ -100,18 +100,24 @@ public class RequestHandler implements IRequestHandler {
 	 * @return
 	 */
 
-	private List<NameValuePair> GetRequestList(Map<String,List<String>> requestMap){
+	private List<NameValuePair> GetRequestList(Map<String,Object> requestMap){
 
 		List<NameValuePair> requestList = new
 				ArrayList<NameValuePair>();
 
-		for (Map.Entry<String, List<String>> entry : requestMap.entrySet()) {
+		for (Map.Entry<String, Object> entry : requestMap.entrySet()) {
 
 			String key = entry.getKey();
-			List<String> valueList = entry.getValue();
+			Object value = entry.getValue();
 
-			for(String value : valueList){
-				requestList.add(new BasicNameValuePair(key, value));		    	
+			if(value instanceof String){
+				requestList.add(new BasicNameValuePair(key,(String)value));
+				continue;
+			}
+
+			List<?> valueList = (List<?>) value;
+			for(Object valueObject : valueList){
+				requestList.add(new BasicNameValuePair(key, (String)valueObject));		    	
 			}
 		}
 
