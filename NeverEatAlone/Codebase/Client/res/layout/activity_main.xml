@@ -1,79 +1,69 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.MainActivity" >
+    android:background="@drawable/layout"
+    android:gravity="center_vertical"
+    android:orientation="vertical" >
 
     <TextView
-        android:id="@+id/app_name"
+        android:id="@+id/tv1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="0dp"
-        android:text="@string/app_name"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <TextView
-        android:id="@+id/username"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/app_name"
-        android:layout_marginTop="50dp"
-        android:text="@string/username"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp" />
 
     <EditText
         android:id="@+id/edit_username"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/username"
-        android:inputType="text" />
-
-    <TextView
-        android:id="@+id/password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/edit_username"
+        android:layout_below="@+id/username"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
-        android:text="@string/password"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:background="@drawable/edittext"
+        android:hint="Username"
+        android:inputType="text" />
 
     <EditText
         android:id="@+id/edit_password"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/password"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/edittext"
+        android:hint="Password"
         android:inputType="textPassword" />
 
     <Button
         android:id="@+id/button_login"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
         android:layout_below="@+id/edit_password"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="94dp"
         android:layout_toLeftOf="@+id/button_signup"
-        android:layout_toStartOf="@+id/button_signup"
+        android:background="@drawable/buttonbackground"
         android:onClick="OnLoginButtonClick"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"
         android:text="@string/login" />
 
     <Button
         android:id="@+id/button_signup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/edit_password"
-        android:layout_marginTop="94dp"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/buttonbackground"
         android:onClick="OnSignUpButtonClick"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"
         android:text="@string/signup" />
 
-</RelativeLayout>
+</LinearLayout>

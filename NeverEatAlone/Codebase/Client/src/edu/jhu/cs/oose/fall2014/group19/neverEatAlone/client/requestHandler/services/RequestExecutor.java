@@ -55,7 +55,7 @@ public class RequestExecutor extends AsyncTask<List<NameValuePair>, Void, List<M
 			// set timeout parameters
 			HttpParams param = new BasicHttpParams();
 			HttpConnectionParams.setConnectionTimeout(param, 1000);
-			HttpConnectionParams.setSoTimeout(param, 1000);
+			HttpConnectionParams.setSoTimeout(param, 3000);
 			// create an HttpClientInstance
 			HttpClientInstance=new DefaultHttpClient(param);
 			GsonObject = GsonHelper.GetGsonInstance();

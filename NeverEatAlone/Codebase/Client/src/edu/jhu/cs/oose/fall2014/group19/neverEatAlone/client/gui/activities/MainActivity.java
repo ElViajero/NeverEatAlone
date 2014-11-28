@@ -10,11 +10,13 @@ import org.apache.http.impl.execchain.RequestAbortedException;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.AccountProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.MessageToasterHelper;
@@ -44,6 +46,13 @@ public class MainActivity extends Activity {
 		RequestType = "CheckCredentials";
 		System.out.println("inside onCreate in MainAcitivty");
 		MessageToasterHelper.toastMessage(this, "inside oncreate");
+		TextView tv =
+				(TextView) findViewById(R.id.tv1);
+		Typeface tf = Typeface.createFromAsset(getAssets(),
+				"fonts/Windsong.ttf");
+		tv.setTypeface(tf);
+		tv.setTextSize(100);
+		tv.setText("NeverEatAlone");
 	}
 
 	/**
