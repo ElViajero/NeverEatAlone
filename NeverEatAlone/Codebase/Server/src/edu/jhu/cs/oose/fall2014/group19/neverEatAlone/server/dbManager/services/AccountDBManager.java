@@ -6,7 +6,8 @@ import java.util.Map;
 
 import javax.ejb.Stateless;
 
-import org.neo4j.cypher.javacompat.*;
+import org.neo4j.cypher.javacompat.ExecutionEngine;
+import org.neo4j.cypher.javacompat.ExecutionResult;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.kernel.impl.util.StringLogger;
@@ -60,7 +61,7 @@ public class AccountDBManager implements IAccountDBManager {
 				DBManager.GetQueryParameterMap(modifiableRequestMap);
 
 
-		// set up paramters to execute and store the result of query
+		// set up parameters to execute and store the result of query
 		ExecutionEngine executionEngine = new ExecutionEngine(GraphDBInstance,
 				StringLogger.SYSTEM);				
 		ExecutionResult result;
@@ -73,7 +74,7 @@ public class AccountDBManager implements IAccountDBManager {
 			Map<String,Object> parameters = new HashMap<String,Object>();
 			parameters.put("creationParameters",queryParamterMap);
 
-			//create cypher query to create node in the dataase.
+			//create cypher query to create node in the database.
 			String query = "CREATE(n:User{creationParameters}) RETURN n";
 
 			// Check for uniqueness constraint violation.
@@ -91,7 +92,7 @@ public class AccountDBManager implements IAccountDBManager {
 			// This is the data returned.
 			resultMapList = DBManager.GetResultMapList(result);
 
-			// Sucessful transaction.
+			// Successful transaction.
 
 
 		}
@@ -108,9 +109,62 @@ public class AccountDBManager implements IAccountDBManager {
 	@Override
 	public List<Map<String,String>> UpdateAccount(Map<String,String[]> request) {
 
-		//TODO
-		return null; 
+		// ********* LOGGING ********* 
+		System.out.println("Reached UpdateAccount in AccountManager");
+		System.out.flush();
+		// ********* LOGGING ********* 
 
+		//create a duplicate map.
+		Map<String,String[]> modifiableRequestMap = new HashMap<String,String[]>(request);
+		modifiableRequestMap.remove("RequestType");
+		modifiableRequestMap.remove("RequestID");
+		
+		//format the parameters for the query.		
+		Map<String, String> queryParamterMap = 
+				DBManager.GetQueryParameterMap(modifiableRequestMap);
+
+
+		// set up parameters to execute and store the result of query
+		ExecutionEngine executionEngine = new ExecutionEngine(GraphDBInstance,
+				StringLogger.SYSTEM);				
+		ExecutionResult result;
+		List<Map<String,String>> resultMapList;
+
+
+		try ( Transaction tx = GraphDBInstance.beginTx() )
+		{
+			//create a params map.
+			Map<String,Object> parameters = new HashMap<String,Object>();
+			parameters.put("updateParameters",queryParamterMap);
+
+			//create cypher query to update the database.
+			String query =""
+					+ "MATCH (n:User) "
+					+ "WHERE n.Username={Username} "
+					+ "SET n += {updateParameters} "
+					+ "RETURN n ";
+
+			// Check for uniqueness constraint violation.
+			try{
+				//execute the query
+				result = executionEngine.execute(query,parameters);
+				tx.success();
+			}catch(Exception e){
+				System.out.println("Constraint violation in updating account. :: ");
+				System.out.println(e.getMessage());
+				result = null;
+				tx.failure();
+			}
+
+			// This is the data returned.
+			resultMapList = DBManager.GetResultMapList(result);
+
+			// Successful transaction.
+
+
+		}
+
+		return resultMapList;
 	}
 	
 	/**
@@ -167,7 +221,7 @@ public class AccountDBManager implements IAccountDBManager {
 				DBManager.GetQueryParameterMap(modifiableRequestMap);
 
 
-		// set up paramters to execute and store the result of query
+		// set up parameters to execute and store the result of query
 		ExecutionEngine executionEngine = new ExecutionEngine(GraphDBInstance,
 				StringLogger.SYSTEM);				
 		ExecutionResult result;
@@ -180,7 +234,7 @@ public class AccountDBManager implements IAccountDBManager {
 			Map<String,Object> parameters = new HashMap<String,Object>();
 			parameters.put("Username",queryParamterMap.get("Username"));
 
-			//create cypher query to delete node from the dataase.
+			//create cypher query to delete node from the database.
 			String query =""
 					+ "OPTIONAL MATCH (n:User)-[r]-() "
 					+ "WHERE n.Username={Username} "
@@ -195,7 +249,7 @@ public class AccountDBManager implements IAccountDBManager {
 			// This is the data returned.
 			resultMapList = DBManager.GetResultMapList(result);
 
-			// Sucessful transaction.
+			// Successful transaction.
 			tx.success();
 
 			//if we reached here then transaction was successful.

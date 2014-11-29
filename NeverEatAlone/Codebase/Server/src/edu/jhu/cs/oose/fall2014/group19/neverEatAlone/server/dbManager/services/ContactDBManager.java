@@ -6,7 +6,8 @@ import java.util.Map;
 
 import javax.ejb.Stateless;
 
-import org.neo4j.cypher.javacompat.*;
+import org.neo4j.cypher.javacompat.ExecutionEngine;
+import org.neo4j.cypher.javacompat.ExecutionResult;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.kernel.impl.util.StringLogger;
