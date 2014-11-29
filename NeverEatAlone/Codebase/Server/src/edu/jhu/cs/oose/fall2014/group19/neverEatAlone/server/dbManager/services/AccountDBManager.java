@@ -52,7 +52,9 @@ public class AccountDBManager implements IAccountDBManager {
 		modifiableRequestMap.remove("RequestType");
 		modifiableRequestMap.remove("RequestID");
 
-
+		// add an "Available" property, creation default value is "YES"
+		modifiableRequestMap.put("Available", new String[]{"YES"});
+		
 		//format the parameters for the query.		
 		Map<String, String> queryParamterMap = 
 				DBManager.GetQueryParameterMap(modifiableRequestMap);
@@ -106,18 +108,44 @@ public class AccountDBManager implements IAccountDBManager {
 	@Override
 	public List<Map<String,String>> UpdateAccount(Map<String,String[]> request) {
 
-		// ********* LOGGING ********* 
-		System.out.println("Reached UpdateAccount in AccountManager");
-		// ********* LOGGING *********
 		//TODO
+		return null; 
 
+	}
+	
+	/**
+	 * Method to set availability of a user
+	 * @param request
+	 * @return
+	 */
+	@Override
+	public List<Map<String,String>> SetAvailability(Map<String,String[]> request){
+		//TODO
+		return null; 
+	}
+	
+	/**
+	 * Method to get account information
+	 */
+	@Override
+	public List<Map<String, String>> GetInfo(Map<String, String[]> request) {
+		// TODO Auto-generated method stub
 		return null;
+	}
 
+	/**
+	 * Method to get availability 
+	 */
+	@Override
+	public List<Map<String, String>> GetAvailability(
+			Map<String, String[]> request) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	/**
 	 * This method deletes the specified account from the database.
-	 * 
+	 * //TODO need to delete the posts posted by this user too.  
 	 * @param request
 	 * @return
 	 */

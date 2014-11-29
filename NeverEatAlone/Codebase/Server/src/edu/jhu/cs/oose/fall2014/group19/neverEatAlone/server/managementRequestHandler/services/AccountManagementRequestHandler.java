@@ -63,8 +63,42 @@ public class AccountManagementRequestHandler{
 		return IAccountManagerObject.DeleteAccount(request);
 	}
 
+	
+	public List<Map<String,String>> SetAvailabilityAccountRequest(Map<String,String[]> request){
 
+		// ********* LOGGING ********* 
+		System.out.println("reached SetAvailabilityAccountRequest");
+		// ********* LOGGING ********* 
 
+		return IAccountManagerObject.SetAvailability(request);
+	}
+	
+	public List<Map<String,String>> GetAvailabilityAccountRequest(Map<String,String[]> request){
+
+		// ********* LOGGING ********* 
+		System.out.println("reached GetAvailabilityAccountRequest");
+		// ********* LOGGING ********* 
+
+		return IAccountManagerObject.GetAvailability(request);
+	}
+	
+	public List<Map<String,String>> UpdateAccountRequest(Map<String,String[]> request){
+
+		// ********* LOGGING ********* 
+		System.out.println("reached UpdateAccountRequest");
+		// ********* LOGGING ********* 
+
+		return IAccountManagerObject.UpdateAccount(request);
+	}
+	
+	public List<Map<String,String>> GetInfoAccountRequest(Map<String,String[]> request){
+
+		// ********* LOGGING ********* 
+		System.out.println("reached GetInfoAccountRequest");
+		// ********* LOGGING ********* 
+
+		return IAccountManagerObject.GetInfo(request);
+	}
 }
 
 
