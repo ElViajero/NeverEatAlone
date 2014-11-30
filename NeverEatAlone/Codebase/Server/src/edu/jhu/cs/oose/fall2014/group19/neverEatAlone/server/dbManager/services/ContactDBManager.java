@@ -176,7 +176,7 @@ public class ContactDBManager implements IContactDBManager {
 			String query = "MATCH (a:User)-[:KNOWS]->(n:User)"
 					+ " WHERE "
 					+ "a.Username = {Username}"
-					+ "RETURN n.Username AS Username";
+					+ "RETURN n.Username AS Username, n.Available AS Available";
 
 			try{
 				//execute the query
