@@ -9,12 +9,20 @@ import com.google.gson.reflect.TypeToken;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.contracts.IActivityProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.helpers.GsonHelper;
 
+/**
+ * This class provides an abstraction
+ * for contact related properties.
+ * 
+ * @author tejasvamsingh
+ *
+ */
 public class ContactProperties implements IActivityProperties {
 
 	//for now, this is the only information about a
 	//contact we display.
 
 	private String contactUsername;
+	private boolean isChecked;
 
 	public ContactProperties(String username){
 		contactUsername = username;
@@ -22,6 +30,7 @@ public class ContactProperties implements IActivityProperties {
 
 	public ContactProperties(Map<String,String> map) {
 		contactUsername = map.get("Username");
+		isChecked=false;
 	}
 
 
@@ -36,6 +45,7 @@ public class ContactProperties implements IActivityProperties {
 		System.out.println("map is : " +requestMap);
 		requestMap.put("Username", 
 				AccountProperties.getUserAccountInstance().getUsername());
+		requestMap.remove("isChecked");
 		return requestMap;
 	}
 
@@ -73,6 +83,16 @@ public class ContactProperties implements IActivityProperties {
 	public void setContactUsername(String contactUsername) {
 		this.contactUsername = contactUsername;
 	}
+
+	public boolean isChecked() {
+		return isChecked;
+	}
+
+	public void setChecked(boolean isChecked) {
+		this.isChecked = isChecked;
+	}
+
+
 
 
 

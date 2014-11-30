@@ -259,7 +259,7 @@ public class CreateMealInformationActivity extends FragmentActivity {
 				mealProperties.toMap();
 
 		Intent intent = new Intent(CreateMealInformationActivity.this, SelectFriendsActivity.class);
-		intent.putExtra("MealProperties", GsonHelper.GetGsonInstance().toJson(mealPropertiesMap));
+		intent.putExtra("mealProperties", GsonHelper.GetGsonInstance().toJson(mealPropertiesMap));
 		CreateMealInformationActivity.this.startActivity(intent);
 
 	}

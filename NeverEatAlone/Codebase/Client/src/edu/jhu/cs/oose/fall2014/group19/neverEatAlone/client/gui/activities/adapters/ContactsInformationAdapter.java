@@ -12,10 +12,10 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.ContactProperties;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.models.ContactsModel;
 
 /**
  * 
+ * @author tejasvamsingh
  * @author Hai Tang
  *This adapter adds a listener on the Checkbox view. 
  *If the checkbox is selected the underlying data of the model is changed. 
@@ -37,6 +37,7 @@ public class ContactsInformationAdapter extends ArrayAdapter<ContactProperties> 
 		protected CheckBox checkbox;
 	}
 
+
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		View view = null;
@@ -50,8 +51,8 @@ public class ContactsInformationAdapter extends ArrayAdapter<ContactProperties> 
 
 				@Override
 				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-					ContactsModel contactelement = (ContactsModel) viewHolder.checkbox.getTag();
-					contactelement.setSelected(buttonView.isChecked());
+					ContactProperties contact = (ContactProperties) viewHolder.checkbox.getTag();
+					contact.setChecked(buttonView.isChecked());
 				}
 			});
 
