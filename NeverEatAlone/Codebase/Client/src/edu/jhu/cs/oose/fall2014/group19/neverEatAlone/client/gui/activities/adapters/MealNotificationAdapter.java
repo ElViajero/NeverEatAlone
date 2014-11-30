@@ -1,7 +1,6 @@
 package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.adapters;
 
 import java.util.List;
-import java.util.Map;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -10,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.MealProperties;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.NotificationProperties;
 
 /**
  * 
@@ -18,7 +19,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
  * from InvitesActivity.java to set up the view for GUI.
  *
  */
-public class MealNotificationAdapter extends ArrayAdapter<Map<String,String>> {
+public class MealNotificationAdapter extends ArrayAdapter<NotificationProperties> {
 
 	private LayoutInflater Inflater;
 	private TextView Poster;
@@ -27,7 +28,7 @@ public class MealNotificationAdapter extends ArrayAdapter<Map<String,String>> {
 	private TextView Location;
 	private Activity Activity;
 
-	private List<Map<String,String>> MealNotifications;
+	private List<NotificationProperties> MealNotifications;
 
 	/**
 	 * Constructor to initialize the GUI meal Notifications
@@ -38,7 +39,7 @@ public class MealNotificationAdapter extends ArrayAdapter<Map<String,String>> {
 	 * @param activity
 	 * @param mealNotifications
 	 */
-	public MealNotificationAdapter(Activity activity, List<Map<String,String>> mealNotifications) {
+	public MealNotificationAdapter(Activity activity, List<NotificationProperties> mealNotifications) {
 
 		super(activity, R.layout.row_meal_notification_layout, mealNotifications);
 
@@ -65,9 +66,13 @@ public class MealNotificationAdapter extends ArrayAdapter<Map<String,String>> {
 		Poster = (TextView) view.findViewById(R.id.textView_meal_notification_poster);
 		StartTime = (TextView) view.findViewById(R.id.textView_meal_notification_starttime);
 		Location = (TextView) view.findViewById(R.id.textView_meal_notification_location);
-		Poster.setText(MealNotifications.get(position).get("Poster"));
-		StartTime.setText(MealNotifications.get(position).get("StartHour"));
-		Location.setText(MealNotifications.get(position).get("Location"));
+
+		MealProperties mealProperties = 
+				(MealProperties) MealNotifications.get(position).getNotificationData();		
+
+		Poster.setText(MealNotifications.get(position).getPoster());
+		StartTime.setText(mealProperties.getStartDateAndTimeProperties().toString());
+		Location.setText(mealProperties.getLocation());
 
 		return view;
 	}

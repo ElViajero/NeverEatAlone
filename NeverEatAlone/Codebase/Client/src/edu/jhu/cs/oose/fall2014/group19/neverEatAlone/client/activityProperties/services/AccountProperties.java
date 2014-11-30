@@ -11,7 +11,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.h
 
 /**
  * This class provides an abstraction
- * of the properties required for the login request.
+ * for account related properties.
  * 
  * @author tejasvamsingh
  *

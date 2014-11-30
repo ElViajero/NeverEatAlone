@@ -39,7 +39,7 @@ public class NotificationManagementRequestHandler {
 		List<Map<String, String>> result = 
 				INotificationDBManagerObject.CreateMealNotification(request);
 
-		List<String> recipientList = Arrays.asList(request.get("Recipient"));
+		List<String> recipientList = Arrays.asList(request.get("recipientList"));
 
 
 		INotificationManagerObject.PushNotification(result , recipientList );
