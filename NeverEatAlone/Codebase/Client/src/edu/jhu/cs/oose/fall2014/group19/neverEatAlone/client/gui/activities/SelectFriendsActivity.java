@@ -1,7 +1,11 @@
 package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import org.apache.http.impl.execchain.RequestAbortedException;
 
 import android.app.ListActivity;
 import android.content.Intent;
@@ -11,81 +15,84 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.models.ContactsModel;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.contracts.IActivityProperties;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.AccountProperties;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.ContactProperties;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.PostProperties;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.adapters.ContactsInformationAdapter;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
 
 /**
  * This activity is used to handle controller operations for select friends
  * page.
  * 
+ * @author tejasvamsingh
  * @author Hai Tang
  *
  */
 public class SelectFriendsActivity extends ListActivity {
 
-	private ArrayAdapter<ContactsModel> selectFriendsAdapter;
-	List<ContactsModel> friendsList;
+	private String requestID;
+	private String requestType;
+	private ArrayAdapter<ContactProperties> selectFriendsAdapter;
+	List<ContactProperties> contactList;
+	private String postData;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		initView(savedInstanceState);
+		postData = getIntent().getStringExtra("mealProperties");
 	}
 
 	/**
 	 * Method used to initialize the view.
 	 * 
+	 * @author tejasvamsingh
 	 * @author: Hai Tang
 	 */
 	private void initView(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_select_friends);
-		/*
-		friendsList = getModel();
-		selectFriendsAdapter = new ContactsInformationAdapter(this,
-				selectFriendsList);
+		fetchContacts();
+		selectFriendsAdapter = 
+				new ContactsInformationAdapter(this,contactList);
 		setListAdapter(selectFriendsAdapter);
-		 */
+
 	}
 
 	/**
-	 * Method used to update view after clicking the broadcast button
-	 * @author: Hai Tang
+	 * This method is used to populate the contacts list.
+	 * @author tejasvamsingh
 	 */
-	private void updateView(List<ContactsModel> selectFriendsList){
-		//selectFriendsList = this.selectFriendsList;
-		setContentView(R.layout.activity_select_friends);
-		/*
-		selectFriendsAdapter = new ContactsInformationAdapter(this,
-				selectFriendsList);
 
-		setListAdapter(selectFriendsAdapter);
-		 */
+	private void fetchContacts() {
+
+		requestID = "Contact";
+		requestType = "GetAll";
+		Map<String,Object> requestMap = new HashMap<String,Object>();
+		requestMap.put("Username",
+				AccountProperties.getUserAccountInstance().getUsername());
+		contactList = new ArrayList<ContactProperties>();
+		try{
+
+			List<Map<String, String>> resultMapList = 
+					RequestHandlerHelper.GetRequestHandlerInstance().
+					HandleRequest(this,requestMap,requestID,requestType) ;		
+
+
+			for(Map<String,String> result : resultMapList){
+				if(result.isEmpty())
+					continue;
+				contactList.add(new ContactProperties(result));
+			}
+
+		}catch(RequestAbortedException e){
+			System.out.println(e.getMessage());
+		}
+
 	}
 
-	/**
-	 * This method creates the list data model used to show in the select
-	 * friends page
-	 * 
-	 * @author: Hai Tang
-	 */
-	private List<ContactsModel> getModel() {
-		final List<ContactsModel> selectFriendsList = new ArrayList<ContactsModel>();
-		selectFriendsList.add(get("Tejas"));
-		selectFriendsList.add(get("Runze"));
-		selectFriendsList.add(get("Xiaozhou"));
-		selectFriendsList.add(get("Yueling"));
-		selectFriendsList.add(get("Hai"));
 
-		return selectFriendsList;
-	}
-
-	/**
-	 * This method is used to get dummy data string
-	 * 
-	 * @author: Hai Tang
-	 */
-	private ContactsModel get(String s) {
-		return new ContactsModel(s);
-	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -118,28 +125,37 @@ public class SelectFriendsActivity extends ListActivity {
 		SelectFriendsActivity.this.startActivity(intent);
 	}
 
-	/**
-	 * Method for broadcast button click
-	 * 
-	 * @author: Hai Tang
-	 */
 
-	/*
-	public void OnBroadcastButtonClick(View view) {
-		for (int i = 0; i < selectFriendsList.size(); i++) {
-			selectFriendsList.get(i).setSelected(true);
+	/**
+	 * This method is the event handler for the post
+	 * button.
+	 * @author tejasvamsingh
+	 */
+	public void OnPostButtonClick(View view) {
+
+		requestID = "Notification";
+		requestType ="Meal";
+		List<String> recipientList =
+				new ArrayList<String>();
+
+		for(ContactProperties contact : contactList){
+			if(contact.isChecked())
+				recipientList.add(contact.getContactUsername());
 		}
-		updateView(selectFriendsList);
-	}*/
 
-	/**
-	 * Method for next button click
-	 * 
-	 * @author: Hai Tang
-	 */
-	public void OnNextButtonClick(View view) {
-		Intent intent = new Intent(SelectFriendsActivity.this,
-				PostInformationActivity.class);
-		SelectFriendsActivity.this.startActivity(intent);
+		IActivityProperties postProperties = 
+				new PostProperties(recipientList, "MEAL", postData);
+
+		try{
+
+			List<Map<String, String>> resultMapList = 
+					RequestHandlerHelper.GetRequestHandlerInstance().
+					HandleRequest(this,postProperties.toMap(),requestID,requestType) ;
+
+		}catch(RequestAbortedException e){
+			System.out.println("Already Handled");
+		}
+
+
 	}
 }

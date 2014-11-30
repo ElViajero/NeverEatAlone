@@ -16,6 +16,7 @@ import com.google.gson.reflect.TypeToken;
 
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.adapters.MealNotificationAdapter;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.DataCacheHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.helpers.GsonHelper;
 
 /**
@@ -27,10 +28,10 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.h
  *
  */
 public class InvitesActivity extends ListActivity {
-	private ArrayAdapter<Map<String,String>> MealNotificationArrayAdapter;
+	private ArrayAdapter<Map<String,String>> InvitesAdapter;
 	private TextView tv;
 	List<Map<String,String>> NotificationList;
-
+	boolean isCreated;
 	/**
 	 * This constructor is responsible for obtaining 
 	 * notifications and updating the GUI.
@@ -45,6 +46,8 @@ public class InvitesActivity extends ListActivity {
 		NotificationList = GsonHelper.GetGsonInstance().
 				fromJson(x,stringStringMap);
 		initView(savedInstanceState);
+		isCreated=false;
+
 
 	}
 
@@ -59,11 +62,15 @@ public class InvitesActivity extends ListActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_invites);
 
-		MealNotificationArrayAdapter = 
+		InvitesAdapter = 
 				new MealNotificationAdapter(this,NotificationList);
-		setListAdapter(MealNotificationArrayAdapter);
+		setListAdapter(InvitesAdapter);
+		DataCacheHelper.registerMealNotificationAdapterInstance(InvitesAdapter);
 
 	}
+
+
+
 
 
 

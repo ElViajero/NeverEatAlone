@@ -7,7 +7,8 @@ import java.util.Map;
 
 import javax.ejb.Stateless;
 
-import org.neo4j.cypher.javacompat.*;
+import org.neo4j.cypher.javacompat.ExecutionEngine;
+import org.neo4j.cypher.javacompat.ExecutionResult;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.kernel.impl.util.StringLogger;
@@ -61,17 +62,17 @@ public class NotificationDBManager implements INotificationDBManager {
 
 
 		//get the recipients as List
-		List<String> recipientList = Arrays.asList(request.get("Recipient"));
+		List<String> recipientList = Arrays.asList(request.get("recipientList"));
 
 
 		//format the parameters for the query.		
 		Map<String, String> queryParamterMap = 
 				DBManager.GetQueryParameterMap(modifiableRequestMap);
 
-		String poster = queryParamterMap.get("Poster");
-		queryParamterMap.remove("RequestType");
-		queryParamterMap.remove("RequestID");
-		queryParamterMap.remove("Recipient");
+		String poster = queryParamterMap.get("poster");
+		queryParamterMap.remove("requestType");
+		queryParamterMap.remove("requestID");
+		queryParamterMap.remove("recipientList");
 
 
 
@@ -110,7 +111,7 @@ public class NotificationDBManager implements INotificationDBManager {
 
 			parameters = new HashMap<String,Object>();
 			parameters.put("Username",poster);
-			parameters.put("PostID",queryParamterMap.get("PostID"));
+			parameters.put("PostID",queryParamterMap.get("postID"));
 
 			query = "MATCH (n:User),(a:Post)"
 					+ "WHERE n.Username={Username} AND "
@@ -133,7 +134,7 @@ public class NotificationDBManager implements INotificationDBManager {
 				//step 3 : add edges to all recipients.
 				parameters = new HashMap<String,Object>();
 				parameters.put("Recipient",	recipient);
-				parameters.put("PostID",queryParamterMap.get("PostID"));
+				parameters.put("PostID",queryParamterMap.get("postID"));
 
 				query = "MATCH (n:Post),(a:User) "
 						+ "WHERE a.Username={Recipient} AND "

@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.DataCacheHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.notificationHandler.services.NotificationHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.helpers.GsonHelper;
 //Cannot extends Activity
@@ -118,15 +119,17 @@ public class TabHostActivity extends TabActivity {
 	public void UpdateNotificationCache(List<Map<String,String>> notificationMapList){
 
 		notificationMapList.remove(0);
+		DataCacheHelper.setMealNotificationCache(notificationMapList);
+		/*
 		for(Map<String,String> notification : notificationMapList ){
 			if(notification.isEmpty())
 				continue;
-			NotificationCache.put(notification.get("PostID"), notification);
+			NotificationCache.put(notification.get("postID"), notification);
 		}
 
 		System.out.println("in UpdateNotificationCache");
-		System.out.println(NotificationCache.get("2"));
-		UpdateView();
+		//System.out.println(NotificationCache.get("2"));
+		UpdateView();*/
 
 	}
 
@@ -168,8 +171,8 @@ public class TabHostActivity extends TabActivity {
 
 		Intent intent = new Intent(this,InvitesActivity.class);
 		intent.putExtra("NotificationMapListJSON", NotificationMapListJSON);
-		TabInvites.setContent(intent);
-		//TabHost.addTab(TabInvites);
+		TabInvites.setContent(intent);		
+		TabHost.addTab(TabInvites);
 
 	}
 
