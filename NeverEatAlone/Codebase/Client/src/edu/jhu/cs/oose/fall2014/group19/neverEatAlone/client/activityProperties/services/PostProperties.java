@@ -23,7 +23,7 @@ public class PostProperties implements IActivityProperties {
 	private List<String> recipientList;
 	private String postID;
 	private String postType;
-	String postData;
+	private String postData;
 
 	public PostProperties(List<String> recipientList,String postType,
 			String postData){
@@ -33,6 +33,7 @@ public class PostProperties implements IActivityProperties {
 
 		this.recipientList = recipientList;
 		this.postData=postData;
+		this.postType =postType;
 	}
 
 	@Override

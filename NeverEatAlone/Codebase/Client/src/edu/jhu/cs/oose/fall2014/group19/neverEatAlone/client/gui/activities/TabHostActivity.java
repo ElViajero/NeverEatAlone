@@ -1,23 +1,19 @@
 package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import android.app.TabActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
-import android.widget.Toast;
-
-import com.google.gson.Gson;
-
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.NotificationProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.DataCacheHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.notificationHandler.services.NotificationHelper;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.helpers.GsonHelper;
 //Cannot extends Activity
 /**
  * 
@@ -63,8 +59,6 @@ public class TabHostActivity extends TabActivity {
 		NotificationHelper.init(this, Username);
 
 
-		//default update the view.
-		UpdateView();
 
 	}
 
@@ -113,66 +107,20 @@ public class TabHostActivity extends TabActivity {
 
 	/**
 	 * 
-	 * Method to update notifications
+	 * Method to update UI whenever notifications arrive.
 	 * @author tejasvamsingh
 	 */
 	public void UpdateNotificationCache(List<Map<String,String>> notificationMapList){
 
 		notificationMapList.remove(0);
-		DataCacheHelper.setMealNotificationCache(notificationMapList);
-		/*
-		for(Map<String,String> notification : notificationMapList ){
-			if(notification.isEmpty())
-				continue;
-			NotificationCache.put(notification.get("postID"), notification);
+		List<NotificationProperties> notificationList = 
+				new ArrayList<NotificationProperties>();
+
+		for(Map<String, String> notification : notificationMapList){
+			notificationList.add(new NotificationProperties(notification));
 		}
 
-		System.out.println("in UpdateNotificationCache");
-		//System.out.println(NotificationCache.get("2"));
-		UpdateView();*/
-
-	}
-
-
-	/**
-	 * 
-	 * Method to refresh the GUI whenever a notification arrives.
-	 * @author tejasvamsingh
-	 * 
-	 */
-
-	private void UpdateView() {
-
-		NotificationMapListJSON = "[";
-		Gson gson = GsonHelper.GetGsonInstance();
-
-		for (Entry<String, Map<String, String>> entry : NotificationCache.entrySet()) {
-
-			Map<String,String> notification = entry.getValue();
-			System.out.println("In UpdateView");
-			System.out.println(notification);
-
-			//push the notifications to view.. Naive for now.
-			Toast.makeText(getApplicationContext(), 
-					notification+"", Toast.LENGTH_SHORT).show();
-
-			String notificationJSON = gson.toJson(notification);
-			NotificationMapListJSON=NotificationMapListJSON+notificationJSON+",";
-
-		}
-
-		NotificationMapListJSON=NotificationMapListJSON.substring(0, NotificationMapListJSON.length()-1);
-		NotificationMapListJSON+="]";
-
-		System.out.println("THE MAP JSON IS : "+NotificationMapListJSON);
-
-		if(NotificationMapListJSON.equals("]"))
-			return;
-
-		Intent intent = new Intent(this,InvitesActivity.class);
-		intent.putExtra("NotificationMapListJSON", NotificationMapListJSON);
-		TabInvites.setContent(intent);		
-		TabHost.addTab(TabInvites);
+		DataCacheHelper.setMealNotificationCache(notificationList);
 
 	}
 

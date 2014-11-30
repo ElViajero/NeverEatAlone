@@ -20,31 +20,32 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.h
 public class DateAndTimeProperties implements IActivityProperties  {
 
 
-	String Day;
-	String Month;
-	String Year;
-	String Hour;
-	String Minute;
+	String day;
+	String month;
+	String year;
+	String hour;
+	String minute;
 
 
 	public DateAndTimeProperties(int day,int month,
 			int year,int hour, int minute) {
 
 		// Initialize the lists.
-		Day =String.valueOf(day);
-		Month = String.valueOf(month);
-		Year = String.valueOf(year);
-		Hour = String.valueOf(hour);
-		Minute = String.valueOf(minute);
+		this.day =String.valueOf(day);
+		this.month = String.valueOf(month);
+		this.year = String.valueOf(year);
+		this.hour = String.valueOf(hour);
+		this.minute = String.valueOf(minute);
 
 	}
 
 	public DateAndTimeProperties(Map<String,String> map) {
 
-		Day = map.get("Day");
-		Month = map.get("Month");
-		Hour = map.get("Hour");
-		Minute = map.get("Minute");
+		day = map.get("day");
+		month = map.get("month");
+		hour = map.get("hour");
+		minute = map.get("minute");
+		year=map.get("year");
 
 	}
 
@@ -70,6 +71,10 @@ public class DateAndTimeProperties implements IActivityProperties  {
 	}
 
 
+	@Override
+	public String toString(){
+		return month+"/"+day+"/"+year+"   " + hour + ":"+minute;
+	}
 
 
 }

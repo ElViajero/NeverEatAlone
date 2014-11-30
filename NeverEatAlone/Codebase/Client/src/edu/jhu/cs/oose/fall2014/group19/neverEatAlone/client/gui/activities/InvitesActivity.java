@@ -1,8 +1,7 @@
 package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities;
 
-import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import android.app.ListActivity;
 import android.content.Intent;
@@ -11,13 +10,10 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-
-import com.google.gson.reflect.TypeToken;
-
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.NotificationProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.adapters.MealNotificationAdapter;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.DataCacheHelper;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.helpers.GsonHelper;
 
 /**
  * 
@@ -28,9 +24,9 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.h
  *
  */
 public class InvitesActivity extends ListActivity {
-	private ArrayAdapter<Map<String,String>> InvitesAdapter;
+	private ArrayAdapter<NotificationProperties> InvitesAdapter;
 	private TextView tv;
-	List<Map<String,String>> NotificationList;
+	List<NotificationProperties> NotificationList;
 	boolean isCreated;
 	/**
 	 * This constructor is responsible for obtaining 
@@ -40,11 +36,7 @@ public class InvitesActivity extends ListActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 
-		Type stringStringMap = new TypeToken<List<Map<String, String>>>(){}.getType();
-		String x= getIntent().getStringExtra("NotificationMapListJSON");
-		System.out.println("JSON is  : "+x);
-		NotificationList = GsonHelper.GetGsonInstance().
-				fromJson(x,stringStringMap);
+		NotificationList = new ArrayList<NotificationProperties>();
 		initView(savedInstanceState);
 		isCreated=false;
 
@@ -53,7 +45,6 @@ public class InvitesActivity extends ListActivity {
 
 	/**
 	 * This method updates the GUI.
-	 * @author Hai Tang
 	 * @author tejasvamsingh
 	 * @param savedInstanceState
 	 */
@@ -68,9 +59,6 @@ public class InvitesActivity extends ListActivity {
 		DataCacheHelper.registerMealNotificationAdapterInstance(InvitesAdapter);
 
 	}
-
-
-
 
 
 

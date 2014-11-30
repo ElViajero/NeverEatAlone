@@ -1,26 +1,27 @@
 package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers;
 
 import java.util.List;
-import java.util.Map;
 
 import android.widget.ArrayAdapter;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.NotificationProperties;
 
 public class DataCacheHelper {
 
-	private static List<Map<String,String>> MealNotificationCache;
-	private static ArrayAdapter<Map<String, String>> mealNotificationAdaapterInstance; 
+	private static List<NotificationProperties> MealNotificationCache;
+	private static ArrayAdapter<NotificationProperties> mealNotificationAdaapterInstance; 
 
-	public static List<Map<String, String>> getMealNotificationCache() {
+	public static List<NotificationProperties> getMealNotificationCache() {
 		return MealNotificationCache;
 	}
 
 	public static void setMealNotificationCache(
-			List<Map<String, String>> notificationCache) {
+			List<NotificationProperties> notificationCache) {
 		MealNotificationCache = notificationCache;
 		mealNotificationAdaapterInstance.addAll(MealNotificationCache);
 	}
 
-	public static void registerMealNotificationAdapterInstance(ArrayAdapter<Map<String, String>> invitesAdapter){
+	public static void registerMealNotificationAdapterInstance(
+			ArrayAdapter<NotificationProperties> invitesAdapter){
 		mealNotificationAdaapterInstance = invitesAdapter;
 	}
 
