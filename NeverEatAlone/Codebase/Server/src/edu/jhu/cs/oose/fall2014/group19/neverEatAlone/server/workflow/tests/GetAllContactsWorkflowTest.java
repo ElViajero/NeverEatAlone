@@ -28,7 +28,7 @@ public class GetAllContactsWorkflowTest {
 	 * @throws IOException 
 	 */
 	@Test
-	public void GetContacts() throws IOException {
+	public void GetContactsTest() throws IOException {
 		
 		// book keeping 
 		System.out.println("deleting all test accounts...");
@@ -37,7 +37,7 @@ public class GetAllContactsWorkflowTest {
 		WorkflowTestHelper.DeleteTestAccount("UserC");
 
 		// create 3 accounts
-		System.out.println("creating all test accounts...");
+		System.out.println("creating test accounts...");
 		WorkflowTestHelper.CreateTestAccount("UserA", "pwA", "emailA");
 		WorkflowTestHelper.CreateTestAccount("UserB", "pwB", "emailB");
 		WorkflowTestHelper.CreateTestAccount("UserC", "pwC", "emailC");
@@ -48,19 +48,19 @@ public class GetAllContactsWorkflowTest {
 		nvps1.add(new BasicNameValuePair("RequestID", "Contact"));	    
 		nvps1.add(new BasicNameValuePair("RequestType", "Add"));
 		nvps1.add(new BasicNameValuePair("Username", "UserA"));
-		nvps1.add(new BasicNameValuePair("ContactUsername", "UserB"));
+		nvps1.add(new BasicNameValuePair("contactUsername", "UserB"));
 		
 		List <NameValuePair> nvps2 = new ArrayList <NameValuePair>();	    
 		nvps2.add(new BasicNameValuePair("RequestID", "Contact"));	    
 		nvps2.add(new BasicNameValuePair("RequestType", "Add"));
 		nvps2.add(new BasicNameValuePair("Username", "UserA"));
-		nvps2.add(new BasicNameValuePair("ContactUsername", "UserC"));
+		nvps2.add(new BasicNameValuePair("contactUsername", "UserC"));
 
 		List <NameValuePair> nvps3 = new ArrayList <NameValuePair>();	    
 		nvps3.add(new BasicNameValuePair("RequestID", "Contact"));	    
 		nvps3.add(new BasicNameValuePair("RequestType", "Add"));
 		nvps3.add(new BasicNameValuePair("Username", "UserB"));
-		nvps3.add(new BasicNameValuePair("ContactUsername", "UserA"));
+		nvps3.add(new BasicNameValuePair("contactUsername", "UserA"));
 		
 		//execute the add contacts request.
 		WorkflowTestHelper.ExecuteRequest(nvps1);

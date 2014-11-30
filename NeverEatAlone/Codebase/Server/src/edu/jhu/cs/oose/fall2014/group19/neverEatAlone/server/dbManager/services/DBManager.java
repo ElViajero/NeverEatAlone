@@ -129,7 +129,6 @@ public class DBManager {
 		// Iterate over the returned rows
 		// The keys of the map are the column names and the values are the entries
 		ResourceIterator<Map<String,Object>> rows = result.iterator();
-		System.out.println(rows.hasNext());
 		
 		//index of element in the maplist 
 		int index=0;

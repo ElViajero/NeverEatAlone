@@ -1,5 +1,6 @@
 package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.services;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,7 +45,7 @@ public class AccountDBManager implements IAccountDBManager {
 	public List<Map<String,String>> CreateAccount(Map<String,String[]> request) {
 
 		// ********* LOGGING ********* 
-		System.out.println("Reached CreateAccount in AccountManager");
+		System.out.println("Reached CreateAccount in AccountDBManager");
 		System.out.flush();
 		// ********* LOGGING ********* 
 
@@ -55,7 +56,7 @@ public class AccountDBManager implements IAccountDBManager {
 
 		// add an "Available" property, creation default value is "YES"
 		modifiableRequestMap.put("Available", new String[]{"YES"});
-		
+
 		//format the parameters for the query.		
 		Map<String, String> queryParamterMap = 
 				DBManager.GetQueryParameterMap(modifiableRequestMap);
@@ -110,7 +111,7 @@ public class AccountDBManager implements IAccountDBManager {
 	public List<Map<String,String>> UpdateAccount(Map<String,String[]> request) {
 
 		// ********* LOGGING ********* 
-		System.out.println("Reached UpdateAccount in AccountManager");
+		System.out.println("Reached UpdateAccount in AccountDBManager");
 		System.out.flush();
 		// ********* LOGGING ********* 
 
@@ -118,7 +119,11 @@ public class AccountDBManager implements IAccountDBManager {
 		Map<String,String[]> modifiableRequestMap = new HashMap<String,String[]>(request);
 		modifiableRequestMap.remove("RequestType");
 		modifiableRequestMap.remove("RequestID");
-		
+
+		// user name can never be changed 
+		String userName = modifiableRequestMap.get("Username")[0]; 
+		modifiableRequestMap.remove("Username"); 
+
 		//format the parameters for the query.		
 		Map<String, String> queryParamterMap = 
 				DBManager.GetQueryParameterMap(modifiableRequestMap);
@@ -135,6 +140,7 @@ public class AccountDBManager implements IAccountDBManager {
 		{
 			//create a params map.
 			Map<String,Object> parameters = new HashMap<String,Object>();
+			parameters.put("Username", userName); 
 			parameters.put("updateParameters",queryParamterMap);
 
 			//create cypher query to update the database.
@@ -166,7 +172,7 @@ public class AccountDBManager implements IAccountDBManager {
 
 		return resultMapList;
 	}
-	
+
 	/**
 	 * Method to set availability of a user
 	 * @param request
@@ -177,7 +183,7 @@ public class AccountDBManager implements IAccountDBManager {
 		//TODO
 		return null; 
 	}
-	
+
 	/**
 	 * Method to get account information
 	 */
@@ -207,7 +213,7 @@ public class AccountDBManager implements IAccountDBManager {
 	public List<Map<String,String>> DeleteAccount(Map<String,String[]> request) {
 
 		// ********* LOGGING ********* 
-		System.out.println("Reached DeleteAccount in AccountManager");
+		System.out.println("Reached DeleteAccount in AccountDBManager");
 		System.out.flush();
 		// ********* LOGGING ********* 
 
@@ -224,8 +230,8 @@ public class AccountDBManager implements IAccountDBManager {
 		// set up parameters to execute and store the result of query
 		ExecutionEngine executionEngine = new ExecutionEngine(GraphDBInstance,
 				StringLogger.SYSTEM);				
-		ExecutionResult result;
-		List<Map<String,String>> resultMapList;
+		List<Map<String,String>> resultMapList = new ArrayList<Map<String,String>>();
+		resultMapList.add(new HashMap<String,String>()); 
 
 
 		try ( Transaction tx = GraphDBInstance.beginTx() )
@@ -234,27 +240,37 @@ public class AccountDBManager implements IAccountDBManager {
 			Map<String,Object> parameters = new HashMap<String,Object>();
 			parameters.put("Username",queryParamterMap.get("Username"));
 
+			System.out.println("deleting user "+parameters.get("Username"));
+
 			//create cypher query to delete node from the database.
+			// first delete the relationships
 			String query =""
 					+ "OPTIONAL MATCH (n:User)-[r]-() "
 					+ "WHERE n.Username={Username} "
-					+ "DELETE n,r ";
+					+ "DELETE r ";
 
+			executionEngine.execute(query,parameters);
 
-			//execute the query
-			result = executionEngine.execute(query,parameters);
+			// then delete the node
+			query =""
+					+ "MATCH (n:User)"
+					+ "WHERE n.Username={Username} "
+					+ "DELETE n ";
 
-			System.out.println("result : "+result);
-			System.out.flush();
-			// This is the data returned.
-			resultMapList = DBManager.GetResultMapList(result);
-
-			// Successful transaction.
-			tx.success();
-
-			//if we reached here then transaction was successful.
-			resultMapList.get(0).put("Status", "Success");
+			// Check for constraint violation.
+			try{
+				//execute the query
+				executionEngine.execute(query,parameters);
+				tx.success();
+				resultMapList.get(0).put("Status", "Success");
+			}catch(Exception e){
+				System.out.println("Constraint violation in deleting account. :: ");
+				System.out.println(e.getMessage());
+				tx.failure();
+				resultMapList.get(0).put("Status", "Failed");
+			}
 		}
+		System.out.println("deleting result: "+resultMapList);
 
 		return resultMapList;
 
@@ -269,7 +285,7 @@ public class AccountDBManager implements IAccountDBManager {
 	public List<Map<String, String>> IsValidAccount(Map<String, String[]> request) {
 
 		// ********* LOGGING ********* 
-		System.out.println("Reached IsValidAccount in AccountManager");
+		System.out.println("Reached IsValidAccount in AccountDBManager");
 		System.out.flush();
 		// ********* LOGGING ********* 
 
