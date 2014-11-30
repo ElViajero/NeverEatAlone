@@ -38,20 +38,7 @@ public interface IAccountDBManager {
 	 */
 	public List<Map<String,String>> GetInfo(Map<String,String[]> request);
 	
-	/**
-	 * Method to get availability information 
-	 * @param request
-	 * @return
-	 */
-	public List<Map<String,String>> GetAvailability(Map<String,String[]> request);
-	
-	/**
-	 * Method to set availability information 
-	 * @param request
-	 * @return
-	 */
-	public List<Map<String,String>> SetAvailability(Map<String,String[]> request);
-	
+
 	/**
 	 * Method to delete an user account.
 	 * @param request

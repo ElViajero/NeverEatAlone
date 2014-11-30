@@ -19,6 +19,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.contracts
  * This class handles account management related database transactions.
  * 
  * @author tejasvamsingh
+ * @author Xiaozhou Zhou
  *
  */
 
@@ -174,17 +175,6 @@ public class AccountDBManager implements IAccountDBManager {
 	}
 
 	/**
-	 * Method to set availability of a user
-	 * @param request
-	 * @return
-	 */
-	@Override
-	public List<Map<String,String>> SetAvailability(Map<String,String[]> request){
-		//TODO
-		return null; 
-	}
-
-	/**
 	 * Method to get account information
 	 */
 	@Override
@@ -193,15 +183,6 @@ public class AccountDBManager implements IAccountDBManager {
 		return null;
 	}
 
-	/**
-	 * Method to get availability 
-	 */
-	@Override
-	public List<Map<String, String>> GetAvailability(
-			Map<String, String[]> request) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	/**
 	 * This method deletes the specified account from the database.

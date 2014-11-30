@@ -105,8 +105,4 @@ public class UpdateAccountWorkflowTest {
 		WorkflowTestHelper.DeleteTestAccount("UserB");
 	}
 
-	@Test
-	public void SetAvailabilityTest() throws IOException {
-
-	}
 }

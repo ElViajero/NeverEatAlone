@@ -64,24 +64,6 @@ public class AccountManagementRequestHandler{
 	}
 
 	
-	public List<Map<String,String>> SetAvailabilityAccountRequest(Map<String,String[]> request){
-
-		// ********* LOGGING ********* 
-		System.out.println("reached SetAvailabilityAccountRequest");
-		// ********* LOGGING ********* 
-
-		return IAccountManagerObject.SetAvailability(request);
-	}
-	
-	public List<Map<String,String>> GetAvailabilityAccountRequest(Map<String,String[]> request){
-
-		// ********* LOGGING ********* 
-		System.out.println("reached GetAvailabilityAccountRequest");
-		// ********* LOGGING ********* 
-
-		return IAccountManagerObject.GetAvailability(request);
-	}
-	
 	public List<Map<String,String>> UpdateAccountRequest(Map<String,String[]> request){
 
 		// ********* LOGGING ********* 
