@@ -21,4 +21,3 @@ Profile:
 What tasks needs to be done: 
 - GUI tests
 - Make Style sheets 
-- Back button
