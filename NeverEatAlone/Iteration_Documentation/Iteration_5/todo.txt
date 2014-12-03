@@ -1,0 +1,24 @@
+What pages needs to be created:
+- Accept/reject friend request
+
+------------------------------------
+What pages needs to be completed:
+Invite summary page
+- Availability status button
+
+Meal summary
+- Needs to populated with information
+
+Contact page
+- Connect the list to individual profiles
+- Add "set visibility" button (maybe additional page)
+
+Profile:
+- Stop hard code info
+- Information need to be connected to server
+
+------------------------------------
+What tasks needs to be done: 
+- GUI tests
+- Make Style sheets 
+- Back button
