@@ -78,5 +78,9 @@
     <string name="end_post">End Post</string>
     <string name="additional_info">Additional Information</string>
     <string name="user_avatar">User Avatar</string>
+    <string name="empty_username">No username provided.</string>
+    <string name="empty_email">No email provided.</string>
+    <string name="empty_password">No password provided.</string>
+    <string name="different_passwords">Passwords do not match.</string>
 
 </resources>
