@@ -22,11 +22,10 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.MealProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.helpers.GsonHelper;
 
-
 public class CreateMealInformationActivity extends FragmentActivity {
 
 	Button BtnSelectStartDate, BtnSelectStartTime, BtnSelectEndDate,
-	BtnSelectEndTime;
+			BtnSelectEndTime;
 
 	private EditText Place;
 	private EditText MaxNumber;
@@ -202,7 +201,6 @@ public class CreateMealInformationActivity extends FragmentActivity {
 		showEndTimePicker();
 	}
 
-
 	/**
 	 * Handler for the meal creation event.
 	 * 
@@ -225,41 +223,40 @@ public class CreateMealInformationActivity extends FragmentActivity {
 
 		String location = Place.getText().toString();
 		String maxNumberOfInvitees = MaxNumber.getText().toString();
-		String isNotificationExtendible = AllowFriendInvite.getText().toString();
+		String isNotificationExtendible = AllowFriendInvite.getText()
+				.toString();
 
 		Toast.makeText(
 				getApplicationContext(),
 				"Start Time: " + DayStart + "/" + dummymonthstart + "/"
-						+ YearStart + " " + HourStart + ":" + MinuteStart + "\n"
-						+ "End Time: " + DayEnd + "/" + dummymonthend + "/"
-						+ YearEnd + " " + HourEnd + ":" + MinuteEnd + "\n"
-						+ "Place: " + location + "\n" + "Max Number: " + maxNumberOfInvitees
-						+ "\n" + "Allow Friend Invite: " + isNotificationExtendible,
-						Toast.LENGTH_SHORT).show();
+						+ YearStart + " " + HourStart + ":" + MinuteStart
+						+ "\n" + "End Time: " + DayEnd + "/" + dummymonthend
+						+ "/" + YearEnd + " " + HourEnd + ":" + MinuteEnd
+						+ "\n" + "Place: " + location + "\n" + "Max Number: "
+						+ maxNumberOfInvitees + "\n" + "Allow Friend Invite: "
+						+ isNotificationExtendible, Toast.LENGTH_SHORT).show();
 
-
-
-		// ************************** PAGE ONE REQUEST CREATION STARTS HERE **************************
-
+		// ************************** PAGE ONE REQUEST CREATION STARTS HERE
+		// **************************
 
 		// Create Date and Time Properties Objects
-		DateAndTimeProperties startDateAndTimeProperties = 
-				new DateAndTimeProperties(DayStart, MonthStart, YearStart, HourStart, MinuteStart);
+		DateAndTimeProperties startDateAndTimeProperties = new DateAndTimeProperties(
+				DayStart, MonthStart, YearStart, HourStart, MinuteStart);
 
-		DateAndTimeProperties endDateAndTimeProperties = 
-				new DateAndTimeProperties(DayEnd, MonthEnd, YearEnd, HourEnd, MinuteEnd);
+		DateAndTimeProperties endDateAndTimeProperties = new DateAndTimeProperties(
+				DayEnd, MonthEnd, YearEnd, HourEnd, MinuteEnd);
 
-		//Create a Meal Object
-		MealProperties mealProperties = new MealProperties(
-				location,
+		// Create a Meal Object
+		MealProperties mealProperties = new MealProperties(location,
 				maxNumberOfInvitees, isNotificationExtendible,
-				startDateAndTimeProperties,endDateAndTimeProperties); 
+				startDateAndTimeProperties, endDateAndTimeProperties);
 
-		Map<String, Object> mealPropertiesMap =
-				mealProperties.toMap();
+		Map<String, Object> mealPropertiesMap = mealProperties.toMap();
 
-		Intent intent = new Intent(CreateMealInformationActivity.this, SelectFriendsActivity.class);
-		intent.putExtra("mealProperties", GsonHelper.GetGsonInstance().toJson(mealPropertiesMap));
+		Intent intent = new Intent(CreateMealInformationActivity.this,
+				SelectFriendsActivity.class);
+		intent.putExtra("mealProperties",
+				GsonHelper.GetGsonInstance().toJson(mealPropertiesMap));
 		CreateMealInformationActivity.this.startActivity(intent);
 
 	}
