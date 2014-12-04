@@ -175,12 +175,67 @@ public class AccountDBManager implements IAccountDBManager {
 	}
 
 	/**
-	 * Method to get account information
+	 * Method to get full account information
 	 */
 	@Override
 	public List<Map<String, String>> GetInfo(Map<String, String[]> request) {
-		// TODO Auto-generated method stub
-		return null;
+
+		// ********* LOGGING ********* 
+		System.out.println("Reached GetInfo in AccountDBManager");
+		System.out.flush();
+		// ********* LOGGING ********* 
+
+		Map<String,String[]> modifiableRequestMap = new HashMap<String,String[]>(request);
+		modifiableRequestMap.remove("RequestType");
+		modifiableRequestMap.remove("RequestID");
+
+
+		//format the parameters for the query.		
+		Map<String, String> queryParamterMap = 
+				DBManager.GetQueryParameterMap(modifiableRequestMap);
+
+
+		// ************************ LOGGING ************************
+		System.out.println("USERNAME :"+queryParamterMap.get("Username"));
+
+		// set up parameters to execute and store the result of query
+		ExecutionEngine executionEngine = new ExecutionEngine(GraphDBInstance,
+				StringLogger.SYSTEM);				
+		ExecutionResult result;
+		List<Map<String,String>> resultMapList;
+
+		try ( Transaction tx = GraphDBInstance.beginTx() )
+		{
+			//create a params map.
+			Map<String,Object> parameters = new HashMap<String,Object>();
+			parameters.put("Username",queryParamterMap.get("Username"));
+
+			// Fetch all the properties of the user node 
+
+			String query = "MATCH (n:User)"
+					+ " WHERE "
+					+ "n.Username = {Username}"
+					+ "RETURN n";
+
+			try{
+				//execute the query
+				result = executionEngine.execute(query,parameters);
+				tx.success();
+			}catch(Exception e){
+				System.out.println("Constraint violation in fetching account information :: ");
+				System.out.println(e.getMessage());
+				result = null;
+				tx.failure();
+			}
+//			System.out.println("query result: \n"+result.dumpToString());
+			// This is the data returned.
+			resultMapList = DBManager.GetResultMapList(result);
+			// Sucessful transaction.
+		}
+
+		System.out.println("Account Info Fetched: "+resultMapList);
+		return resultMapList;		
+		
 	}
 
 
@@ -224,6 +279,7 @@ public class AccountDBManager implements IAccountDBManager {
 			System.out.println("deleting user "+parameters.get("Username"));
 
 			//create cypher query to delete node from the database.
+			//TODO The OPTIONAL does not do its work so I separated deleting r and n: need to look into this issue
 			// first delete the relationships
 			String query =""
 					+ "OPTIONAL MATCH (n:User)-[r]-() "

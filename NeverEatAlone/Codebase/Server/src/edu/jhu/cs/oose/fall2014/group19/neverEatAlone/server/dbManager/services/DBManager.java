@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.ejb.Stateless;
 
+import org.neo4j.cypher.javacompat.ExecutionEngine;
 import org.neo4j.cypher.javacompat.ExecutionResult;
 import org.neo4j.graphdb.DynamicLabel;
 import org.neo4j.graphdb.GraphDatabaseService;
@@ -14,6 +15,7 @@ import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.ResourceIterator;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
+import org.neo4j.kernel.impl.util.StringLogger;
 
 /**
  * This class is a helper class for database operations.
@@ -75,9 +77,14 @@ public class DBManager {
 			assertPropertyIsUnique("Username").create();			
 
 
-			GraphDBInstance.schema().
-			constraintFor(DynamicLabel.label("User")).
-			assertPropertyIsUnique("Email").create();			
+//			GraphDBInstance.schema().
+//			constraintFor(DynamicLabel.label("User")).
+//			assertPropertyIsUnique("Email").create();		
+			
+			String query = "CREATE CONSTRAINT ON (n:User) ASSERT n.Email IS UNIQUE";
+			ExecutionEngine executionEngine = new ExecutionEngine(GraphDBInstance,
+					StringLogger.SYSTEM);	
+			executionEngine.execute(query);
 
 			/*
 			GraphDBInstance.schema().
