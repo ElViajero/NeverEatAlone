@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingLeft="30dp"
+    android:paddingRight="30dp" >
+
+    <ImageView
+        android:id="@+id/contacts_avatar"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:contentDescription="@string/user_avatar"
+        android:gravity="center_vertical"
+        android:src="@drawable/user_profile" />
+
+    <TextView
+        android:id="@+id/contacts_name"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="25dp"
+        android:layout_marginStart="25dp"
+        android:layout_weight="3"
+        android:gravity="center_vertical"
+        android:text="@+id/contacts_name" />
+
+    <Button
+        android:id="@+id/contacts_notification_accept"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:gravity="center_vertical|center_horizontal"
+        android:onClick="OnAcceptButtonClick"
+        android:text="@string/accept" />
+
+    <Button
+        android:id="@+id/contacts_notification_reject"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:gravity="center_vertical|center_horizontal"
+        android:onClick="OnRejectButtonClick"
+        android:text="@string/reject" />
+
+</LinearLayout>

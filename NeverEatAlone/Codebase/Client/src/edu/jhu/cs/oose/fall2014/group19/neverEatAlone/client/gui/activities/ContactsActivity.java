@@ -99,4 +99,20 @@ public class ContactsActivity extends ListActivity {
 		ContactsActivity.this.startActivity(intent);
 	}
 
+	
+	
+	
+	/**
+	 * Method for contact notification button click
+	 * 
+	 * 
+	 */
+	public void OnContactNotificationButtonClick(View view) {
+		Intent intent = new Intent(ContactsActivity.this,
+				DisplayContactNotificationActivity.class);
+		ContactsActivity.this.startActivity(intent);
+	}
+	
+	
+	
 }
