@@ -77,5 +77,6 @@
     <string name="start_post">Start Post</string>
     <string name="end_post">End Post</string>
     <string name="additional_info">Additional Information</string>
+    <string name="user_avatar">User Avatar</string>
 
 </resources>
