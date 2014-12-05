@@ -33,7 +33,7 @@
         android:layout_gravity="center"
         android:layout_weight="1"
         android:gravity="center_vertical|center_horizontal"
-        android:onClick="OnAcceptButtonClick"
+        android:onClick="onAcceptButtonClick"
         android:text="@string/accept" />
 
     <Button
@@ -43,7 +43,7 @@
         android:layout_gravity="center"
         android:layout_weight="1"
         android:gravity="center_vertical|center_horizontal"
-        android:onClick="OnRejectButtonClick"
+        android:onClick="onRejectButtonClick"
         android:text="@string/reject" />
 
 </LinearLayout>

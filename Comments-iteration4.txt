@@ -6,7 +6,7 @@ Although your instructions suggest that the deployer customize the IPAddress fie
 In order to follow your setup instructions, I need a version of Maven newer than the one in Debian Unstable; that's a bad sign. Consider just including the relevant appcompat libraries rather than trying to fetch them via Maven.
 You should not be hard-coding contacts in your ContactsActivity, even for testing.
 Why are you using List<String> in your RegisterRequestProperties instead of just String. Regardless, it's bad form to have parrallel lists, so if you do need a list, you should be using a list of triples, not a triple of lists.
-"Username", "Password", and "Email" (among many others) violate java naming conventions. Fields must start with a lowercase letter.
+"username", "password", and "email" (among many others) violate java naming conventions. Fields must start with a lowercase letter.
 Consider using log4j for your debug output instead of plain System.out.println.
 You pervasively use Strings, String arrays, and Maps from Strings; in many cases, this is in violation of OO design.
 

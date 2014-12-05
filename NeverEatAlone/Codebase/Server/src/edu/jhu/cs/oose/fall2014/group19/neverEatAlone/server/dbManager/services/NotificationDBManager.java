@@ -110,13 +110,13 @@ public class NotificationDBManager implements INotificationDBManager {
 			//step 2 : add an edge from poster to node.
 
 			parameters = new HashMap<String,Object>();
-			parameters.put("Username",poster);
+			parameters.put("username",poster);
 			parameters.put("PostID",queryParamterMap.get("postID"));
 
 			query = "MATCH (n:User),(a:Post)"
-					+ "WHERE n.Username={Username} AND "
+					+ "WHERE n.username={username} AND "
 					+ "a.PostID={PostID}"
-					+ "CREATE (n)-[:POSTER]->(a) "
+					+ "CREATE (n)-[:poster]->(a) "
 					+ "RETURN n";
 
 			try{
@@ -137,7 +137,7 @@ public class NotificationDBManager implements INotificationDBManager {
 				parameters.put("PostID",queryParamterMap.get("postID"));
 
 				query = "MATCH (n:Post),(a:User) "
-						+ "WHERE a.Username={Recipient} AND "
+						+ "WHERE a.username={Recipient} AND "
 						+ "n.PostID={PostID} "
 						+ "CREATE (n)-[:RECIPIENT]->(a) "
 						+ "RETURN n";

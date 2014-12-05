@@ -23,7 +23,7 @@ Has a :
 	Visibility list 	#List of contacts that see the user as available when status is available
 
 
-ACCOUNT INFORMATION
+ACCOUNT INFORMATIon
 --------------------
 Has a :
 	username
@@ -36,18 +36,18 @@ Has a :
 	Avatar
 
 
-CONTACT
+ConTACT
 -------
 Is a :
 	User
 
 
-CONTACT LIST
+ConTACT LIST
 ------------
 Has :
 	Contact Groups  # By default a full contact list has one group (implicit) that has all contacts
 
-CONTACT GROUP
+ConTACT GROUP
 --------------
 Has :
 	Contacts 	# Collection of contacts
@@ -60,14 +60,14 @@ Is a :
 
 
 
-NOTIFICATION
+NOTIFICATIon
 ------------
 Has a:
-	Poster 	# creator of the notification
+	poster 	# creator of the notification
 	Receiver List # contacts that receive the notification
 	
 
-POSTER
+poster
 -------
 Is a:
 	User
@@ -79,7 +79,7 @@ Is a :
 
 
 
-MEAL NOTIFICATION
+MEAL NOTIFICATIon
 ------------------
 Is a :
 	Notification
@@ -88,10 +88,10 @@ Has :
 
 
 
-MEAL NOTIFICATION INFORMATION
+MEAL NOTIFICATIon INFORMATIon
 -----------------------------
 Has :
-	Location
+	location
 	Meal Duration
 	Availability Start time #Start time of when you want to leave
 	Availability End time
@@ -101,17 +101,17 @@ Has :
 	Additional Information
 
 
-UPDATE NOTIFICATION    # notification for general updates to meal notification information.
+UPDATE NOTIFICATIon    # notification for general updates to meal notification information.
 --------------------
 Is a :
 	Meal Notification 
 
-CAPACITY UPDATE NOTIFICATION # pushes capacity status (filled or x remaining) to all contacts that received the original meal notification.
+CAPACITY UPDATE NOTIFICATIon # pushes capacity status (filled or x remaining) to all contacts that received the original meal notification.
 -----------------------------
 Is a :
 	Update Notification
 
-FRIENDS ATTENDING NOTIFICATION 
+FRIENDS ATTENDING NOTIFICATIon 
 -------------------------------
 Is a :
 	Meal Notification
@@ -120,18 +120,18 @@ Has :
 	
 
 
-ACCEPTANCE NOTIFICATION 	# Just to confirm attendance
+ACCEPTANCE NOTIFICATIon 	# Just to confirm attendance
 -----------------------
 Is a :
 	Meal Notification
 
 
-CANCELLATION NOTIFICATION 	# Cancelled by the poster or to cancel attendance of a contact.
+CANCELLATIon NOTIFICATIon 	# Cancelled by the poster or to cancel attendance of a contact.
 -------------------------
 Is a :
 	Meal Notification
 
-COMPLETION NOTIFICATION 	# When all recipients have been found.
+COMPLETIon NOTIFICATIon 	# When all recipients have been found.
 -------------------------
 Is a :
 	Meal Notification

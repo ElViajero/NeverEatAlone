@@ -2,6 +2,7 @@ package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.
 
 import com.google.gson.Gson;
 
+
 /**
  * This class is a Gson Helper class that returns 
  * a Gson instance that is shared by all client requests.
@@ -11,7 +12,7 @@ import com.google.gson.Gson;
 
 public class GsonHelper {
 
-	static Gson GsonInstance;
+	static Gson gsonInstance;
 
 	/**
 	 * This method returns the Gson instance
@@ -19,11 +20,11 @@ public class GsonHelper {
 	 * @author tejasvamsingh
 	 * @return
 	 */
-	public static Gson GetGsonInstance(){
+	public static Gson getGsoninstance(){
 
-		if(GsonInstance==null)
-			GsonInstance = new Gson();
-		return GsonInstance;
+		if(gsonInstance==null)
+			gsonInstance = new Gson();
+		return gsonInstance;
 	}
 
 

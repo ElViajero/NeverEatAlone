@@ -27,7 +27,7 @@ public class ChangePasswordActivity extends Activity {
 	 * 
 	 * @author: Hai Tang
 	 */
-	public void OnConfirmButtonClick(View view) {
+	public void onConfirmButtonClick(View view) {
 		Intent intent = new Intent(ChangePasswordActivity.this,
 				TabHostActivity.class);
 		ChangePasswordActivity.this.startActivity(intent);
@@ -38,7 +38,7 @@ public class ChangePasswordActivity extends Activity {
 	 * 
 	 * @author: Hai Tang
 	 */
-	public void OnCancelButtonClick(View view) {
+	public void onCancelButtonClick(View view) {
 		Intent intent = new Intent(ChangePasswordActivity.this,
 				TabHostActivity.class);
 		ChangePasswordActivity.this.startActivity(intent);

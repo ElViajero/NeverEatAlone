@@ -27,8 +27,8 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.serv
  */
 public class AddFriendsActivity extends Activity {
 
-	private EditText Username;
-	private EditText Email;
+	private EditText usernameEditTextObject;
+	private EditText emailEditTextObject;
 	private String requestID;
 	private String requestType;
 
@@ -36,8 +36,8 @@ public class AddFriendsActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		initview(savedInstanceState);
 
-		Username = (EditText) findViewById(R.id.editText_addfriends_username);
-		Email = (EditText) findViewById(R.id.editText_addfriends_email);
+		usernameEditTextObject = (EditText) findViewById(R.id.editText_addfriends_username);
+		emailEditTextObject = (EditText) findViewById(R.id.editText_addfriends_email);
 
 	}
 
@@ -56,7 +56,7 @@ public class AddFriendsActivity extends Activity {
 	 * 
 	 * @author: Hai Tang
 	 */
-	public void OnBackButtonClick(View view) {
+	public void onBackButtonClick(View view) {
 		Intent intent = new Intent(AddFriendsActivity.this,
 				TabHostActivity.class);
 		AddFriendsActivity.this.startActivity(intent);
@@ -67,10 +67,10 @@ public class AddFriendsActivity extends Activity {
 	 * @author tejasvamsingh 
 	 * @author: Hai Tang
 	 */
-	public void OnSearchButtonClick(View view) {
+	public void onSearchButtonClick(View view) {
 
-		String username = Username.getText().toString();
-		String email = Email.getText().toString();
+		String username = usernameEditTextObject.getText().toString();
+		String email = emailEditTextObject.getText().toString();
 
 		requestID = "Contact";
 		requestType="Add";
@@ -79,8 +79,8 @@ public class AddFriendsActivity extends Activity {
 		try{
 
 			List<Map<String, String>> resultMapList = 
-					RequestHandlerHelper.GetRequestHandlerInstance().
-					HandleRequest(this,contact.toMap(),requestID,requestType) ;		
+					RequestHandlerHelper.getRequestHandlerInstance().
+					handleRequest(this,contact.toMap(),requestID,requestType) ;		
 
 
 			if(resultMapList.get(0).get("Status").equals("Success"))

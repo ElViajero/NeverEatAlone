@@ -9,13 +9,13 @@ public class NotificationProperties implements IActivityProperties {
 	private String poster;
 	private String notificationID;
 
-	public String getPoster() {
+	public String getposter() {
 		return poster;
 	}
 
 
 
-	public void setPoster(String poster) {
+	public void setposter(String poster) {
 		this.poster = poster;
 	}
 

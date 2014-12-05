@@ -32,7 +32,7 @@ public class LoginDBManager implements ILoginDBManager {
 		GraphDBInstance = 
 				DBManager.GetGraphDBInstance();
 	}
-	
+
 	/**
 	 * This method checks credentials for successful login.
 	 * @param request
@@ -41,7 +41,7 @@ public class LoginDBManager implements ILoginDBManager {
 	@Override
 	public List<Map<String, String>> CheckCredentials(
 			Map<String, String[]> request) {
-		
+
 		// ********* LOGGING ********* 
 		System.out.println("Reached CheckCredentials in LoginManager");
 		System.out.flush();
@@ -49,8 +49,8 @@ public class LoginDBManager implements ILoginDBManager {
 
 		//create a duplicate map.
 		Map<String,String[]> modifiableRequestMap = new HashMap<String,String[]>(request);
-		modifiableRequestMap.remove("RequestType");
-		modifiableRequestMap.remove("RequestID");
+		modifiableRequestMap.remove("requestType");
+		modifiableRequestMap.remove("requestID");
 
 
 		//format the parameters for the query.		
@@ -65,17 +65,18 @@ public class LoginDBManager implements ILoginDBManager {
 		List<Map<String,String>> resultMapList;
 
 
+
 		try ( Transaction tx = GraphDBInstance.beginTx() )
 		{
 			//create a params map.
 			Map<String,Object> parameters = new HashMap<String,Object>();
-			parameters.put("Username",queryParamterMap.get("Username"));
-			parameters.put("Password", queryParamterMap.get("Password"));
+			parameters.put("username",queryParamterMap.get("username"));
+			parameters.put("password", queryParamterMap.get("password"));
 
 			//create Cypher query to fetch
 			//node with given credentials from the database.
-			String query = "MATCH(n:User) WHERE n.Username={Username} "
-					+ "AND n.Password={Password} RETURN n";
+			String query = "MATCH(n:User) WHERE n.username={username} "
+					+ "AND n.password={password} RETURN n";
 
 			//execute the query
 			result = executionEngine.execute(query,parameters);
@@ -89,9 +90,9 @@ public class LoginDBManager implements ILoginDBManager {
 		}
 
 		return resultMapList;
-		
+
 	}
 
-	
-	
+
+
 }

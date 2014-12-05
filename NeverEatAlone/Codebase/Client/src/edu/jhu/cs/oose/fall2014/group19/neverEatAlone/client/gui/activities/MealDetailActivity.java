@@ -44,7 +44,7 @@ public class MealDetailActivity extends Activity {
 	 * Method used for back button click
 	 * @author: Hai Tang
 	 */
-	public void OnBackButtonClick(View view){
+	public void onBackButtonClick(View view){
 		Intent intent = new Intent(this, TabHostActivity.class);
 		startActivity(intent);
 	}
@@ -53,7 +53,7 @@ public class MealDetailActivity extends Activity {
 	 * Method used for accept button click
 	 * @author: Hai Tang
 	 */
-	public void OnAcceptButtonClick(View view){
+	public void onAcceptButtonClick(View view){
 		Intent intent = new Intent(this, TabHostActivity.class);
 		startActivity(intent);
 	}
@@ -62,7 +62,7 @@ public class MealDetailActivity extends Activity {
 	 * Method used for decline button click
 	 * @author: Hai Tang
 	 */
-	public void OnDeclineButtonClick(View view){
+	public void onDeclineButtonClick(View view){
 		Intent intent = new Intent(this, TabHostActivity.class);
 		startActivity(intent);
 	}

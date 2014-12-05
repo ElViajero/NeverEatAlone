@@ -78,7 +78,7 @@ public class MealProperties implements IActivityProperties{
 	@Override
 	public Map<String, Object> toMap(){
 
-		Gson gson = GsonHelper.GetGsonInstance();
+		Gson gson = GsonHelper.getGsoninstance();
 		String json = gson.toJson(this);
 		System.out.println("json is : " +json);
 		Type stringObjectMap = new TypeToken<Map<String, Object>>(){}.getType();
@@ -112,12 +112,12 @@ public class MealProperties implements IActivityProperties{
 
 	}
 
-	public String getLocation() {
+	public String getlocation() {
 		return location;
 	}
 
 
-	public void setLocation(String location) {
+	public void setlocation(String location) {
 		this.location = location;
 	}
 

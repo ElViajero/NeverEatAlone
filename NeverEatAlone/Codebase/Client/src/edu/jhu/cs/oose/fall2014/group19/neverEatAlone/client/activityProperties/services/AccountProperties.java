@@ -18,9 +18,9 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.h
  */
 public class AccountProperties implements IActivityProperties {
 
-	private String Username;
-	private String Password;
-	private String Email;
+	private String username;
+	private String password;
+	private String email;
 
 	// one object because at any time, ther is only
 	// one user who is logged in on one client.
@@ -39,17 +39,17 @@ public class AccountProperties implements IActivityProperties {
 	}
 
 	public AccountProperties(String username,String password,String email){
-		Username = username;
-		Password = password;
-		Email=email;
+		this.username = username;
+		this.password = password;
+		this.email=email;
 	}
 
 
 
 	public AccountProperties(Map<String,String> map){
-		Username = map.get("Username");
-		Password = map.get("Password");
-		Email = map.get("Email");
+		username = map.get("username");
+		password = map.get("password");
+		email = map.get("email");
 		fromMap(map);
 	}
 
@@ -64,7 +64,7 @@ public class AccountProperties implements IActivityProperties {
 	public Map<String,Object> toMap(){
 
 		Gson gsonObject = 
-				GsonHelper.GetGsonInstance();
+				GsonHelper.getGsoninstance();
 
 		String jsonString = gsonObject.toJson(this);
 		System.out.println("json is : " +jsonString);
@@ -83,8 +83,8 @@ public class AccountProperties implements IActivityProperties {
 
 	private AccountProperties fromMap (Map<String,String> map){
 		accountPropertiesInstance = 
-				new AccountProperties(map.get("Username"), map.get("Password"));
-		accountPropertiesInstance.setEmail(map.get("Email"));
+				new AccountProperties(map.get("username"), map.get("password"));
+		accountPropertiesInstance.setemail(map.get("email"));
 		return accountPropertiesInstance;
 	}
 
@@ -92,28 +92,28 @@ public class AccountProperties implements IActivityProperties {
 
 	// getters, setters and statics
 
-	public String getUsername() {
-		return Username;
+	public String getusername() {
+		return username;
 	}
 
-	public void setUsername(String username) {
-		Username = username;
+	public void setusername(String username) {
+		this.username = username;
 	}
 
-	public String getPassword() {
-		return Password;
+	public String getpassword() {
+		return password;
 	}
 
-	public void setPassword(String password) {
-		Password = password;
+	public void setpassword(String password) {
+		this.password = password;
 	}
 
-	public String getEmail() {
-		return Email;
+	public String getemail() {
+		return email;
 	}
 
-	public void setEmail(String email) {
-		Email = email;
+	public void setemail(String email) {
+		this.email = email;
 	}
 
 

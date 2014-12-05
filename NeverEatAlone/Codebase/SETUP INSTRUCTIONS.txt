@@ -23,11 +23,11 @@ THOSE FILES. FINALLY PERFORM STEPS 5-7 IN THIS FILE                             
 
 ---------------------------------------+
 =====================================  |
-STEP 0 : SET UP NEW ECLIPSE WORKSPACE  |
+STEP 0 : SET UP NEW ECLIPSE workspace  |
 =====================================  |
 ---------------------------------------+
 1. Open Eclipse                        |
-2. File --> Switch Workspace --> Other |
+2. File --> Switch workspace --> Other |
 3. Select a New workspace.             |
 +--------------------------------------+
 +--------------------------------------+
@@ -111,14 +111,14 @@ STEP 4: GO TO SetupClient
 
 
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>++ 
-THESE STEPS ARE DONE AFTER STEPS 1- 3 ABOVE  + STEPS IN SetupClient and SetupServer Files ||
+THESE STEPS ARE DonE AFTER STEPS 1- 3 ABOVE  + STEPS IN SetupClient and SetupServer Files ||
 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<++
 
  
  
 --------------------------------------------------------------------------------------++
 ======================================                                                ||
-STEP 5 : IMPORT PROJECTS AND CONFIGURE                                                ||
+STEP 5 : IMPORT PROJECTS AND ConFIGURE                                                ||
 ======================================                                                ||
                                                                                       ||
 1. Clone the repository at https:pl.cs.jhu.edu:8000/oose-14-group-19/project.git      ||

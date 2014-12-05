@@ -35,10 +35,10 @@
         android:layout_alignParentTop="true"
         android:layout_marginLeft="17dp"
         android:text="Back"
-        android:onClick="OnBackButtonClick" />
+        android:onClick="onBackButtonClick" />
 
     <TextView
-        android:id="@+id/textView_mealdetails_starttime"
+        android:id="@+id/textView_mealdetails_startTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -48,11 +48,11 @@
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
-        android:id="@+id/textView_mealdetails_endtime"
+        android:id="@+id/textView_mealdetails_endTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textView_mealdetails_starttime"
+        android:layout_below="@+id/textView_mealdetails_startTime"
         android:layout_marginTop="16dp"
         android:text="End Time:"
         android:textAppearance="?android:attr/textAppearanceMedium" />
@@ -62,7 +62,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textView_mealdetails_endtime"
+        android:layout_below="@+id/textView_mealdetails_endTime"
         android:layout_marginTop="26dp"
         android:text="Where?"
         android:textAppearance="?android:attr/textAppearanceMedium"
@@ -124,7 +124,7 @@
         android:id="@+id/textView_mealdetails_when"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView_mealdetails_starttime"
+        android:layout_alignLeft="@+id/textView_mealdetails_startTime"
         android:layout_below="@+id/button_mealdetails_back"
         android:layout_marginTop="14dp"
         android:text="When?"
@@ -148,7 +148,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:text="Accept"
-        android:onClick="OnAcceptButtonClick" />
+        android:onClick="onAcceptButtonClick" />
 
     <Button
         android:id="@+id/button_mealdetails_decline"
@@ -157,6 +157,6 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:text="Decline" 
-        android:onClick="OnDeclineButtonClick"/>
+        android:onClick="onDeclineButtonClick"/>
 
 </RelativeLayout>

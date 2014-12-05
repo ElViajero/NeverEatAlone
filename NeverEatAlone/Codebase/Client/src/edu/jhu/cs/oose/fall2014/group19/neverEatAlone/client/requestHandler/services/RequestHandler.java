@@ -16,7 +16,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.cont
 /**
  * This class is the handler class for all client 
  * requests.
- * For every request, the HandleRequest method of this class is called.
+ * For every request, the handleRequest method of this class is called.
  * 
  * @author tejasvamsingh
  *
@@ -42,17 +42,17 @@ public class RequestHandler implements IRequestHandler {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Map<String, String>> HandleRequest(Activity activity,
+	public List<Map<String, String>> handleRequest(Activity activity,
 			Map<String,Object> requestMap,String requestID,String requestType) 
 					throws RequestAbortedException {
 
 
 		// Get the name value pair list.
-		List<NameValuePair> requestList = GetRequestList(requestMap);
+		List<NameValuePair> requestList = getRequestList(requestMap);
 
 		// Add request headers.
-		requestList.add(new BasicNameValuePair("RequestID", requestID));
-		requestList.add(new BasicNameValuePair("RequestType", requestType));
+		requestList.add(new BasicNameValuePair("requestID", requestID));
+		requestList.add(new BasicNameValuePair("requestType", requestType));
 
 
 		// call the asynchronous result executor.
@@ -100,7 +100,7 @@ public class RequestHandler implements IRequestHandler {
 	 * @return
 	 */
 
-	private List<NameValuePair> GetRequestList(Map<String,Object> requestMap){
+	private List<NameValuePair> getRequestList(Map<String,Object> requestMap){
 
 		List<NameValuePair> requestList = new
 				ArrayList<NameValuePair>();

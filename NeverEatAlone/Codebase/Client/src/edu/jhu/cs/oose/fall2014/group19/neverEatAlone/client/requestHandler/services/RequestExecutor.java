@@ -35,9 +35,9 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.h
  */
 public class RequestExecutor extends AsyncTask<List<NameValuePair>, Void, List<Map<String,String>>>  {
 
-	static HttpClient HttpClientInstance;
-	static String PostRequestURLString; 
-	static Gson GsonObject;
+	static HttpClient httpClientInstance;
+	static String postRequestURLString; 
+	static Gson gsonObject;
 
 
 	/**
@@ -49,34 +49,34 @@ public class RequestExecutor extends AsyncTask<List<NameValuePair>, Void, List<M
 	 */
 
 	private static void InitHttpClienInstance(){
-		if(HttpClientInstance==null){						 
+		if(httpClientInstance==null){						 
 
 
 			// set timeout parameters
 			HttpParams param = new BasicHttpParams();
 			HttpConnectionParams.setConnectionTimeout(param, 1000);
 			HttpConnectionParams.setSoTimeout(param, 3000);
-			// create an HttpClientInstance
-			HttpClientInstance=new DefaultHttpClient(param);
-			GsonObject = GsonHelper.GetGsonInstance();
+			// create an httpClientInstance
+			httpClientInstance=new DefaultHttpClient(param);
+			gsonObject = GsonHelper.getGsoninstance();
 			try {
 				Configuration configurationInstance = 
-						ConfigurationHelper.GetConfigurationInstance();
-				PostRequestURLString =
-						configurationInstance.GetProtocol()+
-						configurationInstance.GetIPAddress()+":"+
-						configurationInstance.GetServerPort()+
-						configurationInstance.GetServerURL();
+						ConfigurationHelper.getConfigurationInstance();
+				postRequestURLString =
+						configurationInstance.getProtocol()+
+						configurationInstance.getIPAddress()+":"+
+						configurationInstance.getServerPort()+
+						configurationInstance.getServerURL();
 
 
-				System.out.println("string is :"+PostRequestURLString);
+				System.out.println("string is :"+postRequestURLString);
 				System.out.flush();
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
-				System.out.println("Cathcing exception in GetHttpClientInstance");
+				System.out.println("Cathcing exception in GethttpClientInstance");
 				e.printStackTrace();
 			}
-			System.out.println("pos string is :"+ PostRequestURLString);
+			System.out.println("pos string is :"+ postRequestURLString);
 		}		
 	}
 
@@ -104,10 +104,10 @@ public class RequestExecutor extends AsyncTask<List<NameValuePair>, Void, List<M
 		InitHttpClienInstance();
 
 		// Set up post request.
-		System.out.println("STRING IS : "+PostRequestURLString);
-		System.out.println("CLIENT IS : "+HttpClientInstance);
+		System.out.println("STRING IS : "+postRequestURLString);
+		System.out.println("CLIENT IS : "+httpClientInstance);
 		System.out.flush();
-		HttpPost httpPost = new HttpPost(PostRequestURLString);
+		HttpPost httpPost = new HttpPost(postRequestURLString);
 		try {
 			httpPost.setEntity(new UrlEncodedFormEntity(requestList));
 		} catch (UnsupportedEncodingException e1) {
@@ -123,22 +123,22 @@ public class RequestExecutor extends AsyncTask<List<NameValuePair>, Void, List<M
 		try {			
 
 			// Execute the request.
-			response = HttpClientInstance.execute(httpPost);	
+			response = httpClientInstance.execute(httpPost);	
 			HttpEntity entity = response.getEntity();
 			//do something useful with the response body
 			// and ensure it is fully consumed
 			BufferedReader in = 
 					new BufferedReader( new InputStreamReader( entity.getContent()));
 
-			// get JSON string.
+			// get JSon string.
 			String responseString=in.readLine();				            	            
 			in.close();
 
-			// De-serialize JSON string.
-			returnMap = GsonObject.fromJson(responseString, stringStringMap);
+			// De-serialize JSon string.
+			returnMap = gsonObject.fromJson(responseString, stringStringMap);
 			entity.consumeContent();			
 		}catch(Exception e){
-			System.out.println("EXCPETION IS :: "+ e.getMessage());
+			System.out.println("EXCPETIon IS :: "+ e.getMessage());
 			System.out.flush();
 			return null;
 			//throw new NullPointerException();
@@ -168,7 +168,7 @@ public class RequestExecutor extends AsyncTask<List<NameValuePair>, Void, List<M
 	 * @author tejasvamsingh
 	 */
 	public static void cleanUp(){
-		HttpClientInstance=null;
+		httpClientInstance=null;
 	}
 
 

@@ -60,7 +60,7 @@ public class CreateAccountWorkflowTest {
 
 	/**
 	 * 
-	 * The method tests the uniqueness of the Username field.
+	 * The method tests the uniqueness of the username field.
 	 * 
 	 * @throws ClientProtocolException
 	 * @throws IOException

@@ -28,12 +28,12 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.serv
 public class RegisterActivity extends Activity {
 
 	// fields used by the register activity.
-	private EditText Username;
-	private EditText Email;
-	private EditText Password;
-	private EditText ConfirmPassword;
-	private String RequestType;
-	private String RequestID;
+	private EditText usernameEditTextObject;
+	private EditText emailEditTextObject;
+	private EditText passwordEditTextObject;
+	private EditText Confirmpassword;
+	private String requestType;
+	private String requestID;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -41,15 +41,15 @@ public class RegisterActivity extends Activity {
 		setContentView(R.layout.activity_register);
 
 		// binding the fields to class variables.
-		Username = (EditText) findViewById(R.id.edit_username);
-		Password = (EditText) findViewById(R.id.edit_password);
-		ConfirmPassword = (EditText) findViewById(R.id.edit_confirm_password);
-		Email = (EditText) findViewById(R.id.edit_email);
+		usernameEditTextObject = (EditText) findViewById(R.id.edit_username);
+		passwordEditTextObject = (EditText) findViewById(R.id.edit_password);
+		Confirmpassword = (EditText) findViewById(R.id.edit_confirm_password);
+		emailEditTextObject = (EditText) findViewById(R.id.edit_email);
 
-		// set the RequestType and RequestID fields.
+		// set the requestType and requestID fields.
 
-		RequestID = "Account";
-		RequestType = "Create";
+		requestID = "Account";
+		requestType = "Create";
 
 	}
 
@@ -79,16 +79,16 @@ public class RegisterActivity extends Activity {
 	 * @author tejasvamsingh
 	 * @param view
 	 */
-	public void OnRegisterButtonClick(View view) {
+	public void onRegisterButtonClick(View view) {
 
 		// Fetch the fields from the GUI.
-		String username = Username.getText().toString();
-		String password = Password.getText().toString();
-		String email = Email.getText().toString();
-		String confirmPassword = ConfirmPassword.getText().toString();
+		String username = usernameEditTextObject.getText().toString();
+		String password = passwordEditTextObject.getText().toString();
+		String email = emailEditTextObject.getText().toString();
+		String confirmpassword = Confirmpassword.getText().toString();
 
 		System.out.println(password);
-		System.out.println(confirmPassword);
+		System.out.println(confirmpassword);
 
 		// ************ THIS WASN'T WRITTEN BY TEJAS. ***************//
 		// *************WHY IS THIS HERE ? !!!! ******************//		
@@ -96,25 +96,25 @@ public class RegisterActivity extends Activity {
 
 		if(username.equals("")){
 			Toast.makeText(getApplicationContext(), 
-					"Username Is Empty !", Toast.LENGTH_SHORT).show();
+					"username Is Empty !", Toast.LENGTH_SHORT).show();
 			return;
 		}
 
 		if(email.equals("")){
 			Toast.makeText(getApplicationContext(), 
-					"Email Is Empty !", Toast.LENGTH_SHORT).show();
+					"email Is Empty !", Toast.LENGTH_SHORT).show();
 			return;
 		}
 
 		if(password.equals("")){
 			Toast.makeText(getApplicationContext(), 
-					"Passwords Is Empty !", Toast.LENGTH_SHORT).show();
+					"passwords Is Empty !", Toast.LENGTH_SHORT).show();
 			return;
 		}
 
-		if(!password.equals(confirmPassword)){
+		if(!password.equals(confirmpassword)){
 			Toast.makeText(getApplicationContext(), 
-					"Passwords Don't Match !", Toast.LENGTH_SHORT).show();
+					"passwords Don't Match !", Toast.LENGTH_SHORT).show();
 			return;
 		}
 
@@ -136,7 +136,7 @@ public class RegisterActivity extends Activity {
 		try{
 			// Initiate the request.
 			List<Map<String, String>> resultMapList = RequestHandlerHelper
-					.GetRequestHandlerInstance().HandleRequest(this,requestMap,RequestID,RequestType);
+					.getRequestHandlerInstance().handleRequest(this,requestMap,requestID,requestType);
 			// Handle the result.
 			MessageToasterHelper.toastMessage(this, "Registration Successful");
 			Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
@@ -147,7 +147,7 @@ public class RegisterActivity extends Activity {
 
 	}
 
-	public void OnCancelButtonClick(View view) {
+	public void onCancelButtonClick(View view) {
 		Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
 		RegisterActivity.this.startActivity(intent);
 	}

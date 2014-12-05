@@ -7,26 +7,26 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 
 public class DatePickerFragment extends DialogFragment {
-	OnDateSetListener OnDateSet;
-	private int Year, Month, Day;
+	OnDateSetListener onDateSet;
+	private int year, month, day;
 
 	public DatePickerFragment() {
 	}
 
 	public void setCallBack(OnDateSetListener ondate) {
-		OnDateSet = ondate;
+		onDateSet = ondate;
 	}
 
 	@Override
 	public void setArguments(Bundle args) {
 		super.setArguments(args);
-		Year = args.getInt("year");
-		Month = args.getInt("month");
-		Day = args.getInt("day");
+		year = args.getInt("year");
+		month = args.getInt("month");
+		day = args.getInt("day");
 	}
 
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
-		return new DatePickerDialog(getActivity(), OnDateSet, Year, Month, Day);
+		return new DatePickerDialog(getActivity(), onDateSet, year, month, day);
 	}
 }
