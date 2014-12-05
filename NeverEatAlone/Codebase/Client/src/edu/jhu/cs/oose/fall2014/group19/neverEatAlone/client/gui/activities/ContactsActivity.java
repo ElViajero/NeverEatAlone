@@ -9,9 +9,11 @@ import org.apache.http.impl.execchain.RequestAbortedException;
 
 import android.app.ListActivity;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.TextView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.AccountProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.ContactProperties;
@@ -52,8 +54,23 @@ public class ContactsActivity extends ListActivity {
 		contactsInformationAdapter = new ContactsInformationAdapter(this,
 				contactList);
 		setListAdapter(contactsInformationAdapter);
+		
+		setTitleStyle();
 	}
 
+	/**
+	 * This method is used to set the font style of the title of each page
+	 * @author: Hai Tang
+	 */
+	public void setTitleStyle() {
+		TextView tv =
+				(TextView) findViewById(R.id.textView_contacts_title);
+		Typeface tf = Typeface.createFromAsset(getAssets(),
+				"fonts/Windsong.ttf");
+		tv.setTypeface(tf);
+		tv.setTextSize(100);
+	}
+	
 	/**
 	 * This method fetches contacts from the server if
 	 * the cache is empty.

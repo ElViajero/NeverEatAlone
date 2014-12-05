@@ -95,6 +95,9 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:onClick="onLogoutButtonClick"
+        android:background="@drawable/buttonbackground"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"
         android:text="@string/logout" />
 
     <Button
@@ -105,6 +108,9 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:onClick="onDeleteAccountButtonClick"
+        android:background="@drawable/buttonbackground"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"
         android:text="@string/delete_account" />
 
     <Button
@@ -115,6 +121,9 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="18dp"
         android:onClick="OnChangePasswordButtonClick"
+        android:background="@drawable/buttonbackground"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"
         android:text="@string/change_password" />
 
     <TextView
@@ -159,6 +168,9 @@
         android:layout_alignParentRight="true"
         android:onClick="OnEditButtonClick"
         android:text="@string/edit"
+        android:background="@drawable/buttonbackground"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <ImageView

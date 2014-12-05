@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
+import android.widget.TextView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.NotificationProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.DataCacheHelper;
@@ -92,7 +93,7 @@ public class TabHostActivity extends TabActivity {
 		TabProfile.setIndicator("Profile");
 		TabProfile.setContent(new Intent(this,ProfileActivity.class));
 
-
+		    
 		/** Add the tabs  to the TabHost to display. */
 
 		TabHost.addTab(TabInvites);
