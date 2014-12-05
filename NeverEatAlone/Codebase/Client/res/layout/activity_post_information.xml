@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/textView_postinformation_title"
-        android:onClick="OnBackButtonClick"
+        android:onClick="onBackButtonClick"
         android:text="@string/back" />
 
     <TextView
@@ -74,7 +74,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:onClick="OnPostButtonClick"
+        android:onClick="onPostButtonClick"
         android:text="@string/post" />
 
 </RelativeLayout>

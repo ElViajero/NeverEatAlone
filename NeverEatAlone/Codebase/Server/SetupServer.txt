@@ -8,7 +8,7 @@ AUTHOR : TEJASVAM SINGH												||
 														||      									
 														||     	
 These are setup instructions for setting up the server project in eclipse.					||      			
-Look at the general instructions in the Codebase/SETUP INSTRUCTIONS file first.					||      		
+Look at the general instructions in the Codebase/SETUP INSTRUCTIonS file first.					||      		
 For setup instructions related to the client project, consult the SetupClient file in 				||      	
 Codebase/Client.												||      										
 														||      										
@@ -38,7 +38,7 @@ STEP 1 : SETUP SERVER                                                           
 9. Name the server TomEE                                                                                     ||
 10. Hit Finish                                                                                               ||
 11. Double click the server                                                                                  ||
-12. Under "Server Locations" (Look at the file that opens on the top)                                        ||
+12. Under "Server locations" (Look at the file that opens on the top)                                        ||
 13. Select "Use Tomcat Installation"                                                                         ||
                                                                                                              ||
 +------------------------------------------------------------------------------------------------------------++
@@ -47,5 +47,5 @@ STEP 1 : SETUP SERVER                                                           
 
 
 ===========================================================
-STEP 2 : GO BACK TO SETUP INSTRUCTIONS AND PERFORM STEP 5-7
+STEP 2 : GO BACK TO SETUP INSTRUCTIonS AND PERFORM STEP 5-7
 ===========================================================

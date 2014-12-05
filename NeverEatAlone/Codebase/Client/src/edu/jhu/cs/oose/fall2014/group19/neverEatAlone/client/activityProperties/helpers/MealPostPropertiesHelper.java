@@ -19,7 +19,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.p
 public class MealPostPropertiesHelper {
 
   *//**
-  * This method returns a JSON string representing data on the first
+  * This method returns a JSon string representing data on the first
   * page of meal post creation
   * 
   * @author tejasvamsingh
@@ -33,14 +33,14 @@ public class MealPostPropertiesHelper {
 	//NOTE :: I'm temporarily returning a MAP since the GUI doesn't 
 	// have pages 2 and 3 and since we are just trying to test
 	// whether this works correctly. The return type should be changed to String.
-	public static Map<String,List<String>> GetPageOneString(MealProperties mealProperties,
+	public static Map<String,List<String>> GetPageoneString(MealProperties mealProperties,
 			DateAndTimeProperties startDateAndTimeProperties,
 			DateAndTimeProperties endDateAndTimeProperties){
 
 
 		// Get the meal Map
 		Map<String,List<String>> mealMap = mealProperties.GetRequestMap();
-		Map<String,List<String>> pageOneMap = new HashMap<String,List<String>>(mealMap);
+		Map<String,List<String>> pageoneMap = new HashMap<String,List<String>>(mealMap);
 
 		// Get the start date and time map
 		Map<String,List<String>> startDateAndTimeMap = startDateAndTimeProperties.GetRequestMap();
@@ -54,7 +54,7 @@ public class MealPostPropertiesHelper {
 			String key = entry.getKey();
 			List<String> value = entry.getValue();
 
-			pageOneMap.put("Start"+key, value);
+			pageoneMap.put("Start"+key, value);
 
 		}
 
@@ -63,7 +63,7 @@ public class MealPostPropertiesHelper {
 
 			String key = entry.getKey();
 			List<String> value = entry.getValue();
-			pageOneMap.put("End"+key, value);
+			pageoneMap.put("End"+key, value);
 
 		}
 
@@ -77,9 +77,9 @@ public class MealPostPropertiesHelper {
 		recipientList.add("Tejas");
 		posterList.add("a");
 		postIDList.add(String.valueOf(r.nextInt()));
-		pageOneMap.put("Recipient",recipientList);
-		pageOneMap.put("Poster",posterList);
-		pageOneMap.put("PostID",postIDList);
+		pageoneMap.put("Recipient",recipientList);
+		pageoneMap.put("poster",posterList);
+		pageoneMap.put("PostID",postIDList);
 
 
 		// NOTE FROM TEJAS TO HIMSELF :::: REMOVE THIS !!!!!!
@@ -87,7 +87,7 @@ public class MealPostPropertiesHelper {
 
 
 
-		return pageOneMap;
+		return pageoneMap;
 
 
 	}

@@ -7,7 +7,7 @@ Secondary actors: contacts
 Goal: set the status to be "available" 
 Pre-Condition: user has logged in 
 Main Path: 
-	1. On the Invites page, user switches the Availability Status button to “on”
+	1. on the Invites page, user switches the Availability Status button to “on”
 	2. The server sets the user's status to be available 
 		a. If one contact is in the Visibility List, the availability indicator of this user on that contact’s Contacts page turns on (the color of the user's display name turns to black)
 
@@ -18,7 +18,7 @@ Secondary actors: contacts
 Goal: set the status to be “unavailable" 
 Pre-Condition: user has logged in 
 Main Path: 
-	1. On the Invites page, user switches the Available Status button to “off”
+	1. on the Invites page, user switches the Available Status button to “off”
 	2. The server sets the user's status to be unavailable 
 	3. The availability indicator of this user on all contacts’ Contacts page turns off (the color of the user's display name turns to gray)
 
@@ -26,7 +26,7 @@ Main Path:
 Set Visibility List
 Primary actor: user
 Secondary actors: contacts 
-Goal: set the Visibility List. Only the contacts in the list can see the user as available when user’s status is available 
+Goal: set the Visibility List. only the contacts in the list can see the user as available when user’s status is available 
 Pre-Condition: user has logged in and on the Contacts page
 Main Path: 
 	1. User clicks the "Set Visibility" button on the Contacts page

@@ -15,7 +15,7 @@ public class ConfigurationProperties {
 		IPAddress=ipAddress;
 	}
 
-	public String GetProtocol() {
+	public String getProtocol() {
 		return Protocol;
 	}
 
@@ -23,7 +23,7 @@ public class ConfigurationProperties {
 		Protocol = protocol;
 	}
 
-	public String GetServerPort() {
+	public String getServerPort() {
 		return ServerPort;
 	}
 
@@ -31,7 +31,7 @@ public class ConfigurationProperties {
 		ServerPort = serverPort;
 	}
 
-	public String GetServerURL() {
+	public String getServerURL() {
 		return ServerURL;
 	}
 

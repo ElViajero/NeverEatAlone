@@ -1,4 +1,4 @@
-<!--@author Hai Tang  -->
+<!-- @author Hai Tang -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/textView_addfriends_title"
-        android:onClick="OnBackButtonClick"
+        android:onClick="onBackButtonClick"
         android:text="@string/back" />
 
     <TextView
@@ -76,7 +76,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:onClick="OnSearchButtonClick"
+        android:onClick="onSearchButtonClick"
         android:text="@string/search" />
 
 </RelativeLayout>

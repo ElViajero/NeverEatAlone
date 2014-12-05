@@ -8,41 +8,41 @@ package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.configuration;
  */
 public class Configuration {
 
-	private String IPAddress;
-	private String Protocol;
-	private String ServerPort;
-	private String ServerURL;
+	private String ipAddress;
+	private String protocol;
+	private String serverPort;
+	private String serverURL;
 
-	public String GetIPAddress(){
-		return IPAddress;
+	public String getIPAddress(){
+		return ipAddress;
 	}
 
-	public void SetIPAdress(String ipAddress){
-		IPAddress=ipAddress;
+	public void setIPAdress(String ipAddress){
+		this.ipAddress=ipAddress;
 	}
 
-	public String GetProtocol() {
-		return Protocol;
+	public String getProtocol() {
+		return protocol;
 	}
 
-	public void SetProtocol(String protocol) {
-		Protocol = protocol;
+	public void setProtocol(String protocol) {
+		this.protocol = protocol;
 	}
 
-	public String GetServerPort() {
-		return ServerPort;
+	public String getServerPort() {
+		return serverPort;
 	}
 
-	public void SetServerPort(String serverPort) {
-		ServerPort = serverPort;
+	public void setServerPort(String serverPort) {
+		this.serverPort = serverPort;
 	}
 
-	public String GetServerURL() {
-		return ServerURL;
+	public String getServerURL() {
+		return serverURL;
 	}
 
-	public void SetServerURL(String serverURL) {
-		ServerURL = serverURL;
+	public void setServerURL(String serverURL) {
+		this.serverURL = serverURL;
 	}
 
 

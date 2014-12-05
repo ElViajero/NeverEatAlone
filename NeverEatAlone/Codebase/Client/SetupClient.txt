@@ -6,7 +6,7 @@ NOTE                                                                            
 AUTHOR : TEJASVAM SINGH											      ||											
                                                                                                               ||
 These are setup instructions for setting up the client project in eclipse.				      ||				
-Look at the general instructions in the Codebase/SETUP INSTRUCTIONS file first.				      ||			
+Look at the general instructions in the Codebase/SETUP INSTRUCTIonS file first.				      ||			
 For setup instructions related to the server project, consult the SetupServer file in 			      ||		
 Codebase/Server.											      ||											
 													      ||											

@@ -1,5 +1,5 @@
 
-USE CASES FOR CONTACT MANAGEMENT
+USE CASES FOR ConTACT MANAGEMENT
 
 
 Use Case to Add a Contact
@@ -11,7 +11,7 @@ Main Path:
 	1. Go to the contacts page
 	2.	Select the "people" tab	
 	3. Press the "add contact" button.
-	4. On "Add page button" select "search by username".
+	4. on "Add page button" select "search by username".
 	5. Type in contact's username.
 	6. Press search button
 	7. Select right contact from search results.
@@ -21,7 +21,7 @@ Alternate Path:
 	1. Go to the contacts page
 	2. Select the people tab
 	3. Press the "add contact" button.
-	4. On "Add page button" select "search by email".
+	4. on "Add page button" select "search by email".
 	5. Type in contact's email.
 	6. Press search button
 	7. Select right contact from search results.
@@ -40,7 +40,7 @@ Main Path:
 	3. Search for contact to be deleted.
 	4. Swipe sideways. Delete and edit appear.
 	5. Hit delete button.
-	6. On the prompt that appears, press "confirm".
+	6. on the prompt that appears, press "confirm".
 
 
 Use Case to Create Groups 
@@ -67,7 +67,7 @@ Main Path:
 	3. Search for group to be deleted.
 	4. Swipe sideways. Delete and edit appear.
 	5. Hit delete button.
-	6. On the prompt that appears, press "confirm".
+	6. on the prompt that appears, press "confirm".
 
 
 Use Case to Edit A Contact's Details

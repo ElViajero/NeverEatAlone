@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_below="@+id/app_name"
-        android:onClick="OnCreateButtonClick"
+        android:onClick="onCreateButtonClick"
         android:text="@string/create" />
 
     <Switch

@@ -36,7 +36,7 @@
         android:paddingRight="50dp" >
 
         <TextView
-            android:id="@+id/CreateMealInformation_text_starttime"
+            android:id="@+id/CreateMealInformation_text_startTime"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -47,15 +47,15 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:onClick="OnStartDataButtonClick"
+            android:onClick="onStartDataButtonClick"
             android:text="@string/SelectDate" />
 
         <Button
-            android:id="@+id/CreateMealInformation_button_starttime"
+            android:id="@+id/CreateMealInformation_button_startTime"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:onClick="OnStartTimeButtonClick"
+            android:onClick="onstartTimeButtonClick"
             android:text="@string/SelectTime" />
     </LinearLayout>
 
@@ -70,7 +70,7 @@
         android:paddingRight="50dp" >
 
         <TextView
-            android:id="@+id/CreateMealInformation_text_endtime"
+            android:id="@+id/CreateMealInformation_text_endTime"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -81,15 +81,15 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:onClick="OnEndDataButtonClick"
+            android:onClick="onEndDataButtonClick"
             android:text="@string/SelectDate" />
 
         <Button
-            android:id="@+id/CreateMealInformation_button_endtime"
+            android:id="@+id/CreateMealInformation_button_endTime"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:onClick="OnEndTimeButtonClick"
+            android:onClick="onendTimeButtonClick"
             android:text="@string/SelectTime" />
     </LinearLayout>
 
@@ -199,7 +199,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_weight="1"
-            android:onClick="OnBackButtonClick"
+            android:onClick="onBackButtonClick"
             android:paddingLeft="50dp"
             android:paddingRight="50dp"
             android:text="@string/back" />
@@ -210,7 +210,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:layout_weight="1"
-            android:onClick="OnNextButtonClick"
+            android:onClick="onNextButtonClick"
             android:paddingLeft="50dp"
             android:paddingRight="50dp"
             android:text="@string/next" />

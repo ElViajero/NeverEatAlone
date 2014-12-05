@@ -75,7 +75,7 @@ public class RequestHandler extends HttpServlet {
 		Map<String, String[]> map = request.getParameterMap();
 
 
-		//System.out.println("The stuff is :" + map.get("Username")[0] );
+		//System.out.println("The stuff is :" + map.get("username")[0] );
 		//System.out.flush();
 
 		//call the beans DispatchRequest method.

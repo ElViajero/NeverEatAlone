@@ -96,7 +96,7 @@
         android:layout_marginTop="20dp"
         android:layout_toLeftOf="@+id/button_register_cancel"
         android:layout_toStartOf="@+id/button_register_register"
-        android:onClick="OnRegisterButtonClick"
+        android:onClick="onRegisterButtonClick"
         android:text="@string/register" />
 
     <Button
@@ -107,7 +107,7 @@
         android:layout_alignParentRight="true"
         android:layout_below="@+id/edit_confirm_password"
         android:layout_marginTop="20dp"
-        android:onClick="OnCancelButtonClick"
+        android:onClick="onCancelButtonClick"
         android:text="@string/cancel" />
 
 </RelativeLayout>

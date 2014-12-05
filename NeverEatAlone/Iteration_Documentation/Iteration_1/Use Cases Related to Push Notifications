@@ -1,11 +1,11 @@
-USE CASES RELATED TO PUSH NOTIFICATIONS
+USE CASES RELATED TO PUSH NOTIFICATIonS
 
 
 1.  Receive a Notification 
 ----------------------------
 Primary actor : recipient (user)
-Secondary actor : Poster (user)
-Precondition : Poster must have sent notification to recipient.Recipient must be available to Poster.
+Secondary actor : poster (user)
+Precondition : poster must have sent notification to recipient.Recipient must be available to poster.
 Goal : Display the notification on device
 Main Path : 
 1.	Check if recipient is available to poster. If yes go to step 2 else go to step 3.
@@ -17,7 +17,7 @@ Main Path :
 2.  Receive a Notification on Changing Availability Status 
 -----------------------------------------------------------
 Primary actor : recipient (user)
-Secondary actor : Poster (user)
+Secondary actor : poster (user)
 Precondition : Recipients deffered notification must be non-empty.
 Goal : Display the notification(s) on device
 Main Path : 
@@ -30,12 +30,12 @@ Main Path :
 
 3.	Post a Capacity Update Notification
 ----------------------------------------
-Primary actor : Poster (user)
+Primary actor : poster (user)
 secondar actor : Recipient (user)
 Precondition : A recipient must have sent an acceptance notification to the poster.
 Goal : Send a Capacity update to all recipients that are available to the poster.
 Main Path:
-1.	On recieving the acceptance notification, update the current capacity field in meal notification information. Go to step 2.
+1.	on recieving the acceptance notification, update the current capacity field in meal notification information. Go to step 2.
 2.	Check if current capacity is less than maximum meal capacity. If so, go to step 3 else go to step 4.
 3	Send a capacity update notification consisting of updated meal notification information to each recipient of the original meal notification. RETURN.
 4.	Close meal notification and send completion notification to all recipients of original notification.
@@ -43,9 +43,9 @@ Main Path:
 
 4.	Post an Update Notification
 ----------------------------
-Primary actor : Poster (user)
+Primary actor : poster (user)
 secondar actor : Recipient (user)
-Precondition : Poster must have already sent a notification to recipients that is currently active.
+Precondition : poster must have already sent a notification to recipients that is currently active.
 Goal : Send updated notifcation to the recipients
 Main Path:
 1.	Update the relevant meal notification information fields
@@ -56,7 +56,7 @@ Main Path:
 
 5.	Post a Friend Attending Notification
 -----------------------------------
-Primary actor : Poster (user)
+Primary actor : poster (user)
 secondar actor : Recipient (user)
 Precondition : A recipient must have sent an acceptance notification to the poster.
 Goal : Inform all other recipients who are contacts of the recipient that accepted the notification that given recipient is attending.
@@ -71,7 +71,7 @@ Main Path :
 
 6.	Post a Completion Notification
 ------------------------------------
-Primary Actor : Poster (user)
+Primary Actor : poster (user)
 Secondary actor(s) : Recipient (user)
 Precondition : Meal notification constraints must be satisified.
 Goal : Send a Completion Notification to all recipients that are available to the poster.
@@ -82,7 +82,7 @@ Main Path :
 
 7.	Post a Cancellation Notification	
 -------------------------------------
-Primary Actor : Poster (user)
+Primary Actor : poster (user)
 Secondary Actor(s) : Recipient(s) (users)
 Precondition : The poster must have pushed a meal notification to recipients which is currently active ( i.e. not expired)
 Goal : Cancel the posted meal notification.
@@ -93,7 +93,7 @@ Main Path :
 9. Send a Contact Request Notification
 ----------------------------------------
 
-Primary Actor : Poster (user)
+Primary Actor : poster (user)
 Secondary Actor(s) : Recipient (users)
 Precondition : The poster must have added the recipeient as a contact.
 Goal : Send a Contact Request.
@@ -103,7 +103,7 @@ Main Path :
 
 10. Recieve a Contact Accept Notification
 ------------------------------------------
-Primary Actor : Poster (user)
+Primary Actor : poster (user)
 Secondary Actor(s) : Recipient (users)
 Precondition : The poster must have added the recipeient as a contact. The contact must have accepted the Contact Request Notifcation and sent the Contact Accept Notification.
 Goal : Recieve A Contact Accept Notification.

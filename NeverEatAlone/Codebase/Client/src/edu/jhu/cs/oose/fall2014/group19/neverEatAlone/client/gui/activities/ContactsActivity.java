@@ -65,14 +65,14 @@ public class ContactsActivity extends ListActivity {
 		requestID = "Contact";
 		requestType = "GetAll";
 		Map<String,Object> requestMap = new HashMap<String,Object>();
-		requestMap.put("Username",
-				AccountProperties.getUserAccountInstance().getUsername());
+		requestMap.put("username",
+				AccountProperties.getUserAccountInstance().getusername());
 		contactList = new ArrayList<ContactProperties>();
 		try{
 
 			List<Map<String, String>> resultMapList = 
-					RequestHandlerHelper.GetRequestHandlerInstance().
-					HandleRequest(this,requestMap,requestID,requestType) ;		
+					RequestHandlerHelper.getRequestHandlerInstance().
+					handleRequest(this,requestMap,requestID,requestType) ;		
 
 
 			for(Map<String,String> result : resultMapList){
@@ -93,7 +93,7 @@ public class ContactsActivity extends ListActivity {
 	 * 
 	 * @author: Hai Tang
 	 */
-	public void OnAddFriendsButtonClick(View view) {
+	public void onAddFriendsButtonClick(View view) {
 		Intent intent = new Intent(ContactsActivity.this,
 				AddFriendsActivity.class);
 		ContactsActivity.this.startActivity(intent);
@@ -107,7 +107,7 @@ public class ContactsActivity extends ListActivity {
 	 * 
 	 * 
 	 */
-	public void OnContactNotificationButtonClick(View view) {
+	public void onContactNotificationButtonClick(View view) {
 		Intent intent = new Intent(ContactsActivity.this,
 				DisplayContactNotificationActivity.class);
 		ContactsActivity.this.startActivity(intent);

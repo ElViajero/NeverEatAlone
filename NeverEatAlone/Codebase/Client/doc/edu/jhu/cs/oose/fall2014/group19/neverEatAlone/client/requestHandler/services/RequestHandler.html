@@ -118,7 +118,7 @@ extends java.lang.Object
 implements <a href="../../../../../../../../../../edu/jhu/cs/oose/fall2014/group19/neverEatAlone/client/requestHandler/contracts/IRequestHandler.html" title="interface in edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.contracts">IRequestHandler</a></pre>
 <div class="block">This class is the handler class for all client 
  requests.
- For every request, the HandleRequest method of this class is called.</div>
+ For every request, the handleRequest method of this class is called.</div>
 <dl>
 <dt><span class="simpleTagLabel">Author:</span></dt>
 <dd>tejasvamsingh</dd>
@@ -129,7 +129,7 @@ implements <a href="../../../../../../../../../../edu/jhu/cs/oose/fall2014/group
 <div class="summary">
 <ul class="blockList">
 <li class="blockList">
-<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+<!-- ======== ConSTRUCTOR SUMMARY ======== -->
 <ul class="blockList">
 <li class="blockList"><a name="constructor.summary">
 <!--   -->
@@ -138,10 +138,10 @@ implements <a href="../../../../../../../../../../edu/jhu/cs/oose/fall2014/group
 <table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Constructor Summary table, listing constructors, and an explanation">
 <caption><span>Constructors</span><span class="tabEnd">&nbsp;</span></caption>
 <tr>
-<th class="colOne" scope="col">Constructor and Description</th>
+<th class="colone" scope="col">Constructor and Description</th>
 </tr>
 <tr class="altColor">
-<td class="colOne"><code><span class="memberNameLink"><a href="../../../../../../../../../../edu/jhu/cs/oose/fall2014/group19/neverEatAlone/client/requestHandler/services/RequestHandler.html#RequestHandler--">RequestHandler</a></span>()</code>&nbsp;</td>
+<td class="colone"><code><span class="memberNameLink"><a href="../../../../../../../../../../edu/jhu/cs/oose/fall2014/group19/neverEatAlone/client/requestHandler/services/RequestHandler.html#RequestHandler--">RequestHandler</a></span>()</code>&nbsp;</td>
 </tr>
 </table>
 </li>
@@ -160,7 +160,7 @@ implements <a href="../../../../../../../../../../edu/jhu/cs/oose/fall2014/group
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>java.util.List&lt;java.util.Map&lt;java.lang.String,java.lang.String&gt;&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../../../../../edu/jhu/cs/oose/fall2014/group19/neverEatAlone/client/requestHandler/services/RequestHandler.html#HandleRequest-java.util.Map-java.lang.String-java.lang.String-">HandleRequest</a></span>(java.util.Map&lt;java.lang.String,java.util.List&lt;java.lang.String&gt;&gt;&nbsp;requestMap,
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../../../../../edu/jhu/cs/oose/fall2014/group19/neverEatAlone/client/requestHandler/services/RequestHandler.html#handleRequest-java.util.Map-java.lang.String-java.lang.String-">handleRequest</a></span>(java.util.Map&lt;java.lang.String,java.util.List&lt;java.lang.String&gt;&gt;&nbsp;requestMap,
              java.lang.String&nbsp;requestID,
              java.lang.String&nbsp;requestType)</code>
 <div class="block">This method handles requests that the client wishes to send to the server.</div>
@@ -182,7 +182,7 @@ implements <a href="../../../../../../../../../../edu/jhu/cs/oose/fall2014/group
 <div class="details">
 <ul class="blockList">
 <li class="blockList">
-<!-- ========= CONSTRUCTOR DETAIL ======== -->
+<!-- ========= ConSTRUCTOR DETAIL ======== -->
 <ul class="blockList">
 <li class="blockList"><a name="constructor.detail">
 <!--   -->
@@ -205,13 +205,13 @@ implements <a href="../../../../../../../../../../edu/jhu/cs/oose/fall2014/group
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a name="HandleRequest-java.util.Map-java.lang.String-java.lang.String-">
+<a name="handleRequest-java.util.Map-java.lang.String-java.lang.String-">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
-<h4>HandleRequest</h4>
-<pre>public&nbsp;java.util.List&lt;java.util.Map&lt;java.lang.String,java.lang.String&gt;&gt;&nbsp;HandleRequest(java.util.Map&lt;java.lang.String,java.util.List&lt;java.lang.String&gt;&gt;&nbsp;requestMap,
+<h4>handleRequest</h4>
+<pre>public&nbsp;java.util.List&lt;java.util.Map&lt;java.lang.String,java.lang.String&gt;&gt;&nbsp;handleRequest(java.util.Map&lt;java.lang.String,java.util.List&lt;java.lang.String&gt;&gt;&nbsp;requestMap,
                                                                                       java.lang.String&nbsp;requestID,
                                                                                       java.lang.String&nbsp;requestType)</pre>
 <div class="block">This method handles requests that the client wishes to send to the server.
@@ -219,7 +219,7 @@ implements <a href="../../../../../../../../../../edu/jhu/cs/oose/fall2014/group
  It executes the requests by calling the execute method on RequestExecutor.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../../../../../../edu/jhu/cs/oose/fall2014/group19/neverEatAlone/client/requestHandler/contracts/IRequestHandler.html#HandleRequest-java.util.Map-java.lang.String-java.lang.String-">HandleRequest</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../../../../../../edu/jhu/cs/oose/fall2014/group19/neverEatAlone/client/requestHandler/contracts/IRequestHandler.html" title="interface in edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.contracts">IRequestHandler</a></code></dd>
+<dd><code><a href="../../../../../../../../../../edu/jhu/cs/oose/fall2014/group19/neverEatAlone/client/requestHandler/contracts/IRequestHandler.html#handleRequest-java.util.Map-java.lang.String-java.lang.String-">handleRequest</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../../../../../../edu/jhu/cs/oose/fall2014/group19/neverEatAlone/client/requestHandler/contracts/IRequestHandler.html" title="interface in edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.contracts">IRequestHandler</a></code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 </dl>
 </li>

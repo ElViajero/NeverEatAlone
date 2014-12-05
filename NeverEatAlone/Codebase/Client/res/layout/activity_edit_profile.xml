@@ -134,7 +134,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:onClick="OnCancelButtonClick"
+        android:onClick="onCancelButtonClick"
         android:text="@string/cancel" />
 
     <Button
@@ -145,7 +145,7 @@
         android:layout_alignBottom="@+id/button_editprofile_cancel"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:onClick="OnComfirmButtonClick"
+        android:onClick="onComfirmButtonClick"
         android:text="@string/confirm" />
 
     <ImageView

@@ -30,20 +30,20 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.serv
  */
 public class MainActivity extends Activity {
 
-	private EditText Username = null;
-	private EditText Password = null;
-	private String RequestID;
-	private String RequestType;
+	private EditText usernameEditTextObject = null;
+	private EditText passwordEditTextObject = null;
+	private String requestID;
+	private String requestType;
 	private boolean isCreated=false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		Username = (EditText) findViewById(R.id.edit_username);
-		Password = (EditText) findViewById(R.id.edit_password);
-		RequestID = "Login";
-		RequestType = "CheckCredentials";
+		usernameEditTextObject = (EditText) findViewById(R.id.edit_username);
+		passwordEditTextObject = (EditText) findViewById(R.id.edit_password);
+		requestID = "Login";
+		requestType = "CheckCredentials";
 		System.out.println("inside onCreate in MainAcitivty");
 		MessageToasterHelper.toastMessage(this, "inside oncreate");
 		TextView tv =
@@ -62,19 +62,19 @@ public class MainActivity extends Activity {
 	 * @throws FileNotFoundException 
 	 * @throws URISyntaxException 
 	 */
-	public void OnLoginButtonClick(View view) throws FileNotFoundException, URISyntaxException {
+	public void onLoginButtonClick(View view) throws FileNotFoundException, URISyntaxException {
 
 
-		String username = Username.getText().toString();
-		String password = Password.getText().toString();
+		String username = usernameEditTextObject.getText().toString();
+		String password = passwordEditTextObject.getText().toString();
 
 		// create the request properties object.
 		AccountProperties loginProperties  = new AccountProperties(username, password);
 		try{
 			// send the request.
 			List<Map<String, String>> resultMapList = 
-					RequestHandlerHelper.GetRequestHandlerInstance().
-					HandleRequest(this,loginProperties.toMap(),RequestID,RequestType) ;		
+					RequestHandlerHelper.getRequestHandlerInstance().
+					handleRequest(this,loginProperties.toMap(),requestID,requestType) ;		
 			isCreated=true;
 			MessageToasterHelper.toastMessage(this, "Welcome "+username);
 
@@ -83,7 +83,7 @@ public class MainActivity extends Activity {
 
 			//start the new activity
 			Intent intent = new Intent(MainActivity.this, TabHostActivity.class);
-			intent.putExtra("Username", username);
+			intent.putExtra("username", username);
 			MainActivity.this.startActivity(intent);
 
 		}catch(RequestAbortedException e){
@@ -125,7 +125,7 @@ public class MainActivity extends Activity {
 	/** 
 	 * Called when the user clicks the Sign Up button 
 	 * */
-	public void OnSignUpButtonClick(View view) {		
+	public void onSignUpButtonClick(View view) {		
 
 		Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
 		MainActivity.this.startActivity(intent);

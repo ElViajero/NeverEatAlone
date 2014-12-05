@@ -45,22 +45,22 @@ public class GetAllContactsWorkflowTest {
 		// create relationships (add contacts)
 		System.out.println("creating relationships...");
 		List <NameValuePair> nvps1 = new ArrayList <NameValuePair>();	    
-		nvps1.add(new BasicNameValuePair("RequestID", "Contact"));	    
-		nvps1.add(new BasicNameValuePair("RequestType", "Add"));
-		nvps1.add(new BasicNameValuePair("Username", "UserA"));
-		nvps1.add(new BasicNameValuePair("contactUsername", "UserB"));
+		nvps1.add(new BasicNameValuePair("requestID", "Contact"));	    
+		nvps1.add(new BasicNameValuePair("requestType", "Add"));
+		nvps1.add(new BasicNameValuePair("username", "UserA"));
+		nvps1.add(new BasicNameValuePair("contactusername", "UserB"));
 		
 		List <NameValuePair> nvps2 = new ArrayList <NameValuePair>();	    
-		nvps2.add(new BasicNameValuePair("RequestID", "Contact"));	    
-		nvps2.add(new BasicNameValuePair("RequestType", "Add"));
-		nvps2.add(new BasicNameValuePair("Username", "UserA"));
-		nvps2.add(new BasicNameValuePair("contactUsername", "UserC"));
+		nvps2.add(new BasicNameValuePair("requestID", "Contact"));	    
+		nvps2.add(new BasicNameValuePair("requestType", "Add"));
+		nvps2.add(new BasicNameValuePair("username", "UserA"));
+		nvps2.add(new BasicNameValuePair("contactusername", "UserC"));
 
 		List <NameValuePair> nvps3 = new ArrayList <NameValuePair>();	    
-		nvps3.add(new BasicNameValuePair("RequestID", "Contact"));	    
-		nvps3.add(new BasicNameValuePair("RequestType", "Add"));
-		nvps3.add(new BasicNameValuePair("Username", "UserB"));
-		nvps3.add(new BasicNameValuePair("contactUsername", "UserA"));
+		nvps3.add(new BasicNameValuePair("requestID", "Contact"));	    
+		nvps3.add(new BasicNameValuePair("requestType", "Add"));
+		nvps3.add(new BasicNameValuePair("username", "UserB"));
+		nvps3.add(new BasicNameValuePair("contactusername", "UserA"));
 		
 		//execute the add contacts request.
 		WorkflowTestHelper.ExecuteRequest(nvps1);
@@ -70,9 +70,9 @@ public class GetAllContactsWorkflowTest {
 		//get all contacts of A
 		System.out.println("getting all contacts of UserA...");
 		List <NameValuePair> nvps = new ArrayList <NameValuePair>();	    
-		nvps.add(new BasicNameValuePair("RequestID", "Contact"));	    
-		nvps.add(new BasicNameValuePair("RequestType", "GetAll"));
-		nvps.add(new BasicNameValuePair("Username", "UserA"));
+		nvps.add(new BasicNameValuePair("requestID", "Contact"));	    
+		nvps.add(new BasicNameValuePair("requestType", "GetAll"));
+		nvps.add(new BasicNameValuePair("username", "UserA"));
 		
 		// check the response
 		System.out.println("checking response for getting all contacts of UserA...");
@@ -80,14 +80,14 @@ public class GetAllContactsWorkflowTest {
 		List<Map<String,String>> returnMap = WorkflowTestHelper.GetReponseMap(response); 
 		System.out.println(returnMap);
 		assertTrue(returnMap.toString().equals("[{Status=Success}, "
-				+ "{Username=UserB, Available=YES}, {Username=UserC, Available=YES}]"));
+				+ "{username=UserB, Available=YES}, {username=UserC, Available=YES}]"));
 		
 		//get all contacts of B
 		System.out.println("getting all contacts of UserB...");
 		nvps = new ArrayList <NameValuePair>();	    
-		nvps.add(new BasicNameValuePair("RequestID", "Contact"));	    
-		nvps.add(new BasicNameValuePair("RequestType", "GetAll"));
-		nvps.add(new BasicNameValuePair("Username", "UserB"));
+		nvps.add(new BasicNameValuePair("requestID", "Contact"));	    
+		nvps.add(new BasicNameValuePair("requestType", "GetAll"));
+		nvps.add(new BasicNameValuePair("username", "UserB"));
 		
 		// check the response
 		System.out.println("checking response for getting all contacts of UserB...");
@@ -95,14 +95,14 @@ public class GetAllContactsWorkflowTest {
 		returnMap = WorkflowTestHelper.GetReponseMap(response); 
 		System.out.println(returnMap);
 		assertTrue(returnMap.toString().equals("[{Status=Success}, "
-				+ "{Username=UserA, Available=YES}]"));
+				+ "{username=UserA, Available=YES}]"));
 		
 		//get all contacts of C
 		System.out.println("getting all contacts of UserC...");
 		nvps = new ArrayList <NameValuePair>();	    
-		nvps.add(new BasicNameValuePair("RequestID", "Contact"));	    
-		nvps.add(new BasicNameValuePair("RequestType", "GetAll"));
-		nvps.add(new BasicNameValuePair("Username", "UserC"));
+		nvps.add(new BasicNameValuePair("requestID", "Contact"));	    
+		nvps.add(new BasicNameValuePair("requestType", "GetAll"));
+		nvps.add(new BasicNameValuePair("username", "UserC"));
 		
 		// check the response
 		System.out.println("checking response for getting all contacts of UserC...");

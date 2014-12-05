@@ -33,7 +33,7 @@
         	android:layout_width="0dp"
         	android:layout_height="match_parent"
         	android:layout_weight="1"
-     	   	android:onClick="OnAddFriendsButtonClick"
+     	   	android:onClick="onAddFriendsButtonClick"
     	    android:text="@string/add_friends" />
 
 
@@ -42,7 +42,7 @@
         	android:layout_width="0dp"
         	android:layout_height="match_parent"
         	android:layout_weight="1"
-        	android:onClick="OnContactNotificationButtonClick"
+        	android:onClick="onContactNotificationButtonClick"
         	android:text="@string/contact_notification" />
         
     	

@@ -60,7 +60,7 @@ public class ContactsNotificationAdapter extends
 		// TODO
 		// Need revise here
 		
-		name.setText(contactInfoList.get(position).getContactUsername()
+		name.setText(contactInfoList.get(position).getContactusername()
 				+ " wants to add you as a friend!");
 		// holder.checkbox.setChecked(contactInfoList.get(position).isSelected());
 		return rowView;

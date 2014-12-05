@@ -26,7 +26,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.notificationHandler
 
 public class TabHostActivity extends TabActivity {
 
-	String Username ;
+	String username ;
 
 	Map<String,Map<String,String>> NotificationCache;
 
@@ -34,7 +34,7 @@ public class TabHostActivity extends TabActivity {
 	TabSpec TabInvites;
 	TabSpec TabProfile;
 	TabHost TabHost; 
-	String NotificationMapListJSON; 
+	String notificationMapListJSon; 
 
 
 	/**
@@ -46,17 +46,17 @@ public class TabHostActivity extends TabActivity {
 	public void onCreate(Bundle savedInstanceState)
 	{
 
-		NotificationMapListJSON="[{}]";
+		notificationMapListJSon="[{}]";
 		super.onCreate(savedInstanceState);
 		// Initialize the view and cache.
 		InitView();
 		NotificationCache = new HashMap<String,Map<String,String>>();
 
 		// Obtain the data required for the activity class
-		Username = getIntent().getStringExtra("Username");
+		username = getIntent().getStringExtra("username");
 
 		//start the notifcations framework.
-		NotificationHelper.init(this, Username);
+		NotificationHelper.init(this, username);
 
 
 
@@ -83,7 +83,7 @@ public class TabHostActivity extends TabActivity {
 
 		TabInvites.setIndicator("Invites");
 		Intent intent = new Intent(this,InvitesActivity.class);
-		intent.putExtra("NotificationMapListJSON", NotificationMapListJSON);
+		intent.putExtra("notificationMapListJSon", notificationMapListJSon);
 		TabInvites.setContent(intent);
 
 		TabContacts.setIndicator("Contacts");
@@ -120,7 +120,7 @@ public class TabHostActivity extends TabActivity {
 			notificationList.add(new NotificationProperties(notification));
 		}
 
-		DataCacheHelper.setMealNotificationCache(notificationList);
+		DataCacheHelper.setmealNotificationCache(notificationList);
 
 	}
 

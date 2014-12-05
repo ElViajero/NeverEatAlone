@@ -28,7 +28,7 @@ public class PostProperties implements IActivityProperties {
 	public PostProperties(List<String> recipientList,String postType,
 			String postData){
 		poster = 
-				AccountProperties.getUserAccountInstance().getUsername();
+				AccountProperties.getUserAccountInstance().getusername();
 		postID = poster+postIDNumber;
 
 		this.recipientList = recipientList;
@@ -39,16 +39,14 @@ public class PostProperties implements IActivityProperties {
 	@Override
 	public Map<String, Object> toMap() {
 
-		Gson gson = GsonHelper.GetGsonInstance();
+		Gson gson = GsonHelper.getGsoninstance();
 		String json = gson.toJson(this);
 		System.out.println("json is : " +json);
 		Type stringObjectMap = new TypeToken<Map<String, Object>>(){}.getType();
 		Map<String,Object> requestMap = gson.fromJson(json, stringObjectMap);
 		System.out.println("map is : " +requestMap);
 
-
 		requestMap.remove("postData");
-
 
 		Map<String,Object> postDataMap = gson.fromJson(postData, stringObjectMap);
 		System.out.println("map is : " +postDataMap);

@@ -52,7 +52,7 @@ public class PostInformationActivity extends Activity {
 	 * Method used for back button click
 	 * @author: Hai Tang
 	 */
-	public void OnBackButtonClick(View view){
+	public void onBackButtonClick(View view){
 		Intent intent = new Intent(this, SelectFriendsActivity.class);
 		startActivity(intent);
 	}
@@ -61,7 +61,7 @@ public class PostInformationActivity extends Activity {
 	 * Method used for post button click
 	 * @author: Hai Tang
 	 */
-	public void OnPostButtonClick(View view){
+	public void onPostButtonClick(View view){
 		Intent intent = new Intent(this, TabHostActivity.class);
 		startActivity(intent);
 	}

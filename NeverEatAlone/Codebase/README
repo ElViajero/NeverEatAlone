@@ -11,9 +11,9 @@ TO SET UP YOU WILL NEED :                                                       
 You will need to enable guest access to rabbitmq. Please see : https://www.rabbitmq.com/access-control.html      | |
                                                                                                                  | |
                                                                                                                  | |
-PLEASE REFER TO THE SETUP INSTRUCTIONS FILE,                                                                     | |
+PLEASE REFER TO THE SETUP INSTRUCTIonS FILE,                                                                     | |
 PERFORM THE FIRST FEW STEPS AND THEN PERFORM THE STEPS IN SetupClient                                            | |
-AND SetupServer FILES. FINALLY, COME BACK TO SETUP INSTRUCTIONS AND PERFORM THE REMAINING STEPS.                 | |
+AND SetupServer FILES. FINALLY, COME BACK TO SETUP INSTRUCTIonS AND PERFORM THE REMAINING STEPS.                 | |
                                                                                                                  | |
 +----------------------------------------------------------------------------------------------------------------+-+
 +----------------------------------------------------------------------------------------------------------------+-+ 
@@ -35,8 +35,8 @@ DO NOT USE localhost. The localhost usually refers to the android emulator. So y
                                                                                                                       | |
 TESTS:                                                                                                                | |
                                                                                                                       | |
-I've just updated the JSON request/response architecture and so the tests need an overhaul before they can be run.    | |
-As they are now, best case they fail because the string returned is now a JSON string.                                | |
+I've just updated the JSon request/response architecture and so the tests need an overhaul before they can be run.    | |
+As they are now, best case they fail because the string returned is now a JSon string.                                | |
                                                                                                                       | | 
 +---------------------------------------------------------------------------------------------------------------------+-+ 
 +---------------------------------------------------------------------------------------------------------------------+-+ 
@@ -85,7 +85,7 @@ NOTE : Everytime you update the project by right click --> maven --> update,  he
 
 +----------------------------------------------------------------------------------------------------------------------------------------------------------+-+
 +----------------------------------------------------------------------------------------------------------------------------------------------------------+-+
-ADDITIONAL NOTES:                                                                                                                                          | |
+ADDITIonAL NOTES:                                                                                                                                          | |
                                                                                                                                                            | |
 Most warnings were fixed (over 200).                                                                                                                       | |
 There are some 8 remaining warnings, some of them are to do with the Android SDK and some are due to the use of deprecated functionality.                  | |
@@ -124,8 +124,8 @@ If everything works (including rabbitmq guest access) :                         
                                                                                                                   | |
 please create two accounts :                                                                                      | |
                                                                                                                   | |
-One with username "a"                                                                                             | |
-One with username "Tejas"                                                                                         | |
+one with username "a"                                                                                             | |
+one with username "Tejas"                                                                                         | |
                                                                                                                   | |
 Log into "a" click "create", fill the fields and click the next button.                                           | |
                                                                                                                   | |
@@ -134,8 +134,8 @@ You should see the Meal properties being posted on the invites list as well as (
 to screen showing successful functioning of the notification framework.                                           | |
                                                                                                                   | |
                                                                                                                   | |
-IN THIS ITERATION,THE INITIAL DESING OF ALL THE SUPPORT FRAMEWORKS REQUIRED                                       | |
-FOR THE FUNCITONALITY THAT THE APP HAS TO OFFER HAS BEEN COMPLETED.                                               | |
+IN THIS ITERATIon,THE INITIAL DESING OF ALL THE SUPPORT FRAMEWORKS REQUIRED                                       | |
+FOR THE FUNCITonALITY THAT THE APP HAS TO OFFER HAS BEEN COMPLETED.                                               | |
                                                                                                                   | |
 However, there is still some considerable tweaking and refactoring to do.                                         | |
                                                                                                                   | |

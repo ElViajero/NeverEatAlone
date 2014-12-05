@@ -7,7 +7,7 @@ Our goal is to develop a mobile application named "Never Eat Alone", which allow
 Actors
 
 User - all users of this app. In an invitation event, they can take one of the following roles:  
-	Poster - the user who post an invitation to contacts
+	poster - the user who post an invitation to contacts
 	Receiver - the user who receive the invitation 
 Database - where all the user information and restaurant information are stored. 
 Server - manage the accounts and analyze the data.
