@@ -5,6 +5,7 @@ import java.util.List;
 
 import android.app.ListActivity;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -39,8 +40,23 @@ public class InvitesActivity extends ListActivity {
 		NotificationList = new ArrayList<NotificationProperties>();
 		initView(savedInstanceState);
 		isCreated=false;
+		
+		setTitleStyle();
 
 
+	}
+
+	/**
+	 * This method is used to set the font style of the title of each page
+	 * @author: Hai Tang
+	 */
+	public void setTitleStyle() {
+		TextView tv =
+				(TextView) findViewById(R.id.app_name);
+		Typeface tf = Typeface.createFromAsset(getAssets(),
+				"fonts/Windsong.ttf");
+		tv.setTypeface(tf);
+		tv.setTextSize(100);
 	}
 
 	/**
