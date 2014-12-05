@@ -112,7 +112,7 @@ public class TabHostActivity extends TabActivity {
 	 */
 	public void UpdateNotificationCache(List<Map<String,String>> notificationMapList){
 
-		notificationMapList.remove(0);
+		System.out.println("in updateNotification");
 		List<NotificationProperties> notificationList = 
 				new ArrayList<NotificationProperties>();
 
