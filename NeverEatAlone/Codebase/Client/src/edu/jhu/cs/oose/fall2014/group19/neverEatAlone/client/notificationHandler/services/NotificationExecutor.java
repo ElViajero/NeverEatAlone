@@ -150,15 +150,21 @@ public class NotificationExecutor extends AsyncTask<String, List<Map<String,Stri
 	@Override
 	protected void onPostExecute(List<Map<String,String>> resultMapList){
 
+		//		System.out.println("Entering onPostExecute");
 		if(resultMapList==null)
 			MessageToasterHelper.toastMessage(ActivityObject,
 					"Could not connect to notification server.");
 
-		else if(!resultMapList.isEmpty())
+		else if(!resultMapList.isEmpty()){
+			System.out.println("NotificationMap is not empty.");
 			ActivityObject.UpdateNotificationCache(resultMapList);
+		}
+
 		System.out.println("Reaching here regularly");
-		if(!cleanBit)
+		if(!cleanBit){
+			//System.out.println("CleanBit is false");
 			new NotificationExecutor(ActivityObject,Username).executeOnExecutor(THREAD_POOL_EXECUTOR, Username);
+		}
 	}
 
 	public static void cleanUp(){		
@@ -166,6 +172,7 @@ public class NotificationExecutor extends AsyncTask<String, List<Map<String,Stri
 		try {
 			//ChannelObject.queueDelete(Username);			
 			ChannelObject.basicCancel(Username);
+
 			ChannelObject.close();
 			connectionObject.close();
 
@@ -196,10 +203,15 @@ public class NotificationExecutor extends AsyncTask<String, List<Map<String,Stri
 			System.out.println("username is"+Username);
 			ChannelObject.queueDeclare(Username, false, false, false, null);
 			consumerObject =  new QueueingConsumer(ChannelObject);
-			ChannelObject.basicConsume(Username, true,Username,true,true,null, consumerObject);
+			ChannelObject.basicConsume(Username, true,Username,
+					true,true,null, consumerObject);
 
 
 		}
+	}
+
+	public static void setCleanUpBit(boolean clean){
+		cleanBit = clean;
 	}
 
 }

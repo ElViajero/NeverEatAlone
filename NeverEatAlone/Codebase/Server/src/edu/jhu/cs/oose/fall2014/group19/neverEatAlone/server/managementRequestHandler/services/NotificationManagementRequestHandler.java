@@ -1,5 +1,6 @@
 package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.managementRequestHandler.services;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -41,8 +42,11 @@ public class NotificationManagementRequestHandler {
 
 		List<String> recipientList = Arrays.asList(request.get("recipientList"));
 
+		List<Map<String, String>> notificationMapList = 
+				new ArrayList<Map<String,String>>(result);
+		notificationMapList.remove(0);
 
-		INotificationManagerObject.PushNotification(result , recipientList );
+		INotificationManagerObject.PushNotification(notificationMapList , recipientList );
 		//change this.
 		return result;
 	}

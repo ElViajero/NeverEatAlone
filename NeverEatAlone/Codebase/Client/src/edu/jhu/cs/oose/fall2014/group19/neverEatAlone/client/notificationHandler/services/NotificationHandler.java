@@ -37,8 +37,9 @@ public class NotificationHandler implements INotificationHandler {
 	 */
 	@Override
 	public void cleanUp() {
-		NotificationExecutor.cleanUp();
+		NotificationExecutor.setCleanUpBit(true);
 		notificationExecutorTask.cancel(true);
+		NotificationExecutor.cleanUp();
 	}
 
 }

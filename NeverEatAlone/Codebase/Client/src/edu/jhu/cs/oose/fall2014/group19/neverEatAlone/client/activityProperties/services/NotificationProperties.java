@@ -51,6 +51,8 @@ public class NotificationProperties implements IActivityProperties {
 
 	public NotificationProperties(Map<String,String> map){
 
+		System.out.println("the map is " + map);
+
 		poster = map.get("poster");
 		notificationID = map.get("postID");
 		notificationType = map.get("postType");
