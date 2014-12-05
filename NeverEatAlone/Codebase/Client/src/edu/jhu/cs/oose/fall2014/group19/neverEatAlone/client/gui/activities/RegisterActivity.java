@@ -77,7 +77,7 @@ public class RegisterActivity extends Activity {
 	 * @author Yueling Loh
 	 * @param view
 	 */
-	public void OnRegisterButtonClick(View view) {
+	public void onRegisterButtonClick(View view) {
 
 		// Fetch the fields from the GUI.
 		String username = usernameET.getText().toString();
@@ -143,7 +143,7 @@ public class RegisterActivity extends Activity {
 		return true;
 	}
 
-	public void OnCancelButtonClick(View view) {
+	public void onCancelButtonClick(View view) {
 		Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
 		RegisterActivity.this.startActivity(intent);
 	}

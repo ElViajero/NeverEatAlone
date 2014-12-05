@@ -14,6 +14,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.TabH
 /**
  * This class tests the activities on the Main(login/register) page
  * @author Xiaozhou Zhou
+ * @author Yueling Loh
  *
  */
 public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActivity> {
@@ -54,14 +55,18 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
 	 * (the user account is already created in testonSignUpButtonClick)
 	 */
 	public void testonLoginButtonClick() {
-
+		EditText vUserName = (EditText)solo.getView(R.id.edit_username);
+		EditText vEditPassword = (EditText)solo.getView(R.id.edit_password);
+		EditText vConfirmPassword = (EditText)solo.getView(R.id.edit_confirm_password);
+		EditText vEmail = (EditText)solo.getView(R.id.edit_email);
+		
 		// create a test account if it does not already exist
 		solo.clickOnButton("Sign Up");
-		solo.clearEditText((EditText)solo.getView(R.id.edit_username));
-		solo.enterText((EditText)solo.getView(R.id.edit_username), "usr_test");
-		solo.enterText((EditText)solo.getView(R.id.edit_password), "pw_test");
-		solo.enterText((EditText)solo.getView(R.id.edit_confirm_password), "pw_test");
-		solo.enterText((EditText)solo.getView(R.id.edit_email), "email@test.com");
+		solo.clearEditText(vUserName);
+		solo.enterText(vUserName, "usr_test");
+		solo.enterText(vEditPassword, "pw_test");
+		solo.enterText(vConfirmPassword, "pw_test");
+		solo.enterText(vEmail, "email@test.com");
 		solo.clickOnButton("Register");
 		if(solo.getCurrentActivity().getClass().equals(RegisterActivity.class))
 			solo.clickOnButton("Cancel"); // TODO: if registered, should go back to main page automatically and don't need this
@@ -73,28 +78,28 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
 			fail("empty user-pw");
 
 		// reject wrong pw
-		solo.enterText((EditText)solo.getView(R.id.edit_username), "usr_test");
-		solo.enterText((EditText)solo.getView(R.id.edit_password), "pw_wrong");
+		solo.enterText(vUserName, "usr_test");
+		solo.enterText(vEditPassword, "pw_wrong");
 		solo.clickOnButton("Login");
 		solo.assertCurrentActivity("Should stay on main page", MainActivity.class);
 		if(!solo.searchText("Invalid Credentials"))
 			fail("wrong password");
 
 		// reject wrong user name
-		solo.clearEditText((EditText)solo.getView(R.id.edit_username));
-		solo.clearEditText((EditText)solo.getView(R.id.edit_password));
-		solo.enterText((EditText)solo.getView(R.id.edit_username), "usr_wrong");
-		solo.enterText((EditText)solo.getView(R.id.edit_password), "pw_test");
+		solo.clearEditText(vUserName);
+		solo.clearEditText(vEditPassword);
+		solo.enterText(vUserName, "usr_wrong");
+		solo.enterText(vEditPassword, "pw_test");
 		solo.clickOnButton("Login");
 		solo.assertCurrentActivity("Should stay on main page", MainActivity.class);
 		if(!solo.searchText("Invalid Credentials"))
 			fail("wrong user name");
 
 		// correct user name and pw: login succeeds
-		solo.clearEditText((EditText)solo.getView(R.id.edit_username));
-		solo.clearEditText((EditText)solo.getView(R.id.edit_password));
-		solo.enterText((EditText)solo.getView(R.id.edit_username), "usr_test");
-		solo.enterText((EditText)solo.getView(R.id.edit_password), "pw_test");
+		solo.clearEditText(vUserName);
+		solo.clearEditText(vEditPassword);
+		solo.enterText(vUserName, "usr_test");
+		solo.enterText(vEditPassword, "pw_test");
 		solo.clickOnButton("Login");
 		if(!solo.searchText("Welcome usr_test !"))
 			fail("should show welcome message");
