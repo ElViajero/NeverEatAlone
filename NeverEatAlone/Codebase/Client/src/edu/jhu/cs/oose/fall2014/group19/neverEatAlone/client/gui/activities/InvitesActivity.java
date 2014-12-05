@@ -50,7 +50,7 @@ public class InvitesActivity extends ListActivity {
 	 * This method is used to set the font style of the title of each page
 	 * @author: Hai Tang
 	 */
-	public void setTitleStyle() {
+	private void setTitleStyle() {
 		TextView tv =
 				(TextView) findViewById(R.id.app_name);
 		Typeface tf = Typeface.createFromAsset(getAssets(),

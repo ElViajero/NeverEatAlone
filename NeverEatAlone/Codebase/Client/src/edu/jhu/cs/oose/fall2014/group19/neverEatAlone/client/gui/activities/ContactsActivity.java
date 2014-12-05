@@ -62,7 +62,7 @@ public class ContactsActivity extends ListActivity {
 	 * This method is used to set the font style of the title of each page
 	 * @author: Hai Tang
 	 */
-	public void setTitleStyle() {
+	private void setTitleStyle() {
 		TextView tv =
 				(TextView) findViewById(R.id.textView_contacts_title);
 		Typeface tf = Typeface.createFromAsset(getAssets(),

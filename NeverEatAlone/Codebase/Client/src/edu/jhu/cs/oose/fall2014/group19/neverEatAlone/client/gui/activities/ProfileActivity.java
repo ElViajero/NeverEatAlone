@@ -44,7 +44,7 @@ public class ProfileActivity extends Activity {
 	 * This method is used to set the font style of the title of each page
 	 * @author: Hai Tang
 	 */
-	public void setTitleStyle() {
+	private void setTitleStyle() {
 		TextView tv =
 				(TextView) findViewById(R.id.profile);
 		Typeface tf = Typeface.createFromAsset(getAssets(),

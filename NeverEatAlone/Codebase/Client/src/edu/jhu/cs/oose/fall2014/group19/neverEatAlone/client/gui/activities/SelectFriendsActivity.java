@@ -67,7 +67,7 @@ public class SelectFriendsActivity extends ListActivity {
 	 * This method is used to set the font style of the title of each page
 	 * @author: Hai Tang
 	 */
-	public void setTitleStyle() {
+	private void setTitleStyle() {
 		TextView tv =
 				(TextView) findViewById(R.id.textView_selectfriends_title);
 		Typeface tf = Typeface.createFromAsset(getAssets(),
@@ -172,6 +172,13 @@ public class SelectFriendsActivity extends ListActivity {
 			System.out.println("Already Handled");
 		}
 
+		/**
+		 * Commented for future use. Used to connect to PostInformation page.
+		 * @author Hai Tang
+		 */
+//		Intent intent = new Intent(SelectFriendsActivity.this,
+//				PostInformationActivity.class);
+//		SelectFriendsActivity.this.startActivity(intent);
 
 	}
 }
