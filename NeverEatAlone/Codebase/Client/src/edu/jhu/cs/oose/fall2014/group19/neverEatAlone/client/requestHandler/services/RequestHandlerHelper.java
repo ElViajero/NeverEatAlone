@@ -18,7 +18,7 @@ public class RequestHandlerHelper {
 	 * Helper method to obtain a handle on the IRequestHandler instance.
 	 * @return
 	 */
-	public static IRequestHandler GetRequestHandlerInstance(){
+	public static IRequestHandler getRequestHandlerInstance(){
 
 		if(IRequestHandlerInstance==null)
 			IRequestHandlerInstance = new RequestHandler();

@@ -1,19 +1,17 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:gravity="center_vertical"
+    android:orientation="vertical"
+    android:background="@drawable/layout_background"
     tools:context="edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.CreateMealInformationActivity" >
 
     <TextView
         android:id="@+id/CreateMealInformation_text_mealinformation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="0dp"
         android:text="@string/CreateMealInformation_meal_information"
         android:textAppearance="?android:attr/textAppearanceLarge" />
@@ -22,9 +20,9 @@
         android:id="@+id/CreateMealInformation_text_when"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/CreateMealInformation_text_mealinformation"
+        android:layout_marginTop="30dp"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"
         android:text="@string/when"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -32,31 +30,39 @@
         android:id="@+id/CreateMealInformation_layout_start"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/CreateMealInformation_text_when"
-        android:orientation="horizontal" >
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp" >
 
         <TextView
-            android:id="@+id/CreateMealInformation_text_starttime"
-            android:layout_width="wrap_content"
+            android:id="@+id/CreateMealInformation_text_startTime"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/start_time" />
 
         <Button
-            android:id="@+id/CreateMealInformation_button_startdate"
-            android:layout_width="wrap_content"
+            android:id="@+id/CreateMealInformation_button_startDate"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:onClick="OnStartDataButtonClick"
+            android:onClick="onStartDataButtonClick"
+            android:background="@drawable/buttonbackground"
+        	android:paddingLeft="15dp"
+       		android:paddingRight="15dp"
             android:text="@string/SelectDate" />
 
         <Button
-            android:id="@+id/CreateMealInformation_button_starttime"
-            android:layout_width="wrap_content"
+            android:id="@+id/CreateMealInformation_button_startTime"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:onClick="OnStartTimeButtonClick"
+            android:onClick="onstartTimeButtonClick"
+            android:background="@drawable/buttonbackground"
+        	android:paddingLeft="15dp"
+       		android:paddingRight="15dp"
             android:text="@string/SelectTime" />
     </LinearLayout>
 
@@ -64,31 +70,39 @@
         android:id="@+id/CreateMealInformation_layout_end"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/CreateMealInformation_layout_start"
-        android:orientation="horizontal" >
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp" >
 
         <TextView
-            android:id="@+id/CreateMealInformation_text_endtime"
-            android:layout_width="wrap_content"
+            android:id="@+id/CreateMealInformation_text_endTime"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/end_time" />
 
         <Button
-            android:id="@+id/CreateMealInformation_button_enddate"
-            android:layout_width="wrap_content"
+            android:id="@+id/CreateMealInformation_button_endDate"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:onClick="OnEndDataButtonClick"
+            android:onClick="onEndDataButtonClick"
+            android:background="@drawable/buttonbackground"
+        	android:paddingLeft="15dp"
+       		android:paddingRight="15dp"
             android:text="@string/SelectDate" />
 
         <Button
-            android:id="@+id/CreateMealInformation_button_endtime"
-            android:layout_width="wrap_content"
+            android:id="@+id/CreateMealInformation_button_endTime"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:onClick="OnEndTimeButtonClick"
+            android:onClick="onendTimeButtonClick"
+            android:background="@drawable/buttonbackground"
+        	android:paddingLeft="15dp"
+       		android:paddingRight="15dp"
             android:text="@string/SelectTime" />
     </LinearLayout>
 
@@ -96,9 +110,9 @@
         android:id="@+id/CreateMealInformation_text_where"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/CreateMealInformation_layout_end"
+        android:layout_marginTop="30dp"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"
         android:text="@string/where"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -106,21 +120,25 @@
         android:id="@+id/CreateMealInformation_layout_where"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/CreateMealInformation_text_where"
-        android:orientation="horizontal" >
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp" >
 
         <TextView
             android:id="@+id/CreateMealInformation_text_restaurant"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="@string/restaurant" />
 
         <EditText
             android:id="@+id/edit_restaurant"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="2"
+            android:background="@drawable/edittext"
             android:inputType="text" />
     </LinearLayout>
 
@@ -128,9 +146,9 @@
         android:id="@+id/CreateMealInformation_text_other"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/CreateMealInformation_layout_where"
+        android:layout_marginTop="30dp"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"
         android:text="@string/other_information"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -138,21 +156,25 @@
         android:id="@+id/CreateMealInformation_layout_maxnumber"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/CreateMealInformation_text_other"
-        android:orientation="horizontal" >
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp" >
 
         <TextView
             android:id="@+id/CreateMealInformation_text_maxnumber"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="@string/max_number" />
 
         <EditText
             android:id="@+id/edit_maxnumber"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="2"
+            android:background="@drawable/edittext"
             android:inputType="number" />
     </LinearLayout>
 
@@ -160,9 +182,11 @@
         android:id="@+id/CreateMealInformation_layout_allowfriendinvite"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/CreateMealInformation_layout_maxnumber"
-        android:orientation="horizontal" >
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp" >
 
         <Switch
             android:id="@+id/switch_allowfriendinvite"
@@ -171,32 +195,45 @@
             android:layout_marginTop="0dp"
             android:text="@string/allow_friend_invite"
             android:textOff="@string/capital_no"
-            android:textOn="@string/capital_yes" />
-
+            android:textOn="@string/capital_yes" 
+            android:paddingLeft="50dp"
+            android:paddingRight="50dp"
+            android:background="@drawable/buttonbackground"/>
     </LinearLayout>
 
-    <Button
-        android:id="@+id/CreateMealInformation_button_back"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/CreateMealInformation_layout_buttons"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/CreateMealInformation_layout_allowfriendinvite"
-        android:layout_marginTop="20dp"
-        android:layout_toLeftOf="@+id/CreateMealInformation_button_next"
-        android:layout_toStartOf="@+id/CreateMealInformation_button_next"
-        android:onClick="OnBackButtonClick"
-        android:text="@string/back" />
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp" >
 
-    <Button
-        android:id="@+id/CreateMealInformation_button_next"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/CreateMealInformation_layout_allowfriendinvite"
-        android:layout_marginTop="20dp"
-        android:onClick="OnNextButtonClick"
-        android:text="@string/next" />
+        <Button
+            android:id="@+id/CreateMealInformation_button_back"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_weight="1"
+            android:onClick="onBackButtonClick"
+            android:paddingLeft="50dp"
+            android:paddingRight="50dp"
+            android:background="@drawable/buttonbackground"
+            android:text="@string/back" />
 
-</RelativeLayout>
+        <Button
+            android:id="@+id/CreateMealInformation_button_next"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_weight="1"
+            android:onClick="onNextButtonClick"
+            android:paddingLeft="50dp"
+            android:paddingRight="50dp"
+            android:background="@drawable/buttonbackground"
+            android:text="@string/next" />
+    </LinearLayout>
+
+</LinearLayout>

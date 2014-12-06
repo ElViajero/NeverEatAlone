@@ -90,9 +90,9 @@ public class DeleteAccountWorkflowTest {
 		//delete UserA
 		System.out.println("deleting UserA...");
 		List <NameValuePair> nvps1 = new ArrayList <NameValuePair>();	    
-		nvps1.add(new BasicNameValuePair("RequestID", "Account"));	    
-		nvps1.add(new BasicNameValuePair("RequestType", "Delete"));
-		nvps1.add(new BasicNameValuePair("Username", "UserA"));
+		nvps1.add(new BasicNameValuePair("requestID", "Account"));	    
+		nvps1.add(new BasicNameValuePair("requestType", "Delete"));
+		nvps1.add(new BasicNameValuePair("username", "UserA"));
 
 		CloseableHttpResponse response = WorkflowTestHelper.ExecuteRequest(nvps1);
 		List<Map<String,String>> returnMap = WorkflowTestHelper.GetReponseMap(response); 
@@ -102,9 +102,9 @@ public class DeleteAccountWorkflowTest {
 		// assert that UserA is no longer in the database
 		System.out.println("check validity of UserA...");
 		List <NameValuePair> nvps2 = new ArrayList <NameValuePair>();	    
-		nvps2.add(new BasicNameValuePair("RequestID", "Account"));	    
-		nvps2.add(new BasicNameValuePair("RequestType", "IsValid"));
-		nvps2.add(new BasicNameValuePair("Username", "UserA"));
+		nvps2.add(new BasicNameValuePair("requestID", "Account"));	    
+		nvps2.add(new BasicNameValuePair("requestType", "IsValid"));
+		nvps2.add(new BasicNameValuePair("username", "UserA"));
 		response = WorkflowTestHelper.ExecuteRequest(nvps2);
 		returnMap = WorkflowTestHelper.GetReponseMap(response); 
 		System.out.println("check validity of UserA: "+returnMap);
@@ -114,10 +114,10 @@ public class DeleteAccountWorkflowTest {
 		System.out.println("creating relationships...");
 		WorkflowTestHelper.CreateTestAccount("UserA", "pwA", "emailA");		
 		List <NameValuePair> nvps3 = new ArrayList <NameValuePair>();	    
-		nvps3.add(new BasicNameValuePair("RequestID", "Contact"));	    
-		nvps3.add(new BasicNameValuePair("RequestType", "Add"));
-		nvps3.add(new BasicNameValuePair("Username", "UserA"));
-		nvps3.add(new BasicNameValuePair("contactUsername", "UserB"));
+		nvps3.add(new BasicNameValuePair("requestID", "Contact"));	    
+		nvps3.add(new BasicNameValuePair("requestType", "Add"));
+		nvps3.add(new BasicNameValuePair("username", "UserA"));
+		nvps3.add(new BasicNameValuePair("contactusername", "UserB"));
 		WorkflowTestHelper.ExecuteRequest(nvps3);
 		
 		// delete UserA again

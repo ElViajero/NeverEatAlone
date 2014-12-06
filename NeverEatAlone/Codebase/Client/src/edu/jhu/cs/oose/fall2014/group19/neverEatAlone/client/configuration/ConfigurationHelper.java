@@ -28,7 +28,7 @@ public class ConfigurationHelper {
 	/**
 	 * 
 	 * Method that returns a configuration properties object.
-	 * One for the entire application.
+	 * one for the entire application.
 	 * 
 	 * @author tejasvamsingh
 	 * @return
@@ -36,7 +36,7 @@ public class ConfigurationHelper {
 	 * @throws URISyntaxException
 	 */
 
-	public static Configuration GetConfigurationInstance() throws FileNotFoundException, URISyntaxException{
+	public static Configuration getConfigurationInstance() throws FileNotFoundException, URISyntaxException{
 		if(ConfigurationInstance==null){
 			Gson gson = new Gson();
 			String str = null;
@@ -50,10 +50,10 @@ public class ConfigurationHelper {
 			}			
 			try {
 				ConfigurationInstance = gson.fromJson(str, Configuration.class);
-				System.out.println("the ip is " +ConfigurationInstance.GetIPAddress());
-				System.out.println("the protocol is " +ConfigurationInstance.GetProtocol());
-				System.out.println("the port is " +ConfigurationInstance.GetServerPort());
-				System.out.println("the URL is " +ConfigurationInstance.GetServerURL());
+				System.out.println("the ip is " +ConfigurationInstance.getIPAddress());
+				System.out.println("the protocol is " +ConfigurationInstance.getProtocol());
+				System.out.println("the port is " +ConfigurationInstance.getServerPort());
+				System.out.println("the URL is " +ConfigurationInstance.getServerURL());
 			} catch (JsonSyntaxException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

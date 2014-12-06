@@ -7,7 +7,7 @@ CORE FEATURES :
 
 -- USER MANAGEMENT FEATURES 
 
-• The ability to create user accounts : email, username and password is required. Username is unique and cannot be changed.
+• The ability to create user accounts : email, username and password is required. username is unique and cannot be changed.
   Optional fields include name, gender, workplace and avatar.
 • The ability to delete user accounts.
 • The ability to login and logout of user account.
@@ -21,7 +21,7 @@ CORE FEATURES :
 • The ability to modify visibility list -- The list that controls which contacts of the user can see the user's availability status when enabled(i.e. set to "available"). It is a subset of the user's contacts.
 
 
---- USER/MEAL NOTIFICATION MANAGEMENT FEATURES
+--- USER/MEAL NOTIFICATIon MANAGEMENT FEATURES
 
 • The ability to post meal notifications  -- sent to contacts based on above visibility list.
 • The ability to recieve meal notifications -- from contacts to whom the user is available (Determined by availability and visibility as noted above).
@@ -30,7 +30,7 @@ CORE FEATURES :
 • The ability to accept or decline a meal invitation. 
 
 
--- MEAL NOTIFICATION CONTENT FEATURES
+-- MEAL NOTIFICATIon ConTENT FEATURES
 
 • The ability to set the location of the meal (Look at geo location features below) -- This CAN BE a custom location (someone's house for example).
 • The ability to set a duration (optional start and end time) for meal notification -- A user may be open for breakfast for two hours from current time OR the user says he/she can have breakfast between 8-10 a.m.
@@ -43,7 +43,7 @@ CORE FEATURES :
 
 
 
--- MEAL NOTIFICATION PUSH FEATURES 
+-- MEAL NOTIFICATIon PUSH FEATURES 
 
 • The ability to push notification to all contacts that are recipients of the meal notification and are currently available to the poster or become available to the poster before the notification expires or is closed manually by the poster.
 • The ability to push "open spots" status -- As people accept, other contacts to whom the notification was sent should be informed that the number of available spots for the notification are decreasing.
@@ -52,7 +52,7 @@ CORE FEATURES :
 • The ability to inform (via push) the poster of the notification of which contacts have accepted and when the notification is closed.
   
 
--- GEO LOCATION FEATURES
+-- GEO location FEATURES
 
 • The ability to automatically find address of restaurant -- If poster type's subway, the address "Subway restaurant, xyz Street, ..." should automatically 
   be filled in.  
@@ -67,20 +67,20 @@ EXTENDED FEATURES:
 • The ability to give a restaurant a star rating (1-5 scale).
 • The ability to favorite a restaurant
 
--- MEAL NOTIFICATION CONTENT AND PUSH 
+-- MEAL NOTIFICATIon ConTENT AND PUSH 
 
 • The ability to recommend a restaurant -- one of the recipients can recommend a restaurant if the location is unspecified.
 • User who receives a meal notification push can accept or decline it on the lock screen
 • User who receives a meal notification push and click on the lock screen to see more detailed information of the notification 
 
--- GEO LOCATION FEATURES
+-- GEO location FEATURES
 
 • The ability to search for restaurants based on proximity.
 • The ability to use geo information to search for contacts (both for adding friend and for searching within contact list) 
 
 -- PREDICTIVE FEATURES
 
-• The ability to recommend restaurants that are liked by majority users in the area (Uses GEO LOCATION).
+• The ability to recommend restaurants that are liked by majority users in the area (Uses GEO location).
 • The ability randomly recommend a restaurant (Should pick from restaurants that have decent ratings)
 • The ability to recommend friends for meal at a particular restaurants -- uses contact's ratings for that restaurant.
 • The ability to recommend restaurants for meal with a particular group of friends -- uses common restaurants that are ranked high by the group in question.
@@ -89,7 +89,7 @@ EXTENDED FEATURES:
 
 • User can use Facebook or other social media account information to log in 
 
--- RELATION MANAGEMENT FEATURES
+-- RELATIon MANAGEMENT FEATURES
 
 • The ability to search contacts (for adding) using true name, work place or phone number 
 • Display contacts in different orders in contact list. (adding a separate page for choosing sorting methods. )

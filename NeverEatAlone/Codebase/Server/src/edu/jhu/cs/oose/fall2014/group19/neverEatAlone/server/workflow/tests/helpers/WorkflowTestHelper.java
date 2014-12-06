@@ -56,11 +56,11 @@ public class WorkflowTestHelper {
 
 		//populate request headers and data		
 		List <NameValuePair> nvps = new ArrayList <NameValuePair>();	    
-		nvps.add(new BasicNameValuePair("RequestID", "Account"));	    
-		nvps.add(new BasicNameValuePair("RequestType", "Create"));
-		nvps.add(new BasicNameValuePair("Username", user));
-		nvps.add(new BasicNameValuePair("Password", pw));
-		nvps.add(new BasicNameValuePair("Email", email));
+		nvps.add(new BasicNameValuePair("requestID", "Account"));	    
+		nvps.add(new BasicNameValuePair("requestType", "Create"));
+		nvps.add(new BasicNameValuePair("username", user));
+		nvps.add(new BasicNameValuePair("password", pw));
+		nvps.add(new BasicNameValuePair("email", email));
 
 		httpPost.setEntity(new UrlEncodedFormEntity(nvps));
 
@@ -95,11 +95,11 @@ public class WorkflowTestHelper {
 
 		//populate request headers and data		
 		List <NameValuePair> nvps = new ArrayList <NameValuePair>();	    
-		nvps.add(new BasicNameValuePair("RequestID", "Account"));	    
-		nvps.add(new BasicNameValuePair("RequestType", "Delete"));
-		nvps.add(new BasicNameValuePair("Username", user));
-//		nvps.add(new BasicNameValuePair("Password", "TestPass"));
-//		nvps.add(new BasicNameValuePair("Email", "Test@test.com"));
+		nvps.add(new BasicNameValuePair("requestID", "Account"));	    
+		nvps.add(new BasicNameValuePair("requestType", "Delete"));
+		nvps.add(new BasicNameValuePair("username", user));
+//		nvps.add(new BasicNameValuePair("password", "TestPass"));
+//		nvps.add(new BasicNameValuePair("email", "Test@test.com"));
 
 		httpPost.setEntity(new UrlEncodedFormEntity(nvps));
 

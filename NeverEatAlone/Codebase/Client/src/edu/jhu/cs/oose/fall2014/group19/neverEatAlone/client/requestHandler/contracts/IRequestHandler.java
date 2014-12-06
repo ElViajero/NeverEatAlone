@@ -22,7 +22,7 @@ public interface IRequestHandler{
 	 * @param requestMap
 	 * @return
 	 */
-	public List<Map<String,String>> HandleRequest(Activity activity,
+	public List<Map<String,String>> handleRequest(Activity activity,
 			Map<String,Object>requestMap,
 			String requestID,String requestType) throws RequestAbortedException;
 

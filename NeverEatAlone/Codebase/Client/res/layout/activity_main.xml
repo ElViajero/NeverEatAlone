@@ -23,7 +23,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
         android:background="@drawable/edittext"
-        android:hint="Username"
+        android:hint="username"
         android:inputType="text" />
 
     <EditText
@@ -35,7 +35,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
         android:background="@drawable/edittext"
-        android:hint="Password"
+        android:hint="password"
         android:inputType="textPassword" />
 
     <Button
@@ -48,7 +48,7 @@
         android:layout_marginTop="94dp"
         android:layout_toLeftOf="@+id/button_signup"
         android:background="@drawable/buttonbackground"
-        android:onClick="OnLoginButtonClick"
+        android:onClick="onLoginButtonClick"
         android:paddingLeft="50dp"
         android:paddingRight="50dp"
         android:text="@string/login" />
@@ -61,7 +61,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
         android:background="@drawable/buttonbackground"
-        android:onClick="OnSignUpButtonClick"
+        android:onClick="onSignUpButtonClick"
         android:paddingLeft="50dp"
         android:paddingRight="50dp"
         android:text="@string/signup" />

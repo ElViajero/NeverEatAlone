@@ -3,6 +3,7 @@ package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -10,15 +11,16 @@ import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.PopupWindow;
-import android.widget.RelativeLayout;
+import android.widget.TextView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
 
 /**
  * ProfileActivity is used to set up the view of Profile page
- * @author Hai Tang 
+ * 
+ * @author Hai Tang
  */
 public class ProfileActivity extends Activity {
-	
+
 	private PopupWindow deleteAccountPopupWindow;
 
 	@Override
@@ -35,7 +37,20 @@ public class ProfileActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_profile);
 
-		
+		setTitleStyle();
+	}
+	
+	/**
+	 * This method is used to set the font style of the title of each page
+	 * @author: Hai Tang
+	 */
+	private void setTitleStyle() {
+		TextView tv =
+				(TextView) findViewById(R.id.profile);
+		Typeface tf = Typeface.createFromAsset(getAssets(),
+				"fonts/Windsong.ttf");
+		tv.setTypeface(tf);
+		tv.setTextSize(100);
 	}
 
 	/**
@@ -49,56 +64,72 @@ public class ProfileActivity extends Activity {
 	}
 
 	/**
-	 * Methods for delete account button click.
-	 * A popup window will be shown for confirmation.
+	 * Methods for delete account button click. A popup window will be shown for
+	 * confirmation.
+	 * 
 	 * @author: Hai Tang
 	 */
 	public void onDeleteAccountButtonClick(View view) {
-		
+
 		View popupview = initPopupWindow();
-		
-		final Button confirmButton = (Button) popupview.findViewById(R.id.button_popup_confirm);
-		final Button cancelButton = (Button) popupview.findViewById(R.id.button_popup_cancel);
-		
+
+		final Button confirmButton = (Button) popupview
+				.findViewById(R.id.button_popup_confirm);
+		final Button cancelButton = (Button) popupview
+				.findViewById(R.id.button_popup_cancel);
+
 		/**
-		 * OnClickListener for the confirm button in the popup window
+<<<<<<< HEAD
+		 * onClickListener for the confirm button in the popup window
+=======
+		 * OnClickListener for the confirm button in the popup window. Account deleted 
+		 * and return to the login page.
+>>>>>>> refs/heads/myGUI_Iter5_v9
+		 * 
 		 * @author: Hai Tang
 		 */
-		confirmButton.setOnClickListener(new Button.OnClickListener(){
+		confirmButton.setOnClickListener(new Button.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				deleteAccountPopupWindow.dismiss();
-				
-				Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
+
+				Intent intent = new Intent(ProfileActivity.this,
+						MainActivity.class);
 				ProfileActivity.this.startActivity(intent);
 			}
-			
+
 		});
-		
+
 		/**
-		 * OnClickListener for the cancel button in the popup window
+		 * onClickListener for the cancel button in the popup window
+		 * 
 		 * @author: Hai Tang
 		 */
-		cancelButton.setOnClickListener(new Button.OnClickListener(){
+		cancelButton.setOnClickListener(new Button.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				deleteAccountPopupWindow.dismiss();
 			}
-			
+
 		});
 	}
 
 	/**
 	 * Method used to initialize the popup window
+	 * 
 	 * @author: Hai Tang
 	 */
 	private View initPopupWindow() {
-		LayoutInflater inflator = (LayoutInflater) ProfileActivity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		View popupview = inflator.inflate(R.layout.popup_delete_account_layout,null);
-		deleteAccountPopupWindow = new PopupWindow(popupview, LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
-		deleteAccountPopupWindow.showAtLocation(popupview, Gravity.CENTER, 0, 0);
+		LayoutInflater inflator = (LayoutInflater) ProfileActivity.this
+				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		View popupview = inflator.inflate(R.layout.popup_delete_account_layout,
+				null);
+		deleteAccountPopupWindow = new PopupWindow(popupview,
+				LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+		deleteAccountPopupWindow
+		.showAtLocation(popupview, Gravity.CENTER, 0, 0);
 		deleteAccountPopupWindow.setFocusable(true);
 		deleteAccountPopupWindow.setAnimationStyle(BIND_IMPORTANT);
 
@@ -110,7 +141,7 @@ public class ProfileActivity extends Activity {
 	 * 
 	 * @author: Hai Tang
 	 */
-	public void OnEditButtonClick(View view) {
+	public void onEditButtonClick(View view) {
 		Intent intent = new Intent(ProfileActivity.this,
 				EditProfileActivity.class);
 		ProfileActivity.this.startActivity(intent);
@@ -121,12 +152,10 @@ public class ProfileActivity extends Activity {
 	 * 
 	 * @author: Hai Tang
 	 */
-	public void OnChangePasswordButtonClick(View view) {
+	public void onChangepasswordButtonClick(View view) {
 		Intent intent = new Intent(ProfileActivity.this,
 				ChangePasswordActivity.class);
 		ProfileActivity.this.startActivity(intent);
 	}
-	
 
-	
 }

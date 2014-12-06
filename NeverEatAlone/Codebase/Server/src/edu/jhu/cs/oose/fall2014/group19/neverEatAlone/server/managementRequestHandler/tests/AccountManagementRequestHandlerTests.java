@@ -41,18 +41,18 @@ public class AccountManagementRequestHandlerTests {
 
 
 		Map<String,String[]> request = new HashMap<String,String[]>();
-		request.put("RequestID",new String[]{"Account"});
-		request.put("RequestType",new String[]{"Create"});
+		request.put("requestID",new String[]{"Account"});
+		request.put("requestType",new String[]{"Create"});
 
 
-		// Get class corresponding to RequestID.
+		// Get class corresponding to requestID.
 		Class<?> c = Class.forName(
 				"edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.managementRequestHandler.services."
-						+request.get("RequestID")[0]+"ManagementRequestHandler");			
+						+request.get("requestID")[0]+"ManagementRequestHandler");			
 
-		// Get method corresponding to RequestType.
-		Method m = (c).getDeclaredMethod(request.get("RequestType")[0]+
-				request.get("RequestID")[0]+
+		// Get method corresponding to requestType.
+		Method m = (c).getDeclaredMethod(request.get("requestType")[0]+
+				request.get("requestID")[0]+
 				"Request" , Map.class);
 
 		//just check if the method is reachable by

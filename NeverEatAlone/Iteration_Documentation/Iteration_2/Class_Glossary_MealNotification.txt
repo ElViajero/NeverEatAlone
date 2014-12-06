@@ -1,5 +1,5 @@
 ======================================
-—- MEAL NOTIFICATION : NOTIFICATION
+—- MEAL NOTIFICATIon : NOTIFICATIon
 ======================================
 
 • ATTRIBUTES
@@ -13,7 +13,7 @@
 	• Friends Attending Notification
 	• Update Notification
 
-• OPERATIONS
+• OPERATIonS
 	• PushOpenSpot()
 	• PushParticipant()
 
@@ -24,10 +24,10 @@
 	• The ability to inform (via push) the poster of the notification of which contacts have accepted and when the notification is closed.
 
 ======================================================
-—- COMPLETION NOTIFICATION : MEAL NOTIFICATION
+—- COMPLETIon NOTIFICATIon : MEAL NOTIFICATIon
 ======================================================
 
-• OPERATIONS
+• OPERATIonS
 	• CloseMeal()
 	• PushNotification()
 
@@ -35,10 +35,10 @@
 	• The ability to close the meal
 
 ======================================================
-—- CANCELLATION NOTIFICATION : MEAL NOTIFICATION
+—- CANCELLATIon NOTIFICATIon : MEAL NOTIFICATIon
 ======================================================
 
-• OPERATIONS
+• OPERATIonS
 	• CancelMeal()
 	• PushNotification()
 
@@ -46,10 +46,10 @@
 	• The ability to cancel the invitation
 
 ======================================================
-—- ACCEPTANCE NOTIFICATION : MEAL NOTIFICATION
+—- ACCEPTANCE NOTIFICATIon : MEAL NOTIFICATIon
 ======================================================
 
-• OPERATIONS
+• OPERATIonS
 	• DecreaseOpenSpot()
 	• PushNotification()
 
@@ -57,20 +57,20 @@
 	• The ability to accept the invitation
 
 ======================================================
-—- FRIENDS ATTENDING NOTIFICATION : MEAL NOTIFICATION
+—- FRIENDS ATTENDING NOTIFICATIon : MEAL NOTIFICATIon
 ======================================================
 
-• OPERATIONS
+• OPERATIonS
 	• PushNotification()
 
 • FEATURES
 	• The ability to push the friends attending notification
 
 ======================================================
-—- UPDATE NOTIFICATION : MEAL NOTIFICATION
+—- UPDATE NOTIFICATIon : MEAL NOTIFICATIon
 ======================================================
 
-• OPERATIONS
+• OPERATIonS
 	• UpdateInfo()
 	• CheckConstraints()
 	• PushNotification()
@@ -80,10 +80,10 @@
 
 
 ======================================================
-—- CAPACITY UPDATE NOTIFICATION : UPDATE NOTIFICATION
+—- CAPACITY UPDATE NOTIFICATIon : UPDATE NOTIFICATIon
 ======================================================
 
-• OPERATIONS
+• OPERATIonS
 	• UpdateOpenSpot() (After update it, it will check open spot and send information)
 	• CheckCapacity()
 	• PushNotification()

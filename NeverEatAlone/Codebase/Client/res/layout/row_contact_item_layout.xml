@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--@author Hai Tang  -->
+<!-- @author Hai Tang -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content" >
@@ -9,7 +9,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
+        android:contentDescription="@string/user_avatar"
         android:src="@drawable/user_profile" />
 
     <TextView
@@ -18,6 +20,8 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_marginLeft="25dp"
+        android:layout_marginStart="25dp"
+        android:layout_toEndOf="@+id/contacts_avatar"
         android:layout_toRightOf="@+id/contacts_avatar"
         android:text="@+id/contacts_name"
         android:textSize="30px" />
@@ -26,7 +30,8 @@
         android:id="@+id/contacts_check"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true" />
 
-</RelativeLayout> 
+</RelativeLayout>

@@ -52,8 +52,8 @@ public class ContactDBManager implements IContactDBManager {
 
 		//create a duplicate map.
 		Map<String,String[]> modifiableRequestMap = new HashMap<String,String[]>(request);
-		modifiableRequestMap.remove("RequestType");
-		modifiableRequestMap.remove("RequestID");
+		modifiableRequestMap.remove("requestType");
+		modifiableRequestMap.remove("requestID");
 
 
 		//format the parameters for the query.		
@@ -63,8 +63,8 @@ public class ContactDBManager implements IContactDBManager {
 
 		// ************************ LOGGING ************************
 
-		System.out.println("USERNAME :"+queryParamterMap.get("Username"));
-		System.out.println("CONTACT :"+queryParamterMap.get("contactUsername"));
+		System.out.println("username :"+queryParamterMap.get("username"));
+		System.out.println("ConTACT :"+queryParamterMap.get("contactusername"));
 
 
 		// set up parameters to execute and store the result of query
@@ -78,14 +78,14 @@ public class ContactDBManager implements IContactDBManager {
 		{
 			//create a params map.
 			Map<String,Object> parameters = new HashMap<String,Object>();
-			parameters.put("Username",queryParamterMap.get("Username"));
-			parameters.put("ContactUsername",queryParamterMap.get("contactUsername"));
+			parameters.put("username",queryParamterMap.get("username"));
+			parameters.put("Contactusername",queryParamterMap.get("contactusername"));
 
 			//create cypher query to add a relation in the dataase.
 			String query = "MATCH (a:User),(b:User)"
 					+ " WHERE "
-					+ "a.Username = {Username} AND "
-					+ "b.Username = {ContactUsername}"
+					+ "a.username = {username} AND "
+					+ "b.username = {Contactusername}"
 					+ "CREATE UNIQUE (a)-[n:KNOWS]->(b)"
 					+ "RETURN n";
 
@@ -105,8 +105,8 @@ public class ContactDBManager implements IContactDBManager {
 
 			query = "MATCH (a:User)-[r]->(n:User)"
 					+ " WHERE "
-					+ "a.Username = {Username} AND "
-					+ "n.Username = {ContactUsername}"
+					+ "a.username = {username} AND "
+					+ "n.username = {Contactusername}"
 					+ "RETURN n ";
 
 			try{
@@ -146,8 +146,8 @@ public class ContactDBManager implements IContactDBManager {
 
 		//create a duplicate map.
 		Map<String,String[]> modifiableRequestMap = new HashMap<String,String[]>(request);
-		modifiableRequestMap.remove("RequestType");
-		modifiableRequestMap.remove("RequestID");
+		modifiableRequestMap.remove("requestType");
+		modifiableRequestMap.remove("requestID");
 
 
 		//format the parameters for the query.		
@@ -156,7 +156,7 @@ public class ContactDBManager implements IContactDBManager {
 		System.out.println("query parameters: "+queryParamterMap);
 
 		// ************************ LOGGING ************************
-		System.out.println("USERNAME :"+queryParamterMap.get("Username"));
+		System.out.println("username :"+queryParamterMap.get("username"));
 
 		// set up parameters to execute and store the result of query
 		ExecutionEngine executionEngine = new ExecutionEngine(GraphDBInstance,
@@ -168,15 +168,15 @@ public class ContactDBManager implements IContactDBManager {
 		{
 			//create a params map.
 			Map<String,Object> parameters = new HashMap<String,Object>();
-			parameters.put("Username",queryParamterMap.get("Username"));
+			parameters.put("username",queryParamterMap.get("username"));
 
 
 			// Fetch the contact via query
 
 			String query = "MATCH (a:User)-[:KNOWS]->(n:User)"
 					+ " WHERE "
-					+ "a.Username = {Username}"
-					+ "RETURN n.Username AS Username, n.Available AS Available";
+					+ "a.username = {username}"
+					+ "RETURN n.username AS username, n.Available AS Available";
 
 			try{
 				//execute the query

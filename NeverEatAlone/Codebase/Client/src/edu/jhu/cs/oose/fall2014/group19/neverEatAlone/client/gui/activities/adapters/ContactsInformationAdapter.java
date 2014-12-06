@@ -59,11 +59,12 @@ public class ContactsInformationAdapter extends ArrayAdapter<ContactProperties> 
 			view.setTag(viewHolder);
 			viewHolder.checkbox.setTag(contactInfoList.get(position));
 		} else {
+			System.out.println("contactInfoList" + contactInfoList);
 			view = convertView;
 			((ViewHolder) view.getTag()).checkbox.setTag(contactInfoList.get(position));
 		}
 		ViewHolder holder = (ViewHolder) view.getTag();
-		holder.name.setText(contactInfoList.get(position).getContactUsername());
+		holder.name.setText(contactInfoList.get(position).getContactusername());
 		//holder.checkbox.setChecked(contactInfoList.get(position).isSelected());
 		return view;
 	}

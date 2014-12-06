@@ -6,6 +6,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/layout_background"
     tools:context="edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.RegisterActivity" >
 
     <TextView
@@ -25,7 +26,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/register"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="50dp"
         android:text="@string/username"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -34,6 +35,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/username"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/edittext"
         android:inputType="text" />
 
     <TextView
@@ -43,7 +46,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/edit_username"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="50dp"
         android:text="@string/email"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -52,6 +55,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/email"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/edittext"
         android:inputType="textEmailAddress" />
 
     <TextView
@@ -59,7 +64,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/edit_email"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="50dp"
         android:text="@string/password"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -68,6 +73,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/password"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/edittext"
         android:inputType="textPassword" />
 
     <TextView
@@ -75,7 +82,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/edit_password"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="50dp"
         android:text="@string/confirm_password"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -83,7 +90,9 @@
         android:id="@+id/edit_confirm_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:layout_below="@+id/confirm_password"
+        android:background="@drawable/edittext"
         android:inputType="textPassword" />
 
     <Button
@@ -93,10 +102,13 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/edit_confirm_password"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="100dp"
         android:layout_toLeftOf="@+id/button_register_cancel"
         android:layout_toStartOf="@+id/button_register_register"
-        android:onClick="OnRegisterButtonClick"
+        android:onClick="onRegisterButtonClick"
+        android:background="@drawable/buttonbackground"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"
         android:text="@string/register" />
 
     <Button
@@ -106,8 +118,11 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/edit_confirm_password"
-        android:layout_marginTop="20dp"
-        android:onClick="OnCancelButtonClick"
+        android:onClick="onCancelButtonClick"
+        android:layout_marginTop="100dp"
+        android:background="@drawable/buttonbackground"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"
         android:text="@string/cancel" />
 
 </RelativeLayout>

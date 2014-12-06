@@ -10,7 +10,7 @@ Although the domain model contains a lot of design detail, it doesn't really exp
 
 Your GUI sketches, use cases, and activity diagram are great.
 
-One minor criticism: don't use JPEG for diagrams; use PNG.
+one minor criticism: don't use JPEG for diagrams; use PNG.
 
 Overall, good job!
 

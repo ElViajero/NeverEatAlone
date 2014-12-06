@@ -1,6 +1,6 @@
 
 
-CHARACTER CASE CONVENTIONS : # Only the stuff inside a function begins with lower case. Everything else that is part of the class begins with upper case.
+CHARACTER CASE ConVENTIonS : # only the stuff inside a function begins with lower case. Everything else that is part of the class begins with upper case.
 
 	1. Class names begin with upper case.
 	2. Class operations and attributes begin with upper case
@@ -8,7 +8,7 @@ CHARACTER CASE CONVENTIONS : # Only the stuff inside a function begins with lowe
 
 
 
-NOTATIONAL CONVENTIONS
+NOTATIonAL ConVENTIonS
 
 ////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////
@@ -33,13 +33,13 @@ PARAMETER SYNTAX
 -----------------
 <Implementation Class>[<argument(+)]
 
-OPERATION SYNTAX
+OPERATIon SYNTAX
 -----------------
 
 <operation name> (<parameter>(*)) [(GET)][(SET)]
 
 
-CLASS DESCRIPTION SYNTAX
+CLASS DESCRIPTIon SYNTAX
 -------------------------
 
 ===============================================
@@ -49,7 +49,7 @@ CLASS DESCRIPTION SYNTAX
 [* ATTRIBUTES
 	<attribute>(+)]
 
-[* OPERATIONS
+[* OPERATIonS
 	<operation>(+)]
 
 [* TYPES
@@ -68,11 +68,11 @@ FLOW OVERVIEW :
 
 1.	The GUI triggers a method of some sub-class of the EventHandler class.
 2.	The event handlers all have access to a RequestDispatcher instance (as they derive from the EventHandler class ).
-3.	Each EventHandler has a RequestID which is a field that contains the type of event (MEAL,CONTACT etc.)
-4.	Each EventHandler has a RequestTypeList which denotes the events (eg. create,update, delete) that are possible for the given RequestID.
-5.	The method of the event handler constructs the necessary parameters (including SessionID,RequestID and RequestType) and calls the DispatchRequest method 	 on the RequestDispatcher 	object.
-6.	The DispatchRequest method checks the RequestID and RequestType and calls the HandleManagementRequest method of the appropriate ManagementRequestHandler.
-7.	HandleManagementRequest calls the appropriate Request method of the given ManagementRequestHandler sub-class based on RequestType.
+3.	Each EventHandler has a requestID which is a field that contains the type of event (MEAL,ConTACT etc.)
+4.	Each EventHandler has a requestTypeList which denotes the events (eg. create,update, delete) that are possible for the given requestID.
+5.	The method of the event handler constructs the necessary parameters (including SessionID,requestID and requestType) and calls the DispatchRequest method 	 on the RequestDispatcher 	object.
+6.	The DispatchRequest method checks the requestID and requestType and calls the HandleManagementRequest method of the appropriate ManagementRequestHandler.
+7.	HandleManagementRequest calls the appropriate Request method of the given ManagementRequestHandler sub-class based on requestType.
 8.	The Request method calls the appropriate method on the Manager object (that is an attribute of the ManagamentRequestHandler sub-class)
 9.	The method of the Manager class updates the Database layer.
 
@@ -81,15 +81,15 @@ To summarize :
 
 GUI -> EVENT HANDLER -> REQUEST DISPATCHER -> MANAGEMENT REQUEST HANDLER -> MANAGER -> DATABASE
 
-ADDITIONAL POINTS :
+ADDITIonAL POINTS :
 
-1.	The DispatchRequest method first obtains UserName from SessionID using the same procedure as mentioned above (using the LoginManagementRequestHandler).
-2.	Then all subsequent processing uses UserName instead of SessionID (i.e. steps 6-9 above).
+1.	The DispatchRequest method first obtains username from SessionID using the same procedure as mentioned above (using the LoginManagementRequestHandler).
+2.	Then all subsequent processing uses username instead of SessionID (i.e. steps 6-9 above).
 3.  After the DB update, control returns to the RequestDispatcher and the RequestDispatcher can cause notificaions to be sent out to clients via the same 		process above using the NotificatoinManagementRequestHandler).
 4.	The client's GUI is updated via fetch from the server.
 
 
-POST VS NOTIFICATOIN CONVENTIONS :
+POST VS NOTIFICATOIN ConVENTIonS :
 
 1.	A user posts to the server.
 2.	A server sends out notifications to all the recipients.
@@ -122,14 +122,14 @@ UserAccount
 ============
 
 * ATTRIBUTES
-	* UserName -> String(1)
-	* Password -> String(1)
-	* UserEmail -> String(1)
+	* username -> String(1)
+	* password -> String(1)
+	* Useremail -> String(1)
 
-* OPERATIONS
-	* UserName()  (GET)(SET)
-	* Password()  (GET)(SET)
-	* UserEmail() (GET)(SET)
+* OPERATIonS
+	* username()  (GET)(SET)
+	* password()  (GET)(SET)
+	* Useremail() (GET)(SET)
 
 * FEATURES
 	* The ability to locally get and set the username, password and user email
@@ -140,7 +140,7 @@ UserAccount
 MealManager
 ===========
 
-* OPERATIONS
+* OPERATIonS
 	* CreateMealPost(Post(1))
 	* UpdateMealPost(Post(1))
 	* CompleteMealPost(Post(1))
@@ -154,11 +154,11 @@ MealManager
 AccountManager
 ===============
 
-* OPERATIONS
+* OPERATIonS
 	* CreateUserAccount()
-	* DeleteUserAccount( UserName(1) )
+	* DeleteUserAccount( username(1) )
 	* UpdateUserAccount( UserAccount(1) )
-	* IsValidUser( UserName(1) )
+	* IsValidUser( username(1) )
 
 * FEATURES
 	* The ability to create user accounts
@@ -172,12 +172,12 @@ ContactManager
 =================
 
 
-* OPERATIONS
-	* UpdateUserVisibilityList(UserName(1), ContactList(1))
-	* UpdateContactInfo(UserName(1), ContactInfo(1))
-	* RemoveContact(UserName(1), ContactInfo(1))
-	* AddContact(UserName(1), ContactInfo(1))
-	* SearchContact(UserName(1), ContactInfo(1))
+* OPERATIonS
+	* UpdateUserVisibilityList(username(1), ContactList(1))
+	* UpdateContactInfo(username(1), ContactInfo(1))
+	* RemoveContact(username(1), ContactInfo(1))
+	* AddContact(username(1), ContactInfo(1))
+	* SearchContact(username(1), ContactInfo(1))
 
 
 * FEATURES
@@ -193,9 +193,9 @@ LoginManager
 ============
 
 
-* OPERATIONS
-	* Login(User.UserName)
-	* GetUserName(SessionID(1))
+* OPERATIonS
+	* Login(User.username)
+	* Getusername(SessionID(1))
 	* Logout(sessionID(1))
 
 * FEATURES
@@ -209,12 +209,12 @@ ContactInfo
 ============
  
 * ATTRIBUTES
-	* UserName -> UserAccount.UserName (1)
-	* Email -> UserAccount.UserEmail(1)
+	* username -> UserAccount.username (1)
+	* email -> UserAccount.Useremail(1)
 	* Alias -> String(1)
 	* Visible -> boolean(1)
 
-* OPERATIONS
+* OPERATIonS
 	* Visible() (GET)(SET)
 	* Alias() (GET)(SET)
 
@@ -235,7 +235,7 @@ User
 	* NotificationsList -> Notifications(*)	
 	* MealPostList-> MealPost(*)	
 
-* OPERATIONS
+* OPERATIonS
 	* AvailabilityStatus() (GET)(SET)
 	* NotificationsList() (GET)(SET)	
 	* ContactList() (GET)
@@ -255,7 +255,7 @@ User
 ManagementRequestHandler
 ========================
 
-* OPERATIONS	
+* OPERATIonS	
 	* HandleManagementRequest(Object(*))	
 
 =========================================================
@@ -265,7 +265,7 @@ AccountMangementRequestHandler : ManagementRequestHandler
 * ATTRIBUTES
 	* AccountManagerObject -> AccountManager(1) 
 
-* OPERATIONS	
+* OPERATIonS	
 	* CreateAccountRequest()
 	* ModifyAccountRequest(UserAccount(1))
 	* DeleteAccountRequest(UserAccount(1))
@@ -283,9 +283,9 @@ LoginManagementRequestHandler : ManagementRequestHandler
 * ATTRIBUTES
 	* LoginManagerObject -> LoginManager(1)
 
-* OPERATIONS
+* OPERATIonS
 	* AuthenticateAndLoginRequest(UserAccount(1))
-	* GetUserNameRequest(SessionID(1))
+	* GetusernameRequest(SessionID(1))
 	* LogoutRequest(SessionID(1))
 
 * FEATURES
@@ -298,7 +298,7 @@ NotificationManager
 * ATTRIBUTES
 	NotificationObject -> Notification(1)	
 
-* OPERATIONS
+* OPERATIonS
 	* CreateNotificationFromPost(Post(1))
 	* UpdatePostFromNotification(Post(1))	
 	* PushNotification()
@@ -314,11 +314,11 @@ ContactManagementRequestHandler : ManagementRequestHandler
 * ATTRIBUTES
 	* ContactManagerObject -> ContactManager(1)
 
-* OPERATIONS
-	* UpdateUserVisibilityListRequest(UserName(1), ContactList(1))
-	* UpdateContactInfoRequest(UserName(1), ContactInfo(1))
-	* RemoveContactRequest(UserName(1), ContactInfo(1))
-	* AddContactRequest(UserName(1), ContactInfo(1))
+* OPERATIonS
+	* UpdateUserVisibilityListRequest(username(1), ContactList(1))
+	* UpdateContactInfoRequest(username(1), ContactInfo(1))
+	* RemoveContactRequest(username(1), ContactInfo(1))
+	* AddContactRequest(username(1), ContactInfo(1))
 
 
 * FEATURES
@@ -332,11 +332,11 @@ MealManagementRequestHandler : ManagementRequestHandler
 * ATTRIBUTES
 	* MealManagerObject -> MealManager(1)	
 
-* OPERATIONS	
-	* CreateMealPostRequest(UserName(1),Post(1))
-	* UpdateMealPostRequest(UserName(1), Post(1))
-	* CompleteMealPostRequest(UserName(1), Post(1))
-	* CloseMealPostRequest(UserName(1), Post(1))
+* OPERATIonS	
+	* CreateMealPostRequest(username(1),Post(1))
+	* UpdateMealPostRequest(username(1), Post(1))
+	* CompleteMealPostRequest(username(1), Post(1))
+	* CloseMealPostRequest(username(1), Post(1))
 	
 
 * FEATURES
@@ -350,7 +350,7 @@ NotificationManagementRequestHandler : ManagementRequestHandler
 * ATTRIBUTES
 	* NotificationManagerObject -> NotificationManager(1)
 
-* OPERATIONS	
+* OPERATIonS	
 	* CreateNotificationRequest(Post(1))
 	* UpdateNotificationRequest(Post(1))
 	
@@ -368,7 +368,7 @@ RequestDispatcher
 	* MealManagementRequestHandlerObject -> MealManagementRequestHandler(1)
 	* NotificatoinManagementRequestHandlerObject -> NotificationManagementRequestHandler(1)
 
-* OPERATIONS
+* OPERATIonS
 	* DispatchRequest(Object(*))
 
 * FEATURES
@@ -380,7 +380,7 @@ Request
 =======
 
 * ATTRIBUTES
-	* RequestTypes -> Enum
+	* requestTypes -> Enum
 
 * FEATURES
 	* Properties class that contains the various request types that are handled by the application.
@@ -405,12 +405,12 @@ ContactEventHandler : EventHandler
 ==================================
 
 * ATTRIBUTES
-	* RequestID -> String(1)
-	* RequestTypeList -> String(+)
+	* requestID -> String(1)
+	* requestTypeList -> String(+)
 	* ContactRequestPostObject -> ContactRequestPost(1)
 	
 
-* OPERATIONS
+* OPERATIonS
 	* HandleSearchForContactEvent()
 	* HandleAddContactEvent()
 	* HandleEditContactEvent()
@@ -427,15 +427,15 @@ Post
 
 * ATTRIBUTES
 	* PostID	
-	* Poster -> User(1)
+	* poster -> User(1)
 	* RecipientList -> ContactInfo(+)
-	* StartTime
-	* EndTime
+	* startTime
+	* endTime
 	* [Message]
 
-* OPERATIONS
-	* StartTime() (GET) (SET)
-	* EndTime() (GET) (SET)
+* OPERATIonS
+	* startTime() (GET) (SET)
+	* endTime() (GET) (SET)
 	* Message() (GET)(SET)
 
 * TYPES
@@ -472,7 +472,7 @@ MealPost : Post
 * ATTRIBUTES
 	* Meal
 
-* OPERATIONS
+* OPERATIonS
 	* Meal() (GET)(SET)
 
 
@@ -482,12 +482,12 @@ MealEventHandler : EventHandler
 ==================================
 
 * ATTRIBUTES
-	* RequestID -> String(1)
-	* RequestTypeList -> String(+)
+	* requestID -> String(1)
+	* requestTypeList -> String(+)
 	* MealObject -> Meal(1)
 	* MealPostObject -> MealPost(1)
 
-* OPERATIONS
+* OPERATIonS
 	* HandleMealCreatedEvent()
 	* HandleMealPostCreatedEvent()
 	* HandleMealPostCompletedEvent()
@@ -503,7 +503,7 @@ MealEventHandler : EventHandler
 
 
 
--- USER/MEAL NOTIFICATION MANAGEMENT FEATURES
+-- USER/MEAL NOTIFICATIon MANAGEMENT FEATURES
 
  -- sent to contacts based on above visibility list.
 * The ability to receive meal notifications -- from contacts to whom the user is available (Determined by availability and visibility as noted above).
@@ -515,7 +515,7 @@ NotificationEventHandler : EventHandler
 =======================================
 
 
-* OPERATIONS
+* OPERATIonS
 	* HandleNotificiationAcceptedEvent()
 	* HandleNotificiationRejectedEvent()
 
@@ -529,7 +529,7 @@ Notification
 
 * ATTRIBUTES
 	*NotificationID	
-	*Poster -> User(1)	
+	*poster -> User(1)	
 	*[Message]
 	
 * TYPES
@@ -558,16 +558,16 @@ Meal
 ====
 
 * ATTRIBUTES
-	* LocationObject -> Location(1)
-	* StartTime -> Time(1)
-	* EndTime -> Time(1)
+	* locationObject -> location(1)
+	* startTime -> Time(1)
+	* endTime -> Time(1)
 	* MaximumCapacity -> integer(1)
 	* IsExtendable -> boolean(1)
 
-* OPERATIONS
-	* LocationObject() (GET)(SET)
-	* StartTime() (GET)(SET)
-	* EndTime() (GET)(SET)
+* OPERATIonS
+	* locationObject() (GET)(SET)
+	* startTime() (GET)(SET)
+	* endTime() (GET)(SET)
 	* MaximumCapacity() (GET)(SET)
 	* IsExtendable() (GET)(SET)
 
@@ -579,15 +579,15 @@ Meal
   
 
 ========
-Location
+location
 ========
 
 * ATTRIBUTES
-	* LocationName -> String(1)
+	* locationName -> String(1)
 	* StreetAddress -> String(1)
 
-* OPERATIONS
-	LocationName()(GET)(SET)
+* OPERATIonS
+	locationName()(GET)(SET)
 	StreetAdress()(GET)(SET)s
 
 * USES

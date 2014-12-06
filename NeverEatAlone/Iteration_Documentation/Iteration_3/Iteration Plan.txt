@@ -4,11 +4,11 @@ Iteration 3: Initial Implement / Test
 
 Server side: 
 
-CONCRETE WORKFLOWS
+ConCRETE WORKFLOWS
 ==================
 
 
-- Created an account creation workflow that checks for uniqueness on the "Username" field.
+- Created an account creation workflow that checks for uniqueness on the "username" field.
 - Created an account deletion workflow that deletes user account if valid.
 - Create an account validity check workflow that checks for the existence of a given user account.
 - Create a login workfow that checks user credentials against the database.
@@ -72,7 +72,7 @@ This set up works, but requires proper dependencies in place, including:
 
 Iteration 4: Core Working
 
-NEXT ACTIONS -- SEVER 
+NEXT ACTIonS -- SEVER 
 ======================
 
 	1. Implement asynchronous requests
@@ -83,14 +83,14 @@ NEXT ACTIONS -- SEVER
 	6. Create a notificaiton workflow
 	
 	
-NEXT ACTIONS -- CLIENT
+NEXT ACTIonS -- CLIENT
 =====================
 
 	1. Define support framework for client workflows.
 	2. Define event handlers for GUI -> controller functionality.
 	3. Define HTTP request/response handlers for client --> server communication
 	
-ADDITIONAL INFORMATION -- OVERALL APPLICATION CONTEXT
+ADDITIonAL INFORMATIon -- OVERALL APPLICATIon ConTEXT
 =====================================================
 
 	1. Focus on "cutting the fat". That is keeping the client as thin as possible.

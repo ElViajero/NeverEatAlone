@@ -54,18 +54,18 @@ public class ManagementRequestHandler implements IManagementRequestHandler {
 		try {
 
 			// ********* LOGGING ********* 
-			System.out.println("class name : "+request.get("RequestID")[0]+"ManagementRequestHandler");
+			System.out.println("class name : "+request.get("requestID")[0]+"ManagementRequestHandler");
 			// ********* LOGGING ********* 
 
 			// obtain class reference
 			Object c = getMyBeanFromClassName("edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.managementRequestHandler.services."
-					+request.get("RequestID")[0]+"ManagementRequestHandler");
+					+request.get("requestID")[0]+"ManagementRequestHandler");
 
 
-			// Get method corresponding to RequestType.
+			// Get method corresponding to requestType.
 
-			Method m = ((Class<? extends Object>) c.getClass()).getDeclaredMethod(request.get("RequestType")[0]+
-					request.get("RequestID")[0]+
+			Method m = ((Class<? extends Object>) c.getClass()).getDeclaredMethod(request.get("requestType")[0]+
+					request.get("requestID")[0]+
 					"Request" , Map.class);
 
 			// Invoke the method.

@@ -27,7 +27,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="154dp"
-        android:onClick="OnPostButtonClick"
+        android:onClick="onPostButtonClick"
         android:text="@string/post" />
 
     <TextView

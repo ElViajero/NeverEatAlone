@@ -42,40 +42,40 @@ public class UpdateAccountWorkflowTest {
 		// change the password of A to pwB, it should succeed 
 		System.out.println("changing the password of UserA...");
 		List <NameValuePair> nvps = new ArrayList <NameValuePair>();	    
-		nvps.add(new BasicNameValuePair("RequestID", "Account"));	    
-		nvps.add(new BasicNameValuePair("RequestType", "Update"));
-		nvps.add(new BasicNameValuePair("Username", "UserA"));
-		nvps.add(new BasicNameValuePair("Password", "pwB"));
+		nvps.add(new BasicNameValuePair("requestID", "Account"));	    
+		nvps.add(new BasicNameValuePair("requestType", "Update"));
+		nvps.add(new BasicNameValuePair("username", "UserA"));
+		nvps.add(new BasicNameValuePair("password", "pwB"));
 		
 		// check the response
 		CloseableHttpResponse response = WorkflowTestHelper.ExecuteRequest(nvps);
 		List<Map<String,String>> returnMap = WorkflowTestHelper.GetReponseMap(response); 
 		System.out.println(returnMap);
 		assertTrue(returnMap.toString().equals(
-				"[{Status=Success}, {Email=emailA, Username=UserA, Available=YES, Password=pwB}]"));
+				"[{Status=Success}, {email=emailA, username=UserA, Available=YES, password=pwB}]"));
 		
 		// change both the email and password of A
 		System.out.println("changing the email and password of UserA...");
 		nvps = new ArrayList <NameValuePair>();	    
-		nvps.add(new BasicNameValuePair("RequestID", "Account"));	    
-		nvps.add(new BasicNameValuePair("RequestType", "Update"));
-		nvps.add(new BasicNameValuePair("Username", "UserA"));
-		nvps.add(new BasicNameValuePair("Email", "emailA2"));
-		nvps.add(new BasicNameValuePair("Password", "pwA2"));
+		nvps.add(new BasicNameValuePair("requestID", "Account"));	    
+		nvps.add(new BasicNameValuePair("requestType", "Update"));
+		nvps.add(new BasicNameValuePair("username", "UserA"));
+		nvps.add(new BasicNameValuePair("email", "emailA2"));
+		nvps.add(new BasicNameValuePair("password", "pwA2"));
 		
 		// check the response
 		response = WorkflowTestHelper.ExecuteRequest(nvps);
 		returnMap = WorkflowTestHelper.GetReponseMap(response); 
 		System.out.println(returnMap);
 		assertTrue(returnMap.toString().equals(
-				"[{Status=Success}, {Email=emailA2, Username=UserA, Available=YES, Password=pwA2}]"));
+				"[{Status=Success}, {email=emailA2, username=UserA, Available=YES, password=pwA2}]"));
 		
 		// change the availability status
 		System.out.println("changing the availability of UserA...");
 		nvps = new ArrayList <NameValuePair>();	    
-		nvps.add(new BasicNameValuePair("RequestID", "Account"));	    
-		nvps.add(new BasicNameValuePair("RequestType", "Update"));
-		nvps.add(new BasicNameValuePair("Username", "UserA"));
+		nvps.add(new BasicNameValuePair("requestID", "Account"));	    
+		nvps.add(new BasicNameValuePair("requestType", "Update"));
+		nvps.add(new BasicNameValuePair("username", "UserA"));
 		nvps.add(new BasicNameValuePair("Available", "NO"));
 		
 		// check the response
@@ -83,15 +83,15 @@ public class UpdateAccountWorkflowTest {
 		returnMap = WorkflowTestHelper.GetReponseMap(response); 
 		System.out.println(returnMap);
 		assertTrue(returnMap.toString().equals(
-				"[{Status=Success}, {Email=emailA2, Username=UserA, Available=NO, Password=pwA2}]"));
+				"[{Status=Success}, {email=emailA2, username=UserA, Available=NO, password=pwA2}]"));
 		
 		// change the email of A to emailB, it violate the uniqueness constraint and should fail
 		System.out.println("changing the email of UserA...");
 		nvps = new ArrayList <NameValuePair>();	    
-		nvps.add(new BasicNameValuePair("RequestID", "Account"));	    
-		nvps.add(new BasicNameValuePair("RequestType", "Update"));
-		nvps.add(new BasicNameValuePair("Username", "UserA"));
-		nvps.add(new BasicNameValuePair("Email", "emailB"));
+		nvps.add(new BasicNameValuePair("requestID", "Account"));	    
+		nvps.add(new BasicNameValuePair("requestType", "Update"));
+		nvps.add(new BasicNameValuePair("username", "UserA"));
+		nvps.add(new BasicNameValuePair("email", "emailB"));
 		
 		// check the response
 		response = WorkflowTestHelper.ExecuteRequest(nvps);

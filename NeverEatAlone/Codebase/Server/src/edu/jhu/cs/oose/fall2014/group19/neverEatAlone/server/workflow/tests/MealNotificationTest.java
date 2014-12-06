@@ -26,8 +26,8 @@ public class MealNotificationTest {
 	public void test() throws ClientProtocolException, IOException, ShutdownSignalException, ConsumerCancelledException, InterruptedException {
 
 		List <NameValuePair> nvps2 = new ArrayList <NameValuePair>();	    
-		nvps2.add(new BasicNameValuePair("RequestID", "Notification"));	    
-		nvps2.add(new BasicNameValuePair("RequestType", "Meal"));
+		nvps2.add(new BasicNameValuePair("requestID", "Notification"));	    
+		nvps2.add(new BasicNameValuePair("requestType", "Meal"));
 		nvps2.add(new BasicNameValuePair("Recipient", "Test1"));
 		nvps2.add(new BasicNameValuePair("Message", "TestUser says Hi !"));
 

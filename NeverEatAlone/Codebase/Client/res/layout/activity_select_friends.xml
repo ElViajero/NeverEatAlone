@@ -7,6 +7,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/layout_background"
+    
     tools:context="edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.SelectFriendsActivity" >
 
     <TextView
@@ -25,7 +27,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/textView_selectfriends_title"
-        android:onClick="OnBackButtonClick"
+        android:onClick="onBackButtonClick"
+        android:background="@drawable/buttonbackground"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"
         android:text="@string/back" />
 
     <ListView
@@ -34,6 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/button_selectfriends_back"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
         android:layout_marginBottom="163dp" >
     </ListView>
 
@@ -44,7 +50,11 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="97dp"
-        android:onClick="OnBroadcastButtonClick"
+        android:onClick="onBroadcastButtonClick"
+        android:background="@drawable/buttonbackground"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"
+        android:layout_marginTop="50dp"
         android:text="@string/broadcast_to_all_friends" />
 
     <Button
@@ -53,7 +63,10 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:onClick="OnPostButtonClick"
+        android:onClick="onPostButtonClick"
+        android:background="@drawable/buttonbackground"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"
         android:text="@string/post" />
 
 </RelativeLayout>

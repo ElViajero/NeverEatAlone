@@ -7,11 +7,13 @@ import org.apache.http.impl.execchain.RequestAbortedException;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.AccountProperties;
@@ -19,21 +21,21 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.help
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
 
 /**
- * This class handles controller logic for the registration 
- * Activity.
+ * This class handles controller logic for the registration Activity.
  * 
  * @author tejasvamsingh,
+ * @author Yueling Loh
  *
  */
 public class RegisterActivity extends Activity {
 
 	// fields used by the register activity.
-	private EditText Username;
-	private EditText Email;
-	private EditText Password;
-	private EditText ConfirmPassword;
-	private String RequestType;
-	private String RequestID;
+	private EditText usernameET;
+	private EditText emailET;
+	private EditText passwordET;
+	private EditText confirmPasswordET;
+	private String requestType;
+	private String requestID;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -41,16 +43,33 @@ public class RegisterActivity extends Activity {
 		setContentView(R.layout.activity_register);
 
 		// binding the fields to class variables.
-		Username = (EditText) findViewById(R.id.edit_username);
-		Password = (EditText) findViewById(R.id.edit_password);
-		ConfirmPassword = (EditText) findViewById(R.id.edit_confirm_password);
-		Email = (EditText) findViewById(R.id.edit_email);
+		usernameET = (EditText) findViewById(R.id.edit_username);
+		passwordET = (EditText) findViewById(R.id.edit_password);
+		confirmPasswordET = (EditText) findViewById(R.id.edit_confirm_password);
+		emailET = (EditText) findViewById(R.id.edit_email);
 
 		// set the RequestType and RequestID fields.
 
-		RequestID = "Account";
-		RequestType = "Create";
+		requestID = "Account";
+		requestType = "Create";
 
+		
+		setTitleStyle();
+
+
+	}
+	
+	/**
+	 * This method is used to set the font style of the title of each page
+	 * @author: Hai Tang
+	 */
+	private void setTitleStyle() {
+		TextView tv =
+				(TextView) findViewById(R.id.register);
+		Typeface tf = Typeface.createFromAsset(getAssets(),
+				"fonts/Windsong.ttf");
+		tv.setTypeface(tf);
+		tv.setTextSize(100);
 	}
 
 	@Override
@@ -72,82 +91,80 @@ public class RegisterActivity extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 
-
 	/**
 	 * Event Handler method for the register button
 	 * 
 	 * @author tejasvamsingh
+	 * @author Yueling Loh
 	 * @param view
 	 */
-	public void OnRegisterButtonClick(View view) {
+	public void onRegisterButtonClick(View view) {
 
 		// Fetch the fields from the GUI.
-		String username = Username.getText().toString();
-		String password = Password.getText().toString();
-		String email = Email.getText().toString();
-		String confirmPassword = ConfirmPassword.getText().toString();
+		String username = usernameET.getText().toString();
+		String password = passwordET.getText().toString();
+		String email = emailET.getText().toString();
+		String confirmPassword = confirmPasswordET.getText().toString();
 
 		System.out.println(password);
 		System.out.println(confirmPassword);
 
-		// ************ THIS WASN'T WRITTEN BY TEJAS. ***************//
-		// *************WHY IS THIS HERE ? !!!! ******************//		
-		// ************* REMOVE THIS !!!!!!!!!!! ****************///
-
-		if(username.equals("")){
-			Toast.makeText(getApplicationContext(), 
-					"Username Is Empty !", Toast.LENGTH_SHORT).show();
+		// Check if entries are valid
+		boolean validRegistration = checkValidRegistration(username, password,
+				email, confirmPassword);
+		if (!validRegistration)
 			return;
-		}
-
-		if(email.equals("")){
-			Toast.makeText(getApplicationContext(), 
-					"Email Is Empty !", Toast.LENGTH_SHORT).show();
-			return;
-		}
-
-		if(password.equals("")){
-			Toast.makeText(getApplicationContext(), 
-					"Passwords Is Empty !", Toast.LENGTH_SHORT).show();
-			return;
-		}
-
-		if(!password.equals(confirmPassword)){
-			Toast.makeText(getApplicationContext(), 
-					"Passwords Don't Match !", Toast.LENGTH_SHORT).show();
-			return;
-		}
-
-		// ************ THIS WASN'T WRITTEN BY TEJAS. ***************//
-		// *************WHY IS THIS HERE ? !!!! ******************//
-		// ************* REMOVE THIS !!!!!!!!!!! ****************///
-
-
-		// ********** TEJAS' CODE STARTS HERE ******************//
 
 		// Create a properties object.
-		AccountProperties registerProperties = 
-				new AccountProperties(username, password,email);
+		AccountProperties registerProperties = new AccountProperties(username,
+				password, email);
 
-
-		//Get the request Map 
+		// Get the request Map
 		Map<String, Object> requestMap = registerProperties.toMap();
 
-		try{
+		try {
 			// Initiate the request.
 			List<Map<String, String>> resultMapList = RequestHandlerHelper
-					.GetRequestHandlerInstance().HandleRequest(this,requestMap,RequestID,RequestType);
+					.getRequestHandlerInstance().handleRequest(this,
+							requestMap, requestID, requestType);
 			// Handle the result.
 			MessageToasterHelper.toastMessage(this, "Registration Successful");
-			Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+			Intent intent = new Intent(RegisterActivity.this,
+					MainActivity.class);
 			RegisterActivity.this.startActivity(intent);
-		}catch(RequestAbortedException e){
+		} catch (RequestAbortedException e) {
 			return;
 		}
 
 	}
 
-	public void OnCancelButtonClick(View view) {
+	private boolean checkValidRegistration(String username, String password,
+			String email, String confirmPassword) {
+
+		if (username.equals("")) {
+			MessageToasterHelper.toastMessage(this, R.string.empty_username);
+			return false;
+		}
+
+		if (email.equals("")) {
+			MessageToasterHelper.toastMessage(this, R.string.empty_email);
+			return false;
+		}
+
+		if (password.equals("")) {
+			MessageToasterHelper.toastMessage(this, R.string.empty_password);
+			return false;
+		}
+
+		if (!password.equals(confirmPassword)) {
+			MessageToasterHelper.toastMessage(this,
+					R.string.different_passwords);
+			return false;
+		}
+		return true;
+	}
+
+	public void onCancelButtonClick(View view) {
 		Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
 		RegisterActivity.this.startActivity(intent);
 	}

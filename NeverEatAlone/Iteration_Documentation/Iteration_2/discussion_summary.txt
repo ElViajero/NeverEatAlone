@@ -45,7 +45,7 @@ Extended Features:
    * Schedule availability (remove it from the core feature list) 
 
 ------------------------
-Miscellaneous (Only for extended features) 
+Miscellaneous (only for extended features) 
 
 * Priority of “availability setting” 
 Login choice > Manually click the button > default login status > scheduled availability 

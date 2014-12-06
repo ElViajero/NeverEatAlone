@@ -1,17 +1,17 @@
 package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities;
 
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R.id;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R.layout;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R.menu;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
+import android.widget.TextView;
 import android.widget.Toast;
+
 
 /**
  * Activity used for edit profile page
@@ -21,21 +21,21 @@ import android.widget.Toast;
  */
 public class EditProfileActivity extends Activity {
 
-	private EditText Username;
-	private EditText Name;
-	private EditText Email;
-	private EditText Gender;
-	private EditText Workspace;
+	private EditText usernameEditTextObject;
+	private EditText nameEditTextObject;
+	private EditText emailEditTextObject;
+	private EditText genderEditTextObject;
+	private EditText workspaceEditTextObject;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		initView(savedInstanceState);
 
-		Username = (EditText) findViewById(R.id.editText_editprofile_username);
-		Name = (EditText) findViewById(R.id.editText_editprofile_name);
-		Email = (EditText) findViewById(R.id.editText_editprofile_email);
-		Gender = (EditText) findViewById(R.id.editText_editprofile_gender);
-		Workspace = (EditText) findViewById(R.id.editText_editprofile_workspace);
+		usernameEditTextObject = (EditText) findViewById(R.id.editText_editprofile_username);
+		nameEditTextObject = (EditText) findViewById(R.id.editText_editprofile_name);
+		emailEditTextObject = (EditText) findViewById(R.id.editText_editprofile_email);
+		genderEditTextObject = (EditText) findViewById(R.id.editText_editprofile_gender);
+		workspaceEditTextObject = (EditText) findViewById(R.id.editText_editprofile_workspace);
 	}
 
 	/**
@@ -46,6 +46,21 @@ public class EditProfileActivity extends Activity {
 	private void initView(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_edit_profile);
+		
+		setTitleStyle();
+	}
+	
+	/**
+	 * This method is used to set the font style of the title of each page
+	 * @author: Hai Tang
+	 */
+	private void setTitleStyle() {
+		TextView tv =
+				(TextView) findViewById(R.id.textView_Title_Edit_Profile);
+		Typeface tf = Typeface.createFromAsset(getAssets(),
+				"fonts/Windsong.ttf");
+		tv.setTypeface(tf);
+		tv.setTextSize(100);
 	}
 
 	/**
@@ -54,22 +69,16 @@ public class EditProfileActivity extends Activity {
 	 * 
 	 * @author: Hai Tang
 	 */
-	public void OnComfirmButtonClick(View view) {
+	public void onComfirmButtonClick(View view) {
 		Intent intent = new Intent(EditProfileActivity.this,
 				TabHostActivity.class);
 		EditProfileActivity.this.startActivity(intent);
 
-		String username = Username.getText().toString();
-		String name = Name.getText().toString();
-		String email = Email.getText().toString();
-		String gender = Gender.getText().toString();
-		String workspace = Workspace.getText().toString();
-
-		Toast.makeText(
-				getApplicationContext(),
-				"Username: " + username + "\n" + "Name: " + name + "\n"
-						+ "Email: " + email + "\n" + "Gender: " + gender + "\n"
-						+ "Workspace: " + workspace, Toast.LENGTH_SHORT).show();
+		String username = usernameEditTextObject.getText().toString();
+		String name = nameEditTextObject.getText().toString();
+		String email = emailEditTextObject.getText().toString();
+		String gender = genderEditTextObject.getText().toString();
+		String workspace = workspaceEditTextObject.getText().toString();
 	}
 
 	/**
@@ -77,7 +86,7 @@ public class EditProfileActivity extends Activity {
 	 * 
 	 * @author: Hai Tang
 	 */
-	public void OnCancelButtonClick(View view) {
+	public void onCancelButtonClick(View view) {
 		Intent intent = new Intent(EditProfileActivity.this,
 				TabHostActivity.class);
 		EditProfileActivity.this.startActivity(intent);

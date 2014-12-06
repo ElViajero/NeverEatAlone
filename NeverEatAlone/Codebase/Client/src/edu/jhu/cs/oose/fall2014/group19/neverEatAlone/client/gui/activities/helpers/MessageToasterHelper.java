@@ -7,6 +7,7 @@ import android.widget.Toast;
  * This class is a helper class that
  * toasts messages to screen.
  * @author tejasvamsingh
+ * @author Yueling Loh
  *
  */
 public class MessageToasterHelper {
@@ -18,5 +19,14 @@ public class MessageToasterHelper {
 	public static void toastMessage(Activity activity, String message){
 		Toast.makeText(activity.getApplicationContext(),
 				message,Toast.LENGTH_SHORT).show();
+	}
+	
+	/**
+	 * This method toasts messages to the screen, with alternate constructor
+	 * @author Yueling Loh
+	 */
+	public static void toastMessage(Activity activity, int stringID){
+		Toast.makeText(activity.getApplicationContext(),
+				stringID,Toast.LENGTH_SHORT).show();
 	}
 }

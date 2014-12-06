@@ -52,8 +52,8 @@ public class AccountDBManager implements IAccountDBManager {
 
 		//create a duplicate map.
 		Map<String,String[]> modifiableRequestMap = new HashMap<String,String[]>(request);
-		modifiableRequestMap.remove("RequestType");
-		modifiableRequestMap.remove("RequestID");
+		modifiableRequestMap.remove("requestType");
+		modifiableRequestMap.remove("requestID");
 
 		// add an "Available" property, creation default value is "YES"
 		modifiableRequestMap.put("Available", new String[]{"YES"});
@@ -118,12 +118,12 @@ public class AccountDBManager implements IAccountDBManager {
 
 		//create a duplicate map.
 		Map<String,String[]> modifiableRequestMap = new HashMap<String,String[]>(request);
-		modifiableRequestMap.remove("RequestType");
-		modifiableRequestMap.remove("RequestID");
+		modifiableRequestMap.remove("requestType");
+		modifiableRequestMap.remove("requestID");
 
 		// user name can never be changed 
-		String userName = modifiableRequestMap.get("Username")[0]; 
-		modifiableRequestMap.remove("Username"); 
+		String username = modifiableRequestMap.get("username")[0]; 
+		modifiableRequestMap.remove("username"); 
 
 		//format the parameters for the query.		
 		Map<String, String> queryParamterMap = 
@@ -141,13 +141,13 @@ public class AccountDBManager implements IAccountDBManager {
 		{
 			//create a params map.
 			Map<String,Object> parameters = new HashMap<String,Object>();
-			parameters.put("Username", userName); 
+			parameters.put("username", username); 
 			parameters.put("updateParameters",queryParamterMap);
 
 			//create cypher query to update the database.
 			String query =""
 					+ "MATCH (n:User) "
-					+ "WHERE n.Username={Username} "
+					+ "WHERE n.username={username} "
 					+ "SET n += {updateParameters} "
 					+ "RETURN n ";
 
@@ -186,8 +186,8 @@ public class AccountDBManager implements IAccountDBManager {
 		// ********* LOGGING ********* 
 
 		Map<String,String[]> modifiableRequestMap = new HashMap<String,String[]>(request);
-		modifiableRequestMap.remove("RequestType");
-		modifiableRequestMap.remove("RequestID");
+		modifiableRequestMap.remove("requestType");
+		modifiableRequestMap.remove("requestID");
 
 
 		//format the parameters for the query.		
@@ -196,7 +196,7 @@ public class AccountDBManager implements IAccountDBManager {
 
 
 		// ************************ LOGGING ************************
-		System.out.println("USERNAME :"+queryParamterMap.get("Username"));
+		System.out.println("username :"+queryParamterMap.get("username"));
 
 		// set up parameters to execute and store the result of query
 		ExecutionEngine executionEngine = new ExecutionEngine(GraphDBInstance,
@@ -208,13 +208,13 @@ public class AccountDBManager implements IAccountDBManager {
 		{
 			//create a params map.
 			Map<String,Object> parameters = new HashMap<String,Object>();
-			parameters.put("Username",queryParamterMap.get("Username"));
+			parameters.put("username",queryParamterMap.get("username"));
 
 			// Fetch all the properties of the user node 
 
 			String query = "MATCH (n:User)"
 					+ " WHERE "
-					+ "n.Username = {Username}"
+					+ "n.username = {username}"
 					+ "RETURN n";
 
 			try{
@@ -254,8 +254,8 @@ public class AccountDBManager implements IAccountDBManager {
 		// ********* LOGGING ********* 
 
 		Map<String,String[]> modifiableRequestMap = new HashMap<String,String[]>(request);
-		modifiableRequestMap.remove("RequestType");
-		modifiableRequestMap.remove("RequestID");
+		modifiableRequestMap.remove("requestType");
+		modifiableRequestMap.remove("requestID");
 
 
 		//format the parameters for the query.		
@@ -274,16 +274,16 @@ public class AccountDBManager implements IAccountDBManager {
 		{
 			//create a params map.
 			Map<String,Object> parameters = new HashMap<String,Object>();
-			parameters.put("Username",queryParamterMap.get("Username"));
+			parameters.put("username",queryParamterMap.get("username"));
 
-			System.out.println("deleting user "+parameters.get("Username"));
+			System.out.println("deleting user "+parameters.get("username"));
 
 			//create cypher query to delete node from the database.
-			//TODO The OPTIONAL does not do its work so I separated deleting r and n: need to look into this issue
+			//TODO The OPTIonAL does not do its work so I separated deleting r and n: need to look into this issue
 			// first delete the relationships
 			String query =""
-					+ "OPTIONAL MATCH (n:User)-[r]-() "
-					+ "WHERE n.Username={Username} "
+					+ "OPTIonAL MATCH (n:User)-[r]-() "
+					+ "WHERE n.username={username} "
 					+ "DELETE r ";
 
 			executionEngine.execute(query,parameters);
@@ -291,7 +291,7 @@ public class AccountDBManager implements IAccountDBManager {
 			// then delete the node
 			query =""
 					+ "MATCH (n:User)"
-					+ "WHERE n.Username={Username} "
+					+ "WHERE n.username={username} "
 					+ "DELETE n ";
 
 			// Check for constraint violation.
@@ -328,8 +328,8 @@ public class AccountDBManager implements IAccountDBManager {
 
 		//create a duplicate map.
 		Map<String,String[]> modifiableRequestMap = new HashMap<String,String[]>(request);
-		modifiableRequestMap.remove("RequestType");
-		modifiableRequestMap.remove("RequestID");
+		modifiableRequestMap.remove("requestType");
+		modifiableRequestMap.remove("requestID");
 
 
 		//format the parameters for the query.		
@@ -348,10 +348,10 @@ public class AccountDBManager implements IAccountDBManager {
 		{
 			//create a params map.
 			Map<String,Object> parameters = new HashMap<String,Object>();
-			parameters.put("Username",queryParamterMap.get("Username"));
+			parameters.put("username",queryParamterMap.get("username"));
 
 			//create cypher query to create node in the dataase.
-			String query = "MATCH(n:User) WHERE n.Username={Username} RETURN n";
+			String query = "MATCH(n:User) WHERE n.username={username} RETURN n";
 
 			//execute the query
 			result = executionEngine.execute(query,parameters);

@@ -39,9 +39,9 @@ public class GetInfoAccountWorkflowTest {
 		// add more properties to test account
 		System.out.println("Adding properties to UserA...");
 		List <NameValuePair> nvps = new ArrayList <NameValuePair>();	    
-		nvps.add(new BasicNameValuePair("RequestID", "Account"));	    
-		nvps.add(new BasicNameValuePair("RequestType", "Update"));
-		nvps.add(new BasicNameValuePair("Username", "UserA"));
+		nvps.add(new BasicNameValuePair("requestID", "Account"));	    
+		nvps.add(new BasicNameValuePair("requestType", "Update"));
+		nvps.add(new BasicNameValuePair("username", "UserA"));
 		nvps.add(new BasicNameValuePair("Telephone", "911"));
 		nvps.add(new BasicNameValuePair("Workplace", "JHU"));
 		CloseableHttpResponse response = WorkflowTestHelper.ExecuteRequest(nvps);
@@ -51,9 +51,9 @@ public class GetInfoAccountWorkflowTest {
 		// fetch account info and assert
 		System.out.println("Fetching account info of UserA...");
 		nvps = new ArrayList <NameValuePair>();	    
-		nvps.add(new BasicNameValuePair("RequestID", "Account"));	    
-		nvps.add(new BasicNameValuePair("RequestType", "GetInfo"));
-		nvps.add(new BasicNameValuePair("Username", "UserA"));
+		nvps.add(new BasicNameValuePair("requestID", "Account"));	    
+		nvps.add(new BasicNameValuePair("requestType", "GetInfo"));
+		nvps.add(new BasicNameValuePair("username", "UserA"));
 		response = WorkflowTestHelper.ExecuteRequest(nvps);
 		List<Map<String,String>> fetchedAccount = WorkflowTestHelper.GetReponseMap(response); 
 		System.out.println("Fetched Account: "+fetchedAccount);
