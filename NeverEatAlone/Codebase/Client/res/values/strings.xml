@@ -88,4 +88,5 @@
     <string name="different_passwords">Passwords do not match.</string>
 	<string name="contacts">Contacts</string>
 	<string name="friends_request">Friends Request</string>
+	<string name="availability_status">Availability Status:</string>
 </resources>
