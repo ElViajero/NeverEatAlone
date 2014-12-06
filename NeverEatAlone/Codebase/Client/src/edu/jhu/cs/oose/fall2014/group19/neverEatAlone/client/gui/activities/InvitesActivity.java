@@ -5,6 +5,7 @@ import java.util.List;
 
 import android.app.ListActivity;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -24,9 +25,11 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.help
  *
  */
 public class InvitesActivity extends ListActivity {
+
 	private ArrayAdapter<NotificationProperties> InvitesAdapter;
 	private TextView tv;
 	List<NotificationProperties> NotificationList;
+
 	boolean isCreated;
 	/**
 	 * This constructor is responsible for obtaining 
@@ -39,8 +42,23 @@ public class InvitesActivity extends ListActivity {
 		NotificationList = new ArrayList<NotificationProperties>();
 		initView(savedInstanceState);
 		isCreated=false;
+		
+		setTitleStyle();
 
 
+	}
+
+	/**
+	 * This method is used to set the font style of the title of each page
+	 * @author: Hai Tang
+	 */
+	private void setTitleStyle() {
+		TextView tv =
+				(TextView) findViewById(R.id.app_name);
+		Typeface tf = Typeface.createFromAsset(getAssets(),
+				"fonts/Windsong.ttf");
+		tv.setTypeface(tf);
+		tv.setTextSize(100);
 	}
 
 	/**
@@ -68,7 +86,7 @@ public class InvitesActivity extends ListActivity {
 		startActivity(intent);
 	}
 
-	public void OnCreateButtonClick(View view) {
+	public void onCreateButtonClick(View view) {
 		// Intent intent = new Intent(RegisterActivity.this,
 		// MainActivity.class);
 		Intent intent = new Intent(InvitesActivity.this,

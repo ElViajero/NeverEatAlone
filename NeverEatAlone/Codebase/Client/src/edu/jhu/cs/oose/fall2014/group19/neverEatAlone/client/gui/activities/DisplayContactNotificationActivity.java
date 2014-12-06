@@ -7,16 +7,18 @@ import java.util.Map;
 
 import org.apache.http.impl.execchain.RequestAbortedException;
 
+import android.app.ListActivity;
+import android.graphics.Typeface;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.TextView;
+import android.widget.Toast;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.AccountProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.ContactProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.adapters.ContactsNotificationAdapter;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
-import android.app.ListActivity;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Toast;
 
 /**
  * This class handles the display of contact notification.
@@ -54,9 +56,24 @@ public class DisplayContactNotificationActivity extends ListActivity {
 
 		// Button acceptButton = (Button)
 		// findViewById(R.id.contacts_notification_accept);
-		// acceptButton.setVisibility(View.GONE);
+		// acceptButton.setVisibility(View.GonE);
 
 		// acceptButton.setVisibility(View.VISIBLE);
+		
+		setTitleStyle();
+	}
+	
+	/**
+	 * This method is used to set the font style of the title of each page
+	 * @author: Hai Tang
+	 */
+	private void setTitleStyle() {
+		TextView tv =
+				(TextView) findViewById(R.id.textView_friendsrequest_title);
+		Typeface tf = Typeface.createFromAsset(getAssets(),
+				"fonts/Windsong.ttf");
+		tv.setTypeface(tf);
+		tv.setTextSize(100);
 	}
 
 	// I am using contact instead of contact notification here.
@@ -74,13 +91,13 @@ public class DisplayContactNotificationActivity extends ListActivity {
 		requestID = "Contact";
 		requestType = "GetAll";
 		Map<String, Object> requestMap = new HashMap<String, Object>();
-		requestMap.put("Username", AccountProperties.getUserAccountInstance()
-				.getUsername());
+		requestMap.put("username", AccountProperties.getUserAccountInstance()
+				.getusername());
 		contactList = new ArrayList<ContactProperties>();
 		try {
 
 			List<Map<String, String>> resultMapList = RequestHandlerHelper
-					.GetRequestHandlerInstance().HandleRequest(this,
+					.getRequestHandlerInstance().handleRequest(this,
 							requestMap, requestID, requestType);
 
 			for (Map<String, String> result : resultMapList) {
@@ -101,7 +118,7 @@ public class DisplayContactNotificationActivity extends ListActivity {
 	 * 
 	 * 
 	 */
-	public void OnAcceptButtonClick(View view) {
+	public void onAcceptButtonClick(View view) {
 		// TODO
 		// Need revise here
 		Toast.makeText(this, "Accepted!", Toast.LENGTH_SHORT).show();
@@ -113,7 +130,7 @@ public class DisplayContactNotificationActivity extends ListActivity {
 	 * 
 	 * 
 	 */
-	public void OnRejectButtonClick(View view) {
+	public void onRejectButtonClick(View view) {
 		// TODO
 		// Need revise here
 		Toast.makeText(this, "Rejected!", Toast.LENGTH_SHORT).show();

@@ -27,22 +27,22 @@ public class AddContactWorkflowTest {
 
 
 		List <NameValuePair> nvps = new ArrayList <NameValuePair>();	    
-		nvps.add(new BasicNameValuePair("RequestID", "Account"));	    
-		nvps.add(new BasicNameValuePair("RequestType", "Delete"));
-		nvps.add(new BasicNameValuePair("Username", "Test2"));
-		nvps.add(new BasicNameValuePair("Password", "TestPass2"));
-		nvps.add(new BasicNameValuePair("Email", "Test@test.com"));
+		nvps.add(new BasicNameValuePair("requestID", "Account"));	    
+		nvps.add(new BasicNameValuePair("requestType", "Delete"));
+		nvps.add(new BasicNameValuePair("username", "Test2"));
+		nvps.add(new BasicNameValuePair("password", "TestPass2"));
+		nvps.add(new BasicNameValuePair("email", "Test@test.com"));
 
 		/*
 		//execute the request.
 		WorkflowTestHelper.ExecuteRequest(nvps);
 
 		nvps = new ArrayList <NameValuePair>();	    
-		nvps.add(new BasicNameValuePair("RequestID", "Account"));	    
-		nvps.add(new BasicNameValuePair("RequestType", "Delete"));
-		nvps.add(new BasicNameValuePair("Username", "Test"));
-		nvps.add(new BasicNameValuePair("Password", "TestPass"));
-		nvps.add(new BasicNameValuePair("Email", "Test@test.com"));
+		nvps.add(new BasicNameValuePair("requestID", "Account"));	    
+		nvps.add(new BasicNameValuePair("requestType", "Delete"));
+		nvps.add(new BasicNameValuePair("username", "Test"));
+		nvps.add(new BasicNameValuePair("password", "TestPass"));
+		nvps.add(new BasicNameValuePair("email", "Test@test.com"));
 
 		//execute the request.
 		WorkflowTestHelper.ExecuteRequest(nvps);
@@ -50,20 +50,20 @@ public class AddContactWorkflowTest {
 
 
 		nvps = new ArrayList <NameValuePair>();	    
-		nvps.add(new BasicNameValuePair("RequestID", "Account"));	    
-		nvps.add(new BasicNameValuePair("RequestType", "Create"));
-		nvps.add(new BasicNameValuePair("Username", "Test"));
-		nvps.add(new BasicNameValuePair("Password", "TestPass"));
-		nvps.add(new BasicNameValuePair("Email", "Test@test.com"));
+		nvps.add(new BasicNameValuePair("requestID", "Account"));	    
+		nvps.add(new BasicNameValuePair("requestType", "Create"));
+		nvps.add(new BasicNameValuePair("username", "Test"));
+		nvps.add(new BasicNameValuePair("password", "TestPass"));
+		nvps.add(new BasicNameValuePair("email", "Test@test.com"));
 
 		//execute the request.
 		WorkflowTestHelper.ExecuteRequest(nvps);
 
 		List <NameValuePair> nvps1 = new ArrayList <NameValuePair>();	    
-		nvps1.add(new BasicNameValuePair("RequestID", "Contact"));	    
-		nvps1.add(new BasicNameValuePair("RequestType", "Add"));
-		nvps1.add(new BasicNameValuePair("Username", "TestUser"));
-		nvps1.add(new BasicNameValuePair("ContactUsername", "Test"));
+		nvps1.add(new BasicNameValuePair("requestID", "Contact"));	    
+		nvps1.add(new BasicNameValuePair("requestType", "Add"));
+		nvps1.add(new BasicNameValuePair("username", "TestUser"));
+		nvps1.add(new BasicNameValuePair("Contactusername", "Test"));
 
 		//execute the request.
 		CloseableHttpResponse response1 = WorkflowTestHelper.ExecuteRequest(nvps1);

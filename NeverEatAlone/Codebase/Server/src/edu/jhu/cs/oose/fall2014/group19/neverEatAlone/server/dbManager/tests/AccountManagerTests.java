@@ -37,11 +37,11 @@ public class AccountManagerTests {
 		//popluate data		
 		Map<String,String[]> requestMap = new HashMap<String,String[]>();
 
-		requestMap.put("RequestID",new String[]{"Account"});
-		requestMap.put("RequestType",new String[]{"Create"});
-		requestMap.put("Username",new String[]{"Tejas"});
-		requestMap.put("Password",new String[]{"T"});
-		requestMap.put("Email",new String[]{"Tea@tea.com"});
+		requestMap.put("requestID",new String[]{"Account"});
+		requestMap.put("requestType",new String[]{"Create"});
+		requestMap.put("username",new String[]{"Tejas"});
+		requestMap.put("password",new String[]{"T"});
+		requestMap.put("email",new String[]{"Tea@tea.com"});
 
 		//create instances and execute account creation logic.
 		IAccountDBManager iAccountManager = new AccountDBManager();
@@ -59,10 +59,10 @@ public class AccountManagerTests {
 		{
 			//create a params map.
 			Map<String,Object> parameters = new HashMap<String,Object>();
-			parameters.put("Username","Tejas");
+			parameters.put("username","Tejas");
 
 			//create cypher query to fetch node from the database.
-			String query = "MATCH (n:User) WHERE n.Username={Username} RETURN n";
+			String query = "MATCH (n:User) WHERE n.username={username} RETURN n";
 
 			//execute the query
 			result = executionEngine.execute(query,parameters);
@@ -84,7 +84,7 @@ public class AccountManagerTests {
 		assertTrue(!resultMapList.isEmpty());		
 		assertTrue(resultMapList.get(0).containsKey("Status"));
 		assertTrue(resultMapList.get(0).get("Status").equals("Success"));
-		assertTrue(resultMapList.get(1).get("Password").equals("T"));				
+		assertTrue(resultMapList.get(1).get("password").equals("T"));				
 	}
 
 
@@ -101,9 +101,9 @@ public class AccountManagerTests {
 		//popluate data		
 		Map<String,String[]> requestMap = new HashMap<String,String[]>();
 
-		requestMap.put("RequestID",new String[]{"Account"});
-		requestMap.put("RequestType",new String[]{"IsValid"});
-		requestMap.put("Username",new String[]{"Tejas"});		
+		requestMap.put("requestID",new String[]{"Account"});
+		requestMap.put("requestType",new String[]{"IsValid"});
+		requestMap.put("username",new String[]{"Tejas"});		
 
 		//create instances and execute account creation logic.
 		IAccountDBManager iAccountManager = new AccountDBManager();
@@ -120,11 +120,11 @@ public class AccountManagerTests {
 		assertTrue(!resultMapList.isEmpty());		
 		assertTrue(resultMapList.get(0).containsKey("Status"));
 		assertTrue(resultMapList.get(0).get("Status").equals("Success"));
-		assertTrue(resultMapList.get(1).get("Password").equals("T"));
+		assertTrue(resultMapList.get(1).get("password").equals("T"));
 
 
 		//CASE 1 : Account is invalid.
-		requestMap.put("Username",new String[]{"T"});		
+		requestMap.put("username",new String[]{"T"});		
 
 		//create instances and execute account creation logic.		
 		resultMapList =

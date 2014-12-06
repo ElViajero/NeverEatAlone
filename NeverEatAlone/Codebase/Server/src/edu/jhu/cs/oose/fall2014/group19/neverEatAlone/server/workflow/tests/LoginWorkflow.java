@@ -58,10 +58,10 @@ public class LoginWorkflow {
 
 		//populate request headers and data		
 		List <NameValuePair> nvps2 = new ArrayList <NameValuePair>();	    
-		nvps2.add(new BasicNameValuePair("RequestID", "Login"));	    
-		nvps2.add(new BasicNameValuePair("RequestType", "CheckCredentials"));
-		nvps2.add(new BasicNameValuePair("Username", "TestUser"));
-		nvps2.add(new BasicNameValuePair("Password", "TestPass"));		
+		nvps2.add(new BasicNameValuePair("requestID", "Login"));	    
+		nvps2.add(new BasicNameValuePair("requestType", "CheckCredentials"));
+		nvps2.add(new BasicNameValuePair("username", "TestUser"));
+		nvps2.add(new BasicNameValuePair("password", "TestPass"));		
 
 		//execute the request.
 		CloseableHttpResponse response2 = WorkflowTestHelper.ExecuteRequest(nvps2);		
@@ -101,11 +101,11 @@ public class LoginWorkflow {
 
 		//populate request headers and data		
 		List <NameValuePair> nvps = new ArrayList <NameValuePair>();	    
-		nvps.add(new BasicNameValuePair("RequestID", "Login"));	    
-		nvps.add(new BasicNameValuePair("RequestType", "CheckCredentials"));
-		nvps.add(new BasicNameValuePair("Username", "testInvalidUser"));
-		nvps.add(new BasicNameValuePair("Password", "testInvalidPass"));
-		nvps.add(new BasicNameValuePair("Email", "testInvalid@testInvalid.com"));
+		nvps.add(new BasicNameValuePair("requestID", "Login"));	    
+		nvps.add(new BasicNameValuePair("requestType", "CheckCredentials"));
+		nvps.add(new BasicNameValuePair("username", "testInvalidUser"));
+		nvps.add(new BasicNameValuePair("password", "testInvalidPass"));
+		nvps.add(new BasicNameValuePair("email", "testInvalid@testInvalid.com"));
 
 
 		//execute the request.

@@ -27,7 +27,7 @@ Regarding your project:
 Regarding your tests:
   * What you have is fine for now; you'll need more for iteration 4, but you knew that.
   * You probably want a separate project for the junit tests
-  * One of your tests uses "10.0.0.3" as the url, which means it doesn't run on my machine; should it be "localhost"?
+  * one of your tests uses "10.0.0.3" as the url, which means it doesn't run on my machine; should it be "localhost"?
   * Consider using http://cargo.codehaus.org/ to start a tomcat server during your tests' setUp().
 
 Total Score: 96/100

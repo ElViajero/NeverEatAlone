@@ -47,9 +47,9 @@ public class IsValidAccountWorkflowTest {
 
 		//populate request headers and data		
 		List <NameValuePair> nvps2 = new ArrayList <NameValuePair>();	    
-		nvps2.add(new BasicNameValuePair("RequestID", "Account"));	    
-		nvps2.add(new BasicNameValuePair("RequestType", "IsValid"));
-		nvps2.add(new BasicNameValuePair("Username", "TestUser"));						
+		nvps2.add(new BasicNameValuePair("requestID", "Account"));	    
+		nvps2.add(new BasicNameValuePair("requestType", "IsValid"));
+		nvps2.add(new BasicNameValuePair("username", "TestUser"));						
 
 
 		CloseableHttpResponse response2 = WorkflowTestHelper.ExecuteRequest(nvps2);		
@@ -62,7 +62,7 @@ public class IsValidAccountWorkflowTest {
 					new BufferedReader( new InputStreamReader( entity2.getContent() ) );		    
 			String response=in.readLine();
 //			System.out.println("get the response: "+response);
-			assertTrue(response.equals("[{\"Status\":\"Success\"},{\"Email\":\"Test@test.com\",\"Username\":\"TestUser\",\"Password\":"
+			assertTrue(response.equals("[{\"Status\":\"Success\"},{\"email\":\"Test@test.com\",\"username\":\"TestUser\",\"password\":"
 					+ "\"TestPass\"},{}]"));	            	            
 			in.close();
 			EntityUtils.consume(entity2);
@@ -98,9 +98,9 @@ public class IsValidAccountWorkflowTest {
 
 		//populate request headers and data		
 		List <NameValuePair> nvps2 = new ArrayList <NameValuePair>();	    
-		nvps2.add(new BasicNameValuePair("RequestID", "Account"));	    
-		nvps2.add(new BasicNameValuePair("RequestType", "IsValid"));
-		nvps2.add(new BasicNameValuePair("Username", "SomeOtherUserID"));						
+		nvps2.add(new BasicNameValuePair("requestID", "Account"));	    
+		nvps2.add(new BasicNameValuePair("requestType", "IsValid"));
+		nvps2.add(new BasicNameValuePair("username", "SomeOtherUserID"));						
 
 		//execute the request.
 		CloseableHttpResponse response2 = WorkflowTestHelper.ExecuteRequest(nvps2);		

@@ -11,7 +11,7 @@ Main Path:
 3.	The poster selects the start time for the meal meal
 4.	The poster selects the end time for the meal, or selects from a list of duration options (e.g. 30 mins, 1 hour, etc.)
 5.	The poster must select from a list of location options:
-a.	One restaurant,
+a.	one restaurant,
 b.	Multiple restaurants, or
 c.	Input new restaurant name
 6.	The poster selects the approximate meal duration selects from a list of duration options (e.g. 30 mins, 1 hour, etc.)

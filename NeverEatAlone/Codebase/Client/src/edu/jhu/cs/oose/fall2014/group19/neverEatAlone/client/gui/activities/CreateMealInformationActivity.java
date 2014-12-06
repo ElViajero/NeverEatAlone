@@ -6,6 +6,7 @@ import java.util.Map;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.app.TimePickerDialog.OnTimeSetListener;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
@@ -15,8 +16,8 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.TimePicker;
-import android.widget.Toast;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.DateAndTimeProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.MealProperties;
@@ -24,30 +25,34 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.h
 
 public class CreateMealInformationActivity extends FragmentActivity {
 
-	Button BtnSelectStartDate, BtnSelectStartTime, BtnSelectEndDate,
-			BtnSelectEndTime;
+	Button BtnSelectStartDate, BtnSelectstartTime, BtnSelectEndDate,
+	BtnSelectendTime;
 
-	private EditText Place;
-	private EditText MaxNumber;
-	private Switch AllowFriendInvite;
+	private EditText place;
+	private EditText maxNumber;
+	private Switch allowFriendInvite;
 
 	// variables to save user selected date and time
-	public int YearStart, MonthStart, DayStart, HourStart, MinuteStart;
-	public int YearEnd, MonthEnd, DayEnd, HourEnd, MinuteEnd;
+	public int startYear, startmonth, startDay, starthour, startminute;
+	public int endYear, endMonth, endDay, endhour, endminute;
 
 	public CreateMealInformationActivity() {
+		initiCalendar();
+	}
+
+	private void initiCalendar() {
 		// Assign current Date and Time Values to Variables
 		final Calendar c = Calendar.getInstance();
-		YearStart = c.get(Calendar.YEAR);
-		YearEnd = YearStart;
-		MonthStart = c.get(Calendar.MONTH);
-		MonthEnd = MonthStart;
-		DayStart = c.get(Calendar.DAY_OF_MONTH);
-		DayEnd = DayStart;
-		HourStart = c.get(Calendar.HOUR_OF_DAY);
-		HourEnd = HourStart;
-		MinuteStart = c.get(Calendar.MINUTE);
-		MinuteEnd = MinuteStart;
+		startYear = c.get(Calendar.YEAR);
+		endYear = startYear;
+		startmonth = c.get(Calendar.MONTH);
+		endMonth = startmonth;
+		startDay = c.get(Calendar.DAY_OF_MONTH);
+		endDay = startDay;
+		starthour = c.get(Calendar.HOUR);
+		endhour = starthour;
+		startminute = c.get(Calendar.MINUTE);
+		endminute = startminute;
 	}
 
 	@Override
@@ -56,14 +61,32 @@ public class CreateMealInformationActivity extends FragmentActivity {
 		setContentView(R.layout.activity_create_meal_information);
 
 		// get the references of buttons
-		BtnSelectStartDate = (Button) findViewById(R.id.CreateMealInformation_button_startdate);
-		BtnSelectStartTime = (Button) findViewById(R.id.CreateMealInformation_button_starttime);
-		BtnSelectEndDate = (Button) findViewById(R.id.CreateMealInformation_button_enddate);
-		BtnSelectEndTime = (Button) findViewById(R.id.CreateMealInformation_button_endtime);
+		BtnSelectStartDate = (Button) findViewById(R.id.CreateMealInformation_button_startDate);
+		BtnSelectstartTime = (Button) findViewById(R.id.CreateMealInformation_button_startTime);
+		BtnSelectEndDate = (Button) findViewById(R.id.CreateMealInformation_button_endDate);
+		BtnSelectendTime = (Button) findViewById(R.id.CreateMealInformation_button_endTime);
 
-		Place = (EditText) findViewById(R.id.edit_restaurant);
-		MaxNumber = (EditText) findViewById(R.id.edit_maxnumber);
-		AllowFriendInvite = (Switch) findViewById(R.id.switch_allowfriendinvite);
+
+		place = (EditText) findViewById(R.id.edit_restaurant);
+		maxNumber = (EditText) findViewById(R.id.edit_maxnumber);
+		allowFriendInvite = (Switch) findViewById(R.id.switch_allowfriendinvite);
+
+		
+		setTitleStyle();
+	}
+	
+	/**
+	 * This method is used to set the font style of the title of each page
+	 * @author: Hai Tang
+	 */
+	private void setTitleStyle() {
+		TextView tv =
+				(TextView) findViewById(R.id.CreateMealInformation_text_mealinformation);
+		Typeface tf = Typeface.createFromAsset(getAssets(),
+				"fonts/Windsong.ttf");
+		tv.setTypeface(tf);
+		tv.setTextSize(100);
+
 	}
 
 	@Override
@@ -85,7 +108,7 @@ public class CreateMealInformationActivity extends FragmentActivity {
 		return super.onOptionsItemSelected(item);
 	}
 
-	public void OnBackButtonClick(View view) {
+	public void onBackButtonClick(View view) {
 		Intent intent = new Intent(CreateMealInformationActivity.this,
 				TabHostActivity.class);
 		CreateMealInformationActivity.this.startActivity(intent);
@@ -95,9 +118,9 @@ public class CreateMealInformationActivity extends FragmentActivity {
 		DatePickerFragment startdate = new DatePickerFragment();
 		// Set selected date into dialog. Default current date.
 		Bundle args = new Bundle();
-		args.putInt("year", YearStart);
-		args.putInt("month", MonthStart);
-		args.putInt("day", DayStart);
+		args.putInt("year", startYear);
+		args.putInt("month", startmonth);
+		args.putInt("day", startDay);
 		startdate.setArguments(args);
 		// Set Call back to capture selected date
 		startdate.setCallBack(onstartdate);
@@ -108,49 +131,49 @@ public class CreateMealInformationActivity extends FragmentActivity {
 		DatePickerFragment enddate = new DatePickerFragment();
 		// Set selected date into dialog. Default current date.
 		Bundle args = new Bundle();
-		args.putInt("year", YearEnd);
-		args.putInt("month", MonthEnd);
-		args.putInt("day", DayEnd);
+		args.putInt("year", endYear);
+		args.putInt("month", endMonth);
+		args.putInt("day", endDay);
 		enddate.setArguments(args);
 		// Set Call back to capture selected date
 		enddate.setCallBack(onenddate);
 		enddate.show(getSupportFragmentManager(), "Date Picker");
 	}
 
-	private void showStartTimePicker() {
-		TimePickerFragment starttime = new TimePickerFragment();
+	private void showstartTimePicker() {
+		TimePickerFragment startTime = new TimePickerFragment();
 		// Set selected time into dialog. Default current time.
 		Bundle args = new Bundle();
-		args.putInt("hour", HourStart);
-		args.putInt("minute", MinuteStart);
-		starttime.setArguments(args);
+		args.putInt("hour", starthour);
+		args.putInt("minute", startminute);
+		startTime.setArguments(args);
 		// Set Call back to capture selected date
-		starttime.setCallBack(onstarttime);
-		starttime.show(getSupportFragmentManager(), "Date Picker");
+		startTime.setCallBack(onstartTime);
+		startTime.show(getSupportFragmentManager(), "Date Picker");
 	}
 
-	private void showEndTimePicker() {
-		TimePickerFragment starttime = new TimePickerFragment();
+	private void showendTimePicker() {
+		TimePickerFragment startTime = new TimePickerFragment();
 		// Set selected time into dialog. Default current time.
 		Bundle args = new Bundle();
-		args.putInt("hour", HourEnd);
-		args.putInt("minute", MinuteEnd);
-		starttime.setArguments(args);
+		args.putInt("hour", endhour);
+		args.putInt("minute", endminute);
+		startTime.setArguments(args);
 		// Set Call back to capture selected date
-		starttime.setCallBack(onendtime);
-		starttime.show(getSupportFragmentManager(), "Date Picker");
+		startTime.setCallBack(onendTime);
+		startTime.show(getSupportFragmentManager(), "Date Picker");
 	}
 
 	OnDateSetListener onstartdate = new OnDateSetListener() {
 		@Override
 		public void onDateSet(DatePicker view, int year, int monthOfYear,
 				int dayOfMonth) {
-			YearStart = year;
-			MonthStart = monthOfYear;
-			int dummyMonthStart = MonthStart + 1;
-			DayStart = dayOfMonth;
-			BtnSelectStartDate.setText(DayStart + "-" + dummyMonthStart + "-"
-					+ YearStart);
+			startYear = year;
+			startmonth = monthOfYear;
+			int dummyMonthStart = startmonth + 1;
+			startDay = dayOfMonth;
+			BtnSelectStartDate.setText(startDay + "-" + dummyMonthStart + "-"
+					+ startYear);
 		}
 	};
 
@@ -158,47 +181,47 @@ public class CreateMealInformationActivity extends FragmentActivity {
 		@Override
 		public void onDateSet(DatePicker view, int year, int monthOfYear,
 				int dayOfMonth) {
-			YearEnd = year;
-			MonthEnd = monthOfYear;
-			int dummyMonthEnd = MonthEnd + 1;
-			DayEnd = dayOfMonth;
-			BtnSelectEndDate.setText(DayEnd + "-" + dummyMonthEnd + "-"
-					+ YearEnd);
+			endYear = year;
+			endMonth = monthOfYear;
+			int dummyMonthEnd = endMonth + 1;
+			endDay = dayOfMonth;
+			BtnSelectEndDate.setText(endDay + "-" + dummyMonthEnd + "-"
+					+ endYear);
 		}
 	};
 
-	OnTimeSetListener onstarttime = new OnTimeSetListener() {
+	OnTimeSetListener onstartTime = new OnTimeSetListener() {
 		@Override
 		public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-			HourStart = hourOfDay;
-			MinuteStart = minute;
-			BtnSelectStartTime.setText(hourOfDay + ":" + minute);
+			starthour = hourOfDay;
+			startminute = minute;
+			BtnSelectstartTime.setText(hourOfDay + ":" + minute);
 		}
 	};
 
-	OnTimeSetListener onendtime = new OnTimeSetListener() {
+	OnTimeSetListener onendTime = new OnTimeSetListener() {
 		@Override
 		public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-			HourEnd = hourOfDay;
-			MinuteEnd = minute;
-			BtnSelectEndTime.setText(hourOfDay + ":" + minute);
+			endhour = hourOfDay;
+			endminute = minute;
+			BtnSelectendTime.setText(hourOfDay + ":" + minute);
 		}
 	};
 
-	public void OnStartDataButtonClick(View view) {
+	public void onStartDataButtonClick(View view) {
 		showStartDatePicker();
 	}
 
-	public void OnStartTimeButtonClick(View view) {
-		showStartTimePicker();
+	public void onstartTimeButtonClick(View view) {
+		showstartTimePicker();
 	}
 
-	public void OnEndDataButtonClick(View view) {
+	public void onEndDataButtonClick(View view) {
 		showEndDatePicker();
 	}
 
-	public void OnEndTimeButtonClick(View view) {
-		showEndTimePicker();
+	public void onendTimeButtonClick(View view) {
+		showendTimePicker();
 	}
 
 	/**
@@ -207,44 +230,23 @@ public class CreateMealInformationActivity extends FragmentActivity {
 	 * @author tejasvamsingh
 	 * @param view
 	 */
-	public void OnNextButtonClick(View view) {
+	public void onNextButtonClick(View view) {
 
-		int dummymonthstart = MonthStart + 1;
-		int dummymonthend = MonthEnd + 1;
 
-		String place = Place.getText().toString();
-		String maxnumber = MaxNumber.getText().toString();
-		String allowfriendinvite;
-		if (AllowFriendInvite.isChecked()) {
-			allowfriendinvite = "Yes";
-		} else {
-			allowfriendinvite = "No";
-		}
 
-		String location = Place.getText().toString();
-		String maxNumberOfInvitees = MaxNumber.getText().toString();
-		String isNotificationExtendible = AllowFriendInvite.getText()
-				.toString();
+		String location = place.getText().toString();
+		String maxNumberOfInvitees = maxNumber.getText().toString();
+		String isNotificationExtendible = allowFriendInvite.isChecked() ? "YES" : "NO";
 
-		Toast.makeText(
-				getApplicationContext(),
-				"Start Time: " + DayStart + "/" + dummymonthstart + "/"
-						+ YearStart + " " + HourStart + ":" + MinuteStart
-						+ "\n" + "End Time: " + DayEnd + "/" + dummymonthend
-						+ "/" + YearEnd + " " + HourEnd + ":" + MinuteEnd
-						+ "\n" + "Place: " + location + "\n" + "Max Number: "
-						+ maxNumberOfInvitees + "\n" + "Allow Friend Invite: "
-						+ isNotificationExtendible, Toast.LENGTH_SHORT).show();
-
-		// ************************** PAGE ONE REQUEST CREATION STARTS HERE
+		// ************************** PAGE onE REQUEST CREATIon STARTS HERE
 		// **************************
 
 		// Create Date and Time Properties Objects
 		DateAndTimeProperties startDateAndTimeProperties = new DateAndTimeProperties(
-				DayStart, MonthStart, YearStart, HourStart, MinuteStart);
+				startDay, startmonth, startYear, starthour, startminute);
 
 		DateAndTimeProperties endDateAndTimeProperties = new DateAndTimeProperties(
-				DayEnd, MonthEnd, YearEnd, HourEnd, MinuteEnd);
+				endDay, endMonth, endYear, endhour, endminute);
 
 		// Create a Meal Object
 		MealProperties mealProperties = new MealProperties(location,
@@ -256,7 +258,7 @@ public class CreateMealInformationActivity extends FragmentActivity {
 		Intent intent = new Intent(CreateMealInformationActivity.this,
 				SelectFriendsActivity.class);
 		intent.putExtra("mealProperties",
-				GsonHelper.GetGsonInstance().toJson(mealPropertiesMap));
+				GsonHelper.getGsoninstance().toJson(mealPropertiesMap));
 		CreateMealInformationActivity.this.startActivity(intent);
 
 	}

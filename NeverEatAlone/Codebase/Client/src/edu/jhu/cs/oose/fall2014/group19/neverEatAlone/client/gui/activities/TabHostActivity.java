@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
+import android.widget.TextView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.NotificationProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.DataCacheHelper;
@@ -26,7 +27,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.notificationHandler
 
 public class TabHostActivity extends TabActivity {
 
-	String Username ;
+	String username ;
 
 	Map<String,Map<String,String>> NotificationCache;
 
@@ -34,7 +35,7 @@ public class TabHostActivity extends TabActivity {
 	TabSpec TabInvites;
 	TabSpec TabProfile;
 	TabHost TabHost; 
-	String NotificationMapListJSON; 
+	String notificationMapListJSon; 
 
 
 	/**
@@ -46,17 +47,17 @@ public class TabHostActivity extends TabActivity {
 	public void onCreate(Bundle savedInstanceState)
 	{
 
-		NotificationMapListJSON="[{}]";
+		notificationMapListJSon="[{}]";
 		super.onCreate(savedInstanceState);
 		// Initialize the view and cache.
 		InitView();
 		NotificationCache = new HashMap<String,Map<String,String>>();
 
 		// Obtain the data required for the activity class
-		Username = getIntent().getStringExtra("Username");
+		username = getIntent().getStringExtra("username");
 
 		//start the notifcations framework.
-		NotificationHelper.init(this, Username);
+		NotificationHelper.init(this, username);
 
 
 
@@ -83,7 +84,7 @@ public class TabHostActivity extends TabActivity {
 
 		TabInvites.setIndicator("Invites");
 		Intent intent = new Intent(this,InvitesActivity.class);
-		intent.putExtra("NotificationMapListJSON", NotificationMapListJSON);
+		intent.putExtra("notificationMapListJSon", notificationMapListJSon);
 		TabInvites.setContent(intent);
 
 		TabContacts.setIndicator("Contacts");
@@ -92,7 +93,7 @@ public class TabHostActivity extends TabActivity {
 		TabProfile.setIndicator("Profile");
 		TabProfile.setContent(new Intent(this,ProfileActivity.class));
 
-
+		    
 		/** Add the tabs  to the TabHost to display. */
 
 		TabHost.addTab(TabInvites);
@@ -112,7 +113,7 @@ public class TabHostActivity extends TabActivity {
 	 */
 	public void UpdateNotificationCache(List<Map<String,String>> notificationMapList){
 
-		notificationMapList.remove(0);
+		System.out.println("in updateNotification");
 		List<NotificationProperties> notificationList = 
 				new ArrayList<NotificationProperties>();
 
@@ -120,7 +121,7 @@ public class TabHostActivity extends TabActivity {
 			notificationList.add(new NotificationProperties(notification));
 		}
 
-		DataCacheHelper.setMealNotificationCache(notificationList);
+		DataCacheHelper.setmealNotificationCache(notificationList);
 
 	}
 

@@ -20,7 +20,7 @@ Main Path:
 1.	The user pushes a "create invitation" button
 2.	The app will show a list of restaurants.
 3.	The user must select: 
-    a.	One restaurant, or
+    a.	one restaurant, or
     b.	Multiple restaurants
     c.	Input new restaurant name
 4.	The app displays the selected restaurant

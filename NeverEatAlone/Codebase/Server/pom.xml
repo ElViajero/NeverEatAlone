@@ -20,7 +20,7 @@
         <version>2.4</version>
         <configuration>
           <warSourceDirectory>WebContent</warSourceDirectory>
-          <failOnMissingWebXml>false</failOnMissingWebXml>
+          <failonMissingWebXml>false</failonMissingWebXml>
         </configuration>
       </plugin>
       

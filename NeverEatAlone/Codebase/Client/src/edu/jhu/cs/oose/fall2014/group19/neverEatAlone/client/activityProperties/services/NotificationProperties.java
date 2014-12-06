@@ -9,13 +9,13 @@ public class NotificationProperties implements IActivityProperties {
 	private String poster;
 	private String notificationID;
 
-	public String getPoster() {
+	public String getposter() {
 		return poster;
 	}
 
 
 
-	public void setPoster(String poster) {
+	public void setposter(String poster) {
 		this.poster = poster;
 	}
 
@@ -50,6 +50,8 @@ public class NotificationProperties implements IActivityProperties {
 
 
 	public NotificationProperties(Map<String,String> map){
+
+		System.out.println("the map is " + map);
 
 		poster = map.get("poster");
 		notificationID = map.get("postID");

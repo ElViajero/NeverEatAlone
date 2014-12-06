@@ -21,15 +21,15 @@ public class ContactProperties implements IActivityProperties {
 	//for now, this is the only information about a
 	//contact we display.
 
-	private String contactUsername;
+	private String contactusername;
 	private boolean isChecked;
 
 	public ContactProperties(String username){
-		contactUsername = username;
+		contactusername = username;
 	}
 
 	public ContactProperties(Map<String,String> map) {
-		contactUsername = map.get("Username");
+		contactusername = map.get("username");
 		isChecked=false;
 	}
 
@@ -37,14 +37,14 @@ public class ContactProperties implements IActivityProperties {
 	@Override
 	public Map<String, Object> toMap() {
 		Gson gsonObject = 
-				GsonHelper.GetGsonInstance();
+				GsonHelper.getGsoninstance();
 		String jsonString = gsonObject.toJson(this);
 		System.out.println("json is : " +jsonString);
 		Type stringObjectMap = new TypeToken<Map<String, Object>>(){}.getType();
 		Map<String,Object> requestMap = gsonObject.fromJson(jsonString, stringObjectMap);
 		System.out.println("map is : " +requestMap);
-		requestMap.put("Username", 
-				AccountProperties.getUserAccountInstance().getUsername());
+		requestMap.put("username", 
+				AccountProperties.getUserAccountInstance().getusername());
 		requestMap.remove("isChecked");
 		return requestMap;
 	}
@@ -55,7 +55,7 @@ public class ContactProperties implements IActivityProperties {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result
-				+ ((contactUsername == null) ? 0 : contactUsername.hashCode());
+				+ ((contactusername == null) ? 0 : contactusername.hashCode());
 		return result;
 	}
 
@@ -68,20 +68,20 @@ public class ContactProperties implements IActivityProperties {
 		if (getClass() != obj.getClass())
 			return false;
 		ContactProperties other = (ContactProperties) obj;
-		if (contactUsername == null) {
-			if (other.contactUsername != null)
+		if (contactusername == null) {
+			if (other.contactusername != null)
 				return false;
-		} else if (!contactUsername.equals(other.contactUsername))
+		} else if (!contactusername.equals(other.contactusername))
 			return false;
 		return true;
 	}
 
-	public String getContactUsername() {
-		return contactUsername;
+	public String getContactusername() {
+		return contactusername;
 	}
 
-	public void setContactUsername(String contactUsername) {
-		this.contactUsername = contactUsername;
+	public void setContactusername(String contactusername) {
+		this.contactusername = contactusername;
 	}
 
 	public boolean isChecked() {

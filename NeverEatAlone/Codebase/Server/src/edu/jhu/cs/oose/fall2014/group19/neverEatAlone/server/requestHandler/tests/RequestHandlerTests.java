@@ -48,8 +48,8 @@ public class RequestHandlerTests {
 		CloseableHttpClient httpclient = HttpClients.createDefault();
 		HttpPost httpPost = new HttpPost("http://10.0.0.3:8080/NeverEatAloneServer/RequestHandler");	    
 		List <NameValuePair> nvps = new ArrayList <NameValuePair>();	    
-		nvps.add(new BasicNameValuePair("RequestID", "Account"));	    
-		nvps.add(new BasicNameValuePair("RequestType", "IsValid"));	    
+		nvps.add(new BasicNameValuePair("requestID", "Account"));	    
+		nvps.add(new BasicNameValuePair("requestType", "IsValid"));	    
 		httpPost.setEntity(new UrlEncodedFormEntity(nvps));	    
 		CloseableHttpResponse response2 = httpclient.execute(httpPost);
 		try {		    

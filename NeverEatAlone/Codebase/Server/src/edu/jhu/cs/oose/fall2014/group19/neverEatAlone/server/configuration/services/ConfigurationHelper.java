@@ -34,7 +34,7 @@ public class ConfigurationHelper implements IConfigurationHelper {
 	/**
 	 * 
 	 * Method that returns a configuration properties object.
-	 * One for the entire application.
+	 * one for the entire application.
 	 * 
 	 * @author tejasvamsingh
 	 * @return

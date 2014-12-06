@@ -2,10 +2,12 @@ package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
 /**
  * 
@@ -19,6 +21,21 @@ public class MealDetailActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_meal_detail);
+		
+		setTitleStyle();
+	}
+	
+	/**
+	 * This method is used to set the font style of the title of each page
+	 * @author: Hai Tang
+	 */
+	private void setTitleStyle() {
+		TextView tv =
+				(TextView) findViewById(R.id.textView_mealdetails_title);
+		Typeface tf = Typeface.createFromAsset(getAssets(),
+				"fonts/Windsong.ttf");
+		tv.setTypeface(tf);
+		tv.setTextSize(100);
 	}
 
 	@Override
@@ -44,7 +61,7 @@ public class MealDetailActivity extends Activity {
 	 * Method used for back button click
 	 * @author: Hai Tang
 	 */
-	public void OnBackButtonClick(View view){
+	public void onBackButtonClick(View view){
 		Intent intent = new Intent(this, TabHostActivity.class);
 		startActivity(intent);
 	}
@@ -53,7 +70,7 @@ public class MealDetailActivity extends Activity {
 	 * Method used for accept button click
 	 * @author: Hai Tang
 	 */
-	public void OnAcceptButtonClick(View view){
+	public void onAcceptButtonClick(View view){
 		Intent intent = new Intent(this, TabHostActivity.class);
 		startActivity(intent);
 	}
@@ -62,7 +79,7 @@ public class MealDetailActivity extends Activity {
 	 * Method used for decline button click
 	 * @author: Hai Tang
 	 */
-	public void OnDeclineButtonClick(View view){
+	public void onDeclineButtonClick(View view){
 		Intent intent = new Intent(this, TabHostActivity.class);
 		startActivity(intent);
 	}

@@ -60,7 +60,7 @@ public class DateAndTimeProperties implements IActivityProperties  {
 	public Map<String, Object> toMap() {
 
 		Gson gsonObject = 
-				GsonHelper.GetGsonInstance();
+				GsonHelper.getGsoninstance();
 		String jsonString = gsonObject.toJson(this);
 		System.out.println("json is : " +jsonString);
 		Type stringObjectMap = new TypeToken<Map<String, Object>>(){}.getType();

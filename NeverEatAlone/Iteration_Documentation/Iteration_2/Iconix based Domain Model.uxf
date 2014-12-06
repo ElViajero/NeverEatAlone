@@ -88,7 +88,7 @@
       <w>100</w>
       <h>30</h>
     </coordinates>
-    <panel_attributes>Poster
+    <panel_attributes>poster
 </panel_attributes>
     <additional_attributes/>
   </element>
@@ -224,7 +224,7 @@
       <w>380</w>
       <h>30</h>
     </coordinates>
-    <panel_attributes>ICONIX Based Domain Model
+    <panel_attributes>IConIX Based Domain Model
 bg=black
 fg=white</panel_attributes>
     <additional_attributes/>
@@ -270,7 +270,7 @@ fg=white</panel_attributes>
       <w>100</w>
       <h>30</h>
     </coordinates>
-    <panel_attributes>Location
+    <panel_attributes>location
 </panel_attributes>
     <additional_attributes/>
   </element>

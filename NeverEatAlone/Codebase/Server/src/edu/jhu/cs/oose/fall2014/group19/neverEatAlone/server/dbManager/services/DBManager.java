@@ -74,14 +74,14 @@ public class DBManager {
 
 			GraphDBInstance.schema().
 			constraintFor(DynamicLabel.label("User")).
-			assertPropertyIsUnique("Username").create();			
+			assertPropertyIsUnique("username").create();			
 
 
 //			GraphDBInstance.schema().
 //			constraintFor(DynamicLabel.label("User")).
-//			assertPropertyIsUnique("Email").create();		
+//			assertPropertyIsUnique("email").create();		
 			
-			String query = "CREATE CONSTRAINT ON (n:User) ASSERT n.Email IS UNIQUE";
+			String query = "CREATE ConSTRAINT on (n:User) ASSERT n.email IS UNIQUE";
 			ExecutionEngine executionEngine = new ExecutionEngine(GraphDBInstance,
 					StringLogger.SYSTEM);	
 			executionEngine.execute(query);

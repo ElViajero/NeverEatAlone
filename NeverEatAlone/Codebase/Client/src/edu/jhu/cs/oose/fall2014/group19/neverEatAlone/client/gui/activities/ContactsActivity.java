@@ -9,9 +9,11 @@ import org.apache.http.impl.execchain.RequestAbortedException;
 
 import android.app.ListActivity;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.TextView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.AccountProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.ContactProperties;
@@ -52,8 +54,23 @@ public class ContactsActivity extends ListActivity {
 		contactsInformationAdapter = new ContactsInformationAdapter(this,
 				contactList);
 		setListAdapter(contactsInformationAdapter);
+		
+		setTitleStyle();
 	}
 
+	/**
+	 * This method is used to set the font style of the title of each page
+	 * @author: Hai Tang
+	 */
+	private void setTitleStyle() {
+		TextView tv =
+				(TextView) findViewById(R.id.textView_contacts_title);
+		Typeface tf = Typeface.createFromAsset(getAssets(),
+				"fonts/Windsong.ttf");
+		tv.setTypeface(tf);
+		tv.setTextSize(100);
+	}
+	
 	/**
 	 * This method fetches contacts from the server if
 	 * the cache is empty.
@@ -65,14 +82,14 @@ public class ContactsActivity extends ListActivity {
 		requestID = "Contact";
 		requestType = "GetAll";
 		Map<String,Object> requestMap = new HashMap<String,Object>();
-		requestMap.put("Username",
-				AccountProperties.getUserAccountInstance().getUsername());
+		requestMap.put("username",
+				AccountProperties.getUserAccountInstance().getusername());
 		contactList = new ArrayList<ContactProperties>();
 		try{
 
 			List<Map<String, String>> resultMapList = 
-					RequestHandlerHelper.GetRequestHandlerInstance().
-					HandleRequest(this,requestMap,requestID,requestType) ;		
+					RequestHandlerHelper.getRequestHandlerInstance().
+					handleRequest(this,requestMap,requestID,requestType) ;		
 
 
 			for(Map<String,String> result : resultMapList){
@@ -93,7 +110,7 @@ public class ContactsActivity extends ListActivity {
 	 * 
 	 * @author: Hai Tang
 	 */
-	public void OnAddFriendsButtonClick(View view) {
+	public void onAddFriendsButtonClick(View view) {
 		Intent intent = new Intent(ContactsActivity.this,
 				AddFriendsActivity.class);
 		ContactsActivity.this.startActivity(intent);
@@ -107,7 +124,7 @@ public class ContactsActivity extends ListActivity {
 	 * 
 	 * 
 	 */
-	public void OnContactNotificationButtonClick(View view) {
+	public void onContactNotificationButtonClick(View view) {
 		Intent intent = new Intent(ContactsActivity.this,
 				DisplayContactNotificationActivity.class);
 		ContactsActivity.this.startActivity(intent);

@@ -20,26 +20,26 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
 public class NotificationTestActivity extends Activity {
 
 
-	private List<Map<String,String>> NotificationMapList;
-	private String RequestID;
-	private String RequestType;
-	private String Username;
-	EditText Message;
-	EditText Recipient;
+	private List<Map<String,String>> notificationMapList;
+	private String requestID;
+	private String requestType;
+	private String username;
+	EditText messageEditTextObject;
+	EditText recipientEditTextObject;
 	AsyncTask<String, List<Map<String, String>>, List<Map<String, String>>> NotificationExecutorTask;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_notification_test_ativity);		
-		NotificationMapList = new ArrayList<Map<String, String>>();
-		RequestID = "Notification";
-		RequestType = "Meal";
-		Message = (EditText) findViewById(R.id.editMessage);
-		Recipient = (EditText) findViewById(R.id.editRecipient);
-		Username = getIntent().getStringExtra("Username");
-		//NotificationExecutorTask= new NotificationExecutor(this).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, Username);
-		System.out.println("ENTERED ON CREATE");
+		notificationMapList = new ArrayList<Map<String, String>>();
+		requestID = "Notification";
+		requestType = "Meal";
+		messageEditTextObject = (EditText) findViewById(R.id.editMessage);
+		recipientEditTextObject = (EditText) findViewById(R.id.editRecipient);
+		username = getIntent().getStringExtra("username");
+		//NotificationExecutorTask= new NotificationExecutor(this).executeonExecutor(AsyncTask.THREAD_POOL_EXECUTOR, username);
+		System.out.println("ENTERED on CREATE");
 
 	}
 
@@ -62,35 +62,35 @@ public class NotificationTestActivity extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 
-	public void UpdateNotificationList(Map<String,String> notification){
+	public void UpdatenotificationList(Map<String,String> notification){
 		System.out.println("updating notifications");
-		NotificationMapList.add(notification);
+		notificationMapList.add(notification);
 		RefreshNotifications();
 	}
 
 	private void RefreshNotifications(){
-		for(Map<String, String> notification : NotificationMapList){			
+		for(Map<String, String> notification : notificationMapList){			
 			Toast.makeText(getApplicationContext(), notification.get("Message"),
 					Toast.LENGTH_SHORT).show();
 		}
 	}
 
-	public void OnPostButtonClick(View view) {
+	public void onPostButtonClick(View view) {
 
-		String message = Message.getText().toString();
-		String  recipient = Recipient.getText().toString();
+		String message = messageEditTextObject.getText().toString();
+		String  recipient = recipientEditTextObject.getText().toString();
 		List<NameValuePair> requestList = new ArrayList<NameValuePair>();
 
-		requestList.add(new BasicNameValuePair("RequestID", RequestID));
-		requestList.add(new BasicNameValuePair("RequestType", RequestType));
-		requestList.add(new BasicNameValuePair("Username", Username));
+		requestList.add(new BasicNameValuePair("requestID", requestID));
+		requestList.add(new BasicNameValuePair("requestType", requestType));
+		requestList.add(new BasicNameValuePair("username", username));
 		requestList.add(new BasicNameValuePair("Message", message));
 		requestList.add(new BasicNameValuePair("Recipient", recipient));
 
 		NotificationExecutorTask.cancel(true);
 		/*
 		List<Map<String, String>> resultMapList = 
-				RequestHandlerHelper.GetRequestHandlerInstance().HandleRequest(requestList) ;
+				RequestHandlerHelper.getRequestHandlerInstance().handleRequest(requestList) ;
 		 */
 
 	}

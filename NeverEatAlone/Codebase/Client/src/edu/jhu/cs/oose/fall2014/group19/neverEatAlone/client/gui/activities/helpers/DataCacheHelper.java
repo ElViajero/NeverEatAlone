@@ -7,17 +7,17 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.
 
 public class DataCacheHelper {
 
-	private static List<NotificationProperties> MealNotificationCache;
+	private static List<NotificationProperties> mealNotificationCache;
 	private static ArrayAdapter<NotificationProperties> mealNotificationAdaapterInstance; 
 
-	public static List<NotificationProperties> getMealNotificationCache() {
-		return MealNotificationCache;
+	public static List<NotificationProperties> getmealNotificationCache() {
+		return mealNotificationCache;
 	}
 
-	public static void setMealNotificationCache(
+	public static void setmealNotificationCache(
 			List<NotificationProperties> notificationCache) {
-		MealNotificationCache = notificationCache;
-		mealNotificationAdaapterInstance.addAll(MealNotificationCache);
+		mealNotificationCache = notificationCache;
+		mealNotificationAdaapterInstance.addAll(mealNotificationCache);
 	}
 
 	public static void registerMealNotificationAdapterInstance(
