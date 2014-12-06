@@ -7,6 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/layout_background"
     tools:context="edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.MealDetailActivity" >
 
     <TextView
@@ -32,9 +33,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/textView_mealdetails_title"
         android:layout_marginLeft="17dp"
         android:text="Back"
+        android:background="@drawable/buttonbackground"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"
         android:onClick="OnBackButtonClick" />
 
     <TextView
@@ -43,7 +47,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/textView_mealdetails_when"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="50dp"
         android:text="Start Time:"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -53,7 +57,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/textView_mealdetails_starttime"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="50dp"
         android:text="End Time:"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -63,7 +67,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/textView_mealdetails_endtime"
-        android:layout_marginTop="26dp"
+        android:layout_marginTop="50dp"
         android:text="Where?"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textStyle="bold" />
@@ -74,7 +78,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/TextView_mealdetails_withwhom"
         android:layout_below="@+id/TextView_mealdetails_withwhom"
-        android:layout_marginTop="20dp" />
+        android:layout_marginTop="50dp" />
 
     <QuickContactBadge
         android:id="@+id/quickContactBadge2"
@@ -97,6 +101,9 @@
         android:layout_alignBottom="@+id/quickContactBadge3"
         android:layout_alignParentRight="true"
         android:layout_alignTop="@+id/quickContactBadge3"
+        android:background="@drawable/buttonbackground"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"
         android:text="Invite Others" />
 
     <TextView
@@ -105,7 +112,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/TextView_mealdetails_where"
         android:layout_below="@+id/TextView_mealdetails_where"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="50dp"
         android:text="Restaurant:"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -115,7 +122,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/TextView_mealdetails_restaurant"
         android:layout_below="@+id/TextView_mealdetails_restaurant"
-        android:layout_marginTop="14dp"
+        android:layout_marginTop="50dp"
         android:text="With Whom?"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textStyle="bold" />
@@ -126,7 +133,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/textView_mealdetails_starttime"
         android:layout_below="@+id/button_mealdetails_back"
-        android:layout_marginTop="14dp"
+        android:layout_marginTop="50dp"
         android:text="When?"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:textStyle="bold" />
@@ -137,7 +144,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_below="@+id/quickContactBadge1"
-        android:layout_marginTop="22dp"
+        android:layout_marginTop="50dp"
         android:text="Additional Information:"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -148,6 +155,9 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:text="Accept"
+        android:background="@drawable/buttonbackground"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"
         android:onClick="OnAcceptButtonClick" />
 
     <Button
@@ -157,6 +167,9 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:text="Decline" 
+        android:background="@drawable/buttonbackground"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"
         android:onClick="OnDeclineButtonClick"/>
 
 </RelativeLayout>

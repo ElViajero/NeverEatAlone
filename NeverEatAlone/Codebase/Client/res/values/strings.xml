@@ -83,4 +83,5 @@
 	<string name="accept">Accept</string>
 	<string name="reject">Reject</string>
 	<string name="contacts">Contacts</string>
+	<string name="friends_request">Friends Request</string>
 </resources>

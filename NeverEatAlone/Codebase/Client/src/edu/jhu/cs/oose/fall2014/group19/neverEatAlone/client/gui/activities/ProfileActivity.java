@@ -79,7 +79,8 @@ public class ProfileActivity extends Activity {
 				.findViewById(R.id.button_popup_cancel);
 
 		/**
-		 * OnClickListener for the confirm button in the popup window
+		 * OnClickListener for the confirm button in the popup window. Account deleted 
+		 * and return to the login page.
 		 * 
 		 * @author: Hai Tang
 		 */
