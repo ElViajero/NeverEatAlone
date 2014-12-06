@@ -30,7 +30,7 @@
         android:paddingRight="50dp"
         android:layout_centerHorizontal="true"
         android:background="@drawable/buttonbackground"
-        android:text="Availability Status:" />
+        android:text="@string/availability_status" />
 
     <ListView
         android:id="@android:id/list"
