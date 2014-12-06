@@ -9,11 +9,13 @@ import org.apache.http.impl.execchain.RequestAbortedException;
 
 import android.app.ListActivity;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.TextView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.contracts.IActivityProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.AccountProperties;
@@ -58,6 +60,20 @@ public class SelectFriendsActivity extends ListActivity {
 				new ContactsInformationAdapter(this,contactList);
 		setListAdapter(selectFriendsAdapter);
 
+		setTitleStyle();
+	}
+	
+	/**
+	 * This method is used to set the font style of the title of each page
+	 * @author: Hai Tang
+	 */
+	private void setTitleStyle() {
+		TextView tv =
+				(TextView) findViewById(R.id.textView_selectfriends_title);
+		Typeface tf = Typeface.createFromAsset(getAssets(),
+				"fonts/Windsong.ttf");
+		tv.setTypeface(tf);
+		tv.setTextSize(100);
 	}
 
 	/**
@@ -156,6 +172,13 @@ public class SelectFriendsActivity extends ListActivity {
 			System.out.println("Already Handled");
 		}
 
+		/**
+		 * Commented for future use. Used to connect to PostInformation page.
+		 * @author Hai Tang
+		 */
+//		Intent intent = new Intent(SelectFriendsActivity.this,
+//				PostInformationActivity.class);
+//		SelectFriendsActivity.this.startActivity(intent);
 
 	}
 }

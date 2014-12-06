@@ -3,7 +3,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent" 
-    android:background="@drawable/grey">
+    android:background="@drawable/layout_popupwindow_background">
 
 
     <TextView
@@ -13,6 +13,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="29dp"
         android:text="@string/delete_account"
+        android:textStyle="bold"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <Button
@@ -23,6 +24,9 @@
         android:layout_alignBottom="@+id/button_popup_confirm"
         android:layout_alignParentRight="true"
         android:layout_marginRight="37dp"
+        android:background="@drawable/buttonbackground"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"
         android:text="@string/cancel" />
 
     <Button
@@ -33,6 +37,9 @@
         android:layout_below="@+id/textView_popup_delete_account_title"
         android:layout_marginLeft="32dp"
         android:layout_marginTop="167dp"
+        android:background="@drawable/buttonbackground"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"
         android:text="@string/confirm" />
 
     <TextView

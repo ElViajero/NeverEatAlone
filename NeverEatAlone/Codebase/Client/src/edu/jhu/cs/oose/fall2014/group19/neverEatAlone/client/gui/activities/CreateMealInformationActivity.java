@@ -6,6 +6,7 @@ import java.util.Map;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.app.TimePickerDialog.OnTimeSetListener;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
@@ -15,6 +16,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.TimePicker;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.DateAndTimeProperties;
@@ -64,9 +66,27 @@ public class CreateMealInformationActivity extends FragmentActivity {
 		BtnSelectEndDate = (Button) findViewById(R.id.CreateMealInformation_button_enddate);
 		BtnSelectendTime = (Button) findViewById(R.id.CreateMealInformation_button_endTime);
 
+
 		place = (EditText) findViewById(R.id.edit_restaurant);
 		maxNumber = (EditText) findViewById(R.id.edit_maxnumber);
 		allowFriendInvite = (Switch) findViewById(R.id.switch_allowfriendinvite);
+
+		
+		setTitleStyle();
+	}
+	
+	/**
+	 * This method is used to set the font style of the title of each page
+	 * @author: Hai Tang
+	 */
+	private void setTitleStyle() {
+		TextView tv =
+				(TextView) findViewById(R.id.CreateMealInformation_text_mealinformation);
+		Typeface tf = Typeface.createFromAsset(getAssets(),
+				"fonts/Windsong.ttf");
+		tv.setTypeface(tf);
+		tv.setTextSize(100);
+
 	}
 
 	@Override
