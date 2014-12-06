@@ -43,7 +43,7 @@ public class MealNotificationAdapter extends ArrayAdapter<NotificationProperties
 
 		super(activity, R.layout.row_meal_notification_layout, mealNotifications);
 
-		activity = activity;
+		this.activity = activity;
 		inflater = activity.getWindow().getLayoutInflater();
 
 		MealNotifications = mealNotifications;
