@@ -43,7 +43,7 @@
             android:text="@string/start_time" />
 
         <Button
-            android:id="@+id/CreateMealInformation_button_startdate"
+            android:id="@+id/CreateMealInformation_button_startDate"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -77,7 +77,7 @@
             android:text="@string/end_time" />
 
         <Button
-            android:id="@+id/CreateMealInformation_button_enddate"
+            android:id="@+id/CreateMealInformation_button_endDate"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
