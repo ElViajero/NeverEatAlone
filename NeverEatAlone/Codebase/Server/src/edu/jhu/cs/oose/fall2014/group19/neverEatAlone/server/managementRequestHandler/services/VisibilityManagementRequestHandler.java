@@ -37,7 +37,7 @@ public class VisibilityManagementRequestHandler {
 	 * @param request
 	 * @return
 	 */
-	public List<Map<String, String>> GetAllContactRequest(Map<String,String[]> request) {
+	public List<Map<String, String>> UnsetVisibilityRequest(Map<String,String[]> request) {
 		
 		System.out.println("Reaching UnsetVisibilityRequest");
 		return IVisibilityDBManagerObject.UnsetVisibility(request); 
