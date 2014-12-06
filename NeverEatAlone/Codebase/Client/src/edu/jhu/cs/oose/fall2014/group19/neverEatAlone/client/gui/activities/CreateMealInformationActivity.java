@@ -61,9 +61,9 @@ public class CreateMealInformationActivity extends FragmentActivity {
 		setContentView(R.layout.activity_create_meal_information);
 
 		// get the references of buttons
-		BtnSelectStartDate = (Button) findViewById(R.id.CreateMealInformation_button_startdate);
+		BtnSelectStartDate = (Button) findViewById(R.id.CreateMealInformation_button_startDate);
 		BtnSelectstartTime = (Button) findViewById(R.id.CreateMealInformation_button_startTime);
-		BtnSelectEndDate = (Button) findViewById(R.id.CreateMealInformation_button_enddate);
+		BtnSelectEndDate = (Button) findViewById(R.id.CreateMealInformation_button_endDate);
 		BtnSelectendTime = (Button) findViewById(R.id.CreateMealInformation_button_endTime);
 
 
