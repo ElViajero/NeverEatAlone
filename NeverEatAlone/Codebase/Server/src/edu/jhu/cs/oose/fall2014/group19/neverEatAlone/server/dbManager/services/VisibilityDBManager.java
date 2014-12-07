@@ -73,7 +73,7 @@ public class VisibilityDBManager implements IVisibilityDBManager {
 				String query = "MATCH (n:User),(a:User) "
 						+ "WHERE n.username={username} AND "
 						+ "a.username={contact} "
-						+ "CREATE (n)-[:VISIBALTO]->(a) "
+						+ "CREATE (n)-[:VISIBLETO]->(a) "
 						+ "RETURN n";
 
 				try{
@@ -84,7 +84,6 @@ public class VisibilityDBManager implements IVisibilityDBManager {
 					System.out.println(e.getMessage());
 					result = null;
 					tx.failure();
-					break; // if one iteration fails, all fail
 				}
 			}
 
@@ -101,8 +100,67 @@ public class VisibilityDBManager implements IVisibilityDBManager {
 
 	@Override
 	public List<Map<String, String>> UnsetVisibility(Map<String, String[]> request) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		// ******************** LOGGING ***************************
+		System.out.println("Reached UnsetVisibility in VisibilityDBManager");		
+
+		//create a duplicate map.
+		Map<String,String[]> modifiableRequestMap = new HashMap<String,String[]>(request);
+
+		//get the contacts as List and remove it from the map
+		List<String> contactList = Arrays.asList(request.get("contactList"));
+		modifiableRequestMap.remove("contactList"); 
+		
+		//format the parameters for the query.		
+		Map<String, String> queryParamterMap = 
+				DBManager.GetQueryParameterMap(modifiableRequestMap);
+
+		queryParamterMap.remove("requestType");
+		queryParamterMap.remove("requestID");
+
+		// set up parameters to execute and store the result of query
+		ExecutionEngine executionEngine = new ExecutionEngine(GraphDBInstance,
+				StringLogger.SYSTEM);				
+		ExecutionResult result = null;
+		List<Map<String,String>> resultMapList;
+		
+		try ( Transaction tx = GraphDBInstance.beginTx() )
+		{
+			//create a params map.
+			Map<String,Object> parameters = new HashMap<String,Object>();
+			parameters.put("creationParameters",queryParamterMap);
+			
+			// delete visibility edges for each contact
+			for(String contact : contactList){
+				parameters = new HashMap<String,Object>();
+				parameters.put("contact", contact);
+
+				String query = "MATCH (n)-[r:VISIBLETO]->(a) "
+						+ "WHERE n.username={username} AND "
+						+ "a.username={contact} "
+						+ "DELETE r  "
+						+ "RETURN n";
+
+				try{
+					//execute the query
+					result = executionEngine.execute(query,parameters);				
+				}catch(Exception e){
+					System.out.println("Constraint violation in unsetting visibility. :: ");
+					System.out.println(e.getMessage());
+					result = null;
+					tx.failure();
+				}
+			}
+
+
+			// Sucessful transaction.
+			resultMapList = DBManager.GetResultMapList(result);
+			tx.success();			
+
+		}
+
+		return resultMapList;
+
 	}
 
 }
