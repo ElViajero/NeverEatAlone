@@ -23,10 +23,18 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.MealProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.helpers.GsonHelper;
 
+/**
+ * This class handles the meal information of the creation of an invite.
+ * 
+ * @author Runze Tang
+ * 
+ * 
+ */
+
 public class CreateMealInformationActivity extends FragmentActivity {
 
 	Button BtnSelectStartDate, BtnSelectstartTime, BtnSelectEndDate,
-	BtnSelectendTime;
+			BtnSelectendTime;
 
 	private EditText place;
 	private EditText maxNumber;
@@ -36,10 +44,22 @@ public class CreateMealInformationActivity extends FragmentActivity {
 	public int startYear, startmonth, startDay, starthour, startminute;
 	public int endYear, endMonth, endDay, endhour, endminute;
 
+	/**
+	 * Initialization the calendar.
+	 * 
+	 * @author Runze Tang
+	 * 
+	 */
 	public CreateMealInformationActivity() {
 		initiCalendar();
 	}
 
+	/**
+	 * Set the calendar to initial.
+	 * 
+	 * @author Runze Tang
+	 * 
+	 */
 	private void initiCalendar() {
 		// Assign current Date and Time Values to Variables
 		final Calendar c = Calendar.getInstance();
@@ -55,6 +75,12 @@ public class CreateMealInformationActivity extends FragmentActivity {
 		endminute = startminute;
 	}
 
+	/**
+	 * Get references of button and edit text.
+	 * 
+	 * @author Runze Tang
+	 * 
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -66,22 +92,20 @@ public class CreateMealInformationActivity extends FragmentActivity {
 		BtnSelectEndDate = (Button) findViewById(R.id.CreateMealInformation_button_endDate);
 		BtnSelectendTime = (Button) findViewById(R.id.CreateMealInformation_button_endTime);
 
-
 		place = (EditText) findViewById(R.id.edit_restaurant);
 		maxNumber = (EditText) findViewById(R.id.edit_maxnumber);
 		allowFriendInvite = (Switch) findViewById(R.id.switch_allowfriendinvite);
 
-		
 		setTitleStyle();
 	}
-	
+
 	/**
 	 * This method is used to set the font style of the title of each page
+	 * 
 	 * @author: Hai Tang
 	 */
 	private void setTitleStyle() {
-		TextView tv =
-				(TextView) findViewById(R.id.CreateMealInformation_text_mealinformation);
+		TextView tv = (TextView) findViewById(R.id.CreateMealInformation_text_mealinformation);
 		Typeface tf = Typeface.createFromAsset(getAssets(),
 				"fonts/Windsong.ttf");
 		tv.setTypeface(tf);
@@ -108,12 +132,24 @@ public class CreateMealInformationActivity extends FragmentActivity {
 		return super.onOptionsItemSelected(item);
 	}
 
+	/**
+	 * Set back button.
+	 * 
+	 * @author Runze Tang
+	 * 
+	 */
 	public void onBackButtonClick(View view) {
 		Intent intent = new Intent(CreateMealInformationActivity.this,
 				TabHostActivity.class);
 		CreateMealInformationActivity.this.startActivity(intent);
 	}
 
+	/**
+	 * Set the selected start date into dialog.
+	 * 
+	 * @author Runze Tang
+	 * 
+	 */
 	private void showStartDatePicker() {
 		DatePickerFragment startdate = new DatePickerFragment();
 		// Set selected date into dialog. Default current date.
@@ -127,6 +163,12 @@ public class CreateMealInformationActivity extends FragmentActivity {
 		startdate.show(getSupportFragmentManager(), "Date Picker");
 	}
 
+	/**
+	 * Set the selected end date into dialog.
+	 * 
+	 * @author Runze Tang
+	 * 
+	 */
 	private void showEndDatePicker() {
 		DatePickerFragment enddate = new DatePickerFragment();
 		// Set selected date into dialog. Default current date.
@@ -140,6 +182,12 @@ public class CreateMealInformationActivity extends FragmentActivity {
 		enddate.show(getSupportFragmentManager(), "Date Picker");
 	}
 
+	/**
+	 * Set the selected start time into dialog.
+	 * 
+	 * @author Runze Tang
+	 * 
+	 */
 	private void showstartTimePicker() {
 		TimePickerFragment startTime = new TimePickerFragment();
 		// Set selected time into dialog. Default current time.
@@ -152,6 +200,12 @@ public class CreateMealInformationActivity extends FragmentActivity {
 		startTime.show(getSupportFragmentManager(), "Date Picker");
 	}
 
+	/**
+	 * Set the selected end time into dialog.
+	 * 
+	 * @author Runze Tang
+	 * 
+	 */
 	private void showendTimePicker() {
 		TimePickerFragment startTime = new TimePickerFragment();
 		// Set selected time into dialog. Default current time.
@@ -164,6 +218,12 @@ public class CreateMealInformationActivity extends FragmentActivity {
 		startTime.show(getSupportFragmentManager(), "Date Picker");
 	}
 
+	/**
+	 * Set listener on the DatePicker.
+	 * 
+	 * @author Runze Tang
+	 * 
+	 */
 	OnDateSetListener onstartdate = new OnDateSetListener() {
 		@Override
 		public void onDateSet(DatePicker view, int year, int monthOfYear,
@@ -177,6 +237,12 @@ public class CreateMealInformationActivity extends FragmentActivity {
 		}
 	};
 
+	/**
+	 * Set listener on the DatePicker.
+	 * 
+	 * @author Runze Tang
+	 * 
+	 */
 	OnDateSetListener onenddate = new OnDateSetListener() {
 		@Override
 		public void onDateSet(DatePicker view, int year, int monthOfYear,
@@ -190,6 +256,12 @@ public class CreateMealInformationActivity extends FragmentActivity {
 		}
 	};
 
+	/**
+	 * Set listener on the TimePicker.
+	 * 
+	 * @author Runze Tang
+	 * 
+	 */
 	OnTimeSetListener onstartTime = new OnTimeSetListener() {
 		@Override
 		public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
@@ -199,6 +271,12 @@ public class CreateMealInformationActivity extends FragmentActivity {
 		}
 	};
 
+	/**
+	 * Set listener on the TimePicker.
+	 * 
+	 * @author Runze Tang
+	 * 
+	 */
 	OnTimeSetListener onendTime = new OnTimeSetListener() {
 		@Override
 		public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
@@ -208,18 +286,42 @@ public class CreateMealInformationActivity extends FragmentActivity {
 		}
 	};
 
+	/**
+	 * Set start date button to show start date picker.
+	 * 
+	 * @author Runze Tang
+	 * 
+	 */
 	public void onStartDataButtonClick(View view) {
 		showStartDatePicker();
 	}
 
+	/**
+	 * Set start time button to show start time picker.
+	 * 
+	 * @author Runze Tang
+	 * 
+	 */
 	public void onstartTimeButtonClick(View view) {
 		showstartTimePicker();
 	}
 
+	/**
+	 * Set end date button to show end date picker.
+	 * 
+	 * @author Runze Tang
+	 * 
+	 */
 	public void onEndDataButtonClick(View view) {
 		showEndDatePicker();
 	}
 
+	/**
+	 * Set end time button to show end time picker.
+	 * 
+	 * @author Runze Tang
+	 * 
+	 */
 	public void onendTimeButtonClick(View view) {
 		showendTimePicker();
 	}
@@ -228,15 +330,15 @@ public class CreateMealInformationActivity extends FragmentActivity {
 	 * Handler for the meal creation event.
 	 * 
 	 * @author tejasvamsingh
+	 * @author Runze Tang
 	 * @param view
 	 */
 	public void onNextButtonClick(View view) {
 
-
-
 		String location = place.getText().toString();
 		String maxNumberOfInvitees = maxNumber.getText().toString();
-		String isNotificationExtendible = allowFriendInvite.isChecked() ? "YES" : "NO";
+		String isNotificationExtendible = allowFriendInvite.isChecked() ? "YES"
+				: "NO";
 
 		// ************************** PAGE onE REQUEST CREATIon STARTS HERE
 		// **************************

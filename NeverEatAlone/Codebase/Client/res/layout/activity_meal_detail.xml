@@ -1,4 +1,5 @@
 <!--@author Hai Tang  -->
+<!--@author Runze Tang  -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -50,23 +51,43 @@
         android:layout_marginTop="50dp"
         android:text="Start Time:"
         android:textAppearance="?android:attr/textAppearanceMedium" />
+    
+    <TextView
+        android:id="@+id/textView_mealdetails_startTime_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textView_mealdetails_startTime"
+        android:layout_marginTop="20dp"
+        android:text=""
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
         android:id="@+id/textView_mealdetails_endTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textView_mealdetails_startTime"
+        android:layout_below="@+id/textView_mealdetails_startTime_result"
         android:layout_marginTop="50dp"
         android:text="End Time:"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
+        <TextView
+        android:id="@+id/textView_mealdetails_endTime_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textView_mealdetails_endTime"
+        android:layout_marginTop="20dp"
+        android:text=""
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+    
     <TextView
         android:id="@+id/TextView_mealdetails_where"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textView_mealdetails_endTime"
+        android:layout_below="@+id/textView_mealdetails_endTime_result"
         android:layout_marginTop="50dp"
         android:text="Where?"
         android:textAppearance="?android:attr/textAppearanceMedium"
@@ -117,10 +138,20 @@
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <TextView
+        android:id="@+id/TextView_mealdetails_restaurant_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/TextView_mealdetails_restaurant"
+        android:layout_marginTop="20dp"
+        android:text=""
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+    
+    <TextView
         android:id="@+id/TextView_mealdetails_withwhom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/TextView_mealdetails_restaurant"
+        android:layout_alignLeft="@+id/TextView_mealdetails_restaurant_result"
         android:layout_below="@+id/TextView_mealdetails_restaurant"
         android:layout_marginTop="50dp"
         android:text="With Whom?"

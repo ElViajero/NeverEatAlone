@@ -6,6 +6,12 @@ import android.app.TimePickerDialog.OnTimeSetListener;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 
+/**
+ * 
+ * This class construct a time picker.
+ * @author Runze Tang
+ * 
+ */
 public class TimePickerFragment extends DialogFragment {
 	OnTimeSetListener onTimeSet;
 	private int hour, minute;
