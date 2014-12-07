@@ -1,7 +1,13 @@
 package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities;
 
+import java.lang.reflect.Type;
+import java.util.Map;
+
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -12,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.helpers.GsonHelper;
 
 /**
  * 
@@ -39,118 +46,41 @@ public class MealDetailActivity extends Activity {
 		setTitleStyle();
 
 		String postData = getIntent().getStringExtra("mealProperties");
-		String location = null;
-		String startDay = null;
-		String endDay = null;
-		String startMonth = null;
-		String endMonth = null;
-		String startYear = null;
-		String endYear = null;
-		String startHour = null;
-		String endHour = null;
-		String startMinute = null;
-		String endMinute = null;
 
-		// TODO
-		// Here I am trying to transform the string in Json to a map.
-		// There might be better ways to do this.
-		JSONObject jObj = null;
-		try {
-			jObj = new JSONObject(postData);
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
+		Gson gson = GsonHelper.getGsoninstance();
+		Type stringObjectMap = new TypeToken<Map<String, Object>>() {
+		}.getType();
+		Map<String, Object> postDataMap = gson.fromJson(postData,
+				stringObjectMap);
 
-		try {
-			jObj
-					.getString("isNotificationExtendible");
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-
-		try {
-			location = jObj.getString("location");
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-
-		try {
-			jObj.getString("maxNumberOfInvitees");
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-
-		try {
-			endDay = jObj.getString("endday");
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-
-		try {
-			endHour = jObj.getString("endhour");
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-
-		try {
-			endMinute = jObj.getString("endminute");
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-
-		try {
-			endMonth = jObj.getString("endmonth");
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-
-		try {
-			endYear = jObj.getString("endyear");
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-
-		try {
-			startDay = jObj.getString("startday");
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-
-		try {
-			startHour = jObj.getString("starthour");
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-
-		try {
-			startMinute = jObj.getString("startminute");
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-
-		try {
-			startYear = jObj.getString("startyear");
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-
-		try {
-			startMonth = jObj.getString("startmonth");
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
+		// String isNotificationExtendible =
+		// postDataMap.get("isNotificationExtendible").toString();
+		String location = postDataMap.get("location").toString();
+		String startYear = postDataMap.get("startyear").toString();
+		String startMonth = postDataMap.get("startmonth").toString();
+		String startDay = postDataMap.get("startday").toString();
+		String startHour = postDataMap.get("starthour").toString();
+		String startMinute = postDataMap.get("startminute").toString();
+		String endYear = postDataMap.get("endyear").toString();
+		String endMonth = postDataMap.get("endmonth").toString();
+		String endDay = postDataMap.get("endday").toString();
+		String endHour = postDataMap.get("endhour").toString();
+		String endMinute = postDataMap.get("endminute").toString();
 
 		TextView textStartTime = (TextView) findViewById(R.id.textView_mealdetails_startTime_result);
 		textStartTime.setText(startDay + "/" + startMonth + "/" + startYear
 				+ "-" + startHour + ":" + startMinute);
 
 		TextView textEndTime = (TextView) findViewById(R.id.textView_mealdetails_endTime_result);
-		textEndTime.setText(endDay + "/" + endMonth + "/" + endYear
-				+ "-" + endHour + ":" + endMinute);
-		
+		textEndTime.setText(endDay + "/" + endMonth + "/" + endYear + "-"
+				+ endHour + ":" + endMinute);
+
 		TextView restaurant = (TextView) findViewById(R.id.TextView_mealdetails_restaurant_result);
 		restaurant.setText(location);
 
+		// TextView additionalinfo = (TextView)
+		// findViewById(R.id.textView_mealdetails_additionalinfo);
+		// additionalinfo.setText(postDataMap.toString());
 	}
 
 	/**
