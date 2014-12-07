@@ -64,7 +64,7 @@ public class ContactDBManager implements IContactDBManager {
 		// ************************ LOGGING ************************
 
 		System.out.println("username :"+queryParamterMap.get("username"));
-		System.out.println("Contact :"+queryParamterMap.get("contactusername"));
+		System.out.println("contact :"+queryParamterMap.get("contactusername"));
 
 
 		// set up parameters to execute and store the result of query
