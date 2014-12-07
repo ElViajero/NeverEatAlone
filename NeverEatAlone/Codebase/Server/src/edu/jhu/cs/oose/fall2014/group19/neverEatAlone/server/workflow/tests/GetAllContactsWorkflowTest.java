@@ -80,7 +80,7 @@ public class GetAllContactsWorkflowTest {
 		List<Map<String,String>> returnMap = WorkflowTestHelper.GetReponseMap(response); 
 		System.out.println(returnMap);
 		assertTrue(returnMap.toString().equals("[{Status=Success}, "
-				+ "{username=UserB, Available=YES}, {username=UserC, Available=YES}]"));
+				+ "{Available=YES, username=UserB}, {Available=YES, username=UserC}]"));
 		
 		//get all contacts of B
 		System.out.println("getting all contacts of UserB...");
@@ -95,7 +95,7 @@ public class GetAllContactsWorkflowTest {
 		returnMap = WorkflowTestHelper.GetReponseMap(response); 
 		System.out.println(returnMap);
 		assertTrue(returnMap.toString().equals("[{Status=Success}, "
-				+ "{username=UserA, Available=YES}]"));
+				+ "{Available=YES, username=UserA}]"));
 		
 		//get all contacts of C
 		System.out.println("getting all contacts of UserC...");

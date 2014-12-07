@@ -64,7 +64,7 @@ public class ContactDBManager implements IContactDBManager {
 		// ************************ LOGGING ************************
 
 		System.out.println("username :"+queryParamterMap.get("username"));
-		System.out.println("ConTACT :"+queryParamterMap.get("contactusername"));
+		System.out.println("Contact :"+queryParamterMap.get("contactusername"));
 
 
 		// set up parameters to execute and store the result of query
@@ -79,13 +79,13 @@ public class ContactDBManager implements IContactDBManager {
 			//create a params map.
 			Map<String,Object> parameters = new HashMap<String,Object>();
 			parameters.put("username",queryParamterMap.get("username"));
-			parameters.put("Contactusername",queryParamterMap.get("contactusername"));
+			parameters.put("contactusername",queryParamterMap.get("contactusername"));
 
 			//create cypher query to add a relation in the dataase.
 			String query = "MATCH (a:User),(b:User)"
 					+ " WHERE "
 					+ "a.username = {username} AND "
-					+ "b.username = {Contactusername}"
+					+ "b.username = {contactusername}"
 					+ "CREATE UNIQUE (a)-[n:KNOWS]->(b)"
 					+ "RETURN n";
 
@@ -106,7 +106,7 @@ public class ContactDBManager implements IContactDBManager {
 			query = "MATCH (a:User)-[r]->(n:User)"
 					+ " WHERE "
 					+ "a.username = {username} AND "
-					+ "n.username = {Contactusername}"
+					+ "n.username = {contactusername}"
 					+ "RETURN n ";
 
 			try{
