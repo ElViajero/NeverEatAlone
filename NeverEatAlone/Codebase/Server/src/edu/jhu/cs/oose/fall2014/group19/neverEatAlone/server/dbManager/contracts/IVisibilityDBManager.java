@@ -14,17 +14,18 @@ import java.util.Map;
 public interface IVisibilityDBManager {
 
 	/**
-	 * Method to set available to some contact
+	 * Method to set visible to some contacts
 	 * @param request
 	 * @return
 	 */
 	public List<Map<String,String>> SetVisibility(Map<String,String[]> request);
 	
 	/**
-	 * method to set unavailable to some contact
+	 * method to set invisible to some contacts
 	 * @param request
 	 * @return
 	 */
 	public List<Map<String,String>> UnsetVisibility(Map<String,String[]> request);
+
 
 }

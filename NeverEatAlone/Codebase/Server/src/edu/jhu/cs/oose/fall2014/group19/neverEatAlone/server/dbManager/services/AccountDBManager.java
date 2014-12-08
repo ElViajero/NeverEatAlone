@@ -279,20 +279,12 @@ public class AccountDBManager implements IAccountDBManager {
 			System.out.println("deleting user "+parameters.get("username"));
 
 			//create cypher query to delete node from the database.
-			//TODO The OPTIonAL does not do its work so I separated deleting r and n: need to look into this issue
 			// first delete the relationships
 			String query =""
-					+ "OPTIonAL MATCH (n:User)-[r]-() "
+					+ "MATCH (n:User) "
 					+ "WHERE n.username={username} "
-					+ "DELETE r ";
-
-			executionEngine.execute(query,parameters);
-
-			// then delete the node
-			query =""
-					+ "MATCH (n:User)"
-					+ "WHERE n.username={username} "
-					+ "DELETE n ";
+					+ "OPTIONAL MATCH (n)-[r]-() "
+					+ "DELETE n,r ";
 
 			// Check for constraint violation.
 			try{
