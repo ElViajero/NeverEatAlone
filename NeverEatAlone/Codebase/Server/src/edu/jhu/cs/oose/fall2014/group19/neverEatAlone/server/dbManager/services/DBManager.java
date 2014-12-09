@@ -81,7 +81,8 @@ public class DBManager {
 //			constraintFor(DynamicLabel.label("User")).
 //			assertPropertyIsUnique("email").create();		
 			
-			String query = "CREATE ConSTRAINT on (n:User) ASSERT n.email IS UNIQUE";
+			// TODO does not work, need to investigate
+			String query = "CREATE CONSTRAINT on (n:User) ASSERT n.email IS UNIQUE";
 			ExecutionEngine executionEngine = new ExecutionEngine(GraphDBInstance,
 					StringLogger.SYSTEM);	
 			executionEngine.execute(query);

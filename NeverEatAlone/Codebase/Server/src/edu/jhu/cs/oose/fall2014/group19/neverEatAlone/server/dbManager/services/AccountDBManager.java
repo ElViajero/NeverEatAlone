@@ -55,9 +55,6 @@ public class AccountDBManager implements IAccountDBManager {
 		modifiableRequestMap.remove("requestType");
 		modifiableRequestMap.remove("requestID");
 
-		// add an "Available" property, creation default value is "YES"
-		modifiableRequestMap.put("Available", new String[]{"YES"});
-
 		//format the parameters for the query.		
 		Map<String, String> queryParamterMap = 
 				DBManager.GetQueryParameterMap(modifiableRequestMap);

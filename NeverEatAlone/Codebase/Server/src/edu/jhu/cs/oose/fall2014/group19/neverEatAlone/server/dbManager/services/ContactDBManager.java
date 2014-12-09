@@ -81,12 +81,13 @@ public class ContactDBManager implements IContactDBManager {
 			parameters.put("username",queryParamterMap.get("username"));
 			parameters.put("contactusername",queryParamterMap.get("contactusername"));
 
-			//create cypher query to add a relation in the dataase.
+			//create cypher query to add a relation in the database.
+			// contact is always added as two ways
 			String query = "MATCH (a:User),(b:User)"
 					+ " WHERE "
 					+ "a.username = {username} AND "
 					+ "b.username = {contactusername}"
-					+ "CREATE UNIQUE (a)-[n:KNOWS]->(b)"
+					+ "CREATE UNIQUE (a)-[n:KNOWS]->(b), (a)<-[:KNOWS]-(b) "
 					+ "RETURN n";
 
 			// Check for uniqueness constraint violation.
@@ -199,6 +200,7 @@ public class ContactDBManager implements IContactDBManager {
 
 	}
 
+	//TODO delete contact
 
 
 
