@@ -10,10 +10,10 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_search">Search</string>
     <string name="signup">Sign Up</string>
-    <string name="username">username</string>
+    <string name="username">Username</string>
     <string name="login">Login</string>
     <string name="logout">Log Out</string>
-    <string name="password">password</string>
+    <string name="password">Password</string>
     <string name="old_password">Your Old password</string>
     <string name="new_password">New password</string>
     <string name="confirm_password">Confirm password</string>
