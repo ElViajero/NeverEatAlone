@@ -26,6 +26,9 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.workflow.tests.help
  */
 public class DatabaseStructureTest {
 
+	/**
+	 * This method creates a small test database 
+	 */
 	// @Test
 	public void createTestDatabase(){
 
@@ -85,7 +88,10 @@ public class DatabaseStructureTest {
 
 	}
 	
-	@Test
+	/**
+	 * This method deletes one relationship in the test database 
+	 */
+	// @Test
 	public void deletionTest(){
 		Map<String,String[]> request; 
 		request = TestRequestBuilder.deleteContactRequest("user2", "user3"); 
@@ -93,6 +99,9 @@ public class DatabaseStructureTest {
 		contactDBManager.DeleteContact(request); 
 	}
 
+	/**
+	 * WARNING!!! This method deletes everything in the database! Use with caution! 
+	 */
 	// @Test
 	public void clearDatabase(){
 		
