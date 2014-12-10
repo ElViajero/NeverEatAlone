@@ -26,7 +26,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.workflow.tests.help
  */
 public class DatabaseStructureTest {
 
-	@Test
+	// @Test
 	public void createTestDatabase(){
 
 		Map<String,String[]> request; 
@@ -83,6 +83,14 @@ public class DatabaseStructureTest {
 		request = TestRequestBuilder.createMealNotificationRequest(parameters); 
 		notificationDBManager.CreateMealNotification(request); 
 
+	}
+	
+	@Test
+	public void deletionTest(){
+		Map<String,String[]> request; 
+		request = TestRequestBuilder.deleteContactRequest("user2", "user3"); 
+		IContactDBManager contactDBManager = new ContactDBManager(); 
+		contactDBManager.DeleteContact(request); 
 	}
 
 	// @Test

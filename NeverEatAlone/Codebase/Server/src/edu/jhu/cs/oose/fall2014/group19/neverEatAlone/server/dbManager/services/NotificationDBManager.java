@@ -113,8 +113,6 @@ public class NotificationDBManager implements INotificationDBManager {
 			parameters.put("username",poster);
 			parameters.put("postID",queryParamterMap.get("postID"));
 			
-			System.out.println("username: "+parameters.get("username")+" postID: "+parameters.get("postID"));
-
 			query = "MATCH (n:User),(a:Post) "
 					+ "WHERE n.username={username} AND "
 					+ "a.postID={postID} "

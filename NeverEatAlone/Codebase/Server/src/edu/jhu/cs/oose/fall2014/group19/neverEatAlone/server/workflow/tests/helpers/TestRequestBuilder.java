@@ -60,6 +60,19 @@ public class TestRequestBuilder {
 	}
 	
 	/**
+	 * Build DeleteContact request
+	 * @return
+	 */
+	public static Map<String,String[]> deleteContactRequest(String username, String contact){
+		
+		Map<String,String[]> request = addContactRequest(username, contact); 
+		request.get("requestType")[0]="Delete";
+		return request; 		
+	}
+	
+	
+	
+	/**
 	 * Build CreateMealNotification request
 	 * @return
 	 */

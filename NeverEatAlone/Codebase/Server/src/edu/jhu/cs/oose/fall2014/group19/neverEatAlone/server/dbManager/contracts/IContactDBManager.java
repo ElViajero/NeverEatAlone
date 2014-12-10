@@ -30,6 +30,14 @@ public interface IContactDBManager {
 	 * @return
 	 */
 	public List<Map<String,String>> GetAllContacts(Map<String,String[]> request);
+	
+	/**
+	 * method to delete a contact
+	 * @param request
+	 * @return
+	 */
+	public List<Map<String,String>> DeleteContact(Map<String,String[]> request);
+
 
 
 }
