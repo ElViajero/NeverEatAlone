@@ -11,9 +11,11 @@ import org.neo4j.kernel.impl.util.StringLogger;
 
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.contracts.IAccountDBManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.contracts.IContactDBManager;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.contracts.INotificationDBManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.services.AccountDBManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.services.ContactDBManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.services.DBManager;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.services.NotificationDBManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.workflow.tests.helpers.TestRequestBuilder;
 
 /**
@@ -70,6 +72,16 @@ public class DatabaseStructureTest {
 		contactDBManager.AddContact(request); 
 		request = TestRequestBuilder.addContactRequest("user2", "user3"); 
 		contactDBManager.AddContact(request); 
+		
+		// create meal notifications
+		INotificationDBManager notificationDBManager = new NotificationDBManager(); 
+		parameters.clear(); 
+		parameters.put("poster", new String[]{"user3"});
+		parameters.put("postID",  new String[]{"1"});
+		String[] recipients = new String[] {"user1", "user2", "user4"}; 
+		parameters.put("recipientList",  recipients);
+		request = TestRequestBuilder.createMealNotificationRequest(parameters); 
+		notificationDBManager.CreateMealNotification(request); 
 
 	}
 

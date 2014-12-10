@@ -59,6 +59,20 @@ public class TestRequestBuilder {
 		return request; 
 	}
 	
+	/**
+	 * Build CreateMealNotification request
+	 * @return
+	 */
+	public static Map<String,String[]> createMealNotificationRequest(Map<String,String[]> parameters){
+		
+		Map<String,String[]> request = new HashMap<String,String[]>(parameters); 
+		
+		request.put("requestID", new String[]{"Notification"});
+		request.put("requestType", new String[]{"Meal"});
+				
+		return request; 
+	}
+	
 	
 	
 }
