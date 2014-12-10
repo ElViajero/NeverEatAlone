@@ -142,23 +142,22 @@ public class RegisterActivity extends Activity {
 			String email, String confirmPassword) {
 
 		if (username.equals("")) {
-			MessageToasterHelper.toastMessage(this, R.string.empty_username);
+			Toast.makeText(this, R.string.empty_username,Toast.LENGTH_SHORT).show();
 			return false;
 		}
 
 		if (email.equals("")) {
-			MessageToasterHelper.toastMessage(this, R.string.empty_email);
+			Toast.makeText(this, R.string.empty_email,Toast.LENGTH_SHORT).show();
 			return false;
 		}
 
 		if (password.equals("")) {
-			MessageToasterHelper.toastMessage(this, R.string.empty_password);
+			Toast.makeText(this, R.string.empty_password,Toast.LENGTH_SHORT).show();
 			return false;
 		}
 
 		if (!password.equals(confirmPassword)) {
-			MessageToasterHelper.toastMessage(this,
-					R.string.different_passwords);
+			Toast.makeText(this, R.string.different_passwords,Toast.LENGTH_SHORT).show();
 			return false;
 		}
 		return true;
