@@ -12,6 +12,7 @@ import org.neo4j.cypher.javacompat.ExecutionResult;
 import org.neo4j.graphdb.DynamicLabel;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
+import org.neo4j.graphdb.Relationship;
 import org.neo4j.graphdb.ResourceIterator;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
@@ -76,16 +77,10 @@ public class DBManager {
 			constraintFor(DynamicLabel.label("User")).
 			assertPropertyIsUnique("username").create();			
 
-
-//			GraphDBInstance.schema().
-//			constraintFor(DynamicLabel.label("User")).
-//			assertPropertyIsUnique("email").create();		
+			GraphDBInstance.schema().
+			constraintFor(DynamicLabel.label("User")).
+			assertPropertyIsUnique("email").create();		
 			
-			String query = "CREATE ConSTRAINT on (n:User) ASSERT n.email IS UNIQUE";
-			ExecutionEngine executionEngine = new ExecutionEngine(GraphDBInstance,
-					StringLogger.SYSTEM);	
-			executionEngine.execute(query);
-
 			/*
 			GraphDBInstance.schema().
 			constraintFor(DynamicLabel.label("Post")).
@@ -164,6 +159,22 @@ public class DBManager {
 						//add the properties. Note the value is returned as string.
 						resultMapList.get(index).
 						put(property, currentNode.getProperty(property).toString());				
+
+					}
+				}
+				
+				else if(entry instanceof org.neo4j.graphdb.Relationship){
+
+					// ********* LOGGING *********
+					System.out.println("IT IS A RELATIONSHIP");
+					// ********* LOGGING *********
+
+					Relationship currentRelation = (Relationship) entry; 
+					// iterate over all the properties for the current relationship object.
+					for(String property : currentRelation.getPropertyKeys()){				
+						//add the properties. Note the value is returned as string.
+						resultMapList.get(index).
+						put(property, currentRelation.getProperty(property).toString());				
 
 					}
 				}

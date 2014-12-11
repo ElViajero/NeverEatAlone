@@ -47,5 +47,31 @@ public class ContactManagementRequestHandler {
 		System.out.println("Reaching GetAllContactRequest");
 		return IContactDBManagerObject.GetAllContacts(request); 
 	}
+	
+	/**
+	 * This method handles requests to delete a contact.
+	 * 
+	 * @param request
+	 * @return
+	 */
+	public List<Map<String,String>> DeleteContactRequest(Map<String,String[]> request){
+
+		System.out.println("Reaching DeleteContactRequest");
+		return IContactDBManagerObject.DeleteContact(request); 
+
+	}
+	
+	/**
+	 * This method handles requests to update a contact's information.
+	 * 
+	 * @param request
+	 * @return
+	 */
+	public List<Map<String,String>> UpdateContactRequest(Map<String,String[]> request){
+
+		System.out.println("Reaching UpdateContactRequest");
+		return IContactDBManagerObject.UpdateContact(request); 
+
+	}
 
 }

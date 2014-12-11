@@ -63,7 +63,7 @@ public class AddContactWorkflowTest {
 		nvps1.add(new BasicNameValuePair("requestID", "Contact"));	    
 		nvps1.add(new BasicNameValuePair("requestType", "Add"));
 		nvps1.add(new BasicNameValuePair("username", "TestUser"));
-		nvps1.add(new BasicNameValuePair("Contactusername", "Test"));
+		nvps1.add(new BasicNameValuePair("contactusername", "Test"));
 
 		//execute the request.
 		CloseableHttpResponse response1 = WorkflowTestHelper.ExecuteRequest(nvps1);

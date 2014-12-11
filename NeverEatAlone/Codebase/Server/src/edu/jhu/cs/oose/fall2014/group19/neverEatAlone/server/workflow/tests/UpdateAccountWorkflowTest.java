@@ -52,7 +52,7 @@ public class UpdateAccountWorkflowTest {
 		List<Map<String,String>> returnMap = WorkflowTestHelper.GetReponseMap(response); 
 		System.out.println(returnMap);
 		assertTrue(returnMap.toString().equals(
-				"[{Status=Success}, {email=emailA, username=UserA, Available=YES, password=pwB}]"));
+				"[{Status=Success}, {password=pwB, email=emailA, username=UserA}]"));
 		
 		// change both the email and password of A
 		System.out.println("changing the email and password of UserA...");
@@ -68,22 +68,7 @@ public class UpdateAccountWorkflowTest {
 		returnMap = WorkflowTestHelper.GetReponseMap(response); 
 		System.out.println(returnMap);
 		assertTrue(returnMap.toString().equals(
-				"[{Status=Success}, {email=emailA2, username=UserA, Available=YES, password=pwA2}]"));
-		
-		// change the availability status
-		System.out.println("changing the availability of UserA...");
-		nvps = new ArrayList <NameValuePair>();	    
-		nvps.add(new BasicNameValuePair("requestID", "Account"));	    
-		nvps.add(new BasicNameValuePair("requestType", "Update"));
-		nvps.add(new BasicNameValuePair("username", "UserA"));
-		nvps.add(new BasicNameValuePair("Available", "NO"));
-		
-		// check the response
-		response = WorkflowTestHelper.ExecuteRequest(nvps);
-		returnMap = WorkflowTestHelper.GetReponseMap(response); 
-		System.out.println(returnMap);
-		assertTrue(returnMap.toString().equals(
-				"[{Status=Success}, {email=emailA2, username=UserA, Available=NO, password=pwA2}]"));
+				"[{Status=Success}, {password=pwA2, email=emailA2, username=UserA}]"));
 		
 		// change the email of A to emailB, it violate the uniqueness constraint and should fail
 		System.out.println("changing the email of UserA...");
