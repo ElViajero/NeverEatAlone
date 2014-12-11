@@ -5,5 +5,6 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="logo_padding">32dp</dimen>
     <dimen name="header_height">150dp</dimen>
+    <dimen name="border_thickness">6dp</dimen>
 
 </resources>
