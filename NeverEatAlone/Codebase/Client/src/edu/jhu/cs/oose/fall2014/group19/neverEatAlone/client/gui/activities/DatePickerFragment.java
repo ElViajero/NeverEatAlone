@@ -5,7 +5,12 @@ import android.app.DatePickerDialog.OnDateSetListener;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
-
+/**
+ * 
+ * This class construct a date picker.
+ * @author Runze Tang
+ * 
+ */
 public class DatePickerFragment extends DialogFragment {
 	OnDateSetListener onDateSet;
 	private int year, month, day;

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Never Eat Alone</string>
+    <string name="app_name">NeverEatAlone</string>
     <string name="edit_message">Enter a message</string>
     <string name="button_send">Send</string>
     <string name="action_settings">Settings</string>
@@ -10,10 +10,10 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_search">Search</string>
     <string name="signup">Sign Up</string>
-    <string name="username">username</string>
+    <string name="username">Username</string>
     <string name="login">Login</string>
     <string name="logout">Log Out</string>
-    <string name="password">password</string>
+    <string name="password">Password</string>
     <string name="old_password">Your Old password</string>
     <string name="new_password">New password</string>
     <string name="confirm_password">Confirm password</string>
@@ -28,7 +28,7 @@
     <string name="title_activity_contacts">ContactsActivity</string>
     <string name="title_activity_profile">ProfileActivity</string>
     <string name="title_activity_create_meal_information">CreateMealInformationActivity</string>
-    <string name="CreateMealInformation_meal_information">Meal Information</string>
+    <string name="CreateMealInformation_meal_information">Meal Info</string>
     <string name="when">When?</string>
     <string name="start_time">Start Time</string>
     <string name="end_time">End Time</string>
@@ -87,6 +87,7 @@
     <string name="empty_password">No password provided.</string>
     <string name="different_passwords">Passwords do not match.</string>
 	<string name="contacts">Contacts</string>
-	<string name="friends_request">Friends Request</string>
+	<string name="friends_request">Friend Request</string>
 	<string name="availability_status">Availability Status:</string>
+	<string name="meal_details">Meal Details</string>
 </resources>

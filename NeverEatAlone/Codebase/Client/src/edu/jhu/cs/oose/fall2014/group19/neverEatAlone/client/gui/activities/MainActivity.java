@@ -46,13 +46,13 @@ public class MainActivity extends Activity {
 		requestType = "CheckCredentials";
 		System.out.println("inside onCreate in MainAcitivty");
 		MessageToasterHelper.toastMessage(this, "inside oncreate");
-		TextView tv =
-				(TextView) findViewById(R.id.tv1);
-		Typeface tf = Typeface.createFromAsset(getAssets(),
-				"fonts/Windsong.ttf");
-		tv.setTypeface(tf);
-		tv.setTextSize(100);
-		tv.setText("NeverEatAlone");
+//		TextView tv =
+//				(TextView) findViewById(R.id.tv1);
+//		Typeface tf = Typeface.createFromAsset(getAssets(),
+//				"fonts/Windsong.ttf");
+//		tv.setTypeface(tf);
+//		tv.setTextSize(100);
+//		tv.setText("NeverEatAlone");
 	}
 
 	/**

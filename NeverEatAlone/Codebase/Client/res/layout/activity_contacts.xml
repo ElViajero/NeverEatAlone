@@ -1,62 +1,65 @@
-<!--@author Hai Tang  -->
+<!-- @author Hai Tang  @author Yueling Loh -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.ContactsActivity" >
 
+    <!-- Header aligned to top -->
+
+    <RelativeLayout
+        android:id="@+id/header_contacts"
+        style="@style/HeaderTheme" >
+
         <TextView
-        android:id="@+id/textView_contacts_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:text="@string/contacts"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-        
-    <ListView
-        android:id="@android:id/list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/button_contacts_addcontacts" 
-        android:layout_marginTop="50dp">
-        
-    </ListView>
+            android:id="@+id/textView_contacts_title"
+            style="@style/HeaderTextTheme"
+            android:text="@string/contacts" />
+    </RelativeLayout>
 
-    <Button
-        android:id="@+id/button_contacts_notification"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textView_contacts_title"
-        android:layout_weight="1"
-        android:background="@drawable/buttonbackground"
-        android:onClick="onContactNotificationButtonClick"
-        android:paddingLeft="50dp"
-        android:paddingRight="50dp"
-        android:layout_marginTop="50dp"
-        android:text="@string/contact_notification" />
+    <!-- Main Space -->
 
+    <RelativeLayout
+        android:id="@+id/main_contacts"
+        style="@style/MainLayoutTheme"
+        android:layout_below="@+id/header_contacts" >
 
-    <Button
-        android:id="@+id/button_contacts_addcontacts"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-		android:layout_toLeftOf="@+id/button_contacts_notification"
-		android:layout_below="@+id/textView_contacts_title"
-        android:layout_weight="1"
-        android:background="@drawable/buttonbackground"
-        android:paddingLeft="50dp"
-        android:paddingRight="50dp"
-        android:onClick="onAddFriendsButtonClick"  
-        android:layout_marginTop="50dp"
-        android:text="@string/add_friends" />
+        <ListView
+            android:id="@android:id/list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/button_contacts_addcontacts"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp" >
+        </ListView>
 
+        <Button
+            android:id="@+id/button_contacts_notification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="50dp"
+            android:layout_weight="1"
+            android:background="@drawable/buttonbackground"
+            android:onClick="onContactNotificationButtonClick"
+            android:paddingLeft="50dp"
+            android:paddingRight="50dp"
+            android:text="@string/contact_notification" />
+
+        <Button
+            android:id="@+id/button_contacts_addcontacts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/textView_contacts_title"
+            android:layout_marginTop="50dp"
+            android:layout_toLeftOf="@+id/button_contacts_notification"
+            android:layout_weight="1"
+            android:background="@drawable/buttonbackground"
+            android:onClick="onAddFriendsButtonClick"
+            android:paddingLeft="50dp"
+            android:paddingRight="50dp"
+            android:text="@string/add_friends" />
+    </RelativeLayout>
 
 </RelativeLayout>

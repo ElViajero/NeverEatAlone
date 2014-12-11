@@ -1,56 +1,61 @@
-<!--@author Hai Tang  -->
+<!-- @author Hai Tang @author Yueling Loh -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.InvitesActivity" >
 
-    <TextView
-        android:id="@+id/app_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="0dp"
-        android:text="@string/app_name"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+    <!-- Header aligned to top -->
 
+    <RelativeLayout
+        android:id="@+id/header_invites"
+        style="@style/HeaderTheme" >
 
-    <Switch
-        android:id="@+id/switch_availability_status"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/invites_button_create"
-        android:layout_marginTop="50dp"
-        android:paddingLeft="50dp"
-        android:paddingRight="50dp"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/buttonbackground"
-        android:text="@string/availability_status" />
+        <TextView
+            android:id="@+id/app_name"
+            style="@style/HeaderTextTheme"
+            android:text="@string/app_name" />
+    </RelativeLayout>
 
-    <ListView
-        android:id="@android:id/list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:layout_below="@+id/switch_availability_status" >
-    </ListView>
+    <!-- Main Space -->
 
-    <Button
-        android:id="@+id/invites_button_create"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-		android:layout_centerHorizontal="true"
-        android:layout_below="@+id/app_name"
-        android:background="@drawable/buttonbackground"
-        android:onClick="onCreateButtonClick"
-        android:paddingLeft="50dp"
-        android:paddingRight="50dp"
-        android:layout_marginTop="50dp"
-        android:text="@string/create" />
+    <RelativeLayout
+        android:id="@+id/main_invites"
+        style="@style/MainLayoutTheme"
+        android:layout_below="@+id/header_invites" >
+
+        <Switch
+            android:id="@+id/switch_availability_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/invites_button_create"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/buttonbackground"
+            android:paddingLeft="50dp"
+            android:paddingRight="50dp"
+            android:text="@string/availability_status" />
+
+        <ListView
+            android:id="@android:id/list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/switch_availability_status"
+            android:layout_marginTop="50dp" >
+        </ListView>
+
+        <Button
+            android:id="@+id/invites_button_create"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/buttonbackground"
+            android:onClick="onCreateButtonClick"
+            android:paddingLeft="50dp"
+            android:paddingRight="50dp"
+            android:text="@string/create" />
+    </RelativeLayout>
 
 </RelativeLayout>
