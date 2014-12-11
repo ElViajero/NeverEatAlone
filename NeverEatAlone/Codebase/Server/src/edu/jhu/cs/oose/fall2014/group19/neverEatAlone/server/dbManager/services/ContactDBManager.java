@@ -175,10 +175,10 @@ public class ContactDBManager implements IContactDBManager {
 
 			// Fetch the contact via query
 
-			String query = "MATCH (a:User)-[:KNOWS]->(n:User)"
+			String query = "MATCH (a:User)-[r:KNOWS]->(n:User)"
 					+ " WHERE "
 					+ "a.username = {username}"
-					+ "RETURN n.username AS username";
+					+ "RETURN n.username AS username, r.alias AS alias";
 
 			try{
 				//execute the query

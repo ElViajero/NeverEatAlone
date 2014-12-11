@@ -81,7 +81,7 @@ public class UpdateContactWorkflowTest {
 		response = WorkflowTestHelper.ExecuteRequest(nvps);
 		returnMap = WorkflowTestHelper.GetReponseMap(response); 
 		System.out.println("fetching contacts of UserA: "+returnMap);
-		assertTrue(returnMap.toString().equals("[{Status=Success}, {username=UserB}]"));
+		assertTrue(returnMap.toString().equals("[{Status=Success}, {alias=Messi, username=UserB}]"));
 
 		// book keeping 
 		System.out.println("deleting all test accounts...");
