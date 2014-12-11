@@ -21,8 +21,8 @@
 
     <RelativeLayout
         android:id="@+id/main_invites"
-        android:layout_below="@+id/header_invites"
-        style="@style/MainLayoutTheme" >
+        style="@style/MainLayoutTheme"
+        android:layout_below="@+id/header_invites" >
 
         <Switch
             android:id="@+id/switch_availability_status"

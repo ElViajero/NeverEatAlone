@@ -4,251 +4,258 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/layout_background"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.CreateMealInformationActivity" >
 
-    <TextView
-        android:id="@+id/CreateMealInformation_text_mealinformation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:text="@string/CreateMealInformation_meal_information"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+    <!-- Header aligned to top -->
 
-    <LinearLayout
-        android:id="@+id/CreateMealInformation_layout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp"
-        android:orientation="vertical"
-        android:layout_below="@+id/CreateMealInformation_text_mealinformation" 
-        android:paddingLeft="50dp"
-        android:paddingRight="50dp" >
+    <RelativeLayout
+        android:id="@+id/header_createMealInfo"
+        style="@style/HeaderTheme" >
 
         <TextView
-            android:id="@+id/CreateMealInformation_text_when"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:paddingLeft="50dp"
-            android:paddingRight="50dp"
-            android:text="@string/when"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:id="@+id/CreateMealInformation_text_mealinformation"
+            style="@style/HeaderTextTheme"
+            android:text="@string/CreateMealInformation_meal_information" />
+    </RelativeLayout>
+
+    <!-- Main Space -->
+
+    <RelativeLayout
+        android:id="@+id/main_createMealInfo"
+        style="@style/MainLayoutTheme"
+        android:layout_below="@+id/header_createMealInfo" >
 
         <LinearLayout
-            android:id="@+id/CreateMealInformation_layout_start"
+            android:id="@+id/CreateMealInformation_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/CreateMealInformation_text_mealinformation"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:paddingLeft="50dp"
             android:paddingRight="50dp" >
 
             <TextView
-                android:id="@+id/CreateMealInformation_text_startTime"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/start_time" />
-
-            <Button
-                android:id="@+id/CreateMealInformation_button_startDate"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/buttonbackground"
-                android:onClick="onStartDataButtonClick"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp"
-                android:text="@string/SelectDate" />
-
-            <Button
-                android:id="@+id/CreateMealInformation_button_startTime"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/buttonbackground"
-                android:onClick="onstartTimeButtonClick"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp"
-                android:text="@string/SelectTime" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/CreateMealInformation_layout_end"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal"
-            android:paddingLeft="50dp"
-            android:paddingRight="50dp" >
-
-            <TextView
-                android:id="@+id/CreateMealInformation_text_endTime"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/end_time" />
-
-            <Button
-                android:id="@+id/CreateMealInformation_button_endDate"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/buttonbackground"
-                android:onClick="onEndDataButtonClick"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp"
-                android:text="@string/SelectDate" />
-
-            <Button
-                android:id="@+id/CreateMealInformation_button_endTime"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@drawable/buttonbackground"
-                android:onClick="onendTimeButtonClick"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp"
-                android:text="@string/SelectTime" />
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/CreateMealInformation_text_where"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:paddingLeft="50dp"
-            android:paddingRight="50dp"
-            android:text="@string/where"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <LinearLayout
-            android:id="@+id/CreateMealInformation_layout_where"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal"
-            android:paddingLeft="50dp"
-            android:paddingRight="50dp" >
-
-            <TextView
-                android:id="@+id/CreateMealInformation_text_restaurant"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/restaurant" />
-
-            <EditText
-                android:id="@+id/edit_restaurant"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:background="@drawable/edittext"
-                android:inputType="text" />
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/CreateMealInformation_text_other"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:paddingLeft="50dp"
-            android:paddingRight="50dp"
-            android:text="@string/other_information"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <LinearLayout
-            android:id="@+id/CreateMealInformation_layout_maxnumber"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"
-            android:orientation="horizontal"
-            android:paddingLeft="50dp"
-            android:paddingRight="50dp" >
-
-            <TextView
-                android:id="@+id/CreateMealInformation_text_maxnumber"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/max_number" />
-
-            <EditText
-                android:id="@+id/edit_maxnumber"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="2"
-                android:background="@drawable/edittext"
-                android:inputType="number" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/CreateMealInformation_layout_allowfriendinvite"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="30dp"
-            android:orientation="horizontal"
-            android:paddingLeft="50dp"
-            android:paddingRight="50dp" >
-
-            <Switch
-                android:id="@+id/switch_allowfriendinvite"
+                android:id="@+id/CreateMealInformation_text_when"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
-                android:background="@drawable/buttonbackground"
+                android:layout_marginTop="30dp"
                 android:paddingLeft="50dp"
                 android:paddingRight="50dp"
-                android:text="@string/allow_friend_invite"
-                android:textOff="@string/capital_no"
-                android:textOn="@string/capital_yes" />
-        </LinearLayout>
+                android:text="@string/when"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
-        <LinearLayout
-            android:id="@+id/CreateMealInformation_layout_buttons"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="30dp"
-            android:orientation="horizontal"
-            android:paddingLeft="50dp"
-            android:paddingRight="50dp" >
-
-            <Button
-                android:id="@+id/CreateMealInformation_button_back"
-                android:layout_width="0dp"
+            <LinearLayout
+                android:id="@+id/CreateMealInformation_layout_start"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_weight="1"
-                android:background="@drawable/buttonbackground"
-                android:onClick="onBackButtonClick"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
                 android:paddingLeft="50dp"
-                android:paddingRight="50dp"
-                android:text="@string/back" />
+                android:paddingRight="50dp" >
 
-            <Button
-                android:id="@+id/CreateMealInformation_button_next"
-                android:layout_width="0dp"
+                <TextView
+                    android:id="@+id/CreateMealInformation_text_startTime"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/start_time" />
+
+                <Button
+                    android:id="@+id/CreateMealInformation_button_startDate"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/buttonbackground"
+                    android:onClick="onStartDataButtonClick"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:text="@string/SelectDate" />
+
+                <Button
+                    android:id="@+id/CreateMealInformation_button_startTime"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/buttonbackground"
+                    android:onClick="onstartTimeButtonClick"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:text="@string/SelectTime" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/CreateMealInformation_layout_end"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_weight="1"
-                android:background="@drawable/buttonbackground"
-                android:onClick="onNextButtonClick"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:paddingLeft="50dp"
+                android:paddingRight="50dp" >
+
+                <TextView
+                    android:id="@+id/CreateMealInformation_text_endTime"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/end_time" />
+
+                <Button
+                    android:id="@+id/CreateMealInformation_button_endDate"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/buttonbackground"
+                    android:onClick="onEndDataButtonClick"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:text="@string/SelectDate" />
+
+                <Button
+                    android:id="@+id/CreateMealInformation_button_endTime"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/buttonbackground"
+                    android:onClick="onendTimeButtonClick"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp"
+                    android:text="@string/SelectTime" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/CreateMealInformation_text_where"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
                 android:paddingLeft="50dp"
                 android:paddingRight="50dp"
-                android:text="@string/next" />
+                android:text="@string/where"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <LinearLayout
+                android:id="@+id/CreateMealInformation_layout_where"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:paddingLeft="50dp"
+                android:paddingRight="50dp" >
+
+                <TextView
+                    android:id="@+id/CreateMealInformation_text_restaurant"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/restaurant" />
+
+                <EditText
+                    android:id="@+id/edit_restaurant"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:background="@drawable/edittext"
+                    android:inputType="text" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/CreateMealInformation_text_other"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:paddingLeft="50dp"
+                android:paddingRight="50dp"
+                android:text="@string/other_information"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <LinearLayout
+                android:id="@+id/CreateMealInformation_layout_maxnumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:paddingLeft="50dp"
+                android:paddingRight="50dp" >
+
+                <TextView
+                    android:id="@+id/CreateMealInformation_text_maxnumber"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/max_number" />
+
+                <EditText
+                    android:id="@+id/edit_maxnumber"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:background="@drawable/edittext"
+                    android:inputType="number" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/CreateMealInformation_layout_allowfriendinvite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="30dp"
+                android:orientation="horizontal"
+                android:paddingLeft="50dp"
+                android:paddingRight="50dp" >
+
+                <Switch
+                    android:id="@+id/switch_allowfriendinvite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="0dp"
+                    android:background="@drawable/buttonbackground"
+                    android:paddingLeft="50dp"
+                    android:paddingRight="50dp"
+                    android:text="@string/allow_friend_invite"
+                    android:textOff="@string/capital_no"
+                    android:textOn="@string/capital_yes" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/CreateMealInformation_layout_buttons"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="30dp"
+                android:orientation="horizontal"
+                android:paddingLeft="50dp"
+                android:paddingRight="50dp" >
+
+                <Button
+                    android:id="@+id/CreateMealInformation_button_back"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/buttonbackground"
+                    android:onClick="onBackButtonClick"
+                    android:paddingLeft="50dp"
+                    android:paddingRight="50dp"
+                    android:text="@string/back" />
+
+                <Button
+                    android:id="@+id/CreateMealInformation_button_next"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/buttonbackground"
+                    android:onClick="onNextButtonClick"
+                    android:paddingLeft="50dp"
+                    android:paddingRight="50dp"
+                    android:text="@string/next" />
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
+    </RelativeLayout>
 
 </RelativeLayout>

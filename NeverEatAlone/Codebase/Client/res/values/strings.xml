@@ -87,6 +87,7 @@
     <string name="empty_password">No password provided.</string>
     <string name="different_passwords">Passwords do not match.</string>
 	<string name="contacts">Contacts</string>
-	<string name="friends_request">Friends Request</string>
+	<string name="friends_request">Friend Request</string>
 	<string name="availability_status">Availability Status:</string>
+	<string name="meal_details">Meal Details</string>
 </resources>

@@ -1,93 +1,98 @@
-<!-- @author Hai Tang -->
+<!-- @author Hai Tang @ Yueling Loh -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@drawable/layout_background"
     tools:context="edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.AddFriendsActivity" >
 
-    <TextView
-        android:id="@+id/textView_addfriends_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp"
-        android:text="@string/add_friends"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+    <!-- Header aligned to top -->
 
-    <Button
-        android:id="@+id/button_addfriends_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textView_addfriends_title"
-        android:onClick="onBackButtonClick"
-        android:background="@drawable/buttonbackground"
-		android:paddingLeft="50dp"
-		android:paddingRight="50dp"
-		android:layout_marginTop="25dp"
-        android:text="@string/back" />
+    <RelativeLayout
+        android:id="@+id/header_addFriends"
+        style="@style/HeaderTheme" >
 
-    <TextView
-        android:id="@+id/textView_addfriends_addbyusername"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_marginTop="30dp"
-        android:layout_above="@+id/editText_addfriends_username"
-        android:text="@string/search_by_username"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        <TextView
+            android:id="@+id/textView_addfriends_title"
+            style="@style/HeaderTextTheme"
+            android:text="@string/add_friends" />
+    </RelativeLayout>
 
-    <EditText
-        android:id="@+id/editText_addfriends_username"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_above="@+id/textView_addfriends_addbyemail"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/edittext"
-        android:ems="10" >
+    <!-- Main Space -->
 
-        <requestFocus />
-    </EditText>
+    <RelativeLayout
+        android:id="@+id/main_addFriends"
+        style="@style/MainLayoutTheme"
+        android:layout_below="@+id/header_addFriends" >
 
-    <TextView
-        android:id="@+id/textView_addfriends_addbyemail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"
-        android:layout_marginTop="30dp"
-        android:text="@string/search_by_email"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        <Button
+            android:id="@+id/button_addfriends_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/textView_addfriends_title"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/buttonbackground"
+            android:onClick="onBackButtonClick"
+            android:paddingLeft="50dp"
+            android:paddingRight="50dp"
+            android:text="@string/back" />
 
-    <EditText
-        android:id="@+id/editText_addfriends_email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textView_addfriends_addbyemail"
-        android:layout_marginTop="20dp"
-        android:ems="10"
-        android:background="@drawable/edittext"
-        android:inputType="textEmailAddress" />
+        <TextView
+            android:id="@+id/textView_addfriends_addbyusername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/editText_addfriends_username"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="30dp"
+            android:text="@string/search_by_username"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <Button
-        android:id="@+id/button_addfriends_search"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:onClick="onSearchButtonClick"
-        android:background="@drawable/buttonbackground"
-		android:paddingLeft="50dp"
-		android:paddingRight="50dp"
-		android:layout_marginTop="50dp"
-        android:text="@string/search" />
+        <EditText
+            android:id="@+id/editText_addfriends_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/textView_addfriends_addbyemail"
+            android:layout_alignParentLeft="true"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/edittext"
+            android:ems="10" >
+
+            <requestFocus />
+        </EditText>
+
+        <TextView
+            android:id="@+id/textView_addfriends_addbyemail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="30dp"
+            android:text="@string/search_by_email"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <EditText
+            android:id="@+id/editText_addfriends_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/textView_addfriends_addbyemail"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/edittext"
+            android:ems="10"
+            android:inputType="textEmailAddress" />
+
+        <Button
+            android:id="@+id/button_addfriends_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/buttonbackground"
+            android:onClick="onSearchButtonClick"
+            android:paddingLeft="50dp"
+            android:paddingRight="50dp"
+            android:text="@string/search" />
+    </RelativeLayout>
 
 </RelativeLayout>
