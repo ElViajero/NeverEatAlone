@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <solid android:color="#94FFB9" />
+    <solid android:color="#53A4BF" />
     
 <!--      <gradient
         android:angle="90"
