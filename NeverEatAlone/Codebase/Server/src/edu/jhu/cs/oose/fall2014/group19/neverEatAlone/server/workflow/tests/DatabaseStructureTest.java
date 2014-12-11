@@ -29,7 +29,7 @@ public class DatabaseStructureTest {
 	/**
 	 * This method creates a small test database 
 	 */
-	// @Test
+	@Test
 	public void createTestDatabase(){
 
 		Map<String,String[]> request; 

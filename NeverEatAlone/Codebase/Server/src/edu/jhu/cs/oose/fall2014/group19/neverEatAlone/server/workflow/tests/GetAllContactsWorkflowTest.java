@@ -23,7 +23,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.workflow.tests.help
 public class GetAllContactsWorkflowTest {
 	/**
 	 * This method creates 3 accounts UserA, UserB, UserC. 
-	 * A knows both B and C, B knows A but not C, C knows no one.
+	 * A adds both B and C, B adds A but not C, C adds no one.
 	 * Fetching contacts for A, B and C should return the correct response.  
 	 * @throws IOException 
 	 */
@@ -79,8 +79,7 @@ public class GetAllContactsWorkflowTest {
 		CloseableHttpResponse response = WorkflowTestHelper.ExecuteRequest(nvps);
 		List<Map<String,String>> returnMap = WorkflowTestHelper.GetReponseMap(response); 
 		System.out.println(returnMap);
-		assertTrue(returnMap.toString().equals("[{Status=Success}, "
-				+ "{Available=YES, username=UserB}, {Available=YES, username=UserC}]"));
+		assertTrue(returnMap.toString().equals("[{Status=Success}, {alias=, username=UserB}, {alias=, username=UserC}]"));
 		
 		//get all contacts of B
 		System.out.println("getting all contacts of UserB...");
@@ -94,8 +93,7 @@ public class GetAllContactsWorkflowTest {
 		response = WorkflowTestHelper.ExecuteRequest(nvps);
 		returnMap = WorkflowTestHelper.GetReponseMap(response); 
 		System.out.println(returnMap);
-		assertTrue(returnMap.toString().equals("[{Status=Success}, "
-				+ "{Available=YES, username=UserA}]"));
+		assertTrue(returnMap.toString().equals("[{Status=Success}, {alias=, username=UserA}]"));
 		
 		//get all contacts of C
 		System.out.println("getting all contacts of UserC...");
@@ -109,7 +107,7 @@ public class GetAllContactsWorkflowTest {
 		response = WorkflowTestHelper.ExecuteRequest(nvps);
 		returnMap = WorkflowTestHelper.GetReponseMap(response); 
 		System.out.println(returnMap);
-		assertTrue(returnMap.toString().equals("[{Status=Failed}]"));
+		assertTrue(returnMap.toString().equals("[{Status=Success}, {alias=, username=UserA}]"));
 		
 		// book keeping 
 		System.out.println("deleting all test accounts...");

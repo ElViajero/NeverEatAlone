@@ -81,6 +81,7 @@ public class ContactDBManager implements IContactDBManager {
 			Map<String,Object> parameters = new HashMap<String,Object>();
 			parameters.put("username",queryParamterMap.get("username"));
 			parameters.put("contactusername",queryParamterMap.get("contactusername"));
+			parameters.put("alias", ""); 
 
 			//create cypher query to add a relation in the database.
 			// contact is always added as two ways
@@ -88,8 +89,9 @@ public class ContactDBManager implements IContactDBManager {
 					+ " WHERE "
 					+ "a.username = {username} AND "
 					+ "b.username = {contactusername}"
-					+ "CREATE UNIQUE (a)-[n:KNOWS]->(b), (a)<-[:KNOWS]-(b) "
-					+ "RETURN n";
+					+ "CREATE UNIQUE (a)-[r1:KNOWS]->(b), (a)<-[r2:KNOWS]-(b) "
+					+ "SET r1.alias = {alias}, r2.alias = {alias} "
+					+ "RETURN r1";
 
 			// Check for uniqueness constraint violation.
 			try{
