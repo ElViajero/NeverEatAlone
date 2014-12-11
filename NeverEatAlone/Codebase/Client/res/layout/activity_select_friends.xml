@@ -1,72 +1,91 @@
-<!-- @author Hai Tang -->
+<!-- @author Hai Tang @author Yueling Loh-->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     android:background="@drawable/layout_background"
     
     tools:context="edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.SelectFriendsActivity" >
 
+    <!-- Header aligned to top -->
+    
+    <RelativeLayout
+        android:id="@+id/header_selectfriends"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/header_height"
+        android:layout_alignParentTop="true"
+        android:background="#6174C9"
+        android:gravity="center" >
     <TextView
         android:id="@+id/textView_selectfriends_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_gravity="center_vertical"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="34dp"
         android:text="@string/select_friends"
         android:textAppearance="?android:attr/textAppearanceLarge" />
+     </RelativeLayout>
 
-    <Button
-        android:id="@+id/button_selectfriends_back"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textView_selectfriends_title"
-        android:onClick="onBackButtonClick"
-        android:background="@drawable/buttonbackground"
-        android:paddingLeft="50dp"
-        android:paddingRight="50dp"
-        android:text="@string/back" />
-
-    <ListView
-        android:id="@android:id/list"
+     <!-- Main Space -->
+     
+     <RelativeLayout
+        android:id="@+id/main_selectfriends"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/button_selectfriends_back"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
-        android:layout_marginBottom="163dp" >
-    </ListView>
+        android:layout_height="match_parent"
+        android:layout_below="@+id/header_selectfriends"
+        android:background="@drawable/layout_background"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin" >
 
-    <Button
-        android:id="@+id/button_selectfriends_broadcast"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="97dp"
-        android:onClick="onBroadcastButtonClick"
-        android:background="@drawable/buttonbackground"
-        android:paddingLeft="50dp"
-        android:paddingRight="50dp"
-        android:layout_marginTop="50dp"
-        android:text="@string/broadcast_to_all_friends" />
+        <Button
+            android:id="@+id/button_selectfriends_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/buttonbackground"
+            android:onClick="onBackButtonClick"
+            android:paddingLeft="50dp"
+            android:paddingRight="50dp"
+            android:text="@string/back" />
 
-    <Button
-        android:id="@+id/button_selectfriends_next"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:onClick="onPostButtonClick"
-        android:background="@drawable/buttonbackground"
-        android:paddingLeft="50dp"
-        android:paddingRight="50dp"
-        android:text="@string/post" />
+        <ListView
+            android:id="@android:id/list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/button_selectfriends_back"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="163dp"
+            android:layout_marginTop="50dp" >
+        </ListView>
+
+        <Button
+            android:id="@+id/button_selectfriends_broadcast"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="97dp"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/buttonbackground"
+            android:onClick="onBroadcastButtonClick"
+            android:paddingLeft="50dp"
+            android:paddingRight="50dp"
+            android:text="@string/broadcast_to_all_friends" />
+
+        <Button
+            android:id="@+id/button_selectfriends_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/buttonbackground"
+            android:onClick="onPostButtonClick"
+            android:paddingLeft="50dp"
+            android:paddingRight="50dp"
+            android:text="@string/post" />
+    </RelativeLayout>
 
 </RelativeLayout>
