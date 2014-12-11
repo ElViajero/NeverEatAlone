@@ -9,22 +9,14 @@
 
     <RelativeLayout
         android:id="@+id/header_invites"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/header_height"
-        android:layout_alignParentTop="true"
-        android:background="#6174C9"
-        android:gravity="center" >
+        style="@style/HeaderTheme" >
 
         <TextView
             android:id="@+id/app_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="0dp"
-            android:text="@string/app_name"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
-    </RelativeLayout>a
+            style="@style/HeaderTextTheme"
+            android:text="@string/app_name" />
+    </RelativeLayout>
+
 
     <!-- Main Space -->
 

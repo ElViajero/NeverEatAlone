@@ -1,34 +1,26 @@
-<!-- @author Hai Tang @author Yueling Loh-->
+<!-- @author Hai Tang @author Yueling Loh -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/layout_background"
-    
     tools:context="edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.SelectFriendsActivity" >
 
     <!-- Header aligned to top -->
-    
+
     <RelativeLayout
         android:id="@+id/header_selectfriends"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/header_height"
-        android:layout_alignParentTop="true"
-        android:background="#6174C9"
-        android:gravity="center" >
-    <TextView
-        android:id="@+id/textView_selectfriends_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_centerHorizontal="true"
-        android:text="@string/select_friends"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-     </RelativeLayout>
+        style="@style/HeaderTheme" >
 
-     <!-- Main Space -->
-     
-     <RelativeLayout
+        <TextView
+            android:id="@+id/textView_selectfriends_title"
+            style="@style/HeaderTextTheme"
+            android:text="@string/select_friends" />
+    </RelativeLayout>
+
+    <!-- Main Space -->
+
+    <RelativeLayout
         android:id="@+id/main_selectfriends"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
