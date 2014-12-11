@@ -178,7 +178,7 @@ public class ContactDBManager implements IContactDBManager {
 			String query = "MATCH (a:User)-[:KNOWS]->(n:User)"
 					+ " WHERE "
 					+ "a.username = {username}"
-					+ "RETURN n.username AS username, n.Available AS Available";
+					+ "RETURN n.username AS username";
 
 			try{
 				//execute the query
@@ -265,6 +265,79 @@ public class ContactDBManager implements IContactDBManager {
 			}
 
 			System.out.println("deleting result: "+resultMapList);
+
+		}
+
+		return resultMapList;
+
+	}
+
+
+	/**
+	 * method to update a contact's information
+	 * @author Xiaozhou Zhou
+	 */
+	@Override
+	public List<Map<String, String>> UpdateContact(Map<String, String[]> request) {
+
+		// ********* LOGGING ********* 
+		System.out.println("Reached UpdateContact in ContactDBManager");
+		System.out.flush();
+		// ********* LOGGING ********* 
+
+		//create a duplicate map.
+		Map<String,String[]> modifiableRequestMap = new HashMap<String,String[]>(request);
+		modifiableRequestMap.remove("requestType");
+		modifiableRequestMap.remove("requestID");
+		
+		// get username and contactusername 
+		String username = modifiableRequestMap.get("username")[0]; 
+		String contactusername = modifiableRequestMap.get("contactusername")[0]; 
+		modifiableRequestMap.remove("username"); 
+		modifiableRequestMap.remove("contactusername"); 
+
+		// ************************ LOGGING ************************
+		System.out.println("username :"+ username);
+		System.out.println("contact :"+ contactusername);
+
+		//format the parameters for the query.		
+		Map<String, String> queryParamterMap = 
+				DBManager.GetQueryParameterMap(modifiableRequestMap);
+
+		// set up parameters to execute and store the result of query
+		ExecutionEngine executionEngine = new ExecutionEngine(GraphDBInstance,
+				StringLogger.SYSTEM);				
+		ExecutionResult result;
+		List<Map<String,String>> resultMapList;
+
+
+		try ( Transaction tx = GraphDBInstance.beginTx() )
+		{
+			//create a params map.
+			Map<String,Object> parameters = new HashMap<String,Object>();
+			parameters.put("username",username);
+			parameters.put("contactusername",contactusername);
+			parameters.put("updateParameters",queryParamterMap);
+
+			// update the property of the relationship in database
+			String query = "MATCH (n:User)-[r:KNOWS]->(a:User) "
+					+ " WHERE n.username = {username} AND a.username = {contactusername} "
+					+ "SET r += {updateParameters} "
+					+ "RETURN r ";
+
+			try{
+				//execute the query
+				result = executionEngine.execute(query,parameters);
+				tx.success();
+			}catch(Exception e){
+				System.out.println("Constraint violation in add contact. :: ");
+				System.out.println(e.getMessage());
+				result = null;
+				tx.failure();
+			}
+
+			// This is the data returned.
+			resultMapList = DBManager.GetResultMapList(result);
 
 		}
 

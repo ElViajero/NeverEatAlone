@@ -38,6 +38,13 @@ public interface IContactDBManager {
 	 */
 	public List<Map<String,String>> DeleteContact(Map<String,String[]> request);
 
+	/**
+	 * method to update a contact
+	 * @param request
+	 * @return
+	 */
+	public List<Map<String, String>> UpdateContact(Map<String, String[]> request);
+
 
 
 }

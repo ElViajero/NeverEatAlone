@@ -60,5 +60,18 @@ public class ContactManagementRequestHandler {
 		return IContactDBManagerObject.DeleteContact(request); 
 
 	}
+	
+	/**
+	 * This method handles requests to update a contact's information.
+	 * 
+	 * @param request
+	 * @return
+	 */
+	public List<Map<String,String>> UpdateContactRequest(Map<String,String[]> request){
+
+		System.out.println("Reaching UpdateContactRequest");
+		return IContactDBManagerObject.UpdateContact(request); 
+
+	}
 
 }
