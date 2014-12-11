@@ -53,14 +53,15 @@ public class EditProfileActivity extends Activity {
 	/**
 	 * This method is used to set the font style of the title of each page
 	 * @author: Hai Tang
+	 * @author: Yueling Loh
 	 */
 	private void setTitleStyle() {
 		TextView tv =
 				(TextView) findViewById(R.id.textView_Title_Edit_Profile);
 		Typeface tf = Typeface.createFromAsset(getAssets(),
-				"fonts/Windsong.ttf");
+				"fonts/Chunkfive.otf");
 		tv.setTypeface(tf);
-		tv.setTextSize(100);
+		tv.setTextSize(80);
 	}
 
 	/**

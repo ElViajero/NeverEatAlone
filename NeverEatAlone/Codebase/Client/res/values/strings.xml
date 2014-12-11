@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Never Eat Alone</string>
+    <string name="app_name">NeverEatAlone</string>
     <string name="edit_message">Enter a message</string>
     <string name="button_send">Send</string>
     <string name="action_settings">Settings</string>
@@ -28,7 +28,7 @@
     <string name="title_activity_contacts">ContactsActivity</string>
     <string name="title_activity_profile">ProfileActivity</string>
     <string name="title_activity_create_meal_information">CreateMealInformationActivity</string>
-    <string name="CreateMealInformation_meal_information">Meal Information</string>
+    <string name="CreateMealInformation_meal_information">Meal Info</string>
     <string name="when">When?</string>
     <string name="start_time">Start Time</string>
     <string name="end_time">End Time</string>
