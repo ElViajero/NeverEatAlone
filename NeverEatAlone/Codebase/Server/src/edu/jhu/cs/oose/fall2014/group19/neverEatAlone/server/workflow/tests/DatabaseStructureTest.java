@@ -3,7 +3,7 @@ package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.workflow.tests;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.junit.Test;
+// import org.junit.Test;
 import org.neo4j.cypher.javacompat.ExecutionEngine;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Transaction;
@@ -29,7 +29,7 @@ public class DatabaseStructureTest {
 	/**
 	 * This method creates a small test database 
 	 */
-	@Test
+	// @Test
 	public void createTestDatabase(){
 
 		Map<String,String[]> request; 
