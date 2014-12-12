@@ -1,5 +1,11 @@
 package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.http.impl.execchain.RequestAbortedException;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -13,31 +19,51 @@ import android.widget.Button;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.AccountProperties;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.MessageToasterHelper;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
 
 /**
  * ProfileActivity is used to set up the view of Profile page
  * 
  * @author Hai Tang
+ * @author Yueling Loh
  */
 public class ProfileActivity extends Activity {
-
+	
 	private PopupWindow deleteAccountPopupWindow;
-
+	private TextView usernameTextView,aliasTextView, nameTextView;
+	private TextView workspaceTextView,emailTextView;
+	private String username;
+	private String requestID;
+	private String requestType;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+		
+		username = AccountProperties.getUserAccountInstance().getusername();
 		initView(savedInstanceState);
+		getProfileInfo();
 	}
 
 	/**
 	 * Method used for initializing the view
 	 * 
 	 * @author: Hai Tang
+	 * @author: Yueling Loh
 	 */
 	private void initView(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_profile);
 
 		setTitleStyle();
+		usernameTextView = (TextView) findViewById(R.id.textView_username);
+		aliasTextView = (TextView) findViewById(R.id.textView_alias);
+		nameTextView = (TextView) findViewById(R.id.textView_Name);
+		workspaceTextView = (TextView) findViewById(R.id.textView_workspace);
+		emailTextView =  (TextView) findViewById(R.id.textView_email);
+		
+		usernameTextView.setText(username);
 	}
 	
 	/**
@@ -157,6 +183,47 @@ public class ProfileActivity extends Activity {
 		Intent intent = new Intent(ProfileActivity.this,
 				ChangePasswordActivity.class);
 		ProfileActivity.this.startActivity(intent);
+	}
+	
+	
+	/**
+	 * Method for getting profile info from the server
+	 * and posting it to screen
+	 * 
+	 * @author Yueling Loh
+	 */
+	private void getProfileInfo(){
+		
+		//CHECK VALUE OF QUOTATION MARKS
+		//set the kind of request
+		requestID = "Account";
+		requestType = "GetInfo";
+		
+		Map<String,Object> requestMap = new HashMap<String,Object>();
+		requestMap.put("username",username);
+		try{
+			// send the request.
+			List<Map<String, String>> resultMapList = 
+					RequestHandlerHelper.getRequestHandlerInstance().
+					handleRequest(this,requestMap,requestID,requestType) ;
+			
+			Map<String, String> profile = resultMapList.get(0);
+			
+			//CHECK VALUE OF QUOTATION MARKS
+			//set to profile to values from the server
+			aliasTextView.setText(profile.get("alias"));
+			nameTextView.setText(profile.get("name"));
+			workspaceTextView.setText(profile.get("workspace"));
+			emailTextView.setText(profile.get("email"));
+			
+	
+
+		}catch(RequestAbortedException e){
+			// This is necessary. The exception has
+			//already been handled in the RequestHandler
+			//class.
+			return;}
+	
 	}
 
 }
