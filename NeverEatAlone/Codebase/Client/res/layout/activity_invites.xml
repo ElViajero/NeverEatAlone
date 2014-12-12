@@ -1,4 +1,7 @@
-<!-- @author Hai Tang @author Yueling Loh -->
+<!--
+ @author Hai Tang @author Yueling Loh 
+@author tejasvamsingh
+-->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -20,8 +23,9 @@
     <!-- Main Space -->
 
     <RelativeLayout
-        android:id="@+id/main_invites"
-        style="@style/MainLayoutTheme"
+        android:id="@+id/layout_invites"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_below="@+id/header_invites" >
 
         <Switch

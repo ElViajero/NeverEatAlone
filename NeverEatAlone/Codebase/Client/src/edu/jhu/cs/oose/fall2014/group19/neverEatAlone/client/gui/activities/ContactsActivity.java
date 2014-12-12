@@ -18,6 +18,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.AccountProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.ContactProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.adapters.ContactsInformationAdapter;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
 
 /**
@@ -54,8 +55,14 @@ public class ContactsActivity extends ListActivity {
 		contactsInformationAdapter = new ContactsInformationAdapter(this,
 				contactList);
 		setListAdapter(contactsInformationAdapter);
-		
+
 		setTitleStyle();
+		applyTheme();
+	}
+
+	private void applyTheme() {
+		ThemeManager.applyTheme(findViewById(android.R.id.content));
+
 	}
 
 	/**
@@ -71,7 +78,7 @@ public class ContactsActivity extends ListActivity {
 		tv.setTypeface(tf);
 		tv.setTextSize(80);
 	}
-	
+
 	/**
 	 * This method fetches contacts from the server if
 	 * the cache is empty.
@@ -117,9 +124,9 @@ public class ContactsActivity extends ListActivity {
 		ContactsActivity.this.startActivity(intent);
 	}
 
-	
-	
-	
+
+
+
 	/**
 	 * Method for contact notification button click
 	 * 
@@ -130,7 +137,7 @@ public class ContactsActivity extends ListActivity {
 				DisplayContactNotificationActivity.class);
 		ContactsActivity.this.startActivity(intent);
 	}
-	
-	
-	
+
+
+
 }

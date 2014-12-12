@@ -13,11 +13,13 @@ import android.widget.Button;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
 
 /**
  * ProfileActivity is used to set up the view of Profile page
  * 
  * @author Hai Tang
+ * @author tejasvamsingh
  */
 public class ProfileActivity extends Activity {
 
@@ -38,8 +40,14 @@ public class ProfileActivity extends Activity {
 		setContentView(R.layout.activity_profile);
 
 		setTitleStyle();
+		applyTheme();
 	}
-	
+
+	private void applyTheme() {
+		ThemeManager.applyTheme(findViewById(android.R.id.content));
+
+	}
+
 	/**
 	 * This method is used to set the font style of the title of each page
 	 * @author: Hai Tang
@@ -79,14 +87,9 @@ public class ProfileActivity extends Activity {
 		final Button cancelButton = (Button) popupview
 				.findViewById(R.id.button_popup_cancel);
 
-		/**
-<<<<<<< HEAD
-		 * onClickListener for the confirm button in the popup window
-=======
-		 * OnClickListener for the confirm button in the popup window. Account deleted 
-		 * and return to the login page.
->>>>>>> refs/heads/myGUI_Iter5_v9
-		 * 
+
+
+		/** 
 		 * @author: Hai Tang
 		 */
 		confirmButton.setOnClickListener(new Button.OnClickListener() {

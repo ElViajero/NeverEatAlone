@@ -21,7 +21,8 @@
 
     <RelativeLayout
         android:id="@+id/main_editProfile"
-        style="@style/MainLayoutTheme"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_below="@+id/header_editProfile" >
 
         <TextView

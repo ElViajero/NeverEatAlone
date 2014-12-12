@@ -8,9 +8,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
 import android.widget.TextView;
-import android.widget.Toast;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
 
 
 /**
@@ -46,10 +46,11 @@ public class EditProfileActivity extends Activity {
 	private void initView(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_edit_profile);
-		
+
 		setTitleStyle();
+		applyTheme();
 	}
-	
+
 	/**
 	 * This method is used to set the font style of the title of each page
 	 * @author: Hai Tang
@@ -63,6 +64,16 @@ public class EditProfileActivity extends Activity {
 		tv.setTypeface(tf);
 		tv.setTextSize(80);
 	}
+
+
+
+
+	private void applyTheme() {
+		ThemeManager.applyTheme(findViewById(android.R.id.content));
+
+	}
+
+
 
 	/**
 	 * Method used when confirm button is clicked. Gather all the revised

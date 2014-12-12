@@ -10,16 +10,16 @@ import org.apache.http.impl.execchain.RequestAbortedException;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.LinearLayout;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.AccountProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.MessageToasterHelper;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.notificationHandler.services.NotificationHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
 
@@ -35,6 +35,7 @@ public class MainActivity extends Activity {
 	private String requestID;
 	private String requestType;
 	private boolean isCreated=false;
+	LinearLayout l;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -42,17 +43,22 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		usernameEditTextObject = (EditText) findViewById(R.id.edit_username);
 		passwordEditTextObject = (EditText) findViewById(R.id.edit_password);
+		l = (LinearLayout) findViewById(R.id.layout_main);
+		//		l.setBackgroundResource(R.drawable.dark_layout_background);
 		requestID = "Login";
 		requestType = "CheckCredentials";
+		ThemeManager.applyTheme(l);
 		System.out.println("inside onCreate in MainAcitivty");
 		MessageToasterHelper.toastMessage(this, "inside oncreate");
-//		TextView tv =
-//				(TextView) findViewById(R.id.tv1);
-//		Typeface tf = Typeface.createFromAsset(getAssets(),
-//				"fonts/Windsong.ttf");
-//		tv.setTypeface(tf);
-//		tv.setTextSize(100);
-//		tv.setText("NeverEatAlone");
+
+
+		//		TextView tv =
+		//				(TextView) findViewById(R.id.tv1);
+		//		Typeface tf = Typeface.createFromAsset(getAssets(),
+		//				"fonts/Windsong.ttf");
+		//		tv.setTypeface(tf);
+		//		tv.setTextSize(100);
+		//		tv.setText("NeverEatAlone");
 	}
 
 	/**
@@ -63,6 +69,7 @@ public class MainActivity extends Activity {
 	 * @throws URISyntaxException 
 	 */
 	public void onLoginButtonClick(View view) throws FileNotFoundException, URISyntaxException {
+		ThemeManager.setTheme(R.style.DarkTheme);
 
 
 		String username = usernameEditTextObject.getText().toString();
@@ -71,7 +78,7 @@ public class MainActivity extends Activity {
 		// create the request properties object.
 		AccountProperties loginProperties  = new AccountProperties(username, password);
 		try{
-			// send the request.
+			//send the request.
 			List<Map<String, String>> resultMapList = 
 					RequestHandlerHelper.getRequestHandlerInstance().
 					handleRequest(this,loginProperties.toMap(),requestID,requestType) ;		

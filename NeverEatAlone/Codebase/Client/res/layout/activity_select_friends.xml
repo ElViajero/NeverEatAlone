@@ -1,9 +1,11 @@
-<!-- @author Hai Tang @author Yueling Loh -->
+<!--
+ @author Hai Tang @author Yueling Loh
+@author tejasvamsingh
+-->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/layout_background"
     tools:context="edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.SelectFriendsActivity" >
 
     <!-- Header aligned to top -->
@@ -22,7 +24,8 @@
 
     <RelativeLayout
         android:id="@+id/main_selectfriends"
-        style="@style/MainLayoutTheme"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_below="@+id/header_selectfriends" >
 
         <Button

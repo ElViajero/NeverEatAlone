@@ -18,12 +18,13 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.AccountProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.ContactProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.adapters.ContactsNotificationAdapter;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
 
 /**
  * This class handles the display of contact notification.
  * 
- * 
+ * @author tejasvamsingh
  */
 public class DisplayContactNotificationActivity extends ListActivity {
 	private ArrayAdapter<ContactProperties> contactsNotificationAdapter;
@@ -59,10 +60,16 @@ public class DisplayContactNotificationActivity extends ListActivity {
 		// acceptButton.setVisibility(View.GonE);
 
 		// acceptButton.setVisibility(View.VISIBLE);
-		
+
 		setTitleStyle();
+		applyTheme();
 	}
-	
+
+	private void applyTheme() {
+		ThemeManager.applyTheme(findViewById(android.R.id.content));
+
+	}
+
 	/**
 	 * This method is used to set the font style of the title of each page
 	 * @author: Hai Tang

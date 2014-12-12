@@ -1,4 +1,7 @@
-<!-- @author Hai Tang @ Yueling Loh -->
+<!--
+ @author Hai Tang @ Yueling Loh
+@author tejasvamsingh
+-->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -21,7 +24,8 @@
 
     <RelativeLayout
         android:id="@+id/main_addFriends"
-        style="@style/MainLayoutTheme"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_below="@+id/header_addFriends" >
 
         <Button

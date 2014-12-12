@@ -17,6 +17,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.NotificationProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.adapters.MealNotificationAdapter;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.DataCacheHelper;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.helpers.GsonHelper;
 
 /**
@@ -82,6 +83,15 @@ public class InvitesActivity extends ListActivity {
 		setListAdapter(InvitesAdapter);
 		DataCacheHelper.registerMealNotificationAdapterInstance(InvitesAdapter);
 
+		applytheme();
+
+	}
+
+	private void applytheme() {
+		ThemeManager.applyTheme(findViewById(android.R.id.content));
+		//ThemeManager.applyTheme(findViewById(R.id.layout_invites));
+		//ThemeManager.applyTheme(findViewById(R.id.header_invites));
+
 	}
 
 	/**
@@ -105,7 +115,7 @@ public class InvitesActivity extends ListActivity {
 
 		intent.putExtra("mealProperties",
 				GsonHelper.getGsoninstance().toJson(mealPropertiesMap));
-//		intent.putExtra("mealProperties", mealProperties.toString());
+		//		intent.putExtra("mealProperties", mealProperties.toString());
 		startActivity(intent);
 
 	}
