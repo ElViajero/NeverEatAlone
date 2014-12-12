@@ -88,7 +88,7 @@ public class ContactsActivity extends ListActivity {
 	private void fetchContacts() {
 
 		requestID = "Contact";
-		requestType = "GetAll";
+		requestType = "getAll";
 		Map<String,Object> requestMap = new HashMap<String,Object>();
 		requestMap.put("username",
 				AccountProperties.getUserAccountInstance().getusername());

@@ -38,13 +38,13 @@ public class DatabaseStructureTest {
 		// Create user accounts 
 		IAccountDBManager accountDBManager = new AccountDBManager(); 
 		request = TestRequestBuilder.createAccountRequest("user1", "pw1", "email1"); 
-		accountDBManager.CreateAccount(request); 
+		accountDBManager.create(request); 
 		request = TestRequestBuilder.createAccountRequest("user2", "pw2", "email2"); 
-		accountDBManager.CreateAccount(request); 
+		accountDBManager.create(request); 
 		request = TestRequestBuilder.createAccountRequest("user3", "pw3", "email3"); 
-		accountDBManager.CreateAccount(request); 
+		accountDBManager.create(request); 
 		request = TestRequestBuilder.createAccountRequest("user4", "pw4", "email4"); 
-		accountDBManager.CreateAccount(request); 
+		accountDBManager.create(request); 
 
 		// Update account information 		
 		parameters.clear(); 
@@ -53,7 +53,7 @@ public class DatabaseStructureTest {
 		parameters.put("first_name",  new String[]{"Leo"});
 		parameters.put("work_place", new String[]{"Barcelona"});
 		request = TestRequestBuilder.updateAccountRequest("user1", parameters); 
-		accountDBManager.UpdateAccount(request); 
+		accountDBManager.update(request); 
 
 		parameters.clear(); 
 		parameters.put("phone_number", new String[]{"888-666-1111"});
@@ -61,21 +61,21 @@ public class DatabaseStructureTest {
 		parameters.put("first_name",  new String[]{"Jose"});
 		parameters.put("work_place", new String[]{"Chelsea"});
 		request = TestRequestBuilder.updateAccountRequest("user2", parameters); 
-		accountDBManager.UpdateAccount(request);
+		accountDBManager.update(request);
 
 		parameters.clear(); 
 		parameters.put("first_name",  new String[]{"Pep"});
 		parameters.put("work_place", new String[]{"Bayern"});
 		request = TestRequestBuilder.updateAccountRequest("user3", parameters); 
-		accountDBManager.UpdateAccount(request);
+		accountDBManager.update(request);
 
 		// Add contacts		
 		IContactDBManager contactDBManager = new ContactDBManager(); 
 		request = TestRequestBuilder.addContactRequest("user1", "user3"); 
-		contactDBManager.AddContact(request); 
+		contactDBManager.add(request); 
 		request = TestRequestBuilder.addContactRequest("user2", "user3"); 
-		contactDBManager.AddContact(request); 
-		
+		contactDBManager.add(request); 
+
 		// create meal notifications
 		INotificationDBManager notificationDBManager = new NotificationDBManager(); 
 		parameters.clear(); 
@@ -87,7 +87,7 @@ public class DatabaseStructureTest {
 		notificationDBManager.CreateMealNotification(request); 
 
 	}
-	
+
 	/**
 	 * This method deletes one relationship in the test database 
 	 */
@@ -96,7 +96,7 @@ public class DatabaseStructureTest {
 		Map<String,String[]> request; 
 		request = TestRequestBuilder.deleteContactRequest("user2", "user3"); 
 		IContactDBManager contactDBManager = new ContactDBManager(); 
-		contactDBManager.DeleteContact(request); 
+		contactDBManager.delete(request); 
 	}
 
 	/**
@@ -104,13 +104,13 @@ public class DatabaseStructureTest {
 	 */
 	// @Test
 	public void clearDatabase(){
-		
+
 		GraphDatabaseService GraphDBInstance = DBManager.GetGraphDBInstance();
 		ExecutionEngine executionEngine = new ExecutionEngine(GraphDBInstance,
 				StringLogger.SYSTEM);	
 
 		try ( Transaction tx = GraphDBInstance.beginTx() ){
-			
+
 			String query = "MATCH (n) "
 					+ "OPTIONAL MATCH (n)-[r]-() "
 					+ "DELETE n,r";

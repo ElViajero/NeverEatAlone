@@ -24,5 +24,5 @@ public interface ILoginDBManager {
 	 * @param request
 	 * @return
 	 */
-	public List<Map<String,String>> CheckCredentials(Map<String,String[]> request);
+	public List<Map<String,String>> checkCredentials(Map<String,String[]> request);
 }

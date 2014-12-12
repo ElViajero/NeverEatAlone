@@ -22,7 +22,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.requestDispatcher.c
 @Stateless
 public class RequestDispatcher implements IRequestDispatcher {
 
-	IManagementRequestHandler IManagementRequestHandlerObject;
+	IManagementRequestHandler iManagementRequestHandlerObject;
 
 
 	@Inject
@@ -45,7 +45,7 @@ public class RequestDispatcher implements IRequestDispatcher {
 	 * This method dispatches request to the ManagementRequestHandler layer
 	 */
 	@Override
-	public List<Map<String,String>> DispatchRequest(Map<String, String[]> request) {
+	public List<Map<String,String>> dispatchRequest(Map<String, String[]> request) {
 
 		// ********* LOGGING ********* 
 		System.out.println("reached DispatchRequest");
@@ -61,13 +61,13 @@ public class RequestDispatcher implements IRequestDispatcher {
 
 		// obtain class reference
 		try {
-			IManagementRequestHandlerObject = (IManagementRequestHandler) 
+			iManagementRequestHandlerObject = (IManagementRequestHandler) 
 					getMyBeanFromClassName
 					("edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server."
 							+ "managementRequestHandler.services."
 							+request.get("requestID")[0]+"ManagementRequestHandler");
-			System.out.println("obect reference : "+ IManagementRequestHandlerObject);
-			return (IManagementRequestHandlerObject.HandleManagementRequest(request));
+			System.out.println("obect reference : "+ iManagementRequestHandlerObject);
+			return (iManagementRequestHandlerObject.handleManagementRequest(request));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			System.out.println("Exception in DispatchRequest :  ");

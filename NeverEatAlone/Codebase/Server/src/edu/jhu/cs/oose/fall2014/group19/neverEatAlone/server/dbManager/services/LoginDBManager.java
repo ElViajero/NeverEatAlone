@@ -39,7 +39,7 @@ public class LoginDBManager implements ILoginDBManager {
 	 * @return
 	 */
 	@Override
-	public List<Map<String, String>> CheckCredentials(
+	public List<Map<String, String>> checkCredentials(
 			Map<String, String[]> request) {
 
 		// ********* LOGGING ********* 

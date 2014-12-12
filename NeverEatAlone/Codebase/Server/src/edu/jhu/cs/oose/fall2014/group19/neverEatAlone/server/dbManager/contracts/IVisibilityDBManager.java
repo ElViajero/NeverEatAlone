@@ -18,14 +18,14 @@ public interface IVisibilityDBManager {
 	 * @param request
 	 * @return
 	 */
-	public List<Map<String,String>> SetVisibility(Map<String,String[]> request);
-	
+	public List<Map<String,String>> setVisibility(Map<String,String[]> request);
+
 	/**
 	 * method to set invisible to some contacts
 	 * @param request
 	 * @return
 	 */
-	public List<Map<String,String>> UnsetVisibility(Map<String,String[]> request);
+	public List<Map<String,String>> unsetVisibility(Map<String,String[]> request);
 
 
 }

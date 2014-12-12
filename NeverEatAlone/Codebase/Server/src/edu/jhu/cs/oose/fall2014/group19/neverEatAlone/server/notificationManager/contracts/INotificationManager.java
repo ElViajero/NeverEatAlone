@@ -8,7 +8,7 @@ import javax.ejb.Local;
 @Local
 public interface INotificationManager {
 
-	public void PushNotification(List<Map<String,String>> notificationList,
+	public void pushNotification(List<Map<String,String>> notificationList,
 			List<String> recipientList);
 
 }

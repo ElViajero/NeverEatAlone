@@ -19,7 +19,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.contracts
  *
  */
 public class VisibilityDBManager implements IVisibilityDBManager {
-	
+
 	GraphDatabaseService GraphDBInstance;
 
 	/**
@@ -34,8 +34,8 @@ public class VisibilityDBManager implements IVisibilityDBManager {
 	 * Add VisibleTo edges to the contacts that are chosen to be visible to 
 	 */
 	@Override
-	public List<Map<String, String>> SetVisibility(Map<String, String[]> request) {
-		
+	public List<Map<String, String>> setVisibility(Map<String, String[]> request) {
+
 		// ******************** LOGGING ***************************
 		System.out.println("Reached SetVisibility in VisibilityDBManager");		
 
@@ -45,7 +45,7 @@ public class VisibilityDBManager implements IVisibilityDBManager {
 		//get the contacts as List and remove it from the map
 		List<String> contactList = Arrays.asList(request.get("contactList"));
 		modifiableRequestMap.remove("contactList"); 
-		
+
 		//format the parameters for the query.		
 		Map<String, String> queryParamterMap = 
 				DBManager.GetQueryParameterMap(modifiableRequestMap);
@@ -58,13 +58,13 @@ public class VisibilityDBManager implements IVisibilityDBManager {
 				StringLogger.SYSTEM);				
 		ExecutionResult result = null;
 		List<Map<String,String>> resultMapList;
-		
+
 		try ( Transaction tx = GraphDBInstance.beginTx() )
 		{
 			//create a params map.
 			Map<String,Object> parameters = new HashMap<String,Object>();
 			parameters.put("creationParameters",queryParamterMap);
-			
+
 			// add visibility edges for each contact
 			for(String contact : contactList){
 				parameters = new HashMap<String,Object>();
@@ -99,8 +99,8 @@ public class VisibilityDBManager implements IVisibilityDBManager {
 	}
 
 	@Override
-	public List<Map<String, String>> UnsetVisibility(Map<String, String[]> request) {
-		
+	public List<Map<String, String>> unsetVisibility(Map<String, String[]> request) {
+
 		// ******************** LOGGING ***************************
 		System.out.println("Reached UnsetVisibility in VisibilityDBManager");		
 
@@ -110,7 +110,7 @@ public class VisibilityDBManager implements IVisibilityDBManager {
 		//get the contacts as List and remove it from the map
 		List<String> contactList = Arrays.asList(request.get("contactList"));
 		modifiableRequestMap.remove("contactList"); 
-		
+
 		//format the parameters for the query.		
 		Map<String, String> queryParamterMap = 
 				DBManager.GetQueryParameterMap(modifiableRequestMap);
@@ -123,13 +123,13 @@ public class VisibilityDBManager implements IVisibilityDBManager {
 				StringLogger.SYSTEM);				
 		ExecutionResult result = null;
 		List<Map<String,String>> resultMapList;
-		
+
 		try ( Transaction tx = GraphDBInstance.beginTx() )
 		{
 			//create a params map.
 			Map<String,Object> parameters = new HashMap<String,Object>();
 			parameters.put("creationParameters",queryParamterMap);
-			
+
 			// delete visibility edges for each contact
 			for(String contact : contactList){
 				parameters = new HashMap<String,Object>();

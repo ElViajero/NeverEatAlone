@@ -49,7 +49,7 @@ public class ManagementRequestHandler implements IManagementRequestHandler {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Map<String,String>> HandleManagementRequest(Map<String, String[]> request) {
+	public List<Map<String,String>> handleManagementRequest(Map<String, String[]> request) {
 
 		try {
 

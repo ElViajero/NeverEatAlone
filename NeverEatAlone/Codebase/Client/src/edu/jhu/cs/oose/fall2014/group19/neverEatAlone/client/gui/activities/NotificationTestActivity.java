@@ -34,7 +34,7 @@ public class NotificationTestActivity extends Activity {
 		setContentView(R.layout.activity_notification_test_ativity);		
 		notificationMapList = new ArrayList<Map<String, String>>();
 		requestID = "Notification";
-		requestType = "Meal";
+		requestType = "meal";
 		messageEditTextObject = (EditText) findViewById(R.id.editMessage);
 		recipientEditTextObject = (EditText) findViewById(R.id.editRecipient);
 		username = getIntent().getStringExtra("username");

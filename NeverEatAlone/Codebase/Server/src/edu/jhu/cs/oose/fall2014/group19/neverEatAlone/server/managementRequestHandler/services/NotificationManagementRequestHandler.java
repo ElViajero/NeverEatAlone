@@ -23,8 +23,8 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.notificationManager
 
 public class NotificationManagementRequestHandler implements IManagementRequestHandler {
 
-	@Inject INotificationManager INotificationManagerObject;
-	@Inject INotificationDBManager INotificationDBManagerObject;
+	@Inject INotificationManager iNotificationManagerObject;
+	@Inject INotificationDBManager iNotificationDBManagerObject;
 
 	/**
 	 * Method that handles meal post and notification requests.
@@ -32,14 +32,14 @@ public class NotificationManagementRequestHandler implements IManagementRequestH
 	 * @param request
 	 * @return
 	 */
-	private List<Map<String,String>> Meal(Map<String,String[]> request){
+	private List<Map<String,String>> meal(Map<String,String[]> request){
 
 		System.out.println("reached MealNotificationRequest");
 
 
 		//commit to the DB.
 		List<Map<String, String>> result = 
-				INotificationDBManagerObject.CreateMealNotification(request);
+				iNotificationDBManagerObject.CreateMealNotification(request);
 
 		List<String> recipientList = Arrays.asList(request.get("recipientList"));
 
@@ -47,13 +47,13 @@ public class NotificationManagementRequestHandler implements IManagementRequestH
 				new ArrayList<Map<String,String>>(result);
 		notificationMapList.remove(0);
 
-		INotificationManagerObject.PushNotification(notificationMapList , recipientList );
+		iNotificationManagerObject.pushNotification(notificationMapList , recipientList );
 		//change this.
 		return result;
 	}
 
 	@Override
-	public List<Map<String, String>> HandleManagementRequest(
+	public List<Map<String, String>> handleManagementRequest(
 			Map<String, String[]> request) {
 
 		System.out.println("Inside HandleManagementRequest");

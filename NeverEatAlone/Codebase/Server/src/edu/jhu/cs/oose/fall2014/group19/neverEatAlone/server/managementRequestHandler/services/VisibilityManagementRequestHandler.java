@@ -16,8 +16,8 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.contracts
 
 @Stateless
 public class VisibilityManagementRequestHandler {
-	
-	@Inject IVisibilityDBManager IVisibilityDBManagerObject;
+
+	@Inject IVisibilityDBManager iVisibilityDBManagerObject;
 
 	/**
 	 * This method handles requests to set visible to a contact
@@ -25,21 +25,21 @@ public class VisibilityManagementRequestHandler {
 	 * @param request
 	 * @return
 	 */
-	public List<Map<String,String>> SetVisibilityRequest(Map<String,String[]> request){
+	public List<Map<String,String>> setVisibilityRequest(Map<String,String[]> request){
 
 		System.out.println("Reaching SetVisibilityRequest");
-		return IVisibilityDBManagerObject.SetVisibility(request); 
+		return iVisibilityDBManagerObject.setVisibility(request); 
 
 	}
-	
+
 	/**
 	 * This method handles requests to set invisible to a contact
 	 * @param request
 	 * @return
 	 */
 	public List<Map<String, String>> UnsetVisibilityRequest(Map<String,String[]> request) {
-		
+
 		System.out.println("Reaching UnsetVisibilityRequest");
-		return IVisibilityDBManagerObject.UnsetVisibility(request); 
+		return iVisibilityDBManagerObject.unsetVisibility(request); 
 	}
 }

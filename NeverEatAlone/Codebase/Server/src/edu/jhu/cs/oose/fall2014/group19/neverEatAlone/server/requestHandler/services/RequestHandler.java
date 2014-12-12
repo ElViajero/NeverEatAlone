@@ -31,7 +31,7 @@ public class RequestHandler extends HttpServlet {
 
 
 	//Inject the bean
-	@Inject IRequestDispatcher IRequestDispatcherObject; 
+	@Inject IRequestDispatcher iRequestDispatcherObject; 
 
 
 
@@ -79,7 +79,7 @@ public class RequestHandler extends HttpServlet {
 		//System.out.flush();
 
 		//call the beans DispatchRequest method.
-		List<Map<String, String>> result = IRequestDispatcherObject.DispatchRequest(map);
+		List<Map<String, String>> result = iRequestDispatcherObject.dispatchRequest(map);
 
 		// For now just print the status of the query (success or failed).		
 		java.io.Writer w = response.getWriter();

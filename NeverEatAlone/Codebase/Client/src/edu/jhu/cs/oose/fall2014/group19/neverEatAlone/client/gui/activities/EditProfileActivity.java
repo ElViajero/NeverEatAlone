@@ -110,7 +110,7 @@ public class EditProfileActivity extends Activity {
 		//CHECK VALUE OF QUOTATION MARKS
 		//sets what kind of request to make
 		requestID = "Account";
-		requestType = "Update";
+		requestType = "update";
 
 		Map<String,Object> requestMap = new HashMap<String,Object>();
 

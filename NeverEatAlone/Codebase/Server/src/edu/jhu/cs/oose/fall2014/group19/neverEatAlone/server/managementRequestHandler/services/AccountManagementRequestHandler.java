@@ -22,7 +22,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.managementRequestHa
 
 public class AccountManagementRequestHandler implements IManagementRequestHandler{
 
-	@Inject IAccountDBManager IAccountManagerObject;
+	@Inject IAccountDBManager iAccountManagerObject;
 
 	/**
 	 * This method handles requests to create an account.
@@ -30,14 +30,14 @@ public class AccountManagementRequestHandler implements IManagementRequestHandle
 	 * @param request
 	 * @return
 	 */
-	public List<Map<String,String>> Create(Map<String,String[]> request){
+	public List<Map<String,String>> create(Map<String,String[]> request){
 
 		// ********* LOGGING ********* 
 		System.out.println("reached CreateAccountRequest");
-		System.out.println(IAccountManagerObject);
+		System.out.println(iAccountManagerObject);
 		// ********* LOGGING ********* 
 
-		return IAccountManagerObject.CreateAccount(request);
+		return iAccountManagerObject.create(request);
 	}
 
 	/**
@@ -46,45 +46,45 @@ public class AccountManagementRequestHandler implements IManagementRequestHandle
 	 * @param request
 	 * @return
 	 */
-	private List<Map<String,String>> IsValid(Map<String,String[]> request){
+	private List<Map<String,String>> isValid(Map<String,String[]> request){
 
 		// ********* LOGGING ********* 
 		System.out.println("reached IsValidAccountRequest");
 		// ********* LOGGING ********* 
 
-		return IAccountManagerObject.IsValidAccount(request);
+		return iAccountManagerObject.isValid(request);
 	}
 
-	private List<Map<String,String>> Delete(Map<String,String[]> request){
+	private List<Map<String,String>> delete(Map<String,String[]> request){
 
 		// ********* LOGGING ********* 
 		System.out.println("reached DeleteAccountRequest");
 		// ********* LOGGING ********* 
 
-		return IAccountManagerObject.DeleteAccount(request);
+		return iAccountManagerObject.delete(request);
 	}
 
 
-	private List<Map<String,String>> Update(Map<String,String[]> request){
+	private List<Map<String,String>> update(Map<String,String[]> request){
 
 		// ********* LOGGING ********* 
 		System.out.println("reached UpdateAccountRequest");
 		// ********* LOGGING ********* 
 
-		return IAccountManagerObject.UpdateAccount(request);
+		return iAccountManagerObject.update(request);
 	}
 
-	private List<Map<String,String>> GetInfo(Map<String,String[]> request){
+	private List<Map<String,String>> getInfo(Map<String,String[]> request){
 
 		// ********* LOGGING ********* 
 		System.out.println("reached GetInfoAccountRequest");
 		// ********* LOGGING ********* 
 
-		return IAccountManagerObject.GetInfo(request);
+		return iAccountManagerObject.getInfo(request);
 	}
 
 	@Override
-	public List<Map<String, String>> HandleManagementRequest(
+	public List<Map<String, String>> handleManagementRequest(
 			Map<String, String[]> request) {
 
 		System.out.println("Inside HandleManagementRequest");

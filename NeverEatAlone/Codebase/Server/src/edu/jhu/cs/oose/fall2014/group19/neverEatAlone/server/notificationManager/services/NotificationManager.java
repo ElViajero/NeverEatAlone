@@ -21,7 +21,7 @@ public class NotificationManager implements INotificationManager {
 	@Inject IConfigurationHelper iConfigurationHelper;
 
 	@Override
-	public void PushNotification(List<Map<String, String>> notificatonList,
+	public void pushNotification(List<Map<String, String>> notificatonList,
 			List<String> recipientList) {
 
 		Gson gson = new Gson();

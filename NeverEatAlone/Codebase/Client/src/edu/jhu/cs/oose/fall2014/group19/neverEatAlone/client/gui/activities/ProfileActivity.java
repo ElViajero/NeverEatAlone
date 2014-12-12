@@ -204,7 +204,7 @@ public class ProfileActivity extends Activity {
 		//CHECK VALUE OF QUOTATION MARKS
 		//set the kind of request
 		requestID = "Account";
-		requestType = "GetInfo";
+		requestType = "getInfo";
 
 		Map<String,Object> requestMap = new HashMap<String,Object>();
 		requestMap.put("username",username);

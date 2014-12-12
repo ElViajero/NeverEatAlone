@@ -23,7 +23,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.managementRequestHa
 
 public class ContactManagementRequestHandler implements IManagementRequestHandler {
 
-	@Inject IContactDBManager IContactDBManagerObject;
+	@Inject IContactDBManager iContactDBManagerObject;
 
 	/**
 	 * This method handles requests to add a contact.
@@ -31,10 +31,10 @@ public class ContactManagementRequestHandler implements IManagementRequestHandle
 	 * @param request
 	 * @return
 	 */
-	private List<Map<String,String>> Add(Map<String,String[]> request){
+	private List<Map<String,String>> add(Map<String,String[]> request){
 
 		System.out.println("Reaching AddContactRequest");
-		return IContactDBManagerObject.AddContact(request); 
+		return iContactDBManagerObject.add(request); 
 
 	}
 
@@ -43,40 +43,40 @@ public class ContactManagementRequestHandler implements IManagementRequestHandle
 	 * @param request
 	 * @return
 	 */
-	private List<Map<String, String>> GetAll(Map<String,String[]> request) {
+	private List<Map<String, String>> getAll(Map<String,String[]> request) {
 
 		System.out.println("Reaching GetAllContactRequest");
-		return IContactDBManagerObject.GetAllContacts(request); 
+		return iContactDBManagerObject.getAll(request); 
 	}
-	
+
 	/**
 	 * This method handles requests to delete a contact.
 	 * 
 	 * @param request
 	 * @return
 	 */
-	public List<Map<String,String>> DeleteContactRequest(Map<String,String[]> request){
+	public List<Map<String,String>> deleteContactRequest(Map<String,String[]> request){
 
 		System.out.println("Reaching DeleteContactRequest");
-		return IContactDBManagerObject.DeleteContact(request); 
+		return iContactDBManagerObject.delete(request); 
 
 	}
-	
+
 	/**
 	 * This method handles requests to update a contact's information.
 	 * 
 	 * @param request
 	 * @return
 	 */
-	public List<Map<String,String>> UpdateContactRequest(Map<String,String[]> request){
+	public List<Map<String,String>> updateContactRequest(Map<String,String[]> request){
 
 		System.out.println("Reaching UpdateContactRequest");
-		return IContactDBManagerObject.UpdateContact(request); 
+		return iContactDBManagerObject.update(request); 
 
 	}
 
 	@Override
-	public List<Map<String, String>> HandleManagementRequest(
+	public List<Map<String, String>> handleManagementRequest(
 			Map<String, String[]> request) {
 		System.out.println("Inside HandleManagementRequest");
 		return ManagemenRequestHandlerHelper.invokeMethod(this,

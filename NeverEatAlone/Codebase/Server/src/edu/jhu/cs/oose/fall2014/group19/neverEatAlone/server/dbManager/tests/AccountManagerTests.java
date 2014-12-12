@@ -7,7 +7,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.junit.Test;
-import org.neo4j.cypher.javacompat.*;
+import org.neo4j.cypher.javacompat.ExecutionEngine;
+import org.neo4j.cypher.javacompat.ExecutionResult;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.kernel.impl.util.StringLogger;
@@ -45,7 +46,7 @@ public class AccountManagerTests {
 
 		//create instances and execute account creation logic.
 		IAccountDBManager iAccountManager = new AccountDBManager();
-		iAccountManager.CreateAccount(requestMap);
+		iAccountManager.create(requestMap);
 
 		GraphDatabaseService graphDBInstance = DBManager.GetGraphDBInstance();
 		ExecutionEngine executionEngine = new ExecutionEngine(graphDBInstance,
@@ -108,7 +109,7 @@ public class AccountManagerTests {
 		//create instances and execute account creation logic.
 		IAccountDBManager iAccountManager = new AccountDBManager();
 		List<Map<String, String>> resultMapList =
-				iAccountManager.IsValidAccount(requestMap);
+				iAccountManager.isValid(requestMap);
 
 
 		System.out.println("STATS");
@@ -128,7 +129,7 @@ public class AccountManagerTests {
 
 		//create instances and execute account creation logic.		
 		resultMapList =
-				iAccountManager.IsValidAccount(requestMap);
+				iAccountManager.isValid(requestMap);
 
 
 		System.out.println("STATS");

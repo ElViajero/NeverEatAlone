@@ -22,7 +22,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.managementRequestHa
 
 public class LoginManagementRequestHandler implements IManagementRequestHandler {
 
-	@Inject ILoginDBManager ILoginManagerObject;
+	@Inject ILoginDBManager iLoginManagerObject;
 
 	/**
 	 * This method checks user credentials for a login request.
@@ -31,17 +31,17 @@ public class LoginManagementRequestHandler implements IManagementRequestHandler 
 	 * @return
 	 */
 
-	private List<Map<String,String>> CheckCredentials(Map<String,String[]> request){
+	private List<Map<String,String>> checkCredentials(Map<String,String[]> request){
 
 		// ********* LOGGING ********* 
 		System.out.println("Reached CheckCredentialsLoginRequest.");
 		// ********* LOGGING *********
 
-		return ILoginManagerObject.CheckCredentials(request);
+		return iLoginManagerObject.checkCredentials(request);
 	}
 
 	@Override
-	public List<Map<String, String>> HandleManagementRequest(
+	public List<Map<String, String>> handleManagementRequest(
 			Map<String, String[]> request) {
 
 		System.out.println("Inside HandleManagementRequest");

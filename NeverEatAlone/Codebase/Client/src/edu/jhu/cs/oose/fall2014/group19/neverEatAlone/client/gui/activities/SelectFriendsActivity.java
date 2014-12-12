@@ -92,7 +92,7 @@ public class SelectFriendsActivity extends ListActivity {
 	private void fetchContacts() {
 
 		requestID = "Contact";
-		requestType = "GetAll";
+		requestType = "getAll";
 		Map<String,Object> requestMap = new HashMap<String,Object>();
 		requestMap.put("username",
 				AccountProperties.getUserAccountInstance().getusername());
@@ -158,7 +158,7 @@ public class SelectFriendsActivity extends ListActivity {
 	public void onPostButtonClick(View view) {
 
 		requestID = "Notification";
-		requestType ="Meal";
+		requestType ="meal";
 		List<String> recipientList =
 				new ArrayList<String>();
 

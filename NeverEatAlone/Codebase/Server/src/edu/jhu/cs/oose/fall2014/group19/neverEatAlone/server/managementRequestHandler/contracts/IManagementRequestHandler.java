@@ -15,5 +15,5 @@ import javax.ejb.Local;
 @Local
 public interface IManagementRequestHandler {
 	
-	public List<Map<String,String>> HandleManagementRequest(Map<String,String[]> request);	
+	public List<Map<String,String>> handleManagementRequest(Map<String,String[]> request);	
 }

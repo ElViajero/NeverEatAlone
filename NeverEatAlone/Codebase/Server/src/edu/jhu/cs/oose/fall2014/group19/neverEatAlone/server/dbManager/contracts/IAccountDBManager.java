@@ -21,38 +21,38 @@ public interface IAccountDBManager {
 	 * @param request
 	 * @return
 	 */
-	public List<Map<String,String>> CreateAccount(Map<String,String[]> request);
-	
+	public List<Map<String,String>> create(Map<String,String[]> request);
+
 	/**
 	 * 
 	 * Method to update an user account 
 	 * @param request
 	 * @return
 	 */
-	public List<Map<String,String>> UpdateAccount(Map<String,String[]> request);
-	
+	public List<Map<String,String>> update(Map<String,String[]> request);
+
 	/**
 	 * Method to get contact information 
 	 * @param request
 	 * @return
 	 */
-	public List<Map<String,String>> GetInfo(Map<String,String[]> request);
-	
+	public List<Map<String,String>> getInfo(Map<String,String[]> request);
+
 
 	/**
 	 * Method to delete an user account.
 	 * @param request
 	 * @return
 	 */
-	public List<Map<String,String>> DeleteAccount(Map<String,String[]> request);
-		
-	
+	public List<Map<String,String>> delete(Map<String,String[]> request);
+
+
 	/**
 	 * Method to check whether an user account is valid. 
 	 * @param request
 	 * @return
 	 */
-	public List<Map<String,String>> IsValidAccount(Map<String,String[]> request);
-	
+	public List<Map<String,String>> isValid(Map<String,String[]> request);
+
 
 }

@@ -22,5 +22,5 @@ public interface IRequestDispatcher {
 	 * @param request
 	 * @return
 	 */
-	public List<Map<String,String>> DispatchRequest(Map<String,String[]> request);	
+	public List<Map<String,String>> dispatchRequest(Map<String,String[]> request);	
 }

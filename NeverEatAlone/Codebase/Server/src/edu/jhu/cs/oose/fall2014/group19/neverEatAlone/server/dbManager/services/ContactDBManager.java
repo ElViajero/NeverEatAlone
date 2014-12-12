@@ -44,7 +44,7 @@ public class ContactDBManager implements IContactDBManager {
 	 * @author tejasvamsingh
 	 */
 	@Override
-	public List<Map<String,String>> AddContact(Map<String,String[]> request) {
+	public List<Map<String,String>> add(Map<String,String[]> request) {
 
 		// ********* LOGGING ********* 
 		System.out.println("Reached AddContact in ContactDBManager");
@@ -141,7 +141,7 @@ public class ContactDBManager implements IContactDBManager {
 	 * @author Xiaozhou Zhou
 	 */
 	@Override
-	public List<Map<String, String>> GetAllContacts(Map<String,String[]> request) {
+	public List<Map<String, String>> getAll(Map<String,String[]> request) {
 
 		// ********* LOGGING ********* 
 		System.out.println("Reached GetAllContacts in ContactDBManager");
@@ -210,7 +210,7 @@ public class ContactDBManager implements IContactDBManager {
 	 * @author Xiaozhou Zhou
 	 */
 	@Override
-	public List<Map<String, String>> DeleteContact(
+	public List<Map<String, String>> delete(
 			Map<String, String[]> request) {
 
 		// ********* LOGGING ********* 
@@ -282,7 +282,7 @@ public class ContactDBManager implements IContactDBManager {
 	 * @author Xiaozhou Zhou
 	 */
 	@Override
-	public List<Map<String, String>> UpdateContact(Map<String, String[]> request) {
+	public List<Map<String, String>> update(Map<String, String[]> request) {
 
 		// ********* LOGGING ********* 
 		System.out.println("Reached UpdateContact in ContactDBManager");
@@ -293,7 +293,7 @@ public class ContactDBManager implements IContactDBManager {
 		Map<String,String[]> modifiableRequestMap = new HashMap<String,String[]>(request);
 		modifiableRequestMap.remove("requestType");
 		modifiableRequestMap.remove("requestID");
-		
+
 		// get username and contactusername 
 		String username = modifiableRequestMap.get("username")[0]; 
 		String contactusername = modifiableRequestMap.get("contactusername")[0]; 

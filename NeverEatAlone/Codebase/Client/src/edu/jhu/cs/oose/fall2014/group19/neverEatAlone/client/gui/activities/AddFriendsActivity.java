@@ -99,7 +99,7 @@ public class AddFriendsActivity extends Activity {
 		String email = emailEditTextObject.getText().toString();
 
 		requestID = "Contact";
-		requestType="Add";
+		requestType="add";
 		IActivityProperties contact = new ContactProperties(username);
 
 		try{

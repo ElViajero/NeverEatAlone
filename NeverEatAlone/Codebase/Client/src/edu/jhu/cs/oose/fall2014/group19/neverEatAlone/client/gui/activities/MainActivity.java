@@ -46,7 +46,7 @@ public class MainActivity extends Activity {
 		l = (LinearLayout) findViewById(R.id.layout_main);
 		//		l.setBackgroundResource(R.drawable.dark_layout_background);
 		requestID = "Login";
-		requestType = "CheckCredentials";
+		requestType = "checkCredentials";
 		ThemeManager.applyTheme(l);
 		System.out.println("inside onCreate in MainAcitivty");
 		MessageToasterHelper.toastMessage(this, "inside oncreate");
