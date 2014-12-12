@@ -77,10 +77,10 @@ public class DBManager {
 			assertPropertyIsUnique("username").create();			
 
 
-//			GraphDBInstance.schema().
-//			constraintFor(DynamicLabel.label("User")).
-//			assertPropertyIsUnique("email").create();		
-			
+			//			GraphDBInstance.schema().
+			//			constraintFor(DynamicLabel.label("User")).
+			//			assertPropertyIsUnique("email").create();		
+
 			String query = "CREATE ConSTRAINT on (n:User) ASSERT n.email IS UNIQUE";
 			ExecutionEngine executionEngine = new ExecutionEngine(GraphDBInstance,
 					StringLogger.SYSTEM);	
@@ -136,7 +136,7 @@ public class DBManager {
 		// Iterate over the returned rows
 		// The keys of the map are the column names and the values are the entries
 		ResourceIterator<Map<String,Object>> rows = result.iterator();
-		
+
 		//index of element in the maplist 
 		int index=0;
 
@@ -151,6 +151,10 @@ public class DBManager {
 
 			for(String col : currentRow.keySet()){
 				Object entry = currentRow.get(col); 
+
+				//another null check
+				if(entry==null)
+					continue;
 
 				if(entry instanceof org.neo4j.graphdb.Node){
 

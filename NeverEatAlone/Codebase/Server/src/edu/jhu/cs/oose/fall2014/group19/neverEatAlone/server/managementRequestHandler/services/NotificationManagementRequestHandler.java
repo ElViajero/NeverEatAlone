@@ -5,10 +5,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.contracts.INotificationDBManager;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.managementRequestHandler.contracts.IManagementRequestHandler;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.managementRequestHandler.helpers.ManagemenRequestHandlerHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.notificationManager.contracts.INotificationManager;
 
 
@@ -19,8 +20,8 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.notificationManager
  * @author tejasvamsingh
  *
  */
-@Stateless
-public class NotificationManagementRequestHandler {
+
+public class NotificationManagementRequestHandler implements IManagementRequestHandler {
 
 	@Inject INotificationManager INotificationManagerObject;
 	@Inject INotificationDBManager INotificationDBManagerObject;
@@ -31,7 +32,7 @@ public class NotificationManagementRequestHandler {
 	 * @param request
 	 * @return
 	 */
-	public List<Map<String,String>> MealNotificationRequest(Map<String,String[]> request){
+	private List<Map<String,String>> Meal(Map<String,String[]> request){
 
 		System.out.println("reached MealNotificationRequest");
 
@@ -49,6 +50,17 @@ public class NotificationManagementRequestHandler {
 		INotificationManagerObject.PushNotification(notificationMapList , recipientList );
 		//change this.
 		return result;
+	}
+
+	@Override
+	public List<Map<String, String>> HandleManagementRequest(
+			Map<String, String[]> request) {
+
+		System.out.println("Inside HandleManagementRequest");
+
+		return ManagemenRequestHandlerHelper.invokeMethod(this,
+				request.get("requestType")[0], request);
+
 	}
 
 

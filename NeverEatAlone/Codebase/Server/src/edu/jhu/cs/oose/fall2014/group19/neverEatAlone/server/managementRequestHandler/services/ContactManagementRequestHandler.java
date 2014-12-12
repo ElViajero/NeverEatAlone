@@ -3,10 +3,11 @@ package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.managementRequestH
 import java.util.List;
 import java.util.Map;
 
-import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.contracts.IContactDBManager;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.managementRequestHandler.contracts.IManagementRequestHandler;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.managementRequestHandler.helpers.ManagemenRequestHandlerHelper;
 
 /**
  * 
@@ -19,8 +20,8 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.contracts
  *
  */
 
-@Stateless
-public class ContactManagementRequestHandler {
+
+public class ContactManagementRequestHandler implements IManagementRequestHandler {
 
 	@Inject IContactDBManager IContactDBManagerObject;
 
@@ -30,22 +31,31 @@ public class ContactManagementRequestHandler {
 	 * @param request
 	 * @return
 	 */
-	public List<Map<String,String>> AddContactRequest(Map<String,String[]> request){
+	private List<Map<String,String>> Add(Map<String,String[]> request){
 
 		System.out.println("Reaching AddContactRequest");
 		return IContactDBManagerObject.AddContact(request); 
 
 	}
-	
+
 	/**
 	 * This method handles requests to fetch all contacts
 	 * @param request
 	 * @return
 	 */
-	public List<Map<String, String>> GetAllContactRequest(Map<String,String[]> request) {
-		
+	private List<Map<String, String>> GetAll(Map<String,String[]> request) {
+
 		System.out.println("Reaching GetAllContactRequest");
 		return IContactDBManagerObject.GetAllContacts(request); 
+	}
+
+	@Override
+	public List<Map<String, String>> HandleManagementRequest(
+			Map<String, String[]> request) {
+		System.out.println("Inside HandleManagementRequest");
+		return ManagemenRequestHandlerHelper.invokeMethod(this,
+				request.get("requestType")[0], request);
+
 	}
 
 }

@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 
 import javax.ejb.Stateless;
+import javax.enterprise.inject.Any;
+import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
 
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.managementRequestHandler.contracts.IManagementRequestHandler;
@@ -20,7 +22,23 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.requestDispatcher.c
 @Stateless
 public class RequestDispatcher implements IRequestDispatcher {
 
-	@Inject IManagementRequestHandler IManagementRequestHandlerObject;
+	IManagementRequestHandler IManagementRequestHandlerObject;
+
+
+	@Inject
+	@Any
+	Instance<Object> myBeans;
+
+	/**
+	 * This class obtains bean reference from container using the passed string.
+	 * @param className
+	 * @return
+	 * @throws Exception
+	 */
+	private Object getMyBeanFromClassName(String className) throws Exception{    
+		Class<?> clazz = Class.forName(className);
+		return myBeans.select(clazz).get();  
+	}
 
 
 	/**
@@ -35,7 +53,33 @@ public class RequestDispatcher implements IRequestDispatcher {
 		System.out.println(request.keySet());
 		// ********* LOGGING ********* 
 
-		return IManagementRequestHandlerObject.HandleManagementRequest(request);
+
+
+		// ********* LOGGING ********* 
+		System.out.println("class name : "+request.get("requestID")[0]+"ManagementRequestHandler");
+		// ********* LOGGING ********* 
+
+		// obtain class reference
+		try {
+			IManagementRequestHandlerObject = (IManagementRequestHandler) 
+					getMyBeanFromClassName
+					("edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server."
+							+ "managementRequestHandler.services."
+							+request.get("requestID")[0]+"ManagementRequestHandler");
+			System.out.println("obect reference : "+ IManagementRequestHandlerObject);
+			return (IManagementRequestHandlerObject.HandleManagementRequest(request));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			System.out.println("Exception in DispatchRequest :  ");
+			e.printStackTrace();
+		}
+
+
+
+
+		return null;
+		/*
+	 	 return IManagementRequestHandlerObject.HandleManagementRequest(request);*/
 	}	
 
 

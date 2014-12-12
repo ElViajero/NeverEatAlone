@@ -188,8 +188,10 @@ public class ContactDBManager implements IContactDBManager {
 				result = null;
 				tx.failure();
 			}
-//			System.out.println("query result: \n"+result.dumpToString());
+			//			System.out.println("query result: \n"+result.dumpToString());
 			// This is the data returned.
+			if(result==null)
+				System.out.println("shit is null");
 			resultMapList = DBManager.GetResultMapList(result);
 			// Sucessful transaction.
 		}
