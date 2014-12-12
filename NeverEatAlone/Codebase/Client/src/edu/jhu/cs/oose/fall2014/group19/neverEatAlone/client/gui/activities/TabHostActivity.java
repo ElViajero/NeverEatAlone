@@ -10,10 +10,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
-import android.widget.TextView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.NotificationProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.DataCacheHelper;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.notificationHandler.services.NotificationHelper;
 //Cannot extends Activity
 /**
@@ -61,6 +61,7 @@ public class TabHostActivity extends TabActivity {
 
 
 
+
 	}
 
 
@@ -70,6 +71,8 @@ public class TabHostActivity extends TabActivity {
 	 * @author tejasvamsingh
 	 */
 	private void InitView() {
+
+
 		setContentView(R.layout.activity_tab_host);
 
 		// create the TabHost that will contain the Tabs
@@ -93,17 +96,28 @@ public class TabHostActivity extends TabActivity {
 		TabProfile.setIndicator("Profile");
 		TabProfile.setContent(new Intent(this,ProfileActivity.class));
 
-		    
+
 		/** Add the tabs  to the TabHost to display. */
 
 		TabHost.addTab(TabInvites);
 		TabHost.addTab(TabContacts);
 		TabHost.addTab(TabProfile);
 
+		//apply the theme
+		applyTheme();
+
 
 	}
 
 
+
+
+	private void applyTheme() {
+		System.out.println("Inside apply theme");
+		ThemeManager.applyTheme(findViewById(android.R.id.content));
+		//ThemeManager.applyTheme(findViewById(R.id.layout_tab_host));
+		//ThemeManager.applyTheme(findViewById(android.R.id.tabs));
+	}
 
 
 	/**

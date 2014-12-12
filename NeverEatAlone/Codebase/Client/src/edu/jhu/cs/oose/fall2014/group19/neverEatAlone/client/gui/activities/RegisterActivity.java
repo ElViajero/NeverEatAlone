@@ -18,6 +18,7 @@ import android.widget.Toast;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.AccountProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.MessageToasterHelper;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
 
 /**
@@ -53,12 +54,18 @@ public class RegisterActivity extends Activity {
 		requestID = "Account";
 		requestType = "Create";
 
-		
+
 		setTitleStyle();
+		applyTheme();
 
 
 	}
-	
+
+	private void applyTheme() {
+		ThemeManager.applyTheme(findViewById(android.R.id.content));
+
+	}
+
 	/**
 	 * This method is used to set the font style of the title of each page
 	 * @author: Hai Tang

@@ -1,9 +1,11 @@
-<!-- @author Runze Tang @author Yueling Loh -->
+<!--
+ @author Runze Tang @author Yueling Loh
+@author tejasvamsingh
+-->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/layout_background"
     tools:context="edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.CreateMealInformationActivity" >
 
     <!-- Header aligned to top -->
@@ -21,8 +23,9 @@
     <!-- Main Space -->
 
     <RelativeLayout
-        android:id="@+id/main_createMealInfo"
-        style="@style/MainLayoutTheme"
+        android:id="@+id/layout_create_meal_information"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_below="@+id/header_createMealInfo" >
 
         <LinearLayout

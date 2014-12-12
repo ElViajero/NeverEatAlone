@@ -18,6 +18,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.contracts.IActivityProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.ContactProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.MessageToasterHelper;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
 
 /**
@@ -25,6 +26,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.serv
  * friends function
  * 
  * @author Hai Tang
+ * @author tejasvamsingh
  *
  */
 public class AddFriendsActivity extends Activity {
@@ -51,10 +53,16 @@ public class AddFriendsActivity extends Activity {
 	private void initview(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_friends);
-		
+
 		setTitleStyle();
+		applyTheme();
 	}
-	
+
+	private void applyTheme() {
+		ThemeManager.applyTheme(findViewById(android.R.id.content));
+
+	}
+
 	/**
 	 * This method is used to set the font style of the title of each page
 	 * @author: Hai Tang

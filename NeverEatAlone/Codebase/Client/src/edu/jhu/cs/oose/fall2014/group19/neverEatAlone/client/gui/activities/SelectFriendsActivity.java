@@ -22,6 +22,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.ContactProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.PostProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.adapters.ContactsInformationAdapter;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
 
 /**
@@ -44,6 +45,12 @@ public class SelectFriendsActivity extends ListActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		initView(savedInstanceState);
 		postData = getIntent().getStringExtra("mealProperties");
+		applyTheme();
+	}
+
+	private void applyTheme() {
+		ThemeManager.applyTheme(findViewById(android.R.id.content));
+
 	}
 
 	/**
@@ -62,7 +69,7 @@ public class SelectFriendsActivity extends ListActivity {
 
 		setTitleStyle();
 	}
-	
+
 	/**
 	 * This method is used to set the font style of the title of each page
 	 * @author: Hai Tang
@@ -177,9 +184,9 @@ public class SelectFriendsActivity extends ListActivity {
 		 * Commented for future use. Used to connect to PostInformation page.
 		 * @author Hai Tang
 		 */
-//		Intent intent = new Intent(SelectFriendsActivity.this,
-//				PostInformationActivity.class);
-//		SelectFriendsActivity.this.startActivity(intent);
+		//		Intent intent = new Intent(SelectFriendsActivity.this,
+		//				PostInformationActivity.class);
+		//		SelectFriendsActivity.this.startActivity(intent);
 
 	}
 }
