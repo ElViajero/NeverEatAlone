@@ -1,5 +1,11 @@
 package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.http.impl.execchain.RequestAbortedException;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -10,7 +16,9 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.AccountProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
 
 
 /**
@@ -27,6 +35,9 @@ public class EditProfileActivity extends Activity {
 	private EditText genderEditTextObject;
 	private EditText workspaceEditTextObject;
 
+	private String requestID;
+	private String requestType;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		initView(savedInstanceState);
@@ -36,6 +47,9 @@ public class EditProfileActivity extends Activity {
 		emailEditTextObject = (EditText) findViewById(R.id.editText_editprofile_email);
 		genderEditTextObject = (EditText) findViewById(R.id.editText_editprofile_gender);
 		workspaceEditTextObject = (EditText) findViewById(R.id.editText_editprofile_workspace);
+
+		usernameEditTextObject.setText(AccountProperties.getUserAccountInstance().getusername());
+
 	}
 
 	/**
@@ -80,6 +94,7 @@ public class EditProfileActivity extends Activity {
 	 * information and return to TabHost Page.
 	 * 
 	 * @author: Hai Tang
+	 * @author: Yueling Loh
 	 */
 	public void onComfirmButtonClick(View view) {
 		Intent intent = new Intent(EditProfileActivity.this,
@@ -91,6 +106,33 @@ public class EditProfileActivity extends Activity {
 		String email = emailEditTextObject.getText().toString();
 		String gender = genderEditTextObject.getText().toString();
 		String workspace = workspaceEditTextObject.getText().toString();
+
+		//CHECK VALUE OF QUOTATION MARKS
+		//sets what kind of request to make
+		requestID = "Account";
+		requestType = "Update";
+
+		Map<String,Object> requestMap = new HashMap<String,Object>();
+
+		//CHECK VALUE OF QUOTATION MARKS
+		//sets the values
+		requestMap.put("username",username);
+		requestMap.put("name",name);
+		requestMap.put("email",email);
+		requestMap.put("gender",gender);
+		requestMap.put("workspace",workspace);
+
+		try{
+			// send the request.
+			List<Map<String, String>> resultMapList = 
+					RequestHandlerHelper.getRequestHandlerInstance().
+					handleRequest(this,requestMap,requestID,requestType) ;
+			Map<String, String> profile = resultMapList.get(0);
+		}catch(RequestAbortedException e){
+			// This is necessary. The exception has
+			//already been handled in the RequestHandler
+			//class.
+			return;}
 	}
 
 	/**
@@ -121,5 +163,45 @@ public class EditProfileActivity extends Activity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	/**
+	 * Method for getting profile info from the server
+	 * and posting it to screen
+	 * 
+	 * @author Yueling Loh
+	 */
+	private void getProfileInfo(){
+
+		//CHECK VALUE OF QUOTATION MARKS
+		//set the kind of request
+		requestID = "Account";
+		requestType = "GetInfo";
+
+		Map<String,Object> requestMap = new HashMap<String,Object>();
+		requestMap.put("username",AccountProperties.getUserAccountInstance().getusername());
+		try{
+			// send the request.
+			List<Map<String, String>> resultMapList = 
+					RequestHandlerHelper.getRequestHandlerInstance().
+					handleRequest(this,requestMap,requestID,requestType) ;
+
+			Map<String, String> profile = resultMapList.get(0);
+
+			//CHECK VALUE OF QUOTATION MARKS
+			//set to profile to values from the server
+
+			nameEditTextObject.setText(profile.get("name"));
+			workspaceEditTextObject.setText(profile.get("workspace"));
+			emailEditTextObject.setText(profile.get("email"));
+			genderEditTextObject.setText(profile.get("gender"));
+
+
+		}catch(RequestAbortedException e){
+			// This is necessary. The exception has
+			//already been handled in the RequestHandler
+			//class.
+			return;}
+
 	}
 }

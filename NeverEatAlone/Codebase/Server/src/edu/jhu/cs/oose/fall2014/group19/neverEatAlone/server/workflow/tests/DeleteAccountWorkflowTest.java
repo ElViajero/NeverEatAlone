@@ -83,7 +83,7 @@ public class DeleteAccountWorkflowTest {
 		WorkflowTestHelper.DeleteTestAccount("UserB");
 
 		// create 1 account
-		System.out.println("creating test account UserA...");
+		System.out.println("creating test accounts...");
 		WorkflowTestHelper.CreateTestAccount("UserA", "pwA", "emailA");		
 		WorkflowTestHelper.CreateTestAccount("UserB", "pwB", "emailB");		
 		
