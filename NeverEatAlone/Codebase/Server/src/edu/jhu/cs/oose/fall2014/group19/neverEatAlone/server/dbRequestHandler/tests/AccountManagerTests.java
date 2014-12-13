@@ -1,4 +1,4 @@
-package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.tests;
+package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbRequestHandler.tests;
 
 import static org.junit.Assert.assertTrue;
 
@@ -13,9 +13,9 @@ import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.kernel.impl.util.StringLogger;
 
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.contracts.IAccountDBManager;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.services.AccountDBManager;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.services.DBManager;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbRequestHandler.contracts.IAccountDBRequestHandler;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbRequestHandler.services.AccountDBRequestHandler;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbRequestHandler.services.DBManager;
 
 
 
@@ -45,7 +45,7 @@ public class AccountManagerTests {
 		requestMap.put("email",new String[]{"Tea@tea.com"});
 
 		//create instances and execute account creation logic.
-		IAccountDBManager iAccountManager = new AccountDBManager();
+		IAccountDBRequestHandler iAccountManager = new AccountDBRequestHandler();
 		iAccountManager.create(requestMap);
 
 		GraphDatabaseService graphDBInstance = DBManager.GetGraphDBInstance();
@@ -107,7 +107,7 @@ public class AccountManagerTests {
 		requestMap.put("username",new String[]{"Tejas"});		
 
 		//create instances and execute account creation logic.
-		IAccountDBManager iAccountManager = new AccountDBManager();
+		IAccountDBRequestHandler iAccountManager = new AccountDBRequestHandler();
 		List<Map<String, String>> resultMapList =
 				iAccountManager.isValid(requestMap);
 

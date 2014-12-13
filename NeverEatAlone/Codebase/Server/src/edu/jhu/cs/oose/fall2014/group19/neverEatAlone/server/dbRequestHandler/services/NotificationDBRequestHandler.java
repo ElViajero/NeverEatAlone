@@ -1,4 +1,4 @@
-package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.services;
+package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbRequestHandler.services;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -13,7 +13,7 @@ import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.kernel.impl.util.StringLogger;
 
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.contracts.INotificationDBManager;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbRequestHandler.contracts.INotificationDBRequestHandler;
 
 /**
  * This class handles notification management related database transactions.
@@ -24,7 +24,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.contracts
 
 
 @Stateless
-public class NotificationDBManager implements INotificationDBManager {
+public class NotificationDBRequestHandler implements INotificationDBRequestHandler {
 
 
 
@@ -35,7 +35,7 @@ public class NotificationDBManager implements INotificationDBManager {
 	 * @author tejasvamsingh
 	 * 
 	 */
-	public NotificationDBManager(){
+	public NotificationDBRequestHandler(){
 		GraphDBInstance = DBManager.GetGraphDBInstance();
 
 	}

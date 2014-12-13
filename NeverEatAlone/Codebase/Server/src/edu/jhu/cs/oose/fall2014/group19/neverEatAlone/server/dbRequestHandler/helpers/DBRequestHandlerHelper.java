@@ -1,4 +1,4 @@
-package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.services;
+package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbRequestHandler.helpers;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,81 +8,47 @@ import java.util.Map;
 import javax.ejb.Stateless;
 
 import org.neo4j.cypher.javacompat.ExecutionResult;
-import org.neo4j.graphdb.DynamicLabel;
-import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Node;
 import org.neo4j.graphdb.Relationship;
 import org.neo4j.graphdb.ResourceIterator;
-import org.neo4j.graphdb.Transaction;
-import org.neo4j.graphdb.factory.GraphDatabaseFactory;
 
-/**
- * This class is a helper class for database operations.
- * It provides a database handle as well as formatting methods
- * for parameters(results) sent to (received from) the database.
- *  
- * @author tejasvamsingh
- *
- */
 @Stateless
-public class DBManager {
+public class DBRequestHandlerHelper {
 
-	private static GraphDatabaseService GraphDBInstance;
 
 	/**
-	 * This method returns a graph database
-	 * instance that is shared by all classes
-	 * that wish to access the database.
-	 * It also registers the instance for clean
-	 * shutdown and defines schema constraints for the first time 
-	 * instantiation. 
+	 * This method is used for formatting query parameters.
+	 * Note, this is a generic method that assumes every String[] has 
+	 * one element.
 	 * 
+	 * In case of multiple query parameters, 
+	 * the calling method must take care of this detail.
+	 * If not, the information may be lost.
+	 * 
+	 * @param request
 	 * @return
 	 */
+	public static Map<String,String> GetQueryParameterMap(Map<String,String[]> request){		 
 
-	public static GraphDatabaseService GetGraphDBInstance(){
-		if(GraphDBInstance==null){
-			//initialize the DB instance in embedded mode.
-			GraphDBInstance = new GraphDatabaseFactory().newEmbeddedDatabase( "./DBData" );
-			// Register the instance for clean shutdown.
-			RegisterShutdownHook();
-			// define schema constraints if not already defined.
-			try{
-				SetDBSchema();
-			}catch(Exception e){
-				System.out.println("No problem. Schema is already defined.");
-			}			
-		}
-		return GraphDBInstance;
+		Map<String,String> queryParameterMap = new HashMap<String,String>();
+
+		for (Map.Entry<String, String[]> entry : request.entrySet()) {
+
+			//obtain the key and value for the current entry.
+			String key = entry.getKey();
+			String[] value = entry.getValue();
+
+			// Put the first element of String[] into our new map.
+			// Read method documentation for more details.		    		    
+			queryParameterMap.put(key, value[0]);		   		   
+		}		
+
+		queryParameterMap.remove("requestID");
+		queryParameterMap.remove("requestType");
+		return queryParameterMap;
 	}
 
 
-	/**
-	 * 
-	 * This method sets constraints on the
-	 * different types of possible nodes in the graph.
-	 * 
-	 * @param graphDBInstance2
-	 */
-	private static void SetDBSchema() throws Exception {
-
-
-		try(Transaction tx = GraphDBInstance.beginTx()){
-
-			//schema constraints go here
-
-			GraphDBInstance.schema().
-			constraintFor(DynamicLabel.label("User")).
-			assertPropertyIsUnique("username").create();			
-			GraphDBInstance.schema().
-			constraintFor(DynamicLabel.label("User")).
-			assertPropertyIsUnique("email").create();		
-
-
-
-			tx.success();
-		}
-	}
 
 	/**
 	 * 
@@ -193,57 +159,6 @@ public class DBManager {
 
 	} 
 
-
-	/**
-	 * This method is used for formatting query parameters.
-	 * Note, this is a generic method that assumes every String[] has 
-	 * one element.
-	 * 
-	 * In case of multiple query parameters, 
-	 * the calling method must take care of this detail.
-	 * If not, the information may be lost.
-	 * 
-	 * @param request
-	 * @return
-	 */
-	public static Map<String,String> GetQueryParameterMap(Map<String,String[]> request){		 
-
-		Map<String,String> queryParameterMap = new HashMap<String,String>();
-
-		for (Map.Entry<String, String[]> entry : request.entrySet()) {
-
-			//obtain the key and value for the current entry.
-			String key = entry.getKey();
-			String[] value = entry.getValue();
-
-			// Put the first element of String[] into our new map.
-			// Read method documentation for more details.		    		    
-			queryParameterMap.put(key, value[0]);		   		   
-		}		
-		return queryParameterMap;
-	}
-
-
-
-	/**
-	 * This method ensures that the database shuts down gracefully
-	 * when the JVM exits.
-	 * @param graphDb
-	 */
-	private static void RegisterShutdownHook()
-	{
-		// Registers a shutdown hook for the Neo4j instance so that it
-		// shuts down nicely when the VM exits (even if you "Ctrl-C" the
-		// running application).
-		Runtime.getRuntime().addShutdownHook( new Thread()
-		{
-			@Override
-			public void run()
-			{
-				GraphDBInstance.shutdown();
-			}
-		} );
-	}
 
 
 }

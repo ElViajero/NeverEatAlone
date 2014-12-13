@@ -5,7 +5,7 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.contracts.IAccountDBManager;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbRequestHandler.contracts.IAccountDBRequestHandler;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.managementRequestHandler.contracts.IManagementRequestHandler;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.reflectionManager.contracts.IReflectionManager;
 
@@ -22,7 +22,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.reflectionManager.c
 
 public class AccountManagementRequestHandler implements IManagementRequestHandler{
 
-	@Inject IAccountDBManager iAccountManagerObject;
+	@Inject IAccountDBRequestHandler iAccountManagerObject;
 	@Inject IReflectionManager iReflectionManagerObject;
 
 	/**

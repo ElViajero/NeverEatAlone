@@ -5,7 +5,7 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.contracts.IContactDBManager;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbRequestHandler.contracts.IContactDBRequestHandler;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.managementRequestHandler.contracts.IManagementRequestHandler;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.reflectionManager.contracts.IReflectionManager;
 
@@ -23,7 +23,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.reflectionManager.c
 
 public class ContactManagementRequestHandler implements IManagementRequestHandler {
 
-	@Inject IContactDBManager iContactDBManagerObject;
+	@Inject IContactDBRequestHandler iContactDBManagerObject;
 	@Inject IReflectionManager iReflectionManagerObject;
 	/**
 	 * This method handles requests to add a contact.

@@ -1,4 +1,4 @@
-package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.services;
+package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbRequestHandler.services;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,7 +13,7 @@ import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.kernel.impl.util.StringLogger;
 
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.contracts.IContactDBManager;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbRequestHandler.contracts.IContactDBRequestHandler;
 
 
 /**
@@ -24,7 +24,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.contracts
  *
  */
 @Stateless
-public class ContactDBManager implements IContactDBManager {
+public class ContactDBRequestHandler implements IContactDBRequestHandler {
 
 
 	GraphDatabaseService GraphDBInstance;
@@ -34,7 +34,7 @@ public class ContactDBManager implements IContactDBManager {
 	 * Constructor gets a database handle.
 	 * @author tejasvamsingh
 	 */
-	public ContactDBManager(){
+	public ContactDBRequestHandler(){
 		GraphDBInstance = DBManager.GetGraphDBInstance();
 	}
 

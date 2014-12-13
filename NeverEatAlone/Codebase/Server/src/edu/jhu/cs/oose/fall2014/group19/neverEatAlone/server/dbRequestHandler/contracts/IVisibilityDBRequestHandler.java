@@ -1,4 +1,4 @@
-package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.contracts;
+package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbRequestHandler.contracts;
 
 import java.util.List;
 import java.util.Map;
@@ -11,7 +11,7 @@ import java.util.Map;
  * @author Xiaozhou Zhou
  *
  */
-public interface IVisibilityDBManager {
+public interface IVisibilityDBRequestHandler {
 
 	/**
 	 * Method to set visible to some contacts

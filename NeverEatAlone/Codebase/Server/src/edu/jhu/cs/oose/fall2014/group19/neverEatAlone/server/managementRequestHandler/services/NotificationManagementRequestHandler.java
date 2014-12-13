@@ -7,7 +7,7 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.contracts.INotificationDBManager;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbRequestHandler.contracts.INotificationDBRequestHandler;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.managementRequestHandler.contracts.IManagementRequestHandler;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.notificationManager.contracts.INotificationManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.reflectionManager.contracts.IReflectionManager;
@@ -24,7 +24,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.reflectionManager.c
 public class NotificationManagementRequestHandler implements IManagementRequestHandler {
 
 	@Inject INotificationManager iNotificationManagerObject;
-	@Inject INotificationDBManager iNotificationDBManagerObject;
+	@Inject INotificationDBRequestHandler iNotificationDBManagerObject;
 	@Inject IReflectionManager iReflectionManagerObject;
 
 	/**

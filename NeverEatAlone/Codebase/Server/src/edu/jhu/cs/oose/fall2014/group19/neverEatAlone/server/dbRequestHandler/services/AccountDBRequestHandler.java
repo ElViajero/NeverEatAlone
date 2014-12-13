@@ -1,4 +1,4 @@
-package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.services;
+package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbRequestHandler.services;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,7 +13,7 @@ import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.kernel.impl.util.StringLogger;
 
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.contracts.IAccountDBManager;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbRequestHandler.contracts.IAccountDBRequestHandler;
 
 /**
  * This class handles account management related database transactions.
@@ -24,7 +24,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.contracts
  */
 
 @Stateless
-public class AccountDBManager implements IAccountDBManager {
+public class AccountDBRequestHandler implements IAccountDBRequestHandler {
 
 	GraphDatabaseService GraphDBInstance;
 
@@ -33,7 +33,7 @@ public class AccountDBManager implements IAccountDBManager {
 	 * @author tejasvamsingh
 	 * 
 	 */
-	public AccountDBManager(){
+	public AccountDBRequestHandler(){
 		GraphDBInstance = DBManager.GetGraphDBInstance();
 
 	}

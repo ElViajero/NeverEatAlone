@@ -1,4 +1,4 @@
-package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.services;
+package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbRequestHandler.services;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -11,14 +11,14 @@ import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.kernel.impl.util.StringLogger;
 
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.contracts.IVisibilityDBManager;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbRequestHandler.contracts.IVisibilityDBRequestHandler;
 
 /**
  * This class set the visibility of a contact
  * @author Xiaozhou Zhou
  *
  */
-public class VisibilityDBManager implements IVisibilityDBManager {
+public class VisibilityDBRequestHandler implements IVisibilityDBRequestHandler {
 
 	GraphDatabaseService GraphDBInstance;
 
@@ -26,7 +26,7 @@ public class VisibilityDBManager implements IVisibilityDBManager {
 	 * Constructor gets a database handler
 	 * 
 	 */
-	public VisibilityDBManager(){
+	public VisibilityDBRequestHandler(){
 		GraphDBInstance = DBManager.GetGraphDBInstance();
 	}
 

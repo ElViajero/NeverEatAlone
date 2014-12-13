@@ -3,19 +3,21 @@ package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.workflow.tests;
 import java.util.HashMap;
 import java.util.Map;
 
+
+
 // import org.junit.Test;
 import org.neo4j.cypher.javacompat.ExecutionEngine;
 import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.kernel.impl.util.StringLogger;
 
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.contracts.IAccountDBManager;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.contracts.IContactDBManager;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.contracts.INotificationDBManager;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.services.AccountDBManager;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.services.ContactDBManager;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.services.DBManager;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.services.NotificationDBManager;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbRequestHandler.contracts.IAccountDBRequestHandler;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbRequestHandler.contracts.IContactDBRequestHandler;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbRequestHandler.contracts.INotificationDBRequestHandler;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbRequestHandler.services.AccountDBRequestHandler;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbRequestHandler.services.ContactDBRequestHandler;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbRequestHandler.services.DBManager;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbRequestHandler.services.NotificationDBRequestHandler;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.workflow.tests.helpers.TestRequestBuilder;
 
 /**
@@ -36,7 +38,7 @@ public class DatabaseStructureTest {
 		Map<String,String[]> parameters = new HashMap<String, String[]>(); 
 
 		// Create user accounts 
-		IAccountDBManager accountDBManager = new AccountDBManager(); 
+		IAccountDBRequestHandler accountDBManager = new AccountDBRequestHandler(); 
 		request = TestRequestBuilder.createAccountRequest("user1", "pw1", "email1"); 
 		accountDBManager.create(request); 
 		request = TestRequestBuilder.createAccountRequest("user2", "pw2", "email2"); 
@@ -70,14 +72,14 @@ public class DatabaseStructureTest {
 		accountDBManager.update(request);
 
 		// Add contacts		
-		IContactDBManager contactDBManager = new ContactDBManager(); 
+		IContactDBRequestHandler contactDBManager = new ContactDBRequestHandler(); 
 		request = TestRequestBuilder.addContactRequest("user1", "user3"); 
 		contactDBManager.add(request); 
 		request = TestRequestBuilder.addContactRequest("user2", "user3"); 
 		contactDBManager.add(request); 
 
 		// create meal notifications
-		INotificationDBManager notificationDBManager = new NotificationDBManager(); 
+		INotificationDBRequestHandler notificationDBManager = new NotificationDBRequestHandler(); 
 		parameters.clear(); 
 		parameters.put("poster", new String[]{"user3"});
 		parameters.put("postID",  new String[]{"1"});
@@ -95,7 +97,7 @@ public class DatabaseStructureTest {
 	public void deletionTest(){
 		Map<String,String[]> request; 
 		request = TestRequestBuilder.deleteContactRequest("user2", "user3"); 
-		IContactDBManager contactDBManager = new ContactDBManager(); 
+		IContactDBRequestHandler contactDBManager = new ContactDBRequestHandler(); 
 		contactDBManager.delete(request); 
 	}
 

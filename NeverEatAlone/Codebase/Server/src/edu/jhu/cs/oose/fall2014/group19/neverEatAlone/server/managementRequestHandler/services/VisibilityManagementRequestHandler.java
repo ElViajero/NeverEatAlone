@@ -6,7 +6,7 @@ import java.util.Map;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.contracts.IVisibilityDBManager;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbRequestHandler.contracts.IVisibilityDBRequestHandler;
 
 /**
  * This class handles all the requests related to setting or unsetting Visibility
@@ -17,7 +17,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.contracts
 @Stateless
 public class VisibilityManagementRequestHandler {
 
-	@Inject IVisibilityDBManager iVisibilityDBManagerObject;
+	@Inject IVisibilityDBRequestHandler iVisibilityDBManagerObject;
 	//@Inject IReflectionManager iReflectionManagerObject;
 	/**
 	 * This method handles requests to set visible to a contact

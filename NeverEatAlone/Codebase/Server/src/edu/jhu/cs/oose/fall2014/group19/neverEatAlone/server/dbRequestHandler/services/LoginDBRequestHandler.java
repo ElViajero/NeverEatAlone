@@ -1,4 +1,4 @@
-package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.services;
+package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbRequestHandler.services;
 
 import java.util.HashMap;
 import java.util.List;
@@ -12,7 +12,7 @@ import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.kernel.impl.util.StringLogger;
 
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.contracts.ILoginDBManager;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbRequestHandler.contracts.ILoginDBRequestHandler;
 
 
 /**
@@ -23,10 +23,10 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.contracts
  *
  */
 @Stateless
-public class LoginDBManager implements ILoginDBManager {
+public class LoginDBRequestHandler implements ILoginDBRequestHandler {
 
 	GraphDatabaseService GraphDBInstance;
-	public LoginDBManager(){
+	public LoginDBRequestHandler(){
 		// for now we get the instance in the constructor.
 		// This may not turn out to be the best way. 
 		GraphDBInstance = 
