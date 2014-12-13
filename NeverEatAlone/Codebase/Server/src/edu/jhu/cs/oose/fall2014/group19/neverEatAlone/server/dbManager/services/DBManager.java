@@ -10,8 +10,7 @@ import javax.ejb.Stateless;
 import org.neo4j.cypher.javacompat.ExecutionResult;
 import org.neo4j.graphdb.DynamicLabel;
 import org.neo4j.graphdb.GraphDatabaseService;
-import org.neo4j.graphdb.Node;
-import org.neo4j.graphdb.Relationship;
+import org.neo4j.graphdb.PropertyContainer;
 import org.neo4j.graphdb.ResourceIterator;
 import org.neo4j.graphdb.Transaction;
 import org.neo4j.graphdb.factory.GraphDatabaseFactory;
@@ -144,34 +143,18 @@ public class DBManager {
 				if(entry==null)
 					continue;
 
-				if(entry instanceof org.neo4j.graphdb.Node){
+				if (entry instanceof org.neo4j.graphdb.PropertyContainer){
 
 					// ********* LOGGING *********
-					System.out.println("IT IS A NODE");
+					System.out.println("IT IS A NODE OR RELATIONSHIP");
 					// ********* LOGGING *********
 
-					Node currentNode = (Node) entry; 
+					PropertyContainer currentEntry = (PropertyContainer) entry; 
 					// iterate over all the properties for the current node object.
-					for(String property : currentNode.getPropertyKeys()){				
+					for(String property : currentEntry.getPropertyKeys()){				
 						//add the properties. Note the value is returned as string.
 						resultMapList.get(index).
-						put(property, currentNode.getProperty(property).toString());				
-
-					}
-				}
-
-				else if(entry instanceof org.neo4j.graphdb.Relationship){
-
-					// ********* LOGGING *********
-					System.out.println("IT IS A RELATIONSHIP");
-					// ********* LOGGING *********
-
-					Relationship currentRelation = (Relationship) entry; 
-					// iterate over all the properties for the current relationship object.
-					for(String property : currentRelation.getPropertyKeys()){				
-						//add the properties. Note the value is returned as string.
-						resultMapList.get(index).
-						put(property, currentRelation.getProperty(property).toString());				
+						put(property, currentEntry.getProperty(property).toString());				
 
 					}
 				}
@@ -225,6 +208,18 @@ public class DBManager {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 	/**
 	 * This method ensures that the database shuts down gracefully
 	 * when the JVM exits.
@@ -244,6 +239,9 @@ public class DBManager {
 			}
 		} );
 	}
+
+
+
 
 
 }
