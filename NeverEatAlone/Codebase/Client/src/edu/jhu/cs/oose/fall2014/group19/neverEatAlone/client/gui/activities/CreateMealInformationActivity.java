@@ -36,7 +36,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.h
 public class CreateMealInformationActivity extends FragmentActivity {
 
 	Button BtnSelectStartDate, BtnSelectstartTime, BtnSelectEndDate,
-	BtnSelectendTime;
+			BtnSelectendTime;
 
 	private EditText place;
 	private EditText maxNumber;
@@ -106,9 +106,9 @@ public class CreateMealInformationActivity extends FragmentActivity {
 
 	private void applyTheme() {
 		ThemeManager.applyTheme(findViewById(android.R.id.content));
-		//ThemeManager.applyTheme(findViewById(R.id.layout_create_meal));
-		//ThemeManager.applyTheme(findViewById(R.id.layout_create_meal_information));
-		//ThemeManager.applyTheme(findViewById(R.id.header_createMealInfo));
+		// ThemeManager.applyTheme(findViewById(R.id.layout_create_meal));
+		// ThemeManager.applyTheme(findViewById(R.id.layout_create_meal_information));
+		// ThemeManager.applyTheme(findViewById(R.id.header_createMealInfo));
 
 	}
 
