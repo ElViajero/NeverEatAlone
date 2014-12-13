@@ -246,8 +246,8 @@ public class CreateMealInformationActivity extends FragmentActivity {
 			startmonth = monthOfYear;
 			int dummyMonthStart = startmonth + 1;
 			startDay = dayOfMonth;
-			BtnSelectStartDate.setText(startDay + "-" + dummyMonthStart + "-"
-					+ startYear);
+			BtnSelectStartDate.setText(timeToString(startDay) + "-"
+					+ timeToString(dummyMonthStart) + "-" + startYear);
 		}
 	};
 
@@ -265,8 +265,8 @@ public class CreateMealInformationActivity extends FragmentActivity {
 			endMonth = monthOfYear;
 			int dummyMonthEnd = endMonth + 1;
 			endDay = dayOfMonth;
-			BtnSelectEndDate.setText(endDay + "-" + dummyMonthEnd + "-"
-					+ endYear);
+			BtnSelectEndDate.setText(timeToString(endDay) + "-"
+					+ timeToString(dummyMonthEnd) + "-" + endYear);
 		}
 	};
 
@@ -281,7 +281,8 @@ public class CreateMealInformationActivity extends FragmentActivity {
 		public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 			starthour = hourOfDay;
 			startminute = minute;
-			BtnSelectstartTime.setText(hourOfDay + ":" + minute);
+			BtnSelectstartTime.setText(timeToString(hourOfDay) + ":"
+					+ timeToString(minute));
 		}
 	};
 
@@ -296,7 +297,8 @@ public class CreateMealInformationActivity extends FragmentActivity {
 		public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 			endhour = hourOfDay;
 			endminute = minute;
-			BtnSelectendTime.setText(hourOfDay + ":" + minute);
+			BtnSelectendTime.setText(timeToString(hourOfDay) + ":"
+					+ timeToString(minute));
 		}
 	};
 
@@ -338,6 +340,20 @@ public class CreateMealInformationActivity extends FragmentActivity {
 	 */
 	public void onendTimeButtonClick(View view) {
 		showendTimePicker();
+	}
+
+	/**
+	 * Set the right form for time and date.
+	 * 
+	 * @author Runze Tang
+	 * 
+	 */
+	private String timeToString(int time) {
+		if (time >= 10) {
+			return String.valueOf(time);
+		} else {
+			return "0" + time;
+		}
 	}
 
 	/**
