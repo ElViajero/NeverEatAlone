@@ -1,19 +1,15 @@
 package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbRequestHandler.services;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 
-import org.neo4j.cypher.javacompat.ExecutionEngine;
-import org.neo4j.cypher.javacompat.ExecutionResult;
-import org.neo4j.graphdb.GraphDatabaseService;
-import org.neo4j.graphdb.Transaction;
-import org.neo4j.kernel.impl.util.StringLogger;
-
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.contracts.IDBQueryExecutionManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbRequestHandler.contracts.IAccountDBRequestHandler;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbRequestHandler.helpers.DBRequestHandlerHelper;
 
 /**
  * This class handles account management related database transactions.
@@ -26,17 +22,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbRequestHandler.co
 @Stateless
 public class AccountDBRequestHandler implements IAccountDBRequestHandler {
 
-	GraphDatabaseService GraphDBInstance;
-
-	/**
-	 * Constructor gets a database handle.
-	 * @author tejasvamsingh
-	 * 
-	 */
-	public AccountDBRequestHandler(){
-		GraphDBInstance = DBManager.GetGraphDBInstance();
-
-	}
+	@Inject IDBQueryExecutionManager iDBQueryExecutionManagerInstance;
 
 	/**
 	 * This method is responsible for creating an user account in the database.
@@ -50,55 +36,27 @@ public class AccountDBRequestHandler implements IAccountDBRequestHandler {
 		System.out.flush();
 		// ********* LOGGING ********* 
 
-		//create a duplicate map.
-		Map<String,String[]> modifiableRequestMap = new HashMap<String,String[]>(request);
-		modifiableRequestMap.remove("requestType");
-		modifiableRequestMap.remove("requestID");
 
 		//format the parameters for the query.		
-		Map<String, String> queryParamterMap = 
-				DBManager.GetQueryParameterMap(modifiableRequestMap);
+		Map<String, String> parameterMap = 
+				DBRequestHandlerHelper.GetQueryParameterMap(request);
 
+		//create a params map.
+		Map<String,Object> queryParameterMap = new HashMap<String,Object>();
+		queryParameterMap.put("creationParameters",parameterMap);
 
-		// set up parameters to execute and store the result of query
-		ExecutionEngine executionEngine = new ExecutionEngine(GraphDBInstance,
-				StringLogger.SYSTEM);				
-		ExecutionResult result;
-		List<Map<String,String>> resultMapList;
+		//create cypher query to create node in the database.
+		String query = "CREATE(n:User{creationParameters}) RETURN n";
 
+		return iDBQueryExecutionManagerInstance
+				.executeQuery(query, queryParameterMap);
 
-		try ( Transaction tx = GraphDBInstance.beginTx() )
-		{
-			//create a params map.
-			Map<String,Object> parameters = new HashMap<String,Object>();
-			parameters.put("creationParameters",queryParamterMap);
-
-			//create cypher query to create node in the database.
-			String query = "CREATE(n:User{creationParameters}) RETURN n";
-
-			// Check for uniqueness constraint violation.
-			try{
-				//execute the query
-				result = executionEngine.execute(query,parameters);
-				tx.success();
-			}catch(Exception e){
-				System.out.println("Constraint violation in create account. :: ");
-				System.out.println(e.getMessage());
-				result = null;
-				tx.failure();
-			}
-
-			// This is the data returned.
-			resultMapList = DBManager.GetResultMapList(result);
-
-			// Successful transaction.
-
-
-		}
-
-		return resultMapList;
 
 	}
+
+
+
+
 
 	/**
 	 * This method is responsible for account update database transactions.
@@ -113,63 +71,29 @@ public class AccountDBRequestHandler implements IAccountDBRequestHandler {
 		System.out.flush();
 		// ********* LOGGING ********* 
 
-		//create a duplicate map.
-		Map<String,String[]> modifiableRequestMap = new HashMap<String,String[]>(request);
-		modifiableRequestMap.remove("requestType");
-		modifiableRequestMap.remove("requestID");
-
-		// user name can never be changed 
-		String username = modifiableRequestMap.get("username")[0]; 
-		modifiableRequestMap.remove("username"); 
-
 		//format the parameters for the query.		
-		Map<String, String> queryParamterMap = 
-				DBManager.GetQueryParameterMap(modifiableRequestMap);
+		Map<String, String> parameterMap = 
+				DBRequestHandlerHelper.GetQueryParameterMap(request);
 
+		//create a params map.
+		Map<String,Object> queryParameterMap = new HashMap<String,Object>();
+		queryParameterMap.put("username", parameterMap.get("username")); 
+		queryParameterMap.put("updateParameters",parameterMap);
 
-		// set up parameters to execute and store the result of query
-		ExecutionEngine executionEngine = new ExecutionEngine(GraphDBInstance,
-				StringLogger.SYSTEM);				
-		ExecutionResult result;
-		List<Map<String,String>> resultMapList;
+		//create cypher query to update the database.
+		String query =""
+				+ "MATCH (n:User) "
+				+ "WHERE n.username={username} "
+				+ "SET n += {updateParameters} "
+				+ "RETURN n ";
 
+		return iDBQueryExecutionManagerInstance
+				.executeQuery(query, queryParameterMap);
 
-		try ( Transaction tx = GraphDBInstance.beginTx() )
-		{
-			//create a params map.
-			Map<String,Object> parameters = new HashMap<String,Object>();
-			parameters.put("username", username); 
-			parameters.put("updateParameters",queryParamterMap);
-
-			//create cypher query to update the database.
-			String query =""
-					+ "MATCH (n:User) "
-					+ "WHERE n.username={username} "
-					+ "SET n += {updateParameters} "
-					+ "RETURN n ";
-
-			// Check for uniqueness constraint violation.
-			try{
-				//execute the query
-				result = executionEngine.execute(query,parameters);
-				tx.success();
-			}catch(Exception e){
-				System.out.println("Constraint violation in updating account. :: ");
-				System.out.println(e.getMessage());
-				result = null;
-				tx.failure();
-			}
-
-			// This is the data returned.
-			resultMapList = DBManager.GetResultMapList(result);
-
-			// Successful transaction.
-
-
-		}
-
-		return resultMapList;
 	}
+
+
+
 
 	/**
 	 * Method to get full account information
@@ -182,58 +106,34 @@ public class AccountDBRequestHandler implements IAccountDBRequestHandler {
 		System.out.flush();
 		// ********* LOGGING ********* 
 
-		Map<String,String[]> modifiableRequestMap = new HashMap<String,String[]>(request);
-		modifiableRequestMap.remove("requestType");
-		modifiableRequestMap.remove("requestID");
-
-
 		//format the parameters for the query.		
-		Map<String, String> queryParamterMap = 
-				DBManager.GetQueryParameterMap(modifiableRequestMap);
+		Map<String, String> parameterMap = 
+				DBRequestHandlerHelper.GetQueryParameterMap(request);
 
 
 		// ************************ LOGGING ************************
-		System.out.println("username :"+queryParamterMap.get("username"));
+		System.out.println("username :"+parameterMap.get("username"));
 
-		// set up parameters to execute and store the result of query
-		ExecutionEngine executionEngine = new ExecutionEngine(GraphDBInstance,
-				StringLogger.SYSTEM);				
-		ExecutionResult result;
-		List<Map<String,String>> resultMapList;
 
-		try ( Transaction tx = GraphDBInstance.beginTx() )
-		{
-			//create a params map.
-			Map<String,Object> parameters = new HashMap<String,Object>();
-			parameters.put("username",queryParamterMap.get("username"));
 
-			// Fetch all the properties of the user node 
+		//create a params map.
+		Map<String,Object> queryParameterMap = new HashMap<String,Object>();
+		queryParameterMap.put("username",parameterMap.get("username"));
 
-			String query = "MATCH (n:User)"
-					+ " WHERE "
-					+ "n.username = {username}"
-					+ "RETURN n";
+		// Fetch all the properties of the user node 
 
-			try{
-				//execute the query
-				result = executionEngine.execute(query,parameters);
-				tx.success();
-			}catch(Exception e){
-				System.out.println("Constraint violation in fetching account information :: ");
-				System.out.println(e.getMessage());
-				result = null;
-				tx.failure();
-			}
-			//			System.out.println("query result: \n"+result.dumpToString());
-			// This is the data returned.
-			resultMapList = DBManager.GetResultMapList(result);
-			// Sucessful transaction.
-		}
+		String query = "MATCH (n:User)"
+				+ " WHERE "
+				+ "n.username = {username}"
+				+ "RETURN n";
 
-		System.out.println("Account Info Fetched: "+resultMapList);
-		return resultMapList;		
+		return iDBQueryExecutionManagerInstance
+				.executeQuery(query, queryParameterMap);
 
 	}
+
+
+
 
 
 	/**
@@ -250,57 +150,31 @@ public class AccountDBRequestHandler implements IAccountDBRequestHandler {
 		System.out.flush();
 		// ********* LOGGING ********* 
 
-		Map<String,String[]> modifiableRequestMap = new HashMap<String,String[]>(request);
-		modifiableRequestMap.remove("requestType");
-		modifiableRequestMap.remove("requestID");
-
-
 		//format the parameters for the query.		
-		Map<String, String> queryParamterMap = 
-				DBManager.GetQueryParameterMap(modifiableRequestMap);
+		Map<String, String> parameterMap = 
+				DBRequestHandlerHelper.GetQueryParameterMap(request);
 
 
-		// set up parameters to execute and store the result of query
-		ExecutionEngine executionEngine = new ExecutionEngine(GraphDBInstance,
-				StringLogger.SYSTEM);				
-		List<Map<String,String>> resultMapList = new ArrayList<Map<String,String>>();
-		resultMapList.add(new HashMap<String,String>()); 
+		//create a params map.
+		Map<String,Object> queryParameterMap = new HashMap<String,Object>();
+		queryParameterMap.put("username",parameterMap.get("username"));
 
+		System.out.println("deleting user "+queryParameterMap.get("username"));
 
-		try ( Transaction tx = GraphDBInstance.beginTx() )
-		{
-			//create a params map.
-			Map<String,Object> parameters = new HashMap<String,Object>();
-			parameters.put("username",queryParamterMap.get("username"));
+		//create cypher query to delete node from the database.
+		// first delete the relationships
+		String query =""
+				+ "MATCH (n:User) "
+				+ "WHERE n.username={username} "
+				+ "OPTIONAL MATCH (n)-[r]-() "
+				+ "DELETE n,r ";
 
-			System.out.println("deleting user "+parameters.get("username"));
-
-			//create cypher query to delete node from the database.
-			// first delete the relationships
-			String query =""
-					+ "MATCH (n:User) "
-					+ "WHERE n.username={username} "
-					+ "OPTIONAL MATCH (n)-[r]-() "
-					+ "DELETE n,r ";
-
-			// Check for constraint violation.
-			try{
-				//execute the query
-				executionEngine.execute(query,parameters);
-				tx.success();
-				resultMapList.get(0).put("Status", "Success");
-			}catch(Exception e){
-				System.out.println("Constraint violation in deleting account. :: ");
-				System.out.println(e.getMessage());
-				tx.failure();
-				resultMapList.get(0).put("Status", "Failed");
-			}
-		}
-		System.out.println("deleting result: "+resultMapList);
-
-		return resultMapList;
+		return iDBQueryExecutionManagerInstance
+				.executeQuery(query, queryParameterMap);
 
 	}
+
+
 
 	/**
 	 * This method checks if a given user 
@@ -315,47 +189,26 @@ public class AccountDBRequestHandler implements IAccountDBRequestHandler {
 		System.out.flush();
 		// ********* LOGGING ********* 
 
-		//create a duplicate map.
-		Map<String,String[]> modifiableRequestMap = new HashMap<String,String[]>(request);
-		modifiableRequestMap.remove("requestType");
-		modifiableRequestMap.remove("requestID");
-
-
 		//format the parameters for the query.		
-		Map<String, String> queryParamterMap = 
-				DBManager.GetQueryParameterMap(modifiableRequestMap);
+		Map<String, String> parameterMap = 
+				DBRequestHandlerHelper.GetQueryParameterMap(request);
 
 
-		// set up paramters to execute and store the result of query
-		ExecutionEngine executionEngine = new ExecutionEngine(GraphDBInstance,
-				StringLogger.SYSTEM);				
-		ExecutionResult result;
-		List<Map<String,String>> resultMapList;
+		//create a params map.
+		Map<String,Object> queryParameterMap = new HashMap<String,Object>();
+		queryParameterMap.put("username",parameterMap.get("username"));
 
+		//create cypher query to create node in the dataase.
+		String query = "MATCH(n:User) WHERE n.username={username} RETURN n";
 
-		try ( Transaction tx = GraphDBInstance.beginTx() )
-		{
-			//create a params map.
-			Map<String,Object> parameters = new HashMap<String,Object>();
-			parameters.put("username",queryParamterMap.get("username"));
-
-			//create cypher query to create node in the dataase.
-			String query = "MATCH(n:User) WHERE n.username={username} RETURN n";
-
-			//execute the query
-			result = executionEngine.execute(query,parameters);
-
-			// This is the data returned.
-			resultMapList = DBManager.GetResultMapList(result);
-
-			// Sucessful transaction.
-			tx.success();
-
-		}
-
-		return resultMapList;
+		return iDBQueryExecutionManagerInstance
+				.executeQuery(query, queryParameterMap);
 
 	}
+
+
+
+
 
 
 

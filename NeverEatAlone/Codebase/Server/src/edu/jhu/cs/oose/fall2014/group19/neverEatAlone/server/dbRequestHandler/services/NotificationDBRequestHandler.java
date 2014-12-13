@@ -6,14 +6,11 @@ import java.util.List;
 import java.util.Map;
 
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 
-import org.neo4j.cypher.javacompat.ExecutionEngine;
-import org.neo4j.cypher.javacompat.ExecutionResult;
-import org.neo4j.graphdb.GraphDatabaseService;
-import org.neo4j.graphdb.Transaction;
-import org.neo4j.kernel.impl.util.StringLogger;
-
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.contracts.IDBQueryExecutionManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbRequestHandler.contracts.INotificationDBRequestHandler;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbRequestHandler.helpers.DBRequestHandlerHelper;
 
 /**
  * This class handles notification management related database transactions.
@@ -26,20 +23,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbRequestHandler.co
 @Stateless
 public class NotificationDBRequestHandler implements INotificationDBRequestHandler {
 
-
-
-	GraphDatabaseService GraphDBInstance;
-
-	/**
-	 * Constructor gets a database handle.
-	 * @author tejasvamsingh
-	 * 
-	 */
-	public NotificationDBRequestHandler(){
-		GraphDBInstance = DBManager.GetGraphDBInstance();
-
-	}
-
+	@Inject IDBQueryExecutionManager iDBQueryExecutionManagerInstance; 
 
 
 	/**
@@ -55,117 +39,64 @@ public class NotificationDBRequestHandler implements INotificationDBRequestHandl
 		System.out.println("Reached CreateMealNotification in NotificationDBManager");
 
 
-
-		//create a duplicate map.
-		Map<String,String[]> modifiableRequestMap = new HashMap<String,String[]>(request);
-
-
-
 		//get the recipients as List
 		List<String> recipientList = Arrays.asList(request.get("recipientList"));
 
-
 		//format the parameters for the query.		
-		Map<String, String> queryParamterMap = 
-				DBManager.GetQueryParameterMap(modifiableRequestMap);
+		Map<String, String> paramterMap = 
+				DBRequestHandlerHelper.GetQueryParameterMap(request);
 
-		String poster = queryParamterMap.get("poster");
-		queryParamterMap.remove("requestType");
-		queryParamterMap.remove("requestID");
-		queryParamterMap.remove("recipientList");
+		String poster = paramterMap.get("poster");
+		paramterMap.remove("recipientList");
 
 
+		//create a params map.
+		Map<String,Object> queryParameterMap = new HashMap<String,Object>();
+		queryParameterMap.put("creationParameters",paramterMap);
 
-		// set up parameters to execute and store the result of query
-		ExecutionEngine executionEngine = new ExecutionEngine(GraphDBInstance,
-				StringLogger.SYSTEM);				
-		ExecutionResult result;
-		List<Map<String,String>> resultMapList;
+		//create cypher query to create node in the dataase.
+		String query = "CREATE(n:Post{creationParameters}) RETURN n";
 
-
-		try ( Transaction tx = GraphDBInstance.beginTx() )
-		{
-			//create a params map.
-			Map<String,Object> parameters = new HashMap<String,Object>();
-			parameters.put("creationParameters",queryParamterMap);
-
-			//create cypher query to create node in the dataase.
-			String query = "CREATE(n:Post{creationParameters}) RETURN n";
-
-			// Check for uniqueness constraint violation.
-			try{
-				//execute the query
-				result = executionEngine.execute(query,parameters);				
-			}catch(Exception e){
-				System.out.println("Constraint violation in query 1. :: ");
-				System.out.println(e.getMessage());
-				result = null;
-				tx.failure();
-			}
-
-			// This is the data returned.
-			resultMapList = DBManager.GetResultMapList(result);
+		// This is the data returned.
+		List<Map<String, String>> resultMapList = iDBQueryExecutionManagerInstance
+				.executeQuery(query, queryParameterMap);
 
 
-			//step 2 : add an edge from poster to node.
+		//step 2 : add an edge from poster to node.
 
-			parameters = new HashMap<String,Object>();
-			parameters.put("username",poster);
-			parameters.put("postID",queryParamterMap.get("postID"));
-			
-			query = "MATCH (n:User),(a:Post) "
-					+ "WHERE n.username={username} AND "
-					+ "a.postID={postID} "
-					+ "CREATE (n)-[:POSTER]->(a) "
+		queryParameterMap = new HashMap<String,Object>();
+		queryParameterMap.put("username",poster);
+		queryParameterMap.put("postID",paramterMap.get("postID"));
+
+		query = "MATCH (n:User),(a:Post) "
+				+ "WHERE n.username={username} AND "
+				+ "a.postID={postID} "
+				+ "CREATE (n)-[:POSTER]->(a) "
+				+ "RETURN n";
+
+		iDBQueryExecutionManagerInstance
+		.executeQuery(query, queryParameterMap);
+
+
+		for(String recipient : recipientList){
+
+			//step 3 : add edges to all recipients.
+			queryParameterMap = new HashMap<String,Object>();
+			queryParameterMap.put("Recipient",	recipient);
+			queryParameterMap.put("postID",paramterMap.get("postID"));
+
+			query = "MATCH (n:Post),(a:User) "
+					+ "WHERE a.username={Recipient} AND "
+					+ "n.postID={postID} "
+					+ "CREATE (n)-[:RECIPIENT]->(a) "
 					+ "RETURN n";
 
-			try{
-				//execute the query
-				result = executionEngine.execute(query,parameters);				
-			}catch(Exception e){
-				System.out.println("Constraint violation in query 2. :: ");
-				System.out.println(e.getMessage());
-				result = null;
-				tx.failure();
-			}
-
-
-			for(String recipient : recipientList){
-				//step 3 : add edges to all recipients.
-				parameters = new HashMap<String,Object>();
-				parameters.put("Recipient",	recipient);
-				parameters.put("postID",queryParamterMap.get("postID"));
-
-				query = "MATCH (n:Post),(a:User) "
-						+ "WHERE a.username={Recipient} AND "
-						+ "n.postID={postID} "
-						+ "CREATE (n)-[:RECIPIENT]->(a) "
-						+ "RETURN n";
-
-
-
-				try{
-					//execute the query
-					result = executionEngine.execute(query,parameters);				
-				}catch(Exception e){
-					System.out.println("Constraint violation in query 3. :: ");
-					System.out.println(e.getMessage());
-					result = null;
-					tx.failure();
-				}
-			}
-
-
-			// Sucessful transaction.
-
-			tx.success();
-
-
+			iDBQueryExecutionManagerInstance
+			.executeQuery(query, queryParameterMap);
 		}
 
 		return resultMapList;
 
 	}
-
 
 }

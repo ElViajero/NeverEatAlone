@@ -5,13 +5,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.neo4j.cypher.javacompat.ExecutionEngine;
-import org.neo4j.cypher.javacompat.ExecutionResult;
-import org.neo4j.graphdb.GraphDatabaseService;
-import org.neo4j.graphdb.Transaction;
-import org.neo4j.kernel.impl.util.StringLogger;
+import javax.inject.Inject;
 
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.contracts.IDBQueryExecutionManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbRequestHandler.contracts.IVisibilityDBRequestHandler;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbRequestHandler.helpers.DBRequestHandlerHelper;
 
 /**
  * This class set the visibility of a contact
@@ -20,15 +18,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbRequestHandler.co
  */
 public class VisibilityDBRequestHandler implements IVisibilityDBRequestHandler {
 
-	GraphDatabaseService GraphDBInstance;
-
-	/**
-	 * Constructor gets a database handler
-	 * 
-	 */
-	public VisibilityDBRequestHandler(){
-		GraphDBInstance = DBManager.GetGraphDBInstance();
-	}
+	@Inject IDBQueryExecutionManager iDBQueryExecutionManagerInstance;  
 
 	/**
 	 * Add VisibleTo edges to the contacts that are chosen to be visible to 
@@ -39,61 +29,35 @@ public class VisibilityDBRequestHandler implements IVisibilityDBRequestHandler {
 		// ******************** LOGGING ***************************
 		System.out.println("Reached SetVisibility in VisibilityDBManager");		
 
-		//create a duplicate map.
-		Map<String,String[]> modifiableRequestMap = new HashMap<String,String[]>(request);
 
 		//get the contacts as List and remove it from the map
 		List<String> contactList = Arrays.asList(request.get("contactList"));
-		modifiableRequestMap.remove("contactList"); 
 
 		//format the parameters for the query.		
-		Map<String, String> queryParamterMap = 
-				DBManager.GetQueryParameterMap(modifiableRequestMap);
+		Map<String, String> paramterMap = 
+				DBRequestHandlerHelper.GetQueryParameterMap(request);
+		paramterMap.remove("contactList");
 
-		queryParamterMap.remove("requestType");
-		queryParamterMap.remove("requestID");
+		//create a params map.
+		Map<String,Object> queryParameterMap = new HashMap<String,Object>();
+		queryParameterMap.put("creationParameters",paramterMap);
 
-		// set up parameters to execute and store the result of query
-		ExecutionEngine executionEngine = new ExecutionEngine(GraphDBInstance,
-				StringLogger.SYSTEM);				
-		ExecutionResult result = null;
-		List<Map<String,String>> resultMapList;
+		List<Map<String,String>> resultMapList=null;
 
-		try ( Transaction tx = GraphDBInstance.beginTx() )
-		{
-			//create a params map.
-			Map<String,Object> parameters = new HashMap<String,Object>();
-			parameters.put("creationParameters",queryParamterMap);
+		// add visibility edges for each contact
+		for(String contact : contactList){
 
-			// add visibility edges for each contact
-			for(String contact : contactList){
-				parameters = new HashMap<String,Object>();
-				parameters.put("contact", contact);
+			queryParameterMap = new HashMap<String,Object>();
+			queryParameterMap.put("contact", contact);
 
-				String query = "MATCH (n:User),(a:User) "
-						+ "WHERE n.username={username} AND "
-						+ "a.username={contact} "
-						+ "CREATE (n)-[:VISIBLETO]->(a) "
-						+ "RETURN n";
-
-				try{
-					//execute the query
-					result = executionEngine.execute(query,parameters);				
-				}catch(Exception e){
-					System.out.println("Constraint violation in setting visibility. :: ");
-					System.out.println(e.getMessage());
-					result = null;
-					tx.failure();
-				}
-			}
-
-
-			// Sucessful transaction.
-			resultMapList = DBManager.GetResultMapList(result);
-			tx.success();			
-
+			String query = "MATCH (n:User),(a:User) "
+					+ "WHERE n.username={username} AND "
+					+ "a.username={contact} "
+					+ "CREATE (n)-[:VISIBLETO]->(a) "
+					+ "RETURN n";
+			resultMapList=iDBQueryExecutionManagerInstance
+					.executeQuery(query, queryParameterMap);
 		}
-
 		return resultMapList;
 
 	}
@@ -104,63 +68,39 @@ public class VisibilityDBRequestHandler implements IVisibilityDBRequestHandler {
 		// ******************** LOGGING ***************************
 		System.out.println("Reached UnsetVisibility in VisibilityDBManager");		
 
-		//create a duplicate map.
-		Map<String,String[]> modifiableRequestMap = new HashMap<String,String[]>(request);
 
 		//get the contacts as List and remove it from the map
 		List<String> contactList = Arrays.asList(request.get("contactList"));
-		modifiableRequestMap.remove("contactList"); 
+
 
 		//format the parameters for the query.		
-		Map<String, String> queryParamterMap = 
-				DBManager.GetQueryParameterMap(modifiableRequestMap);
+		Map<String, String> paramterMap = 
+				DBRequestHandlerHelper.GetQueryParameterMap(request);
 
-		queryParamterMap.remove("requestType");
-		queryParamterMap.remove("requestID");
-
-		// set up parameters to execute and store the result of query
-		ExecutionEngine executionEngine = new ExecutionEngine(GraphDBInstance,
-				StringLogger.SYSTEM);				
-		ExecutionResult result = null;
-		List<Map<String,String>> resultMapList;
-
-		try ( Transaction tx = GraphDBInstance.beginTx() )
-		{
-			//create a params map.
-			Map<String,Object> parameters = new HashMap<String,Object>();
-			parameters.put("creationParameters",queryParamterMap);
-
-			// delete visibility edges for each contact
-			for(String contact : contactList){
-				parameters = new HashMap<String,Object>();
-				parameters.put("contact", contact);
-
-				String query = "MATCH (n)-[r:VISIBLETO]->(a) "
-						+ "WHERE n.username={username} AND "
-						+ "a.username={contact} "
-						+ "DELETE r  "
-						+ "RETURN n";
-
-				try{
-					//execute the query
-					result = executionEngine.execute(query,parameters);				
-				}catch(Exception e){
-					System.out.println("Constraint violation in unsetting visibility. :: ");
-					System.out.println(e.getMessage());
-					result = null;
-					tx.failure();
-				}
-			}
+		paramterMap.remove("contactList");
 
 
-			// Sucessful transaction.
-			resultMapList = DBManager.GetResultMapList(result);
-			tx.success();			
+		//create a params map.
+		Map<String,Object> queryParameterMap = new HashMap<String,Object>();
+		queryParameterMap.put("creationParameters",paramterMap);
+
+		List<Map<String,String>> resultMapList=null;
+
+		// delete visibility edges for each contact
+		for(String contact : contactList){
+			queryParameterMap = new HashMap<String,Object>();
+			queryParameterMap.put("contact", contact);
+
+			String query = "MATCH (n)-[r:VISIBLETO]->(a) "
+					+ "WHERE n.username={username} AND "
+					+ "a.username={contact} "
+					+ "DELETE r  "
+					+ "RETURN n";	
+			resultMapList=iDBQueryExecutionManagerInstance
+					.executeQuery(query, queryParameterMap);
 
 		}
-
 		return resultMapList;
-
 	}
 
 }
