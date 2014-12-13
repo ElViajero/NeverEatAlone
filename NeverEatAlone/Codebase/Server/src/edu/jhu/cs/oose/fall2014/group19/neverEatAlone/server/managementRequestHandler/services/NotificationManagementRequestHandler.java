@@ -9,8 +9,8 @@ import javax.inject.Inject;
 
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.contracts.INotificationDBManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.managementRequestHandler.contracts.IManagementRequestHandler;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.managementRequestHandler.helpers.ManagemenRequestHandlerHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.notificationManager.contracts.INotificationManager;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.reflectionManager.contracts.IReflectionManager;
 
 
 /**
@@ -25,6 +25,7 @@ public class NotificationManagementRequestHandler implements IManagementRequestH
 
 	@Inject INotificationManager iNotificationManagerObject;
 	@Inject INotificationDBManager iNotificationDBManagerObject;
+	@Inject IReflectionManager iReflectionManagerObject;
 
 	/**
 	 * Method that handles meal post and notification requests.
@@ -58,9 +59,8 @@ public class NotificationManagementRequestHandler implements IManagementRequestH
 
 		System.out.println("Inside HandleManagementRequest");
 
-		return ManagemenRequestHandlerHelper.invokeMethod(this,
+		return iReflectionManagerObject.invokeMethod(this,
 				request.get("requestType")[0], request);
-
 	}
 
 

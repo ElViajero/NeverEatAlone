@@ -7,7 +7,7 @@ import javax.inject.Inject;
 
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.contracts.IAccountDBManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.managementRequestHandler.contracts.IManagementRequestHandler;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.managementRequestHandler.helpers.ManagemenRequestHandlerHelper;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.reflectionManager.contracts.IReflectionManager;
 
 /**
  * 
@@ -23,6 +23,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.managementRequestHa
 public class AccountManagementRequestHandler implements IManagementRequestHandler{
 
 	@Inject IAccountDBManager iAccountManagerObject;
+	@Inject IReflectionManager iReflectionManagerObject;
 
 	/**
 	 * This method handles requests to create an account.
@@ -89,7 +90,7 @@ public class AccountManagementRequestHandler implements IManagementRequestHandle
 
 		System.out.println("Inside HandleManagementRequest");
 
-		return ManagemenRequestHandlerHelper.invokeMethod(this,
+		return iReflectionManagerObject.invokeMethod(this,
 				request.get("requestType")[0], request);
 	}
 

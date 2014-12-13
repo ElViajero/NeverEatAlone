@@ -4,11 +4,10 @@ import java.util.List;
 import java.util.Map;
 
 import javax.ejb.Stateless;
-import javax.enterprise.inject.Any;
-import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
 
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.managementRequestHandler.contracts.IManagementRequestHandler;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.reflectionManager.contracts.IReflectionManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.requestDispatcher.contracts.IRequestDispatcher;
 
 /**
@@ -23,22 +22,13 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.requestDispatcher.c
 public class RequestDispatcher implements IRequestDispatcher {
 
 	IManagementRequestHandler iManagementRequestHandlerObject;
+	@Inject IReflectionManager iReflectionManagerObject;
 
+	final String PACKAGE_NAME = "edu.jhu.cs.oose.fall2014."
+			+ "group19.neverEatAlone.server"
+			+ ".managementRequestHandler.services.";
 
-	@Inject
-	@Any
-	Instance<Object> myBeans;
-
-	/**
-	 * This class obtains bean reference from container using the passed string.
-	 * @param className
-	 * @return
-	 * @throws Exception
-	 */
-	private Object getMyBeanFromClassName(String className) throws Exception{    
-		Class<?> clazz = Class.forName(className);
-		return myBeans.select(clazz).get();  
-	}
+	final String CLASS_SUFFIX = "ManagementRequestHandler";
 
 
 	/**
@@ -54,32 +44,23 @@ public class RequestDispatcher implements IRequestDispatcher {
 		// ********* LOGGING ********* 
 
 
+		String classPrefix = request.get("requestID")[0]; 
 
 		// ********* LOGGING ********* 
-		System.out.println("class name : "+request.get("requestID")[0]+"ManagementRequestHandler");
+		System.out.println("class name : "+PACKAGE_NAME+classPrefix+CLASS_SUFFIX);
 		// ********* LOGGING ********* 
 
-		// obtain class reference
-		try {
-			iManagementRequestHandlerObject = (IManagementRequestHandler) 
-					getMyBeanFromClassName
-					("edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server."
-							+ "managementRequestHandler.services."
-							+request.get("requestID")[0]+"ManagementRequestHandler");
-			System.out.println("obect reference : "+ iManagementRequestHandlerObject);
-			return (iManagementRequestHandlerObject.handleManagementRequest(request));
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			System.out.println("Exception in DispatchRequest :  ");
-			e.printStackTrace();
-		}
+		// obtain class reference		
+		iManagementRequestHandlerObject = (IManagementRequestHandler) 
+				iReflectionManagerObject.getClass(PACKAGE_NAME+classPrefix+CLASS_SUFFIX);
 
+		// ********* LOGGING *********
+		System.out.println("object reference : "+ iManagementRequestHandlerObject);
+		// ********* LOGGING *********
 
+		// Delegate the request to the appropriate class.
+		return (iManagementRequestHandlerObject.handleManagementRequest(request));
 
-
-		return null;
-		/*
-	 	 return IManagementRequestHandlerObject.HandleManagementRequest(request);*/
 	}	
 
 

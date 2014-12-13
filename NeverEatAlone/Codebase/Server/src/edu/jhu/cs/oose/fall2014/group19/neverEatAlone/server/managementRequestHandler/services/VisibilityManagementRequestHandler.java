@@ -18,7 +18,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.contracts
 public class VisibilityManagementRequestHandler {
 
 	@Inject IVisibilityDBManager iVisibilityDBManagerObject;
-
+	//@Inject IReflectionManager iReflectionManagerObject;
 	/**
 	 * This method handles requests to set visible to a contact
 	 * 
@@ -42,4 +42,6 @@ public class VisibilityManagementRequestHandler {
 		System.out.println("Reaching UnsetVisibilityRequest");
 		return iVisibilityDBManagerObject.unsetVisibility(request); 
 	}
+
+
 }
