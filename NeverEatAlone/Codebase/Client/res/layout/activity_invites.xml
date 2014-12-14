@@ -50,7 +50,7 @@
             android:layout_below="@+id/invites_button_create"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="50dp"
-            android:background="@drawable/buttonbackground"
+            android:background="@drawable/button_background_light"
             android:paddingLeft="50dp"
             android:paddingRight="50dp"
             android:text="@string/availability_status" />
@@ -70,7 +70,7 @@
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="50dp"
-            android:background="@drawable/buttonbackground"
+            android:background="@drawable/button_background_light"
             android:onClick="onCreateButtonClick"
             android:paddingLeft="50dp"
             android:paddingRight="50dp"

@@ -90,13 +90,34 @@
     </style>
 
     <!--
-    	Standard Button Layout.
+    	Button Bar Button Layout.
 		@author Yueling Loh 
     -->
     <style name="BarButton">
         <item name="android:layout_width">@dimen/button_standard_width</item>
         <item name="android:layout_height">match_parent</item>
-        <item name="android:background">@drawable/buttonbackground</item>
+        <item name="android:background">@drawable/button_background_light</item>
+    </style>
+
+        <!--
+    	Standard Button Layout.
+		@author Yueling Loh 
+    -->
+    <style name="StandardButton">
+        <item name="android:layout_width">@dimen/button_standard_width</item>
+        <item name="android:layout_height">@dimen/button_height</item>
+        <item name="android:background">@drawable/button_background_light</item>
+    </style>
+    
+            <!--
+    	Standard Button Layout.
+		@author Yueling Loh 
+    -->
+    <style name="BigEditText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/edittext_height</item>
+        <item name="android:background">@drawable/edittext_background_light</item>
+        <item name="android:gravity">center</item>
     </style>
 
 </resources>

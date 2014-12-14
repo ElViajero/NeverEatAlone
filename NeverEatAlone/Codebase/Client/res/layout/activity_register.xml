@@ -43,7 +43,7 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             android:layout_toRightOf="@+id/button_register_cancel"
-            android:background="@drawable/buttonbackground"
+            android:background="@drawable/button_background_light"
             android:onClick="onRegisterButtonClick"
             android:text="@string/register" />
     </RelativeLayout>
@@ -68,11 +68,10 @@
 
         <EditText
             android:id="@+id/edit_username"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/BigEditText"
             android:layout_below="@+id/username"
             android:layout_marginTop="10dp"
-            android:background="@drawable/edittext"
+            android:gravity="center_vertical"
             android:inputType="text" />
 
         <TextView
@@ -88,11 +87,10 @@
 
         <EditText
             android:id="@+id/edit_email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/BigEditText"
             android:layout_below="@+id/email"
             android:layout_marginTop="10dp"
-            android:background="@drawable/edittext"
+            android:gravity="center_vertical"
             android:inputType="textEmailAddress" />
 
         <TextView
@@ -106,11 +104,10 @@
 
         <EditText
             android:id="@+id/edit_password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/BigEditText"
             android:layout_below="@+id/password"
             android:layout_marginTop="10dp"
-            android:background="@drawable/edittext"
+            android:gravity="center_vertical"
             android:inputType="textPassword" />
 
         <TextView
@@ -124,11 +121,10 @@
 
         <EditText
             android:id="@+id/edit_confirm_password"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/BigEditText"
             android:layout_below="@+id/confirm_password"
             android:layout_marginTop="10dp"
-            android:background="@drawable/edittext"
+            android:gravity="center_vertical"
             android:inputType="textPassword" />
     </RelativeLayout>
 
