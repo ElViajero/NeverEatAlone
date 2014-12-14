@@ -120,13 +120,13 @@ public class CreateMealInformationActivity extends FragmentActivity {
 		tv.setTextSize(80);
 
 	}
-	
+
 	private void applyTheme() {
 		ThemeManager.applyTheme(findViewById(android.R.id.content));
 		// ThemeManager.applyTheme(findViewById(R.id.layout_create_meal));
 		// ThemeManager.applyTheme(findViewById(R.id.layout_create_meal_information));
 		// ThemeManager.applyTheme(findViewById(R.id.header_createMealInfo));
-		}
+	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -355,35 +355,40 @@ public class CreateMealInformationActivity extends FragmentActivity {
 		String maxNumberOfInvitees = maxNumber.getText().toString();
 		String isNotificationExtendible = allowFriendInvite.isChecked() ? "YES"
 				: "NO";
-		
-		if(location.equals("")){
-			Toast.makeText(this, R.string.location_empty,Toast.LENGTH_SHORT).show();
+
+		if (location.equals("")) {
+			Toast.makeText(this, R.string.location_empty, Toast.LENGTH_SHORT)
+					.show();
 			return;
 		}
-		if(Integer.parseInt(maxNumberOfInvitees)<0){
-			Toast.makeText(this, R.string.negative_invitees,Toast.LENGTH_SHORT).show();
+		if (maxNumberOfInvitees.length() == 0) {
+			Toast.makeText(this, R.string.number_invitees_empty, Toast.LENGTH_SHORT)
+					.show();
 			return;
 		}
-		
-		//converts the date into a java date type and checks if start date is after end date
+
+		// converts the date into a java date type and checks if start date is
+		// after end date
 		SimpleDateFormat ft = new SimpleDateFormat("yyyy:mm:dd:HH:MM");
-		String startDateStr = startYear +":"+startmonth + ":"+startDay +":"+starthour+":"+startminute;
-		String endDateStr = endYear +":"+endMonth + ":"+endDay +":"+endhour+":"+endminute;
-		Date startDate,endDate;
-		try{
-			
+		String startDateStr = startYear + ":" + startmonth + ":" + startDay
+				+ ":" + starthour + ":" + startminute;
+		String endDateStr = endYear + ":" + endMonth + ":" + endDay + ":"
+				+ endhour + ":" + endminute;
+		Date startDate, endDate;
+		try {
+
 			startDate = ft.parse(startDateStr);
 			endDate = ft.parse(endDateStr);
-			if(startDate.after(endDate)){
-				Toast.makeText(this, R.string.date_error,Toast.LENGTH_SHORT).show();
+			if (startDate.after(endDate)) {
+				Toast.makeText(this, R.string.date_error, Toast.LENGTH_SHORT)
+						.show();
 				return;
 			}
-		}catch(Exception e){
-			Log.e("CreatMealInfo","date parsing error");
+		} catch (Exception e) {
+			Log.e("CreatMealInfo", "date parsing error");
 			return;
 		}
-		
-		
+
 		// ************************** PAGE onE REQUEST CREATIon STARTS HERE
 		// **************************
 
@@ -393,8 +398,6 @@ public class CreateMealInformationActivity extends FragmentActivity {
 
 		DateAndTimeProperties endDateAndTimeProperties = new DateAndTimeProperties(
 				endDay, endMonth, endYear, endhour, endminute);
-		
-		
 
 		// Create a Meal Object
 		MealProperties mealProperties = new MealProperties(location,
