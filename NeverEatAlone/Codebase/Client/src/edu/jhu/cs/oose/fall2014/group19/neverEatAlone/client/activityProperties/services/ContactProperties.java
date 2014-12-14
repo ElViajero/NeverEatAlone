@@ -29,9 +29,10 @@ public class ContactProperties implements IActivityProperties {
 	}
 
 	public ContactProperties(Map<String,String> map) {
-		contactusername = map.get("username");
-		isChecked=false;
+		fromMap(map);
 	}
+
+	public ContactProperties(){};
 
 
 	@Override
@@ -90,6 +91,12 @@ public class ContactProperties implements IActivityProperties {
 
 	public void setChecked(boolean isChecked) {
 		this.isChecked = isChecked;
+	}
+
+	@Override
+	public void fromMap(Map<String, String> map) {
+		contactusername = map.get("username");
+		isChecked=false;
 	}
 
 

@@ -61,6 +61,12 @@ public class PostProperties implements IActivityProperties {
 
 
 		return requestMap;
+	}
+
+	@Override
+	public void fromMap(Map<String, String> map) {
+
+
 	}	
 
 
