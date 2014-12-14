@@ -25,13 +25,15 @@ import android.widget.Toast;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.DateAndTimeProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.MealProperties;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.helpers.GsonHelper;
 
 /**
  * This class handles the meal information of the creation of an invite.
  * 
  * @author Runze Tang
- * 
+ * @author Yueling Loh
+ * @author tejasvamsingh
  * 
  */
 
@@ -101,6 +103,7 @@ public class CreateMealInformationActivity extends FragmentActivity {
 		allowFriendInvite = (Switch) findViewById(R.id.switch_allowfriendinvite);
 
 		setTitleStyle();
+		applyTheme();
 	}
 
 	/**
@@ -117,6 +120,13 @@ public class CreateMealInformationActivity extends FragmentActivity {
 		tv.setTextSize(80);
 
 	}
+	
+	private void applyTheme() {
+		ThemeManager.applyTheme(findViewById(android.R.id.content));
+		// ThemeManager.applyTheme(findViewById(R.id.layout_create_meal));
+		// ThemeManager.applyTheme(findViewById(R.id.layout_create_meal_information));
+		// ThemeManager.applyTheme(findViewById(R.id.header_createMealInfo));
+		}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {

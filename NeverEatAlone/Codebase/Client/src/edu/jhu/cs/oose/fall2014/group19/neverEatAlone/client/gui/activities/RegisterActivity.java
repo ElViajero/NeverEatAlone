@@ -54,7 +54,7 @@ public class RegisterActivity extends Activity {
 		// set the RequestType and RequestID fields.
 
 		requestID = "Account";
-		requestType = "Create";
+		requestType = "create";
 		validator = new EmailValidatorHelper();
 
 		
