@@ -9,6 +9,7 @@ import java.util.Map;
 import org.apache.http.impl.execchain.RequestAbortedException;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -20,6 +21,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.AccountProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.MessageToasterHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.LoginView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.notificationHandler.services.NotificationHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
 
@@ -36,12 +38,26 @@ public class MainActivity extends Activity {
 	private String requestType;
 	private boolean isCreated=false;
 	LinearLayout l;
+	Context context;
+	Activity activity;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		usernameEditTextObject = (EditText) findViewById(R.id.edit_username);
+		
+		context = this;
+		activity = this;
+		LoginView lv = new LoginView(context, activity);
+//		usernameEditTextObject = (EditText) findViewById(R.id.edit_username);
+		
+//		String string = "edit_username";
+//		int resID = getResources().getIdentifier(string,
+//			    "id", getPackageName());		
+//		usernameEditTextObject = (EditText) findViewById(resID);
+		
+		usernameEditTextObject = (EditText) lv.getView("edit_username");
+		
 		passwordEditTextObject = (EditText) findViewById(R.id.edit_password);
 		l = (LinearLayout) findViewById(R.id.layout_main);
 		//		l.setBackgroundResource(R.drawable.dark_layout_background);
