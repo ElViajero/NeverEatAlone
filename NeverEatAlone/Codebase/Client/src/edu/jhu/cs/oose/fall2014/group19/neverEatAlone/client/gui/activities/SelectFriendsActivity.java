@@ -168,7 +168,7 @@ public class SelectFriendsActivity extends ListActivity {
 		}
 
 		IActivityProperties postProperties = 
-				new PostProperties(recipientList, "MEAL", postData);
+				new PostProperties(recipientList, "meal", postData);
 
 		try{
 

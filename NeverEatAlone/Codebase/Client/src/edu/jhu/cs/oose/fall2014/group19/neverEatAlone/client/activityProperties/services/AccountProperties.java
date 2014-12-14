@@ -81,11 +81,12 @@ public class AccountProperties implements IActivityProperties {
 
 	// private helper methods.
 
-	private AccountProperties fromMap (Map<String,String> map){
+	@Override
+	public void fromMap (Map<String,String> map){
 		accountPropertiesInstance = 
 				new AccountProperties(map.get("username"), map.get("password"));
 		accountPropertiesInstance.setemail(map.get("email"));
-		return accountPropertiesInstance;
+
 	}
 
 

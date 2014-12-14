@@ -16,6 +16,7 @@ public class DataCacheHelper {
 
 	public static void setmealNotificationCache(
 			List<NotificationProperties> notificationCache) {
+		System.out.println("Inside this set");
 		mealNotificationCache = notificationCache;
 		mealNotificationAdaapterInstance.addAll(mealNotificationCache);
 	}
@@ -24,8 +25,6 @@ public class DataCacheHelper {
 			ArrayAdapter<NotificationProperties> invitesAdapter){
 		mealNotificationAdaapterInstance = invitesAdapter;
 	}
-
-
 
 
 

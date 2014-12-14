@@ -3,16 +3,17 @@ package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties
 import java.util.Map;
 
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.contracts.IActivityProperties;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.helpers.ActivityPropertiesHelper;
 
 public class NotificationProperties implements IActivityProperties {
 
 	private String poster;
 	private String notificationID;
+	private boolean isAccepted;
 
 	public String getposter() {
 		return poster;
 	}
-
 
 
 	public void setposter(String poster) {
@@ -53,11 +54,24 @@ public class NotificationProperties implements IActivityProperties {
 
 		System.out.println("the map is " + map);
 
+		isAccepted=false;
 		poster = map.get("poster");
 		notificationID = map.get("postID");
 		notificationType = map.get("postType");
-		if(notificationType.equals("MEAL"))
-			notificationData= new MealProperties(map);
+		try {
+			notificationData = (IActivityProperties) 
+					ActivityPropertiesHelper.getPropertyTypes(notificationType).newInstance();
+			System.out.println("THE CRAP IS "+ notificationData);
+			notificationData.fromMap(map);
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+
 	}
 
 
@@ -66,6 +80,14 @@ public class NotificationProperties implements IActivityProperties {
 	public Map<String, Object> toMap() {
 		//TODO
 		return null;
+	}
+
+
+
+	@Override
+	public void fromMap(Map<String, String> map) {
+		// TODO Auto-generated method stub
+
 	}
 
 }

@@ -2,23 +2,31 @@ package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties
 
 
 import java.lang.reflect.Type;
-import java.util.HashMap;
 import java.util.Map;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.contracts.IActivityProperties;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.helpers.ActivityPropertiesHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.helpers.GsonHelper;
 
 public class MealProperties implements IActivityProperties{
 
 
+	// Instance variables
 	String location;
 	String maxNumberOfInvitees;
 	String isNotificationExtendible;
 	DateAndTimeProperties startDateAndTimeProperties;
 	DateAndTimeProperties endDateAndTimeProperties;
+
+
+
+
+	//constructors
+
+	public MealProperties(){}
 
 	public MealProperties(String location,
 			String maxNumberOfInvitees, String isNotificationExtendible,
@@ -35,46 +43,17 @@ public class MealProperties implements IActivityProperties{
 
 
 	public MealProperties(Map<String,String> map) {
-		location = map.get("location");
-		maxNumberOfInvitees = map.get("maxNumberOfInvitees");
-		isNotificationExtendible = map.get("isNotificationExtendible");
-		startDateAndTimeProperties = constructStartDateAndTimeProperties(map);
-		endDateAndTimeProperties = constructEndDateAndTimeProperties(map);
-
-
+		fromMap(map);
 	}
 
 
-	private DateAndTimeProperties constructEndDateAndTimeProperties(
-			Map<String, String> map) {
-
-		HashMap<String, String> endDateAndTimeMap = 
-				new HashMap<String,String>();
-
-		endDateAndTimeMap.put("day", map.get("endday"));
-		endDateAndTimeMap.put("hour", map.get("endhour"));
-		endDateAndTimeMap.put("minute", map.get("endminute"));
-		endDateAndTimeMap.put("month", map.get("endmonth"));
-		endDateAndTimeMap.put("year", map.get("endyear"));
-		return new DateAndTimeProperties(endDateAndTimeMap);
-	}
 
 
-	private DateAndTimeProperties constructStartDateAndTimeProperties(
-			Map<String, String> map) {
 
-		HashMap<String, String> startDateAndTimeMap = 
-				new HashMap<String,String>();
-
-		startDateAndTimeMap.put("day", map.get("startday"));
-		startDateAndTimeMap.put("hour", map.get("starthour"));
-		startDateAndTimeMap.put("minute", map.get("startminute"));
-		startDateAndTimeMap.put("month", map.get("startmonth"));
-		startDateAndTimeMap.put("year", map.get("startyear"));
-		return new DateAndTimeProperties(startDateAndTimeMap);
-	}
+	// interface methods
 
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Map<String, Object> toMap(){
 
@@ -88,29 +67,33 @@ public class MealProperties implements IActivityProperties{
 		requestMap.remove("startDateAndTimeProperties");
 		requestMap.remove("endDateAndTimeProperties");
 
+		DateAndTimeProperties.setPrefix("start");
 		Map<String, Object> startDateAndTimeMap = 
 				startDateAndTimeProperties.toMap();
+		DateAndTimeProperties.setPrefix("end");
 		Map<String, Object> endDateAndTimeMap =
 				endDateAndTimeProperties.toMap();
 
-		for (Map.Entry<String, Object> entry : endDateAndTimeMap.entrySet()) {
-
-			String key = entry.getKey();
-			Object value = entry.getValue();
-			requestMap.put("end"+key, value);
-
-		}
-
-		for (Map.Entry<String, Object> entry : startDateAndTimeMap.entrySet()) {
-
-			String key = entry.getKey();
-			Object value = entry.getValue();
-			requestMap.put("start"+key, value);
-
-		}
-		return requestMap;
+		return ActivityPropertiesHelper.combineMaps(requestMap,
+				startDateAndTimeMap,endDateAndTimeMap);
 
 	}
+
+
+
+	@Override
+	public void fromMap(Map<String, String> map) {
+		location = map.get("location");
+		maxNumberOfInvitees = map.get("maxNumberOfInvitees");
+		isNotificationExtendible = map.get("isNotificationExtendible");
+		DateAndTimeProperties.setPrefix("start");
+		startDateAndTimeProperties = new DateAndTimeProperties(map);
+		DateAndTimeProperties.setPrefix("end");
+		endDateAndTimeProperties = new DateAndTimeProperties(map);
+	}
+
+
+	//getters and setters
 
 	public String getlocation() {
 		return location;
@@ -162,6 +145,13 @@ public class MealProperties implements IActivityProperties{
 			DateAndTimeProperties endDateAndTimeProperties) {
 		this.endDateAndTimeProperties = endDateAndTimeProperties;
 	}
+
+
+	//private helper methods
+
+
+
+
 
 }
 

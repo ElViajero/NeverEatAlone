@@ -19,6 +19,7 @@ public interface IActivityProperties {
 
 	public Map<String,Object> toMap();
 
+	public void fromMap(Map<String,String> map);
 
 
 

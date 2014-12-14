@@ -2,6 +2,7 @@ package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties
 
 
 import java.lang.reflect.Type;
+import java.util.HashMap;
 import java.util.Map;
 
 import com.google.gson.Gson;
@@ -20,17 +21,29 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.h
 public class DateAndTimeProperties implements IActivityProperties  {
 
 
+	//instance variables
+
 	String day;
 	String month;
 	String year;
 	String hour;
 	String minute;
+	static String prefix="";
 
+
+	//constructors
+	public DateAndTimeProperties(int day,int month,
+			int year,int hour, int minute,String prefixString) {
+		this(day,month,year,hour,minute);
+		prefix = prefixString;
+
+	}
 
 	public DateAndTimeProperties(int day,int month,
 			int year,int hour, int minute) {
 
 		// Initialize the lists.
+		prefix="";
 		this.day =String.valueOf(day);
 		this.month = String.valueOf(month);
 		this.year = String.valueOf(year);
@@ -40,15 +53,11 @@ public class DateAndTimeProperties implements IActivityProperties  {
 	}
 
 	public DateAndTimeProperties(Map<String,String> map) {
-
-		day = map.get("day");
-		month = map.get("month");
-		hour = map.get("hour");
-		minute = map.get("minute");
-		year=map.get("year");
-
+		fromMap(map);
 	}
 
+
+	// interface methods
 
 	/**
 	 * Method that returns a 
@@ -66,14 +75,50 @@ public class DateAndTimeProperties implements IActivityProperties  {
 		Type stringObjectMap = new TypeToken<Map<String, Object>>(){}.getType();
 		Map<String,Object> requestMap = gsonObject.fromJson(jsonString, stringObjectMap);
 		System.out.println("map is : " +requestMap);
-		return requestMap;
 
+		return addPrefix(requestMap);
+	}
+
+	@Override
+	public void fromMap(Map<String, String> map) {
+		day = map.get(prefix+"day");
+		month = map.get(prefix+"month");
+		hour = map.get(prefix+"hour");
+		minute = map.get(prefix+"minute");
+		year=map.get(prefix+"year");
 	}
 
 
+	//getters,setters, toString()
 	@Override
 	public String toString(){
 		return month+"/"+day+"/"+year+"   " + hour + ":"+minute;
+	}
+
+
+	public static String getPrefix() {
+		return prefix;
+	}
+
+	public static void setPrefix(String prefixString) {
+		prefix = prefixString;
+	}
+
+
+	//private helper methods
+	private Map<String, Object> addPrefix(Map<String, Object> requestMap) {
+
+		Map<String,Object> prefixRequestMap = 
+				new HashMap<String,Object>();
+
+		for (Map.Entry<String, Object> entry : requestMap.entrySet()) {
+			String key = entry.getKey();
+			Object value = entry.getValue();
+			if(!key.equals("prefix"))
+				key=prefix+key;
+			prefixRequestMap.put(key, value);
+		}
+		return prefixRequestMap;
 	}
 
 
