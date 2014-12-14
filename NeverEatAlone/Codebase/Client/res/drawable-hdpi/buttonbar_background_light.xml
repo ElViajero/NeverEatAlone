@@ -3,12 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <solid android:color="#53A4BF" />
+    <solid android:color="#56D180" />
     
-<!--      <gradient
-        android:angle="90"
-        android:startColor="#FF9800"
-        android:endColor="#FFEE58"
-        android:type="linear" /> -->
-
 </shape>

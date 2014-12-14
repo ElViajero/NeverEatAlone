@@ -9,11 +9,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
 
 /**
  * Activity used for the change password page
  * 
  * @author Hai Tang
+ * @author Yueling Loh
  *
  */
 public class ChangePasswordActivity extends Activity {
@@ -28,16 +30,13 @@ public class ChangePasswordActivity extends Activity {
 
 	/**
 	 * This method is used to set the font style of the title of each page
+	 * 
 	 * @author: Hai Tang
 	 * @author: Yueling Loh
 	 */
 	private void setTitleStyle() {
-		TextView tv =
-				(TextView) findViewById(R.id.textView_changepassword_title);
-		Typeface tf = Typeface.createFromAsset(getAssets(),
-				"fonts/Chunkfive.otf");
-		tv.setTypeface(tf);
-		tv.setTextSize(80);
+		TextView tv = (TextView) findViewById(R.id.textView_changepassword_title);
+		ThemeManager.setHeaderFont(tv);
 	}
 	
 	/**

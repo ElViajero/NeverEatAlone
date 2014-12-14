@@ -32,7 +32,6 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.h
 public class InvitesActivity extends ListActivity {
 
 	private ArrayAdapter<NotificationProperties> InvitesAdapter;
-	private TextView tv;
 	List<NotificationProperties> NotificationList;
 
 	boolean isCreated;
@@ -55,26 +54,11 @@ public class InvitesActivity extends ListActivity {
 	}
 
 	/**
-	 * This method is used to set the font style of the title of each page
-	 * 
-	 * @author: Hai Tang
-	 * @author: Yueling Loh
-	 */
-	private void setTitleStyle() {
-		TextView tv = (TextView) findViewById(R.id.app_name);
-		Typeface tf = Typeface.createFromAsset(getAssets(),
-				"fonts/Chunkfive.otf");
-		tv.setTypeface(tf);
-		tv.setTextSize(80);
-	}
-
-	/**
 	 * This method updates the GUI.
 	 * 
 	 * @author tejasvamsingh
 	 * @param savedInstanceState
 	 */
-
 	private void initView(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_invites);
@@ -83,14 +67,35 @@ public class InvitesActivity extends ListActivity {
 		setListAdapter(InvitesAdapter);
 		DataCacheHelper.registerMealNotificationAdapterInstance(InvitesAdapter);
 
-		applytheme();
+		applyTheme();
 
 	}
 
-	private void applytheme() {
-		ThemeManager.applyTheme(findViewById(android.R.id.content));
-		//ThemeManager.applyTheme(findViewById(R.id.layout_invites));
-		//ThemeManager.applyTheme(findViewById(R.id.header_invites));
+	/**
+	 * This method is used to set the font style of the title of each page
+	 * 
+	 * @author: Hai Tang
+	 * @author: Yueling Loh
+	 */
+	private void setTitleStyle() {
+		TextView tv = (TextView) findViewById(R.id.app_name);
+		ThemeManager.setHeaderFont(tv);
+	}
+
+	/**
+	 * This method applies the GUI's color theme.
+	 * 
+	 * @author tejasvamsingh
+	 * @author Yueling Loh
+	 */
+	private void applyTheme() {
+
+		View mainLayout = findViewById(R.id.layout_invites);
+		View headerLayout = findViewById(R.id.header_invites);
+		View buttonBar = findViewById(R.id.buttons_invites);
+
+		ThemeManager.applyTheme(mainLayout, headerLayout);
+		ThemeManager.applyButtonTheme(buttonBar);
 
 	}
 
@@ -103,7 +108,6 @@ public class InvitesActivity extends ListActivity {
 	 * 
 	 * 
 	 */
-
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		Intent intent = new Intent(this, MealDetailActivity.class);
@@ -115,7 +119,7 @@ public class InvitesActivity extends ListActivity {
 
 		intent.putExtra("mealProperties",
 				GsonHelper.getGsoninstance().toJson(mealPropertiesMap));
-		//		intent.putExtra("mealProperties", mealProperties.toString());
+		// intent.putExtra("mealProperties", mealProperties.toString());
 		startActivity(intent);
 
 	}

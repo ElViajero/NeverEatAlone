@@ -27,6 +27,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.serv
  * 
  * @author Hai Tang
  * @author tejasvamsingh
+ * @author Yueling Loh
  *
  */
 public class AddFriendsActivity extends Activity {
@@ -58,23 +59,32 @@ public class AddFriendsActivity extends Activity {
 		applyTheme();
 	}
 
+	/**
+	 * This method applies the GUI's color theme.
+	 * 
+	 * @author tejasvamsingh
+	 * @author Yueling Loh
+	 */
 	private void applyTheme() {
-		ThemeManager.applyTheme(findViewById(android.R.id.content));
+
+		View mainLayout = findViewById(R.id.main_addfriends);
+		View headerLayout = findViewById(R.id.header_addfriends);
+		View buttonBar = findViewById(R.id.buttons_addfriends);
+
+		ThemeManager.applyTheme(mainLayout, headerLayout);
+		ThemeManager.applyButtonTheme(buttonBar);
 
 	}
-
+	
 	/**
 	 * This method is used to set the font style of the title of each page
+	 * 
 	 * @author: Hai Tang
 	 * @author: Yueling Loh
 	 */
 	private void setTitleStyle() {
-		TextView tv =
-				(TextView) findViewById(R.id.textView_addfriends_title);
-		Typeface tf = Typeface.createFromAsset(getAssets(),
-				"fonts/Chunkfive.otf");
-		tv.setTypeface(tf);
-		tv.setTextSize(80);
+		TextView tv = (TextView) findViewById(R.id.textView_addfriends_title);
+		ThemeManager.setHeaderFont(tv);
 	}
 
 	/**

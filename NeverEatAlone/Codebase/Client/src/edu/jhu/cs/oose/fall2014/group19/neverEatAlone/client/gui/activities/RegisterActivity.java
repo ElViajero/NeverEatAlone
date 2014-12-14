@@ -7,7 +7,6 @@ import org.apache.http.impl.execchain.RequestAbortedException;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -63,23 +62,33 @@ public class RegisterActivity extends Activity {
 
 	}
 	
+	/**
+	 * This method applies the GUI's color theme.
+	 * 
+	 * @author tejasvamsingh
+	 * @author Yueling Loh
+	 */
 	private void applyTheme() {
-		ThemeManager.applyTheme(findViewById(android.R.id.content));
+
+		View mainLayout = findViewById(R.id.main_registration);
+		View headerLayout = findViewById(R.id.header_registration);
+		View buttonBar = findViewById(R.id.buttons_registration);
+
+		ThemeManager.applyTheme(mainLayout, headerLayout);
+		ThemeManager.applyButtonTheme(buttonBar);
 
 	}
 	
+	
 	/**
 	 * This method is used to set the font style of the title of each page
+	 * 
 	 * @author: Hai Tang
 	 * @author: Yueling Loh
 	 */
 	private void setTitleStyle() {
-		TextView tv =
-				(TextView) findViewById(R.id.register);
-		Typeface tf = Typeface.createFromAsset(getAssets(),
-				"fonts/Chunkfive.otf");
-		tv.setTypeface(tf);
-		tv.setTextSize(80);;
+		TextView tv = (TextView) findViewById(R.id.register);
+		ThemeManager.setHeaderFont(tv);
 	}
 
 	@Override
