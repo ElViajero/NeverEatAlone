@@ -14,11 +14,11 @@
     <string name="login">Login</string>
     <string name="logout">Log Out</string>
     <string name="password">Password</string>
-    <string name="old_password">Your Old password</string>
-    <string name="new_password">New password</string>
-    <string name="confirm_password">Confirm password</string>
+    <string name="old_password">Old Password</string>
+    <string name="new_password">New Password</string>
+    <string name="confirm_password">Confirm Password</string>
     <string name="title_activity_register">RegisterActivity</string>
-    <string name="email">email</string>
+    <string name="email">Email</string>
     <string name="register">Register</string>
     <string name="confirm">Confirm</string>
     <string name="cancel">Cancel</string>
