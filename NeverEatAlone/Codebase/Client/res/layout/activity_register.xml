@@ -1,6 +1,7 @@
 <!--
- @author Hai Tang @author Yueling Loh 
-@author tejasvamsingh
+ @author Hai Tang 
+ @author Yueling Loh 
+ @author tejasvamsingh
 -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
