@@ -18,7 +18,7 @@
     <string name="new_password">New password</string>
     <string name="confirm_password">Confirm password</string>
     <string name="title_activity_register">RegisterActivity</string>
-    <string name="email">email</string>
+    <string name="email">Email</string>
     <string name="register">Register</string>
     <string name="confirm">Confirm</string>
     <string name="cancel">Cancel</string>
@@ -56,11 +56,11 @@
     <string name="name">Name</string>
     <string name="delete_account">Delete Account</string>
     <string name="change_password">Change password</string>
-    <string name="workspace">workspace</string>
+    <string name="workspace">Workspace</string>
     <string name="edit">Edit</string>
     <string name="title_activity_edit_profile">EditProfileActivity</string>
     <string name="edit_profile">Edit Profile</string>
-    <string name="gender">gender</string>
+    <string name="gender">Gender</string>
     <string name="title_activity_change_password">ChangepasswordActivity</string>
     <string name="title_activity_add_friends">AddFriendsActivity</string>
     <string name="add_friends">Add Friends</string>
