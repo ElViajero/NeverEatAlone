@@ -16,7 +16,8 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.
  */
 public class LoginView implements IView{
 	
-	private EditText usernameEditTextObject = null;
+	private EditText editTextObject = null;
+	private String value = null;
 	
 	Context context;
 	Activity activity;
@@ -37,16 +38,16 @@ public class LoginView implements IView{
 		
 		//Hai's comments: this piece of codes works in MainActivity, but not here.
 		//Hai's comments: OK, this one is working as well!
-		int resID = context.getResources().getIdentifier(viewName,
+		int resourceID = context.getResources().getIdentifier(viewName,
 			    "id", context.getPackageName());		
-		usernameEditTextObject = (EditText) activity.findViewById(resID);
+		editTextObject = (EditText) activity.findViewById(resourceID);
 		
 		//Hai's comments:findViewById not working outside Activity.
 		//Hai's comments: OK, have made this one working!
 //		usernameEditTextObject = (EditText) activity.findViewById(R.id.edit_username);
 //		
 		
-		return usernameEditTextObject;
+		return editTextObject;
 //		return null;
 	}
 
@@ -58,8 +59,8 @@ public class LoginView implements IView{
 
 	@Override
 	public String getValue(View view) {
-		// TODO Auto-generated method stub
-		return null;
+		value = ((EditText) view).getText().toString();
+		return value;
 	}
 
 	@Override

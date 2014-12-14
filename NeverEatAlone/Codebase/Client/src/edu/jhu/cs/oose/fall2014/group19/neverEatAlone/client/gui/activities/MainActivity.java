@@ -28,6 +28,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.serv
 /**
  * This is the main activity that is displayed when the application starts. 
  * @author tejasvamsingh
+ * @author Hai Tang
  *
  */
 public class MainActivity extends Activity {
@@ -38,8 +39,9 @@ public class MainActivity extends Activity {
 	private String requestType;
 	private boolean isCreated=false;
 	LinearLayout l;
-	Context context;
-	Activity activity;
+	private Context context;
+	private Activity activity;
+	private LoginView loginView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -48,17 +50,18 @@ public class MainActivity extends Activity {
 		
 		context = this;
 		activity = this;
-		LoginView lv = new LoginView(context, activity);
+		loginView = new LoginView(context, activity);
 //		usernameEditTextObject = (EditText) findViewById(R.id.edit_username);
+//		passwordEditTextObject = (EditText) findViewById(R.id.edit_password);
 		
 //		String string = "edit_username";
 //		int resID = getResources().getIdentifier(string,
 //			    "id", getPackageName());		
 //		usernameEditTextObject = (EditText) findViewById(resID);
 		
-		usernameEditTextObject = (EditText) lv.getView("edit_username");
-		
-		passwordEditTextObject = (EditText) findViewById(R.id.edit_password);
+		usernameEditTextObject = (EditText) loginView.getView("edit_username");
+		passwordEditTextObject = (EditText) loginView.getView("edit_password");
+
 		l = (LinearLayout) findViewById(R.id.layout_main);
 		//		l.setBackgroundResource(R.drawable.dark_layout_background);
 		requestID = "Login";
@@ -88,9 +91,11 @@ public class MainActivity extends Activity {
 		ThemeManager.setTheme(R.style.DarkTheme);
 
 
-		String username = usernameEditTextObject.getText().toString();
+//		String username = usernameEditTextObject.getText().toString();
+//		String username = usernameEditTextObject.getValue();
+		String username = loginView.getValue(usernameEditTextObject);
 		String password = passwordEditTextObject.getText().toString();
-
+		
 		// create the request properties object.
 		AccountProperties loginProperties  = new AccountProperties(username, password);
 		try{
