@@ -61,6 +61,7 @@ public class MainActivity extends Activity {
 		
 		usernameEditTextObject = (EditText) loginView.getView("edit_username");
 		passwordEditTextObject = (EditText) loginView.getView("edit_password");
+		
 
 		l = (LinearLayout) findViewById(R.id.layout_main);
 		//		l.setBackgroundResource(R.drawable.dark_layout_background);
@@ -83,6 +84,7 @@ public class MainActivity extends Activity {
 	/**
 	 * Event handler for client login requests.
 	 * @author tejasvamsingh
+	 * @author Hai Tang
 	 * @param view
 	 * @throws FileNotFoundException 
 	 * @throws URISyntaxException 
@@ -92,9 +94,11 @@ public class MainActivity extends Activity {
 
 
 //		String username = usernameEditTextObject.getText().toString();
+//		String password = passwordEditTextObject.getText().toString();
+		
 //		String username = usernameEditTextObject.getValue();
 		String username = loginView.getValue(usernameEditTextObject);
-		String password = passwordEditTextObject.getText().toString();
+		String password = loginView.getValue(passwordEditTextObject);
 		
 		// create the request properties object.
 		AccountProperties loginProperties  = new AccountProperties(username, password);
