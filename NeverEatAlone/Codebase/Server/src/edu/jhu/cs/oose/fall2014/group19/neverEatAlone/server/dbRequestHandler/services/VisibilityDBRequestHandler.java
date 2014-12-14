@@ -24,37 +24,40 @@ public class VisibilityDBRequestHandler implements IVisibilityDBRequestHandler {
 	 * Add VisibleTo edges to the contacts that are chosen to be visible to 
 	 */
 	@Override
-	public List<Map<String, String>> setVisibility(Map<String, String[]> request) {
+	public List<Map<String, String>> add(Map<String, String[]> request) {
 
 		// ******************** LOGGING ***************************
-		System.out.println("Reached SetVisibility in VisibilityDBManager");		
+		System.out.println("Reached addVisibility in VisibilityDBManager");		
 
 
 		//get the contacts as List and remove it from the map
 		List<String> contactList = Arrays.asList(request.get("contactList"));
+		String username = request.get("username")[0]; 
 
 		//format the parameters for the query.		
 		Map<String, String> paramterMap = 
 				DBRequestHandlerHelper.GetQueryParameterMap(request);
 		paramterMap.remove("contactList");
+		paramterMap.remove("username");
 
 		//create a params map.
 		Map<String,Object> queryParameterMap = new HashMap<String,Object>();
 		queryParameterMap.put("creationParameters",paramterMap);
+		queryParameterMap.put("username", username);
 
 		List<Map<String,String>> resultMapList=null;
 
 		// add visibility edges for each contact
 		for(String contact : contactList){
 
-			queryParameterMap = new HashMap<String,Object>();
 			queryParameterMap.put("contact", contact);
 
 			String query = "MATCH (n:User),(a:User) "
 					+ "WHERE n.username={username} AND "
 					+ "a.username={contact} "
-					+ "CREATE (n)-[:VISIBLETO]->(a) "
-					+ "RETURN n";
+					+ "CREATE (n)-[r:VISIBILITY{creationParameters}]->(a) "
+					+ "RETURN r";
+			
 			resultMapList=iDBQueryExecutionManagerInstance
 					.executeQuery(query, queryParameterMap);
 		}
@@ -63,10 +66,10 @@ public class VisibilityDBRequestHandler implements IVisibilityDBRequestHandler {
 	}
 
 	@Override
-	public List<Map<String, String>> unsetVisibility(Map<String, String[]> request) {
+	public List<Map<String, String>> delete(Map<String, String[]> request) {
 
 		// ******************** LOGGING ***************************
-		System.out.println("Reached UnsetVisibility in VisibilityDBManager");		
+		System.out.println("Reached deleteVisibility in VisibilityDBManager");		
 
 
 		//get the contacts as List and remove it from the map
@@ -82,16 +85,14 @@ public class VisibilityDBRequestHandler implements IVisibilityDBRequestHandler {
 
 		//create a params map.
 		Map<String,Object> queryParameterMap = new HashMap<String,Object>();
-		queryParameterMap.put("creationParameters",paramterMap);
-
+		queryParameterMap.put("username", paramterMap.get("username"));
 		List<Map<String,String>> resultMapList=null;
 
 		// delete visibility edges for each contact
 		for(String contact : contactList){
-			queryParameterMap = new HashMap<String,Object>();
 			queryParameterMap.put("contact", contact);
 
-			String query = "MATCH (n)-[r:VISIBLETO]->(a) "
+			String query = "MATCH (n)-[r:VISIBILITY]->(a) "
 					+ "WHERE n.username={username} AND "
 					+ "a.username={contact} "
 					+ "DELETE r  "
@@ -100,6 +101,49 @@ public class VisibilityDBRequestHandler implements IVisibilityDBRequestHandler {
 					.executeQuery(query, queryParameterMap);
 
 		}
+		return resultMapList;
+	}
+
+
+	@Override
+	public List<Map<String, String>> update(Map<String, String[]> request) {
+
+		// ******************** LOGGING ***************************
+		System.out.println("Reached update in VisibilityDBManager");		
+
+
+		//get the contacts as List and remove it from the map
+		List<String> contactList = Arrays.asList(request.get("contactList"));
+		String username = request.get("username")[0]; 
+
+		//format the parameters for the query.		
+		Map<String, String> paramterMap = 
+				DBRequestHandlerHelper.GetQueryParameterMap(request);
+		paramterMap.remove("contactList");
+		paramterMap.remove("username");
+
+		//create a params map.
+		Map<String,Object> queryParameterMap = new HashMap<String,Object>();
+		queryParameterMap.put("updateParameters",paramterMap);
+		queryParameterMap.put("username", username);
+
+		List<Map<String,String>> resultMapList=null;
+
+		// add visibility edges for each contact
+		for(String contact : contactList){
+
+			queryParameterMap.put("contact", contact);
+
+			String query = "MATCH (n)-[r:VISIBILITY]->(a) "
+					+ "WHERE n.username={username} AND "
+					+ "a.username={contact} "
+					+ "SET r += {updateParameters} "
+					+ "RETURN r";	
+			
+			resultMapList=iDBQueryExecutionManagerInstance
+					.executeQuery(query, queryParameterMap);
+		}
+		
 		return resultMapList;
 	}
 
