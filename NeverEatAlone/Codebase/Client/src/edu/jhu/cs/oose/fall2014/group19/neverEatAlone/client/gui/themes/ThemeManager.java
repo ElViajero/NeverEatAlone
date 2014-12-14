@@ -12,7 +12,7 @@ public class ThemeManager {
 			System.out.println("acitivity is null");
 		}
 
-		view.setBackgroundResource(R.drawable.white_layout_background);
+		view.setBackgroundResource(R.drawable.layout_background);
 
 
 		/*

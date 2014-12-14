@@ -14,25 +14,71 @@
         android:contentDescription="@string/app_logo"
         android:src="@drawable/ic_logo_big" />
 
-    <EditText
-        android:id="@+id/edit_username"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/edit_username_layout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
-        android:background="@drawable/edittext"
-        android:hint="@string/username"
-        android:inputType="text" />
+        android:orientation="horizontal" >
 
-    <EditText
-        android:id="@+id/edit_password"
-        android:layout_width="wrap_content"
+        <RelativeLayout
+            android:id="@+id/edit_username_latent_layout_left"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2" >
+        </RelativeLayout>
+
+        <EditText
+            android:id="@+id/edit_username"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_weight="0.6"
+            android:background="@drawable/edittext"
+            android:hint="@string/username"
+            android:inputType="text" />
+
+        <RelativeLayout
+            android:id="@+id/edit_username_latent_layout_right"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2" >
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/edit_password_layout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
-        android:background="@drawable/edittext"
-        android:hint="@string/password"
-        android:inputType="textPassword" />
+        android:orientation="horizontal" >
+
+        <RelativeLayout
+            android:id="@+id/edit_password_latent_layout_left"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2" >
+        </RelativeLayout>
+
+        <EditText
+            android:id="@+id/edit_password"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_weight="0.6"
+            android:background="@drawable/edittext"
+            android:hint="@string/password"
+            android:inputType="textPassword" />
+
+        <RelativeLayout
+            android:id="@+id/edit_password_latent_layout_right"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2" >
+        </RelativeLayout>
+    </LinearLayout>
 
     <Button
         android:id="@+id/button_login"
