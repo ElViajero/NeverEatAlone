@@ -1,4 +1,4 @@
-<!-- @author Hai Tang @author Yueling -->
+<!-- @author Hai Tang @author Yueling @author Runze Tang-->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -22,152 +22,201 @@
     <RelativeLayout
         android:id="@+id/main_editProfile"
         style="@style/MainLayoutTheme"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_below="@+id/header_editProfile" >
 
-        <TextView
-            android:id="@+id/textView_editprofile_username"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/imageView_editprofile_avatar"
-            android:layout_marginTop="50dp"
-            android:text="@string/username"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <TextView
-            android:id="@+id/textView_editprofile_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/textView_editprofile_username"
-            android:layout_marginTop="50dp"
-            android:text="@string/name"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <TextView
-            android:id="@+id/textView_editprofile_email"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/textView_editprofile_name"
-            android:layout_marginTop="50dp"
-            android:text="@string/email"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <TextView
-            android:id="@+id/textView_editprofile_gender"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/textView_editprofile_email"
-            android:layout_marginTop="50dp"
-            android:text="@string/gender"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <TextView
-            android:id="@+id/textView_editprofile_workspace"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/textView_editprofile_gender"
-            android:layout_marginTop="50dp"
-            android:text="@string/workspace"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-        
-         <TextView
-            android:id="@+id/textView_editprofile_alias"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/textView_editprofile_workspace"
-            android:layout_marginTop="50dp"
-            android:text="@string/alias"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-        
-
-        <EditText
-            android:id="@+id/editText_editprofile_workspace"
+        <LinearLayout
+            android:id="@+id/main_editProfile_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/textView_editprofile_workspace"
-            android:layout_alignBottom="@+id/textView_editprofile_workspace"
-            android:layout_alignLeft="@+id/editText_editprofile_gender"
-            android:layout_alignStart="@+id/editText_editprofile_gender"
-            android:background="@drawable/edittext"
-            android:ems="10"
-            android:inputType="text" />
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            android:paddingLeft="50dp"
+            android:paddingRight="50dp" >
 
-        <EditText
-            android:id="@+id/editText_editprofile_gender"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/textView_editprofile_workspace"
-            android:layout_alignBaseline="@+id/textView_editprofile_gender"
-            android:layout_alignBottom="@+id/textView_editprofile_gender"
-            android:layout_alignLeft="@+id/editText_editprofile_email"
-            android:layout_alignStart="@+id/editText_editprofile_email"
-            android:background="@drawable/edittext"
-            android:ems="10"
-            android:inputType="text" />
+            <ImageView
+                android:id="@+id/imageView_editprofile_avatar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@string/user_avatar"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/user_profile" />
 
-        <EditText
-            android:id="@+id/editText_editprofile_email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/textView_editprofile_gender"
-            android:layout_alignBaseline="@+id/textView_editprofile_email"
-            android:layout_alignBottom="@+id/textView_editprofile_email"
-            android:layout_alignLeft="@+id/editText_editprofile_name"
-            android:layout_alignStart="@+id/editText_editprofile_name"
-            android:background="@drawable/edittext"
-            android:ems="10"
-            android:inputType="textEmailAddress" />
+            <LinearLayout
+                android:id="@+id/editProfile_username_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="50dp"
+                android:orientation="horizontal"
+                android:paddingLeft="50dp"
+                android:paddingRight="50dp" >
 
-        <EditText
-            android:id="@+id/editText_editprofile_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/textView_editprofile_email"
-            android:layout_alignBaseline="@+id/textView_editprofile_name"
-            android:layout_alignBottom="@+id/textView_editprofile_name"
-            android:layout_alignLeft="@+id/editText_editprofile_username"
-            android:layout_alignStart="@+id/editText_editprofile_username"
-            android:background="@drawable/edittext"
-            android:ems="10"
-            android:inputType="textPersonName" />
+                <TextView
+                    android:id="@+id/textView_editprofile_username"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/username"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
 
-        <TextView
-            android:id="@+id/textView_editprofile_username2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/textView_editprofile_username"
-            android:layout_alignBottom="@+id/textView_editprofile_username"
-            android:layout_marginLeft="15dp"
-            android:layout_marginStart="15dp"
-            android:layout_toEndOf="@+id/textView_editprofile_username"
-            android:layout_toRightOf="@+id/textView_editprofile_username"
-            android:background="@drawable/edittext"
-            android:ems="10"
-            android:inputType="text" />
-        <EditText
-            android:id="@+id/editText_editprofile_alias"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/textView_editprofile_alias"
-            android:layout_alignBottom="@+id/textView_editprofile_alias"
-            android:layout_marginLeft="15dp"
-            android:layout_marginStart="15dp"
-            android:layout_toEndOf="@+id/textView_editprofile_alias"
-            android:layout_toRightOf="@+id/textView_editprofile_alias"
-            android:background="@drawable/edittext"
-            android:ems="10"
-            android:inputType="text" />
+                <TextView
+                    android:id="@+id/textView_editprofile_username2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:background="@drawable/edittext"
+                    android:ems="10"
+                    android:gravity="center_horizontal" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/editProfile_name_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal"
+                android:paddingLeft="50dp"
+                android:paddingRight="50dp" >
+
+                <TextView
+                    android:id="@+id/textView_editprofile_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/name"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <EditText
+                    android:id="@+id/editText_editprofile_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:background="@drawable/edittext"
+                    android:ems="10"
+                    android:gravity="center_horizontal"
+                    android:inputType="textPersonName" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/editProfile_email_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal"
+                android:paddingLeft="50dp"
+                android:paddingRight="50dp" >
+
+                <TextView
+                    android:id="@+id/textView_editprofile_email"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/email"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <EditText
+                    android:id="@+id/editText_editprofile_email"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:background="@drawable/edittext"
+                    android:ems="10"
+                    android:gravity="center_horizontal"
+                    android:inputType="textEmailAddress" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/editProfile_gender_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal"
+                android:paddingLeft="50dp"
+                android:paddingRight="50dp" >
+
+                <TextView
+                    android:id="@+id/textView_editprofile_gender"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/gender"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <EditText
+                    android:id="@+id/editText_editprofile_gender"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:background="@drawable/edittext"
+                    android:ems="10"
+                    android:gravity="center_horizontal"
+                    android:inputType="text" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/editProfile_workspace_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal"
+                android:paddingLeft="50dp"
+                android:paddingRight="50dp" >
+
+                <TextView
+                    android:id="@+id/textView_editprofile_workspace"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/workspace"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <EditText
+                    android:id="@+id/editText_editprofile_workspace"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:background="@drawable/edittext"
+                    android:ems="10"
+                    android:gravity="center_horizontal"
+                    android:inputType="text" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/editProfile_alias_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal"
+                android:paddingLeft="50dp"
+                android:paddingRight="50dp" >
+
+                <TextView
+                    android:id="@+id/textView_editprofile_alias"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/alias"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+                <EditText
+                    android:id="@+id/editText_editprofile_alias"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:background="@drawable/edittext"
+                    android:ems="10"
+                    android:gravity="center_horizontal"
+                    android:inputType="text" />
+            </LinearLayout>
+        </LinearLayout>
 
         <Button
             android:id="@+id/button_editprofile_cancel"
@@ -195,17 +244,6 @@
             android:paddingLeft="50dp"
             android:paddingRight="50dp"
             android:text="@string/confirm" />
-
-        <ImageView
-            android:id="@+id/imageView_editprofile_avatar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:contentDescription="@string/user_avatar"
-            android:src="@drawable/user_profile" />
-
     </RelativeLayout>
 
 </RelativeLayout>
