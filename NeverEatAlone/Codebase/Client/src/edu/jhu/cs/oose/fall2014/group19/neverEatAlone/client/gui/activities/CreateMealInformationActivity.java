@@ -1,6 +1,8 @@
 package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Map;
 
 import android.app.DatePickerDialog.OnDateSetListener;
@@ -9,6 +11,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,18 +21,17 @@ import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.DateAndTimeProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.MealProperties;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.helpers.GsonHelper;
 
 /**
  * This class handles the meal information of the creation of an invite.
  * 
- * 
  * @author Runze Tang
- * @author tejasvamsingh
+ * 
  * 
  */
 
@@ -99,17 +101,6 @@ public class CreateMealInformationActivity extends FragmentActivity {
 		allowFriendInvite = (Switch) findViewById(R.id.switch_allowfriendinvite);
 
 		setTitleStyle();
-
-		applyTheme();
-
-	}
-
-	private void applyTheme() {
-		ThemeManager.applyTheme(findViewById(android.R.id.content));
-		// ThemeManager.applyTheme(findViewById(R.id.layout_create_meal));
-		// ThemeManager.applyTheme(findViewById(R.id.layout_create_meal_information));
-		// ThemeManager.applyTheme(findViewById(R.id.header_createMealInfo));
-
 	}
 
 	/**
@@ -246,8 +237,8 @@ public class CreateMealInformationActivity extends FragmentActivity {
 			startmonth = monthOfYear;
 			int dummyMonthStart = startmonth + 1;
 			startDay = dayOfMonth;
-			BtnSelectStartDate.setText(timeToString(startDay) + "-"
-					+ timeToString(dummyMonthStart) + "-" + startYear);
+			BtnSelectStartDate.setText(startDay + "-" + dummyMonthStart + "-"
+					+ startYear);
 		}
 	};
 
@@ -265,8 +256,8 @@ public class CreateMealInformationActivity extends FragmentActivity {
 			endMonth = monthOfYear;
 			int dummyMonthEnd = endMonth + 1;
 			endDay = dayOfMonth;
-			BtnSelectEndDate.setText(timeToString(endDay) + "-"
-					+ timeToString(dummyMonthEnd) + "-" + endYear);
+			BtnSelectEndDate.setText(endDay + "-" + dummyMonthEnd + "-"
+					+ endYear);
 		}
 	};
 
@@ -281,8 +272,7 @@ public class CreateMealInformationActivity extends FragmentActivity {
 		public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 			starthour = hourOfDay;
 			startminute = minute;
-			BtnSelectstartTime.setText(timeToString(hourOfDay) + ":"
-					+ timeToString(minute));
+			BtnSelectstartTime.setText(hourOfDay + ":" + minute);
 		}
 	};
 
@@ -297,8 +287,7 @@ public class CreateMealInformationActivity extends FragmentActivity {
 		public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 			endhour = hourOfDay;
 			endminute = minute;
-			BtnSelectendTime.setText(timeToString(hourOfDay) + ":"
-					+ timeToString(minute));
+			BtnSelectendTime.setText(hourOfDay + ":" + minute);
 		}
 	};
 
@@ -343,24 +332,11 @@ public class CreateMealInformationActivity extends FragmentActivity {
 	}
 
 	/**
-	 * Set the right form for time and date.
-	 * 
-	 * @author Runze Tang
-	 * 
-	 */
-	private String timeToString(int time) {
-		if (time >= 10) {
-			return String.valueOf(time);
-		} else {
-			return "0" + time;
-		}
-	}
-
-	/**
 	 * Handler for the meal creation event.
 	 * 
 	 * @author tejasvamsingh
 	 * @author Runze Tang
+	 * @author Yueling Loh
 	 * @param view
 	 */
 	public void onNextButtonClick(View view) {
@@ -369,7 +345,35 @@ public class CreateMealInformationActivity extends FragmentActivity {
 		String maxNumberOfInvitees = maxNumber.getText().toString();
 		String isNotificationExtendible = allowFriendInvite.isChecked() ? "YES"
 				: "NO";
-
+		
+		if(location.equals("")){
+			Toast.makeText(this, R.string.location_empty,Toast.LENGTH_SHORT).show();
+			return;
+		}
+		if(Integer.parseInt(maxNumberOfInvitees)<0){
+			Toast.makeText(this, R.string.negative_invitees,Toast.LENGTH_SHORT).show();
+			return;
+		}
+		
+		//converts the date into a java date type and checks if start date is after end date
+		SimpleDateFormat ft = new SimpleDateFormat("yyyy:mm:dd:HH:MM");
+		String startDateStr = startYear +":"+startmonth + ":"+startDay +":"+starthour+":"+startminute;
+		String endDateStr = endYear +":"+endMonth + ":"+endDay +":"+endhour+":"+endminute;
+		Date startDate,endDate;
+		try{
+			
+			startDate = ft.parse(startDateStr);
+			endDate = ft.parse(endDateStr);
+			if(startDate.after(endDate)){
+				Toast.makeText(this, R.string.date_error,Toast.LENGTH_SHORT).show();
+				return;
+			}
+		}catch(Exception e){
+			Log.e("CreatMealInfo","date parsing error");
+			return;
+		}
+		
+		
 		// ************************** PAGE onE REQUEST CREATIon STARTS HERE
 		// **************************
 
@@ -379,6 +383,8 @@ public class CreateMealInformationActivity extends FragmentActivity {
 
 		DateAndTimeProperties endDateAndTimeProperties = new DateAndTimeProperties(
 				endDay, endMonth, endYear, endhour, endminute);
+		
+		
 
 		// Create a Meal Object
 		MealProperties mealProperties = new MealProperties(location,

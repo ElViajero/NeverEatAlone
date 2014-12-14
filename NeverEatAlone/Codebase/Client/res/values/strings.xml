@@ -91,4 +91,8 @@
 	<string name="availability_status">Availability Status:</string>
 	<string name="meal_details">Meal Details</string>
 	<string name="app_logo">App Logo</string>
+	<string name="invalid_email">Invalid email.</string>
+	<string name="location_empty">Please enter a location.</string>
+	<string name="negative_invitees">Invalid max number of invitees.</string>
+	<string name="date_error">Please enter valid start/end date/time.</string>
 </resources>

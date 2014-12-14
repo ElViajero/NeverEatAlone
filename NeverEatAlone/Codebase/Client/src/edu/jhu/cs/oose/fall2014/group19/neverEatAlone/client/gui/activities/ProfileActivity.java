@@ -20,29 +20,27 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.AccountProperties;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.MessageToasterHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
-
 
 /**
  * ProfileActivity is used to set up the view of Profile page
  * 
  * @author Hai Tang
  * @author Yueling Loh
- * @author tejasvamsingh
  */
 public class ProfileActivity extends Activity {
-
+	
 	private PopupWindow deleteAccountPopupWindow;
 	private TextView usernameTextView,aliasTextView, nameTextView;
-	private TextView workspaceTextView,emailTextView;
+	private TextView workspaceTextView,emailTextView,genderTextView;
 	private String username;
 	private String requestID;
 	private String requestType;
-
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-
+		
 		username = AccountProperties.getUserAccountInstance().getusername();
 		initView(savedInstanceState);
 		getProfileInfo();
@@ -59,29 +57,21 @@ public class ProfileActivity extends Activity {
 		setContentView(R.layout.activity_profile);
 
 		setTitleStyle();
-
 		usernameTextView = (TextView) findViewById(R.id.textView_username);
 		aliasTextView = (TextView) findViewById(R.id.textView_alias);
 		nameTextView = (TextView) findViewById(R.id.textView_Name);
 		workspaceTextView = (TextView) findViewById(R.id.textView_workspace);
 		emailTextView =  (TextView) findViewById(R.id.textView_email);
-
+		genderTextView = (TextView) findViewById(R.id.textView_Gender);
+		
+		
 		usernameTextView.setText(username);
-
-		applyTheme();
-
 	}
-
-	private void applyTheme() {
-		ThemeManager.applyTheme(findViewById(android.R.id.content));
-
-	}
-
+	
 	/**
 	 * This method is used to set the font style of the title of each page
 	 * @author: Hai Tang
 	 * @author: Yueling Loh
-	 * @author tejasvamsingh
 	 */
 	private void setTitleStyle() {
 		TextView tv =
@@ -117,9 +107,14 @@ public class ProfileActivity extends Activity {
 		final Button cancelButton = (Button) popupview
 				.findViewById(R.id.button_popup_cancel);
 
-
-
-		/** 
+		/**
+<<<<<<< HEAD
+		 * onClickListener for the confirm button in the popup window
+=======
+		 * OnClickListener for the confirm button in the popup window. Account deleted 
+		 * and return to the login page.
+>>>>>>> refs/heads/myGUI_Iter5_v9
+		 * 
 		 * @author: Hai Tang
 		 */
 		confirmButton.setOnClickListener(new Button.OnClickListener() {
@@ -191,8 +186,8 @@ public class ProfileActivity extends Activity {
 				ChangePasswordActivity.class);
 		ProfileActivity.this.startActivity(intent);
 	}
-
-
+	
+	
 	/**
 	 * Method for getting profile info from the server
 	 * and posting it to screen
@@ -200,12 +195,12 @@ public class ProfileActivity extends Activity {
 	 * @author Yueling Loh
 	 */
 	private void getProfileInfo(){
-
+		
 		//CHECK VALUE OF QUOTATION MARKS
 		//set the kind of request
 		requestID = "Account";
-		requestType = "getInfo";
-
+		requestType = "GetInfo";
+		
 		Map<String,Object> requestMap = new HashMap<String,Object>();
 		requestMap.put("username",username);
 		try{
@@ -213,24 +208,25 @@ public class ProfileActivity extends Activity {
 			List<Map<String, String>> resultMapList = 
 					RequestHandlerHelper.getRequestHandlerInstance().
 					handleRequest(this,requestMap,requestID,requestType) ;
-
+			
 			Map<String, String> profile = resultMapList.get(0);
-
+			
 			//CHECK VALUE OF QUOTATION MARKS
 			//set to profile to values from the server
 			aliasTextView.setText(profile.get("alias"));
 			nameTextView.setText(profile.get("name"));
 			workspaceTextView.setText(profile.get("workspace"));
 			emailTextView.setText(profile.get("email"));
-
-
+			genderTextView.setText(profile.get("gender"));
+			
+	
 
 		}catch(RequestAbortedException e){
 			// This is necessary. The exception has
 			//already been handled in the RequestHandler
 			//class.
 			return;}
-
+	
 	}
 
 }

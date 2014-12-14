@@ -21,8 +21,7 @@
 
     <RelativeLayout
         android:id="@+id/main_editProfile"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        style="@style/MainLayoutTheme"
         android:layout_below="@+id/header_editProfile" >
 
         <TextView
@@ -79,6 +78,18 @@
             android:layout_marginTop="50dp"
             android:text="@string/workspace"
             android:textAppearance="?android:attr/textAppearanceMedium" />
+        
+         <TextView
+            android:id="@+id/textView_editprofile_alias"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/textView_editprofile_workspace"
+            android:layout_marginTop="50dp"
+            android:text="@string/alias"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+        
 
         <EditText
             android:id="@+id/editText_editprofile_workspace"
@@ -131,8 +142,8 @@
             android:ems="10"
             android:inputType="textPersonName" />
 
-        <EditText
-            android:id="@+id/editText_editprofile_username"
+        <TextView
+            android:id="@+id/textView_editprofile_username2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/textView_editprofile_username"
@@ -141,6 +152,19 @@
             android:layout_marginStart="15dp"
             android:layout_toEndOf="@+id/textView_editprofile_username"
             android:layout_toRightOf="@+id/textView_editprofile_username"
+            android:background="@drawable/edittext"
+            android:ems="10"
+            android:inputType="text" />
+        <EditText
+            android:id="@+id/editText_editprofile_alias"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/textView_editprofile_alias"
+            android:layout_alignBottom="@+id/textView_editprofile_alias"
+            android:layout_marginLeft="15dp"
+            android:layout_marginStart="15dp"
+            android:layout_toEndOf="@+id/textView_editprofile_alias"
+            android:layout_toRightOf="@+id/textView_editprofile_alias"
             android:background="@drawable/edittext"
             android:ems="10"
             android:inputType="text" />
@@ -178,9 +202,10 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/textView_Title_Edit_Profile"
+            android:layout_alignParentTop="true"
             android:contentDescription="@string/user_avatar"
             android:src="@drawable/user_profile" />
+
     </RelativeLayout>
 
 </RelativeLayout>

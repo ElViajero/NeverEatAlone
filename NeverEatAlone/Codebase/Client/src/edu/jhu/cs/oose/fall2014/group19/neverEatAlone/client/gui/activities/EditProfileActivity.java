@@ -14,11 +14,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.AccountProperties;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.EmailValidatorHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
+import android.widget.TextView;
+import android.widget.Toast;
 
 
 /**
@@ -29,12 +30,14 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.serv
  */
 public class EditProfileActivity extends Activity {
 
-	private EditText usernameEditTextObject;
+	private TextView usernameTextObject;
 	private EditText nameEditTextObject;
 	private EditText emailEditTextObject;
 	private EditText genderEditTextObject;
 	private EditText workspaceEditTextObject;
-
+	private EditText aliasEditTextObject;
+	private EmailValidatorHelper validator;
+	
 	private String requestID;
 	private String requestType;
 
@@ -42,14 +45,15 @@ public class EditProfileActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		initView(savedInstanceState);
 
-		usernameEditTextObject = (EditText) findViewById(R.id.editText_editprofile_username);
+		usernameTextObject = (TextView) findViewById(R.id.textView_editprofile_username2);
 		nameEditTextObject = (EditText) findViewById(R.id.editText_editprofile_name);
 		emailEditTextObject = (EditText) findViewById(R.id.editText_editprofile_email);
 		genderEditTextObject = (EditText) findViewById(R.id.editText_editprofile_gender);
 		workspaceEditTextObject = (EditText) findViewById(R.id.editText_editprofile_workspace);
-
-		usernameEditTextObject.setText(AccountProperties.getUserAccountInstance().getusername());
-
+		aliasEditTextObject = (EditText) findViewById(R.id.editText_editprofile_alias);
+		
+		usernameTextObject.setText(AccountProperties.getUserAccountInstance().getusername());
+		validator = new EmailValidatorHelper();
 	}
 
 	/**
@@ -60,11 +64,10 @@ public class EditProfileActivity extends Activity {
 	private void initView(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_edit_profile);
-
+		
 		setTitleStyle();
-		applyTheme();
 	}
-
+	
 	/**
 	 * This method is used to set the font style of the title of each page
 	 * @author: Hai Tang
@@ -79,16 +82,6 @@ public class EditProfileActivity extends Activity {
 		tv.setTextSize(80);
 	}
 
-
-
-
-	private void applyTheme() {
-		ThemeManager.applyTheme(findViewById(android.R.id.content));
-
-	}
-
-
-
 	/**
 	 * Method used when confirm button is clicked. Gather all the revised
 	 * information and return to TabHost Page.
@@ -101,19 +94,25 @@ public class EditProfileActivity extends Activity {
 				TabHostActivity.class);
 		EditProfileActivity.this.startActivity(intent);
 
-		String username = usernameEditTextObject.getText().toString();
+		String username = usernameTextObject.getText().toString();
 		String name = nameEditTextObject.getText().toString();
 		String email = emailEditTextObject.getText().toString();
 		String gender = genderEditTextObject.getText().toString();
 		String workspace = workspaceEditTextObject.getText().toString();
-
+		String alias = aliasEditTextObject.getText().toString();
+		
+		if (!validator.isValid(email)){
+			Toast.makeText(this, R.string.invalid_email,Toast.LENGTH_SHORT).show();
+			return;
+		}
+		
 		//CHECK VALUE OF QUOTATION MARKS
 		//sets what kind of request to make
 		requestID = "Account";
-		requestType = "update";
-
+		requestType = "Update";
+		
 		Map<String,Object> requestMap = new HashMap<String,Object>();
-
+		
 		//CHECK VALUE OF QUOTATION MARKS
 		//sets the values
 		requestMap.put("username",username);
@@ -121,18 +120,19 @@ public class EditProfileActivity extends Activity {
 		requestMap.put("email",email);
 		requestMap.put("gender",gender);
 		requestMap.put("workspace",workspace);
-
+		requestMap.put("alias", alias);
+		
 		try{
 			// send the request.
 			List<Map<String, String>> resultMapList = 
-					RequestHandlerHelper.getRequestHandlerInstance().
-					handleRequest(this,requestMap,requestID,requestType) ;
+							RequestHandlerHelper.getRequestHandlerInstance().
+							handleRequest(this,requestMap,requestID,requestType) ;
 			Map<String, String> profile = resultMapList.get(0);
 		}catch(RequestAbortedException e){
-			// This is necessary. The exception has
-			//already been handled in the RequestHandler
-			//class.
-			return;}
+					// This is necessary. The exception has
+					//already been handled in the RequestHandler
+					//class.
+		return;}
 	}
 
 	/**
@@ -164,7 +164,7 @@ public class EditProfileActivity extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-
+	
 	/**
 	 * Method for getting profile info from the server
 	 * and posting it to screen
@@ -172,12 +172,12 @@ public class EditProfileActivity extends Activity {
 	 * @author Yueling Loh
 	 */
 	private void getProfileInfo(){
-
+		
 		//CHECK VALUE OF QUOTATION MARKS
 		//set the kind of request
 		requestID = "Account";
 		requestType = "GetInfo";
-
+		
 		Map<String,Object> requestMap = new HashMap<String,Object>();
 		requestMap.put("username",AccountProperties.getUserAccountInstance().getusername());
 		try{
@@ -185,23 +185,23 @@ public class EditProfileActivity extends Activity {
 			List<Map<String, String>> resultMapList = 
 					RequestHandlerHelper.getRequestHandlerInstance().
 					handleRequest(this,requestMap,requestID,requestType) ;
-
+			
 			Map<String, String> profile = resultMapList.get(0);
-
+			
 			//CHECK VALUE OF QUOTATION MARKS
 			//set to profile to values from the server
-
+			
 			nameEditTextObject.setText(profile.get("name"));
 			workspaceEditTextObject.setText(profile.get("workspace"));
 			emailEditTextObject.setText(profile.get("email"));
 			genderEditTextObject.setText(profile.get("gender"));
-
+	
 
 		}catch(RequestAbortedException e){
 			// This is necessary. The exception has
 			//already been handled in the RequestHandler
 			//class.
 			return;}
-
+	
 	}
 }

@@ -18,8 +18,8 @@ import android.widget.Toast;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.AccountProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.MessageToasterHelper;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.EmailValidatorHelper;
 
 /**
  * This class handles controller logic for the registration Activity.
@@ -37,6 +37,7 @@ public class RegisterActivity extends Activity {
 	private EditText confirmPasswordET;
 	private String requestType;
 	private String requestID;
+	private EmailValidatorHelper validator;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -52,20 +53,15 @@ public class RegisterActivity extends Activity {
 		// set the RequestType and RequestID fields.
 
 		requestID = "Account";
-		requestType = "create";
+		requestType = "Create";
+		validator = new EmailValidatorHelper();
 
-
+		
 		setTitleStyle();
-		applyTheme();
 
 
 	}
-
-	private void applyTheme() {
-		ThemeManager.applyTheme(findViewById(android.R.id.content));
-
-	}
-
+	
 	/**
 	 * This method is used to set the font style of the title of each page
 	 * @author: Hai Tang
@@ -156,6 +152,11 @@ public class RegisterActivity extends Activity {
 
 		if (email.equals("")) {
 			Toast.makeText(this, R.string.empty_email,Toast.LENGTH_SHORT).show();
+			return false;
+		}
+		
+		if(!validator.isValid(email)){
+			Toast.makeText(this, R.string.invalid_email,Toast.LENGTH_SHORT).show();
 			return false;
 		}
 

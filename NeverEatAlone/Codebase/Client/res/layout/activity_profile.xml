@@ -1,11 +1,8 @@
-<!--
-@author Hai Tang @author Yueling Loh 
-@author tejasvamsingh
--->
+<!-- @author Hai Tang @author Yueling Loh -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     tools:context="edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.ProfileActivity" >
 
     <!-- Header aligned to top -->
@@ -24,9 +21,11 @@
 
     <RelativeLayout
         android:id="@+id/main_profile"
+        style="@style/MainLayoutTheme"
+        android:layout_below="@+id/header_profile"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/header_profile" >
+    	android:layout_height="wrap_content"
+     >
 
         <TextView
             android:id="@+id/profile_username"
@@ -67,6 +66,14 @@
             android:layout_marginTop="20dp"
             android:text="@string/email"
             android:textAppearance="?android:attr/textAppearanceMedium" />
+        <TextView
+            android:id="@+id/profile_gender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/profile_email"
+            android:layout_marginTop="20dp"
+            android:text="@string/gender"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
             android:id="@+id/textView_alias"
@@ -92,6 +99,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_above="@+id/profile_email"
+            android:layout_centerHorizontal="true"
+            android:text="Harry Potter"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+        
+         <TextView
+            android:id="@+id/textView_Gender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/profile_name"
             android:layout_centerHorizontal="true"
             android:text="Harry Potter"
             android:textAppearance="?android:attr/textAppearanceMedium" />
@@ -186,11 +202,13 @@
             android:id="@+id/imageView_profile_avatar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
+            android:layout_alignLeft="@+id/profile_username"
             android:layout_alignParentStart="true"
-            android:layout_below="@+id/profile"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="14dp"
             android:contentDescription="@string/user_avatar"
             android:src="@drawable/user_profile" />
+
     </RelativeLayout>
 
 </RelativeLayout>
