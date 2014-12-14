@@ -247,8 +247,8 @@ public class CreateMealInformationActivity extends FragmentActivity {
 			startMonth = monthOfYear;
 			int dummyMonthStart = startMonth + 1;
 			startDay = dayOfMonth;
-			BtnSelectStartDate.setText(startDay + "-" + dummyMonthStart + "-"
-					+ startYear);
+			BtnSelectStartDate.setText(timeToString(startDay) + "-"
+					+ timeToString(dummyMonthStart) + "-" + startYear);
 		}
 	};
 
@@ -266,8 +266,8 @@ public class CreateMealInformationActivity extends FragmentActivity {
 			endMonth = monthOfYear;
 			int dummyMonthEnd = endMonth + 1;
 			endDay = dayOfMonth;
-			BtnSelectEndDate.setText(endDay + "-" + dummyMonthEnd + "-"
-					+ endYear);
+			BtnSelectEndDate.setText(timeToString(endDay) + "-"
+					+ timeToString(dummyMonthEnd) + "-" + endYear);
 		}
 	};
 
@@ -282,7 +282,8 @@ public class CreateMealInformationActivity extends FragmentActivity {
 		public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 			startHour = hourOfDay;
 			startMinute = minute;
-			BtnSelectstartTime.setText(hourOfDay + ":" + minute);
+			BtnSelectstartTime.setText(timeToString(hourOfDay) + ":"
+					+ timeToString(minute));
 		}
 	};
 
@@ -297,7 +298,8 @@ public class CreateMealInformationActivity extends FragmentActivity {
 		public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 			endHour = hourOfDay;
 			endMinute = minute;
-			BtnSelectendTime.setText(hourOfDay + ":" + minute);
+			BtnSelectendTime.setText(timeToString(hourOfDay) + ":"
+					+ timeToString(minute));
 		}
 	};
 
@@ -342,6 +344,20 @@ public class CreateMealInformationActivity extends FragmentActivity {
 	}
 
 	/**
+	 * Set the right form for time and date.
+	 * 
+	 * @author Runze Tang
+	 * 
+	 */
+	private String timeToString(int time) {
+		if (time >= 10) {
+			return String.valueOf(time);
+		} else {
+			return "0" + time;
+		}
+	}
+
+	/**
 	 * Handler for the meal creation event.
 	 * 
 	 * @author tejasvamsingh
@@ -362,8 +378,8 @@ public class CreateMealInformationActivity extends FragmentActivity {
 			return;
 		}
 		if (maxNumberOfInvitees.length() == 0) {
-			Toast.makeText(this, R.string.number_invitees_empty, Toast.LENGTH_SHORT)
-					.show();
+			Toast.makeText(this, R.string.number_invitees_empty,
+					Toast.LENGTH_SHORT).show();
 			return;
 		}
 
