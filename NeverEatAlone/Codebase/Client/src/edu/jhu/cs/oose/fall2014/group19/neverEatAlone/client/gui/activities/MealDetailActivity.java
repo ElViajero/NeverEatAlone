@@ -3,9 +3,6 @@ package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities;
 import java.lang.reflect.Type;
 import java.util.Map;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -68,12 +65,14 @@ public class MealDetailActivity extends Activity {
 		String endMinute = postDataMap.get("endminute").toString();
 
 		TextView textStartTime = (TextView) findViewById(R.id.textView_mealdetails_startTime_result);
-		textStartTime.setText(startDay + "/" + startMonth + "/" + startYear
-				+ "-" + startHour + ":" + startMinute);
+		textStartTime.setText(timeToString(startDay) + "/"
+				+ timeToString(startMonth) + "/" + startYear + "-"
+				+ timeToString(startHour) + ":" + timeToString(startMinute));
 
 		TextView textEndTime = (TextView) findViewById(R.id.textView_mealdetails_endTime_result);
-		textEndTime.setText(endDay + "/" + endMonth + "/" + endYear + "-"
-				+ endHour + ":" + endMinute);
+		textEndTime.setText(timeToString(endDay) + "/" + timeToString(endMonth)
+				+ "/" + endYear + "-" + timeToString(endHour) + ":"
+				+ timeToString(endMinute));
 
 		TextView restaurant = (TextView) findViewById(R.id.TextView_mealdetails_restaurant_result);
 		restaurant.setText(location);
@@ -144,5 +143,19 @@ public class MealDetailActivity extends Activity {
 	public void onDeclineButtonClick(View view) {
 		Intent intent = new Intent(this, TabHostActivity.class);
 		startActivity(intent);
+	}
+
+	/**
+	 * Set the right form for time and date.
+	 * 
+	 * @author Runze Tang
+	 * 
+	 */
+	private String timeToString(String time) {
+		if (time.length() > 1) {
+			return time;
+		} else {
+			return "0" + time;
+		}
 	}
 }

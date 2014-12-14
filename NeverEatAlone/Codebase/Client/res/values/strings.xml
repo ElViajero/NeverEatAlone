@@ -90,4 +90,5 @@
 	<string name="friends_request">Friend Request</string>
 	<string name="availability_status">Availability Status:</string>
 	<string name="meal_details">Meal Details</string>
+	<string name="app_logo">App Logo</string>
 </resources>

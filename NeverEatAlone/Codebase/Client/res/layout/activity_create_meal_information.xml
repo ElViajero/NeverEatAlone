@@ -32,7 +32,6 @@
             android:id="@+id/CreateMealInformation_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/CreateMealInformation_text_mealinformation"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="10dp"
             android:orientation="vertical"
@@ -153,15 +152,16 @@
                     android:id="@+id/CreateMealInformation_text_restaurant"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="3"
                     android:text="@string/restaurant" />
 
                 <EditText
                     android:id="@+id/edit_restaurant"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2"
+                    android:layout_weight="5"
                     android:background="@drawable/edittext"
+                    android:gravity="center_horizontal"
                     android:inputType="text" />
             </LinearLayout>
 
@@ -189,15 +189,16 @@
                     android:id="@+id/CreateMealInformation_text_maxnumber"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="3"
                     android:text="@string/max_number" />
 
                 <EditText
                     android:id="@+id/edit_maxnumber"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="2"
+                    android:layout_weight="5"
                     android:background="@drawable/edittext"
+                    android:gravity="center_horizontal"
                     android:inputType="number" />
             </LinearLayout>
 
