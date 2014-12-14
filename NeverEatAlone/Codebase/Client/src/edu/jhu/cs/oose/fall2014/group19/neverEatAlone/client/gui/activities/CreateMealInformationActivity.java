@@ -47,8 +47,8 @@ public class CreateMealInformationActivity extends FragmentActivity {
 	private Switch allowFriendInvite;
 
 	// variables to save user selected date and time
-	public int startYear, startmonth, startDay, starthour, startminute;
-	public int endYear, endMonth, endDay, endhour, endminute;
+	public int startYear, startMonth, startDay, startHour, startMinute;
+	public int endYear, endMonth, endDay, endHour, endMinute;
 
 	/**
 	 * Initialization the calendar.
@@ -71,14 +71,14 @@ public class CreateMealInformationActivity extends FragmentActivity {
 		final Calendar c = Calendar.getInstance();
 		startYear = c.get(Calendar.YEAR);
 		endYear = startYear;
-		startmonth = c.get(Calendar.MONTH);
-		endMonth = startmonth;
+		startMonth = c.get(Calendar.MONTH);
+		endMonth = startMonth;
 		startDay = c.get(Calendar.DAY_OF_MONTH);
 		endDay = startDay;
-		starthour = c.get(Calendar.HOUR);
-		endhour = starthour;
-		startminute = c.get(Calendar.MINUTE);
-		endminute = startminute;
+		startHour = c.get(Calendar.HOUR);
+		endHour = startHour;
+		startMinute = c.get(Calendar.MINUTE);
+		endMinute = startMinute;
 	}
 
 	/**
@@ -170,7 +170,7 @@ public class CreateMealInformationActivity extends FragmentActivity {
 		// Set selected date into dialog. Default current date.
 		Bundle args = new Bundle();
 		args.putInt("year", startYear);
-		args.putInt("month", startmonth);
+		args.putInt("month", startMonth);
 		args.putInt("day", startDay);
 		startdate.setArguments(args);
 		// Set Call back to capture selected date
@@ -207,8 +207,8 @@ public class CreateMealInformationActivity extends FragmentActivity {
 		TimePickerFragment startTime = new TimePickerFragment();
 		// Set selected time into dialog. Default current time.
 		Bundle args = new Bundle();
-		args.putInt("hour", starthour);
-		args.putInt("minute", startminute);
+		args.putInt("hour", startHour);
+		args.putInt("minute", startMinute);
 		startTime.setArguments(args);
 		// Set Call back to capture selected date
 		startTime.setCallBack(onstartTime);
@@ -225,8 +225,8 @@ public class CreateMealInformationActivity extends FragmentActivity {
 		TimePickerFragment startTime = new TimePickerFragment();
 		// Set selected time into dialog. Default current time.
 		Bundle args = new Bundle();
-		args.putInt("hour", endhour);
-		args.putInt("minute", endminute);
+		args.putInt("hour", endHour);
+		args.putInt("minute", endMinute);
 		startTime.setArguments(args);
 		// Set Call back to capture selected date
 		startTime.setCallBack(onendTime);
@@ -244,8 +244,8 @@ public class CreateMealInformationActivity extends FragmentActivity {
 		public void onDateSet(DatePicker view, int year, int monthOfYear,
 				int dayOfMonth) {
 			startYear = year;
-			startmonth = monthOfYear;
-			int dummyMonthStart = startmonth + 1;
+			startMonth = monthOfYear;
+			int dummyMonthStart = startMonth + 1;
 			startDay = dayOfMonth;
 			BtnSelectStartDate.setText(startDay + "-" + dummyMonthStart + "-"
 					+ startYear);
@@ -280,8 +280,8 @@ public class CreateMealInformationActivity extends FragmentActivity {
 	OnTimeSetListener onstartTime = new OnTimeSetListener() {
 		@Override
 		public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-			starthour = hourOfDay;
-			startminute = minute;
+			startHour = hourOfDay;
+			startMinute = minute;
 			BtnSelectstartTime.setText(hourOfDay + ":" + minute);
 		}
 	};
@@ -295,8 +295,8 @@ public class CreateMealInformationActivity extends FragmentActivity {
 	OnTimeSetListener onendTime = new OnTimeSetListener() {
 		@Override
 		public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-			endhour = hourOfDay;
-			endminute = minute;
+			endHour = hourOfDay;
+			endMinute = minute;
 			BtnSelectendTime.setText(hourOfDay + ":" + minute);
 		}
 	};
@@ -370,10 +370,10 @@ public class CreateMealInformationActivity extends FragmentActivity {
 		// converts the date into a java date type and checks if start date is
 		// after end date
 		SimpleDateFormat ft = new SimpleDateFormat("yyyy:mm:dd:HH:MM");
-		String startDateStr = startYear + ":" + startmonth + ":" + startDay
-				+ ":" + starthour + ":" + startminute;
+		String startDateStr = startYear + ":" + startMonth + ":" + startDay
+				+ ":" + startHour + ":" + startMinute;
 		String endDateStr = endYear + ":" + endMonth + ":" + endDay + ":"
-				+ endhour + ":" + endminute;
+				+ endHour + ":" + endMinute;
 		Date startDate, endDate;
 		try {
 
@@ -392,12 +392,14 @@ public class CreateMealInformationActivity extends FragmentActivity {
 		// ************************** PAGE onE REQUEST CREATIon STARTS HERE
 		// **************************
 
+		int dummyStartMonth = startMonth + 1;
+		int dummyEndMonth = endMonth + 1;
 		// Create Date and Time Properties Objects
 		DateAndTimeProperties startDateAndTimeProperties = new DateAndTimeProperties(
-				startDay, startmonth, startYear, starthour, startminute);
+				startDay, dummyStartMonth, startYear, startHour, startMinute);
 
 		DateAndTimeProperties endDateAndTimeProperties = new DateAndTimeProperties(
-				endDay, endMonth, endYear, endhour, endminute);
+				endDay, dummyEndMonth, endYear, endHour, endMinute);
 
 		// Create a Meal Object
 		MealProperties mealProperties = new MealProperties(location,
