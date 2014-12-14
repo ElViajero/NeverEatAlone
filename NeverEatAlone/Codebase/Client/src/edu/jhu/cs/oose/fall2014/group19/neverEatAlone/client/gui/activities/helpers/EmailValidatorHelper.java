@@ -2,6 +2,12 @@ package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.hel
 
 import java.util.regex.Pattern;
 
+/**
+ * This class is a helper class that
+ * checks if an email is valid
+ * @author Yueling Loh
+ *
+ */
 public class EmailValidatorHelper {
 	private Pattern p;
  
