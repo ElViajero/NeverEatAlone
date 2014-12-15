@@ -1,15 +1,8 @@
 package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.http.impl.execchain.RequestAbortedException;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -21,9 +14,7 @@ import android.widget.TextView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.AccountProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.LoginView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.ProfileView;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
 
 /**
  * ProfileActivity is used to set up the view of Profile page
@@ -70,17 +61,23 @@ public class ProfileActivity extends Activity {
 	 * This method is used to set GUI colors
 	 * 
 	 * @author: Yueling Loh
+	 * @author Hai Tang
 	 */
 
 	private void applyTheme() {
-		View mainLayout = findViewById(R.id.main_profile);
-		View headerLayout = findViewById(R.id.header_profile);
-		View buttonBar = findViewById(R.id.buttons_profile);
 		
-		View changePasswordButton = findViewById(R.id.button_profile_changepassword);
-		View editProfileButton = findViewById(R.id.button_profile_edit);
-		View logoutButton = findViewById(R.id.button_profile_logout);
-		View deleteAccountButton = findViewById(R.id.button_delete_account);
+		context = this;
+		activity = this;
+		profileView = new ProfileView(context, activity);
+		
+		View mainLayout = profileView.getView("main_profile");
+		View headerLayout = profileView.getView("header_profile");
+		View buttonBar = profileView.getView("buttons_profile");
+		
+		View changePasswordButton = profileView.getView("button_profile_changepassword");
+		View editProfileButton = profileView.getView("button_profile_edit");
+		View logoutButton = profileView.getView("button_profile_logout");
+		View deleteAccountButton = profileView.getView("button_delete_account");
 
 		ThemeManager.applyTheme(mainLayout, headerLayout);
 		ThemeManager.applyButtonBarTheme(buttonBar);
@@ -232,11 +229,11 @@ public class ProfileActivity extends Activity {
 				.getView("textView_Gender");
 
 		profileView.setValue(usernameTextViewObject, username);
+		profileView.setValue(emailTextViewObject, email);
 		// TODO: Need to be filled with real Strings
 		profileView.setValue(aliasTextViewObject, "abc");
 		profileView.setValue(nameTextViewObject, "abc");
 		profileView.setValue(workspaceTextViewObject, "abc");
-		profileView.setValue(emailTextViewObject, email);
 		profileView.setValue(genderTextViewObject, "abc");
 
 	}

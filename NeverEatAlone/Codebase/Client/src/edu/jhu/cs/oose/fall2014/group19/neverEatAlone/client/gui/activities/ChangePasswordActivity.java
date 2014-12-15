@@ -1,6 +1,7 @@
 package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.widget.TextView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.ProfileView;
 
 /**
  * Activity used for the change password page
@@ -20,10 +22,19 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeMan
  */
 public class ChangePasswordActivity extends Activity {
 
+	private Context context;
+	private Activity activity;
+	private ProfileView profileView;
+	private TextView changePasswordTextViewTitleObject;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_change_password);
+		
+		context = this;
+		activity = this;
+		profileView = new ProfileView(context, activity);
 		
 		setTitleStyle();
 	}
@@ -35,8 +46,8 @@ public class ChangePasswordActivity extends Activity {
 	 * @author: Yueling Loh
 	 */
 	private void setTitleStyle() {
-		TextView tv = (TextView) findViewById(R.id.textView_changepassword_title);
-		ThemeManager.setHeaderFont(tv);
+		changePasswordTextViewTitleObject = (TextView) profileView.getView("textView_changepassword_title");
+		ThemeManager.setHeaderFont(changePasswordTextViewTitleObject);
 	}
 	
 	/**
