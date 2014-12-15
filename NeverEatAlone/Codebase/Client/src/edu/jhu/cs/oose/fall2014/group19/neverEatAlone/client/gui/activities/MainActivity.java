@@ -71,24 +71,32 @@ public class MainActivity extends Activity {
 		signupButtonObject = (Button) loginView.getView("button_signup");
 		logoBigObject = (ImageView) loginView.getView("logo_big");
 
-
-		l = (LinearLayout) findViewById(R.id.layout_main);
-		//		l.setBackgroundResource(R.drawable.dark_layout_background);
+		applyTheme();
+		
 		requestID = "Login";
 		requestType = "checkCredentials";
-		ThemeManager.applyTheme(l);
 		System.out.println("inside onCreate in MainAcitivty");
 		MessageToasterHelper.toastMessage(this, "inside oncreate");
+		
+		
 
-
-		//		TextView tv =
-		//				(TextView) findViewById(R.id.tv1);
-		//		Typeface tf = Typeface.createFromAsset(getAssets(),
-		//				"fonts/Windsong.ttf");
-		//		tv.setTypeface(tf);
-		//		tv.setTextSize(100);
-		//		tv.setText("NeverEatAlone");
 	}
+	
+	
+	/**
+	 * This method applies the GUI's color theme.
+	 * 
+	 * @author Yueling Loh
+	 */
+	private void applyTheme() {
+		View mainLayout = findViewById(R.id.layout_main);
+
+		ThemeManager.applyBackground(mainLayout);
+		
+		ThemeManager.applyButtonColor(loginButtonObject);
+		ThemeManager.applyButtonColor(signupButtonObject);
+	}
+
 
 	/**
 	 * Event handler for client login requests.

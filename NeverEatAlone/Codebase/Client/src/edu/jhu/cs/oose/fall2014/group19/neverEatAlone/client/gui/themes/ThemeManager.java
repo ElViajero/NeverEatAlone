@@ -41,6 +41,21 @@ public class ThemeManager {
 	}
 
 
+	/**
+	 * This changes the background color.
+	 * 
+	 * @author Yueling Loh
+	 * 
+	 */
+	public static void applyBackground(View mainView) {
+
+		if (mainView == null) {
+			System.out.println("acitivity is null");
+		}
+
+		mainView.setBackgroundResource(mainTheme);
+	}
+
 
 	/**
 	 * This changes the background colors of the header and the main layout.
