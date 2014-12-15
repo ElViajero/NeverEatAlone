@@ -11,7 +11,7 @@
     <!-- Header aligned to top -->
 
     <RelativeLayout
-        android:id="@+id/header_addFriends"
+        android:id="@+id/header_addfriends"
         style="@style/HeaderTheme" >
 
         <TextView
@@ -20,26 +20,35 @@
             android:text="@string/add_friends" />
     </RelativeLayout>
 
-    <!-- Main Space -->
+    <!-- Button Header aligned to top -->
 
-    <RelativeLayout
-        android:id="@+id/main_addFriends"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/header_addFriends" >
+    <LinearLayout
+        android:id="@+id/buttons_addfriends"
+        style="@style/ButtonBarTheme"
+        android:layout_below="@+id/header_addfriends" >
 
         <Button
             android:id="@+id/button_addfriends_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
-            android:layout_below="@+id/textView_addfriends_title"
             android:layout_marginTop="25dp"
-            android:background="@drawable/buttonbackground"
+            android:background="@drawable/button_background_light"
             android:onClick="onBackButtonClick"
             android:paddingLeft="50dp"
             android:paddingRight="50dp"
             android:text="@string/back" />
+        
+    </LinearLayout>
+
+    <!-- Main Space -->
+
+    <RelativeLayout
+        android:id="@+id/main_addfriends"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/buttons_addfriends" >
 
         <TextView
             android:id="@+id/textView_addfriends_addbyusername"
@@ -92,7 +101,7 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="50dp"
-            android:background="@drawable/buttonbackground"
+            android:background="@drawable/button_background_light"
             android:onClick="onSearchButtonClick"
             android:paddingLeft="50dp"
             android:paddingRight="50dp"

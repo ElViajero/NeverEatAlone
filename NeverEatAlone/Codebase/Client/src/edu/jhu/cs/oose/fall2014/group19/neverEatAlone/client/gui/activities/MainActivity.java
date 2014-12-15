@@ -90,7 +90,7 @@ public class MainActivity extends Activity {
 	 * @throws URISyntaxException 
 	 */
 	public void onLoginButtonClick(View view) throws FileNotFoundException, URISyntaxException {
-		ThemeManager.setTheme(R.style.DarkTheme);
+		// ThemeManager.setTheme(R.style.DarkTheme);
 
 
 //		String username = usernameEditTextObject.getText().toString();

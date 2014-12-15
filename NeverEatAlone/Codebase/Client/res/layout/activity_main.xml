@@ -31,11 +31,9 @@
 
         <EditText
             android:id="@+id/edit_username"
+            style="@style/BigEditText"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
             android:layout_weight="0.6"
-            android:background="@drawable/edittext"
             android:hint="@string/username"
             android:inputType="text" />
 
@@ -64,11 +62,9 @@
 
         <EditText
             android:id="@+id/edit_password"
+            style="@style/BigEditText"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
             android:layout_weight="0.6"
-            android:background="@drawable/edittext"
             android:hint="@string/password"
             android:inputType="textPassword" />
 
@@ -82,26 +78,18 @@
 
     <Button
         android:id="@+id/button_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/StandardButton"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="94dp"
-        android:background="@drawable/buttonbackground"
         android:onClick="onLoginButtonClick"
-        android:paddingLeft="50dp"
-        android:paddingRight="50dp"
         android:text="@string/login" />
 
     <Button
         android:id="@+id/button_signup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/StandardButton"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="30dp"
-        android:background="@drawable/buttonbackground"
         android:onClick="onSignUpButtonClick"
-        android:paddingLeft="50dp"
-        android:paddingRight="50dp"
         android:text="@string/signup" />
 
 </LinearLayout>

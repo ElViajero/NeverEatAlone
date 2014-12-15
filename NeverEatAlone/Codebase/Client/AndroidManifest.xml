@@ -71,7 +71,7 @@
             android:label="@string/title_activity_edit_profile" >
         </activity>
         <activity
-            android:name=".gui.activities.ChangepasswordActivity"
+            android:name=".gui.activities.ChangePasswordActivity"
             android:label="@string/title_activity_change_password" >
         </activity>
         <activity
