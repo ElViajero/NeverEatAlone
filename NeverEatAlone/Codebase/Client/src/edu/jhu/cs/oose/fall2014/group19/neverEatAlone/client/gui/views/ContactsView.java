@@ -5,6 +5,11 @@ import android.content.Context;
 import android.view.View;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.contracts.IView;
 
+/**
+ * This class handles all the view components for the Contacts Page.
+ * @author Hai Tang
+ *
+ */
 public class ContactsView implements IView{
 
 	private View viewObject = null;
@@ -50,7 +55,7 @@ public class ContactsView implements IView{
 	}
 
 	@Override
-	public void setValue(String value) {
+	public void setValue(View view, String value) {
 		// TODO Auto-generated method stub
 		
 	}

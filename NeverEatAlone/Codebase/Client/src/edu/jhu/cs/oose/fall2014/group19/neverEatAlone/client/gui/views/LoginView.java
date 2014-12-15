@@ -71,7 +71,7 @@ public class LoginView implements IView{
 	}
 
 	@Override
-	public void setValue(String value) {
+	public void setValue(View view, String value) {
 		// TODO Auto-generated method stub
 		
 	}

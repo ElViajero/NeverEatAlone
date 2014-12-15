@@ -3,15 +3,16 @@ package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views;
 import android.app.Activity;
 import android.content.Context;
 import android.view.View;
+import android.widget.TextView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.contracts.IView;
 
 /**
- * This class handles all the view components for the Invites Page.
+ * This class handles all the view components for the Profile Page.
  * @author Hai Tang
  *
  */
-public class InvitesView implements IView{
-
+public class ProfileView implements IView{
+	
 	private View viewObject = null;
 	private String value = null;
 	
@@ -19,11 +20,11 @@ public class InvitesView implements IView{
 	Activity activity;
 	
 	/**
-	 * The constructor is used to get the content from the InvitesActivity
+	 * The constructor is used to get the content from the ProfileActivity
 	 * in order to use getResources() and getPackageName()
 	 * @author Hai Tang
 	 */
-	public InvitesView(Context context, Activity activity){
+	public ProfileView(Context context, Activity activity){
 		this.context = context;
 		this.activity = activity;
 	}
@@ -56,9 +57,9 @@ public class InvitesView implements IView{
 
 	@Override
 	public void setValue(View view, String value) {
-		// TODO Auto-generated method stub
+		((TextView) view).setText(value);
 		
 	}
-	
+
 	
 }

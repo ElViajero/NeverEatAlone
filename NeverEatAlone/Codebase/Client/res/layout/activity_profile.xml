@@ -74,17 +74,17 @@
             android:layout_marginTop="20dp"
             android:text="@string/gender"
             android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <TextView
-            android:id="@+id/textView_alias"
+        
+            <TextView
+            android:id="@+id/profile_workspace"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/profile_name"
-            android:layout_centerHorizontal="true"
-            android:text="HP"
+            android:layout_below="@+id/profile_gender"
+            android:layout_marginTop="20dp"
+            android:text="@string/workspace"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
-        <TextView
+            <TextView
             android:id="@+id/textView_username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -93,24 +93,60 @@
             android:layout_centerHorizontal="true"
             android:text="hpotter1"
             android:textAppearance="?android:attr/textAppearanceMedium" />
+                    
+            <TextView
+            android:id="@+id/textView_alias"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/profile_alias"
+            android:layout_alignBottom="@+id/profile_alias"
+            android:layout_centerHorizontal="true"
+            android:text="HP"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+
 
         <TextView
             android:id="@+id/textView_Name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/profile_email"
+            android:layout_alignBaseline="@+id/profile_name"
+            android:layout_alignBottom="@+id/profile_name"
             android:layout_centerHorizontal="true"
             android:text="Harry Potter"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+        
+        <TextView
+            android:id="@+id/textView_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/profile_email"
+            android:layout_alignBottom="@+id/profile_email"
+            android:layout_centerHorizontal="true"
+            android:text="harry@jhu.edu"
             android:textAppearance="?android:attr/textAppearanceMedium" />
         
          <TextView
             android:id="@+id/textView_Gender"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/profile_name"
+            android:layout_alignBaseline="@+id/profile_gender"
+            android:layout_alignBottom="@+id/profile_gender"
             android:layout_centerHorizontal="true"
             android:text="Harry Potter"
             android:textAppearance="?android:attr/textAppearanceMedium" />
+         
+         <TextView
+            android:id="@+id/textView_workspace"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/profile_workspace"
+            android:layout_alignBottom="@+id/profile_workspace"
+            android:layout_centerHorizontal="true"
+            android:text="Hogworts"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+         
+
 
         <Button
             android:id="@+id/button_profile_logout"
@@ -151,38 +187,11 @@
             android:paddingRight="50dp"
             android:text="@string/change_password" />
 
-        <TextView
-            android:id="@+id/textView_workspace"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/profile_workspace"
-            android:layout_alignBottom="@+id/profile_workspace"
-            android:layout_centerHorizontal="true"
-            android:text="Hogworts"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+        
 
-        <TextView
-            android:id="@+id/profile_workspace"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/profile_email"
-            android:layout_alignStart="@+id/profile_email"
-            android:layout_below="@+id/profile_email"
-            android:layout_marginTop="27dp"
-            android:text="@string/workspace"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
 
-        <TextView
-            android:id="@+id/textView_email"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/profile_email"
-            android:layout_alignBottom="@+id/profile_email"
-            android:layout_alignLeft="@+id/textView_Name"
-            android:layout_alignStart="@+id/textView_Name"
-            android:layout_centerHorizontal="true"
-            android:text="harry@jhu.edu"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        
 
         <Button
             android:id="@+id/button_profile_edit"

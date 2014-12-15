@@ -21,7 +21,8 @@ import android.widget.TextView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.AccountProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.MessageToasterHelper;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.LoginView;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.ProfileView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
 
 /**
@@ -34,18 +35,24 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.serv
 public class ProfileActivity extends Activity {
 
 	private PopupWindow deleteAccountPopupWindow;
-	private TextView usernameTextView, aliasTextView, nameTextView;
-	private TextView workspaceTextView, emailTextView, genderTextView;
+	private TextView profileTitleObject;
+	private TextView usernameTextViewObject, aliasTextViewObject, nameTextViewObject;
+	private TextView workspaceTextViewObject, emailTextViewObject, genderTextViewObject;
 	private String username;
 	private String requestID;
 	private String requestType;
 
+	private Context context;
+	private Activity activity;
+	private ProfileView profileView;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 
 		username = AccountProperties.getUserAccountInstance().getusername();
 		initView(savedInstanceState);
-		getProfileInfo();
+		//Hai's comments: getProfileinfo() not actually in use.
+//		getProfileInfo();
 	}
 
 	/**
@@ -57,16 +64,29 @@ public class ProfileActivity extends Activity {
 	private void initView(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_profile);
+		
+		context = this;
+		activity = this;
+		profileView = new ProfileView(context, activity);
 
+		profileTitleObject = (TextView) profileView.getView("profile");
 		setTitleStyle();
-		usernameTextView = (TextView) findViewById(R.id.textView_username);
-		aliasTextView = (TextView) findViewById(R.id.textView_alias);
-		nameTextView = (TextView) findViewById(R.id.textView_Name);
-		workspaceTextView = (TextView) findViewById(R.id.textView_workspace);
-		emailTextView = (TextView) findViewById(R.id.textView_email);
-		genderTextView = (TextView) findViewById(R.id.textView_Gender);
+		usernameTextViewObject = (TextView) profileView.getView("textView_username");
+		aliasTextViewObject = (TextView) profileView.getView("textView_alias");
+		nameTextViewObject = (TextView) profileView.getView("textView_Name");
+		workspaceTextViewObject = (TextView) profileView.getView("textView_workspace");
+		emailTextViewObject = (TextView) profileView.getView("textView_email");
+		genderTextViewObject = (TextView) profileView.getView("textView_Gender");
 
-		usernameTextView.setText(username);
+//		usernameTextViewObject.setText(username);
+		profileView.setValue(usernameTextViewObject, username);
+		//TODO: Need to be filled with real Strings
+		profileView.setValue(aliasTextViewObject, "abc");
+		profileView.setValue(nameTextViewObject, "abc");
+		profileView.setValue(workspaceTextViewObject, "abc");
+		profileView.setValue(emailTextViewObject, "abc");
+		profileView.setValue(genderTextViewObject, "abc");
+		
 		applyTheme();
 	}
 
@@ -83,11 +103,11 @@ public class ProfileActivity extends Activity {
 	 * @author: Yueling Loh
 	 */
 	private void setTitleStyle() {
-		TextView tv = (TextView) findViewById(R.id.profile);
+		
 		Typeface tf = Typeface.createFromAsset(getAssets(),
 				"fonts/Chunkfive.otf");
-		tv.setTypeface(tf);
-		tv.setTextSize(80);
+		profileTitleObject.setTypeface(tf);
+		profileTitleObject.setTextSize(80);
 	}
 
 	/**
@@ -116,10 +136,8 @@ public class ProfileActivity extends Activity {
 				.findViewById(R.id.button_popup_cancel);
 
 		/**
-		 * <<<<<<< HEAD onClickListener for the confirm button in the popup
-		 * window ======= OnClickListener for the confirm button in the popup
-		 * window. Account deleted and return to the login page. >>>>>>>
-		 * refs/heads/myGUI_Iter5_v9
+		 * OnClickListener for the confirm button in the popup
+		 * window. Account deleted and return to the login page.
 		 * 
 		 * @author: Hai Tang
 		 */
@@ -206,7 +224,7 @@ public class ProfileActivity extends Activity {
 		requestType = "getInfo";
 
 		Map<String, Object> requestMap = new HashMap<String, Object>();
-		requestMap.put("username", username);
+//		requestMap.put("username", username);
 		try {
 			// send the request.
 			List<Map<String, String>> resultMapList = RequestHandlerHelper
@@ -217,11 +235,11 @@ public class ProfileActivity extends Activity {
 
 			// CHECK VALUE OF QUOTATION MARKS
 			// set to profile to values from the server
-			aliasTextView.setText(profile.get("alias"));
-			nameTextView.setText(profile.get("name"));
-			workspaceTextView.setText(profile.get("workspace"));
-			emailTextView.setText(profile.get("email"));
-			genderTextView.setText(profile.get("gender"));
+//			aliasTextViewObject.setText(profile.get("alias"));
+//			nameTextViewObject.setText(profile.get("name"));
+//			workspaceTextViewObject.setText(profile.get("workspace"));
+//			emailTextViewObject.setText(profile.get("email"));
+//			genderTextViewObject.setText(profile.get("gender"));
 
 		} catch (RequestAbortedException e) {
 			// This is necessary. The exception has
