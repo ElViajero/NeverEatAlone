@@ -46,9 +46,7 @@ public class AddFriendsActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		initview(savedInstanceState);
 
-		context = this;
-		activity = this;
-		contactsView = new ContactsView(context, activity);
+		initContactsView();
 
 		usernameEditTextObject = (EditText) contactsView
 				.getView("editText_addfriends_username");
@@ -57,6 +55,16 @@ public class AddFriendsActivity extends Activity {
 		addFriendTextViewTitleObject = (TextView) contactsView
 				.getView("textView_addfriends_title");
 
+	}
+
+	/**
+	 * Method used to initalize the ContactsView
+	 * @author: Hai Tang
+	 */
+	private void initContactsView() {
+		context = this;
+		activity = this;
+		contactsView = new ContactsView(context, activity);
 	}
 
 	/**
@@ -80,6 +88,7 @@ public class AddFriendsActivity extends Activity {
 	 */
 	private void applyTheme() {
 
+		initContactsView();
 		View mainLayout = contactsView.getView("main_addfriends");
 		View headerLayout = contactsView.getView("header_addfriends");
 		View buttonBar = contactsView.getView("buttons_addfriends");

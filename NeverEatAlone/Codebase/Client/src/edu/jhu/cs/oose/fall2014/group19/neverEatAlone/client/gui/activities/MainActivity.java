@@ -53,16 +53,7 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		context = this;
-		activity = this;
-		loginView = new LoginView(context, activity);
-		//		usernameEditTextObject = (EditText) findViewById(R.id.edit_username);
-		//		passwordEditTextObject = (EditText) findViewById(R.id.edit_password);
-
-		//		String string = "edit_username";
-		//		int resID = getResources().getIdentifier(string,
-		//			    "id", getPackageName());		
-		//		usernameEditTextObject = (EditText) findViewById(resID);
+		initLoginView();
 
 		usernameEditTextObject = (EditText) loginView.getView("edit_username");
 		passwordEditTextObject = (EditText) loginView.getView("edit_password");
@@ -81,15 +72,24 @@ public class MainActivity extends Activity {
 		
 
 	}
+
+
+	private void initLoginView() {
+		context = this;
+		activity = this;
+		loginView = new LoginView(context, activity);
+	}
 	
 	
 	/**
 	 * This method applies the GUI's color theme.
 	 * 
 	 * @author Yueling Loh
+	 * @author Hai Tang
 	 */
 	private void applyTheme() {
-		View mainLayout = findViewById(R.id.layout_main);
+		initLoginView();
+		View mainLayout = loginView.getView("layout_main");
 
 		ThemeManager.applyBackground(mainLayout);
 		
@@ -109,11 +109,6 @@ public class MainActivity extends Activity {
 	public void onLoginButtonClick(View view) throws FileNotFoundException, URISyntaxException {
 		// ThemeManager.setTheme(R.style.DarkTheme);
 
-
-		//		String username = usernameEditTextObject.getText().toString();
-		//		String password = passwordEditTextObject.getText().toString();
-
-		//		String username = usernameEditTextObject.getValue();
 		String username = loginView.getValue(usernameEditTextObject);
 		String password = loginView.getValue(passwordEditTextObject);
 

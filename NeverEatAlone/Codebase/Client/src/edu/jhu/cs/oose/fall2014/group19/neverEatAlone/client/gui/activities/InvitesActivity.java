@@ -40,9 +40,6 @@ public class InvitesActivity extends ListActivity {
 	private Button createAnInviteObject;
 	private Button viewMyInvitesObject;
 	private Switch availabilitySwitchObject;
-//	private View headerLayout;
-//	private View mainLayout;
-//	private View buttonBar;
 	List<NotificationProperties> NotificationList;
 
 	String requestID;
@@ -51,7 +48,7 @@ public class InvitesActivity extends ListActivity {
 	boolean isCreated;
 	private Context context;
 	private Activity activity;
-	private InvitesView invitesview;
+	private InvitesView invitesView;
 
 	/**
 	 * This constructor is responsible for obtaining notifications and updating
@@ -68,20 +65,28 @@ public class InvitesActivity extends ListActivity {
 		initView(savedInstanceState);
 		isCreated = false;
 
-		context = this;
-		activity = this;
-		invitesview = new InvitesView(context, activity);
+		initInvitesView();
 
-		appNameObject = (TextView) invitesview.getView("app_name");
-		createAnInviteObject = (Button) invitesview.getView("invites_button_create");
-		viewMyInvitesObject = (Button) invitesview.getView("invites_button_my_posts");
-		availabilitySwitchObject = (Switch) invitesview.getView("switch_availability_status");
+		appNameObject = (TextView) invitesView.getView("app_name");
+		createAnInviteObject = (Button) invitesView.getView("invites_button_create");
+		viewMyInvitesObject = (Button) invitesView.getView("invites_button_my_posts");
+		availabilitySwitchObject = (Switch) invitesView.getView("switch_availability_status");
 		
 //		mainLayout = invitesview.getView("layout_invites");
 //		headerLayout = invitesview.getView("header_invites");
 //		buttonBar = invitesview.getView("buttons_invites");
 		
 		setTitleStyle();
+	}
+
+	/**
+	 * Method used to initialize the InvitesView
+	 * @author: Hai Tang
+	 */
+	private void initInvitesView() {
+		context = this;
+		activity = this;
+		invitesView = new InvitesView(context, activity);
 	}
 
 
@@ -120,16 +125,17 @@ public class InvitesActivity extends ListActivity {
 	 * 
 	 * @author tejasvamsingh
 	 * @author Yueling Loh
+	 * @author Hai Tang
 	 */
 	private void applyTheme() {
+		initInvitesView();
+		View mainLayout = invitesView.getView("layout_invites");
+		View headerLayout = invitesView.getView("header_invites");
+		View buttonBar = invitesView.getView("buttons_invites");
 		
-		View mainLayout = findViewById(R.id.layout_invites);
-		View headerLayout = findViewById(R.id.header_invites);
-		View buttonBar = findViewById(R.id.buttons_invites);
-		
-		View createInviteButton = findViewById(R.id.invites_button_create);
-		View myInvitesButton = findViewById(R.id.invites_button_my_posts);
-		Switch availabilitySwitch = (Switch) findViewById(R.id.switch_availability_status);
+		View createInviteButton = invitesView.getView("invites_button_create");
+		View myInvitesButton = invitesView.getView("invites_button_my_posts");
+		Switch availabilitySwitch = (Switch) invitesView.getView("switch_availability_status");
 
 		ThemeManager.applyTheme(mainLayout, headerLayout);
 		ThemeManager.applyButtonBarTheme(buttonBar);

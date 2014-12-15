@@ -7,6 +7,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.MealView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.helpers.GsonHelper;
 
 /**
@@ -28,11 +30,17 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.h
  */
 public class MealDetailActivity extends Activity {
 
+	private Context context;
+	private Activity activity;
+	private MealView mealView;
+	private TextView mealDetailTitleObject;
+	
 	/**
 	 * 
 	 * This method fetches mealProperties information from the InvitesActivity.
 	 * 
 	 * @author: Runze Tang
+	 * @author Hai Tang
 	 *
 	 */
 	@Override
@@ -40,6 +48,9 @@ public class MealDetailActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_meal_detail);
 
+		initMealView();
+		mealDetailTitleObject = (TextView) mealView.getView("textView_mealdetails_title");
+		
 		setTitleStyle();
 
 		String postData = getIntent().getStringExtra("mealProperties");
@@ -50,6 +61,7 @@ public class MealDetailActivity extends Activity {
 		Map<String, Object> postDataMap = gson.fromJson(postData,
 				stringObjectMap);
 
+		
 		// String isNotificationExtendible =
 		// postDataMap.get("isNotificationExtendible").toString();
 		String location = postDataMap.get("location").toString();
@@ -64,18 +76,18 @@ public class MealDetailActivity extends Activity {
 		String endHour = postDataMap.get("endhour").toString();
 		String endMinute = postDataMap.get("endminute").toString();
 
-		TextView textStartTime = (TextView) findViewById(R.id.textView_mealdetails_startTime_result);
-		textStartTime.setText(timeToString(startDay) + "/"
+		TextView textStartTimeTextViewObject = (TextView) mealView.getView("textView_mealdetails_startTime_result");
+		mealView.setValue(textStartTimeTextViewObject, timeToString(startDay) + "/"
 				+ timeToString(startMonth) + "/" + startYear + "-"
 				+ timeToString(startHour) + ":" + timeToString(startMinute));
 
-		TextView textEndTime = (TextView) findViewById(R.id.textView_mealdetails_endTime_result);
-		textEndTime.setText(timeToString(endDay) + "/" + timeToString(endMonth)
+		TextView textEndTimeTextViewObject = (TextView) mealView.getView("textView_mealdetails_endTime_result");
+		mealView.setValue(textEndTimeTextViewObject, timeToString(endDay) + "/" + timeToString(endMonth)
 				+ "/" + endYear + "-" + timeToString(endHour) + ":"
 				+ timeToString(endMinute));
 
-		TextView restaurant = (TextView) findViewById(R.id.TextView_mealdetails_restaurant_result);
-		restaurant.setText(location);
+		TextView restaurantTextViewObject = (TextView) mealView.getView("TextView_mealdetails_restaurant_result");
+		mealView.setValue(restaurantTextViewObject, location);
 
 		// TextView additionalinfo = (TextView)
 		// findViewById(R.id.textView_mealdetails_additionalinfo);
@@ -83,17 +95,26 @@ public class MealDetailActivity extends Activity {
 	}
 
 	/**
+	 * Method used to initialize MealView
+	 * @author: Hai Tang
+	 */
+	private void initMealView() {
+		context = this;
+		activity = this;
+		mealView = new MealView(context, activity);
+	}
+	
+	/**
 	 * This method is used to set the font style of the title of each page
 	 * 
 	 * @author: Hai Tang
 	 * @author: Yueling Loh
 	 */
 	private void setTitleStyle() {
-		TextView tv = (TextView) findViewById(R.id.textView_mealdetails_title);
 		Typeface tf = Typeface.createFromAsset(getAssets(),
 				"fonts/Chunkfive.otf");
-		tv.setTypeface(tf);
-		tv.setTextSize(80);
+		mealDetailTitleObject.setTypeface(tf);
+		mealDetailTitleObject.setTextSize(80);
 	}
 
 	@Override

@@ -7,7 +7,9 @@ import java.util.Map;
 
 import org.apache.http.impl.execchain.RequestAbortedException;
 
+import android.app.Activity;
 import android.app.ListActivity;
+import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
@@ -19,18 +21,24 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.ContactProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.adapters.ContactsNotificationAdapter;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.ContactsView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
 
 /**
  * This class handles the display of contact notification.
  * 
  * @author tejasvamsingh
+ * @author Hai Tang
  */
 public class DisplayContactNotificationActivity extends ListActivity {
 	private ArrayAdapter<ContactProperties> contactsNotificationAdapter;
-
+	private TextView friendRequestTitleObject;
 	String requestType;
 	String requestID;
+	
+	private Context context;
+	private Activity activity;
+	private ContactsView contactsView;
 
 	List<ContactProperties> contactList;
 
@@ -49,7 +57,10 @@ public class DisplayContactNotificationActivity extends ListActivity {
 	private void initView(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_display_contact_notification);
-
+		
+		initContactsView();
+		friendRequestTitleObject = (TextView) contactsView.getView("textView_friendsrequest_title");
+		
 		fetchContacts();
 		contactsNotificationAdapter = new ContactsNotificationAdapter(this,
 				contactList);
@@ -64,6 +75,16 @@ public class DisplayContactNotificationActivity extends ListActivity {
 		setTitleStyle();
 		applyTheme();
 	}
+	
+	/**
+	 * Method used to initialize ProfileView
+	 * @author: Hai Tang
+	 */
+	private void initContactsView() {
+		context = this;
+		activity = this;
+		contactsView = new ContactsView(context, activity);
+	}
 
 	private void applyTheme() {
 		ThemeManager.applyTheme(findViewById(android.R.id.content));
@@ -76,12 +97,10 @@ public class DisplayContactNotificationActivity extends ListActivity {
 	 * @author: Yueling Loh
 	 */
 	private void setTitleStyle() {
-		TextView tv =
-				(TextView) findViewById(R.id.textView_friendsrequest_title);
 		Typeface tf = Typeface.createFromAsset(getAssets(),
 				"fonts/Chunkfive.otf");
-		tv.setTypeface(tf);
-		tv.setTextSize(80);
+		friendRequestTitleObject.setTypeface(tf);
+		friendRequestTitleObject.setTextSize(80);
 	}
 
 	// I am using contact instead of contact notification here.
