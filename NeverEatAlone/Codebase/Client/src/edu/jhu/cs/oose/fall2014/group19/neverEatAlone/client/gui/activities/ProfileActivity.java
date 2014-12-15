@@ -51,7 +51,7 @@ public class ProfileActivity extends Activity {
 
 		username = AccountProperties.getUserAccountInstance().getusername();
 		initView(savedInstanceState);
-		//Hai's comments: getProfileinfo() not actually in use.
+		//Hai's comment: getProfileinfo() not actually in use.
 //		getProfileInfo();
 	}
 
