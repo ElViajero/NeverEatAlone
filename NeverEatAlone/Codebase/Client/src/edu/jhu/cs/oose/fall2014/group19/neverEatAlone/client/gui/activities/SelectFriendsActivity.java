@@ -204,6 +204,19 @@ public class SelectFriendsActivity extends ListActivity {
 	}
 	
 	/**
+	 * Method used to unselect all the friend in the user's contact list.
+	 * @author: Hai Tang
+	 */
+	public void onUnselectAllButtonClick(View view){
+		for(ContactProperties contact : contactList){
+			contact.setChecked(false);			
+		}		
+		
+		updateView(contactList);
+	}
+	
+	
+	/**
 	 * Method used to update view after clicking the broadcast button
 	 * @author: Hai Tang
 	 */

@@ -63,6 +63,19 @@
             android:paddingLeft="50dp"
             android:paddingRight="50dp"
             android:text="@string/broadcast_to_all_friends" />
+        
+                <Button
+            android:id="@+id/button_selectfriends_unselectall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/button_selectfriends_broadcast"
+            android:layout_alignBottom="@+id/button_selectfriends_broadcast"
+			android:layout_marginLeft="50dp"
+            android:background="@drawable/button_background_light"
+            android:onClick="onUnselectAllButtonClick"
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp"
+            android:text="@string/unselect_all_friends" />
 
         <Button
             android:id="@+id/button_selectfriends_next"
