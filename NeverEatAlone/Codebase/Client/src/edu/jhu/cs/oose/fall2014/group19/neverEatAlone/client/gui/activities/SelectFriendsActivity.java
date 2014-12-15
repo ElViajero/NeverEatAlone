@@ -184,9 +184,13 @@ public class SelectFriendsActivity extends ListActivity {
 		 * Commented for future use. Used to connect to PostInformation page.
 		 * @author Hai Tang
 		 */
-		//		Intent intent = new Intent(SelectFriendsActivity.this,
-		//				PostInformationActivity.class);
-		//		SelectFriendsActivity.this.startActivity(intent);
+//				Intent intent = new Intent(SelectFriendsActivity.this,
+//						PostInformationActivity.class);
+//				SelectFriendsActivity.this.startActivity(intent);
+		Intent intent = new Intent(SelectFriendsActivity.this,
+				TabHostActivity.class);
+		SelectFriendsActivity.this.startActivity(intent);
+		
 
 	}
 	

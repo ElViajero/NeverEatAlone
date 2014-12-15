@@ -103,7 +103,7 @@ public class MyPostsActivity extends ListActivity {
 
 	public void onBackButtonClick(View view) {
 
-		Intent intent = new Intent(MyPostsActivity.this, InvitesActivity.class);
+		Intent intent = new Intent(MyPostsActivity.this, TabHostActivity.class);
 		MyPostsActivity.this.startActivity(intent);
 	}
 
