@@ -215,7 +215,7 @@ public class SelectFriendsActivity extends ListActivity {
 		 * @author Runze Tang
 		 */
 		Intent intent = new Intent(SelectFriendsActivity.this,
-				InvitesActivity.class);
+				TabHostActivity.class);
 		SelectFriendsActivity.this.startActivity(intent);
 
 	}
