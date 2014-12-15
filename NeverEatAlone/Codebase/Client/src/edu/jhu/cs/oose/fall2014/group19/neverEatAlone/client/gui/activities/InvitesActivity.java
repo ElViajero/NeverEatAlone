@@ -160,4 +160,12 @@ public class InvitesActivity extends ListActivity {
 				CreateMealInformationActivity.class);
 		InvitesActivity.this.startActivity(intent);
 	}
+	
+	public void onMyPostsButtonClick(View view) {
+		// Intent intent = new Intent(RegisterActivity.this,
+		// MainActivity.class);
+		Intent intent = new Intent(InvitesActivity.this,
+				MyPostsActivity.class);
+		InvitesActivity.this.startActivity(intent);
+	}
 }

@@ -87,8 +87,12 @@
             android:label="@string/title_activity_post_information" >
         </activity>
         <activity
-            android:name="edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.DisplayContactNotificationActivity"
+            android:name=".gui.activities.DisplayContactNotificationActivity"
             android:label="@string/title_activity_display_contact_notification" >
+        </activity>
+        <activity
+            android:name=".gui.activities.MyPostsActivity"
+            android:label="@string/title_activity_my_posts" >
         </activity>
     </application>
 

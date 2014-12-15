@@ -79,20 +79,23 @@
     <string name="additional_info">Additional Information</string>
     <string name="user_avatar">User Avatar</string>
     <string name="title_activity_display_contact_notification">DisplayContactNotificationActivity</string>
-	<string name="contact_notification">Friend Requests</string>
-	<string name="accept">Accept</string>
-	<string name="reject">Reject</string>
+    <string name="contact_notification">Friend Requests</string>
+    <string name="accept">Accept</string>
+    <string name="reject">Reject</string>
     <string name="empty_username">No username provided.</string>
     <string name="empty_email">No email provided.</string>
     <string name="empty_password">No password provided.</string>
     <string name="different_passwords">Passwords do not match.</string>
-	<string name="contacts">Contacts</string>
-	<string name="friends_request">Friend Request</string>
-	<string name="availability_status">Availability Status:</string>
-	<string name="meal_details">Meal Details</string>
-	<string name="app_logo">App Logo</string>
-	<string name="invalid_email">Invalid email.</string>
-	<string name="location_empty">Please enter a location.</string>
-	<string name="number_invitees_empty">Please enter the max number of invitees.</string>
-	<string name="date_error">Please enter valid start/end date/time.</string>
+    <string name="contacts">Contacts</string>
+    <string name="friends_request">Friend Request</string>
+    <string name="availability_status">Availability Status:</string>
+    <string name="meal_details">Meal Details</string>
+    <string name="app_logo">App Logo</string>
+    <string name="invalid_email">Invalid email.</string>
+    <string name="location_empty">Please enter a location.</string>
+    <string name="number_invitees_empty">Please enter the max number of invitees.</string>
+    <string name="date_error">Please enter valid start/end date/time.</string>
+    <string name="title_activity_my_posts">MyPostsActivity</string>
+    <string name="my_posts">My Posts</string>
+
 </resources>
