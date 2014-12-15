@@ -16,7 +16,6 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.reflectionManager.c
  *
  */
 
-@Stateless
 public class VisibilityManagementRequestHandler  implements IManagementRequestHandler {
 
 	@Inject IVisibilityDBRequestHandler iVisibilityDBManagerObject;
@@ -52,12 +51,23 @@ public class VisibilityManagementRequestHandler  implements IManagementRequestHa
 	 * @param request
 	 * @return
 	 */
-	private List<Map<String, String>> set(Map<String,String[]> request) {
+	private List<Map<String, String>> update(Map<String,String[]> request) {
 
 		System.out.println("Reaching SetVisibilityRequest");
 		return iVisibilityDBManagerObject.update(request); 
 	}
 
+	/**
+	 * This method handles requests to get all contacts that are visible to the user
+	 * @param request
+	 * @return
+	 */
+	private List<Map<String, String>> getAll(Map<String,String[]> request) {
+
+		System.out.println("Reaching getAllVisibilityRequest");
+		return iVisibilityDBManagerObject.getAll(request); 
+	}
+	
 	@Override
 	public List<Map<String, String>> handleManagementRequest(
 			Map<String, String[]> request) {

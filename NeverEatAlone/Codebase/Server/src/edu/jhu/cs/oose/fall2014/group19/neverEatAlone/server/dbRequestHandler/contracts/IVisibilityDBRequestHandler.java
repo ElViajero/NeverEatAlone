@@ -33,6 +33,14 @@ public interface IVisibilityDBRequestHandler {
 	 * @return
 	 */
 	public List<Map<String,String>> update(Map<String,String[]> request);
+	
+	/**
+	 * method to get all contacts that are visible
+	 * @param request
+	 * @return
+	 */
+	public List<Map<String,String>> getAll(Map<String,String[]> request);
+
 
 
 }

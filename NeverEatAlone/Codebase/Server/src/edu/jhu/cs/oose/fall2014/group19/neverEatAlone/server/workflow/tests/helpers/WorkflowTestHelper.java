@@ -57,7 +57,7 @@ public class WorkflowTestHelper {
 		//populate request headers and data		
 		List <NameValuePair> nvps = new ArrayList <NameValuePair>();	    
 		nvps.add(new BasicNameValuePair("requestID", "Account"));	    
-		nvps.add(new BasicNameValuePair("requestType", "Create"));
+		nvps.add(new BasicNameValuePair("requestType", "create"));
 		nvps.add(new BasicNameValuePair("username", user));
 		nvps.add(new BasicNameValuePair("password", pw));
 		nvps.add(new BasicNameValuePair("email", email));
@@ -96,7 +96,7 @@ public class WorkflowTestHelper {
 		//populate request headers and data		
 		List <NameValuePair> nvps = new ArrayList <NameValuePair>();	    
 		nvps.add(new BasicNameValuePair("requestID", "Account"));	    
-		nvps.add(new BasicNameValuePair("requestType", "Delete"));
+		nvps.add(new BasicNameValuePair("requestType", "delete"));
 		nvps.add(new BasicNameValuePair("username", user));
 //		nvps.add(new BasicNameValuePair("password", "TestPass"));
 //		nvps.add(new BasicNameValuePair("email", "Test@test.com"));
