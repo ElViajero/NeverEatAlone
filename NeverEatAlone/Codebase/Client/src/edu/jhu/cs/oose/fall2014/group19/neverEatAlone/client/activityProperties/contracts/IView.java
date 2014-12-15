@@ -13,6 +13,6 @@ public interface IView {
 	public View getView(String viewName);
 	public void setView(View view);
 	public String getValue(View view);
-	public void setValue(String value);
+	public void setValue(View view, String value);
 	
 }
