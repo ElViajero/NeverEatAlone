@@ -62,9 +62,7 @@ public class ContactsActivity extends ListActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_contacts);
 
-		context = this;
-		activity = this;
-		contactsView = new ContactsView(context, activity);
+		initContactView();
 
 		contactTitleObject = (TextView) contactsView
 				.getView("textView_contacts_title");
@@ -83,17 +81,30 @@ public class ContactsActivity extends ListActivity {
 	}
 
 	/**
+	 * Method used to initialize ContactView.
+	 * @author: Hai Tang
+	 */
+	private void initContactView() {
+		context = this;
+		activity = this;
+		contactsView = new ContactsView(context, activity);
+	}
+
+	/**
 	 * This method applies the GUI's color theme.
 	 * 
 	 * @author Yueling Loh
+	 * @author Hai Tang
 	 */
 	private void applyTheme() {
-		View mainLayout = findViewById(R.id.main_contacts);
-		View headerLayout = findViewById(R.id.header_contacts);
-		View buttonBar = findViewById(R.id.buttons_contacts);
+		initContactView();
 		
-		View contactsNotificationButton = findViewById(R.id.button_contacts_notification);
-		View addContactsButton = findViewById(R.id.button_contacts_addcontacts);
+		View mainLayout = contactsView.getView("main_contacts");
+		View headerLayout = contactsView.getView("header_contacts");
+		View buttonBar = contactsView.getView("buttons_contacts");
+		
+		View contactsNotificationButton = contactsView.getView("button_contacts_notification");
+		View addContactsButton = contactsView.getView("button_contacts_addcontacts");
 
 		ThemeManager.applyTheme(mainLayout, headerLayout);
 		ThemeManager.applyButtonBarTheme(buttonBar);

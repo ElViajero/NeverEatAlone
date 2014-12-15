@@ -66,9 +66,7 @@ public class ProfileActivity extends Activity {
 
 	private void applyTheme() {
 		
-		context = this;
-		activity = this;
-		profileView = new ProfileView(context, activity);
+		initProfileView();
 		
 		View mainLayout = profileView.getView("main_profile");
 		View headerLayout = profileView.getView("header_profile");
@@ -88,6 +86,16 @@ public class ProfileActivity extends Activity {
 		ThemeManager.applyButtonColor(deleteAccountButton);
 
 
+	}
+
+	/**
+	 * Method used to initialize ProfileView
+	 * @author: Hai Tang
+	 */
+	private void initProfileView() {
+		context = this;
+		activity = this;
+		profileView = new ProfileView(context, activity);
 	}
 
 	/**
@@ -212,9 +220,7 @@ public class ProfileActivity extends Activity {
 		username = AccountProperties.getUserAccountInstance().getusername();
 		email = AccountProperties.getUserAccountInstance().getemail();
 
-		context = this;
-		activity = this;
-		profileView = new ProfileView(context, activity);
+		initProfileView();
 
 		profileTitleObject = (TextView) profileView.getView("profile");
 		setTitleStyle();
