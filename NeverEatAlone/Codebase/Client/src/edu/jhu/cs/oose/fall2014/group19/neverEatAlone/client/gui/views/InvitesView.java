@@ -6,7 +6,7 @@ import android.view.View;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.contracts.IView;
 
 /**
- * This class handles all the view components for the Invites Page.
+ * This class handles all the view components for the Invites related Page.
  * @author Hai Tang
  *
  */

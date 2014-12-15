@@ -5,8 +5,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
 
+import android.app.Activity;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.app.TimePickerDialog.OnTimeSetListener;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -26,6 +28,8 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.DateAndTimeProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.MealProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.MealView;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.ProfileView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.helpers.GsonHelper;
 
 /**
@@ -34,17 +38,21 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.h
  * @author Runze Tang
  * @author Yueling Loh
  * @author tejasvamsingh
+ * @author Hai Tang
  * 
  */
 
 public class CreateMealInformationActivity extends FragmentActivity {
 
-	Button BtnSelectStartDate, BtnSelectstartTime, BtnSelectEndDate,
-			BtnSelectendTime;
-
-	private EditText place;
-	private EditText maxNumber;
-	private Switch allowFriendInvite;
+	private Button btnSelectStartDateObject, btnSelectstartTimeObject, btnSelectEndDateObject,
+			btnSelectendTimeObject;
+	private TextView createMealInfoTitleObject;
+	private EditText placeEditViewObject;
+	private EditText maxNumberEditViewObject;
+	private Switch allowFriendInviteSwitchObject;
+	private Context context;
+	private Activity activity;
+	private MealView mealView;
 
 	// variables to save user selected date and time
 	public int startYear, startMonth, startDay, startHour, startMinute;
@@ -85,25 +93,39 @@ public class CreateMealInformationActivity extends FragmentActivity {
 	 * Get references of button and edit text.
 	 * 
 	 * @author Runze Tang
+	 * @author Hai Tang
 	 * 
 	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_create_meal_information);
+		
+		initMealView();
 
 		// get the references of buttons
-		BtnSelectStartDate = (Button) findViewById(R.id.CreateMealInformation_button_startDate);
-		BtnSelectstartTime = (Button) findViewById(R.id.CreateMealInformation_button_startTime);
-		BtnSelectEndDate = (Button) findViewById(R.id.CreateMealInformation_button_endDate);
-		BtnSelectendTime = (Button) findViewById(R.id.CreateMealInformation_button_endTime);
+		btnSelectStartDateObject = (Button) mealView.getView("CreateMealInformation_button_startDate");
+		btnSelectstartTimeObject = (Button) mealView.getView("CreateMealInformation_button_startTime");
+		btnSelectEndDateObject = (Button) mealView.getView("CreateMealInformation_button_endDate");
+		btnSelectendTimeObject = (Button) mealView.getView("CreateMealInformation_button_endTime");
 
-		place = (EditText) findViewById(R.id.edit_restaurant);
-		maxNumber = (EditText) findViewById(R.id.edit_maxnumber);
-		allowFriendInvite = (Switch) findViewById(R.id.switch_allowfriendinvite);
+		placeEditViewObject = (EditText) mealView.getView("edit_restaurant");
+		maxNumberEditViewObject = (EditText) mealView.getView("edit_maxnumber");
+		allowFriendInviteSwitchObject = (Switch) mealView.getView("switch_allowfriendinvite");
+		createMealInfoTitleObject = (TextView) mealView.getView("CreateMealInformation_text_mealinformation");
 
 		setTitleStyle();
 		applyTheme();
+	}
+
+	/**
+	 * Method used to initialize MealView
+	 * @author: Hai Tang
+	 */
+	private void initMealView() {
+		context = this;
+		activity = this;
+		mealView = new MealView(context, activity);
 	}
 
 	/**
@@ -113,11 +135,10 @@ public class CreateMealInformationActivity extends FragmentActivity {
 	 * @author: Yueling Loh
 	 */
 	private void setTitleStyle() {
-		TextView tv = (TextView) findViewById(R.id.CreateMealInformation_text_mealinformation);
 		Typeface tf = Typeface.createFromAsset(getAssets(),
 				"fonts/Chunkfive.otf");
-		tv.setTypeface(tf);
-		tv.setTextSize(80);
+		createMealInfoTitleObject.setTypeface(tf);
+		createMealInfoTitleObject.setTextSize(80);
 
 	}
 
@@ -247,7 +268,7 @@ public class CreateMealInformationActivity extends FragmentActivity {
 			startMonth = monthOfYear;
 			int dummyMonthStart = startMonth + 1;
 			startDay = dayOfMonth;
-			BtnSelectStartDate.setText(timeToString(startDay) + "-"
+			btnSelectStartDateObject.setText(timeToString(startDay) + "-"
 					+ timeToString(dummyMonthStart) + "-" + startYear);
 		}
 	};
@@ -266,7 +287,7 @@ public class CreateMealInformationActivity extends FragmentActivity {
 			endMonth = monthOfYear;
 			int dummyMonthEnd = endMonth + 1;
 			endDay = dayOfMonth;
-			BtnSelectEndDate.setText(timeToString(endDay) + "-"
+			btnSelectEndDateObject.setText(timeToString(endDay) + "-"
 					+ timeToString(dummyMonthEnd) + "-" + endYear);
 		}
 	};
@@ -282,7 +303,7 @@ public class CreateMealInformationActivity extends FragmentActivity {
 		public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 			startHour = hourOfDay;
 			startMinute = minute;
-			BtnSelectstartTime.setText(timeToString(hourOfDay) + ":"
+			btnSelectstartTimeObject.setText(timeToString(hourOfDay) + ":"
 					+ timeToString(minute));
 		}
 	};
@@ -298,7 +319,7 @@ public class CreateMealInformationActivity extends FragmentActivity {
 		public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 			endHour = hourOfDay;
 			endMinute = minute;
-			BtnSelectendTime.setText(timeToString(hourOfDay) + ":"
+			btnSelectendTimeObject.setText(timeToString(hourOfDay) + ":"
 					+ timeToString(minute));
 		}
 	};
@@ -363,13 +384,16 @@ public class CreateMealInformationActivity extends FragmentActivity {
 	 * @author tejasvamsingh
 	 * @author Runze Tang
 	 * @author Yueling Loh
+	 * @author Hai Tang
 	 * @param view
 	 */
 	public void onNextButtonClick(View view) {
 
-		String location = place.getText().toString();
-		String maxNumberOfInvitees = maxNumber.getText().toString();
-		String isNotificationExtendible = allowFriendInvite.isChecked() ? "YES"
+		initMealView();
+		
+		String location = mealView.getValue(placeEditViewObject);
+		String maxNumberOfInvitees = mealView.getValue(maxNumberEditViewObject);
+		String isNotificationExtendible = allowFriendInviteSwitchObject.isChecked() ? "YES"
 				: "NO";
 
 		if (location.equals("")) {

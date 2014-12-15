@@ -4,15 +4,14 @@ import android.app.Activity;
 import android.content.Context;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.contracts.IView;
-
 /**
- * This class handles all the view components for the Contacts related Page.
+ * This class handles all the view components for the Meal related Page.
  * @author Hai Tang
  *
  */
-public class ContactsView implements IView{
-
+public class MealView implements IView{
 	private View viewObject = null;
 	private String value = null;
 	
@@ -20,15 +19,15 @@ public class ContactsView implements IView{
 	Activity activity;
 	
 	/**
-	 * The constructor is used to get the content from the ContactsActivity
+	 * The constructor is used to get the content from the Meal related Activity
 	 * in order to use getResources() and getPackageName()
 	 * @author Hai Tang
 	 */
-	public ContactsView(Context context, Activity activity){
+	public MealView(Context context, Activity activity){
 		this.context = context;
 		this.activity = activity;
 	}
-	
+
 	/**
 	 * Overriden method used to get the view of different ViewObject.
 	 * @author Hai Tang
@@ -49,20 +48,19 @@ public class ContactsView implements IView{
 		
 	}
 
-	/**
-	 * Overriden method used to get value from ViewObject
-	 * @author Hai Tang
-	 */
 	@Override
 	public String getValue(View view) {
 		value = ((EditText) view).getText().toString();
 		return value;
 	}
 
+	/**
+	 * Overriden method used to set the value of different ViewObject.
+	 * @author Hai Tang
+	 */
 	@Override
 	public void setValue(View view, String value) {
-		// TODO Auto-generated method stub
+		((TextView) view).setText(value);
 		
 	}
-
 }

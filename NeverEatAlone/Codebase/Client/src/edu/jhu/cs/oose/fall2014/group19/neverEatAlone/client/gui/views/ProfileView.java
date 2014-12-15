@@ -8,7 +8,7 @@ import android.widget.TextView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.contracts.IView;
 
 /**
- * This class handles all the view components for the Profile Page.
+ * This class handles all the view components for the Profile related Page.
  * @author Hai Tang
  *
  */
