@@ -15,7 +15,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.AccountProperties;
@@ -35,6 +37,9 @@ public class MainActivity extends Activity {
 
 	private EditText usernameEditTextObject = null;
 	private EditText passwordEditTextObject = null;
+	private Button loginButtonObject = null;
+	private Button signupButtonObject = null;
+	private ImageView logoBigObject = null;
 	private String requestID;
 	private String requestType;
 	private boolean isCreated=false;
@@ -61,6 +66,9 @@ public class MainActivity extends Activity {
 		
 		usernameEditTextObject = (EditText) loginView.getView("edit_username");
 		passwordEditTextObject = (EditText) loginView.getView("edit_password");
+		loginButtonObject = (Button) loginView.getView("button_login");
+		signupButtonObject = (Button) loginView.getView("button_signup");
+		logoBigObject = (ImageView) loginView.getView("logo_big");
 		
 
 		l = (LinearLayout) findViewById(R.id.layout_main);

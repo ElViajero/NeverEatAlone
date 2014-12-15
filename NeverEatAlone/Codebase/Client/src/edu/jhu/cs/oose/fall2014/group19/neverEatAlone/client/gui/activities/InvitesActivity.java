@@ -4,13 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import android.app.Activity;
 import android.app.ListActivity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Switch;
 import android.widget.TextView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.MealProperties;
@@ -18,6 +22,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.adapters.MealNotificationAdapter;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.DataCacheHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.InvitesView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.helpers.GsonHelper;
 
 /**
@@ -32,16 +37,21 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.h
 public class InvitesActivity extends ListActivity {
 
 	private ArrayAdapter<NotificationProperties> InvitesAdapter;
-	private TextView tv;
+	private TextView appNameObject;
+	private Button createAnInviteObject;
+	private Switch availabilitySwitchObject;
 	List<NotificationProperties> NotificationList;
-
 	boolean isCreated;
+	private Context context;
+	private Activity activity;
+	private InvitesView invitesview;
 
 	/**
 	 * This constructor is responsible for obtaining notifications and updating
 	 * the GUI.
 	 * 
 	 * @author tejasvamsingh
+	 * @author Hai Tang
 	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -49,9 +59,16 @@ public class InvitesActivity extends ListActivity {
 		NotificationList = new ArrayList<NotificationProperties>();
 		initView(savedInstanceState);
 		isCreated = false;
-
+		
+		context = this;
+		activity = this;
+		invitesview = new InvitesView(context, activity);
+		
+		appNameObject = (TextView) invitesview.getView("app_name");
+		createAnInviteObject = (Button) invitesview.getView("invites_button_create");
+		availabilitySwitchObject = (Switch) invitesview.getView("switch_availability_status");
+		
 		setTitleStyle();
-
 	}
 
 	/**
@@ -61,11 +78,10 @@ public class InvitesActivity extends ListActivity {
 	 * @author: Yueling Loh
 	 */
 	private void setTitleStyle() {
-		TextView tv = (TextView) findViewById(R.id.app_name);
 		Typeface tf = Typeface.createFromAsset(getAssets(),
 				"fonts/Chunkfive.otf");
-		tv.setTypeface(tf);
-		tv.setTextSize(80);
+		appNameObject.setTypeface(tf);
+		appNameObject.setTextSize(80);
 	}
 
 	/**
