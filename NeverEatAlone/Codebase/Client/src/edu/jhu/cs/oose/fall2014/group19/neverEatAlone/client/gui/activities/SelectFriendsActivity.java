@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.contracts.IActivityProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.AccountProperties;
@@ -150,6 +151,7 @@ public class SelectFriendsActivity extends ListActivity {
 	 * This method is the event handler for the post button.
 	 * 
 	 * @author tejasvamsingh
+	 * @author Runze Tang
 	 */
 	public void onPostButtonClick(View view) {
 
@@ -160,6 +162,12 @@ public class SelectFriendsActivity extends ListActivity {
 		for (ContactProperties contact : contactList) {
 			if (contact.isChecked())
 				recipientList.add(contact.getContactusername());
+		}
+
+		if (recipientList.isEmpty()) {
+			Toast.makeText(this, R.string.no_invitees, Toast.LENGTH_SHORT)
+					.show();
+			return;
 		}
 
 		IActivityProperties postProperties = new PostProperties(recipientList,

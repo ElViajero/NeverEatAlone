@@ -99,6 +99,6 @@
     <string name="unselect_all_friends">Unselect All</string>
     <string name="my_posts">My Invites</string>
     <string name="invitees_not_enough">The max number of invitees should be at least 2.</string>
+    <string name="no_invitees">You must select at least 1 recipient.</string>
 
 </resources>
-
