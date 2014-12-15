@@ -98,6 +98,7 @@
     <string name="title_activity_my_posts">MyPostsActivity</string>
     <string name="unselect_all_friends">Unselect All</string>
     <string name="my_posts">My Invites</string>
+    <string name="invitees_not_enough">The max number of invitees should be at least 2.</string>
 
 </resources>
 
