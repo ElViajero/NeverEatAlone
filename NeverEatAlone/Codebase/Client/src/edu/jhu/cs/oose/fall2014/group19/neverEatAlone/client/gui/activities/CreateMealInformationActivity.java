@@ -406,6 +406,11 @@ public class CreateMealInformationActivity extends FragmentActivity {
 					Toast.LENGTH_SHORT).show();
 			return;
 		}
+		if (Integer.parseInt(maxNumberOfInvitees) < 2) {
+			Toast.makeText(this, R.string.invitees_not_enough, Toast.LENGTH_SHORT)
+					.show();
+			return;
+		}
 
 		// converts the date into a java date type and checks if start date is
 		// after end date

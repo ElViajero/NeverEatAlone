@@ -29,6 +29,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.serv
  * @author Hai Tang
  * @author tejasvamsingh
  * @author Yueling Loh
+ * @author Runze Tang
  *
  */
 public class AddFriendsActivity extends Activity {
@@ -45,7 +46,6 @@ public class AddFriendsActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		initview(savedInstanceState);
-
 		initContactsView();
 
 		usernameEditTextObject = (EditText) contactsView
@@ -54,6 +54,9 @@ public class AddFriendsActivity extends Activity {
 				.getView("editText_addfriends_email");
 		addFriendTextViewTitleObject = (TextView) contactsView
 				.getView("textView_addfriends_title");
+		
+		setTitleStyle();
+
 
 	}
 
@@ -75,8 +78,6 @@ public class AddFriendsActivity extends Activity {
 	private void initview(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_add_friends);
-
-		setTitleStyle();
 		applyTheme();
 	}
 
@@ -112,10 +113,13 @@ public class AddFriendsActivity extends Activity {
 	 * Method used for clicking the back button
 	 * 
 	 * @author: Hai Tang
+	 * @author Runze Tang
 	 */
 	public void onBackButtonClick(View view) {
 		Intent intent = new Intent(AddFriendsActivity.this,
 				TabHostActivity.class);
+		// Go to the specific tab.
+		intent.putExtra("FirstTab", 1);
 		AddFriendsActivity.this.startActivity(intent);
 	}
 
@@ -124,6 +128,7 @@ public class AddFriendsActivity extends Activity {
 	 * 
 	 * @author tejasvamsingh
 	 * @author: Hai Tang
+	 * @author Runze Tang
 	 */
 	public void onSearchButtonClick(View view) {
 
@@ -152,6 +157,8 @@ public class AddFriendsActivity extends Activity {
 
 		Intent intent = new Intent(AddFriendsActivity.this,
 				TabHostActivity.class);
+		// Go to the specific tab.
+		intent.putExtra("FirstTab", 1);
 		AddFriendsActivity.this.startActivity(intent);
 
 	}

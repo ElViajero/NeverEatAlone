@@ -1,7 +1,5 @@
 package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views;
 
-import javax.swing.text.AbstractDocument.Content;
-
 import android.app.Activity;
 import android.content.Context;
 import android.view.View;

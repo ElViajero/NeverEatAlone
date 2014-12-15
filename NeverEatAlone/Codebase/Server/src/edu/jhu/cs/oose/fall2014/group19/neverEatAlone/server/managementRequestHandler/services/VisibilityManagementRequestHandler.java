@@ -3,7 +3,6 @@ package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.managementRequestH
 import java.util.List;
 import java.util.Map;
 
-import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbRequestHandler.contracts.IVisibilityDBRequestHandler;

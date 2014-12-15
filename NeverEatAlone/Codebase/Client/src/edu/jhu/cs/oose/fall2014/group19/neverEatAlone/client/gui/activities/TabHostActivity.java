@@ -23,71 +23,78 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.help
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.notificationHandler.services.NotificationHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
+
 //Cannot extends Activity
 /**
  * 
  * @author tejasvamsingh
  * @author Hai Tang
- * TabHostActivity is used to create and switch between three main pages: 
- * Invites page, Contacts page and Profile page.
- * Which are corresponding to InvitesActivity, ContactsActivity and ProfileActivity
+ * @author Runze Tang
+ * 
+ *         TabHostActivity is used to create and switch between three main
+ *         pages: Invites page, Contacts page and Profile page. Which are
+ *         corresponding to InvitesActivity, ContactsActivity and
+ *         ProfileActivity
  */
 
 public class TabHostActivity extends TabActivity {
 
-	String username ;
+	String username;
 	String requestID;
 	String requestType;
-	
+
 	TabSpec TabContacts;
 	TabSpec TabInvites;
 	TabSpec TabProfile;
-	TabHost TabHost; 
+	TabHost TabHost;
 	String notificationMapListJSon;
 
-	Set<NotificationProperties> notificationCache; 
-
-
+	Set<NotificationProperties> notificationCache;
 
 	/**
-	 *  This method intializes the activity.
-	 *  @author tejasvamsingh 
-	 *  */
+	 * This method intializes the activity.
+	 * 
+	 * @author tejasvamsingh
+	 * @author Runze Tang
+	 * */
 
 	@Override
-	public void onCreate(Bundle savedInstanceState)
-	{
+	public void onCreate(Bundle savedInstanceState) {
 
-		notificationMapListJSon="[{}]";
+		notificationMapListJSon = "[{}]";
 		super.onCreate(savedInstanceState);
 
-		notificationCache=new HashSet<NotificationProperties>();
+		notificationCache = new HashSet<NotificationProperties>();
+
+		Intent i = getIntent();
+		int tabToOpen = i.getIntExtra("FirstTab", 0);
 
 		// Initialize the view and cache.
-		InitView();
+		InitView(tabToOpen);
 		// Obtain the data required for the activity class
 		username = getIntent().getStringExtra("username");
 
-		//start the notifications framework.
+		// start the notifications framework.
 		NotificationHelper.init(this, username);
 		fetchNotifications();
-		
+
 	}
 
-
 	/**
-	 * This method is used to initialize the three main Tabs, i.e., Invites, Contacts and Profile
+	 * This method is used to initialize the three main Tabs, i.e., Invites,
+	 * Contacts and Profile
+	 * 
 	 * @author: Hai Tang
 	 * @author tejasvamsingh
 	 * @author Yueling Loh
+	 * @author Runze Tang
 	 */
-	private void InitView() {
-
+	private void InitView(int tabToOpen) {
 
 		setContentView(R.layout.activity_tab_host);
 
 		// create the TabHost that will contain the Tabs
-		TabHost = (TabHost)findViewById(android.R.id.tabhost);
+		TabHost = (TabHost) findViewById(android.R.id.tabhost);
 
 		TabInvites = TabHost.newTabSpec("Invites Tab");
 		TabContacts = TabHost.newTabSpec("Contacts Tab");
@@ -99,39 +106,43 @@ public class TabHostActivity extends TabActivity {
 		// Set Invite tab
 		View invitesTabview = createTabView(TabHost.getContext(), "Invites");
 		TabInvites.setIndicator(invitesTabview);
-//		TabInvites.setIndicator("Invites");
-		Intent intent = new Intent(this,InvitesActivity.class);
+		// TabInvites.setIndicator("Invites");
+		Intent intent = new Intent(this, InvitesActivity.class);
 		intent.putExtra("notificationMapListJSon", notificationMapListJSon);
 		TabInvites.setContent(intent);
 
 		// Set Contacts tabs
 		View contactsTabview = createTabView(TabHost.getContext(), "Contacts");
 		TabContacts.setIndicator(contactsTabview);
-//		TabContacts.setIndicator("Contacts");
-		TabContacts.setContent(new Intent(this,ContactsActivity.class));
+		// TabContacts.setIndicator("Contacts");
+		TabContacts.setContent(new Intent(this, ContactsActivity.class));
 
 		// Set Profile tabs
 		View profileTabview = createTabView(TabHost.getContext(), "Profile");
 		TabProfile.setIndicator(profileTabview);
-//		TabProfile.setIndicator("Profile");
-		TabProfile.setContent(new Intent(this,ProfileActivity.class));
+		// TabProfile.setIndicator("Profile");
+		TabProfile.setContent(new Intent(this, ProfileActivity.class));
 
-
-		/** Add the tabs  to the TabHost to display. */
-
+		// Add the tabs to the TabHost to display.
 		TabHost.addTab(TabInvites);
 		TabHost.addTab(TabContacts);
 		TabHost.addTab(TabProfile);
 
-//		applyTheme();
+		// Change to the target tab
+		if (tabToOpen != 0) {
+			TabHost.setCurrentTab(tabToOpen);
+		}
+		// applyTheme();
 	}
 
 	/**
 	 * This method is used to set the Tab theme and titles
+	 * 
 	 * @author Yueling Loh
 	 */
 	private static View createTabView(final Context context, final String string) {
-		View view = LayoutInflater.from(context).inflate(R.layout.tab_layout, null);
+		View view = LayoutInflater.from(context).inflate(R.layout.tab_layout,
+				null);
 		ThemeManager.applyTabTheme(view);
 		TextView tv = (TextView) view.findViewById(R.id.tabsText);
 		tv.setText(string);
@@ -142,15 +153,16 @@ public class TabHostActivity extends TabActivity {
 	/**
 	 * 
 	 * Method to update UI whenever notifications arrive.
+	 * 
 	 * @author tejasvamsingh
 	 */
-	public void UpdateNotificationCache(List<Map<String,String>> notificationMapList){
+	public void UpdateNotificationCache(
+			List<Map<String, String>> notificationMapList) {
 
 		System.out.println("in updateNotification");
 
-
-		for(Map<String, String> notification : notificationMapList){
-			if(notification.isEmpty())
+		for (Map<String, String> notification : notificationMapList) {
+			if (notification.isEmpty())
 				continue;
 			notificationCache.add(new NotificationProperties(notification));
 		}
@@ -159,27 +171,25 @@ public class TabHostActivity extends TabActivity {
 
 	}
 
-
 	private void fetchNotifications() {
 
-		try{
+		try {
 			requestID = "Notification";
 			requestType = "fetch";
 
-			//send the request.
-			List<Map<String, String>> resultMapList = 
-					RequestHandlerHelper.getRequestHandlerInstance().
-					handleRequest(this,
+			// send the request.
+			List<Map<String, String>> resultMapList = RequestHandlerHelper
+					.getRequestHandlerInstance().handleRequest(this,
 							AccountProperties.getUserAccountInstance().toMap(),
-							requestID,requestType) ;
+							requestID, requestType);
 
-			System.out.println("The notifications are : "  + resultMapList.size());
+			System.out.println("The notifications are : "
+					+ resultMapList.size());
 
 			UpdateNotificationCache(resultMapList);
-		}catch(RequestAbortedException e){
+		} catch (RequestAbortedException e) {
 			return;
 		}
 	}
-
 
 }
