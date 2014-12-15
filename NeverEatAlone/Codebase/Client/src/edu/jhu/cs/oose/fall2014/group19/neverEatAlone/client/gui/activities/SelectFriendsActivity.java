@@ -1,11 +1,15 @@
 package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.http.impl.execchain.RequestAbortedException;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import android.app.ListActivity;
 import android.content.Intent;
@@ -25,6 +29,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.adapters.ContactsInformationAdapter;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.helpers.GsonHelper;
 
 /**
  * This activity is used to handle controller operations for select friends
@@ -167,6 +172,26 @@ public class SelectFriendsActivity extends ListActivity {
 		if (recipientList.isEmpty()) {
 			Toast.makeText(this, R.string.no_invitees, Toast.LENGTH_SHORT)
 					.show();
+			return;
+		}
+
+		Gson gson = GsonHelper.getGsoninstance();
+		Type stringObjectMap = new TypeToken<Map<String, Object>>() {
+		}.getType();
+		Map<String, Object> postDataMap = gson.fromJson(postData,
+				stringObjectMap);
+
+		String maxSizeString = postDataMap.get("maxNumberOfInvitees")
+				.toString();
+		int maxSize = Integer.parseInt(maxSizeString);
+
+		if (recipientList.size() >= maxSize) {
+			Integer tmpSize = recipientList.size() + 1;
+			String tmpSizeString = tmpSize.toString();
+			String tmpInfo = getString(R.string.more_invitees_first) + " "
+					+ maxSizeString + getString(R.string.more_invitees_last)
+					+ " " + tmpSizeString + ".";
+			Toast.makeText(this, tmpInfo, Toast.LENGTH_SHORT).show();
 			return;
 		}
 
