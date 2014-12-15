@@ -97,5 +97,7 @@
     <string name="date_error">Please enter valid start/end date/time.</string>
     <string name="title_activity_my_posts">MyPostsActivity</string>
     <string name="my_posts">My Posts</string>
+    <string name="unselect_all_friends">Unselect All</string>
 
 </resources>
+
