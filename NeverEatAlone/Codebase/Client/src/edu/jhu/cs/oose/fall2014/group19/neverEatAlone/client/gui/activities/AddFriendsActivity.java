@@ -91,10 +91,13 @@ public class AddFriendsActivity extends Activity {
 	 * Method used for clicking the back button
 	 * 
 	 * @author: Hai Tang
+	 * @author Runze Tang
 	 */
 	public void onBackButtonClick(View view) {
 		Intent intent = new Intent(AddFriendsActivity.this,
 				TabHostActivity.class);
+		// Go to the specific tab.
+		intent.putExtra("FirstTab", 1);
 		AddFriendsActivity.this.startActivity(intent);
 	}
 

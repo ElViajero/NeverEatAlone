@@ -16,6 +16,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeMan
  * 
  * @author Hai Tang
  * @author Yueling Loh
+ * @author Runze Tang
  *
  */
 public class ChangePasswordActivity extends Activity {
@@ -24,7 +25,7 @@ public class ChangePasswordActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_change_password);
-		
+
 		setTitleStyle();
 	}
 
@@ -38,15 +39,18 @@ public class ChangePasswordActivity extends Activity {
 		TextView tv = (TextView) findViewById(R.id.textView_changepassword_title);
 		ThemeManager.setHeaderFont(tv);
 	}
-	
+
 	/**
 	 * Method used when confirm buttton is clicked
 	 * 
 	 * @author: Hai Tang
+	 * @author Runze Tang
 	 */
 	public void onConfirmButtonClick(View view) {
 		Intent intent = new Intent(ChangePasswordActivity.this,
 				TabHostActivity.class);
+		// Go to the specific tab.
+		intent.putExtra("FirstTab", 2);
 		ChangePasswordActivity.this.startActivity(intent);
 	}
 
@@ -54,10 +58,13 @@ public class ChangePasswordActivity extends Activity {
 	 * Method used when cancel buttton is clicked
 	 * 
 	 * @author: Hai Tang
+	 * @author Runze Tang
 	 */
 	public void onCancelButtonClick(View view) {
 		Intent intent = new Intent(ChangePasswordActivity.this,
 				TabHostActivity.class);
+		// Go to the specific tab.
+		intent.putExtra("FirstTab", 2);
 		ChangePasswordActivity.this.startActivity(intent);
 	}
 
