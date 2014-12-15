@@ -71,7 +71,7 @@ public class AddFriendsActivity extends Activity {
 		View buttonBar = findViewById(R.id.buttons_addfriends);
 
 		ThemeManager.applyTheme(mainLayout, headerLayout);
-		ThemeManager.applyButtonTheme(buttonBar);
+		ThemeManager.applyButtonBarTheme(buttonBar);
 
 	}
 

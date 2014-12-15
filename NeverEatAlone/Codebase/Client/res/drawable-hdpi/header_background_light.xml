@@ -3,6 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <solid android:color="#6174C9" />
+    <solid android:color="#0078A6" />
     
 </shape>

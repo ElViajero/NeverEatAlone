@@ -78,7 +78,7 @@ public class MyPostsActivity extends ListActivity {
 		View buttonBar = findViewById(R.id.my_posts_buttons_layout);
 
 		ThemeManager.applyTheme(mainLayout, headerLayout);
-		ThemeManager.applyButtonTheme(buttonBar);
+		ThemeManager.applyButtonBarTheme(buttonBar);
 
 	}
 

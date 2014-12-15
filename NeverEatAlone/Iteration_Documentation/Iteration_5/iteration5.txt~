@@ -1,0 +1,43 @@
+Iteration 5: Alpha Release
+
+Server
+Completed the following functionality, with full integration with client:
+Create a new account 
+Check if the user exists in DB
+Delete a user account and all its relationships
+Update any account property except username
+Fetch full account information 
+Check if the username and password both match the DB
+Add a contact (now adding directly)
+Fetch all contacts of a user
+
+Client
+Created all GUI pages/activities:
+The 3 main tabs (Contacts, Friends, Profile)
+Create Meal Post (Meal information + friend list)
+Accept/Reject Friend Request
+Associated Profile pages
+Associated Meal summary pages 
+Retooled GUI style  
+Created more client side tests, including
+Register Activity
+Create Meal Activity
+
+Iteration 6: Project Completion
+
+Complete GUI pages
+Invite summary page (Availability status button)
+Meal summary (Needs to populated with information)
+Contact page (Connect the list to individual profiles, Visibility)
+Finalize links between client and server
+Complete testing
+Finish visibility
+Create Icon
+Finish refining GUI
+Fix more bugs
+Time permitting, look at the rest of standard funcationality and extended features
+Make sure issues like atomicity, transactions,scalability, data integrity, are adressed to a satisfactory degree
+Make sure the app is fast
+
+
+

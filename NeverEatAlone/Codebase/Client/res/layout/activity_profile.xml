@@ -1,4 +1,7 @@
-<!-- @author Hai Tang @author Yueling Loh -->
+<!-- 
+@author Hai Tang 
+@author Yueling Loh 
+-->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -17,15 +20,45 @@
             android:text="@string/profile" />
     </RelativeLayout>
 
+    <!-- Button Header -->
+
+    <RelativeLayout
+        android:id="@+id/buttons_profile"
+        style="@style/ButtonBarTheme"
+        android:layout_below="@+id/header_profile" >
+
+        <Button
+            android:id="@+id/button_profile_changepassword"
+            style="@style/BarButton"
+            android:layout_alignParentLeft="true"
+            android:onClick="onChangepasswordButtonClick"
+            android:text="@string/change_password" />
+
+        <Button
+            android:id="@+id/button_profile_edit"
+            style="@style/BarButton"
+            android:layout_alignParentRight="true"
+            android:onClick="onEditButtonClick"
+            android:text="@string/edit" />
+    </RelativeLayout>
+
     <!-- Main Space -->
 
     <RelativeLayout
         android:id="@+id/main_profile"
         style="@style/MainLayoutTheme"
-        android:layout_below="@+id/header_profile"
-        android:layout_width="match_parent"
-    	android:layout_height="wrap_content"
-     >
+        android:layout_below="@+id/buttons_profile" >
+
+        <ImageView
+            android:id="@+id/imageView_profile_avatar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/profile_username"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="14dp"
+            android:contentDescription="@string/user_avatar"
+            android:src="@drawable/user_profile" />
 
         <TextView
             android:id="@+id/profile_username"
@@ -66,6 +99,7 @@
             android:layout_marginTop="20dp"
             android:text="@string/email"
             android:textAppearance="?android:attr/textAppearanceMedium" />
+
         <TextView
             android:id="@+id/profile_gender"
             android:layout_width="wrap_content"
@@ -74,8 +108,8 @@
             android:layout_marginTop="20dp"
             android:text="@string/gender"
             android:textAppearance="?android:attr/textAppearanceMedium" />
-        
-            <TextView
+
+        <TextView
             android:id="@+id/profile_workspace"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -84,7 +118,7 @@
             android:text="@string/workspace"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
-            <TextView
+        <TextView
             android:id="@+id/textView_username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -93,8 +127,8 @@
             android:layout_centerHorizontal="true"
             android:text="hpotter1"
             android:textAppearance="?android:attr/textAppearanceMedium" />
-                    
-            <TextView
+
+        <TextView
             android:id="@+id/textView_alias"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -103,8 +137,6 @@
             android:layout_centerHorizontal="true"
             android:text="HP"
             android:textAppearance="?android:attr/textAppearanceMedium" />
-
-
 
         <TextView
             android:id="@+id/textView_Name"
@@ -115,7 +147,7 @@
             android:layout_centerHorizontal="true"
             android:text="Harry Potter"
             android:textAppearance="?android:attr/textAppearanceMedium" />
-        
+
         <TextView
             android:id="@+id/textView_email"
             android:layout_width="wrap_content"
@@ -125,8 +157,8 @@
             android:layout_centerHorizontal="true"
             android:text="harry@jhu.edu"
             android:textAppearance="?android:attr/textAppearanceMedium" />
-        
-         <TextView
+
+        <TextView
             android:id="@+id/textView_Gender"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -135,8 +167,8 @@
             android:layout_centerHorizontal="true"
             android:text="Harry Potter"
             android:textAppearance="?android:attr/textAppearanceMedium" />
-         
-         <TextView
+
+        <TextView
             android:id="@+id/textView_workspace"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -145,79 +177,24 @@
             android:layout_centerHorizontal="true"
             android:text="Hogworts"
             android:textAppearance="?android:attr/textAppearanceMedium" />
-         
-
 
         <Button
             android:id="@+id/button_profile_logout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/StandardButton"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:background="@drawable/button_background_light"
             android:onClick="onLogoutButtonClick"
-            android:paddingLeft="50dp"
-            android:paddingRight="50dp"
             android:text="@string/logout" />
 
         <Button
             android:id="@+id/button_delete_account"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/StandardButton"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:background="@drawable/button_background_light"
             android:onClick="onDeleteAccountButtonClick"
-            android:paddingLeft="50dp"
-            android:paddingRight="50dp"
             android:text="@string/delete_account" />
-
-        <Button
-            android:id="@+id/button_profile_changepassword"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/button_profile_logout"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="18dp"
-            android:background="@drawable/button_background_light"
-            android:onClick="onChangepasswordButtonClick"
-            android:paddingLeft="50dp"
-            android:paddingRight="50dp"
-            android:text="@string/change_password" />
-
-        
-
-
-
-        
-
-        <Button
-            android:id="@+id/button_profile_edit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/textView_username"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:background="@drawable/button_background_light"
-            android:onClick="onEditButtonClick"
-            android:paddingLeft="50dp"
-            android:paddingRight="50dp"
-            android:text="@string/edit"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
-
-        <ImageView
-            android:id="@+id/imageView_profile_avatar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/profile_username"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="14dp"
-            android:contentDescription="@string/user_avatar"
-            android:src="@drawable/user_profile" />
-
     </RelativeLayout>
 
 </RelativeLayout>

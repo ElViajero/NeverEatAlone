@@ -8,10 +8,14 @@ import java.util.Set;
 import org.apache.http.impl.execchain.RequestAbortedException;
 
 import android.app.TabActivity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
+import android.widget.TextView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.AccountProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.NotificationProperties;
@@ -34,8 +38,7 @@ public class TabHostActivity extends TabActivity {
 	String username ;
 	String requestID;
 	String requestType;
-
-
+	
 	TabSpec TabContacts;
 	TabSpec TabInvites;
 	TabSpec TabProfile;
@@ -60,18 +63,15 @@ public class TabHostActivity extends TabActivity {
 
 		notificationCache=new HashSet<NotificationProperties>();
 
-
 		// Initialize the view and cache.
 		InitView();
 		// Obtain the data required for the activity class
 		username = getIntent().getStringExtra("username");
 
-		//start the notifcations framework.
+		//start the notifications framework.
 		NotificationHelper.init(this, username);
 		fetchNotifications();
-
-
-
+		
 	}
 
 
@@ -79,6 +79,7 @@ public class TabHostActivity extends TabActivity {
 	 * This method is used to initialize the three main Tabs, i.e., Invites, Contacts and Profile
 	 * @author: Hai Tang
 	 * @author tejasvamsingh
+	 * @author Yueling Loh
 	 */
 	private void InitView() {
 
@@ -95,15 +96,24 @@ public class TabHostActivity extends TabActivity {
 		// Set the Tab name and Activity
 		// that will be opened when particular Tab will be selected
 
-		TabInvites.setIndicator("Invites");
+		// Set Invite tab
+		View invitesTabview = createTabView(TabHost.getContext(), "Invites");
+		TabInvites.setIndicator(invitesTabview);
+//		TabInvites.setIndicator("Invites");
 		Intent intent = new Intent(this,InvitesActivity.class);
 		intent.putExtra("notificationMapListJSon", notificationMapListJSon);
 		TabInvites.setContent(intent);
 
-		TabContacts.setIndicator("Contacts");
+		// Set Contacts tabs
+		View contactsTabview = createTabView(TabHost.getContext(), "Contacts");
+		TabContacts.setIndicator(contactsTabview);
+//		TabContacts.setIndicator("Contacts");
 		TabContacts.setContent(new Intent(this,ContactsActivity.class));
 
-		TabProfile.setIndicator("Profile");
+		// Set Profile tabs
+		View profileTabview = createTabView(TabHost.getContext(), "Profile");
+		TabProfile.setIndicator(profileTabview);
+//		TabProfile.setIndicator("Profile");
 		TabProfile.setContent(new Intent(this,ProfileActivity.class));
 
 
@@ -113,22 +123,21 @@ public class TabHostActivity extends TabActivity {
 		TabHost.addTab(TabContacts);
 		TabHost.addTab(TabProfile);
 
-		//apply the theme
-		applyTheme();
-
-
+//		applyTheme();
 	}
 
-
-
-
-	private void applyTheme() {
-		System.out.println("Inside apply theme");
-		ThemeManager.applyTheme(findViewById(android.R.id.content));
-		//ThemeManager.applyTheme(findViewById(R.id.layout_tab_host));
-		//ThemeManager.applyTheme(findViewById(android.R.id.tabs));
+	/**
+	 * This method is used to set the Tab theme and titles
+	 * @author Yueling Loh
+	 */
+	private static View createTabView(final Context context, final String string) {
+		View view = LayoutInflater.from(context).inflate(R.layout.tab_layout, null);
+		ThemeManager.applyTabTheme(view);
+		TextView tv = (TextView) view.findViewById(R.id.tabsText);
+		tv.setText(string);
+		ThemeManager.setTabFont(tv);
+		return view;
 	}
-
 
 	/**
 	 * 

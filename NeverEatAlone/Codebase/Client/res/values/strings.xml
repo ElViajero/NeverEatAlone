@@ -55,9 +55,9 @@
     <string name="alias">Alias</string>
     <string name="name">Name</string>
     <string name="delete_account">Delete Account</string>
-    <string name="change_password">Change password</string>
+    <string name="change_password">Change Password</string>
     <string name="workspace">Workspace</string>
-    <string name="edit">Edit</string>
+    <string name="edit">Edit Profile</string>
     <string name="title_activity_edit_profile">EditProfileActivity</string>
     <string name="edit_profile">Edit Profile</string>
     <string name="gender">Gender</string>
@@ -96,8 +96,8 @@
     <string name="number_invitees_empty">Please enter the max number of invitees.</string>
     <string name="date_error">Please enter valid start/end date/time.</string>
     <string name="title_activity_my_posts">MyPostsActivity</string>
-    <string name="my_posts">My Posts</string>
     <string name="unselect_all_friends">Unselect All</string>
+    <string name="my_posts">My Invites</string>
 
 </resources>
 

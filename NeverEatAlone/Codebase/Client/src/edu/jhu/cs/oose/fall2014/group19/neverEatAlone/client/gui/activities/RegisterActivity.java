@@ -75,7 +75,7 @@ public class RegisterActivity extends Activity {
 		View buttonBar = findViewById(R.id.buttons_registration);
 
 		ThemeManager.applyTheme(mainLayout, headerLayout);
-		ThemeManager.applyButtonTheme(buttonBar);
+		ThemeManager.applyButtonBarTheme(buttonBar);
 
 	}
 	

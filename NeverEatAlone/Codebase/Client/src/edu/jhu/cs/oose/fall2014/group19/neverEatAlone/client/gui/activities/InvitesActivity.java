@@ -38,7 +38,11 @@ public class InvitesActivity extends ListActivity {
 	private ArrayAdapter<NotificationProperties> InvitesAdapter;
 	private TextView appNameObject;
 	private Button createAnInviteObject;
+	private Button viewMyInvitesObject;
 	private Switch availabilitySwitchObject;
+//	private View headerLayout;
+//	private View mainLayout;
+//	private View buttonBar;
 	List<NotificationProperties> NotificationList;
 
 	String requestID;
@@ -55,6 +59,7 @@ public class InvitesActivity extends ListActivity {
 	 * 
 	 * @author tejasvamsingh
 	 * @author Hai Tang
+	 * @author Yueling Loh
 	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -69,8 +74,13 @@ public class InvitesActivity extends ListActivity {
 
 		appNameObject = (TextView) invitesview.getView("app_name");
 		createAnInviteObject = (Button) invitesview.getView("invites_button_create");
+		viewMyInvitesObject = (Button) invitesview.getView("invites_button_my_posts");
 		availabilitySwitchObject = (Switch) invitesview.getView("switch_availability_status");
-
+		
+//		mainLayout = invitesview.getView("layout_invites");
+//		headerLayout = invitesview.getView("header_invites");
+//		buttonBar = invitesview.getView("buttons_invites");
+		
 		setTitleStyle();
 	}
 
@@ -104,12 +114,6 @@ public class InvitesActivity extends ListActivity {
 		ThemeManager.setHeaderFont(appNameObject);
 	}
 
-	//	private void setTitleStyle() {
-	//		Typeface tf = Typeface.createFromAsset(getAssets(),
-	//				"fonts/Chunkfive.otf");
-	//		appNameObject.setTypeface(tf);
-	//		appNameObject.setTextSize(80);
-	//	}
 
 	/**
 	 * This method applies the GUI's color theme.
@@ -118,14 +122,22 @@ public class InvitesActivity extends ListActivity {
 	 * @author Yueling Loh
 	 */
 	private void applyTheme() {
-
+		
 		View mainLayout = findViewById(R.id.layout_invites);
 		View headerLayout = findViewById(R.id.header_invites);
 		View buttonBar = findViewById(R.id.buttons_invites);
+		
+		View createInviteButton = findViewById(R.id.invites_button_create);
+		View myInvitesButton = findViewById(R.id.invites_button_my_posts);
+		Switch availabilitySwitch = (Switch) findViewById(R.id.switch_availability_status);
 
 		ThemeManager.applyTheme(mainLayout, headerLayout);
-		ThemeManager.applyButtonTheme(buttonBar);
+		ThemeManager.applyButtonBarTheme(buttonBar);
 
+		ThemeManager.applyButtonColor(createInviteButton);
+		ThemeManager.applyButtonColor(myInvitesButton);
+		ThemeManager.applyAvailabilityColor(availabilitySwitch);
+		
 	}
 
 	/**

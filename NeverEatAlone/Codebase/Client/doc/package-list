@@ -1,10 +1,13 @@
 edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client
 edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.contracts
+edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.helpers
 edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services
 edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.configuration
 edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities
 edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.adapters
 edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers
+edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes
+edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views
 edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.notificationHandler.contracts
 edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.notificationHandler.services
 edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.contracts

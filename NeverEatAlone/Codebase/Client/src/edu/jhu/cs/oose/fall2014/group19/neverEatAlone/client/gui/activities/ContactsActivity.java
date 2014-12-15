@@ -16,6 +16,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Switch;
 import android.widget.TextView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.AccountProperties;
@@ -64,11 +65,14 @@ public class ContactsActivity extends ListActivity {
 		context = this;
 		activity = this;
 		contactsView = new ContactsView(context, activity);
-		
-		contactTitleObject = (TextView) contactsView.getView("textView_contacts_title");
-		friendRequestButtonObejct = (Button) contactsView.getView("button_contacts_notification");
-		addFriendButtonObject = (Button) contactsView.getView("button_contacts_addcontacts");
-		
+
+		contactTitleObject = (TextView) contactsView
+				.getView("textView_contacts_title");
+		friendRequestButtonObejct = (Button) contactsView
+				.getView("button_contacts_notification");
+		addFriendButtonObject = (Button) contactsView
+				.getView("button_contacts_addcontacts");
+
 		fetchContacts();
 		contactsInformationAdapter = new ContactsInformationAdapter(this,
 				contactList);
@@ -78,27 +82,40 @@ public class ContactsActivity extends ListActivity {
 		applyTheme();
 	}
 
+	/**
+	 * This method applies the GUI's color theme.
+	 * 
+	 * @author Yueling Loh
+	 */
 	private void applyTheme() {
-		ThemeManager.applyTheme(findViewById(android.R.id.content));
+		View mainLayout = findViewById(R.id.main_contacts);
+		View headerLayout = findViewById(R.id.header_contacts);
+		View buttonBar = findViewById(R.id.buttons_contacts);
+		
+		View contactsNotificationButton = findViewById(R.id.button_contacts_notification);
+		View addContactsButton = findViewById(R.id.button_contacts_addcontacts);
 
+		ThemeManager.applyTheme(mainLayout, headerLayout);
+		ThemeManager.applyButtonBarTheme(buttonBar);
+		
+		ThemeManager.applyButtonColor(contactsNotificationButton);
+		ThemeManager.applyButtonColor(addContactsButton);
 	}
 
 	/**
 	 * This method is used to set the font style of the title of each page
+	 * 
 	 * @author: Hai Tang
 	 * @author: Yueling Loh
 	 */
 	private void setTitleStyle() {
 
-		Typeface tf = Typeface.createFromAsset(getAssets(),
-				"fonts/Chunkfive.otf");
-		contactTitleObject.setTypeface(tf);
-		contactTitleObject.setTextSize(80);
+		ThemeManager.setHeaderFont(contactTitleObject);
 	}
 
 	/**
-	 * This method fetches contacts from the server if
-	 * the cache is empty.
+	 * This method fetches contacts from the server if the cache is empty.
+	 * 
 	 * @author tejasvamsingh
 	 * @return
 	 */
@@ -106,29 +123,27 @@ public class ContactsActivity extends ListActivity {
 
 		requestID = "Contact";
 		requestType = "getAll";
-		Map<String,Object> requestMap = new HashMap<String,Object>();
-		requestMap.put("username",
-				AccountProperties.getUserAccountInstance().getusername());
+		Map<String, Object> requestMap = new HashMap<String, Object>();
+		requestMap.put("username", AccountProperties.getUserAccountInstance()
+				.getusername());
 		contactList = new ArrayList<ContactProperties>();
-		try{
+		try {
 
-			List<Map<String, String>> resultMapList = 
-					RequestHandlerHelper.getRequestHandlerInstance().
-					handleRequest(this,requestMap,requestID,requestType) ;		
+			List<Map<String, String>> resultMapList = RequestHandlerHelper
+					.getRequestHandlerInstance().handleRequest(this,
+							requestMap, requestID, requestType);
 
-
-			for(Map<String,String> result : resultMapList){
-				if(result.isEmpty())
+			for (Map<String, String> result : resultMapList) {
+				if (result.isEmpty())
 					continue;
 				contactList.add(new ContactProperties(result));
 			}
 
-		}catch(RequestAbortedException e){
+		} catch (RequestAbortedException e) {
 			System.out.println(e.getMessage());
 		}
 
 	}
-
 
 	/**
 	 * Method for add friends button click
@@ -141,9 +156,6 @@ public class ContactsActivity extends ListActivity {
 		ContactsActivity.this.startActivity(intent);
 	}
 
-
-
-
 	/**
 	 * Method for contact notification button click
 	 * 
@@ -154,7 +166,5 @@ public class ContactsActivity extends ListActivity {
 				DisplayContactNotificationActivity.class);
 		ContactsActivity.this.startActivity(intent);
 	}
-
-
 
 }

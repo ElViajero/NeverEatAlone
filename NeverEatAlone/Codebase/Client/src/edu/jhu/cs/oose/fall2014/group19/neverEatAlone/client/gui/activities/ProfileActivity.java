@@ -65,25 +65,42 @@ public class ProfileActivity extends Activity {
 
 		applyTheme();
 	}
+	
+	/**
+	 * This method is used to set GUI colors
+	 * 
+	 * @author: Yueling Loh
+	 */
 
 	private void applyTheme() {
-		ThemeManager.applyTheme(findViewById(android.R.id.content));
+		View mainLayout = findViewById(R.id.main_profile);
+		View headerLayout = findViewById(R.id.header_profile);
+		View buttonBar = findViewById(R.id.buttons_profile);
+		
+		View changePasswordButton = findViewById(R.id.button_profile_changepassword);
+		View editProfileButton = findViewById(R.id.button_profile_edit);
+		View logoutButton = findViewById(R.id.button_profile_logout);
+		View deleteAccountButton = findViewById(R.id.button_delete_account);
+
+		ThemeManager.applyTheme(mainLayout, headerLayout);
+		ThemeManager.applyButtonBarTheme(buttonBar);
+		
+		ThemeManager.applyButtonColor(changePasswordButton);
+		ThemeManager.applyButtonColor(editProfileButton);
+		ThemeManager.applyButtonColor(logoutButton );
+		ThemeManager.applyButtonColor(deleteAccountButton);
+
 
 	}
 
 	/**
 	 * This method is used to set the font style of the title of each page
 	 * 
-	 * @author tejasvamsingh
-	 * @author: Hai Tang
 	 * @author: Yueling Loh
 	 */
 	private void setTitleStyle() {
 
-		Typeface tf = Typeface.createFromAsset(getAssets(),
-				"fonts/Chunkfive.otf");
-		profileTitleObject.setTypeface(tf);
-		profileTitleObject.setTextSize(80);
+		ThemeManager.setHeaderFont(profileTitleObject);
 	}
 
 	/**
