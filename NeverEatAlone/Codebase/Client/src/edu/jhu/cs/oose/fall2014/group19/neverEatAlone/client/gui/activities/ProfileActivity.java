@@ -39,6 +39,7 @@ public class ProfileActivity extends Activity {
 	private TextView usernameTextViewObject, aliasTextViewObject, nameTextViewObject;
 	private TextView workspaceTextViewObject, emailTextViewObject, genderTextViewObject;
 	private String username;
+	private String email;
 	private String requestID;
 	private String requestType;
 
@@ -50,9 +51,12 @@ public class ProfileActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 
 		username = AccountProperties.getUserAccountInstance().getusername();
+		email = AccountProperties.getUserAccountInstance().getemail();
+		
 		initView(savedInstanceState);
+		
 		//Hai's comment: getProfileinfo() not actually in use.
-//		getProfileInfo();
+		getProfileInfo();
 	}
 
 	/**
@@ -77,14 +81,14 @@ public class ProfileActivity extends Activity {
 		workspaceTextViewObject = (TextView) profileView.getView("textView_workspace");
 		emailTextViewObject = (TextView) profileView.getView("textView_email");
 		genderTextViewObject = (TextView) profileView.getView("textView_Gender");
-
+		
 //		usernameTextViewObject.setText(username);
 		profileView.setValue(usernameTextViewObject, username);
 		//TODO: Need to be filled with real Strings
 		profileView.setValue(aliasTextViewObject, "abc");
 		profileView.setValue(nameTextViewObject, "abc");
 		profileView.setValue(workspaceTextViewObject, "abc");
-		profileView.setValue(emailTextViewObject, "abc");
+		profileView.setValue(emailTextViewObject, email);
 		profileView.setValue(genderTextViewObject, "abc");
 		
 		applyTheme();
@@ -235,11 +239,12 @@ public class ProfileActivity extends Activity {
 
 			// CHECK VALUE OF QUOTATION MARKS
 			// set to profile to values from the server
-//			aliasTextViewObject.setText(profile.get("alias"));
-//			nameTextViewObject.setText(profile.get("name"));
-//			workspaceTextViewObject.setText(profile.get("workspace"));
-//			emailTextViewObject.setText(profile.get("email"));
-//			genderTextViewObject.setText(profile.get("gender"));
+			usernameTextViewObject.setText(profile.get("username"));
+			aliasTextViewObject.setText(profile.get("alias"));
+			nameTextViewObject.setText(profile.get("name"));
+			workspaceTextViewObject.setText(profile.get("workspace"));
+			emailTextViewObject.setText(profile.get("email"));
+			genderTextViewObject.setText(profile.get("gender"));
 
 		} catch (RequestAbortedException e) {
 			// This is necessary. The exception has
