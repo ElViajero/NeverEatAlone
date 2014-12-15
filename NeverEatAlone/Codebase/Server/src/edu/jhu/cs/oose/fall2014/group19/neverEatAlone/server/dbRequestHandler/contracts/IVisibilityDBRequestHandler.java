@@ -14,18 +14,33 @@ import java.util.Map;
 public interface IVisibilityDBRequestHandler {
 
 	/**
-	 * Method to set visible to some contacts
+	 * Method to add visibility to some contacts
 	 * @param request
 	 * @return
 	 */
-	public List<Map<String,String>> setVisibility(Map<String,String[]> request);
+	public List<Map<String,String>> add(Map<String,String[]> request);
 
 	/**
-	 * method to set invisible to some contacts
+	 * method to delete visibility to some contacts
 	 * @param request
 	 * @return
 	 */
-	public List<Map<String,String>> unsetVisibility(Map<String,String[]> request);
+	public List<Map<String,String>> delete(Map<String,String[]> request);
+	
+	/**
+	 * method to set status of visibility
+	 * @param request
+	 * @return
+	 */
+	public List<Map<String,String>> update(Map<String,String[]> request);
+	
+	/**
+	 * method to get all contacts that are visible
+	 * @param request
+	 * @return
+	 */
+	public List<Map<String,String>> getAll(Map<String,String[]> request);
+
 
 
 }
