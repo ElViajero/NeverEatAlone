@@ -36,26 +36,20 @@ public class ProfileActivity extends Activity {
 
 	private PopupWindow deleteAccountPopupWindow;
 	private TextView profileTitleObject;
-	private TextView usernameTextViewObject, aliasTextViewObject, nameTextViewObject;
-	private TextView workspaceTextViewObject, emailTextViewObject, genderTextViewObject;
+	private TextView usernameTextViewObject, aliasTextViewObject,
+			nameTextViewObject;
+	private TextView workspaceTextViewObject, emailTextViewObject,
+			genderTextViewObject;
 	private String username;
 	private String email;
-	private String requestID;
-	private String requestType;
-
 	private Context context;
 	private Activity activity;
 	private ProfileView profileView;
-	
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 
-		username = AccountProperties.getUserAccountInstance().getusername();
-		email = AccountProperties.getUserAccountInstance().getemail();
-		
 		initView(savedInstanceState);
-		
-		//Hai's comment: getProfileinfo() not actually in use.
 		getProfileInfo();
 	}
 
@@ -68,29 +62,7 @@ public class ProfileActivity extends Activity {
 	private void initView(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_profile);
-		
-		context = this;
-		activity = this;
-		profileView = new ProfileView(context, activity);
 
-		profileTitleObject = (TextView) profileView.getView("profile");
-		setTitleStyle();
-		usernameTextViewObject = (TextView) profileView.getView("textView_username");
-		aliasTextViewObject = (TextView) profileView.getView("textView_alias");
-		nameTextViewObject = (TextView) profileView.getView("textView_Name");
-		workspaceTextViewObject = (TextView) profileView.getView("textView_workspace");
-		emailTextViewObject = (TextView) profileView.getView("textView_email");
-		genderTextViewObject = (TextView) profileView.getView("textView_Gender");
-		
-//		usernameTextViewObject.setText(username);
-		profileView.setValue(usernameTextViewObject, username);
-		//TODO: Need to be filled with real Strings
-		profileView.setValue(aliasTextViewObject, "abc");
-		profileView.setValue(nameTextViewObject, "abc");
-		profileView.setValue(workspaceTextViewObject, "abc");
-		profileView.setValue(emailTextViewObject, email);
-		profileView.setValue(genderTextViewObject, "abc");
-		
 		applyTheme();
 	}
 
@@ -107,7 +79,7 @@ public class ProfileActivity extends Activity {
 	 * @author: Yueling Loh
 	 */
 	private void setTitleStyle() {
-		
+
 		Typeface tf = Typeface.createFromAsset(getAssets(),
 				"fonts/Chunkfive.otf");
 		profileTitleObject.setTypeface(tf);
@@ -140,8 +112,8 @@ public class ProfileActivity extends Activity {
 				.findViewById(R.id.button_popup_cancel);
 
 		/**
-		 * OnClickListener for the confirm button in the popup
-		 * window. Account deleted and return to the login page.
+		 * OnClickListener for the confirm button in the popup window. Account
+		 * deleted and return to the login page.
 		 * 
 		 * @author: Hai Tang
 		 */
@@ -218,40 +190,37 @@ public class ProfileActivity extends Activity {
 	/**
 	 * Method for getting profile info from the server and posting it to screen
 	 * 
+	 * @author Hai Tang
 	 * @author Yueling Loh
 	 */
 	private void getProfileInfo() {
 
-		// CHECK VALUE OF QUOTATION MARKS
-		// set the kind of request
-		requestID = "Account";
-		requestType = "getInfo";
+		username = AccountProperties.getUserAccountInstance().getusername();
+		email = AccountProperties.getUserAccountInstance().getemail();
 
-		Map<String, Object> requestMap = new HashMap<String, Object>();
-//		requestMap.put("username", username);
-		try {
-			// send the request.
-			List<Map<String, String>> resultMapList = RequestHandlerHelper
-					.getRequestHandlerInstance().handleRequest(this,
-							requestMap, requestID, requestType);
+		context = this;
+		activity = this;
+		profileView = new ProfileView(context, activity);
 
-			Map<String, String> profile = resultMapList.get(0);
+		profileTitleObject = (TextView) profileView.getView("profile");
+		setTitleStyle();
+		usernameTextViewObject = (TextView) profileView
+				.getView("textView_username");
+		aliasTextViewObject = (TextView) profileView.getView("textView_alias");
+		nameTextViewObject = (TextView) profileView.getView("textView_Name");
+		workspaceTextViewObject = (TextView) profileView
+				.getView("textView_workspace");
+		emailTextViewObject = (TextView) profileView.getView("textView_email");
+		genderTextViewObject = (TextView) profileView
+				.getView("textView_Gender");
 
-			// CHECK VALUE OF QUOTATION MARKS
-			// set to profile to values from the server
-			usernameTextViewObject.setText(profile.get("username"));
-			aliasTextViewObject.setText(profile.get("alias"));
-			nameTextViewObject.setText(profile.get("name"));
-			workspaceTextViewObject.setText(profile.get("workspace"));
-			emailTextViewObject.setText(profile.get("email"));
-			genderTextViewObject.setText(profile.get("gender"));
-
-		} catch (RequestAbortedException e) {
-			// This is necessary. The exception has
-			// already been handled in the RequestHandler
-			// class.
-			return;
-		}
+		profileView.setValue(usernameTextViewObject, username);
+		// TODO: Need to be filled with real Strings
+		profileView.setValue(aliasTextViewObject, "abc");
+		profileView.setValue(nameTextViewObject, "abc");
+		profileView.setValue(workspaceTextViewObject, "abc");
+		profileView.setValue(emailTextViewObject, email);
+		profileView.setValue(genderTextViewObject, "abc");
 
 	}
 
