@@ -27,6 +27,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.serv
  * @author Hai Tang
  * @author tejasvamsingh
  * @author Yueling Loh
+ * @author Runze Tang
  *
  */
 public class AddFriendsActivity extends Activity {
@@ -99,8 +100,10 @@ public class AddFriendsActivity extends Activity {
 
 	/**
 	 * Method used for clicking the search button.
-	 * @author tejasvamsingh 
+	 * 
+	 * @author tejasvamsingh
 	 * @author: Hai Tang
+	 * @author Runze Tang
 	 */
 	public void onSearchButtonClick(View view) {
 
@@ -108,31 +111,30 @@ public class AddFriendsActivity extends Activity {
 		String email = emailEditTextObject.getText().toString();
 
 		requestID = "Contact";
-		requestType="add";
+		requestType = "add";
 		IActivityProperties contact = new ContactProperties(username);
 
-		try{
+		try {
 
-			List<Map<String, String>> resultMapList = 
-					RequestHandlerHelper.getRequestHandlerInstance().
-					handleRequest(this,contact.toMap(),requestID,requestType) ;		
+			List<Map<String, String>> resultMapList = RequestHandlerHelper
+					.getRequestHandlerInstance().handleRequest(this,
+							contact.toMap(), requestID, requestType);
 
 			MessageToasterHelper.toastMessage(this, "Contact Added !");
 
-			//start the new activity
+			// start the new activity
 			Intent intent = new Intent(this, TabHostActivity.class);
 			this.startActivity(intent);
 
-
-		}catch(RequestAbortedException e){
+		} catch (RequestAbortedException e) {
 
 		}
 
 		Intent intent = new Intent(AddFriendsActivity.this,
 				TabHostActivity.class);
+		// Go to the specific tab.
+		intent.putExtra("FirstTab", 1);
 		AddFriendsActivity.this.startActivity(intent);
-
-
 
 	}
 
