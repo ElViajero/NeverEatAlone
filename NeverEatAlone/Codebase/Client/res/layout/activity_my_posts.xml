@@ -2,11 +2,49 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="${relativePackage}.${activityClass}" >
+    tools:context="edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.MyPostsActivity" >
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+    <!-- Header aligned to top -->
+
+    <RelativeLayout
+        android:id="@+id/header_my_posts"
+        style="@style/HeaderTheme" >
+
+        <TextView
+            android:id="@+id/my_posts"
+            style="@style/HeaderTextTheme"
+            android:text="@string/my_posts" />
+    </RelativeLayout>
+
+    <!-- Button Header -->
+
+    <RelativeLayout
+        android:id="@+id/my_posts_buttons_layout"
+        style="@style/ButtonBarTheme"
+        android:layout_below="@+id/header_my_posts" >
+
+        <Button
+            android:id="@+id/my_posts_button_back"
+            style="@style/BarButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onBackButtonClick"
+            android:text="@string/back" />
+    </RelativeLayout>
+
+    <!-- Main Space -->
+
+    <RelativeLayout
+        android:id="@+id/layout_my_posts"
+        style="@style/MainLayoutTheme"
+        android:layout_below="@+id/my_posts_buttons_layout" >
+
+        <ListView
+            android:id="@android:id/list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp" >
+        </ListView>
+    </RelativeLayout>
 
 </RelativeLayout>
