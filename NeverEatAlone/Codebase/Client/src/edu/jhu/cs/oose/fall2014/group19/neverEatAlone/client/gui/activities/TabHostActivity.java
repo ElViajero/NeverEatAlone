@@ -1,9 +1,11 @@
 package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+
+import org.apache.http.impl.execchain.RequestAbortedException;
 
 import android.app.TabActivity;
 import android.content.Intent;
@@ -11,10 +13,12 @@ import android.os.Bundle;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.AccountProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.NotificationProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.DataCacheHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.notificationHandler.services.NotificationHelper;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
 //Cannot extends Activity
 /**
  * 
@@ -28,14 +32,18 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.notificationHandler
 public class TabHostActivity extends TabActivity {
 
 	String username ;
+	String requestID;
+	String requestType;
 
-	Map<String,Map<String,String>> NotificationCache;
 
 	TabSpec TabContacts;
 	TabSpec TabInvites;
 	TabSpec TabProfile;
 	TabHost TabHost; 
-	String notificationMapListJSon; 
+	String notificationMapListJSon;
+
+	Set<NotificationProperties> notificationCache; 
+
 
 
 	/**
@@ -49,16 +57,18 @@ public class TabHostActivity extends TabActivity {
 
 		notificationMapListJSon="[{}]";
 		super.onCreate(savedInstanceState);
+
+		notificationCache=new HashSet<NotificationProperties>();
+
+
 		// Initialize the view and cache.
 		InitView();
-		NotificationCache = new HashMap<String,Map<String,String>>();
-
 		// Obtain the data required for the activity class
 		username = getIntent().getStringExtra("username");
 
 		//start the notifcations framework.
 		NotificationHelper.init(this, username);
-
+		fetchNotifications();
 
 
 
@@ -128,15 +138,39 @@ public class TabHostActivity extends TabActivity {
 	public void UpdateNotificationCache(List<Map<String,String>> notificationMapList){
 
 		System.out.println("in updateNotification");
-		List<NotificationProperties> notificationList = 
-				new ArrayList<NotificationProperties>();
+
 
 		for(Map<String, String> notification : notificationMapList){
-			notificationList.add(new NotificationProperties(notification));
+			if(notification.isEmpty())
+				continue;
+			notificationCache.add(new NotificationProperties(notification));
 		}
 
-		DataCacheHelper.setmealNotificationCache(notificationList);
+		DataCacheHelper.setmealNotificationCache(notificationCache);
 
 	}
+
+
+	private void fetchNotifications() {
+
+		try{
+			requestID = "Notification";
+			requestType = "fetch";
+
+			//send the request.
+			List<Map<String, String>> resultMapList = 
+					RequestHandlerHelper.getRequestHandlerInstance().
+					handleRequest(this,
+							AccountProperties.getUserAccountInstance().toMap(),
+							requestID,requestType) ;
+
+			System.out.println("The notifications are : "  + resultMapList.size());
+
+			UpdateNotificationCache(resultMapList);
+		}catch(RequestAbortedException e){
+			return;
+		}
+	}
+
 
 }

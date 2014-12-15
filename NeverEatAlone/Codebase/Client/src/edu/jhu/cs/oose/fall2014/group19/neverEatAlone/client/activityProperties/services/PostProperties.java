@@ -30,6 +30,7 @@ public class PostProperties implements IActivityProperties {
 		poster = 
 				AccountProperties.getUserAccountInstance().getusername();
 		postID = poster+postIDNumber;
+		postIDNumber++;
 
 		this.recipientList = recipientList;
 		this.postData=postData;
@@ -69,7 +70,13 @@ public class PostProperties implements IActivityProperties {
 
 	}	
 
+	public static void initPostID(String PostIDString){
+		postIDNumber=Integer.parseInt(PostIDString.substring(
+				AccountProperties.getUserAccountInstance().getusername().length(),
+				PostIDString.length()));
+		postIDNumber++;
 
+	}
 
 
 

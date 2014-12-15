@@ -1,5 +1,7 @@
 package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import android.widget.ArrayAdapter;
@@ -15,9 +17,10 @@ public class DataCacheHelper {
 	}
 
 	public static void setmealNotificationCache(
-			List<NotificationProperties> notificationCache) {
+			Collection<NotificationProperties> notificationCache) {
 		System.out.println("Inside this set");
-		mealNotificationCache = notificationCache;
+		mealNotificationCache = new ArrayList<NotificationProperties>(notificationCache);
+		mealNotificationAdaapterInstance.clear();
 		mealNotificationAdaapterInstance.addAll(mealNotificationCache);
 	}
 

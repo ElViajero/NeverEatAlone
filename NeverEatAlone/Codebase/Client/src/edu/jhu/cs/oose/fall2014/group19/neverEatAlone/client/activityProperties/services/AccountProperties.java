@@ -21,7 +21,7 @@ public class AccountProperties implements IActivityProperties {
 	private String username;
 	private String password;
 	private String email;
-
+	private String currentPostID;
 	// one object because at any time, ther is only
 	// one user who is logged in on one client.
 	private static AccountProperties accountPropertiesInstance;
@@ -42,14 +42,12 @@ public class AccountProperties implements IActivityProperties {
 		this.username = username;
 		this.password = password;
 		this.email=email;
+		this.currentPostID = username + "0";
 	}
 
 
 
 	public AccountProperties(Map<String,String> map){
-		username = map.get("username");
-		password = map.get("password");
-		email = map.get("email");
 		fromMap(map);
 	}
 
@@ -83,9 +81,15 @@ public class AccountProperties implements IActivityProperties {
 
 	@Override
 	public void fromMap (Map<String,String> map){
+		username = map.get("username");
+		password = map.get("password");
+		email = map.get("email");
+		currentPostID = map.get("postID");
+
 		accountPropertiesInstance = 
 				new AccountProperties(map.get("username"), map.get("password"));
 		accountPropertiesInstance.setemail(map.get("email"));
+		PostProperties.initPostID(map.get("currentPostID"));
 
 	}
 
