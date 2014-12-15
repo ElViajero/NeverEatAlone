@@ -24,7 +24,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.reflectionManager.c
 public class NotificationManagementRequestHandler implements IManagementRequestHandler {
 
 	@Inject INotificationManager iNotificationManagerObject;
-	@Inject INotificationDBRequestHandler iNotificationDBManagerObject;
+	@Inject INotificationDBRequestHandler iNotificationDBRequestHandlerObject;
 	@Inject IReflectionManager iReflectionManagerObject;
 
 	/**
@@ -40,7 +40,7 @@ public class NotificationManagementRequestHandler implements IManagementRequestH
 
 		//commit to the DB.
 		List<Map<String, String>> result = 
-				iNotificationDBManagerObject.CreateMealNotification(request);
+				iNotificationDBRequestHandlerObject.CreateMealNotification(request);
 
 		List<String> recipientList = Arrays.asList(request.get("recipientList"));
 
@@ -52,6 +52,16 @@ public class NotificationManagementRequestHandler implements IManagementRequestH
 		//change this.
 		return result;
 	}
+
+
+	private List<Map<String,String>> fetch(Map<String,String[]> request){
+
+		System.out.println("Reached fetch in NotificationManagementRequestHandler.");
+		return iNotificationDBRequestHandlerObject.fetchNotifications(request);
+
+	}
+
+
 
 	@Override
 	public List<Map<String, String>> handleManagementRequest(

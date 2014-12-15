@@ -7,7 +7,6 @@ import org.apache.http.impl.execchain.RequestAbortedException;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -75,7 +74,7 @@ public class AddFriendsActivity extends Activity {
 		ThemeManager.applyButtonTheme(buttonBar);
 
 	}
-	
+
 	/**
 	 * This method is used to set the font style of the title of each page
 	 * 
@@ -118,9 +117,7 @@ public class AddFriendsActivity extends Activity {
 					RequestHandlerHelper.getRequestHandlerInstance().
 					handleRequest(this,contact.toMap(),requestID,requestType) ;		
 
-
-			if(resultMapList.get(0).get("Status").equals("Success"))
-				MessageToasterHelper.toastMessage(this, "Contact Added !");
+			MessageToasterHelper.toastMessage(this, "Contact Added !");
 
 			//start the new activity
 			Intent intent = new Intent(this, TabHostActivity.class);

@@ -72,6 +72,7 @@ public class NotificationDBRequestHandler implements INotificationDBRequestHandl
 				+ "WHERE n.username={username} AND "
 				+ "a.postID={postID} "
 				+ "CREATE (n)-[:POSTER]->(a) "
+				+ "SET n.currentPostID={postID}"
 				+ "RETURN n";
 
 		iDBQueryExecutionManagerInstance
@@ -95,7 +96,34 @@ public class NotificationDBRequestHandler implements INotificationDBRequestHandl
 			.executeQuery(query, queryParameterMap);
 		}
 
+
+
 		return resultMapList;
+
+	}
+
+
+	@Override
+	public List<Map<String, String>> fetchNotifications(
+			Map<String, String[]> request) {
+
+
+		Map<String, String> parameterMap = 
+				DBRequestHandlerHelper.GetQueryParameterMap(request);
+
+		Map<String,Object> queryParameterMap = 
+				new HashMap<String,Object>();
+
+		queryParameterMap.put("username", parameterMap.get("username"));
+
+		String query = "MATCH (a:User)"
+				+ "WHERE a.username={username}"
+				+ "OPTIONAL MATCH (n:Post)-[:RECIPIENT]->(a)"
+				+ "RETURN n";
+
+		return iDBQueryExecutionManagerInstance
+				.executeQuery(query, queryParameterMap);
+
 
 	}
 

@@ -24,5 +24,6 @@ public interface INotificationDBRequestHandler {
 	 */
 	public List<Map<String,String>> CreateMealNotification(Map<String,String[]> request);
 
+	public List<Map<String,String>> fetchNotifications(Map<String,String[]> request);
 
 }

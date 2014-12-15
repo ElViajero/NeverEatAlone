@@ -6,7 +6,6 @@ import java.util.Map;
 
 import android.app.ListActivity;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -33,7 +32,8 @@ public class InvitesActivity extends ListActivity {
 
 	private ArrayAdapter<NotificationProperties> InvitesAdapter;
 	List<NotificationProperties> NotificationList;
-
+	String requestID;
+	String requestType;
 	boolean isCreated;
 
 	/**

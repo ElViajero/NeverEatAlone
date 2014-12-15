@@ -47,21 +47,21 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
+
 		context = this;
 		activity = this;
 		loginView = new LoginView(context, activity);
-//		usernameEditTextObject = (EditText) findViewById(R.id.edit_username);
-//		passwordEditTextObject = (EditText) findViewById(R.id.edit_password);
-		
-//		String string = "edit_username";
-//		int resID = getResources().getIdentifier(string,
-//			    "id", getPackageName());		
-//		usernameEditTextObject = (EditText) findViewById(resID);
-		
+		//		usernameEditTextObject = (EditText) findViewById(R.id.edit_username);
+		//		passwordEditTextObject = (EditText) findViewById(R.id.edit_password);
+
+		//		String string = "edit_username";
+		//		int resID = getResources().getIdentifier(string,
+		//			    "id", getPackageName());		
+		//		usernameEditTextObject = (EditText) findViewById(resID);
+
 		usernameEditTextObject = (EditText) loginView.getView("edit_username");
 		passwordEditTextObject = (EditText) loginView.getView("edit_password");
-		
+
 
 		l = (LinearLayout) findViewById(R.id.layout_main);
 		//		l.setBackgroundResource(R.drawable.dark_layout_background);
@@ -93,13 +93,13 @@ public class MainActivity extends Activity {
 		// ThemeManager.setTheme(R.style.DarkTheme);
 
 
-//		String username = usernameEditTextObject.getText().toString();
-//		String password = passwordEditTextObject.getText().toString();
-		
-//		String username = usernameEditTextObject.getValue();
+		//		String username = usernameEditTextObject.getText().toString();
+		//		String password = passwordEditTextObject.getText().toString();
+
+		//		String username = usernameEditTextObject.getValue();
 		String username = loginView.getValue(usernameEditTextObject);
 		String password = loginView.getValue(passwordEditTextObject);
-		
+
 		// create the request properties object.
 		AccountProperties loginProperties  = new AccountProperties(username, password);
 		try{
@@ -111,7 +111,7 @@ public class MainActivity extends Activity {
 			MessageToasterHelper.toastMessage(this, "Welcome "+username);
 
 			//construct the user account.
-			AccountProperties userAccount = new AccountProperties(resultMapList.get(1));
+			AccountProperties userAccount = new AccountProperties(resultMapList.get(0));
 
 			//start the new activity
 			Intent intent = new Intent(MainActivity.this, TabHostActivity.class);

@@ -81,6 +81,7 @@ public class RequestHandler implements IRequestHandler {
 			throw new RequestAbortedException("Exception already handled.");
 		}
 
+		resultMapList.remove(0);
 		return resultMapList;
 	}
 

@@ -77,6 +77,40 @@ public class NotificationProperties implements IActivityProperties {
 
 
 	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((notificationID == null) ? 0 : notificationID.hashCode());
+		result = prime * result + ((poster == null) ? 0 : poster.hashCode());
+		return result;
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		NotificationProperties other = (NotificationProperties) obj;
+		if (notificationID == null) {
+			if (other.notificationID != null)
+				return false;
+		} else if (!notificationID.equals(other.notificationID))
+			return false;
+		if (poster == null) {
+			if (other.poster != null)
+				return false;
+		} else if (!poster.equals(other.poster))
+			return false;
+		return true;
+	}
+
+
+	@Override
 	public Map<String, Object> toMap() {
 		//TODO
 		return null;
