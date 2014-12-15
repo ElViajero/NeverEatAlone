@@ -7,18 +7,22 @@ import java.util.Map;
 
 import org.apache.http.impl.execchain.RequestAbortedException;
 
+import android.app.Activity;
 import android.app.ListActivity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.AccountProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.ContactProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.adapters.ContactsInformationAdapter;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.ContactsView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
 
 /**
@@ -29,6 +33,12 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.serv
  */
 public class ContactsActivity extends ListActivity {
 	private ArrayAdapter<ContactProperties> contactsInformationAdapter;
+	private TextView contactTitleObject;
+	private Button friendRequestButtonObejct;
+	private Button addFriendButtonObject;
+	private Context context;
+	private Activity activity;
+	private ContactsView contactsView;
 
 	String requestType;
 	String requestID;
@@ -51,6 +61,14 @@ public class ContactsActivity extends ListActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_contacts);
 
+		context = this;
+		activity = this;
+		contactsView = new ContactsView(context, activity);
+		
+		contactTitleObject = (TextView) contactsView.getView("textView_contacts_title");
+		friendRequestButtonObejct = (Button) contactsView.getView("button_contacts_notification");
+		addFriendButtonObject = (Button) contactsView.getView("button_contacts_addcontacts");
+		
 		fetchContacts();
 		contactsInformationAdapter = new ContactsInformationAdapter(this,
 				contactList);
@@ -71,12 +89,11 @@ public class ContactsActivity extends ListActivity {
 	 * @author: Yueling Loh
 	 */
 	private void setTitleStyle() {
-		TextView tv =
-				(TextView) findViewById(R.id.textView_contacts_title);
+
 		Typeface tf = Typeface.createFromAsset(getAssets(),
 				"fonts/Chunkfive.otf");
-		tv.setTypeface(tf);
-		tv.setTextSize(80);
+		contactTitleObject.setTypeface(tf);
+		contactTitleObject.setTextSize(80);
 	}
 
 	/**

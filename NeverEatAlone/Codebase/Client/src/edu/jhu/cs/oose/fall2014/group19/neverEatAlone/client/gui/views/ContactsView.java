@@ -5,7 +5,7 @@ import android.content.Context;
 import android.view.View;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.contracts.IView;
 
-public class InvitesView implements IView{
+public class ContactsView implements IView{
 
 	private View viewObject = null;
 	private String value = null;
@@ -14,15 +14,15 @@ public class InvitesView implements IView{
 	Activity activity;
 	
 	/**
-	 * The constructor is used to get the content from the InvitesActivity
+	 * The constructor is used to get the content from the ContactsActivity
 	 * in order to use getResources() and getPackageName()
 	 * @author Hai Tang
 	 */
-	public InvitesView(Context context, Activity activity){
+	public ContactsView(Context context, Activity activity){
 		this.context = context;
 		this.activity = activity;
 	}
-
+	
 	/**
 	 * Overriden method used to get the view of different ViewObject.
 	 * @author Hai Tang
@@ -54,6 +54,5 @@ public class InvitesView implements IView{
 		// TODO Auto-generated method stub
 		
 	}
-	
-	
+
 }
