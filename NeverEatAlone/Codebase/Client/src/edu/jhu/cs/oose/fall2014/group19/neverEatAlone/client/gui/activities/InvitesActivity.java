@@ -173,6 +173,10 @@ public class InvitesActivity extends ListActivity {
 		InvitesActivity.this.startActivity(intent);
 	}
 	
+	/**
+	 * This method implements the My Post button.
+	 * 
+	 */
 	public void onMyPostsButtonClick(View view) {
 		// Intent intent = new Intent(RegisterActivity.this,
 		// MainActivity.class);

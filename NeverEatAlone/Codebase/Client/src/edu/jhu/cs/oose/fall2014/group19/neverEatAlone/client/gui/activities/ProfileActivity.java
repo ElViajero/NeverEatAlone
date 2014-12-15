@@ -1,15 +1,8 @@
 package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.apache.http.impl.execchain.RequestAbortedException;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -21,9 +14,7 @@ import android.widget.TextView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.AccountProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.LoginView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.ProfileView;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
 
 /**
  * ProfileActivity is used to set up the view of Profile page

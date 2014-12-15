@@ -2,7 +2,6 @@ package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
