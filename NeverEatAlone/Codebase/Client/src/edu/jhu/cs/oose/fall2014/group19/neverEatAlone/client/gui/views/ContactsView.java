@@ -3,6 +3,7 @@ package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views;
 import android.app.Activity;
 import android.content.Context;
 import android.view.View;
+import android.widget.EditText;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.contracts.IView;
 
 /**
@@ -48,10 +49,14 @@ public class ContactsView implements IView{
 		
 	}
 
+	/**
+	 * Overriden method used to get value from ViewObject
+	 * @author Hai Tang
+	 */
 	@Override
 	public String getValue(View view) {
-		// TODO Auto-generated method stub
-		return null;
+		value = ((EditText) view).getText().toString();
+		return value;
 	}
 
 	@Override

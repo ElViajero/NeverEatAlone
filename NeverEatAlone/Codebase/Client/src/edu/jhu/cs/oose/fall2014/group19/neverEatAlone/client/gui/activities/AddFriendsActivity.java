@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.http.impl.execchain.RequestAbortedException;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -18,6 +19,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.ContactProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.MessageToasterHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.ContactsView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
 
 /**
@@ -33,15 +35,27 @@ public class AddFriendsActivity extends Activity {
 
 	private EditText usernameEditTextObject;
 	private EditText emailEditTextObject;
+	private TextView addFriendTextViewTitleObject;
 	private String requestID;
 	private String requestType;
+	private Context context;
+	private Activity activity;
+	private ContactsView contactsView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		initview(savedInstanceState);
 
-		usernameEditTextObject = (EditText) findViewById(R.id.editText_addfriends_username);
-		emailEditTextObject = (EditText) findViewById(R.id.editText_addfriends_email);
+		context = this;
+		activity = this;
+		contactsView = new ContactsView(context, activity);
+
+		usernameEditTextObject = (EditText) contactsView
+				.getView("editText_addfriends_username");
+		emailEditTextObject = (EditText) contactsView
+				.getView("editText_addfriends_email");
+		addFriendTextViewTitleObject = (TextView) contactsView
+				.getView("textView_addfriends_title");
 
 	}
 
@@ -66,9 +80,9 @@ public class AddFriendsActivity extends Activity {
 	 */
 	private void applyTheme() {
 
-		View mainLayout = findViewById(R.id.main_addfriends);
-		View headerLayout = findViewById(R.id.header_addfriends);
-		View buttonBar = findViewById(R.id.buttons_addfriends);
+		View mainLayout = contactsView.getView("main_addfriends");
+		View headerLayout = contactsView.getView("header_addfriends");
+		View buttonBar = contactsView.getView("buttons_addfriends");
 
 		ThemeManager.applyTheme(mainLayout, headerLayout);
 		ThemeManager.applyButtonBarTheme(buttonBar);
@@ -82,8 +96,7 @@ public class AddFriendsActivity extends Activity {
 	 * @author: Yueling Loh
 	 */
 	private void setTitleStyle() {
-		TextView tv = (TextView) findViewById(R.id.textView_addfriends_title);
-		ThemeManager.setHeaderFont(tv);
+		ThemeManager.setHeaderFont(addFriendTextViewTitleObject);
 	}
 
 	/**
@@ -99,40 +112,38 @@ public class AddFriendsActivity extends Activity {
 
 	/**
 	 * Method used for clicking the search button.
-	 * @author tejasvamsingh 
+	 * 
+	 * @author tejasvamsingh
 	 * @author: Hai Tang
 	 */
 	public void onSearchButtonClick(View view) {
 
-		String username = usernameEditTextObject.getText().toString();
-		String email = emailEditTextObject.getText().toString();
+		String username = contactsView.getValue(usernameEditTextObject);
+		String email = contactsView.getValue(emailEditTextObject);
 
 		requestID = "Contact";
-		requestType="add";
+		requestType = "add";
 		IActivityProperties contact = new ContactProperties(username);
 
-		try{
+		try {
 
-			List<Map<String, String>> resultMapList = 
-					RequestHandlerHelper.getRequestHandlerInstance().
-					handleRequest(this,contact.toMap(),requestID,requestType) ;		
+			List<Map<String, String>> resultMapList = RequestHandlerHelper
+					.getRequestHandlerInstance().handleRequest(this,
+							contact.toMap(), requestID, requestType);
 
 			MessageToasterHelper.toastMessage(this, "Contact Added !");
 
-			//start the new activity
+			// start the new activity
 			Intent intent = new Intent(this, TabHostActivity.class);
 			this.startActivity(intent);
 
-
-		}catch(RequestAbortedException e){
+		} catch (RequestAbortedException e) {
 
 		}
 
 		Intent intent = new Intent(AddFriendsActivity.this,
 				TabHostActivity.class);
 		AddFriendsActivity.this.startActivity(intent);
-
-
 
 	}
 
