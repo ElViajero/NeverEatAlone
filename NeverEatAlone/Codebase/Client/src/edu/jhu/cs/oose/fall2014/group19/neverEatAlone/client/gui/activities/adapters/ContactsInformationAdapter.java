@@ -65,7 +65,7 @@ public class ContactsInformationAdapter extends ArrayAdapter<ContactProperties> 
 		}
 		ViewHolder holder = (ViewHolder) view.getTag();
 		holder.name.setText(contactInfoList.get(position).getContactusername());
-		//holder.checkbox.setChecked(contactInfoList.get(position).isSelected());
+		holder.checkbox.setChecked(contactInfoList.get(position).isChecked());
 		return view;
 	}
 } 
