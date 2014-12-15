@@ -7,6 +7,7 @@ import java.util.Map;
 import org.apache.http.impl.execchain.RequestAbortedException;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.EmailValidatorHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.ProfileView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,23 +39,36 @@ public class EditProfileActivity extends Activity {
 	private EditText workspaceEditTextObject;
 	private EditText aliasEditTextObject;
 	private EmailValidatorHelper validator;
-
-	private String requestID;
-	private String requestType;
-
+	
+	private Context context;
+	private Activity activity;
+	private ProfileView profileView;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		initView(savedInstanceState);
 
-		usernameTextObject = (TextView) findViewById(R.id.textView_editprofile_username2);
-		nameEditTextObject = (EditText) findViewById(R.id.editText_editprofile_name);
-		emailEditTextObject = (EditText) findViewById(R.id.editText_editprofile_email);
-		genderEditTextObject = (EditText) findViewById(R.id.editText_editprofile_gender);
-		workspaceEditTextObject = (EditText) findViewById(R.id.editText_editprofile_workspace);
-		aliasEditTextObject = (EditText) findViewById(R.id.editText_editprofile_alias);
+		initViewObjects();
+	}
 
-		usernameTextObject.setText(AccountProperties.getUserAccountInstance()
-				.getusername());
+	/**
+	 * Method used to initialize View Objects
+	 * @author: Hai Tang
+	 */
+	private void initViewObjects() {
+		context = this;
+		activity = this;
+		profileView = new ProfileView(context, activity);
+		
+		usernameTextObject = (TextView) profileView.getView("textView_editprofile_username2");
+		nameEditTextObject = (EditText) profileView.getView("editText_editprofile_name");
+		emailEditTextObject = (EditText) profileView.getView("editText_editprofile_email");
+		genderEditTextObject = (EditText) profileView.getView("editText_editprofile_gender");
+		workspaceEditTextObject = (EditText) profileView.getView("editText_editprofile_workspace");
+		aliasEditTextObject = (EditText) profileView.getView("editText_editprofile_alias");
+
+		profileView.setValue(usernameTextObject, AccountProperties.getUserAccountInstance()
+					.getusername());
+		
 		validator = new EmailValidatorHelper();
 	}
 
@@ -100,12 +115,12 @@ public class EditProfileActivity extends Activity {
 				TabHostActivity.class);
 		EditProfileActivity.this.startActivity(intent);
 
-		String username = usernameTextObject.getText().toString();
-		String name = nameEditTextObject.getText().toString();
-		String email = emailEditTextObject.getText().toString();
-		String gender = genderEditTextObject.getText().toString();
-		String workspace = workspaceEditTextObject.getText().toString();
-		String alias = aliasEditTextObject.getText().toString();
+//		String username = usernameTextObject.getText().toString();
+		String name = profileView.getValue(nameEditTextObject);
+		String email = profileView.getValue(emailEditTextObject);
+		String gender = profileView.getValue(genderEditTextObject);
+		String workspace = profileView.getValue(workspaceEditTextObject);
+		String alias = profileView.getValue(aliasEditTextObject);
 
 		if (!validator.isValid(email)) {
 			Toast.makeText(this, R.string.invalid_email, Toast.LENGTH_SHORT)
@@ -113,34 +128,10 @@ public class EditProfileActivity extends Activity {
 			return;
 		}
 
-		// CHECK VALUE OF QUOTATION MARKS
-		// sets what kind of request to make
-		requestID = "Account";
-		requestType = "update";
-
-		Map<String, Object> requestMap = new HashMap<String, Object>();
-
-		// CHECK VALUE OF QUOTATION MARKS
-		// sets the values
-		requestMap.put("username", username);
-		requestMap.put("name", name);
-		requestMap.put("email", email);
-		requestMap.put("gender", gender);
-		requestMap.put("workspace", workspace);
-		requestMap.put("alias", alias);
-
-		try {
-			// send the request.
-			List<Map<String, String>> resultMapList = RequestHandlerHelper
-					.getRequestHandlerInstance().handleRequest(this,
-							requestMap, requestID, requestType);
-			Map<String, String> profile = resultMapList.get(0);
-		} catch (RequestAbortedException e) {
-			// This is necessary. The exception has
-			// already been handled in the RequestHandler
-			// class.
-			return;
-		}
+		//Set new values to AccountProperties to show in Profile page
+		AccountProperties.getUserAccountInstance().setemail(email);
+		//TODO Hai's Comment:Need to populate other values
+		
 	}
 
 	/**
@@ -173,43 +164,4 @@ public class EditProfileActivity extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 
-	/**
-	 * Method for getting profile info from the server and posting it to screen
-	 * 
-	 * @author Yueling Loh
-	 */
-	private void getProfileInfo() {
-
-		// CHECK VALUE OF QUOTATION MARKS
-		// set the kind of request
-		requestID = "Account";
-		requestType = "GetInfo";
-
-		Map<String, Object> requestMap = new HashMap<String, Object>();
-		requestMap.put("username", AccountProperties.getUserAccountInstance()
-				.getusername());
-		try {
-			// send the request.
-			List<Map<String, String>> resultMapList = RequestHandlerHelper
-					.getRequestHandlerInstance().handleRequest(this,
-							requestMap, requestID, requestType);
-
-			Map<String, String> profile = resultMapList.get(0);
-
-			// CHECK VALUE OF QUOTATION MARKS
-			// set to profile to values from the server
-
-			nameEditTextObject.setText(profile.get("name"));
-			workspaceEditTextObject.setText(profile.get("workspace"));
-			emailEditTextObject.setText(profile.get("email"));
-			genderEditTextObject.setText(profile.get("gender"));
-
-		} catch (RequestAbortedException e) {
-			// This is necessary. The exception has
-			// already been handled in the RequestHandler
-			// class.
-			return;
-		}
-
-	}
 }

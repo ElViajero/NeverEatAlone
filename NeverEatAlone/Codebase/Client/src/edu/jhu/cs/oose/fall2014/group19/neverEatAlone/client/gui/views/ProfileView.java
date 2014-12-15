@@ -3,6 +3,7 @@ package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views;
 import android.app.Activity;
 import android.content.Context;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.contracts.IView;
 
@@ -51,10 +52,14 @@ public class ProfileView implements IView{
 
 	@Override
 	public String getValue(View view) {
-		// TODO Auto-generated method stub
-		return null;
+		value = ((EditText) view).getText().toString();
+		return value;
 	}
 
+	/**
+	 * Overriden method used to set the value of different ViewObject.
+	 * @author Hai Tang
+	 */
 	@Override
 	public void setValue(View view, String value) {
 		((TextView) view).setText(value);
