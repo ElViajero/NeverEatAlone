@@ -189,4 +189,30 @@ public class SelectFriendsActivity extends ListActivity {
 		//		SelectFriendsActivity.this.startActivity(intent);
 
 	}
+	
+	
+	/**
+	 * Method used to select all the friend in the user's contact list.
+	 * @author: Hai Tang
+	 */
+	public void onBroadcastButtonClick(View view){
+		for(ContactProperties contact : contactList){
+			contact.setChecked(true);			
+		}		
+		
+		updateView(contactList);
+	}
+	
+	/**
+	 * Method used to update view after clicking the broadcast button
+	 * @author: Hai Tang
+	 */
+	private void updateView(List<ContactProperties> contactList){
+		
+		selectFriendsAdapter = 
+				new ContactsInformationAdapter(this,contactList);
+		setListAdapter(selectFriendsAdapter);
+
+	}
+	
 }
