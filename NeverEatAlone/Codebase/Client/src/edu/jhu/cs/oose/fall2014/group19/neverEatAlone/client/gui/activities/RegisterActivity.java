@@ -73,9 +73,15 @@ public class RegisterActivity extends Activity {
 		View mainLayout = findViewById(R.id.main_registration);
 		View headerLayout = findViewById(R.id.header_registration);
 		View buttonBar = findViewById(R.id.buttons_registration);
+		
+		View registerButton = findViewById(R.id.button_register_cancel);
+		View cancelButton = findViewById(R.id.button_register_register);
 
 		ThemeManager.applyTheme(mainLayout, headerLayout);
 		ThemeManager.applyButtonBarTheme(buttonBar);
+
+		ThemeManager.applyButtonColor(registerButton);
+		ThemeManager.applyButtonColor(cancelButton);
 
 	}
 	
