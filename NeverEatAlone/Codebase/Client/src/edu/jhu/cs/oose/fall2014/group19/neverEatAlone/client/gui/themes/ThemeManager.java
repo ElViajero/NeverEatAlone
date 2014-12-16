@@ -158,7 +158,7 @@ public class ThemeManager {
 				"fonts/Chunkfive.otf");
 		tv.setTypeface(tf);
 		tv.setTextColor(Color.parseColor("#FFFFFF"));
-		tv.setTextSize(80);
+//		tv.setTextSize(80);
 
 	}
 	
