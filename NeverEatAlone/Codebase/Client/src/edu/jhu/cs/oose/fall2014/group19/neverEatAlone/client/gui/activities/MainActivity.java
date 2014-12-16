@@ -73,7 +73,10 @@ public class MainActivity extends Activity {
 
 	}
 
-
+	/**
+	 * Method used to initialize LoginView
+	 * @author: Hai Tang
+	 */
 	private void initLoginView() {
 		context = this;
 		activity = this;

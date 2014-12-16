@@ -40,12 +40,12 @@ public class MyPostsActivity extends ListActivity {
 	boolean isCreated;
 	private Context context;
 	private Activity activity;
-	private InvitesView invitesview;
+	private InvitesView invitesView;
 
 	/**
 	 * This constructor is responsible for obtaining notifications and updating
 	 * the GUI.
-	 * 
+	 * @author Hai Tang
 	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -54,13 +54,21 @@ public class MyPostsActivity extends ListActivity {
 		initView(savedInstanceState);
 		isCreated = false;
 
-		context = this;
-		activity = this;
-		invitesview = new InvitesView(context, activity);
+		initInvitesView();
 
-		titleNameObject = (TextView) invitesview.getView("my_posts");
+		titleNameObject = (TextView) invitesView.getView("my_posts");
 
 		setTitleStyle();
+	}
+
+	/**
+	 * Method used to initialize InvitesView
+	 * @author: Hai Tang
+	 */
+	private void initInvitesView() {
+		context = this;
+		activity = this;
+		invitesView = new InvitesView(context, activity);
 	}
 
 	/**
@@ -91,13 +99,15 @@ public class MyPostsActivity extends ListActivity {
 
 	/**
 	 * This method applies the GUI's color theme.
+	 * @author Hai Tang
 	 * 
 	 */
 	private void applyTheme() {
 
-		View mainLayout = findViewById(R.id.layout_my_posts);
-		View headerLayout = findViewById(R.id.header_my_posts);
-		View buttonBar = findViewById(R.id.my_posts_buttons_layout);
+		initInvitesView();
+		View mainLayout = invitesView.getView("layout_my_posts");
+		View headerLayout = invitesView.getView("header_my_posts");
+		View buttonBar = invitesView.getView("my_posts_buttons_layout");
 
 		ThemeManager.applyTheme(mainLayout, headerLayout);
 		ThemeManager.applyButtonBarTheme(buttonBar);

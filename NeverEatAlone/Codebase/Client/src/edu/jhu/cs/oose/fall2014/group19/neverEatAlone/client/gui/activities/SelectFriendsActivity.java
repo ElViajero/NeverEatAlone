@@ -11,7 +11,9 @@ import org.apache.http.impl.execchain.RequestAbortedException;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import android.app.Activity;
 import android.app.ListActivity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -28,6 +30,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.PostProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.adapters.ContactsInformationAdapter;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.ContactsView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.helpers.GsonHelper;
 
@@ -46,9 +49,14 @@ public class SelectFriendsActivity extends ListActivity {
 	private ArrayAdapter<ContactProperties> selectFriendsAdapter;
 	List<ContactProperties> contactList;
 	private String postData;
+	private TextView selectFriendTitle;
+	private Context context;
+	private Activity activity;
+	private ContactsView contactsView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		
 		initView(savedInstanceState);
 		postData = getIntent().getStringExtra("mealProperties");
 		applyTheme();
@@ -68,11 +76,25 @@ public class SelectFriendsActivity extends ListActivity {
 	private void initView(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_select_friends);
+		
+		initContactView();
+		selectFriendTitle = (TextView) contactsView.getView("textView_selectfriends_title");
+		
 		fetchContacts();
 		selectFriendsAdapter = new ContactsInformationAdapter(this, contactList);
 		setListAdapter(selectFriendsAdapter);
 
 		setTitleStyle();
+	}
+	
+	/**
+	 * Method used to initialize ContactView.
+	 * @author: Hai Tang
+	 */
+	private void initContactView() {
+		context = this;
+		activity = this;
+		contactsView = new ContactsView(context, activity);
 	}
 
 	/**
@@ -82,11 +104,10 @@ public class SelectFriendsActivity extends ListActivity {
 	 * @author: Yueling Loh
 	 */
 	private void setTitleStyle() {
-		TextView tv = (TextView) findViewById(R.id.textView_selectfriends_title);
 		Typeface tf = Typeface.createFromAsset(getAssets(),
 				"fonts/Chunkfive.otf");
-		tv.setTypeface(tf);
-		tv.setTextSize(80);
+		selectFriendTitle.setTypeface(tf);
+		selectFriendTitle.setTextSize(80);
 	}
 
 	/**

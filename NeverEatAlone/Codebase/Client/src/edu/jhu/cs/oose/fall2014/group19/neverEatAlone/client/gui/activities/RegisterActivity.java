@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.http.impl.execchain.RequestAbortedException;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -19,6 +20,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.MessageToasterHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.LoginView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.EmailValidatorHelper;
 
 /**
@@ -26,7 +28,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.help
  * 
  * @author tejasvamsingh,
  * @author Yueling Loh
- *
+ * @author Hai Tang
  */
 public class RegisterActivity extends Activity {
 
@@ -38,17 +40,24 @@ public class RegisterActivity extends Activity {
 	private String requestType;
 	private String requestID;
 	private EmailValidatorHelper validator;
+	private TextView registerTitle;
+	private Context context;
+	private Activity activity;
+	private LoginView loginView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_register);
+		
+		initLoginView();
 
 		// binding the fields to class variables.
-		usernameET = (EditText) findViewById(R.id.edit_username);
-		passwordET = (EditText) findViewById(R.id.edit_password);
-		confirmPasswordET = (EditText) findViewById(R.id.edit_confirm_password);
-		emailET = (EditText) findViewById(R.id.edit_email);
+		usernameET = (EditText) loginView.getView("edit_username");
+		passwordET = (EditText) loginView.getView("edit_password");
+		confirmPasswordET = (EditText) loginView.getView("edit_confirm_password");
+		emailET = (EditText) loginView.getView("edit_email");
+		registerTitle = (TextView) loginView.getView("register");
 
 		// set the RequestType and RequestID fields.
 
@@ -63,19 +72,31 @@ public class RegisterActivity extends Activity {
 	}
 	
 	/**
+	 * Method used to initialize LoginView
+	 * @author: Hai Tang
+	 */
+	private void initLoginView() {
+		context = this;
+		activity = this;
+		loginView = new LoginView(context, activity);
+	}
+	
+	/**
 	 * This method applies the GUI's color theme.
 	 * 
 	 * @author tejasvamsingh
 	 * @author Yueling Loh
+	 * @author Hai Tang
 	 */
 	private void applyTheme() {
 
-		View mainLayout = findViewById(R.id.main_registration);
-		View headerLayout = findViewById(R.id.header_registration);
-		View buttonBar = findViewById(R.id.buttons_registration);
+		initLoginView();
+		View mainLayout = loginView.getView("main_registration");
+		View headerLayout = loginView.getView("header_registration");
+		View buttonBar = loginView.getView("buttons_registration");
 		
-		View registerButton = findViewById(R.id.button_register_cancel);
-		View cancelButton = findViewById(R.id.button_register_register);
+		View registerButton = loginView.getView("button_register_cancel");
+		View cancelButton = loginView.getView("button_register_register");
 
 		ThemeManager.applyTheme(mainLayout, headerLayout);
 		ThemeManager.applyButtonBarTheme(buttonBar);
@@ -93,8 +114,7 @@ public class RegisterActivity extends Activity {
 	 * @author: Yueling Loh
 	 */
 	private void setTitleStyle() {
-		TextView tv = (TextView) findViewById(R.id.register);
-		ThemeManager.setHeaderFont(tv);
+		ThemeManager.setHeaderFont(registerTitle);
 	}
 
 	@Override
@@ -126,10 +146,11 @@ public class RegisterActivity extends Activity {
 	public void onRegisterButtonClick(View view) {
 
 		// Fetch the fields from the GUI.
-		String username = usernameET.getText().toString();
-		String password = passwordET.getText().toString();
-		String email = emailET.getText().toString();
-		String confirmPassword = confirmPasswordET.getText().toString();
+		
+		String username = loginView.getValue(usernameET);
+		String password = loginView.getValue(passwordET);
+		String email = loginView.getValue(emailET);
+		String confirmPassword = loginView.getValue(confirmPasswordET);
 
 		System.out.println(password);
 		System.out.println(confirmPassword);
