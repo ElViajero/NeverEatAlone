@@ -1,6 +1,7 @@
 package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers;
 
 import android.app.Activity;
+import android.content.Context;
 import android.widget.Toast;
 
 /**
@@ -12,21 +13,29 @@ import android.widget.Toast;
  */
 public class MessageToasterHelper {
 
+	public static Context contextObject;
+
+
 	/**
 	 * This method toasts messages to the screen.
 	 * @author tejasvamsingh
 	 */
 	public static void toastMessage(Activity activity, String message){
-		Toast.makeText(activity.getApplicationContext(),
+		Toast.makeText(contextObject,
 				message,Toast.LENGTH_SHORT).show();
 	}
-	
+
+	public static void toastMessage(String message){
+		Toast.makeText(contextObject,
+				message,Toast.LENGTH_SHORT).show();
+	}
+
 	/**
 	 * This method toasts messages to the screen, with alternate constructor
 	 * @author Yueling Loh
 	 */
 	public static void toastMessage(Activity activity, int stringID){
-		Toast.makeText(activity.getApplicationContext(),
+		Toast.makeText(contextObject,
 				stringID,Toast.LENGTH_SHORT).show();
 	}
 }

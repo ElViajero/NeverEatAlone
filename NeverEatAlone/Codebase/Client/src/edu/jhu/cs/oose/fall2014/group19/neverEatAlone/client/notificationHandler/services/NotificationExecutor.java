@@ -19,6 +19,7 @@ import com.rabbitmq.client.ConsumerCancelledException;
 import com.rabbitmq.client.QueueingConsumer;
 import com.rabbitmq.client.ShutdownSignalException;
 
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.AccountProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.configuration.ConfigurationHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.TabHostActivity;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.MessageToasterHelper;
@@ -65,20 +66,22 @@ public class NotificationExecutor extends AsyncTask<String, List<Map<String,Stri
 	public NotificationExecutor(TabHostActivity tabHostActivity,String username){
 		activityObject = tabHostActivity;
 		gsonObject = GsonHelper.getGsoninstance();	
-		this.username = username;
+		this.username = AccountProperties.getUserAccountInstance().getusername();
 		cleanBit=false;
 
 		//handling the try/catch stuff here makes sense for now.
 		try {
 			IPAddress = ConfigurationHelper.getConfigurationInstance().getIPAddress();
+
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (URISyntaxException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		} 
 		System.out.println("The IP in NotificationExecutor is :" + IPAddress );
+
 		System.out.flush();
 	}
 
@@ -179,22 +182,31 @@ public class NotificationExecutor extends AsyncTask<String, List<Map<String,Stri
 		} catch (IOException e) {
 			System.out.println("username is :" + username);
 			System.out.println("IOException in cleanUp" + e.getMessage());
+
+			ChannelObject=null;
+			consumerObject=null;
+			factoryObject=null;
+
 			return;
 		}
 		catch (NullPointerException e){
 			System.out.println("NullPointer in onPostExecute");
 			return;
+		}finally{
+
+			ChannelObject=null;
+			consumerObject=null;
+			factoryObject=null;	
 		}
 
-		ChannelObject=null;
-		consumerObject=null;
-		factoryObject=null;
+
 
 
 	}
 
 
 	private static void initConsumptionFramework() throws IOException{
+		System.out.println("Inside initConsumptionFrameowork in NotificationExecutor.");
 		if(ChannelObject==null){
 			factoryObject = new ConnectionFactory();
 			factoryObject.setHost(IPAddress);
@@ -204,7 +216,7 @@ public class NotificationExecutor extends AsyncTask<String, List<Map<String,Stri
 			ChannelObject.queueDeclare(username, false, false, false, null);
 			consumerObject =  new QueueingConsumer(ChannelObject);
 			ChannelObject.basicConsume(username, true,username,
-					true,true,null, consumerObject);
+					false,true,null, consumerObject);
 
 
 		}

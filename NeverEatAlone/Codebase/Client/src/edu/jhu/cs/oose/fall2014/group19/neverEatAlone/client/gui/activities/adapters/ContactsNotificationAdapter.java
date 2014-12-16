@@ -7,9 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.contracts.IActivityProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.ContactProperties;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.NotificationProperties;
 
 /**
  * 
@@ -17,16 +20,15 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.
  * 
  */
 public class ContactsNotificationAdapter extends
-		ArrayAdapter<ContactProperties> {
+ArrayAdapter<IActivityProperties> {
 
-	// TODO
-	// We need to change the contact to contact notification.
-	
-	private List<ContactProperties> contactInfoList;
+
+	private List<IActivityProperties> contactInfoList;
 	private Activity context;
 
 	public ContactsNotificationAdapter(Activity activity,
-			List<ContactProperties> contactInfoList) {
+			List<IActivityProperties> contactInfoList) {
+
 		super(activity, R.layout.row_contact_notification_item_layout,
 				contactInfoList);
 		this.context = activity;
@@ -46,23 +48,33 @@ public class ContactsNotificationAdapter extends
 
 			// TODO
 			// Need revise here
-			
-			TextView name = (TextView) rowView.findViewById(R.id.contacts_name);
 
+			TextView name = (TextView) rowView.findViewById(R.id.contacts_name);
 			rowView.setTag(name);
 
 		} else {
 			rowView = convertView;
-
 		}
 		TextView name = (TextView) rowView.getTag();
-		
+
 		// TODO
 		// Need revise here
-		
-		name.setText(contactInfoList.get(position).getContactusername()
+
+		Button accept = (Button) rowView.findViewById(R.id.contacts_notification_accept);
+		Button reject = (Button) rowView.findViewById(R.id.contacts_notification_reject);
+		accept.setVisibility(View.INVISIBLE);
+		reject.setVisibility(View.INVISIBLE);
+
+		NotificationProperties notification = (NotificationProperties)
+				contactInfoList.get(position);
+
+		ContactProperties contactPropertiesObject =(ContactProperties)
+				notification.getNotificationData();
+
+
+		name.setText(contactPropertiesObject.getContactusername()
 				+ " wants to add you as a friend!");
-		// holder.checkbox.setChecked(contactInfoList.get(position).isSelected());
+
 		return rowView;
 	}
 

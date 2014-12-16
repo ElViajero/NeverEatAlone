@@ -1,6 +1,7 @@
 package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -77,6 +78,30 @@ public class PostProperties implements IActivityProperties {
 		postIDNumber++;
 
 	}
+
+	public static PostProperties  notificationToPost(NotificationProperties notification){
+
+		String pType = notification.getNotificationType(); 
+		List<String> pRecipientList = new ArrayList<String>();
+		pRecipientList.add(notification.getPoster());
+		String pData =
+				GsonHelper.getGsoninstance().toJson(notification.getNotificationData().toMap());
+		PostProperties post = 
+				new PostProperties(pRecipientList, pType, pData);
+		post.setPostID(notification.getNotificationID());
+
+		return post;
+
+	}
+
+	public String getPostID() {
+		return postID;
+	}
+
+	public void setPostID(String postID) {
+		this.postID = postID;
+	}
+
 
 
 

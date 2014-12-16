@@ -49,6 +49,7 @@ public class NotificationManagementRequestHandler implements IManagementRequestH
 		notificationMapList.remove(0);
 
 		iNotificationManagerObject.pushNotification(notificationMapList , recipientList );
+
 		//change this.
 		return result;
 	}
