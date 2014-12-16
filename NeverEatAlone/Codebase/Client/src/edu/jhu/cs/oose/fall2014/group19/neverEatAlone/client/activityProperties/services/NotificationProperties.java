@@ -10,15 +10,41 @@ public class NotificationProperties implements IActivityProperties {
 	private String poster;
 	private String notificationID;
 	private boolean isAccepted;
+	String notificationType;
+	IActivityProperties notificationData;
 
-	public String getposter() {
+	public String getPoster() {
 		return poster;
 	}
 
 
-	public void setposter(String poster) {
+	public void setPoster(String poster) {
 		this.poster = poster;
 	}
+
+
+	public boolean isAccepted() {
+		return isAccepted;
+	}
+
+
+	public void setAccepted(boolean isAccepted) {
+		this.isAccepted = isAccepted;
+	}
+
+
+	public String getNotificationType() {
+		return notificationType;
+	}
+
+
+	public void setNotificationType(String notificationType) {
+		this.notificationType = notificationType;
+	}
+
+
+
+
 
 
 
@@ -46,8 +72,6 @@ public class NotificationProperties implements IActivityProperties {
 
 
 
-	String notificationType;
-	IActivityProperties notificationData;
 
 
 	public NotificationProperties(Map<String,String> map){
@@ -123,5 +147,6 @@ public class NotificationProperties implements IActivityProperties {
 		// TODO Auto-generated method stub
 
 	}
+
 
 }

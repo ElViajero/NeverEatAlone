@@ -17,6 +17,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.
  * 
  * @author tejasvamsingh
  * @author Hai Tang
+ * 
  *This adapter adds a listener on the Checkbox view. 
  *If the checkbox is selected the underlying data of the model is changed. 
  *Checkbox gets the corresponding model element assigned via the getTag() method.
@@ -59,7 +60,7 @@ public class ContactsInformationAdapter extends ArrayAdapter<ContactProperties> 
 			view.setTag(viewHolder);
 			viewHolder.checkbox.setTag(contactInfoList.get(position));
 		} else {
-			System.out.println("contactInfoList" + contactInfoList);
+			//System.out.println("contactInfoList" + contactInfoList);
 			view = convertView;
 			((ViewHolder) view.getTag()).checkbox.setTag(contactInfoList.get(position));
 		}

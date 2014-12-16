@@ -40,6 +40,8 @@ public class ContactDBRequestHandler implements IContactDBRequestHandler {
 		Map<String, String> paramterMap = 
 				DBRequestHandlerHelper.GetQueryParameterMap(request);
 
+		System.out.println("parameter map is : "+ paramterMap);
+
 		// ************************ LOGGING ************************
 
 		System.out.println("username :"+paramterMap.get("username"));
@@ -59,29 +61,43 @@ public class ContactDBRequestHandler implements IContactDBRequestHandler {
 				+ " WHERE "
 				+ "a.username = {username} AND "
 				+ "b.username = {contactusername}"
-				+ "CREATE UNIQUE (a)-[r1:KNOWS]->(b), (a)<-[r2:KNOWS]-(b) "
-				+ "SET r1.alias = {alias}, r2.alias = {alias} "
-				+ "RETURN r1";
+				+ "CREATE UNIQUE (a)-[r:KNOWS]->(b) "
+				+ "SET r.alias = {alias} "
+				+ "RETURN r";
 
 		iDBQueryExecutionManagerInstance
 		.executeQuery(query, queryParameterMap);
 
 		// Fetch the contact via query
-
 		query = "MATCH (a:User)-[r]->(n:User)"
 				+ " WHERE "
 				+ "a.username = {username} AND "
 				+ "n.username = {contactusername}"
 				+ "RETURN n ";
 
-		return iDBQueryExecutionManagerInstance
+		List<Map<String, String>> resultMap = 
+				iDBQueryExecutionManagerInstance
 				.executeQuery(query, queryParameterMap);
 
+		System.out.println("Reaching the end of query : "+ resultMap);
+
+		Map<String,String> statusMap=null;
+		if(resultMap.get(0).get("Status").equals("Success")){
+			System.out.println("Successful query.");
+			//LoggerHelper.printresultMap(resultMap);
+			statusMap = resultMap.get(0);
+			resultMap.clear();
+		}
+		resultMap.add(0,statusMap);
+		resultMap.add(paramterMap);
+		//LoggerHelper.printresultMap(resultMap);
+		return resultMap;
 	}
 
 	/**
 	 * method to fetch all contacts of a user
 	 * @author Xiaozhou Zhou
+	 * @author tejasvamsingh
 	 */
 	@Override
 	public List<Map<String, String>> getAll(Map<String,String[]> request) {
@@ -109,8 +125,9 @@ public class ContactDBRequestHandler implements IContactDBRequestHandler {
 
 		// Fetch the contact via query
 
-		String query = "MATCH (a:User)-[r:KNOWS]->(n:User)"
-				+ " WHERE "
+		String query = "MATCH (a:User)-[r:KNOWS]->(n:User) "				
+				+ "WHERE "
+				+ "(n)-[:KNOWS]->(a) AND "
 				+ "a.username = {username}"
 				+ "RETURN n.username AS username, r.alias AS alias";
 

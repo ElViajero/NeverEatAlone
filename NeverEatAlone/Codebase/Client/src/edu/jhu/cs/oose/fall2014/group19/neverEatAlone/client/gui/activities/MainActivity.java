@@ -21,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.AccountProperties;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.DataCacheHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.MessageToasterHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.LoginView;
@@ -56,6 +57,9 @@ public class MainActivity extends Activity {
 		context = this;
 		activity = this;
 		loginView = new LoginView(context, activity);
+
+		MessageToasterHelper.contextObject = getApplicationContext();
+
 		//		usernameEditTextObject = (EditText) findViewById(R.id.edit_username);
 		//		passwordEditTextObject = (EditText) findViewById(R.id.edit_password);
 
@@ -196,6 +200,7 @@ public class MainActivity extends Activity {
 		}
 		RequestHandlerHelper.cleanUp();
 		NotificationHelper.cleanUp();
+		DataCacheHelper.cleanUp();
 
 	}
 

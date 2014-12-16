@@ -1,5 +1,6 @@
 package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -16,9 +17,12 @@ import android.widget.TextView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.contracts.IActivityProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.ContactProperties;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.PostProperties;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.DataCacheHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.MessageToasterHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.helpers.GsonHelper;
 
 /**
  * This activity is used to set the view and control the logic related to add
@@ -107,17 +111,25 @@ public class AddFriendsActivity extends Activity {
 		String username = usernameEditTextObject.getText().toString();
 		String email = emailEditTextObject.getText().toString();
 
+		List<String> recipientList = new ArrayList<String>();
+		recipientList.add(username);
+
 		requestID = "Contact";
 		requestType="add";
-		IActivityProperties contact = new ContactProperties(username);
+		MessageToasterHelper.toastMessage(this, "the damn username is :"+username);
+		IActivityProperties contactProperties = new ContactProperties(username);
+		IActivityProperties postProperties = new PostProperties(recipientList, "contact", 
+				GsonHelper.getGsoninstance().toJson(contactProperties.toMap()));
 
 		try{
 
 			List<Map<String, String>> resultMapList = 
 					RequestHandlerHelper.getRequestHandlerInstance().
-					handleRequest(this,contact.toMap(),requestID,requestType) ;		
+					handleRequest(this,postProperties.toMap(),requestID,requestType) ;		
 
-			MessageToasterHelper.toastMessage(this, "Contact Added !");
+			MessageToasterHelper.toastMessage(this, "Contact Request Sent !");
+
+			DataCacheHelper.addPost(postProperties, "contactPost");
 
 			//start the new activity
 			Intent intent = new Intent(this, TabHostActivity.class);

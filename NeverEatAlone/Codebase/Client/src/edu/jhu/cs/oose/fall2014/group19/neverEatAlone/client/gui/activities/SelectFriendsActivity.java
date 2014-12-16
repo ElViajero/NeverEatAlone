@@ -179,18 +179,9 @@ public class SelectFriendsActivity extends ListActivity {
 		}catch(RequestAbortedException e){
 			System.out.println("Already Handled");
 		}
-
-		/**
-		 * Commented for future use. Used to connect to PostInformation page.
-		 * @author Hai Tang
-		 */
-		//		Intent intent = new Intent(SelectFriendsActivity.this,
-		//				PostInformationActivity.class);
-		//		SelectFriendsActivity.this.startActivity(intent);
-
 	}
-	
-	
+
+
 	/**
 	 * Method used to select all the friend in the user's contact list.
 	 * @author: Hai Tang
@@ -199,20 +190,20 @@ public class SelectFriendsActivity extends ListActivity {
 		for(ContactProperties contact : contactList){
 			contact.setChecked(true);			
 		}		
-		
+
 		updateView(contactList);
 	}
-	
+
 	/**
 	 * Method used to update view after clicking the broadcast button
 	 * @author: Hai Tang
 	 */
 	private void updateView(List<ContactProperties> contactList){
-		
+
 		selectFriendsAdapter = 
 				new ContactsInformationAdapter(this,contactList);
 		setListAdapter(selectFriendsAdapter);
 
 	}
-	
+
 }

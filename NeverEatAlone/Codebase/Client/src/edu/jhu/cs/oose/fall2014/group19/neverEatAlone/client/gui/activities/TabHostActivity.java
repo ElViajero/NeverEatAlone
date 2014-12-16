@@ -59,16 +59,15 @@ public class TabHostActivity extends TabActivity {
 		super.onCreate(savedInstanceState);
 
 		notificationCache=new HashSet<NotificationProperties>();
-
+		//		fetchNotifications();
 
 		// Initialize the view and cache.
 		InitView();
 		// Obtain the data required for the activity class
 		username = getIntent().getStringExtra("username");
-
 		//start the notifcations framework.
 		NotificationHelper.init(this, username);
-		fetchNotifications();
+
 
 
 
@@ -139,15 +138,12 @@ public class TabHostActivity extends TabActivity {
 
 		System.out.println("in updateNotification");
 
-
 		for(Map<String, String> notification : notificationMapList){
 			if(notification.isEmpty())
 				continue;
 			notificationCache.add(new NotificationProperties(notification));
 		}
-
-		DataCacheHelper.setmealNotificationCache(notificationCache);
-
+		DataCacheHelper.setNotificationCache(notificationCache);
 	}
 
 

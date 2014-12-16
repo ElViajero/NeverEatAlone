@@ -21,6 +21,8 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.AccountProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.ContactProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.adapters.ContactsInformationAdapter;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.DataCacheHelper;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.MessageToasterHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.ContactsView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
@@ -64,15 +66,18 @@ public class ContactsActivity extends ListActivity {
 		context = this;
 		activity = this;
 		contactsView = new ContactsView(context, activity);
-		
+
 		contactTitleObject = (TextView) contactsView.getView("textView_contacts_title");
 		friendRequestButtonObejct = (Button) contactsView.getView("button_contacts_notification");
 		addFriendButtonObject = (Button) contactsView.getView("button_contacts_addcontacts");
-		
-		fetchContacts();
+		contactList = new ArrayList<ContactProperties>();
 		contactsInformationAdapter = new ContactsInformationAdapter(this,
 				contactList);
 		setListAdapter(contactsInformationAdapter);
+
+		fetchContacts();
+
+
 
 		setTitleStyle();
 		applyTheme();
@@ -109,19 +114,24 @@ public class ContactsActivity extends ListActivity {
 		Map<String,Object> requestMap = new HashMap<String,Object>();
 		requestMap.put("username",
 				AccountProperties.getUserAccountInstance().getusername());
-		contactList = new ArrayList<ContactProperties>();
+
 		try{
 
 			List<Map<String, String>> resultMapList = 
 					RequestHandlerHelper.getRequestHandlerInstance().
 					handleRequest(this,requestMap,requestID,requestType) ;		
 
-
+			contactList.clear();
 			for(Map<String,String> result : resultMapList){
 				if(result.isEmpty())
 					continue;
 				contactList.add(new ContactProperties(result));
 			}
+
+			MessageToasterHelper.toastMessage(this, contactList.get(0).getContactusername());
+			contactsInformationAdapter.notifyDataSetChanged();
+			DataCacheHelper.setServerFetchRequired("contact", false);
+
 
 		}catch(RequestAbortedException e){
 			System.out.println(e.getMessage());
@@ -155,6 +165,15 @@ public class ContactsActivity extends ListActivity {
 		ContactsActivity.this.startActivity(intent);
 	}
 
+
+	@Override
+	protected void onResume(){
+		super.onResume();
+		System.out.println("FETCH STATUS :"+
+				DataCacheHelper.isServerFetchRequired("contact"));
+		if(DataCacheHelper.isServerFetchRequired("contact"))
+			fetchContacts();
+	}
 
 
 }

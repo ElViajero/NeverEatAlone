@@ -9,17 +9,19 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.contracts.IActivityProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.MealProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.NotificationProperties;
 
 /**
- * 
  * @author Hai Tang
+ * @author tejasvamsingh
+ * 
  * This class defines the MealNotificationAdapter which takes the List<Map<String,String>> data model
  * from InvitesActivity.java to set up the view for GUI.
  *
  */
-public class MealNotificationAdapter extends ArrayAdapter<NotificationProperties> {
+public class MealNotificationAdapter extends ArrayAdapter<IActivityProperties> {
 
 	private LayoutInflater inflater;
 	private TextView poster;
@@ -28,7 +30,7 @@ public class MealNotificationAdapter extends ArrayAdapter<NotificationProperties
 	private TextView location;
 	private Activity activity;
 
-	private List<NotificationProperties> MealNotifications;
+	private List<IActivityProperties> MealNotifications;
 
 	/**
 	 * Constructor to initialize the GUI meal Notifications
@@ -39,7 +41,8 @@ public class MealNotificationAdapter extends ArrayAdapter<NotificationProperties
 	 * @param activity
 	 * @param mealNotifications
 	 */
-	public MealNotificationAdapter(Activity activity, List<NotificationProperties> mealNotifications) {
+	public MealNotificationAdapter(Activity activity, 
+			List<IActivityProperties> mealNotifications) {
 
 		super(activity, R.layout.row_meal_notification_layout, mealNotifications);
 
@@ -67,10 +70,13 @@ public class MealNotificationAdapter extends ArrayAdapter<NotificationProperties
 		startTime = (TextView) view.findViewById(R.id.textView_meal_notification_startTime);
 		location = (TextView) view.findViewById(R.id.textView_meal_notification_location);
 
-		MealProperties mealProperties = 
-				(MealProperties) MealNotifications.get(position).getNotificationData();		
+		NotificationProperties notification = (NotificationProperties) 
+				MealNotifications.get(position);
 
-		poster.setText(MealNotifications.get(position).getposter());
+		MealProperties mealProperties =(MealProperties) 
+				notification.getNotificationData();		
+
+		poster.setText(notification.getPoster());
 		startTime.setText(mealProperties.getStartDateAndTimeProperties().toString());
 		location.setText(mealProperties.getlocation());
 

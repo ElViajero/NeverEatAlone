@@ -16,6 +16,7 @@ import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.TextView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.contracts.IActivityProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.MealProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.NotificationProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.adapters.MealNotificationAdapter;
@@ -35,11 +36,11 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.h
  */
 public class InvitesActivity extends ListActivity {
 
-	private ArrayAdapter<NotificationProperties> InvitesAdapter;
+	private ArrayAdapter<IActivityProperties> invitesAdapter;
 	private TextView appNameObject;
 	private Button createAnInviteObject;
 	private Switch availabilitySwitchObject;
-	List<NotificationProperties> NotificationList;
+	List<IActivityProperties> NotificationList;
 
 	String requestID;
 	String requestType;
@@ -59,7 +60,7 @@ public class InvitesActivity extends ListActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 
-		NotificationList = new ArrayList<NotificationProperties>();
+		NotificationList = new ArrayList<IActivityProperties>();
 		initView(savedInstanceState);
 		isCreated = false;
 
@@ -85,9 +86,9 @@ public class InvitesActivity extends ListActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_invites);
 
-		InvitesAdapter = new MealNotificationAdapter(this, NotificationList);
-		setListAdapter(InvitesAdapter);
-		DataCacheHelper.registerMealNotificationAdapterInstance(InvitesAdapter);
+		invitesAdapter = new MealNotificationAdapter(this, NotificationList);
+		setListAdapter(invitesAdapter);
+		DataCacheHelper.registerNotificationAdapterInstance(invitesAdapter, "meal");
 
 		applyTheme();
 
@@ -141,8 +142,10 @@ public class InvitesActivity extends ListActivity {
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		Intent intent = new Intent(this, MealDetailActivity.class);
 
-		MealProperties mealProperties = (MealProperties) NotificationList.get(
-				position).getNotificationData();
+		NotificationProperties notification = (NotificationProperties)
+				NotificationList.get(position);
+
+		MealProperties mealProperties = (MealProperties) notification.getNotificationData();
 
 		Map<String, Object> mealPropertiesMap = mealProperties.toMap();
 
@@ -160,7 +163,7 @@ public class InvitesActivity extends ListActivity {
 				CreateMealInformationActivity.class);
 		InvitesActivity.this.startActivity(intent);
 	}
-	
+
 	public void onMyPostsButtonClick(View view) {
 		// Intent intent = new Intent(RegisterActivity.this,
 		// MainActivity.class);

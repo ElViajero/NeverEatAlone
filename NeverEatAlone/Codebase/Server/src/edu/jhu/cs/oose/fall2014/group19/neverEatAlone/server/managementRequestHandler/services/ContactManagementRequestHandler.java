@@ -1,12 +1,17 @@
 package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.managementRequestHandler.services;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
 
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbRequestHandler.contracts.IContactDBRequestHandler;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.logger.helper.LoggerHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.managementRequestHandler.contracts.IManagementRequestHandler;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.managementRequestHandler.contracts.INotificationManagementRequestHandler;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.notificationManager.contracts.INotificationManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.reflectionManager.contracts.IReflectionManager;
 
 /**
@@ -21,10 +26,14 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.reflectionManager.c
  */
 
 
-public class ContactManagementRequestHandler implements IManagementRequestHandler {
+public class ContactManagementRequestHandler implements 
+IManagementRequestHandler,INotificationManagementRequestHandler {
 
 	@Inject IContactDBRequestHandler iContactDBManagerObject;
 	@Inject IReflectionManager iReflectionManagerObject;
+	@Inject INotificationManager iNotificationManagerObject;
+
+
 	/**
 	 * This method handles requests to add a contact.
 	 * 
@@ -34,7 +43,22 @@ public class ContactManagementRequestHandler implements IManagementRequestHandle
 	private List<Map<String,String>> add(Map<String,String[]> request){
 
 		System.out.println("Reaching AddContactRequest");
-		return iContactDBManagerObject.add(request); 
+		List<Map<String, String>> result=
+				iContactDBManagerObject.add(request);
+		List<Map<String, String>> notificationMapList =
+				new ArrayList<Map<String,String>>(result);
+		System.out.println("FINISHED ADD EXECUTION.");
+		LoggerHelper.printresultMap(result);
+
+		if(result.get(0).get("Status").equals("Success")){
+			System.out.println("Successful operation.");
+			notificationMapList.remove(0);
+			iNotificationManagerObject.pushNotification(
+					notificationMapList, Arrays.asList(request.get("recipientList")));
+		}
+
+
+		return result;
 
 	}
 
@@ -46,7 +70,7 @@ public class ContactManagementRequestHandler implements IManagementRequestHandle
 	private List<Map<String, String>> getAll(Map<String,String[]> request) {
 
 		System.out.println("Reaching GetAllContactRequest");
-		return iContactDBManagerObject.getAll(request); 
+		return iContactDBManagerObject.getAll(request);		
 	}
 
 	/**
@@ -82,6 +106,31 @@ public class ContactManagementRequestHandler implements IManagementRequestHandle
 		return iReflectionManagerObject.invokeMethod(this,
 				request.get("requestType")[0], request);
 
+	}
+
+	@Override
+	public List<Map<String, String>> accept(Map<String, String[]> request) {
+		System.out.println("inside accept in ContactMRH");		
+		LoggerHelper.printrequestMap(request);
+		List<Map<String, String>> result = 
+				add(request);
+		/*
+		List<Map<String, String>> notificationMapList =
+				new ArrayList<Map<String,String>>(result);
+
+		if(result.get(0).get("Status").equals("Success")){
+			System.out.println("Successful operation.");
+			notificationMapList.remove(0);
+			iNotificationManagerObject.pushNotification(
+					notificationMapList, Arrays.asList(request.get("recipientList")));
+		}*/
+		return result;
+	}
+
+	@Override
+	public List<Map<String, String>> reject(Map<String, String[]> request) {
+		System.out.println("inside reject in ContactMRH");
+		return null;
 	}
 
 }

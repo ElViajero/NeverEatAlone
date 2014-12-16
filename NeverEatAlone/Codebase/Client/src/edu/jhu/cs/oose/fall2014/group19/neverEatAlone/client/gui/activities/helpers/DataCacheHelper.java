@@ -2,33 +2,137 @@ package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.hel
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import android.widget.ArrayAdapter;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.contracts.IActivityProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.NotificationProperties;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.PostProperties;
 
 public class DataCacheHelper {
 
-	private static List<NotificationProperties> mealNotificationCache;
-	private static ArrayAdapter<NotificationProperties> mealNotificationAdaapterInstance; 
 
-	public static List<NotificationProperties> getmealNotificationCache() {
-		return mealNotificationCache;
-	}
+	private static Map<String,ArrayAdapter<IActivityProperties>> adapterMap;
+	private static Map<String,List<IActivityProperties>> adapterDataMap;	
+	private static Map<String,Boolean> isServerFetchRequiredMap;
+	private static Map<String,IActivityProperties> myPostMap;
 
-	public static void setmealNotificationCache(
+
+	public static void setNotificationCache(			
 			Collection<NotificationProperties> notificationCache) {
-		System.out.println("Inside this set");
-		mealNotificationCache = new ArrayList<NotificationProperties>(notificationCache);
-		mealNotificationAdaapterInstance.clear();
-		mealNotificationAdaapterInstance.addAll(mealNotificationCache);
+		System.out.println("Inside setNotificationCache");
+
+		initMaps();
+		clearAdapters();
+
+		for(NotificationProperties notification : notificationCache){
+
+			if(isResponse(notification)){
+				handleResponse(notification);
+				continue;
+			}
+
+			String key = notification.getNotificationType();
+
+			if(!adapterDataMap.containsKey(key))
+				adapterDataMap.put(key, new ArrayList<IActivityProperties>());
+
+			adapterDataMap.get(key).add(notification);
+		}
+
+		System.out.println("adapter maps : "+adapterDataMap);
+		populateAdapters();
 	}
 
-	public static void registerMealNotificationAdapterInstance(
-			ArrayAdapter<NotificationProperties> invitesAdapter){
-		mealNotificationAdaapterInstance = invitesAdapter;
+
+	private static void populateAdapters() {
+
+		for(Map.Entry<String, ArrayAdapter<IActivityProperties>> 
+		entry : adapterMap.entrySet()){
+			entry.getValue().addAll(adapterDataMap.get(entry.getKey()));
+		}
+
 	}
 
+	private static void clearAdapters() {
+		for (Map.Entry<String, ArrayAdapter<IActivityProperties>>
+		entry : adapterMap.entrySet()) {
+			System.out.println("entry is "+ entry);
+			entry.getValue().clear();
+			adapterDataMap.get(entry.getKey()).clear();
+		}
+	}
+
+	private static void initMaps() {
+		if(adapterMap==null){
+			adapterMap = new HashMap<String, ArrayAdapter<IActivityProperties>>();
+			adapterDataMap = new HashMap<String, List<IActivityProperties>>();
+			isServerFetchRequiredMap = new HashMap<String, Boolean>();
+			myPostMap=new HashMap<String, IActivityProperties>();
+		}
+	}
+
+	public static void registerNotificationAdapterInstance(
+			ArrayAdapter<IActivityProperties> adapter,String adapterType){
+		initMaps();
+		adapterMap.put(adapterType, adapter);
+		if(!adapterDataMap.containsKey(adapterType))
+			adapterDataMap.put(adapterType, new ArrayList<IActivityProperties>());
+		populateAdapters();
+
+	}
+
+	public static boolean isServerFetchRequired(String key){
+		initMaps();
+		return isServerFetchRequiredMap.containsKey(key)? 
+				isServerFetchRequiredMap.get(key) : true;
+	}
+
+	public static void setServerFetchRequired(String key,boolean value){
+		initMaps();
+		isServerFetchRequiredMap.put(key, value);
+	}
+
+
+	public static void cleanUp(){
+		adapterMap =null;
+		adapterDataMap=null;
+	}
+
+
+	public static void addPost(IActivityProperties post,String key){
+
+		if(!adapterDataMap.containsKey(key))
+			adapterDataMap.put(key, new ArrayList<IActivityProperties>());
+		adapterDataMap.get(key).add(post);
+
+		PostProperties postPropertiesObject = (PostProperties)post;
+		myPostMap.put(postPropertiesObject.getPostID(),post);
+
+		populateAdapter(key);
+	}
+
+	public static void populateAdapter(String key){
+		if(adapterMap.containsKey(key))
+			adapterMap.get(key).addAll(adapterDataMap.get(key));
+	}
+
+
+	private static void handleResponse(NotificationProperties notification) {
+
+		MessageToasterHelper.toastMessage(notification.getPoster()+
+				" has accepted " + notification.getNotificationType()+" invitation.");
+
+		isServerFetchRequiredMap.put(notification.getNotificationID(), true);
+		isServerFetchRequiredMap.put(notification.getNotificationType()+"Post", true);
+
+	}
+
+	private static boolean isResponse(NotificationProperties notification) {
+		return myPostMap.containsKey(notification.getNotificationID());
+	}
 
 
 }
