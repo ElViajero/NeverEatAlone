@@ -13,8 +13,8 @@
           android:radius="8dp" />
       <padding
           android:left="@dimen/button_padding"
-          android:left="@dimen/button_padding"
-          android:left="@dimen/button_padding"
-          android:left="@dimen/button_padding" />
+          android:right="@dimen/button_padding"
+          android:top="@dimen/button_padding"
+          android:bottom="@dimen/button_padding" />
 
 </shape>
