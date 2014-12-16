@@ -177,7 +177,7 @@ public class ThemeManager {
 		Typeface tf = Typeface.createFromAsset(tv.getContext().getAssets(),
 				"fonts/Chunkfive.otf");
 		tv.setTypeface(tf);
-		tv.setTextSize(20);
+//		tv.setTextSize(20);
 
 	}
 	
