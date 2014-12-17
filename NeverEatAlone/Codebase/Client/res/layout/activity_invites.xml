@@ -34,21 +34,33 @@
             android:id="@+id/buttons_invites_container"
             style="@style/ButtonBarTheme"
             android:layout_gravity="center_horizontal"
+            android:baselineAligned="false"
             android:orientation="horizontal" >
 
             <Button
                 android:id="@+id/invites_button_my_posts"
                 style="@style/BarButton"
-                android:layout_marginEnd="@dimen/activity_horizontal_margin"
                 android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:layout_weight="0.33"
                 android:onClick="onMyPostsButtonClick"
-                android:text="@string/my_posts" />
+                android:text="@string/my_posts"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+            <Button
+                android:id="@+id/invites_button_accepted_invites"
+                style="@style/BarButton"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:layout_weight="0.33"
+                android:text="@string/accepted_invites"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
 
             <Button
                 android:id="@+id/invites_button_create"
                 style="@style/BarButton"
+                android:layout_weight="0.33"
                 android:onClick="onCreateButtonClick"
-                android:text="@string/create" />
+                android:text="@string/create"
+                android:textAppearance="?android:attr/textAppearanceSmall" />
         </LinearLayout>
     </LinearLayout>
     <!-- Main Space -->

@@ -17,34 +17,56 @@
     </RelativeLayout>
 
     <!-- Button Header -->
-
-    <RelativeLayout
+    
+    <LinearLayout
         android:id="@+id/my_posts_buttons_layout"
         style="@style/ButtonBarTheme"
-        android:layout_below="@+id/header_my_posts" >
+        android:layout_below="@+id/header_my_posts"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal" >
 
-        <Button
-            android:id="@+id/my_posts_button_back"
-            style="@style/BarButton"
-            android:layout_width="@dimen/button_standard_width"
-            android:layout_height="wrap_content"
-            android:onClick="onBackButtonClick"
-            android:text="@string/back" />
-    </RelativeLayout>
+        <LinearLayout
+            android:id="@+id/my_posts_buttons_layout_container"
+            style="@style/ButtonBarTheme"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/my_posts_button_back"
+                style="@style/BarButton"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:onClick="onBackButtonClick"
+                android:text="@string/back" />
+
+            <RelativeLayout
+                android:id="@+id/button_placeholder"
+                android:layout_width="0dip"
+                android:layout_height="0dip"
+                android:layout_weight="0.5" >
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
 
     <!-- Main Space -->
+
 
     <RelativeLayout
         android:id="@+id/layout_my_posts"
         style="@style/MainLayoutTheme"
-        android:layout_below="@+id/my_posts_buttons_layout" >
+        android:layout_below="@+id/my_posts_buttons_layout"
+         >
 
-        <ListView
-            android:id="@android:id/list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50dp" >
-        </ListView>
+        <RelativeLayout
+            android:id="@+id/layout_my_posts_container"
+            style="@style/MainLayoutTheme"
+            android:layout_alignParentTop="true" >
+
+            <ListView
+                android:id="@android:id/list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+            </ListView>
+        </RelativeLayout>
     </RelativeLayout>
 
 </RelativeLayout>
