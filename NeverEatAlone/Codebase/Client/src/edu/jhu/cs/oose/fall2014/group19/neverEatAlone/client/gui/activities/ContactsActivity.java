@@ -221,6 +221,8 @@ public class ContactsActivity extends ListActivity {
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		Intent intent = new Intent(ContactsActivity.this, ContactsProfileActivity.class);
 		ContactsActivity.this.startActivity(intent);
+		
+		//TODO Need to be populated with real contacts data
 	}
-	
+		
 }
