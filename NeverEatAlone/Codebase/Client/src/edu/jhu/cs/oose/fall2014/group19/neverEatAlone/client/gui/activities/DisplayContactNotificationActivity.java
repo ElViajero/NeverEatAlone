@@ -22,7 +22,6 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.NotificationProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.PostProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.adapters.ContactsNotificationAdapter;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.MessageToasterHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.NotificationAndPostCacheHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.ContactsView;
@@ -165,7 +164,7 @@ public class DisplayContactNotificationActivity extends ListActivity {
 	private boolean sendRequest() {
 
 		ContactProperties p = (ContactProperties) selectedNotification.getNotificationData();
-		MessageToasterHelper.toastMessage(this,"YES : "+p.toMap());
+
 		System.out.println("selectedNotification : "+ selectedNotification);
 		List<String> recipientList = new ArrayList<String>();
 		recipientList.add(selectedNotification.getPoster());
