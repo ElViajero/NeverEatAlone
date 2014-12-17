@@ -113,7 +113,6 @@
         <RelativeLayout
             android:id="@+id/main_button1_layout_left"
             android:layout_width="0dp"
-<<<<<<< HEAD
             android:layout_height="wrap_content"
             android:layout_weight="0.25" >
         </RelativeLayout>
@@ -172,8 +171,6 @@
             android:id="@+id/main_button2_layout_right"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-=======
-            android:layout_height="match_parent"
             android:layout_weight="0.25" >
         </RelativeLayout>
 
@@ -231,7 +228,6 @@
             android:id="@+id/main_button2_layout_right"
             android:layout_width="0dp"
             android:layout_height="match_parent"
->>>>>>> refs/heads/yueling-current
             android:layout_weight="0.25" >
         </RelativeLayout>
     </LinearLayout>
