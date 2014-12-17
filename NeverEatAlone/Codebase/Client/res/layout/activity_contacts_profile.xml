@@ -111,7 +111,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
-            android:id="@+id/textView_contacts_username"
+            android:id="@+id/textView_contactsprofile_username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/contacts_profile_username"
@@ -121,7 +121,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
-            android:id="@+id/textView_contacts_alias"
+            android:id="@+id/textView_contactsprofile_alias"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/contacts_profile_alias"
@@ -131,7 +131,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
-            android:id="@+id/textView_contacts_Name"
+            android:id="@+id/textView_contactsprofile_Name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/contacts_profile_name"
@@ -141,7 +141,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
-            android:id="@+id/textView_contacts_email"
+            android:id="@+id/textView_contactsprofile_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/contacts_profile_email"
@@ -151,7 +151,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
-            android:id="@+id/textView_contacts_Gender"
+            android:id="@+id/textView_contactsprofile_Gender"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/contacts_profile_gender"
@@ -161,7 +161,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
-            android:id="@+id/textView_contacts_workspace"
+            android:id="@+id/textView_contactsprofile_workspace"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/contacts_profile_workspace"
