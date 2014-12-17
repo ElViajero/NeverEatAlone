@@ -154,7 +154,7 @@ public class InvitesActivity extends ListActivity {
 		NotificationProperties notification = (NotificationProperties) NotificationList
 				.get(position);
 
-		DataCacheHelper.setNotificationPropertiesObject(notification);
+		DataCacheHelper.setIActivityPropertiesObject(notification);
 		startActivity(intent);
 
 	}

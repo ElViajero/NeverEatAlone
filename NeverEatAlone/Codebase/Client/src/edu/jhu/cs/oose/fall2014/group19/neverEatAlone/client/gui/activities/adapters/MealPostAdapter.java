@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.gson.reflect.TypeToken;
@@ -70,6 +71,11 @@ public class MealPostAdapter extends ArrayAdapter<IActivityProperties> {
 
 		startTime = (TextView) view.findViewById(R.id.textView_meal_notification_startTime);
 		location = (TextView) view.findViewById(R.id.textView_meal_notification_location);
+		Button closeButton = (Button) view.findViewById(R.id.myPosts_button_close);
+		Button detailsButton = (Button) view.findViewById(R.id.myPosts_button_detail);
+
+		closeButton.setVisibility(View.INVISIBLE);
+		detailsButton.setVisibility(View.INVISIBLE);
 
 		PostProperties post = (PostProperties) 
 				MealNotifications.get(position);

@@ -240,7 +240,8 @@ public class MealDBRequestHandler implements IMealDBRequestHandler {
 
 
 		String query = "MATCH (n:Post),(a:User),(b:User) "
-				+ "WHERE (n)-[:RECIPIENT]->(a) "
+				+ "WHERE ((n)-[:RECIPIENT]->(a) "
+				+ "OR (a)-[:POSTER]->(n)) "
 				+ "AND a.username={username} "
 				+ "AND n.postID={postID} "
 				+ "AND (b)-[:ATTENDING]->(n) "

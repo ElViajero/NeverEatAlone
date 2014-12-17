@@ -70,7 +70,7 @@ public class MealDetailActivity extends ListActivity {
 		mealDetailTitleObject = (TextView) mealView.getView("textView_mealdetails_title");
 
 		notificationPropertiesObject=
-				DataCacheHelper.getNotificationPropertiesObject();
+				(NotificationProperties) DataCacheHelper.getIActivityPropertiesObject();
 
 		setTitleStyle();
 		populateView();

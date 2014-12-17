@@ -1,26 +1,14 @@
 package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.http.impl.execchain.RequestAbortedException;
 
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R.layout;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.AccountProperties;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.ContactProperties;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.NotificationProperties;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.PostProperties;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.adapters.ContactsInformationAdapter;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.DataCacheHelper;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.MessageToasterHelper;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.NotificationAndPostCacheHelper;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.MealView;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
 import android.app.Activity;
+import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -30,26 +18,41 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.ContactProperties;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.MealProperties;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.PostProperties;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.adapters.ContactsInformationAdapter;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.DataCacheHelper;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.MealView;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.helpers.GsonHelper;
+
 /**
  * 
- * @author Runze Tang
+ * @author tejasvamsingh
+ * 
  * 
  *         MyPostsDetailActivity class is used to set up the view of the My
  *         Posts Details page. And also set up the functions after clicking
  *         different buttons.
  */
-public class MyPostsDetailActivity extends Activity {
+public class MyPostsDetailActivity extends ListActivity {
 
-	private ArrayAdapter<ContactProperties> contactsInformationAdapter;
+	private ArrayAdapter<ContactProperties> attendingContactsAdapter;
 	private Context context;
 	private Activity activity;
 	private MealView myPostsView;
 	private TextView myPostsDetailTitleObject;
 	private String requestID;
 	private String requestType;
-	private NotificationProperties notificationPropertiesObject;
+	private PostProperties postPropertiesObject;
 
-	List<ContactProperties> contactList;
+	List<ContactProperties> attendingContactsList;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -60,17 +63,16 @@ public class MyPostsDetailActivity extends Activity {
 		myPostsDetailTitleObject = (TextView) myPostsView
 				.getView("textView_myPostsDetail_title");
 
-		// TODO need changes here
-		contactList = new ArrayList<ContactProperties>();
-		contactsInformationAdapter = new ContactsInformationAdapter(this,
-				contactList);
-		// setListAdapter(contactsInformationAdapter);
+		attendingContactsList = new ArrayList<ContactProperties>();
+		attendingContactsAdapter = new ContactsInformationAdapter(this,
+				attendingContactsList);
+		setListAdapter(attendingContactsAdapter);
 
-		fetchContacts();
+		postPropertiesObject = (PostProperties) DataCacheHelper
+				.getIActivityPropertiesObject();
 
-		notificationPropertiesObject = DataCacheHelper
-				.getNotificationPropertiesObject();
-
+		fetchAttending();
+		populateView();
 		setTitleStyle();
 		applyTheme();
 
@@ -105,38 +107,7 @@ public class MyPostsDetailActivity extends Activity {
 
 	}
 
-	// TODO need changes here
-	private void fetchContacts() {
 
-		requestID = "Contact";
-		requestType = "getAll";
-
-		Map<String, Object> requestMap = new HashMap<String, Object>();
-		requestMap.put("username", AccountProperties.getUserAccountInstance()
-				.getusername());
-
-		try {
-
-			List<Map<String, String>> resultMapList = RequestHandlerHelper
-					.getRequestHandlerInstance().handleRequest(this,
-							requestMap, requestID, requestType);
-			contactList.clear();
-			for (Map<String, String> result : resultMapList) {
-				if (result.isEmpty())
-					continue;
-				contactList.add(new ContactProperties(result));
-			}
-
-			MessageToasterHelper.toastMessage(this, contactList.get(0)
-					.getContactusername());
-			contactsInformationAdapter.notifyDataSetChanged();
-			NotificationAndPostCacheHelper.setServerFetchRequired("contact",
-					false);
-
-		} catch (RequestAbortedException e) {
-			System.out.println(e.getMessage());
-		}
-	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -171,9 +142,81 @@ public class MyPostsDetailActivity extends Activity {
 	 * click handler for the close button.
 	 * 
 	 */
-	public void onCloseButtonClick(View view) {
-
+	public void onCloseButtonClick(View view){
 		// TODO
+	}
+
+
+
+	private void fetchAttending() {
+
+		requestID="Meal";
+		requestType="getAttendingContacts";
+		attendingContactsList.clear();
+
+		try{
+
+			List<Map<String, String>> resultMapList =
+					RequestHandlerHelper.getRequestHandlerInstance().
+					handleRequest(this,postPropertiesObject.toMap(),requestID,requestType);
+
+
+			for(Map<String, String> result : resultMapList){
+
+				if(result.isEmpty())
+					continue;
+
+				attendingContactsList.add(new ContactProperties(result));	
+			}
+
+			attendingContactsAdapter.notifyDataSetChanged();
+
+		}catch(RequestAbortedException e){
+
+		}
+	}
+
+	/**
+	 * Populates the fields in the view.
+	 * @author tejasvamsingh
+	 */
+
+	private void populateView() {
+
+
+		Gson gson = GsonHelper.getGsoninstance();
+
+		String postData = postPropertiesObject.getPostData();
+
+		Type stringStringMap = new TypeToken<Map<String, String>>(){}.getType();
+
+		Map<String,String> postDataMap = 
+				gson.fromJson(postData, stringStringMap);
+
+
+		MealProperties mealPropertiesObject = new MealProperties(postDataMap);
+
+
+		TextView textStartTimeTextViewObject = 
+				(TextView) myPostsView.getView("textView_myPostsDetail_startTime_result");
+		myPostsView.setValue(textStartTimeTextViewObject,
+				mealPropertiesObject.getStartDateAndTimeProperties().toString());
+
+		TextView textEndTimeTextViewObject = 
+				(TextView) myPostsView.getView("textView_myPostsDetail_endTime_result");
+		myPostsView.setValue(textEndTimeTextViewObject,
+				mealPropertiesObject.getEndDateAndTimeProperties().toString() );
+
+		TextView restaurantTextViewObject = 
+				(TextView) myPostsView.getView("TextView_myPostsDetail_restaurant_result");
+
+
+		myPostsView.setValue(restaurantTextViewObject,
+				mealPropertiesObject.getlocation());
+
 
 	}
+
+
+
 }

@@ -21,19 +21,18 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.AccountProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.NotificationProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.PostProperties;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.adapters.MealNotificationAdapter;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.adapters.MealPostAdapter;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.DataCacheHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.MessageToasterHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.NotificationAndPostCacheHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.ContactsView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.InvitesView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
 
 /**
  * 
  * This class handles controller operations for the MyPosts page.
- * 
+ * @author tejasvamsingh
  * @author Runze Tang
  */
 public class MyPostsActivity extends ListActivity {
@@ -48,12 +47,12 @@ public class MyPostsActivity extends ListActivity {
 	private Activity activity;
 	private InvitesView invitesView;
 
-	NotificationProperties selectedNotification;
+	IActivityProperties selectedPost;
 	int listItemIndex;
 	Button detailButton;
 	Button closeButton;
 
-	List<IActivityProperties> notificationList;
+	List<IActivityProperties> postList;
 
 	/**
 	 * This constructor is responsible for obtaining notifications and updating
@@ -95,8 +94,8 @@ public class MyPostsActivity extends ListActivity {
 
 		detailButton = new Button(getApplicationContext());
 		closeButton = new Button(getApplicationContext());
-		notificationList = new ArrayList<IActivityProperties>();
-		myPostsAdapter = new MealPostAdapter(this, notificationList);
+		postList = new ArrayList<IActivityProperties>();
+		myPostsAdapter = new MealPostAdapter(this, postList);
 
 		setListAdapter(myPostsAdapter);
 
@@ -104,6 +103,8 @@ public class MyPostsActivity extends ListActivity {
 				"mealPost");
 
 		fetchPosts();
+
+
 
 		setTitleStyle();
 
@@ -150,7 +151,7 @@ public class MyPostsActivity extends ListActivity {
 	 */
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
-		selectedNotification = (NotificationProperties) myPostsAdapter
+		selectedPost = myPostsAdapter
 				.getItem(position);
 		listItemIndex = position;
 		setButtonsVisible(v);
@@ -178,6 +179,8 @@ public class MyPostsActivity extends ListActivity {
 	 * @param view
 	 */
 	public void onDetailMyPostsButtonClick(View view) {
+
+		DataCacheHelper.setIActivityPropertiesObject(selectedPost);
 		Intent intent = new Intent(this, MyPostsDetailActivity.class);
 		startActivity(intent);
 	}
