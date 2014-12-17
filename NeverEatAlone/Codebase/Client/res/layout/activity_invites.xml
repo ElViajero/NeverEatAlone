@@ -39,6 +39,7 @@
             <Button
                 android:id="@+id/invites_button_my_posts"
                 style="@style/BarButton"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
                 android:layout_marginRight="@dimen/activity_horizontal_margin"
                 android:onClick="onMyPostsButtonClick"
                 android:text="@string/my_posts" />
