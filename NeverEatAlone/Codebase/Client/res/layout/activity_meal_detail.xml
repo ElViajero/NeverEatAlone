@@ -208,10 +208,10 @@
 
                     <Button
                         android:id="@+id/button_mealdetails_inviteothers"
-                        style="@style/StandardButton"
+                        style="@style/barButton"
                         android:layout_weight="0.3"
                         android:text="@string/invite_others" />
-
+                    
                     <TextView
                         android:id="@+id/button_mealdetails_padding"
                         android:layout_width="0dip"
