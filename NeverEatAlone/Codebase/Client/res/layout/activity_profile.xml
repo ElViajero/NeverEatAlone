@@ -86,18 +86,16 @@
 
     <!-- Main Space -->
 
-    <LinearLayout
+    <ScrollView
         android:id="@+id/main_profile"
         style="@style/MainLayoutTheme"
         android:layout_above="@+id/buttons_profile"
-        android:layout_below="@+id/buttons_profile_top"
-        android:paddingTop="@dimen/header_vertical_margin" >
+        android:layout_below="@+id/buttons_profile_top">
 
         <RelativeLayout
             android:id="@+id/layout_profile_container"
             style="@style/MainLayoutTheme"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent" >
+            >
 
             <ImageView
                 android:id="@+id/imageView_profile_avatar"
@@ -120,7 +118,7 @@
                     android:id="@+id/profile_username"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="0.3"
                     android:text="@string/username"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -128,8 +126,7 @@
                     android:id="@+id/textView_username"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="3"
-                    android:background="@drawable/edittext"
+                    android:layout_weight="0.7"
                     android:gravity="center_horizontal"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
             </LinearLayout>
@@ -147,7 +144,7 @@
                     android:id="@+id/profile_alias"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="0.3"
                     android:text="@string/alias"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -155,8 +152,7 @@
                     android:id="@+id/textView_alias"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="3"
-                    android:background="@drawable/edittext"
+                    android:layout_weight="0.7"
                     android:gravity="center_horizontal"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
             </LinearLayout>
@@ -174,7 +170,7 @@
                     android:id="@+id/profile_name"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="0.3"
                     android:text="@string/name"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -182,8 +178,7 @@
                     android:id="@+id/textView_Name"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="3"
-                    android:background="@drawable/edittext"
+                    android:layout_weight="0.7"
                     android:gravity="center_horizontal"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
             </LinearLayout>
@@ -201,7 +196,7 @@
                     android:id="@+id/profile_email"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="0.3"
                     android:text="@string/email"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -209,8 +204,7 @@
                     android:id="@+id/textView_email"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="3"
-                    android:background="@drawable/edittext"
+                    android:layout_weight="0.7"
                     android:gravity="center_horizontal"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
             </LinearLayout>
@@ -228,8 +222,7 @@
                     android:id="@+id/profile_gender"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/activity_horizontal_margin"
-                    android:layout_weight="1"
+                    android:layout_weight="0.3"
                     android:text="@string/gender"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -237,8 +230,7 @@
                     android:id="@+id/textView_Gender"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="3"
-                    android:background="@drawable/edittext"
+                    android:layout_weight="0.7"
                     android:gravity="center_horizontal"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
             </LinearLayout>
@@ -256,7 +248,7 @@
                     android:id="@+id/profile_workspace"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="0.3"
                     android:text="@string/workspace"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -264,12 +256,11 @@
                     android:id="@+id/textView_workspace"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="3"
-                    android:background="@drawable/edittext"
+                    android:layout_weight="0.7"
                     android:gravity="center_horizontal"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
             </LinearLayout>
         </RelativeLayout>
-    </LinearLayout>
+    </ScrollView>
 
 </RelativeLayout>

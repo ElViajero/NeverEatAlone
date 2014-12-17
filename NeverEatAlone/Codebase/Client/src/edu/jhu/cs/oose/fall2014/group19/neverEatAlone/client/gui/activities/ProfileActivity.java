@@ -71,7 +71,7 @@ public class ProfileActivity extends Activity {
 		
 		View mainLayout = profileView.getView("main_profile");
 		View headerLayout = profileView.getView("header_profile");
-		View buttonBar = profileView.getView("buttons_profile");
+		View buttonBarBottom = profileView.getView("buttons_profile");
 		View buttonBarTop = profileView.getView("buttons_profile_top");
 		
 		View changePasswordButton = profileView.getView("button_profile_changepassword");
@@ -79,9 +79,11 @@ public class ProfileActivity extends Activity {
 		View logoutButton = profileView.getView("button_profile_logout");
 		View deleteAccountButton = profileView.getView("button_delete_account");
 
-		ThemeManager.applyTheme(mainLayout, headerLayout);
-		ThemeManager.applyButtonBarTheme(buttonBar);
-		ThemeManager.applyButtonBarTheme(buttonBarTop);
+		
+		ThemeManager.applyDoubleBarTheme(mainLayout, headerLayout,buttonBarTop, buttonBarBottom); 
+//		ThemeManager.applyTheme(mainLayout, headerLayout);
+//		ThemeManager.applyButtonBarTheme(buttonBar);
+//		ThemeManager.applyButtonBarTheme(buttonBarTop);
 		
 		ThemeManager.applyButtonColor(changePasswordButton);
 		ThemeManager.applyButtonColor(editProfileButton);
