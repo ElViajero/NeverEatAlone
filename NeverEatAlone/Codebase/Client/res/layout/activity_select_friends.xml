@@ -40,6 +40,7 @@
             android:id="@+id/button_selectfriends_broadcast"
 			style="@style/BarButton"
             android:onClick="onBroadcastButtonClick"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
 			android:layout_marginRight="@dimen/activity_horizontal_margin" 
 			android:text="@string/broadcast_to_all_friends"/>
         

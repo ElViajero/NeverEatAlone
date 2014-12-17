@@ -22,6 +22,7 @@ public class ThemeManager {
 	static int headerTheme = R.drawable.header_background_light;
 	static int mainTheme = R.drawable.layout_background_light;
 	static int mainThemePlain = R.drawable.plain_layout_background_light;
+	static int mainThemePlainSides = R.drawable.plain_layout_background_light_sides;
 	static int buttonBarTheme = R.drawable.buttonbar_background_light;
 	static int buttonBarThemePlain = R.drawable.plain_buttonbar_background_light;
 	static int tabTheme = R.drawable.tab_background_light;
@@ -98,6 +99,18 @@ public class ThemeManager {
 		mainView.setBackgroundResource(mainThemePlain);
 		headerView.setBackgroundResource(headerTheme);
 		buttonBarView.setBackgroundResource(buttonBarThemePlain);
+
+	}
+	
+	public static void applyDoubleBarTheme(View mainView, View headerView,View buttonBarViewTop, View buttonBarViewBottom) {
+
+		if ((mainView == null) || (headerView == null)|| (buttonBarViewTop == null)|| (buttonBarViewBottom == null)) {
+			System.out.println("acitivity is null");
+		}
+		headerView.setBackgroundResource(headerTheme);
+		buttonBarViewTop.setBackgroundResource(buttonBarTheme);
+		mainView.setBackgroundResource(mainThemePlainSides);
+		buttonBarViewBottom.setBackgroundResource(buttonBarThemePlain);
 
 	}
 
@@ -186,7 +199,18 @@ public class ThemeManager {
 				"fonts/Chunkfive.otf");
 		tv.setTypeface(tf);
 		tv.setTextColor(Color.parseColor("#00B9FF"));
-//		tv.setTextSize(80);
+
+	}
+	
+	public static void setTitleFont(TextView tv) {
+
+		if (tv == null) {
+			System.out.println("acitivity is null");
+		}
+
+		Typeface tf = Typeface.createFromAsset(tv.getContext().getAssets(),
+				"fonts/Chunkfive.otf");
+		tv.setTypeface(tf);
 
 	}
 	

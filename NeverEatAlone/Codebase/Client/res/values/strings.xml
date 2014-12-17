@@ -106,6 +106,9 @@
     <string name="contacts_profile">Contacts Profile</string>
     <string name="accepted_invites">Accepted Invites</string>
     <string name="title_activity_accepted_invites">AcceptedInvitesActivity</string>
-    
+    <string name="decline">Decline</string>
+    <string name="with_whom">With Whom?</string>
+    <string name="additional_information">Additional Information</string>
+    <string name="invite_others">Invite Others</string>
 
 </resources>

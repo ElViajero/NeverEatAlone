@@ -1,5 +1,5 @@
 {
-	"ipAddress" : "10.0.0.3" ,
+	"ipAddress" : "10.188.165.209" ,
 	"protocol" : "http://" ,
 	"serverPort" : "8080" ,
 	"serverURL" : "/NeverEatAloneServer/RequestHandler"

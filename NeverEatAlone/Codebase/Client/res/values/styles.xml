@@ -43,8 +43,8 @@
         <item name="android:layout_gravity">center_vertical</item>
         <item name="android:gravity">left|center_vertical</item>
         <item name="android:textSize">@dimen/header_text_size</item>
-        <item name="android:drawableLeft">@drawable/ic_logo</item>
-        <item name="android:drawablePadding">@dimen/logo_padding</item>
+       <!--  <item name="android:drawableLeft">@drawable/ic_logo</item>
+        <item name="android:drawablePadding">@dimen/logo_padding</item> -->
     </style>
 
     <!--
@@ -106,6 +106,7 @@
     <style name="StandardButton">
         <item name="android:layout_width">0dip</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
         <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
     </style>
 
