@@ -22,6 +22,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.ProfileVi
  * @author Hai Tang
  * @author Yueling Loh
  * @author tejasvamsingh
+ * @author Runze Tang
  */
 public class ProfileActivity extends Activity {
 
@@ -56,7 +57,7 @@ public class ProfileActivity extends Activity {
 
 		applyTheme();
 	}
-	
+
 	/**
 	 * This method is used to set GUI colors
 	 * 
@@ -71,6 +72,7 @@ public class ProfileActivity extends Activity {
 		View mainLayout = profileView.getView("main_profile");
 		View headerLayout = profileView.getView("header_profile");
 		View buttonBar = profileView.getView("buttons_profile");
+		View buttonBarTop = profileView.getView("buttons_profile_top");
 		
 		View changePasswordButton = profileView.getView("button_profile_changepassword");
 		View editProfileButton = profileView.getView("button_profile_edit");
@@ -79,6 +81,7 @@ public class ProfileActivity extends Activity {
 
 		ThemeManager.applyTheme(mainLayout, headerLayout);
 		ThemeManager.applyButtonBarTheme(buttonBar);
+		ThemeManager.applyButtonBarTheme(buttonBarTop);
 		
 		ThemeManager.applyButtonColor(changePasswordButton);
 		ThemeManager.applyButtonColor(editProfileButton);
@@ -90,6 +93,7 @@ public class ProfileActivity extends Activity {
 
 	/**
 	 * Method used to initialize ProfileView
+	 * 
 	 * @author: Hai Tang
 	 */
 	private void initProfileView() {

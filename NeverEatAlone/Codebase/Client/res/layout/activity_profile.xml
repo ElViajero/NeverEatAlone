@@ -1,6 +1,7 @@
 <!--
 @author Hai Tang 
 @author Yueling Loh 
+@author Runze Tang
 -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -20,19 +21,18 @@
             android:text="@string/profile" />
     </RelativeLayout>
 
-    <!-- Button Header -->
-
     <LinearLayout
-        android:id="@+id/buttons_profile"
+        android:id="@+id/buttons_profile_top"
         style="@style/ButtonBarTheme"
         android:layout_below="@+id/header_profile"
         android:layout_gravity="center_horizontal"
         android:orientation="horizontal" >
 
         <LinearLayout
-            android:id="@+id/buttons_profile_container"
+            android:id="@+id/buttons_profile_container_top"
             style="@style/ButtonBarTheme"
             android:layout_gravity="center_horizontal"
+            android:baselineAligned="false"
             android:orientation="horizontal" >
 
             <Button
@@ -53,14 +53,44 @@
         </LinearLayout>
     </LinearLayout>
 
+    <!-- Button Bottom -->
+
+    <LinearLayout
+        android:id="@+id/buttons_profile"
+        style="@style/ButtonBarTheme"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:id="@+id/buttons_profile_container"
+            style="@style/ButtonBarTheme"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/button_profile_logout"
+                style="@style/BarButton"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:onClick="onLogoutButtonClick"
+                android:text="@string/logout" />
+
+            <Button
+                android:id="@+id/button_delete_account"
+                style="@style/BarButton"
+                android:onClick="onDeleteAccountButtonClick"
+                android:text="@string/delete_account" />
+        </LinearLayout>
+    </LinearLayout>
+
     <!-- Main Space -->
 
     <LinearLayout
         android:id="@+id/main_profile"
         style="@style/MainLayoutTheme"
-        android:layout_below="@+id/buttons_profile"
-        android:layout_gravity="center_vertical"
-        android:orientation="vertical"
+        android:layout_above="@+id/buttons_profile"
+        android:layout_below="@+id/buttons_profile_top"
         android:paddingTop="@dimen/header_vertical_margin" >
 
         <RelativeLayout
@@ -239,24 +269,6 @@
                     android:gravity="center_horizontal"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
             </LinearLayout>
-
-            <Button
-                android:id="@+id/button_profile_logout"
-                style="@style/StandardButton"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:onClick="onLogoutButtonClick"
-                android:text="@string/logout" />
-
-            <Button
-                android:id="@+id/button_delete_account"
-                style="@style/StandardButton"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:onClick="onDeleteAccountButtonClick"
-                android:text="@string/delete_account" />
         </RelativeLayout>
     </LinearLayout>
 
