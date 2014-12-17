@@ -104,5 +104,6 @@
     <string name="more_invitees_last">. The current number of attendance is </string>
     <string name="title_activity_contacts_profile">ContactsProfileActivity</string>
     <string name="contacts_profile">Contacts Profile</string>
+    <string name="accepted_invites">Accepted Invites</string>
 
 </resources>

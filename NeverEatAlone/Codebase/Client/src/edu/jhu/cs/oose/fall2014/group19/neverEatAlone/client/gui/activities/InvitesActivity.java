@@ -124,6 +124,7 @@ public class InvitesActivity extends ListActivity {
 
 		View createInviteButton = invitesView.getView("invites_button_create");
 		View myInvitesButton = invitesView.getView("invites_button_my_posts");
+		View acceptedInvitesButton = invitesView.getView("invites_button_accepted_invites");
 		Switch availabilitySwitch = (Switch) invitesView.getView("switch_availability_status");
 
 		ThemeManager.applyTheme(mainLayout, headerLayout);
@@ -131,6 +132,7 @@ public class InvitesActivity extends ListActivity {
 
 		ThemeManager.applyButtonColor(createInviteButton);
 		ThemeManager.applyButtonColor(myInvitesButton);
+		ThemeManager.applyButtonColor(acceptedInvitesButton);
 		ThemeManager.applyAvailabilityColor(availabilitySwitch);
 
 	}
