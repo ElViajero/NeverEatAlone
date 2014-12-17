@@ -9,6 +9,7 @@ import org.apache.http.impl.execchain.RequestAbortedException;
 import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -41,7 +42,6 @@ public class DisplayContactNotificationActivity extends ListActivity {
 	String requestType;
 	String requestID;
 
-
 	private Context context;
 	private Activity activity;
 	private ContactsView contactsView;
@@ -50,7 +50,6 @@ public class DisplayContactNotificationActivity extends ListActivity {
 	int listItemIndex;
 	Button acceptButton;
 	Button rejectButton;
-
 
 	List<IActivityProperties> contactList;
 
@@ -69,7 +68,7 @@ public class DisplayContactNotificationActivity extends ListActivity {
 	private void initView(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_display_contact_notification);
-		acceptButton =new Button(getApplicationContext());
+		acceptButton = new Button(getApplicationContext());
 		rejectButton = new Button(getApplicationContext());
 		contactList = new ArrayList<IActivityProperties>();
 		contactsNotificationAdapter = new ContactsNotificationAdapter(this,
@@ -77,18 +76,19 @@ public class DisplayContactNotificationActivity extends ListActivity {
 
 		setListAdapter(contactsNotificationAdapter);
 
-		NotificationAndPostCacheHelper.
-		registerAdapterInstance(contactsNotificationAdapter, "contact");
+		NotificationAndPostCacheHelper.registerAdapterInstance(
+				contactsNotificationAdapter, "contact");
 
 		fetchContactRequests();
 
+		setTitleStyle();
 		requestID = "Contact";
 		applyTheme();
 	}
 
-
 	/**
 	 * Method used to initialize ProfileView
+	 * 
 	 * @author: Hai Tang
 	 */
 	private void initContactsView() {
@@ -98,32 +98,65 @@ public class DisplayContactNotificationActivity extends ListActivity {
 	}
 
 	private void applyTheme() {
-		ThemeManager.applyTheme(findViewById(android.R.id.content));
+		initContactsView();
+		View mainLayout = contactsView.getView("main_friendsRequest");
+		View headerLayout = contactsView.getView("header_friendsRequest");
+		View buttonBar = contactsView.getView("buttons_layout_friendsRequest");
+		View backButton = contactsView.getView("friendsRequest_button_back");
+
+		ThemeManager.applyTheme(mainLayout, headerLayout);
+		ThemeManager.applyButtonBarTheme(buttonBar);
+
+		ThemeManager.applyButtonColor(backButton);
+
 	}
 
+	/**
+	 * This method is used to set the font style of the title of each page
+	 * 
+	 * @author: Yueling Loh
+	 */
+	private void setTitleStyle() {
 
+		initContactsView();
+		friendRequestTitleObject = (TextView) contactsView
+				.getView("textView_friendsrequest_title");
 
+		ThemeManager.setHeaderFont(friendRequestTitleObject);
+	}
 
+	/**
+	 * Method used for clicking the back button
+	 * 
+	 * @author Yueling Loh
+	 */
+	public void onBackButtonClick(View view) {
+		Intent intent = new Intent(DisplayContactNotificationActivity.this,
+				TabHostActivity.class);
+		// Go to the specific tab.
+		intent.putExtra("FirstTab", 1);
+		DisplayContactNotificationActivity.this.startActivity(intent);
+	}
 
 	/**
 	 * This method handles click events on the listview.
+	 * 
 	 * @author tejasvamsingh
 	 * 
 	 */
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 
-		selectedNotification = (NotificationProperties) 
-				contactsNotificationAdapter.getItem(position);
-		listItemIndex=position;
+		selectedNotification = (NotificationProperties) contactsNotificationAdapter
+				.getItem(position);
+		listItemIndex = position;
 		setButtonsVisible(v);
-
 
 	}
 
-
 	/**
 	 * Toggles visibility of buttons for listview.
+	 * 
 	 * @author tejasvamsingh
 	 * @param v
 	 */
@@ -132,99 +165,100 @@ public class DisplayContactNotificationActivity extends ListActivity {
 		acceptButton.setVisibility(View.INVISIBLE);
 		rejectButton.setVisibility(View.INVISIBLE);
 
-		acceptButton = (Button) v.findViewById(R.id.contacts_notification_accept);
-		rejectButton = (Button) v.findViewById(R.id.contacts_notification_reject);
+		acceptButton = (Button) v
+				.findViewById(R.id.contacts_notification_accept);
+		rejectButton = (Button) v
+				.findViewById(R.id.contacts_notification_reject);
 		acceptButton.setVisibility(View.VISIBLE);
 		rejectButton.setVisibility(View.VISIBLE);
 	}
 
 	/**
 	 * Handler for the accept button.
+	 * 
 	 * @author tejasvamsingh
 	 * @param view
 	 */
-	public void onAcceptContactRequestButtonClick(View view){
-		requestType="accept";
+	public void onAcceptContactRequestButtonClick(View view) {
+		requestType = "accept";
 		selectedNotification.setAccepted(true);
-		sendRequest();		
+		sendRequest();
 	}
 
 	/**
 	 * @author tejasvamsingh
 	 * @param view
 	 */
-	public void onRejectContactRequestButtonClick(View view){
-		requestType="reject";
-		sendRequest();		
+	public void onRejectContactRequestButtonClick(View view) {
+		requestType = "reject";
+		sendRequest();
 	}
 
 	/**
 	 * sends the request.
+	 * 
 	 * @author tejasvamsingh
 	 */
 	private boolean sendRequest() {
 
-		ContactProperties p = (ContactProperties) selectedNotification.getNotificationData();
-		MessageToasterHelper.toastMessage(this,"YES : "+p.toMap());
-		System.out.println("selectedNotification : "+ selectedNotification);
+		ContactProperties p = (ContactProperties) selectedNotification
+				.getNotificationData();
+		MessageToasterHelper.toastMessage(this, "YES : " + p.toMap());
+		System.out.println("selectedNotification : " + selectedNotification);
 		List<String> recipientList = new ArrayList<String>();
 		recipientList.add(selectedNotification.getPoster());
 
-		IActivityProperties postProperties = 
-				PostProperties.notificationToPost(selectedNotification);
-		try{
+		IActivityProperties postProperties = PostProperties
+				.notificationToPost(selectedNotification);
+		try {
 
-			List<Map<String, String>> result =
-					RequestHandlerHelper.getRequestHandlerInstance().
-					handleRequest(this,postProperties.toMap(),requestID,requestType);
+			List<Map<String, String>> result = RequestHandlerHelper
+					.getRequestHandlerInstance().handleRequest(this,
+							postProperties.toMap(), requestID, requestType);
 
-			NotificationAndPostCacheHelper.setServerFetchRequired("contact", true);
-			System.out.println("FETCH STATUS :"+
-					NotificationAndPostCacheHelper.isServerFetchRequired("contact"));
+			NotificationAndPostCacheHelper.setServerFetchRequired("contact",
+					true);
+			System.out.println("FETCH STATUS :"
+					+ NotificationAndPostCacheHelper
+							.isServerFetchRequired("contact"));
 			contactsNotificationAdapter.remove(selectedNotification);
 			return true;
 
-		}catch(RequestAbortedException e){
+		} catch (RequestAbortedException e) {
 			return false;
 		}
 
 	}
 
-
 	private void fetchContactRequests() {
 
-		requestID ="Contact";
-		requestType="fetchRequests";
+		requestID = "Contact";
+		requestType = "fetchRequests";
 
 		contactList.clear();
 
-		try{
+		try {
 
-			List<Map<String, String>> resultMapList =
-					RequestHandlerHelper.getRequestHandlerInstance().
-					handleRequest(this,
+			List<Map<String, String>> resultMapList = RequestHandlerHelper
+					.getRequestHandlerInstance().handleRequest(this,
 							AccountProperties.getUserAccountInstance().toMap(),
-							requestID,requestType);
+							requestID, requestType);
 
-			for(Map<String, String> result : resultMapList){
+			for (Map<String, String> result : resultMapList) {
 
-				if(result.isEmpty())
+				if (result.isEmpty())
 					continue;
-				System.out.println("RESULT IS :"+ result);
+				System.out.println("RESULT IS :" + result);
 				result.put("postType", "contact");
 				contactList.add(new NotificationProperties(result));
 			}
 
 			contactsNotificationAdapter.notifyDataSetChanged();
 
-
-
-		}catch(RequestAbortedException e){
+		} catch (RequestAbortedException e) {
 			return;
 		}
 
 	}
-
-
 
 }

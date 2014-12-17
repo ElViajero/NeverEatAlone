@@ -20,22 +20,57 @@
             android:text="@string/friends_request" />
     </RelativeLayout>
 
+    <!-- Button Header -->
+
+    <LinearLayout
+        android:id="@+id/buttons_layout_friendsRequest"
+        style="@style/ButtonBarTheme"
+        android:layout_below="@+id/header_friendsRequest"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:id="@+id/buttons_layout_friendsRequest_container"
+            style="@style/ButtonBarTheme"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/friendsRequest_button_back"
+                style="@style/BarButton"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:onClick="onBackButtonClick"
+                android:text="@string/back" />
+
+            <RelativeLayout
+                android:id="@+id/button_placeholder"
+                android:layout_width="0dip"
+                android:layout_height="0dip"
+                android:layout_weight="0.5" >
+            </RelativeLayout>
+        </LinearLayout>
+    </LinearLayout>
+
     <!-- Main Space -->
 
     <RelativeLayout
         android:id="@+id/main_friendsRequest"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/header_friendsRequest" >
+        style="@style/MainLayoutTheme"
+        android:layout_below="@+id/buttons_layout_friendsRequest" >
 
-        <ListView
-            android:id="@android:id/list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/textView_friendsrequest_title"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="50dp" >
-        </ListView>
+        <RelativeLayout
+            android:id="@+id/main_friendsRequest_container"
+            style="@style/MainLayoutTheme"
+            android:layout_alignParentTop="true" >
+
+            <ListView
+                android:id="@android:id/list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView_friendsrequest_title"
+                android:layout_centerHorizontal="true" >
+            </ListView>
+        </RelativeLayout>
     </RelativeLayout>
 
 </RelativeLayout>
