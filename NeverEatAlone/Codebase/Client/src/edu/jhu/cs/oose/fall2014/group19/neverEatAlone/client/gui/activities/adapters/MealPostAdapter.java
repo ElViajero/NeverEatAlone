@@ -20,7 +20,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.helpers.GsonHelper;
 
 /**
- * @author Hai Tang
+ * 
  * @author tejasvamsingh
  * 
  * This class defines the MealNotificationAdapter which takes the List<Map<String,String>> data model
@@ -30,9 +30,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.h
 public class MealPostAdapter extends ArrayAdapter<IActivityProperties> {
 
 	private LayoutInflater inflater;
-	private TextView poster;
 	private TextView startTime;
-	private TextView endTime;
 	private TextView location;
 	private Activity activity;
 
@@ -70,7 +68,7 @@ public class MealPostAdapter extends ArrayAdapter<IActivityProperties> {
 		inflater = activity.getLayoutInflater();
 		view = inflater.inflate(R.layout.row_meal_post_layout, null);
 
-		poster = (TextView) view.findViewById(R.id.textView_meal_notification_poster);
+
 		startTime = (TextView) view.findViewById(R.id.textView_meal_notification_startTime);
 		location = (TextView) view.findViewById(R.id.textView_meal_notification_location);
 
