@@ -14,10 +14,10 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.
 public class MealView implements IView{
 	private View viewObject = null;
 	private String value = null;
-	
+
 	Context context;
 	Activity activity;
-	
+
 	/**
 	 * The constructor is used to get the content from the Meal related Activity
 	 * in order to use getResources() and getPackageName()
@@ -28,15 +28,17 @@ public class MealView implements IView{
 		this.activity = activity;
 	}
 
+
 	/**
+	 * 
 	 * Overriden method used to get the view of different ViewObject.
 	 * @author Hai Tang
 	 */
 	@Override
 	public View getView(String viewName) {
-		
+
 		int resourceID = context.getResources().getIdentifier(viewName,
-			    "id", context.getPackageName());		
+				"id", context.getPackageName());		
 		viewObject = activity.findViewById(resourceID);
 
 		return viewObject;
@@ -45,7 +47,7 @@ public class MealView implements IView{
 	@Override
 	public void setView(View view) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -61,6 +63,6 @@ public class MealView implements IView{
 	@Override
 	public void setValue(View view, String value) {
 		((TextView) view).setText(value);
-		
+
 	}
 }

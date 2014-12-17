@@ -222,5 +222,41 @@ public class MealDBRequestHandler implements IMealDBRequestHandler {
 	}
 
 
+	@Override
+	public List<Map<String, String>> getAttendingContacts(
+			Map<String, String[]> request) {
+
+		Map<String, String> parameterMap = 
+				DBRequestHandlerHelper.GetQueryParameterMap(request);
+
+		Map<String,Object> queryParameterMap = 
+				new HashMap<String,Object>();
+
+		System.out.println("USERNAME : "+ parameterMap.get("poster"));
+		System.out.println("POSTID : "+ parameterMap.get("postID"));
+
+		queryParameterMap.put("username", parameterMap.get("poster"));
+		queryParameterMap.put("postID", parameterMap.get("postID"));
+
+
+		String query = "MATCH (n:Post),(a:User),(b:User) "
+				+ "WHERE (n)-[:RECIPIENT]->(a) "
+				+ "AND a.username={username} "
+				+ "AND n.postID={postID} "
+				+ "AND (b)-[:ATTENDING]->(n) "
+				+ "AND (a)-[:KNOWS]->(b) "
+				+ "AND (b)-[:KNOWS]->(a) "
+				+ "RETURN b";
+
+		List<Map<String, String>> resultMap =
+				iDBQueryExecutionManagerInstance
+				.executeQuery(query, queryParameterMap);
+
+		System.out.println("RESULT MAP IS :"+ resultMap);
+		return resultMap;
+
+	}
+
+
 
 }

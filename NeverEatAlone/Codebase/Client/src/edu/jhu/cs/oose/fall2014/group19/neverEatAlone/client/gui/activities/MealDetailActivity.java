@@ -1,27 +1,32 @@
 package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.http.impl.execchain.RequestAbortedException;
 
 import android.app.Activity;
+import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
 
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.ContactProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.MealProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.NotificationProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.PostProperties;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.adapters.ContactsInformationAdapter;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.DataCacheHelper;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.MessageToasterHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.NotificationAndPostCacheHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.MealView;
@@ -37,9 +42,11 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.h
  *         Details page. And also set up the functions after clicking different
  *         buttons.
  */
-public class MealDetailActivity extends Activity {
+public class MealDetailActivity extends ListActivity {
 
 
+	List<ContactProperties> attendingList;
+	private ArrayAdapter<ContactProperties> attendingAdapter;
 	private Context context;
 	private Activity activity;
 	private MealView mealView;
@@ -69,7 +76,17 @@ public class MealDetailActivity extends Activity {
 		populateView();
 		applyTheme();
 
+		attendingList= new ArrayList<ContactProperties>();
+		attendingAdapter=new ContactsInformationAdapter(this, attendingList);
+		setListAdapter(attendingAdapter);
+
+
+		fetchAttending();
+
+
 	}
+
+
 
 
 
@@ -90,11 +107,11 @@ public class MealDetailActivity extends Activity {
 	 * @author: Yueling Loh
 	 */
 	private void setTitleStyle() {
-		
+
 		ThemeManager.setHeaderFont(mealDetailTitleObject);
 
 	}
-	
+
 	/**
 	 * This method applies the GUI's color theme.
 	 * 
@@ -106,21 +123,21 @@ public class MealDetailActivity extends Activity {
 		View mainLayout = mealView.getView("main_mealDetails");
 		View headerLayout = mealView.getView("header_mealDetails");
 		View buttonBar = mealView.getView("buttons_mealDetails");
-		
+
 		View backButton = mealView.getView("button_mealdetails_back");
 		View declineButton = mealView.getView("button_mealdetails_decline");
 		View acceptButton = mealView.getView("button_mealdetails_accept");
 		View inviteOthersButton = mealView.getView("button_mealdetails_inviteothers");
 
 		ThemeManager.applyPlainTheme(mainLayout, headerLayout,buttonBar);
-		
+
 		ThemeManager.applyButtonColor(backButton);
 		ThemeManager.applyButtonColor(declineButton);
 		ThemeManager.applyButtonColor(acceptButton);
 		ThemeManager.applyButtonColor(inviteOthersButton);
 
 	}
-	
+
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -225,9 +242,50 @@ public class MealDetailActivity extends Activity {
 		TextView restaurantTextViewObject = 
 				(TextView) mealView.getView("TextView_mealdetails_restaurant_result");
 
+		MessageToasterHelper.toastMessage(mealPropertiesObject.getlocation());
 		mealView.setValue(restaurantTextViewObject,
 				mealPropertiesObject.getlocation());
+
+
 	}
+
+
+
+	private void fetchAttending() {
+
+		requestID="Meal";
+		requestType="getAttendingContacts";
+		attendingList.clear();
+		PostProperties postPropertiesObject=
+				PostProperties.notificationToPost(notificationPropertiesObject);
+
+		attendingList.add(new ContactProperties(
+				notificationPropertiesObject.getPoster()));	
+
+
+
+		try{
+
+			List<Map<String, String>> resultMapList =
+					RequestHandlerHelper.getRequestHandlerInstance().
+					handleRequest(this,postPropertiesObject.toMap(),requestID,requestType);
+
+
+			for(Map<String, String> result : resultMapList){
+
+				if(result.isEmpty())
+					continue;
+
+				attendingList.add(new ContactProperties(result));	
+			}
+
+
+		}catch(RequestAbortedException e){
+
+		}
+		attendingAdapter.notifyDataSetChanged();
+	}
+
 
 
 }
