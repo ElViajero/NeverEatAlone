@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Switch;
 import android.widget.TextView;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.AcceptedInvitesActivity;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.contracts.IActivityProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.NotificationProperties;
@@ -174,4 +175,13 @@ public class InvitesActivity extends ListActivity {
 				MyPostsActivity.class);
 		InvitesActivity.this.startActivity(intent);
 	}
+	
+	public void onAcceptedInvitesButtonClick(View view) {
+		// Intent intent = new Intent(RegisterActivity.this,
+		// MainActivity.class);
+		Intent intent = new Intent(InvitesActivity.this,
+				AcceptedInvitesActivity.class);
+		InvitesActivity.this.startActivity(intent);
+	}
+	
 }

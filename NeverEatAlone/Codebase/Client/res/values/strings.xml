@@ -105,5 +105,7 @@
     <string name="title_activity_contacts_profile">ContactsProfileActivity</string>
     <string name="contacts_profile">Contacts Profile</string>
     <string name="accepted_invites">Accepted Invites</string>
+    <string name="title_activity_accepted_invites">AcceptedInvitesActivity</string>
+    
 
 </resources>
