@@ -1,0 +1,175 @@
+<!-- 
+@author Hai Tang 
+-->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context="edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.ContactsProfileActivity" >
+
+ <!-- Header aligned to top -->
+
+    <RelativeLayout
+        android:id="@+id/header_contacts_profile"
+        style="@style/HeaderTheme" >
+
+        <TextView
+            android:id="@+id/contacts_profile"
+            style="@style/HeaderTextTheme"
+            android:text="@string/contacts_profile" />
+    </RelativeLayout>
+
+    <!-- Button Header -->
+
+    <RelativeLayout
+        android:id="@+id/buttons_contacts_profile"
+        style="@style/ButtonBarTheme"
+        android:layout_below="@+id/header_contacts_profile" >
+
+        <Button
+            android:id="@+id/button_contacts_profile_back"
+            style="@style/BarButton"
+            android:layout_alignParentRight="true"
+            android:onClick="onBackButtonClick"
+            android:text="@string/back" />
+    </RelativeLayout>
+
+    <!-- Main Space -->
+
+    <RelativeLayout
+        android:id="@+id/main_contacts_profile"
+        style="@style/MainLayoutTheme"
+        android:layout_below="@+id/buttons_contacts_profile" >
+
+        <ImageView
+            android:id="@+id/imageView_contacts_profile_avatar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/contacts_profile_username"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="14dp"
+            android:contentDescription="@string/user_avatar"
+            android:src="@drawable/user_profile" />
+
+        <TextView
+            android:id="@+id/contacts_profile_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/imageView_contacts_profile_avatar"
+            android:layout_marginTop="20dp"
+            android:text="@string/username"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/contacts_profile_alias"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/contacts_profile_username"
+            android:layout_marginTop="20dp"
+            android:text="@string/alias"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/contacts_profile_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/contacts_profile_alias"
+            android:layout_marginTop="20dp"
+            android:text="@string/name"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/contacts_profile_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/contacts_profile_name"
+            android:layout_marginTop="20dp"
+            android:text="@string/email"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/contacts_profile_gender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/contacts_profile_email"
+            android:layout_marginTop="20dp"
+            android:text="@string/gender"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/contacts_profile_workspace"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/contacts_profile_gender"
+            android:layout_marginTop="20dp"
+            android:text="@string/workspace"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/textView_contacts_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/contacts_profile_username"
+            android:layout_alignBottom="@+id/contacts_profile_username"
+            android:layout_centerHorizontal="true"
+            android:text="hpotter1"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/textView_contacts_alias"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/contacts_profile_alias"
+            android:layout_alignBottom="@+id/contacts_profile_alias"
+            android:layout_centerHorizontal="true"
+            android:text="HP"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/textView_contacts_Name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/contacts_profile_name"
+            android:layout_alignBottom="@+id/contacts_profile_name"
+            android:layout_centerHorizontal="true"
+            android:text="Harry Potter"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/textView_contacts_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/contacts_profile_email"
+            android:layout_alignBottom="@+id/contacts_profile_email"
+            android:layout_centerHorizontal="true"
+            android:text="harry@jhu.edu"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/textView_contacts_Gender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/contacts_profile_gender"
+            android:layout_alignBottom="@+id/contacts_profile_gender"
+            android:layout_centerHorizontal="true"
+            android:text="Harry Potter"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/textView_contacts_workspace"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/contacts_profile_workspace"
+            android:layout_alignBottom="@+id/contacts_profile_workspace"
+            android:layout_centerHorizontal="true"
+            android:text="Hogworts"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

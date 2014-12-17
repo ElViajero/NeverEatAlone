@@ -29,6 +29,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.help
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.ContactsView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.helpers.GsonHelper;
 
 /**
  * This activity is used to handle controller operations for select friends
@@ -207,6 +208,10 @@ public class SelectFriendsActivity extends ListActivity {
 		} catch (RequestAbortedException e) {
 			System.out.println("Already Handled");
 		}
+		
+		Intent intent = new Intent(SelectFriendsActivity.this,
+				TabHostActivity.class);
+		SelectFriendsActivity.this.startActivity(intent);
 	}
 
 

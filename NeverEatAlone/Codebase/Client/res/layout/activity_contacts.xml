@@ -23,40 +23,55 @@
 
     <!-- Button Header -->
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/buttons_contacts"
         style="@style/ButtonBarTheme"
-        android:layout_below="@+id/header_contacts" >
+        android:layout_below="@+id/header_contacts"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal" >
 
-        <Button
-            android:id="@+id/button_contacts_notification"
-            style="@style/BarButton"
-            android:layout_alignParentLeft="true"
-            android:onClick="onContactNotificationButtonClick"
-            android:text="@string/contact_notification" />
+        <LinearLayout
+            android:id="@+id/buttons_contacts_container"
+            style="@style/ButtonBarTheme"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal" >
 
-        <Button
-            android:id="@+id/button_contacts_addcontacts"
-            style="@style/BarButton"
-            android:layout_alignParentRight="true"
-            android:onClick="onAddFriendsButtonClick"
-            android:text="@string/add_friends" />
+            <Button
+                android:id="@+id/button_contacts_notification"
+                style="@style/BarButton"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:onClick="onContactNotificationButtonClick"
+                android:text="@string/contact_notification" />
 
-    </RelativeLayout>
+            <Button
+                android:id="@+id/button_contacts_addcontacts"
+                style="@style/BarButton"
+                android:onClick="onAddFriendsButtonClick"
+                android:paddingBottom="-10dp"
+                android:paddingTop="-10dp"
+                android:text="@string/add_friends" />
+        </LinearLayout>
+    </LinearLayout>
 
     <!-- Main Space -->
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/main_contacts"
         style="@style/MainLayoutTheme"
         android:layout_below="@+id/buttons_contacts" >
 
-        <ListView
-            android:id="@android:id/list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true" >
-        </ListView>
-    </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/layout_contacts_container"
+            style="@style/MainLayoutTheme" >
+
+            <ListView
+                android:id="@android:id/list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/activity_horizontal_margin" >
+            </ListView>
+        </RelativeLayout>
+    </LinearLayout>
 
 </RelativeLayout>

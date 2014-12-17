@@ -94,6 +94,10 @@
             android:name=".gui.activities.MyPostsActivity"
             android:label="@string/title_activity_my_posts" >
         </activity>
+        <activity
+            android:name="edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.ContactsProfileActivity"
+            android:label="@string/title_activity_contacts_profile" >
+        </activity>
     </application>
 
 </manifest>

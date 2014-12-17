@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!--
         Base application theme, dependent on API level. This theme is replaced
@@ -23,7 +23,7 @@
     -->
     <style name="HeaderTheme">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">@dimen/header_height</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_alignParentTop">true</item>
         <!-- <item name="android:layout_alignParentStart">true</item> -->
         <item name="android:gravity">center</item>
@@ -41,10 +41,10 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_gravity">center_vertical</item>
-        <item name="android:gravity">left</item>
+        <item name="android:gravity">left|center_vertical</item>
+        <item name="android:textSize">@dimen/header_text_size</item>
         <item name="android:drawableLeft">@drawable/ic_logo</item>
         <item name="android:drawablePadding">@dimen/logo_padding</item>
-        <item name="android:textAppearance">?android:attr/textAppearanceLarge</item>
     </style>
 
     <!--
@@ -66,11 +66,11 @@
     -->
     <style name="ButtonBarTheme">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">@dimen/button_bar_height</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:paddingLeft">@dimen/activity_horizontal_margin</item>
         <item name="android:paddingRight">@dimen/activity_horizontal_margin</item>
-        <item name="android:paddingBottom">@dimen/activity_vertical_margin</item>
-        <item name="android:paddingTop">@dimen/activity_vertical_margin</item>
+        <item name="android:paddingBottom">@dimen/header_vertical_margin</item>
+        <item name="android:paddingTop">@dimen/header_vertical_margin</item>
     </style>
 
     <!--
@@ -93,8 +93,10 @@
 		@author Yueling Loh 
     -->
     <style name="BarButton">
-        <item name="android:layout_width">@dimen/button_standard_width</item>
-        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_width">0dip</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">0.5</item>
+        <!-- <item name="android:textAppearance">?android:attr/textAppearanceSmall</item> -->
     </style>
 
     <!--
@@ -103,7 +105,7 @@
     -->
     <style name="StandardButton">
         <item name="android:layout_width">@dimen/button_standard_width</item>
-        <item name="android:layout_height">@dimen/button_height</item>
+        <item name="android:layout_height">wrap_content</item>
     </style>
 
     <!--
@@ -112,7 +114,11 @@
     -->
     <style name="BigEditText">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">@dimen/edittext_height</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingBottom">@dimen/edittext_padding</item>
+        <item name="android:paddingTop">@dimen/edittext_padding</item>
+        <item name="android:paddingLeft">@dimen/activity_horizontal_margin</item>
+        <item name="android:paddingRight">@dimen/activity_horizontal_margin</item>
         <item name="android:background">@drawable/edittext_background_light</item>
         <item name="android:gravity">center</item>
     </style>

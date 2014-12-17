@@ -15,16 +15,20 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.AccountProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.ContactProperties;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.MealProperties;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.NotificationProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.adapters.ContactsInformationAdapter;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.NotificationAndPostCacheHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.MessageToasterHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.ContactsView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.helpers.GsonHelper;
 
 /**
  * This class handles controller operations for the contacts tab
@@ -71,11 +75,7 @@ public class ContactsActivity extends ListActivity {
 		addFriendButtonObject = (Button) contactsView
 				.getView("button_contacts_addcontacts");
 
-
-
-		context = this;
-		activity = this;
-		contactsView = new ContactsView(context, activity);
+		initContactView();
 
 		contactTitleObject = (TextView) contactsView.getView("textView_contacts_title");
 		friendRequestButtonObejct = (Button) contactsView.getView("button_contacts_notification");
@@ -211,5 +211,16 @@ public class ContactsActivity extends ListActivity {
 			fetchContacts();
 	}
 
-
+	/**
+	 * This method goes to the ContactsProfileActivity when clicking specific contacts. It also passes
+	 * the ContactsProperties to the ContactsProfileActivity.
+	 * @author Hai Tang
+	 * @param position
+	 */
+	@Override
+	protected void onListItemClick(ListView l, View v, int position, long id) {
+		Intent intent = new Intent(ContactsActivity.this, ContactsProfileActivity.class);
+		ContactsActivity.this.startActivity(intent);
+	}
+	
 }
