@@ -109,9 +109,13 @@ public class MyPostsActivity extends ListActivity {
 		View mainLayout = invitesView.getView("layout_my_posts");
 		View headerLayout = invitesView.getView("header_my_posts");
 		View buttonBar = invitesView.getView("my_posts_buttons_layout");
-
+		View backButton = invitesView.getView("my_posts_button_back");
+		
 		ThemeManager.applyTheme(mainLayout, headerLayout);
 		ThemeManager.applyButtonBarTheme(buttonBar);
+				
+		ThemeManager.applyButtonColor(backButton);
+
 
 	}
 

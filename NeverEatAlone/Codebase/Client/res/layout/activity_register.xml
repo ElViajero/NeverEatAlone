@@ -27,7 +27,6 @@
         android:id="@+id/buttons_registration"
         style="@style/ButtonBarTheme"
         android:layout_alignParentBottom="true"
-        android:layout_below="@+id/header_invites"
         android:layout_gravity="center_horizontal"
         android:orientation="horizontal" >
 
