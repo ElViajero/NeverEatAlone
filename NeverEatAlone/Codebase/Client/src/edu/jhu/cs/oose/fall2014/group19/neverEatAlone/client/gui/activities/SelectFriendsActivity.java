@@ -17,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
@@ -56,13 +57,8 @@ public class SelectFriendsActivity extends ListActivity {
 
 		initView(savedInstanceState);
 		postData = getIntent().getStringExtra("mealProperties");
-		applyTheme();
 	}
 
-	private void applyTheme() {
-		ThemeManager.applyTheme(findViewById(android.R.id.content));
-
-	}
 
 	/**
 	 * Method used to initialize the view.
@@ -82,6 +78,29 @@ public class SelectFriendsActivity extends ListActivity {
 		setListAdapter(selectFriendsAdapter);
 
 		setTitleStyle();
+		applyTheme();
+	}
+	
+	/**
+	 * This method applies the GUI's color theme.
+	 * 
+	 * @author Hai Tang
+	 */
+	private void applyTheme() {
+		initContactView();
+		View mainLayout = contactsView.getView("layout_selectfriends");
+		View headerLayout = contactsView.getView("header_selectfriends");
+		View buttonBar = contactsView.getView("buttons_selectfriends");
+
+		View backSelectfriendsButton = contactsView.getView("button_selectfriends_back");
+
+
+		ThemeManager.applyTheme(mainLayout, headerLayout);
+		ThemeManager.applyButtonBarTheme(buttonBar);
+
+		ThemeManager.applyButtonColor(backSelectfriendsButton);
+
+
 	}
 
 	/**
@@ -101,10 +120,7 @@ public class SelectFriendsActivity extends ListActivity {
 	 * @author: Yueling Loh
 	 */
 	private void setTitleStyle() {
-		Typeface tf = Typeface.createFromAsset(getAssets(),
-				"fonts/Chunkfive.otf");
-		selectFriendTitle.setTypeface(tf);
-		selectFriendTitle.setTextSize(80);
+		ThemeManager.setHeaderFont(selectFriendTitle);
 	}
 
 	/**

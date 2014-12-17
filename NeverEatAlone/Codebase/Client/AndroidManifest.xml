@@ -99,7 +99,7 @@
             android:label="@string/title_activity_contacts_profile" >
         </activity>
         <activity
-            android:name=".AcceptedInvitesActivity"
+            android:name=".gui.activities.AcceptedInvitesActivity"
             android:label="@string/title_activity_accepted_invites" >
         </activity>
     </application>
