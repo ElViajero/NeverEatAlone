@@ -25,6 +25,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.ContactProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.PostProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.adapters.ContactsInformationAdapter;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.NotificationAndPostCacheHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.ContactsView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
@@ -137,6 +138,7 @@ public class SelectFriendsActivity extends ListActivity {
 
 	}
 
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -175,8 +177,9 @@ public class SelectFriendsActivity extends ListActivity {
 	 */
 	public void onPostButtonClick(View view) {
 
-		requestID = "Notification";
-		requestType = "meal";
+		requestID = "Meal";
+		requestType = "create";
+
 		List<String> recipientList = new ArrayList<String>();
 
 		for (ContactProperties contact : contactList) {
@@ -194,10 +197,12 @@ public class SelectFriendsActivity extends ListActivity {
 				"meal", postData);
 
 		try {
-
 			List<Map<String, String>> resultMapList = RequestHandlerHelper
 					.getRequestHandlerInstance().handleRequest(this,
 							postProperties.toMap(), requestID, requestType);
+
+			NotificationAndPostCacheHelper.addPost(postProperties, "mealPost");
+
 
 		} catch (RequestAbortedException e) {
 			System.out.println("Already Handled");

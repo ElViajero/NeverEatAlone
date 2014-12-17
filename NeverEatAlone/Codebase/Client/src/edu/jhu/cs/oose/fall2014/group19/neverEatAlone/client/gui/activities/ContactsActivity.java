@@ -20,7 +20,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.AccountProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.ContactProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.adapters.ContactsInformationAdapter;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.DataCacheHelper;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.NotificationAndPostCacheHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.MessageToasterHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.ContactsView;
@@ -169,7 +169,7 @@ public class ContactsActivity extends ListActivity {
 
 			MessageToasterHelper.toastMessage(this, contactList.get(0).getContactusername());
 			contactsInformationAdapter.notifyDataSetChanged();
-			DataCacheHelper.setServerFetchRequired("contact", false);
+			NotificationAndPostCacheHelper.setServerFetchRequired("contact", false);
 
 
 		} catch (RequestAbortedException e) {
@@ -206,8 +206,8 @@ public class ContactsActivity extends ListActivity {
 	protected void onResume(){
 		super.onResume();
 		System.out.println("FETCH STATUS :"+
-				DataCacheHelper.isServerFetchRequired("contact"));
-		if(DataCacheHelper.isServerFetchRequired("contact"))
+				NotificationAndPostCacheHelper.isServerFetchRequired("contact"));
+		if(NotificationAndPostCacheHelper.isServerFetchRequired("contact"))
 			fetchContacts();
 	}
 

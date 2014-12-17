@@ -11,13 +11,14 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.NotificationProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.PostProperties;
 
-public class DataCacheHelper {
+public class NotificationAndPostCacheHelper {
 
 
 	private static Map<String,ArrayAdapter<IActivityProperties>> adapterMap;
 	private static Map<String,List<IActivityProperties>> adapterDataMap;	
 	private static Map<String,Boolean> isServerFetchRequiredMap;
 	private static Map<String,IActivityProperties> myPostMap;
+	private static Map<String,List<String>> attendingMap;
 
 
 	public static void setNotificationCache(			
@@ -71,10 +72,11 @@ public class DataCacheHelper {
 			adapterDataMap = new HashMap<String, List<IActivityProperties>>();
 			isServerFetchRequiredMap = new HashMap<String, Boolean>();
 			myPostMap=new HashMap<String, IActivityProperties>();
-		}
+			attendingMap = new HashMap<String, List<String>>();
+		}		
 	}
 
-	public static void registerNotificationAdapterInstance(
+	public static void registerAdapterInstance(
 			ArrayAdapter<IActivityProperties> adapter,String adapterType){
 		initMaps();
 		adapterMap.put(adapterType, adapter);
@@ -106,8 +108,10 @@ public class DataCacheHelper {
 
 		if(!adapterDataMap.containsKey(key))
 			adapterDataMap.put(key, new ArrayList<IActivityProperties>());
-		adapterDataMap.get(key).add(post);
+		if(!attendingMap.containsKey(key))
+			attendingMap.put(key, new ArrayList<String>());
 
+		adapterDataMap.get(key).add(post);
 		PostProperties postPropertiesObject = (PostProperties)post;
 		myPostMap.put(postPropertiesObject.getPostID(),post);
 
@@ -133,6 +137,7 @@ public class DataCacheHelper {
 	private static boolean isResponse(NotificationProperties notification) {
 		return myPostMap.containsKey(notification.getNotificationID());
 	}
+
 
 
 }

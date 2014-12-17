@@ -102,6 +102,16 @@ public class PostProperties implements IActivityProperties {
 		this.postID = postID;
 	}
 
+	public String getPostData() {
+		return postData;
+	}
+
+	public void setPostData(String postData) {
+		this.postData = postData;
+	}
+
+
+
 
 
 

@@ -21,7 +21,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.NotificationProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.PostProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.adapters.ContactsNotificationAdapter;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.DataCacheHelper;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.NotificationAndPostCacheHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.MessageToasterHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.ContactsView;
@@ -76,7 +76,7 @@ public class DisplayContactNotificationActivity extends ListActivity {
 
 		setListAdapter(contactsNotificationAdapter);
 
-		DataCacheHelper.registerNotificationAdapterInstance(contactsNotificationAdapter, "contact");		
+		NotificationAndPostCacheHelper.registerAdapterInstance(contactsNotificationAdapter, "contact");		
 
 		requestID = "Contact";
 		applyTheme();
@@ -173,9 +173,9 @@ public class DisplayContactNotificationActivity extends ListActivity {
 					RequestHandlerHelper.getRequestHandlerInstance().
 					handleRequest(this,postProperties.toMap(),requestID,requestType);
 
-			DataCacheHelper.setServerFetchRequired("contact", true);
+			NotificationAndPostCacheHelper.setServerFetchRequired("contact", true);
 			System.out.println("FETCH STATUS :"+
-					DataCacheHelper.isServerFetchRequired("contact"));
+					NotificationAndPostCacheHelper.isServerFetchRequired("contact"));
 			contactsNotificationAdapter.remove(selectedNotification);
 			return true;
 

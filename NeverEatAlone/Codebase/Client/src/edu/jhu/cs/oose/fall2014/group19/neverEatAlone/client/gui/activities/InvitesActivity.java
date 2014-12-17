@@ -20,7 +20,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.MealProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.NotificationProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.adapters.MealNotificationAdapter;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.DataCacheHelper;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.NotificationAndPostCacheHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.InvitesView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.helpers.GsonHelper;
@@ -103,7 +103,7 @@ public class InvitesActivity extends ListActivity {
 
 		invitesAdapter = new MealNotificationAdapter(this, NotificationList);
 		setListAdapter(invitesAdapter);
-		DataCacheHelper.registerNotificationAdapterInstance(invitesAdapter, "meal");
+		NotificationAndPostCacheHelper.registerAdapterInstance(invitesAdapter, "meal");
 
 		applyTheme();
 

@@ -2,7 +2,6 @@ package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import android.app.Activity;
 import android.app.ListActivity;
@@ -14,11 +13,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.MealProperties;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.NotificationProperties;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.contracts.IActivityProperties;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.adapters.MealPostAdapter;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.NotificationAndPostCacheHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.InvitesView;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.helpers.GsonHelper;
 
 /**
  * 
@@ -27,10 +26,10 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.h
  */
 public class MyPostsActivity extends ListActivity {
 
-	private ArrayAdapter<NotificationProperties> MyPostsAdapter;
+	private ArrayAdapter<IActivityProperties> myPostsAdapter;
 	private TextView titleNameObject;
 
-	List<NotificationProperties> NotificationList;
+	List<IActivityProperties> notificationList;
 
 	String requestID;
 	String requestType;
@@ -43,12 +42,13 @@ public class MyPostsActivity extends ListActivity {
 	/**
 	 * This constructor is responsible for obtaining notifications and updating
 	 * the GUI.
-	 * @author Hai Tang
+	 * @author tejasvamsingh
 	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 
-		NotificationList = new ArrayList<NotificationProperties>();
+		notificationList = new ArrayList<IActivityProperties>();
+
 		initView(savedInstanceState);
 		isCreated = false;
 
@@ -61,7 +61,7 @@ public class MyPostsActivity extends ListActivity {
 
 	/**
 	 * Method used to initialize InvitesView
-	 * @author: Hai Tang
+	 * @author tejasvamsingh
 	 */
 	private void initInvitesView() {
 		context = this;
@@ -71,16 +71,19 @@ public class MyPostsActivity extends ListActivity {
 
 	/**
 	 * This method updates the GUI.
-	 * 
+	 * @author tejasvamsingh
 	 */
 	private void initView(Bundle savedInstanceState) {
+
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_my_posts);
 
-		// Needs to be changed here!
-		//MyPostsAdapter = new MealNotificationAdapter(this, NotificationList);
-		setListAdapter(MyPostsAdapter);
-		//DataCacheHelper.registerNotificationAdapter(MyPostsAdapter);
+
+		myPostsAdapter = new MealPostAdapter(this, notificationList);
+		setListAdapter(myPostsAdapter);
+
+		NotificationAndPostCacheHelper.
+		registerAdapterInstance(myPostsAdapter, "mealPost");
 
 		applyTheme();
 
@@ -122,20 +125,6 @@ public class MyPostsActivity extends ListActivity {
 	 */
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
-
-		// Needs to be changed here! I will add functionalities for posters
-		// after the list of invites from the poster is done.
-		Intent intent = new Intent(this, MealDetailActivity.class);
-
-		MealProperties mealProperties = (MealProperties) NotificationList.get(
-				position).getNotificationData();
-
-		Map<String, Object> mealPropertiesMap = mealProperties.toMap();
-
-		intent.putExtra("mealProperties",
-				GsonHelper.getGsoninstance().toJson(mealPropertiesMap));
-		// intent.putExtra("mealProperties", mealProperties.toString());
-		startActivity(intent);
 
 	}
 

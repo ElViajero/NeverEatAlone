@@ -9,6 +9,7 @@ import javax.inject.Inject;
 
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbRequestHandler.contracts.INotificationDBRequestHandler;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.managementRequestHandler.contracts.IManagementRequestHandler;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.managementRequestHandler.contracts.INotificationManagementRequestHandler;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.notificationManager.contracts.INotificationManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.reflectionManager.contracts.IReflectionManager;
 
@@ -21,7 +22,8 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.reflectionManager.c
  *
  */
 
-public class NotificationManagementRequestHandler implements IManagementRequestHandler {
+public class MealManagementRequestHandler implements 
+IManagementRequestHandler,INotificationManagementRequestHandler{
 
 	@Inject INotificationManager iNotificationManagerObject;
 	@Inject INotificationDBRequestHandler iNotificationDBRequestHandlerObject;
@@ -33,7 +35,7 @@ public class NotificationManagementRequestHandler implements IManagementRequestH
 	 * @param request
 	 * @return
 	 */
-	private List<Map<String,String>> meal(Map<String,String[]> request){
+	private List<Map<String,String>> create(Map<String,String[]> request){
 
 		System.out.println("reached MealNotificationRequest");
 
@@ -72,6 +74,20 @@ public class NotificationManagementRequestHandler implements IManagementRequestH
 
 		return iReflectionManagerObject.invokeMethod(this,
 				request.get("requestType")[0], request);
+	}
+
+
+	@Override
+	public List<Map<String, String>> accept(Map<String, String[]> request) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public List<Map<String, String>> reject(Map<String, String[]> request) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 
