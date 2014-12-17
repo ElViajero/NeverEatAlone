@@ -116,9 +116,13 @@
             android:launchMode="singleTask" >
         </activity>
         <activity
-            android:name="edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.AcceptedInvitesActivity"
+            android:name=".gui.activities.AcceptedInvitesActivity"
             android:label="@string/title_activity_accepted_invites"
             android:launchMode="singleTask" >
+        </activity>
+        <activity
+            android:name="edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.MyPostsDetailActivity"
+            android:label="@string/title_activity_my_posts_detail" >
         </activity>
     </application>
 
