@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.TextView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.LoginView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.ProfileView;
 
 /**
@@ -25,29 +26,56 @@ public class ChangePasswordActivity extends Activity {
 	private Context context;
 	private Activity activity;
 	private ProfileView profileView;
-	private TextView changePasswordTextViewTitleObject;
-	
+	private TextView changePasswordTitle;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_change_password);
-		
+
+		initProfileView();
+
+		changePasswordTitle = (TextView) profileView
+				.getView("textView_changepassword_title");
+
+		setTitleStyle();
+		applyTheme();
+	}
+
+	private void initProfileView() {
 		context = this;
 		activity = this;
 		profileView = new ProfileView(context, activity);
+	}
 
-		setTitleStyle();
+	/**
+	 * This method applies the GUI's color theme.
+	 * 
+	 */
+	private void applyTheme() {
+
+		initProfileView();
+		View mainLayout = profileView.getView("main_changePassword");
+		View headerLayout = profileView.getView("header_changePassword");
+		View buttonBar = profileView.getView("buttons_password");
+
+		View registerButton = profileView
+				.getView("button_changepassword_confirm");
+		View cancelButton = profileView.getView("button_changepassword_cancel");
+
+		ThemeManager.applyPlainTheme(mainLayout, headerLayout, buttonBar);
+
+		ThemeManager.applyButtonColor(registerButton);
+		ThemeManager.applyButtonColor(cancelButton);
+
 	}
 
 	/**
 	 * This method is used to set the font style of the title of each page
 	 * 
-	 * @author: Hai Tang
-	 * @author: Yueling Loh
 	 */
 	private void setTitleStyle() {
-		changePasswordTextViewTitleObject = (TextView) profileView.getView("textView_changepassword_title");
-		ThemeManager.setHeaderFont(changePasswordTextViewTitleObject);
+		ThemeManager.setHeaderFont(changePasswordTitle);
 	}
 
 	/**

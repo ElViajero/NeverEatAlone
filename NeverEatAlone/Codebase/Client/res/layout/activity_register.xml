@@ -39,6 +39,7 @@
             <Button
                 android:id="@+id/button_register_cancel"
                 style="@style/BarButton"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
                 android:layout_marginRight="@dimen/activity_horizontal_margin"
                 android:onClick="onCancelButtonClick"
                 android:text="@string/cancel" />
