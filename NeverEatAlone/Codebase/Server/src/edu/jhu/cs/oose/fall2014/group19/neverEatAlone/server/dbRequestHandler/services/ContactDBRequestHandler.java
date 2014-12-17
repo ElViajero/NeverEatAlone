@@ -53,6 +53,8 @@ public class ContactDBRequestHandler implements IContactDBRequestHandler {
 		Map<String,Object> queryParameterMap = new HashMap<String,Object>();
 		queryParameterMap.put("username",paramterMap.get("username"));
 		queryParameterMap.put("contactusername",paramterMap.get("contactusername"));
+		queryParameterMap.put("postID", paramterMap.get("postID"));
+
 		queryParameterMap.put("alias", ""); 
 
 		//create cypher query to add a relation in the database.
@@ -61,8 +63,8 @@ public class ContactDBRequestHandler implements IContactDBRequestHandler {
 				+ " WHERE "
 				+ "a.username = {username} AND "
 				+ "b.username = {contactusername}"
-				+ "CREATE UNIQUE (a)-[r:KNOWS]->(b) "
-				+ "SET r.alias = {alias} "
+				+ "CREATE UNIQUE (a)-[r:KNOWS]->(b) "				
+				+ "SET r.postID={postID} "
 				+ "RETURN r";
 
 		iDBQueryExecutionManagerInstance
@@ -203,6 +205,27 @@ public class ContactDBRequestHandler implements IContactDBRequestHandler {
 
 		return iDBQueryExecutionManagerInstance
 				.executeQuery(query, queryParameterMap);
+	}
+
+	@Override
+	public List<Map<String, String>> fetchRequests(Map<String, String[]>request) {
+
+		Map<String, String> parameterMap = 
+				DBRequestHandlerHelper.GetQueryParameterMap(request);
+
+		Map<String,Object> queryParameterMap = 
+				new HashMap<String,Object>();
+
+		queryParameterMap.put("username",parameterMap.get("username"));
+
+		String query = "MATCH (a:User)-[r:KNOWS]->(b:User) "
+				+ "WHERE NOT (b)-[:KNOWS]->(a) "
+				+ "AND b.username={username} "
+				+ "RETURN a.username AS username, a.username AS poster,r";
+
+		return iDBQueryExecutionManagerInstance.
+				executeQuery(query, queryParameterMap);
+
 	}
 
 

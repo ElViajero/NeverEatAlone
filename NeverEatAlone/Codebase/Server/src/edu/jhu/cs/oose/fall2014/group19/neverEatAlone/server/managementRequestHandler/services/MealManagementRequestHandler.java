@@ -58,12 +58,30 @@ IManagementRequestHandler,INotificationManagementRequestHandler{
 	}
 
 
-	private List<Map<String,String>> fetch(Map<String,String[]> request){
+	private List<Map<String,String>> fetchNotifications(Map<String,String[]> request){
 
 		System.out.println("Reached fetch in NotificationManagementRequestHandler.");
 		return iMealDBRequestHandlerObject.fetchNotifications(request);
 
 	}
+
+	private List<Map<String,String>> fetchPosts(Map<String,String[]> request){
+
+		System.out.println("Reached fetchPosts in MealMRH");
+		return iMealDBRequestHandlerObject.fetchPosts(request);
+
+	}
+
+
+
+	private List<Map<String,String>> fetchAccepted(Map<String,String[]> request){
+		System.out.println("Reached fetchAccepted in MEALMRH");
+		return iMealDBRequestHandlerObject.fetchAcceptedNotifications(request);
+
+	}
+
+
+
 
 
 
@@ -84,7 +102,7 @@ IManagementRequestHandler,INotificationManagementRequestHandler{
 		LoggerHelper.printrequestMap(request);
 
 		List<Map<String, String>> result=
-				iMealDBRequestHandlerObject.acceptMealNotifications(request);
+				iMealDBRequestHandlerObject.acceptMealNotification(request);
 
 		List<Map<String, String>> notificationMapList =
 				new ArrayList<Map<String,String>>(result);

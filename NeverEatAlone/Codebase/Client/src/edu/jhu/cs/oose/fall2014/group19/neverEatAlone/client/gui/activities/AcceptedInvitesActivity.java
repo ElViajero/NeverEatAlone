@@ -1,4 +1,10 @@
-package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client;
+package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.http.impl.execchain.RequestAbortedException;
 
 import android.app.Activity;
 import android.app.ListActivity;
@@ -8,13 +14,20 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.TextView;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.TabHostActivity;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.contracts.IActivityProperties;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.AccountProperties;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.NotificationProperties;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.adapters.MealNotificationAdapter;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.InvitesView;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
 /**
  * 
  * @author Hai Tang
+ * @author tejasvamsingh
  *
  */
 public class AcceptedInvitesActivity extends ListActivity {
@@ -23,12 +36,18 @@ public class AcceptedInvitesActivity extends ListActivity {
 	private Context context;
 	private Activity activity;
 	private InvitesView invitesView;
-	
+	private String requestID;
+	private	String requestType;
+
+	private ArrayAdapter<IActivityProperties> acceptedInvitesAdapter;
+	private List<IActivityProperties> acceptedInvitesList;
+
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_accepted_invites);
-		
+
 		initView(savedInstanceState);
 		initInvitesView();
 		acceptedInvitesTitleObject = (TextView) invitesView.getView("accepted_invites_title");
@@ -44,10 +63,11 @@ public class AcceptedInvitesActivity extends ListActivity {
 		activity = this;
 		invitesView = new InvitesView(context, activity);
 	}
-	
+
 	/**
 	 * This method updates the GUI.
 	 * 
+	 * @author tejasvamsingh
 	 * @author Hai Tang
 	 * @param savedInstanceState
 	 */
@@ -55,10 +75,19 @@ public class AcceptedInvitesActivity extends ListActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_accepted_invites);
 
+		acceptedInvitesList= new ArrayList<IActivityProperties>();
+
+		acceptedInvitesAdapter=
+				new MealNotificationAdapter(this, acceptedInvitesList);
+		setListAdapter(acceptedInvitesAdapter);
+		fetchAcceptedInvites();
+
 		applyTheme();
 
 	}
-	
+
+
+
 	/**
 	 * This method is used to set the font style of the title of each page
 	 * 
@@ -68,7 +97,7 @@ public class AcceptedInvitesActivity extends ListActivity {
 
 		ThemeManager.setHeaderFont(acceptedInvitesTitleObject);
 	}
-	
+
 	/**
 	 * This method applies the GUI's color theme.
 
@@ -88,7 +117,7 @@ public class AcceptedInvitesActivity extends ListActivity {
 
 
 	}
-	
+
 	public void onBackButtonClick(View view) {
 		// Intent intent = new Intent(RegisterActivity.this,
 		// MainActivity.class);
@@ -96,7 +125,7 @@ public class AcceptedInvitesActivity extends ListActivity {
 				TabHostActivity.class);
 		AcceptedInvitesActivity.this.startActivity(intent);
 	}
-	
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -114,5 +143,41 @@ public class AcceptedInvitesActivity extends ListActivity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+
+	/**
+	 * @author tejasvamsingh
+	 */
+	private void fetchAcceptedInvites() {
+
+		requestID="Meal";
+		requestType="fetchAccepted";
+
+		acceptedInvitesList.clear();
+
+		try{
+
+			List<Map<String, String>> resultMapList =
+					RequestHandlerHelper.getRequestHandlerInstance().
+					handleRequest(this,
+							AccountProperties.getUserAccountInstance().toMap(),
+							requestID,requestType);
+
+			for(Map<String, String> result : resultMapList){
+
+				if(result.isEmpty())
+					continue;
+				System.out.println("RESULT IS :"+ result);				
+				acceptedInvitesList.add(new NotificationProperties(result));
+			}
+
+			System.out.println("accepted invite list : "+ acceptedInvitesList);
+			acceptedInvitesAdapter.notifyDataSetChanged();
+
+		}catch(RequestAbortedException e){
+			return;
+		}
+
 	}
 }

@@ -7,7 +7,7 @@ import javax.ejb.Local;
 
 /**
  * 
- * Interface for notification management services.
+ * Interface for notification database query management services.
  * Accessible to the management request handler layers. 
  * 
  * @author tejasvamsingh
@@ -26,6 +26,11 @@ public interface IMealDBRequestHandler {
 
 	public List<Map<String,String>> fetchNotifications(Map<String,String[]> request);
 
-	public List<Map<String,String>> acceptMealNotifications(Map<String,String[]> request);
+	public List<Map<String,String>> fetchPosts(Map<String,String[]> request);
+
+	public List<Map<String,String>> acceptMealNotification(Map<String,String[]> request);
+
+	public List<Map<String,String>> fetchAcceptedNotifications(Map<String,String[]> request);
+
 
 }

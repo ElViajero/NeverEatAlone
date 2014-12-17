@@ -129,7 +129,7 @@ public class MealDBRequestHandler implements IMealDBRequestHandler {
 
 
 	@Override
-	public List<Map<String, String>> acceptMealNotifications(
+	public List<Map<String, String>> acceptMealNotification(
 			Map<String, String[]> request) {
 
 		Map<String, String> parameterMap = 
@@ -163,5 +163,64 @@ public class MealDBRequestHandler implements IMealDBRequestHandler {
 		return resultMap;
 
 	}
+
+
+	@Override
+	public List<Map<String, String>> fetchPosts(Map<String, String[]> request) {
+
+
+		Map<String, String> parameterMap = 
+				DBRequestHandlerHelper.GetQueryParameterMap(request);
+
+		Map<String,Object> queryParameterMap = 
+				new HashMap<String,Object>();
+
+		System.out.println("USERNAME : "+ parameterMap.get("username"));
+
+		queryParameterMap.put("poster", parameterMap.get("username"));
+
+
+		String query = "MATCH (n:Post) "
+				+ "WHERE n.poster={poster} "
+				+ "RETURN n";
+
+		List<Map<String, String>> resultMap =
+				iDBQueryExecutionManagerInstance
+				.executeQuery(query, queryParameterMap);
+
+		return resultMap;
+	}
+
+
+	@Override
+	public List<Map<String, String>> fetchAcceptedNotifications(
+			Map<String, String[]> request) {
+
+
+		Map<String, String> parameterMap = 
+				DBRequestHandlerHelper.GetQueryParameterMap(request);
+
+		Map<String,Object> queryParameterMap = 
+				new HashMap<String,Object>();
+
+		System.out.println("USERNAME : "+ parameterMap.get("username"));
+
+		queryParameterMap.put("username", parameterMap.get("username"));
+
+
+		String query = "MATCH (n:Post),(a:User) "
+				+ "WHERE (a)-[:ATTENDING]->(n) "
+				+ "AND a.username={username}"
+				+ "RETURN n";
+
+		List<Map<String, String>> resultMap =
+				iDBQueryExecutionManagerInstance
+				.executeQuery(query, queryParameterMap);
+
+		return resultMap;
+
+	}
+
+
 
 }

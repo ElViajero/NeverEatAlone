@@ -19,6 +19,7 @@ import android.widget.TextView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.AccountProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.NotificationProperties;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.MessageToasterHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.NotificationAndPostCacheHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.notificationHandler.services.NotificationHelper;
@@ -71,7 +72,7 @@ public class TabHostActivity extends TabActivity {
 		int tabToOpen = i.getIntExtra("FirstTab", 0);
 
 		notificationCache=new HashSet<NotificationProperties>();
-		//		fetchNotifications();
+		fetchNotifications();
 
 
 		// Initialize the view and cache.
@@ -174,10 +175,11 @@ public class TabHostActivity extends TabActivity {
 	}
 
 	private void fetchNotifications() {
-
+		MessageToasterHelper.toastMessage("INside FEtCH");
+		notificationCache.clear();		
 		try {
-			requestID = "Notification";
-			requestType = "fetch";
+			requestID = "Meal";
+			requestType = "fetchNotifications";
 
 			// send the request.
 			List<Map<String, String>> resultMapList = RequestHandlerHelper

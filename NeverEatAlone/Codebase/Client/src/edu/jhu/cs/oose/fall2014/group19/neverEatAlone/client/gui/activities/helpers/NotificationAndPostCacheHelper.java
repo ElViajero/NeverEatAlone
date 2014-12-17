@@ -78,11 +78,12 @@ public class NotificationAndPostCacheHelper {
 
 	public static void registerAdapterInstance(
 			ArrayAdapter<IActivityProperties> adapter,String adapterType){
+		MessageToasterHelper.toastMessage("INSIDE REGISTER ADAPTER");
 		initMaps();
 		adapterMap.put(adapterType, adapter);
 		if(!adapterDataMap.containsKey(adapterType))
 			adapterDataMap.put(adapterType, new ArrayList<IActivityProperties>());
-		populateAdapters();
+		populateAdapter(adapterType);
 
 	}
 
@@ -119,8 +120,10 @@ public class NotificationAndPostCacheHelper {
 	}
 
 	public static void populateAdapter(String key){
-		if(adapterMap.containsKey(key))
+		if(adapterMap.containsKey(key)){
+			adapterMap.get(key).clear();
 			adapterMap.get(key).addAll(adapterDataMap.get(key));
+		}
 	}
 
 
@@ -138,6 +141,10 @@ public class NotificationAndPostCacheHelper {
 		return myPostMap.containsKey(notification.getNotificationID());
 	}
 
+	public static void clearAdapterDataMap(String key){
+		if(adapterDataMap.containsKey(key))
+			adapterDataMap.get(key).clear();
+	}
 
 
 }

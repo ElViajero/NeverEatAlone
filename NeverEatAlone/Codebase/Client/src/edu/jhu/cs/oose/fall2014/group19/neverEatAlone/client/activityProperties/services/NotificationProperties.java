@@ -74,6 +74,20 @@ public class NotificationProperties implements IActivityProperties {
 	public NotificationProperties(){}
 
 
+
+
+	public NotificationProperties(String poster, String notificationID,
+			boolean isAccepted, String notificationType,
+			IActivityProperties notificationData) {
+
+		this.poster = poster;
+		this.notificationID = notificationID;
+		this.isAccepted = isAccepted;
+		this.notificationType = notificationType;
+		this.notificationData = notificationData;
+	}
+
+
 	public NotificationProperties(Map<String,String> map){
 
 		System.out.println("the map is " + map);
@@ -144,7 +158,8 @@ public class NotificationProperties implements IActivityProperties {
 
 	@Override
 	public void fromMap(Map<String, String> map) {
-		// TODO Auto-generated method stub
+
+
 
 	}
 

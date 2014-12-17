@@ -79,7 +79,7 @@ IManagementRequestHandler,INotificationManagementRequestHandler {
 	 * @param request
 	 * @return
 	 */
-	public List<Map<String,String>> deleteContactRequest(Map<String,String[]> request){
+	private List<Map<String,String>> delete(Map<String,String[]> request){
 
 		System.out.println("Reaching DeleteContactRequest");
 		return iContactDBManagerObject.delete(request); 
@@ -92,12 +92,23 @@ IManagementRequestHandler,INotificationManagementRequestHandler {
 	 * @param request
 	 * @return
 	 */
-	public List<Map<String,String>> updateContactRequest(Map<String,String[]> request){
+	private List<Map<String,String>> update(Map<String,String[]> request){
 
 		System.out.println("Reaching UpdateContactRequest");
 		return iContactDBManagerObject.update(request); 
 
 	}
+
+	private List<Map<String,String>> fetchRequests(Map<String,String[]> request){
+		System.out.println("Reaching fetchContact in ContactMRH");
+		return iContactDBManagerObject.fetchRequests(request);
+	}
+
+
+
+
+
+
 
 	@Override
 	public List<Map<String, String>> handleManagementRequest(

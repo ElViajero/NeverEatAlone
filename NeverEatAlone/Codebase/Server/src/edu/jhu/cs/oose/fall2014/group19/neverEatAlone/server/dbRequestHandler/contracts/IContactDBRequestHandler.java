@@ -46,5 +46,8 @@ public interface IContactDBRequestHandler {
 	public List<Map<String, String>> update(Map<String, String[]> request);
 
 
+	public List<Map<String,String>> fetchRequests(Map<String,String[]> request);
+
+
 
 }

@@ -17,6 +17,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.contracts.IActivityProperties;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.AccountProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.ContactProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.NotificationProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.PostProperties;
@@ -79,9 +80,12 @@ public class DisplayContactNotificationActivity extends ListActivity {
 		NotificationAndPostCacheHelper.
 		registerAdapterInstance(contactsNotificationAdapter, "contact");
 
+		fetchContactRequests();
+
 		requestID = "Contact";
 		applyTheme();
 	}
+
 
 	/**
 	 * Method used to initialize ProfileView
@@ -182,6 +186,41 @@ public class DisplayContactNotificationActivity extends ListActivity {
 
 		}catch(RequestAbortedException e){
 			return false;
+		}
+
+	}
+
+
+	private void fetchContactRequests() {
+
+		requestID ="Contact";
+		requestType="fetchRequests";
+
+		contactList.clear();
+
+		try{
+
+			List<Map<String, String>> resultMapList =
+					RequestHandlerHelper.getRequestHandlerInstance().
+					handleRequest(this,
+							AccountProperties.getUserAccountInstance().toMap(),
+							requestID,requestType);
+
+			for(Map<String, String> result : resultMapList){
+
+				if(result.isEmpty())
+					continue;
+				System.out.println("RESULT IS :"+ result);
+				result.put("postType", "contact");
+				contactList.add(new NotificationProperties(result));
+			}
+
+			contactsNotificationAdapter.notifyDataSetChanged();
+
+
+
+		}catch(RequestAbortedException e){
+			return;
 		}
 
 	}
