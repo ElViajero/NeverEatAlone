@@ -43,24 +43,21 @@
                 android:layout_marginRight="@dimen/activity_horizontal_margin"
                 android:layout_weight="0.33"
                 android:onClick="onMyPostsButtonClick"
-                android:text="@string/my_posts"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
+                android:text="@string/my_posts" />
 
             <Button
                 android:id="@+id/invites_button_accepted_invites"
                 style="@style/BarButton"
                 android:layout_marginRight="@dimen/activity_horizontal_margin"
                 android:layout_weight="0.33"
-                android:text="@string/accepted_invites"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
+                android:text="@string/accepted_invites" />
 
             <Button
                 android:id="@+id/invites_button_create"
                 style="@style/BarButton"
                 android:layout_weight="0.33"
                 android:onClick="onCreateButtonClick"
-                android:text="@string/create"
-                android:textAppearance="?android:attr/textAppearanceSmall" />
+                android:text="@string/create" />
         </LinearLayout>
     </LinearLayout>
     <!-- Main Space -->

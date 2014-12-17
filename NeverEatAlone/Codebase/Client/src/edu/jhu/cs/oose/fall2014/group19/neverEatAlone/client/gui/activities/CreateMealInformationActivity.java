@@ -44,8 +44,8 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.h
 
 public class CreateMealInformationActivity extends FragmentActivity {
 
-	private Button btnSelectStartDateObject, btnSelectstartTimeObject, btnSelectEndDateObject,
-			btnSelectendTimeObject;
+	private Button btnSelectStartDateObject, btnSelectstartTimeObject,
+			btnSelectEndDateObject, btnSelectendTimeObject;
 	private TextView createMealInfoTitleObject;
 	private EditText placeEditViewObject;
 	private EditText maxNumberEditViewObject;
@@ -53,6 +53,9 @@ public class CreateMealInformationActivity extends FragmentActivity {
 	private Context context;
 	private Activity activity;
 	private MealView mealView;
+//	private View mainLayout;
+//	private View headerLayout;
+//	private View buttonBar;
 
 	// variables to save user selected date and time
 	public int startYear, startMonth, startDay, startHour, startMinute;
@@ -100,19 +103,27 @@ public class CreateMealInformationActivity extends FragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_create_meal_information);
-		
+
 		initMealView();
 
 		// get the references of buttons
-		btnSelectStartDateObject = (Button) mealView.getView("CreateMealInformation_button_startDate");
-		btnSelectstartTimeObject = (Button) mealView.getView("CreateMealInformation_button_startTime");
-		btnSelectEndDateObject = (Button) mealView.getView("CreateMealInformation_button_endDate");
-		btnSelectendTimeObject = (Button) mealView.getView("CreateMealInformation_button_endTime");
+		btnSelectStartDateObject = (Button) mealView
+				.getView("CreateMealInformation_button_startDate");
+		btnSelectstartTimeObject = (Button) mealView
+				.getView("CreateMealInformation_button_startTime");
+		btnSelectEndDateObject = (Button) mealView
+				.getView("CreateMealInformation_button_endDate");
+		btnSelectendTimeObject = (Button) mealView
+				.getView("CreateMealInformation_button_endTime");
 
 		placeEditViewObject = (EditText) mealView.getView("edit_restaurant");
 		maxNumberEditViewObject = (EditText) mealView.getView("edit_maxnumber");
-		allowFriendInviteSwitchObject = (Switch) mealView.getView("switch_allowfriendinvite");
-		createMealInfoTitleObject = (TextView) mealView.getView("CreateMealInformation_text_mealinformation");
+		allowFriendInviteSwitchObject = (Switch) mealView
+				.getView("switch_allowfriendinvite");
+		createMealInfoTitleObject = (TextView) mealView
+				.getView("CreateMealInformation_text_mealinformation");
+
+
 
 		setTitleStyle();
 		applyTheme();
@@ -120,6 +131,7 @@ public class CreateMealInformationActivity extends FragmentActivity {
 
 	/**
 	 * Method used to initialize MealView
+	 * 
 	 * @author: Hai Tang
 	 */
 	private void initMealView() {
@@ -135,18 +147,41 @@ public class CreateMealInformationActivity extends FragmentActivity {
 	 * @author: Yueling Loh
 	 */
 	private void setTitleStyle() {
-		Typeface tf = Typeface.createFromAsset(getAssets(),
-				"fonts/Chunkfive.otf");
-		createMealInfoTitleObject.setTypeface(tf);
-		createMealInfoTitleObject.setTextSize(80);
 
+		ThemeManager.setHeaderFont(createMealInfoTitleObject);
 	}
-
+	
+	/**
+	 * This method is used to set GUI colors
+	 * 
+	 * @author: Yueling Loh
+	 */
 	private void applyTheme() {
-		ThemeManager.applyTheme(findViewById(android.R.id.content));
-		// ThemeManager.applyTheme(findViewById(R.id.layout_create_meal));
-		// ThemeManager.applyTheme(findViewById(R.id.layout_create_meal_information));
-		// ThemeManager.applyTheme(findViewById(R.id.header_createMealInfo));
+		
+		initMealView();
+		View mainLayout = mealView.getView("main_createMealInfo");
+		View headerLayout = mealView.getView("header_createMealInfo");
+		View buttonBar = mealView.getView("buttons_createMealInfo");
+		
+		View backButton = mealView.getView("CreateMealInformation_button_back");
+		View nextButton = mealView.getView("CreateMealInformation_button_next");
+
+		ThemeManager.applyPlainTheme(mainLayout, headerLayout, buttonBar);
+
+		ThemeManager.applyButtonColor(btnSelectStartDateObject);
+		ThemeManager.applyButtonColor(btnSelectstartTimeObject );
+		ThemeManager.applyButtonColor(btnSelectEndDateObject);
+		ThemeManager.applyButtonColor(btnSelectendTimeObject);
+		ThemeManager.applyButtonColor(allowFriendInviteSwitchObject);
+		
+		
+		ThemeManager.applyButtonColor(backButton);
+		ThemeManager.applyButtonColor(nextButton);
+		
+		ThemeManager.applyEditTextColor(placeEditViewObject);
+		ThemeManager.applyEditTextColor(maxNumberEditViewObject);		
+
+		
 	}
 
 	@Override
@@ -390,11 +425,11 @@ public class CreateMealInformationActivity extends FragmentActivity {
 	public void onNextButtonClick(View view) {
 
 		initMealView();
-		
+
 		String location = mealView.getValue(placeEditViewObject);
 		String maxNumberOfInvitees = mealView.getValue(maxNumberEditViewObject);
-		String isNotificationExtendible = allowFriendInviteSwitchObject.isChecked() ? "YES"
-				: "NO";
+		String isNotificationExtendible = allowFriendInviteSwitchObject
+				.isChecked() ? "YES" : "NO";
 
 		if (location.equals("")) {
 			Toast.makeText(this, R.string.location_empty, Toast.LENGTH_SHORT)
@@ -407,8 +442,8 @@ public class CreateMealInformationActivity extends FragmentActivity {
 			return;
 		}
 		if (Integer.parseInt(maxNumberOfInvitees) < 2) {
-			Toast.makeText(this, R.string.invitees_not_enough, Toast.LENGTH_SHORT)
-					.show();
+			Toast.makeText(this, R.string.invitees_not_enough,
+					Toast.LENGTH_SHORT).show();
 			return;
 		}
 
