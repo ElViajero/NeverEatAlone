@@ -1,4 +1,4 @@
-<!-- @author Hai Tang @author Yueling @author Runze Tang-->
+<!-- @author Hai Tang @author Yueling @author Runze Tang -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -16,43 +16,67 @@
             style="@style/HeaderTextTheme"
             android:text="@string/edit_profile" />
     </RelativeLayout>
+    <!-- Button Header -->
+
+    <LinearLayout
+        android:id="@+id/buttons_editProfile"
+        style="@style/ButtonBarTheme"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:id="@+id/buttons_editProfile_container"
+            style="@style/ButtonBarTheme"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/button_editprofile_cancel"
+                style="@style/BarButton"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:onClick="onCancelButtonClick"
+                android:text="@string/cancel" />
+
+            <Button
+                android:id="@+id/button_editprofile_comfirm"
+                style="@style/BarButton"
+                android:onClick="onComfirmButtonClick"
+                android:text="@string/confirm" />
+        </LinearLayout>
+    </LinearLayout>
 
     <!-- Main Space -->
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/main_editProfile"
         style="@style/MainLayoutTheme"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_above="@+id/buttons_editProfile"
         android:layout_below="@+id/header_editProfile" >
 
-        <LinearLayout
-            android:id="@+id/main_editProfile_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"
-            android:orientation="vertical"
-            android:paddingLeft="50dp"
-            android:paddingRight="50dp" >
+        <RelativeLayout
+            android:id="@+id/layout_editProfile_container"
+            style="@style/MainLayoutTheme"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" >
 
             <ImageView
                 android:id="@+id/imageView_editprofile_avatar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
                 android:contentDescription="@string/user_avatar"
-                android:layout_gravity="center_horizontal"
                 android:src="@drawable/user_profile" />
 
             <LinearLayout
                 android:id="@+id/editProfile_username_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/imageView_editprofile_avatar"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="50dp"
-                android:orientation="horizontal"
-                android:paddingLeft="50dp"
-                android:paddingRight="50dp" >
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
+                android:orientation="horizontal" >
 
                 <TextView
                     android:id="@+id/textView_editprofile_username"
@@ -68,19 +92,18 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
                     android:background="@drawable/edittext"
-                    android:ems="10"
-                    android:gravity="center_horizontal" />
+                    android:gravity="center_horizontal"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/editProfile_name_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/editProfile_username_layout"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="20dp"
-                android:orientation="horizontal"
-                android:paddingLeft="50dp"
-                android:paddingRight="50dp" >
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
+                android:orientation="horizontal" >
 
                 <TextView
                     android:id="@+id/textView_editprofile_name"
@@ -96,20 +119,19 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
                     android:background="@drawable/edittext"
-                    android:ems="10"
                     android:gravity="center_horizontal"
-                    android:inputType="textPersonName" />
+                    android:inputType="textPersonName"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/editProfile_email_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/editProfile_name_layout"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="20dp"
-                android:orientation="horizontal"
-                android:paddingLeft="50dp"
-                android:paddingRight="50dp" >
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
+                android:orientation="horizontal" >
 
                 <TextView
                     android:id="@+id/textView_editprofile_email"
@@ -125,20 +147,19 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
                     android:background="@drawable/edittext"
-                    android:ems="10"
                     android:gravity="center_horizontal"
-                    android:inputType="textEmailAddress" />
+                    android:inputType="textEmailAddress"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/editProfile_gender_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/editProfile_email_layout"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="20dp"
-                android:orientation="horizontal"
-                android:paddingLeft="50dp"
-                android:paddingRight="50dp" >
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
+                android:orientation="horizontal" >
 
                 <TextView
                     android:id="@+id/textView_editprofile_gender"
@@ -154,20 +175,19 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
                     android:background="@drawable/edittext"
-                    android:ems="10"
                     android:gravity="center_horizontal"
-                    android:inputType="text" />
+                    android:inputType="text"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/editProfile_workspace_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/editProfile_gender_layout"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="20dp"
-                android:orientation="horizontal"
-                android:paddingLeft="50dp"
-                android:paddingRight="50dp" >
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
+                android:orientation="horizontal" >
 
                 <TextView
                     android:id="@+id/textView_editprofile_workspace"
@@ -183,20 +203,19 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
                     android:background="@drawable/edittext"
-                    android:ems="10"
                     android:gravity="center_horizontal"
-                    android:inputType="text" />
+                    android:inputType="text"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/editProfile_alias_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/editProfile_workspace_layout"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="20dp"
-                android:orientation="horizontal"
-                android:paddingLeft="50dp"
-                android:paddingRight="50dp" >
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
+                android:orientation="horizontal" >
 
                 <TextView
                     android:id="@+id/textView_editprofile_alias"
@@ -212,38 +231,11 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
                     android:background="@drawable/edittext"
-                    android:ems="10"
                     android:gravity="center_horizontal"
-                    android:inputType="text" />
+                    android:inputType="text"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
             </LinearLayout>
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/button_editprofile_cancel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:background="@drawable/button_background_light"
-            android:onClick="onCancelButtonClick"
-            android:paddingLeft="50dp"
-            android:paddingRight="50dp"
-            android:text="@string/cancel" />
-
-        <Button
-            android:id="@+id/button_editprofile_comfirm"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/button_editprofile_cancel"
-            android:layout_alignBottom="@+id/button_editprofile_cancel"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:background="@drawable/button_background_light"
-            android:onClick="onComfirmButtonClick"
-            android:paddingLeft="50dp"
-            android:paddingRight="50dp"
-            android:text="@string/confirm" />
-    </RelativeLayout>
+        </RelativeLayout>
+    </LinearLayout>
 
 </RelativeLayout>
