@@ -208,7 +208,7 @@
 
                     <Button
                         android:id="@+id/button_mealdetails_inviteothers"
-                        style="@style/barButton"
+                        style="@style/BarButton"
                         android:layout_weight="0.3"
                         android:text="@string/invite_others" />
                     
