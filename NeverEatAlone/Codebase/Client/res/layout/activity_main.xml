@@ -33,7 +33,7 @@
         <RelativeLayout
             android:id="@+id/edit_username_latent_layout_left"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="0.2" >
         </RelativeLayout>
 
@@ -41,7 +41,8 @@
             android:id="@+id/edit_username"
             style="@style/BigEditText"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
             android:layout_weight="0.6"
             android:hint="@string/username"
             android:inputType="text" />
@@ -49,7 +50,7 @@
         <RelativeLayout
             android:id="@+id/edit_username_latent_layout_right"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="0.2" >
         </RelativeLayout>
     </LinearLayout>
@@ -72,7 +73,7 @@
         <RelativeLayout
             android:id="@+id/edit_password_latent_layout_left"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="0.2" >
         </RelativeLayout>
 
@@ -80,7 +81,8 @@
             android:id="@+id/edit_password"
             style="@style/BigEditText"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
             android:layout_weight="0.6"
             android:hint="@string/password"
             android:inputType="textPassword" />
@@ -88,7 +90,7 @@
         <RelativeLayout
             android:id="@+id/edit_password_latent_layout_right"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="0.2" >
         </RelativeLayout>
     </LinearLayout>
@@ -111,7 +113,7 @@
         <RelativeLayout
             android:id="@+id/main_button1_layout_left"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="0.25" >
         </RelativeLayout>
 
@@ -119,8 +121,8 @@
             android:id="@+id/button_login"
             style="@style/StandardButton"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_horizontal"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
             android:layout_weight="0.5"
             android:onClick="onLoginButtonClick"
             android:text="@string/login" />
@@ -128,7 +130,7 @@
         <RelativeLayout
             android:id="@+id/main_button1_layout_right"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="0.25" >
         </RelativeLayout>
     </LinearLayout>
@@ -151,7 +153,7 @@
         <RelativeLayout
             android:id="@+id/main_button2_layout_left"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="0.25" >
         </RelativeLayout>
 
@@ -159,8 +161,8 @@
             android:id="@+id/button_signup"
             style="@style/StandardButton"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_horizontal"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
             android:layout_weight="0.5"
             android:onClick="onSignUpButtonClick"
             android:text="@string/signup" />
@@ -168,7 +170,7 @@
         <RelativeLayout
             android:id="@+id/main_button2_layout_right"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="0.25" >
         </RelativeLayout>
     </LinearLayout>
