@@ -19,4 +19,5 @@
     <dimen name="button_padding">0dp</dimen>
     <dimen name="switch_padding">12dp</dimen>
 	<dimen name="edittext_padding">8dp</dimen>
+	<dimen name="title_font_size">42sp</dimen>
 </resources>

@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.AccountProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.NotificationAndPostCacheHelper;
@@ -31,6 +32,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.serv
 /**
  * This is the main activity that is displayed when the application starts. 
  * @author tejasvamsingh
+ * @author Yueling Loh
  * @author Hai Tang
  *
  */
@@ -40,10 +42,11 @@ public class MainActivity extends Activity {
 	private EditText passwordEditTextObject = null;
 	private Button loginButtonObject = null;
 	private Button signupButtonObject = null;
-	private ImageView logoBigObject = null;
+//	private ImageView logoBigObject = null;
 	private String requestID;
 	private String requestType;
 	private boolean isCreated=false;
+	private TextView mainTitle;
 	LinearLayout l;
 	private Context context;
 	private Activity activity;
@@ -68,7 +71,9 @@ public class MainActivity extends Activity {
 
 		loginButtonObject = (Button) loginView.getView("button_login");
 		signupButtonObject = (Button) loginView.getView("button_signup");
-		logoBigObject = (ImageView) loginView.getView("logo_big");
+//		logoBigObject = (ImageView) loginView.getView("logo_big");
+		
+		mainTitle = (TextView) loginView.getView("logo_name");
 
 		applyTheme();
 
@@ -101,11 +106,13 @@ public class MainActivity extends Activity {
 	private void applyTheme() {
 		initLoginView();
 		View mainLayout = loginView.getView("layout_main");
-
+		
 		ThemeManager.applyBackground(mainLayout);
 
 		ThemeManager.applyButtonColor(loginButtonObject);
 		ThemeManager.applyButtonColor(signupButtonObject);
+		
+		ThemeManager.setTitleFont(mainTitle);
 	}
 
 

@@ -199,7 +199,18 @@ public class ThemeManager {
 				"fonts/Chunkfive.otf");
 		tv.setTypeface(tf);
 		tv.setTextColor(Color.parseColor("#00B9FF"));
-//		tv.setTextSize(80);
+
+	}
+	
+	public static void setTitleFont(TextView tv) {
+
+		if (tv == null) {
+			System.out.println("acitivity is null");
+		}
+
+		Typeface tf = Typeface.createFromAsset(tv.getContext().getAssets(),
+				"fonts/Chunkfive.otf");
+		tv.setTypeface(tf);
 
 	}
 	
