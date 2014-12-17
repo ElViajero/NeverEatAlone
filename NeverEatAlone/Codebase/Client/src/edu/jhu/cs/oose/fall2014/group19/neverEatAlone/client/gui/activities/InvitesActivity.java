@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Switch;
 import android.widget.TextView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.contracts.IActivityProperties;
@@ -70,6 +69,7 @@ public class InvitesActivity extends ListActivity {
 
 	/**
 	 * Method used to initialize the InvitesView
+	 * 
 	 * @author: Hai Tang
 	 */
 	private void initInvitesView() {
@@ -77,7 +77,6 @@ public class InvitesActivity extends ListActivity {
 		activity = this;
 		invitesView = new InvitesView(context, activity);
 	}
-
 
 	/**
 	 * This method updates the GUI.
@@ -91,7 +90,8 @@ public class InvitesActivity extends ListActivity {
 
 		invitesAdapter = new MealNotificationAdapter(this, NotificationList);
 		setListAdapter(invitesAdapter);
-		NotificationAndPostCacheHelper.registerAdapterInstance(invitesAdapter, "meal");
+		NotificationAndPostCacheHelper.registerAdapterInstance(invitesAdapter,
+				"meal");
 
 		applyTheme();
 
@@ -108,7 +108,6 @@ public class InvitesActivity extends ListActivity {
 		ThemeManager.setHeaderFont(appNameObject);
 	}
 
-
 	/**
 	 * This method applies the GUI's color theme.
 	 * 
@@ -124,8 +123,10 @@ public class InvitesActivity extends ListActivity {
 
 		View createInviteButton = invitesView.getView("invites_button_create");
 		View myInvitesButton = invitesView.getView("invites_button_my_posts");
-		View acceptedInvitesButton = invitesView.getView("invites_button_accepted_invites");
-		Switch availabilitySwitch = (Switch) invitesView.getView("switch_availability_status");
+		View acceptedInvitesButton = invitesView
+				.getView("invites_button_accepted_invites");
+		// Switch availabilitySwitch = (Switch)
+		// invitesView.getView("switch_availability_status");
 
 		ThemeManager.applyTheme(mainLayout, headerLayout);
 		ThemeManager.applyButtonBarTheme(buttonBar);
@@ -133,7 +134,7 @@ public class InvitesActivity extends ListActivity {
 		ThemeManager.applyButtonColor(createInviteButton);
 		ThemeManager.applyButtonColor(myInvitesButton);
 		ThemeManager.applyButtonColor(acceptedInvitesButton);
-		ThemeManager.applyAvailabilityColor(availabilitySwitch);
+		// ThemeManager.applyAvailabilityColor(availabilitySwitch);
 
 	}
 
@@ -150,8 +151,8 @@ public class InvitesActivity extends ListActivity {
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		Intent intent = new Intent(this, MealDetailActivity.class);
 
-		NotificationProperties notification = (NotificationProperties)
-				NotificationList.get(position);
+		NotificationProperties notification = (NotificationProperties) NotificationList
+				.get(position);
 
 		DataCacheHelper.setNotificationPropertiesObject(notification);
 		startActivity(intent);
@@ -166,12 +167,10 @@ public class InvitesActivity extends ListActivity {
 		InvitesActivity.this.startActivity(intent);
 	}
 
-
 	public void onMyPostsButtonClick(View view) {
 		// Intent intent = new Intent(RegisterActivity.this,
 		// MainActivity.class);
-		Intent intent = new Intent(InvitesActivity.this,
-				MyPostsActivity.class);
+		Intent intent = new Intent(InvitesActivity.this, MyPostsActivity.class);
 		InvitesActivity.this.startActivity(intent);
 	}
 
