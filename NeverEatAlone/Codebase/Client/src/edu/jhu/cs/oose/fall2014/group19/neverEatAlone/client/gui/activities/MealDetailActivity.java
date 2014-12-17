@@ -23,6 +23,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.PostProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.DataCacheHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.NotificationAndPostCacheHelper;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.MealView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.helpers.GsonHelper;
@@ -66,6 +67,7 @@ public class MealDetailActivity extends Activity {
 
 		setTitleStyle();
 		populateView();
+		applyTheme();
 
 	}
 
@@ -88,11 +90,37 @@ public class MealDetailActivity extends Activity {
 	 * @author: Yueling Loh
 	 */
 	private void setTitleStyle() {
-		Typeface tf = Typeface.createFromAsset(getAssets(),
-				"fonts/Chunkfive.otf");
-		mealDetailTitleObject.setTypeface(tf);
-		mealDetailTitleObject.setTextSize(80);
+		
+		ThemeManager.setHeaderFont(mealDetailTitleObject);
+
 	}
+	
+	/**
+	 * This method applies the GUI's color theme.
+	 * 
+	 * @author Yueling Loh
+	 */
+	private void applyTheme() {
+
+		initMealView();
+		View mainLayout = mealView.getView("main_mealDetails");
+		View headerLayout = mealView.getView("header_mealDetails");
+		View buttonBar = mealView.getView("buttons_mealDetails");
+		
+		View backButton = mealView.getView("button_mealdetails_back");
+		View declineButton = mealView.getView("button_mealdetails_decline");
+		View acceptButton = mealView.getView("button_mealdetails_accept");
+		View inviteOthersButton = mealView.getView("button_mealdetails_inviteothers");
+
+		ThemeManager.applyPlainTheme(mainLayout, headerLayout,buttonBar);
+		
+		ThemeManager.applyButtonColor(backButton);
+		ThemeManager.applyButtonColor(declineButton);
+		ThemeManager.applyButtonColor(acceptButton);
+		ThemeManager.applyButtonColor(inviteOthersButton);
+
+	}
+	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
