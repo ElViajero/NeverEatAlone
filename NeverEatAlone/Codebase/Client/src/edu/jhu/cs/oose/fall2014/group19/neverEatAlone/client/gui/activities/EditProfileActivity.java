@@ -33,6 +33,7 @@ public class EditProfileActivity extends Activity {
 	private EditText workspaceEditTextObject;
 	private EditText aliasEditTextObject;
 	private EmailValidatorHelper validator;
+	private TextView editProfileTitle;
 
 	private Context context;
 	private Activity activity;
@@ -40,21 +41,13 @@ public class EditProfileActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		initView(savedInstanceState);
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_edit_profile);
 
 		initViewObjects();
-	}
 
-	/**
-	 * Method used to initialize View Objects
-	 * 
-	 * @author: Hai Tang
-	 */
-	private void initViewObjects() {
-		context = this;
-		activity = this;
-		profileView = new ProfileView(context, activity);
-
+		editProfileTitle = (TextView) profileView
+				.getView("textView_Title_Edit_Profile");
 		usernameTextObject = (TextView) profileView
 				.getView("textView_editprofile_username2");
 		nameEditTextObject = (EditText) profileView
@@ -72,19 +65,21 @@ public class EditProfileActivity extends Activity {
 				.getUserAccountInstance().getusername());
 
 		validator = new EmailValidatorHelper();
-	}
-
-	/**
-	 * Method for initializing the view
-	 * 
-	 * @author: Hai Tang
-	 */
-	private void initView(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_edit_profile);
 
 		setTitleStyle();
 		applyTheme();
+	}
+
+	/**
+	 * Method used to initialize View Objects
+	 * 
+	 * @author: Hai Tang
+	 */
+	private void initViewObjects() {
+		context = this;
+		activity = this;
+		profileView = new ProfileView(context, activity);
+
 	}
 
 	/**
@@ -94,15 +89,23 @@ public class EditProfileActivity extends Activity {
 	 * @author: Yueling Loh
 	 */
 	private void setTitleStyle() {
-		TextView tv = (TextView) findViewById(R.id.textView_Title_Edit_Profile);
-		Typeface tf = Typeface.createFromAsset(getAssets(),
-				"fonts/Chunkfive.otf");
-		tv.setTypeface(tf);
-		tv.setTextSize(80);
+		ThemeManager.setHeaderFont(editProfileTitle);
 	}
 
 	private void applyTheme() {
-		ThemeManager.applyTheme(findViewById(android.R.id.content));
+		initViewObjects();
+
+		View mainLayout = profileView.getView("main_editProfile");
+		View headerLayout = profileView.getView("header_editProfile");
+		View buttonBar = profileView.getView("buttons_editProfile");
+
+		View comfirmButton = profileView.getView("button_editprofile_comfirm");
+		View cancelButton = profileView.getView("button_editprofile_cancel");
+
+		ThemeManager.applyPlainTheme(mainLayout, headerLayout, buttonBar);
+
+		ThemeManager.applyButtonColor(comfirmButton);
+		ThemeManager.applyButtonColor(cancelButton);
 	}
 
 	/**

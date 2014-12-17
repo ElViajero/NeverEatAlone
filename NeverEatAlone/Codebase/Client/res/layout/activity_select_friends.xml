@@ -20,74 +20,93 @@
             android:text="@string/select_friends" />
     </RelativeLayout>
 
+ <!--     Button Header -->
+
+    <LinearLayout
+        android:id="@+id/buttons_selectfriends"
+        style="@style/ButtonBarTheme"
+        android:layout_below="@+id/header_selectfriends"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:id="@+id/buttons_selectfriends_container"
+            style="@style/ButtonBarTheme"
+            android:layout_gravity="center_horizontal"
+            android:baselineAligned="false"
+            android:orientation="horizontal" >
+
+            <Button
+            android:id="@+id/button_selectfriends_broadcast"
+			style="@style/BarButton"
+            android:onClick="onBroadcastButtonClick"
+			android:layout_marginRight="@dimen/activity_horizontal_margin" 
+			android:text="@string/broadcast_to_all_friends"/>
+        
+            <Button
+            android:id="@+id/button_selectfriends_unselectall"
+			style="@style/BarButton"
+            android:onClick="onUnselectAllButtonClick"
+            android:text="@string/unselect_all_friends" />
+
+
+        </LinearLayout>
+    </LinearLayout> 
+    
+        <!-- Button Bar Button -->
+
+    <LinearLayout
+        android:id="@+id/buttons_selectfriends_buttom"
+        style="@style/ButtonBarTheme"
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:id="@+id/buttons_selectfriends_buttom_container"
+            style="@style/ButtonBarTheme"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal" >
+       
+		<Button
+            android:id="@+id/button_selectfriends_back"
+            style="@style/BarButton"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_weight="0.33"
+            android:onClick="onBackButtonClick"
+            android:text="@string/back"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+                        
+        <Button
+            android:id="@+id/button_selectfriends_post"
+            style="@style/BarButton"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_weight="0.33"
+            android:onClick="onPostButtonClick"
+            android:text="@string/post"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+            
+        </LinearLayout>
+    </LinearLayout>
+    
     <!-- Main Space -->
+    <LinearLayout
+        android:id="@+id/layout_selectfriends"
+        style="@style/MainLayoutTheme"
+        android:layout_below="@+id/buttons_selectfriends"
+        android:layout_above="@+id/buttons_selectfriends_buttom" >
 
     <RelativeLayout
-        android:id="@+id/main_selectfriends"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/header_selectfriends" >
-
-        <Button
-            android:id="@+id/button_selectfriends_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:background="@drawable/button_background_light"
-            android:onClick="onBackButtonClick"
-            android:paddingLeft="50dp"
-            android:paddingRight="50dp"
-            android:text="@string/back" />
+        android:id="@+id/layout_selectfriends_container"
+		style="@style/MainLayoutTheme" >
 
         <ListView
             android:id="@android:id/list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/button_selectfriends_back"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="163dp"
-            android:layout_marginTop="50dp" >
-        </ListView>
-
-        <Button
-            android:id="@+id/button_selectfriends_broadcast"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="97dp"
-            android:layout_marginTop="50dp"
-            android:background="@drawable/button_background_light"
-            android:onClick="onBroadcastButtonClick"
-            android:paddingLeft="50dp"
-            android:paddingRight="50dp"
-            android:text="@string/broadcast_to_all_friends" />
-        
-                <Button
-            android:id="@+id/button_selectfriends_unselectall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/button_selectfriends_broadcast"
-            android:layout_alignBottom="@+id/button_selectfriends_broadcast"
-			android:layout_marginLeft="50dp"
-            android:background="@drawable/button_background_light"
-            android:onClick="onUnselectAllButtonClick"
-            android:paddingLeft="25dp"
-            android:paddingRight="25dp"
-            android:text="@string/unselect_all_friends" />
-
-        <Button
-            android:id="@+id/button_selectfriends_next"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:background="@drawable/button_background_light"
-            android:onClick="onPostButtonClick"
-            android:paddingLeft="50dp"
-            android:paddingRight="50dp"
-            android:text="@string/post" />
+            android:layout_marginTop="@dimen/activity_horizontal_margin" >
+        </ListView>       
     </RelativeLayout>
-
+    
+    </LinearLayout>
 </RelativeLayout>
