@@ -41,12 +41,8 @@
             android:id="@+id/edit_username"
             style="@style/BigEditText"
             android:layout_width="0dp"
-<<<<<<< HEAD
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-=======
-            android:layout_height="match_parent"
->>>>>>> refs/heads/yueling-current
             android:layout_weight="0.6"
             android:hint="@string/username"
             android:inputType="text" />
@@ -85,12 +81,8 @@
             android:id="@+id/edit_password"
             style="@style/BigEditText"
             android:layout_width="0dp"
-<<<<<<< HEAD
             android:layout_height="wrap_content"
             android:layout_gravity="top"
-=======
-            android:layout_height="match_parent"
->>>>>>> refs/heads/yueling-current
             android:layout_weight="0.6"
             android:hint="@string/password"
             android:inputType="textPassword" />
