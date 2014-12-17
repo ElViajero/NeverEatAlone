@@ -110,6 +110,8 @@
     <string name="with_whom">With Whom?</string>
     <string name="additional_information">Additional Information</string>
     <string name="invite_others">Invite Others</string>
-	<string name="detail">Details</string>
-	<string name="close">Close</string>
+    <string name="detail">Details</string>
+    <string name="close">Close</string>
+    <string name="title_activity_my_posts_detail">MyPostsDetailActivity</string>
+	<string name="my_posts_detail">My Posts Details</string>
 </resources>

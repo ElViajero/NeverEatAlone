@@ -178,10 +178,8 @@ public class MyPostsActivity extends ListActivity {
 	 * @param view
 	 */
 	public void onDetailMyPostsButtonClick(View view) {
-		// TODO Need to be revised here
-		// requestType = "accept";
-		// selectedNotification.setAccepted(true);
-		// sendRequest();
+		Intent intent = new Intent(this, MyPostsDetailActivity.class);
+		startActivity(intent);
 	}
 
 	/**
