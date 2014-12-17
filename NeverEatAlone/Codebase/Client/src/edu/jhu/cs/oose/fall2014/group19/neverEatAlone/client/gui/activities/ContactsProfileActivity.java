@@ -9,6 +9,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeMan
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.ProfileView;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -141,10 +142,22 @@ public class ContactsProfileActivity extends Activity {
 		profileView.setValue(usernameTextViewObject, username);
 		profileView.setValue(emailTextViewObject, email);
 		// TODO: Need to be filled with real Strings
-		profileView.setValue(aliasTextViewObject, "abc");
-		profileView.setValue(nameTextViewObject, "abc");
-		profileView.setValue(workspaceTextViewObject, "abc");
-		profileView.setValue(genderTextViewObject, "abc");
+		profileView.setValue(aliasTextViewObject, "Needs to be changed");
+		profileView.setValue(nameTextViewObject, "Needs to be changed");
+		profileView.setValue(workspaceTextViewObject, "Needs to be changed");
+		profileView.setValue(genderTextViewObject, "Needs to be changed");
 
+	}
+	
+	/**
+	 * This method implements the back button
+	 * 
+	 * @author Yueling Loh
+	 */
+	public void onBackButtonClick(View view) {
+
+		Intent intent = new Intent(ContactsProfileActivity.this, TabHostActivity.class);
+		intent.putExtra("FirstTab", 1);
+		ContactsProfileActivity.this.startActivity(intent);
 	}
 }
