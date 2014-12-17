@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+<item android:drawable="@drawable/buttonbar_background_light_outer"/>
+<item android:drawable="@drawable/buttonbar_background_light_inner"
+    android:top="3dp" android:right="3dp" android:bottom="0dp"
+    android:left="3dp" />
+</layer-list>
