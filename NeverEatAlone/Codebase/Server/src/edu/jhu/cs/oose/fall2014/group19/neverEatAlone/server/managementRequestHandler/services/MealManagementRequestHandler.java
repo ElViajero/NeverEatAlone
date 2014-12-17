@@ -7,7 +7,8 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbRequestHandler.contracts.INotificationDBRequestHandler;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbRequestHandler.contracts.IMealDBRequestHandler;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.logger.helper.LoggerHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.managementRequestHandler.contracts.IManagementRequestHandler;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.managementRequestHandler.contracts.INotificationManagementRequestHandler;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.notificationManager.contracts.INotificationManager;
@@ -26,7 +27,7 @@ public class MealManagementRequestHandler implements
 IManagementRequestHandler,INotificationManagementRequestHandler{
 
 	@Inject INotificationManager iNotificationManagerObject;
-	@Inject INotificationDBRequestHandler iNotificationDBRequestHandlerObject;
+	@Inject IMealDBRequestHandler iMealDBRequestHandlerObject;
 	@Inject IReflectionManager iReflectionManagerObject;
 
 	/**
@@ -42,7 +43,7 @@ IManagementRequestHandler,INotificationManagementRequestHandler{
 
 		//commit to the DB.
 		List<Map<String, String>> result = 
-				iNotificationDBRequestHandlerObject.CreateMealNotification(request);
+				iMealDBRequestHandlerObject.CreateMealNotification(request);
 
 		List<String> recipientList = Arrays.asList(request.get("recipientList"));
 
@@ -60,7 +61,7 @@ IManagementRequestHandler,INotificationManagementRequestHandler{
 	private List<Map<String,String>> fetch(Map<String,String[]> request){
 
 		System.out.println("Reached fetch in NotificationManagementRequestHandler.");
-		return iNotificationDBRequestHandlerObject.fetchNotifications(request);
+		return iMealDBRequestHandlerObject.fetchNotifications(request);
 
 	}
 
@@ -79,8 +80,23 @@ IManagementRequestHandler,INotificationManagementRequestHandler{
 
 	@Override
 	public List<Map<String, String>> accept(Map<String, String[]> request) {
-		// TODO Auto-generated method stub
-		return null;
+		System.out.println("reached accept in MealMRH");
+		LoggerHelper.printrequestMap(request);
+
+		List<Map<String, String>> result=
+				iMealDBRequestHandlerObject.acceptMealNotifications(request);
+
+		List<Map<String, String>> notificationMapList =
+				new ArrayList<Map<String,String>>(result);
+		LoggerHelper.printresultMap(result);
+
+		if(result.get(0).get("Status").equals("Success")){
+			System.out.println("Successful operation.");
+			notificationMapList.remove(0);
+			iNotificationManagerObject.pushNotification(
+					notificationMapList, Arrays.asList(request.get("recipientList")));
+		}
+		return result;
 	}
 
 

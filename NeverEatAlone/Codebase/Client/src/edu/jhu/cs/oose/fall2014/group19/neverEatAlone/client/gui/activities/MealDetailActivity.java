@@ -1,10 +1,9 @@
 package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities;
 
-import java.lang.reflect.Type;
+import java.util.List;
 import java.util.Map;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+import org.apache.http.impl.execchain.RequestAbortedException;
 
 import android.app.Activity;
 import android.content.Context;
@@ -15,14 +14,23 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+
+import com.google.gson.Gson;
+
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.MealProperties;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.NotificationProperties;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.PostProperties;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.DataCacheHelper;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.NotificationAndPostCacheHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.MealView;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.helpers.GsonHelper;
 
 /**
  * 
+ * @author tejasvamsingh
  * @author Hai Tang
- * @author Runze Tang
  * 
  *         MealDetailActivity class is used to set up the view of the Meal
  *         Details page. And also set up the functions after clicking different
@@ -30,17 +38,19 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.h
  */
 public class MealDetailActivity extends Activity {
 
+
 	private Context context;
 	private Activity activity;
 	private MealView mealView;
 	private TextView mealDetailTitleObject;
-	
+	private String requestID;
+	private String requestType;
+	private NotificationProperties notificationPropertiesObject;
+
 	/**
 	 * 
-	 * This method fetches mealProperties information from the InvitesActivity.
-	 * 
-	 * @author: Runze Tang
-	 * @author Hai Tang
+	 *Called when the activity is first created.
+	 *@author tejasvamsingh
 	 *
 	 */
 	@Override
@@ -50,49 +60,16 @@ public class MealDetailActivity extends Activity {
 
 		initMealView();
 		mealDetailTitleObject = (TextView) mealView.getView("textView_mealdetails_title");
-		
+
+		notificationPropertiesObject=
+				DataCacheHelper.getNotificationPropertiesObject();
+
 		setTitleStyle();
+		populateView();
 
-		String postData = getIntent().getStringExtra("mealProperties");
-
-		Gson gson = GsonHelper.getGsoninstance();
-		Type stringObjectMap = new TypeToken<Map<String, Object>>() {
-		}.getType();
-		Map<String, Object> postDataMap = gson.fromJson(postData,
-				stringObjectMap);
-
-		
-		// String isNotificationExtendible =
-		// postDataMap.get("isNotificationExtendible").toString();
-		String location = postDataMap.get("location").toString();
-		String startYear = postDataMap.get("startyear").toString();
-		String startMonth = postDataMap.get("startmonth").toString();
-		String startDay = postDataMap.get("startday").toString();
-		String startHour = postDataMap.get("starthour").toString();
-		String startMinute = postDataMap.get("startminute").toString();
-		String endYear = postDataMap.get("endyear").toString();
-		String endMonth = postDataMap.get("endmonth").toString();
-		String endDay = postDataMap.get("endday").toString();
-		String endHour = postDataMap.get("endhour").toString();
-		String endMinute = postDataMap.get("endminute").toString();
-
-		TextView textStartTimeTextViewObject = (TextView) mealView.getView("textView_mealdetails_startTime_result");
-		mealView.setValue(textStartTimeTextViewObject, timeToString(startDay) + "/"
-				+ timeToString(startMonth) + "/" + startYear + "-"
-				+ timeToString(startHour) + ":" + timeToString(startMinute));
-
-		TextView textEndTimeTextViewObject = (TextView) mealView.getView("textView_mealdetails_endTime_result");
-		mealView.setValue(textEndTimeTextViewObject, timeToString(endDay) + "/" + timeToString(endMonth)
-				+ "/" + endYear + "-" + timeToString(endHour) + ":"
-				+ timeToString(endMinute));
-
-		TextView restaurantTextViewObject = (TextView) mealView.getView("TextView_mealdetails_restaurant_result");
-		mealView.setValue(restaurantTextViewObject, location);
-
-		// TextView additionalinfo = (TextView)
-		// findViewById(R.id.textView_mealdetails_additionalinfo);
-		// additionalinfo.setText(postDataMap.toString());
 	}
+
+
 
 	/**
 	 * Method used to initialize MealView
@@ -103,7 +80,7 @@ public class MealDetailActivity extends Activity {
 		activity = this;
 		mealView = new MealView(context, activity);
 	}
-	
+
 	/**
 	 * This method is used to set the font style of the title of each page
 	 * 
@@ -147,14 +124,38 @@ public class MealDetailActivity extends Activity {
 	}
 
 	/**
-	 * Method used for accept button click
+	 * click handler for the accept button.
 	 * 
-	 * @author: Hai Tang
+	 * @author tejasvamsingh
 	 */
 	public void onAcceptButtonClick(View view) {
-		Intent intent = new Intent(this, TabHostActivity.class);
-		startActivity(intent);
+
+		requestID ="Meal";
+		requestType ="accept";
+
+		PostProperties postPropertiesObject=
+				PostProperties.notificationToPost(notificationPropertiesObject);
+
+		try{
+
+			List<Map<String, String>> result =
+					RequestHandlerHelper.getRequestHandlerInstance().
+					handleRequest(this,postPropertiesObject.toMap(),requestID,requestType);
+
+			NotificationAndPostCacheHelper.setServerFetchRequired("meal", true);
+			System.out.println("FETCH STATUS :"+
+					NotificationAndPostCacheHelper.isServerFetchRequired("meal"));
+
+			Intent intent = new Intent(this, TabHostActivity.class);
+			startActivity(intent);
+
+
+		}catch(RequestAbortedException e){
+			return;
+		}
+
 	}
+
 
 	/**
 	 * Method used for decline button click
@@ -166,17 +167,39 @@ public class MealDetailActivity extends Activity {
 		startActivity(intent);
 	}
 
+
 	/**
-	 * Set the right form for time and date.
-	 * 
-	 * @author Runze Tang
-	 * 
+	 * Populates the fields in the view.
+	 * @author tejasvamsingh
 	 */
-	private String timeToString(String time) {
-		if (time.length() > 1) {
-			return time;
-		} else {
-			return "0" + time;
-		}
+
+	private void populateView() {
+
+
+		Gson gson = GsonHelper.getGsoninstance();
+
+
+
+		MealProperties mealPropertiesObject = (MealProperties)
+				notificationPropertiesObject.getNotificationData();
+
+
+		TextView textStartTimeTextViewObject = 
+				(TextView) mealView.getView("textView_mealdetails_startTime_result");
+		mealView.setValue(textStartTimeTextViewObject,
+				mealPropertiesObject.getStartDateAndTimeProperties().toString());
+
+		TextView textEndTimeTextViewObject = 
+				(TextView) mealView.getView("textView_mealdetails_endTime_result");
+		mealView.setValue(textEndTimeTextViewObject,
+				mealPropertiesObject.getEndDateAndTimeProperties().toString() );
+
+		TextView restaurantTextViewObject = 
+				(TextView) mealView.getView("TextView_mealdetails_restaurant_result");
+
+		mealView.setValue(restaurantTextViewObject,
+				mealPropertiesObject.getlocation());
 	}
+
+
 }

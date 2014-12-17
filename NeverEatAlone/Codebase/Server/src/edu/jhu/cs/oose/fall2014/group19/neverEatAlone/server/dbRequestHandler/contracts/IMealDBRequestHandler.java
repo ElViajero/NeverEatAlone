@@ -14,7 +14,7 @@ import javax.ejb.Local;
  *
  */
 @Local
-public interface INotificationDBRequestHandler {
+public interface IMealDBRequestHandler {
 
 	/**
 	 * Method to create a meal notification.
@@ -25,5 +25,7 @@ public interface INotificationDBRequestHandler {
 	public List<Map<String,String>> CreateMealNotification(Map<String,String[]> request);
 
 	public List<Map<String,String>> fetchNotifications(Map<String,String[]> request);
+
+	public List<Map<String,String>> acceptMealNotifications(Map<String,String[]> request);
 
 }

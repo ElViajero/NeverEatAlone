@@ -53,7 +53,6 @@ public class MealPostAdapter extends ArrayAdapter<IActivityProperties> {
 		inflater = activity.getWindow().getLayoutInflater();
 
 		MealNotifications = mealNotifications;
-		System.out.println("Reached contructor : "+ MealNotifications);
 	}
 
 

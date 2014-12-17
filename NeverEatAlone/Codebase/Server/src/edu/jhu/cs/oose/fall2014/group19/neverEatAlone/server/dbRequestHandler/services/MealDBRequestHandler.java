@@ -9,7 +9,7 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.contracts.IDBQueryExecutionManager;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbRequestHandler.contracts.INotificationDBRequestHandler;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbRequestHandler.contracts.IMealDBRequestHandler;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbRequestHandler.helpers.DBRequestHandlerHelper;
 
 /**
@@ -21,7 +21,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbRequestHandler.he
 
 
 @Stateless
-public class NotificationDBRequestHandler implements INotificationDBRequestHandler {
+public class MealDBRequestHandler implements IMealDBRequestHandler {
 
 	@Inject IDBQueryExecutionManager iDBQueryExecutionManagerInstance; 
 
@@ -124,6 +124,43 @@ public class NotificationDBRequestHandler implements INotificationDBRequestHandl
 		return iDBQueryExecutionManagerInstance
 				.executeQuery(query, queryParameterMap);
 
+
+	}
+
+
+	@Override
+	public List<Map<String, String>> acceptMealNotifications(
+			Map<String, String[]> request) {
+
+		Map<String, String> parameterMap = 
+				DBRequestHandlerHelper.GetQueryParameterMap(request);
+
+		Map<String,Object> queryParameterMap = 
+				new HashMap<String,Object>();
+
+
+		queryParameterMap.put("username", parameterMap.get("poster"));
+		queryParameterMap.put("postID", parameterMap.get("postID"));
+
+		String query = "MATCH (a:User),(n:Post) "
+				+ "WHERE a.username={username} "
+				+ "AND n.postID={postID} "
+				+ "CREATE UNIQUE (a)-[:ATTENDING]->(n) "
+				+ "RETURN n";
+
+		List<Map<String, String>> resultMap =
+				iDBQueryExecutionManagerInstance
+				.executeQuery(query, queryParameterMap);
+
+		Map<String,String> statusMap=null;
+		if(resultMap.get(0).get("Status").equals("Success")){
+			System.out.println("Successful query.");
+			statusMap = resultMap.get(0);
+			resultMap.clear();
+		}
+		resultMap.add(0,statusMap);
+		resultMap.add(parameterMap);
+		return resultMap;
 
 	}
 

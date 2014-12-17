@@ -71,7 +71,7 @@ public class NotificationProperties implements IActivityProperties {
 	}
 
 
-
+	public NotificationProperties(){}
 
 
 	public NotificationProperties(Map<String,String> map){
