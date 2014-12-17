@@ -102,5 +102,7 @@
     <string name="no_invitees">You must select at least 1 recipient.</string>
     <string name="more_invitees_first">You set the maximum number of attendance to be </string>
     <string name="more_invitees_last">. The current number of attendance is </string>
+    <string name="title_activity_contacts_profile">ContactsProfileActivity</string>
+    <string name="contacts_profile">Contacts Profile</string>
 
 </resources>
