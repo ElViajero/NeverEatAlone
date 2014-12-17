@@ -139,13 +139,13 @@ public class ContactsProfileActivity extends Activity {
 		genderTextViewObject = (TextView) profileView
 				.getView("textView_contactsprofile_Gender");
 
-		profileView.setValue(usernameTextViewObject, username);
-		profileView.setValue(emailTextViewObject, email);
+		profileView.setValue(usernameTextViewObject, "Friend's Name");
+		profileView.setValue(emailTextViewObject, " ");
 		// TODO: Need to be filled with real Strings
-		profileView.setValue(aliasTextViewObject, "Needs to be changed");
-		profileView.setValue(nameTextViewObject, "Needs to be changed");
-		profileView.setValue(workspaceTextViewObject, "Needs to be changed");
-		profileView.setValue(genderTextViewObject, "Needs to be changed");
+		profileView.setValue(aliasTextViewObject, " ");
+		profileView.setValue(nameTextViewObject, " ");
+		profileView.setValue(workspaceTextViewObject, " ");
+		profileView.setValue(genderTextViewObject, " ");
 
 	}
 	

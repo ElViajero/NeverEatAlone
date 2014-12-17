@@ -110,5 +110,6 @@
     <string name="with_whom">With Whom?</string>
     <string name="additional_information">Additional Information</string>
     <string name="invite_others">Invite Others</string>
-
+	<string name="detail">Details</string>
+	<string name="close">Close</string>
 </resources>

@@ -13,6 +13,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
@@ -20,10 +21,12 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.AccountProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.NotificationProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.PostProperties;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.adapters.MealNotificationAdapter;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.adapters.MealPostAdapter;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.MessageToasterHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.NotificationAndPostCacheHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.ContactsView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.InvitesView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
 
@@ -31,14 +34,12 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.serv
  * 
  * This class handles controller operations for the MyPosts page.
  * 
+ * @author Runze Tang
  */
 public class MyPostsActivity extends ListActivity {
 
-	private ArrayAdapter<IActivityProperties> myPostsAdapter;
 	private TextView titleNameObject;
-
-	List<IActivityProperties> notificationList;
-
+	private ArrayAdapter<IActivityProperties> myPostsAdapter;
 	String requestID;
 	String requestType;
 
@@ -47,9 +48,17 @@ public class MyPostsActivity extends ListActivity {
 	private Activity activity;
 	private InvitesView invitesView;
 
+	NotificationProperties selectedNotification;
+	int listItemIndex;
+	Button detailButton;
+	Button closeButton;
+
+	List<IActivityProperties> notificationList;
+
 	/**
 	 * This constructor is responsible for obtaining notifications and updating
 	 * the GUI.
+	 * 
 	 * @author tejasvamsingh
 	 */
 	@Override
@@ -57,22 +66,14 @@ public class MyPostsActivity extends ListActivity {
 
 		MessageToasterHelper.toastMessage("Inside CREATE");
 
-		notificationList = new ArrayList<IActivityProperties>();
-
 		initView(savedInstanceState);
 		isCreated = false;
 
-		initInvitesView();
-
-		fetchPosts();
-
-		titleNameObject = (TextView) invitesView.getView("my_posts");
-		setTitleStyle();
 	}
-
 
 	/**
 	 * Method used to initialize InvitesView
+	 * 
 	 * @author tejasvamsingh
 	 */
 	private void initInvitesView() {
@@ -83,19 +84,28 @@ public class MyPostsActivity extends ListActivity {
 
 	/**
 	 * This method updates the GUI.
+	 * 
 	 * @author tejasvamsingh
+	 * @author Runze Tang
 	 */
 	private void initView(Bundle savedInstanceState) {
 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_my_posts);
 
-
+		detailButton = new Button(getApplicationContext());
+		closeButton = new Button(getApplicationContext());
+		notificationList = new ArrayList<IActivityProperties>();
 		myPostsAdapter = new MealPostAdapter(this, notificationList);
+
 		setListAdapter(myPostsAdapter);
 
-		NotificationAndPostCacheHelper.
-		registerAdapterInstance(myPostsAdapter, "mealPost");
+		NotificationAndPostCacheHelper.registerAdapterInstance(myPostsAdapter,
+				"mealPost");
+
+		fetchPosts();
+
+		setTitleStyle();
 
 		applyTheme();
 
@@ -106,12 +116,14 @@ public class MyPostsActivity extends ListActivity {
 	 * 
 	 */
 	private void setTitleStyle() {
-
+		initInvitesView();
+		titleNameObject = (TextView) invitesView.getView("my_posts");
 		ThemeManager.setHeaderFont(titleNameObject);
 	}
 
 	/**
 	 * This method applies the GUI's color theme.
+	 * 
 	 * @author Hai Tang
 	 * 
 	 */
@@ -128,20 +140,59 @@ public class MyPostsActivity extends ListActivity {
 
 		ThemeManager.applyButtonColor(backButton);
 
-
 	}
 
 	/**
-	 * This method goes to the MealDetailActivity (needs to be changed) when
-	 * clicking. It also passes the mealProperties to the MealDetailActivity
-	 * (needs to be changed).
+	 * This method handles click events on the listview.
 	 * 
 	 * @param position
 	 * 
 	 */
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
+		selectedNotification = (NotificationProperties) myPostsAdapter
+				.getItem(position);
+		listItemIndex = position;
+		setButtonsVisible(v);
+	}
 
+	/**
+	 * Toggles visibility of buttons for listview.
+	 * 
+	 * @param v
+	 */
+	private void setButtonsVisible(View v) {
+
+		detailButton.setVisibility(View.INVISIBLE);
+		closeButton.setVisibility(View.INVISIBLE);
+
+		detailButton = (Button) v.findViewById(R.id.myPosts_button_detail);
+		closeButton = (Button) v.findViewById(R.id.myPosts_button_close);
+		detailButton.setVisibility(View.VISIBLE);
+		closeButton.setVisibility(View.VISIBLE);
+	}
+
+	/**
+	 * Handler for the detail button.
+	 * 
+	 * @param view
+	 */
+	public void onDetailMyPostsButtonClick(View view) {
+		// TODO Need to be revised here
+		// requestType = "accept";
+		// selectedNotification.setAccepted(true);
+		// sendRequest();
+	}
+
+	/**
+	 * Handler for the close button.
+	 * 
+	 * @param view
+	 */
+	public void onCloseMyPostsButtonClick(View view) {
+		// TODO Need to be revised here
+		// requestType = "reject";
+		// sendRequest();
 	}
 
 	/**
@@ -154,11 +205,10 @@ public class MyPostsActivity extends ListActivity {
 		MyPostsActivity.this.startActivity(intent);
 	}
 
-
 	private void fetchPosts() {
 
-		requestID="Meal";
-		requestType="fetchPosts";
+		requestID = "Meal";
+		requestType = "fetchPosts";
 
 		NotificationAndPostCacheHelper.clearAdapterDataMap("mealPost");
 
@@ -168,22 +218,22 @@ public class MyPostsActivity extends ListActivity {
 							AccountProperties.getUserAccountInstance().toMap(),
 							requestID, requestType);
 
-			for( Map<String, String> result :resultMapList){
+			for (Map<String, String> result : resultMapList) {
 
-				if(result.isEmpty())
+				if (result.isEmpty())
 					continue;
 
-				NotificationProperties notification = new NotificationProperties(result);
+				NotificationProperties notification = new NotificationProperties(
+						result);
 
 				NotificationAndPostCacheHelper.addPost(
-						PostProperties.notificationToPost(notification), "mealPost");
+						PostProperties.notificationToPost(notification),
+						"mealPost");
 			}
-
 
 		} catch (RequestAbortedException e) {
 			System.out.println("Already Handled");
 		}
-
 
 	}
 

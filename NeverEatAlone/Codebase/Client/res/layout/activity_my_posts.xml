@@ -1,3 +1,4 @@
+<!-- @author Runze Tang -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -17,7 +18,7 @@
     </RelativeLayout>
 
     <!-- Button Header -->
-    
+
     <LinearLayout
         android:id="@+id/my_posts_buttons_layout"
         style="@style/ButtonBarTheme"
@@ -49,12 +50,10 @@
 
     <!-- Main Space -->
 
-
     <RelativeLayout
         android:id="@+id/layout_my_posts"
         style="@style/MainLayoutTheme"
-        android:layout_below="@+id/my_posts_buttons_layout"
-         >
+        android:layout_below="@+id/my_posts_buttons_layout" >
 
         <RelativeLayout
             android:id="@+id/layout_my_posts_container"
@@ -64,7 +63,8 @@
             <ListView
                 android:id="@android:id/list"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true" >
             </ListView>
         </RelativeLayout>
     </RelativeLayout>
