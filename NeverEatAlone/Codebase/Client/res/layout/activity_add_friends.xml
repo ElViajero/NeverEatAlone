@@ -1,6 +1,7 @@
 <!--
  @author Hai Tang @ Yueling Loh
 @author tejasvamsingh
+@author Runze Tang
 -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -25,52 +26,56 @@
     <LinearLayout
         android:id="@+id/buttons_addfriends"
         style="@style/ButtonBarTheme"
-        android:layout_below="@+id/header_addfriends" >
+        android:layout_alignParentBottom="true"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal" >
 
-        <Button
-            android:id="@+id/button_addfriends_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_marginTop="25dp"
-            android:background="@drawable/button_background_light"
-            android:onClick="onBackButtonClick"
-            android:paddingLeft="50dp"
-            android:paddingRight="50dp"
-            android:text="@string/back" />
-        
+        <LinearLayout
+            android:id="@+id/buttons_addfriends_container"
+            style="@style/ButtonBarTheme"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/button_addfriends_back"
+                style="@style/BarButton"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:onClick="onBackButtonClick"
+                android:text="@string/back" />
+
+            <Button
+                android:id="@+id/button_addfriends_search"
+                style="@style/BarButton"
+                android:onClick="onSearchButtonClick"
+                android:text="@string/search" />
+        </LinearLayout>
     </LinearLayout>
 
     <!-- Main Space -->
 
     <RelativeLayout
         android:id="@+id/main_addfriends"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/buttons_addfriends" >
+        style="@style/MainLayoutTheme"
+        android:layout_above="@+id/buttons_addfriends"
+        android:layout_below="@+id/header_addfriends" >
 
         <TextView
             android:id="@+id/textView_addfriends_addbyusername"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/editText_addfriends_username"
             android:layout_alignParentLeft="true"
-            android:layout_marginTop="30dp"
+            android:layout_alignParentStart="true"
             android:text="@string/search_by_username"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <EditText
             android:id="@+id/editText_addfriends_username"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/textView_addfriends_addbyemail"
-            android:layout_alignParentLeft="true"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/edittext"
-            android:ems="10" >
-
-            <requestFocus />
+            style="@style/BigEditText"
+            android:layout_below="@+id/textView_addfriends_addbyusername"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"
+            android:inputType="text" >
         </EditText>
 
         <TextView
@@ -78,34 +83,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:layout_marginTop="30dp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/editText_addfriends_username"
+            android:layout_marginTop="10dp"
             android:text="@string/search_by_email"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <EditText
             android:id="@+id/editText_addfriends_email"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
+            style="@style/BigEditText"
             android:layout_below="@+id/textView_addfriends_addbyemail"
-            android:layout_marginTop="20dp"
-            android:background="@drawable/edittext"
-            android:ems="10"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical"
             android:inputType="textEmailAddress" />
-
-        <Button
-            android:id="@+id/button_addfriends_search"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="50dp"
-            android:background="@drawable/button_background_light"
-            android:onClick="onSearchButtonClick"
-            android:paddingLeft="50dp"
-            android:paddingRight="50dp"
-            android:text="@string/search" />
     </RelativeLayout>
 
 </RelativeLayout>
