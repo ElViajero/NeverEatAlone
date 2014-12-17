@@ -11,11 +11,11 @@
           android:color="#0078A6" />
       <corners
           android:radius="8dp" />
-      <padding
+     <padding
           android:left="@dimen/button_padding"
           android:right="@dimen/button_padding"
           android:top="@dimen/button_padding"
-          android:bottom="@dimen/button_padding" />
+          android:bottom="@dimen/button_padding" /> 
 
 
 </shape>
