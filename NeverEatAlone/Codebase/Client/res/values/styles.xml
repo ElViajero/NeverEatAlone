@@ -126,7 +126,7 @@
 
     
 	<!--
-    	Big Edit Text Layout.
+    	Regular Edit Text Layout.
 		@author Yueling Loh 
     -->
     <style name="RegularEditText">
@@ -136,6 +136,7 @@
         <item name="android:paddingTop">@dimen/edittext_padding</item>
         <item name="android:paddingLeft">@dimen/activity_horizontal_margin</item>
         <item name="android:paddingRight">@dimen/activity_horizontal_margin</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
         <item name="android:gravity">center</item>
     </style>
 

@@ -39,12 +39,16 @@
                 android:id="@+id/accepted_invites_button_back"
                 style="@style/BarButton"
                 android:layout_marginRight="@dimen/activity_horizontal_margin"
-                android:layout_weight="0.33"
                 android:onClick="onBackButtonClick"
                 android:text="@string/back"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
-
+            <RelativeLayout
+                android:id="@+id/button_placeholder"
+                android:layout_width="0dip"
+                android:layout_height="0dip"
+                android:layout_weight="0.5" >
+            </RelativeLayout>
         </LinearLayout> 
     </LinearLayout>
     

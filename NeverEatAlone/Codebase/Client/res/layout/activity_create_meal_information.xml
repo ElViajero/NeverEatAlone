@@ -165,8 +165,8 @@
 
                 <EditText
                     android:id="@+id/edit_restaurant"
+                    style="@style/RegularEditText"
                     android:layout_weight="2"
-       style="@style/RegularEditText"
                     android:inputType="text" />
             </LinearLayout>
 
@@ -193,11 +193,19 @@
                     android:layout_weight="1"
                     android:text="@string/max_number" />
 
-                <EditText
-                    android:id="@+id/edit_maxnumber"
-                     style="@style/RegularEditText"
+                <LinearLayout
+                    android:id="@+id/edit_maxnumber_container"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:inputType="number" />
+                    android:orientation="horizontal" >
+
+                    <EditText
+                        android:id="@+id/edit_maxnumber"
+                        style="@style/RegularEditText"
+                        android:layout_weight="1"
+                        android:inputType="number" />
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -213,11 +221,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingBottom="@dimen/switch_padding"
-                    android:paddingTop="@dimen/switch_padding"
                     android:paddingLeft="@dimen/switch_padding"
                     android:paddingRight="@dimen/switch_padding"
-                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:paddingTop="@dimen/switch_padding"
                     android:text="@string/allow_friend_invite"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
                     android:textOff="@string/capital_no"
                     android:textOn="@string/capital_yes" />
             </LinearLayout>
