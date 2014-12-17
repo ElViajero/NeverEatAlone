@@ -48,8 +48,6 @@
                 android:id="@+id/invites_button_create"
                 style="@style/BarButton"
                 android:onClick="onCreateButtonClick"
-                android:paddingBottom="-10dp"
-                android:paddingTop="-10dp"
                 android:text="@string/create" />
         </LinearLayout>
     </LinearLayout>

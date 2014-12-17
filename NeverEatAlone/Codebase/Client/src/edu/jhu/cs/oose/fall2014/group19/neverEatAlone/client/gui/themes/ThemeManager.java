@@ -18,9 +18,12 @@ public class ThemeManager {
 	// static int mainTheme = R.style.MainLayoutTheme;
 	// static int headerTheme = R.style.HeaderTheme;
 
-	static int mainTheme = R.drawable.layout_background_light;
+	static int frontTheme = R.drawable.layout_background_light_outer;
 	static int headerTheme = R.drawable.header_background_light;
+	static int mainTheme = R.drawable.layout_background_light;
+	static int mainThemePlain = R.drawable.plain_layout_background_light;
 	static int buttonBarTheme = R.drawable.buttonbar_background_light;
+	static int buttonBarThemePlain = R.drawable.plain_buttonbar_background_light;
 	static int tabTheme = R.drawable.tab_background_light;
 	static int buttonColor = R.drawable.button_background_light;
 	static int editTextColor = R.drawable.edittext_background_light;
@@ -53,9 +56,17 @@ public class ThemeManager {
 			System.out.println("acitivity is null");
 		}
 
-		mainView.setBackgroundResource(mainTheme);
+		mainView.setBackgroundResource(frontTheme);
 	}
 
+	/**
+	 * This changes the background colors of the header and the main layout.
+	 * 
+	 * @author Yueling Loh
+	 * 
+	 */
+
+	
 
 	/**
 	 * This changes the background colors of the header and the main layout.
@@ -70,6 +81,23 @@ public class ThemeManager {
 		}
 		mainView.setBackgroundResource(mainTheme);
 		headerView.setBackgroundResource(headerTheme);
+
+	}
+	
+	/**
+	 * This changes the background colors of the header and the main layout.
+	 * 
+	 * @author Yueling Loh
+	 * 
+	 */
+	public static void applyPlainTheme(View mainView, View headerView,View buttonBarView) {
+
+		if ((mainView == null) || (headerView == null)|| (buttonBarView == null)) {
+			System.out.println("acitivity is null");
+		}
+		mainView.setBackgroundResource(mainThemePlain);
+		headerView.setBackgroundResource(headerTheme);
+		buttonBarView.setBackgroundResource(buttonBarThemePlain);
 
 	}
 
@@ -177,7 +205,6 @@ public class ThemeManager {
 		Typeface tf = Typeface.createFromAsset(tv.getContext().getAssets(),
 				"fonts/Chunkfive.otf");
 		tv.setTypeface(tf);
-//		tv.setTextSize(20);
 
 	}
 	

@@ -96,7 +96,7 @@
         <item name="android:layout_width">0dip</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_weight">0.5</item>
-        <!-- <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>-->
+        <!-- <item name="android:textAppearance">?android:attr/textAppearanceSmall</item> -->
     </style>
 
     <!--
@@ -115,6 +115,10 @@
     <style name="BigEditText">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingBottom">@dimen/edittext_padding</item>
+        <item name="android:paddingTop">@dimen/edittext_padding</item>
+        <item name="android:paddingLeft">@dimen/activity_horizontal_margin</item>
+        <item name="android:paddingRight">@dimen/activity_horizontal_margin</item>
         <item name="android:background">@drawable/edittext_background_light</item>
         <item name="android:gravity">center</item>
     </style>

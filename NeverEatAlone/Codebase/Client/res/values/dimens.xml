@@ -18,5 +18,5 @@
     <dimen name="tab_text_size">18sp</dimen>
     <dimen name="button_padding">0dp</dimen>
     <dimen name="switch_padding">12dp</dimen>
-
+	<dimen name="edittext_padding">8dp</dimen>
 </resources>

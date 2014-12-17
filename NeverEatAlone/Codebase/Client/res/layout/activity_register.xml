@@ -23,28 +23,34 @@
 
     <!-- Button Bar -->
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/buttons_registration"
         style="@style/ButtonBarTheme"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true" >
+        android:layout_below="@+id/header_invites"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal" >
 
-        <Button
-            android:id="@+id/button_register_cancel"
-            style="@style/BarButton"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:onClick="onCancelButtonClick"
-            android:text="@string/cancel" />
+        <LinearLayout
+            android:id="@+id/buttons_invites_container"
+            style="@style/ButtonBarTheme"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal" >
 
-        <Button
-            android:id="@+id/button_register_register"
-            style="@style/BarButton"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_toRightOf="@+id/button_register_cancel"
-            android:onClick="onRegisterButtonClick"
-            android:text="@string/register" />
-    </RelativeLayout>
+            <Button
+                android:id="@+id/button_register_cancel"
+                style="@style/BarButton"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:onClick="onCancelButtonClick"
+                android:text="@string/cancel" />
+
+            <Button
+                android:id="@+id/button_register_register"
+                style="@style/BarButton"
+                android:onClick="onRegisterButtonClick"
+                android:text="@string/register" />
+        </LinearLayout>
+    </LinearLayout>
 
     <!-- Main Space -->
 
@@ -54,76 +60,81 @@
         android:layout_above="@+id/buttons_registration"
         android:layout_below="@+id/header_registration" >
 
-        <TextView
-            android:id="@+id/username"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_marginTop="50dp"
-            android:text="@string/username"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+        <RelativeLayout
+            android:id="@+id/main_registration_countainer"
+            style="@style/MainLayoutTheme"
+            android:layout_alignParentTop="true" >
 
-        <EditText
-            android:id="@+id/edit_username"
-            style="@style/BigEditText"
-            android:layout_below="@+id/username"
-            android:layout_marginTop="10dp"
-            android:gravity="center_vertical"
-            android:inputType="text" />
+            <TextView
+                android:id="@+id/username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:text="@string/username"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
-        <TextView
-            android:id="@+id/email"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_below="@+id/edit_username"
-            android:layout_marginTop="50dp"
-            android:text="@string/email"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            <EditText
+                android:id="@+id/edit_username"
+                style="@style/BigEditText"
+                android:layout_below="@+id/username"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:inputType="text" />
 
-        <EditText
-            android:id="@+id/edit_email"
-            style="@style/BigEditText"
-            android:layout_below="@+id/email"
-            android:layout_marginTop="10dp"
-            android:gravity="center_vertical"
-            android:inputType="textEmailAddress" />
+            <TextView
+                android:id="@+id/email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/edit_username"
+                android:layout_marginTop="10dp"
+                android:text="@string/email"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
-        <TextView
-            android:id="@+id/password"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/edit_email"
-            android:layout_marginTop="50dp"
-            android:text="@string/password"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            <EditText
+                android:id="@+id/edit_email"
+                style="@style/BigEditText"
+                android:layout_below="@+id/email"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:inputType="textEmailAddress" />
 
-        <EditText
-            android:id="@+id/edit_password"
-            style="@style/BigEditText"
-            android:layout_below="@+id/password"
-            android:layout_marginTop="10dp"
-            android:gravity="center_vertical"
-            android:inputType="textPassword" />
+            <TextView
+                android:id="@+id/password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/edit_email"
+                android:layout_marginTop="10dp"
+                android:text="@string/password"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
 
-        <TextView
-            android:id="@+id/confirm_password"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/edit_password"
-            android:layout_marginTop="50dp"
-            android:text="@string/confirm_password"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            <EditText
+                android:id="@+id/edit_password"
+                style="@style/BigEditText"
+                android:layout_below="@+id/password"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:inputType="textPassword" />
 
-        <EditText
-            android:id="@+id/edit_confirm_password"
-            style="@style/BigEditText"
-            android:layout_below="@+id/confirm_password"
-            android:layout_marginTop="10dp"
-            android:gravity="center_vertical"
-            android:inputType="textPassword" />
+            <TextView
+                android:id="@+id/confirm_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/edit_password"
+                android:layout_marginTop="10dp"
+                android:text="@string/confirm_password"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+            <EditText
+                android:id="@+id/edit_confirm_password"
+                style="@style/BigEditText"
+                android:layout_below="@+id/confirm_password"
+                android:layout_marginTop="10dp"
+                android:gravity="center_vertical"
+                android:inputType="textPassword" />
+        </RelativeLayout>
     </RelativeLayout>
 
 </RelativeLayout>
