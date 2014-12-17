@@ -1,3 +1,5 @@
+
+
 <!-- @author Yueling Loh @author tejasvamsingh -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -33,7 +35,7 @@
         <RelativeLayout
             android:id="@+id/edit_username_latent_layout_left"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="0.2" >
         </RelativeLayout>
 
@@ -50,7 +52,7 @@
         <RelativeLayout
             android:id="@+id/edit_username_latent_layout_right"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="0.2" >
         </RelativeLayout>
     </LinearLayout>
@@ -73,7 +75,7 @@
         <RelativeLayout
             android:id="@+id/edit_password_latent_layout_left"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="0.2" >
         </RelativeLayout>
 
@@ -90,7 +92,7 @@
         <RelativeLayout
             android:id="@+id/edit_password_latent_layout_right"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="0.2" >
         </RelativeLayout>
     </LinearLayout>
@@ -173,63 +175,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.25" >
         </RelativeLayout>
-
-        <Button
-            android:id="@+id/button_login"
-            style="@style/StandardButton"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="0.5"
-            android:onClick="onLoginButtonClick"
-            android:text="@string/login" />
-
-        <RelativeLayout
-            android:id="@+id/main_button1_layout_right"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.25" >
-        </RelativeLayout>
-    </LinearLayout>
-
-    <RelativeLayout
-        android:id="@+id/main_layout_blank5"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.05" >
-    </RelativeLayout>
-
-    <LinearLayout
-        android:id="@+id/main_button2_layout"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="0.1"
-        android:orientation="horizontal" >
-
-        <RelativeLayout
-            android:id="@+id/main_button2_layout_left"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.25" >
-        </RelativeLayout>
-
-        <Button
-            android:id="@+id/button_signup"
-            style="@style/StandardButton"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="0.5"
-            android:onClick="onSignUpButtonClick"
-            android:text="@string/signup" />
-
-        <RelativeLayout
-            android:id="@+id/main_button2_layout_right"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="0.25" >
-        </RelativeLayout>
     </LinearLayout>
 
     <RelativeLayout
@@ -240,3 +185,5 @@
     </RelativeLayout>
 
 </LinearLayout>
+
+
