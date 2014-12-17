@@ -117,7 +117,8 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/textView_mealdetails_startTime_container"
-                android:layout_marginTop="10dp" >
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal" >
 
                 <TextView
                     android:id="@+id/textView_mealdetails_endTime"
@@ -153,7 +154,8 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_below="@+id/TextView_mealdetails_where"
-                android:layout_marginTop="10dp" >
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal" >
 
                 <TextView
                     android:id="@+id/TextView_mealdetails_restaurant"
@@ -196,37 +198,39 @@
                     android:layout_width="0dip"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="WITH WHOM RESULT: JUST A PLACEHOLDER"
+                    android:text="WITH WHOM RESULT"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/inviteothers_button_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/mealdetails_withwhom_result_container"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal" >
+
+                <Button
+                    android:id="@+id/button_mealdetails_inviteothers"
+                    style="@style/BarButton"
+                    android:layout_weight="0.5"
+                    android:text="@string/invite_others"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
-                <LinearLayout
-                    android:id="@+id/inviteothers_button_container"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:orientation="horizontal" >
-
-                    <Button
-                        android:id="@+id/button_mealdetails_inviteothers"
-                        style="@style/BarButton"
-                        android:layout_weight="0.3"
-                        android:text="@string/invite_others" />
-                    
-                    <TextView
-                        android:id="@+id/button_mealdetails_padding"
-                        android:layout_width="0dip"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="0.7"
-                        android:gravity="center_horizontal"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
-                </LinearLayout>
+                <TextView
+                    android:id="@+id/button_mealdetails_padding"
+                    android:layout_width="0dip"
+                    android:layout_height="0dip"
+                    android:layout_weight="0.5"
+                    android:gravity="center_horizontal"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
             </LinearLayout>
 
             <TextView
                 android:id="@+id/textView_mealdetails_additionalinfo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/mealdetails_withwhom_result_container"
+                android:layout_below="@+id/inviteothers_button_container"
                 android:layout_marginTop="20dp"
                 android:text="@string/additional_information"
                 android:textAppearance="?android:attr/textAppearanceMedium"
@@ -246,7 +250,7 @@
                     android:layout_width="0dip"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="ADDITIONAL INFO: JUST A PLACEHOLDER"
+                    android:text="ADDITIONAL INFO RESULT"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
             </LinearLayout>
 
