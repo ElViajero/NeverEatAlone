@@ -63,7 +63,7 @@
         <RelativeLayout
             android:id="@+id/main_registration_countainer"
             style="@style/MainLayoutTheme"
-            android:gravity="center_vertical" >
+            android:layout_alignParentTop="true" >
 
             <TextView
                 android:id="@+id/username"
