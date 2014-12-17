@@ -61,11 +61,11 @@ public class AddFriendsActivity extends Activity {
 
 		setTitleStyle();
 
-
 	}
 
 	/**
 	 * Method used to initalize the ContactsView
+	 * 
 	 * @author: Hai Tang
 	 */
 	private void initContactsView() {
@@ -90,6 +90,7 @@ public class AddFriendsActivity extends Activity {
 	 * 
 	 * @author tejasvamsingh
 	 * @author Yueling Loh
+	 * @author Runze Tang
 	 */
 	private void applyTheme() {
 
@@ -98,8 +99,13 @@ public class AddFriendsActivity extends Activity {
 		View headerLayout = contactsView.getView("header_addfriends");
 		View buttonBar = contactsView.getView("buttons_addfriends");
 
-		ThemeManager.applyTheme(mainLayout, headerLayout);
-		ThemeManager.applyButtonBarTheme(buttonBar);
+		View searchButton = contactsView.getView("button_addfriends_search");
+		View backButton = contactsView.getView("button_addfriends_back");
+
+		ThemeManager.applyPlainTheme(mainLayout, headerLayout, buttonBar);
+
+		ThemeManager.applyButtonColor(searchButton);
+		ThemeManager.applyButtonColor(backButton);
 
 	}
 
@@ -143,23 +149,24 @@ public class AddFriendsActivity extends Activity {
 		recipientList.add(username);
 
 		requestID = "Contact";
-		requestType="add";
-		MessageToasterHelper.toastMessage(this, "the damn username is :"+username);
+		requestType = "add";
+		MessageToasterHelper.toastMessage(this, "the damn username is :"
+				+ username);
 		IActivityProperties contactProperties = new ContactProperties(username);
-		IActivityProperties postProperties = new PostProperties(recipientList, "contact", 
-				GsonHelper.getGsoninstance().toJson(contactProperties.toMap()));
-
+		IActivityProperties postProperties = new PostProperties(recipientList,
+				"contact", GsonHelper.getGsoninstance().toJson(
+						contactProperties.toMap()));
 
 		try {
 
-			List<Map<String, String>> resultMapList = 
-					RequestHandlerHelper.getRequestHandlerInstance().
-					handleRequest(this,postProperties.toMap(),requestID,requestType) ;		
-
+			List<Map<String, String>> resultMapList = RequestHandlerHelper
+					.getRequestHandlerInstance().handleRequest(this,
+							postProperties.toMap(), requestID, requestType);
 
 			MessageToasterHelper.toastMessage(this, "Contact Request Sent !");
 
-			NotificationAndPostCacheHelper.addPost(postProperties, "contactPost");
+			NotificationAndPostCacheHelper.addPost(postProperties,
+					"contactPost");
 
 			// start the new activity
 			Intent intent = new Intent(this, TabHostActivity.class);
