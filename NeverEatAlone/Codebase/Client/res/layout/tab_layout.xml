@@ -13,6 +13,8 @@
         android:padding="@dimen/tab_margin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@drawable/tab_text_color_light"
         android:text="Title" />
 
 </LinearLayout>
