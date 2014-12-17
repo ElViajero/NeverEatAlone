@@ -96,19 +96,15 @@ public class SelectFriendsActivity extends ListActivity {
 		View backSelectfriendsButton = contactsView.getView("button_selectfriends_back");
 		View postSelectfriendsButton = contactsView.getView("button_selectfriends_post");
 		View broadcastSelectfriendsButton = contactsView.getView("button_selectfriends_broadcast");
-		View unselectSelectfriendsButton = contactsView.getView("button_selectfriends_unselectall");
+//		View unselectSelectfriendsButton = contactsView.getView("button_selectfriends_unselectall");
 
-
-		ThemeManager.applyTheme(mainLayout, headerLayout);
+		ThemeManager.applyDoubleBarTheme(mainLayout, headerLayout,buttonBar, buttonBarButtom);
 //		ThemeManager.applyPlainTheme(mainLayout, headerLayout, buttonBarButtom);
-		
-		ThemeManager.applyButtonBarTheme(buttonBar);
-		ThemeManager.applyButtonBarTheme(buttonBarButtom);
 
 		ThemeManager.applyButtonColor(backSelectfriendsButton);
 		ThemeManager.applyButtonColor(postSelectfriendsButton);
 		ThemeManager.applyButtonColor(broadcastSelectfriendsButton);
-		ThemeManager.applyButtonColor(unselectSelectfriendsButton);
+//		ThemeManager.applyButtonColor(unselectSelectfriendsButton);
 
 
 	}

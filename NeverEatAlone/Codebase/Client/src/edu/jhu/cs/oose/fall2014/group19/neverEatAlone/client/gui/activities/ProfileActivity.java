@@ -243,10 +243,10 @@ public class ProfileActivity extends Activity {
 		profileView.setValue(usernameTextViewObject, username);
 		profileView.setValue(emailTextViewObject, email);
 		// TODO: Need to be filled with real Strings
-		profileView.setValue(aliasTextViewObject, "abc");
-		profileView.setValue(nameTextViewObject, "abc");
-		profileView.setValue(workspaceTextViewObject, "abc");
-		profileView.setValue(genderTextViewObject, "abc");
+		profileView.setValue(aliasTextViewObject, " ");
+		profileView.setValue(nameTextViewObject, " ");
+		profileView.setValue(workspaceTextViewObject, " ");
+		profileView.setValue(genderTextViewObject, " ");
 
 	}
 
