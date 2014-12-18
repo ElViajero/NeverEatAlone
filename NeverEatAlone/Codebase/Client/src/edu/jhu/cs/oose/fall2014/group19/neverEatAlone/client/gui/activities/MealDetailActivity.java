@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -82,6 +83,11 @@ public class MealDetailActivity extends ListActivity {
 
 
 		fetchAttending();
+
+		if(DataCacheHelper.isAccepted()){
+			Button accept = (Button)mealView.getView("button_mealdetails_accept");
+			accept.setText("Undo Accept");
+		}
 
 
 	}
@@ -178,6 +184,9 @@ public class MealDetailActivity extends ListActivity {
 		requestID ="Meal";
 		requestType ="accept";
 
+		if(DataCacheHelper.isAccepted())
+			requestType="undoAccept";
+
 		PostProperties postPropertiesObject=
 				PostProperties.notificationToPost(notificationPropertiesObject);
 
@@ -190,6 +199,8 @@ public class MealDetailActivity extends ListActivity {
 			NotificationAndPostCacheHelper.setServerFetchRequired("meal", true);
 			System.out.println("FETCH STATUS :"+
 					NotificationAndPostCacheHelper.isServerFetchRequired("meal"));
+
+			notificationPropertiesObject.setAccepted(!DataCacheHelper.isAccepted());
 
 			Intent intent = new Intent(this, TabHostActivity.class);
 			startActivity(intent);

@@ -118,7 +118,8 @@ public class MealDBRequestHandler implements IMealDBRequestHandler {
 
 		String query = "MATCH (a:User)"
 				+ "WHERE a.username={username}"
-				+ "OPTIONAL MATCH (n:Post)-[:RECIPIENT]->(a)"
+				+ "OPTIONAL MATCH (n:Post)-[:RECIPIENT]->(a) "
+				+ "WHERE NOT (a)-[:ATTENDING]->(n)"
 				+ "RETURN n";
 
 		return iDBQueryExecutionManagerInstance
@@ -247,6 +248,7 @@ public class MealDBRequestHandler implements IMealDBRequestHandler {
 				+ "AND (b)-[:ATTENDING]->(n) "
 				+ "AND (a)-[:KNOWS]->(b) "
 				+ "AND (b)-[:KNOWS]->(a) "
+				+ "AND NOT b.username={username}"
 				+ "RETURN b";
 
 		List<Map<String, String>> resultMap =
@@ -255,6 +257,36 @@ public class MealDBRequestHandler implements IMealDBRequestHandler {
 
 		System.out.println("RESULT MAP IS :"+ resultMap);
 		return resultMap;
+
+	}
+
+
+	@Override
+	public List<Map<String, String>> undoAccept(Map<String, String[]> request) {
+
+		Map<String, String> parameterMap = 
+				DBRequestHandlerHelper.GetQueryParameterMap(request);
+
+		Map<String,Object> queryParameterMap = 
+				new HashMap<String,Object>();
+
+		System.out.println("USERNAME : "+ parameterMap.get("poster"));
+
+		queryParameterMap.put("username", parameterMap.get("poster"));
+		queryParameterMap.put("postID",parameterMap.get("postID"));
+
+		String query = "MATCH (a:User)-[r:ATTENDING]->(n:Post) "
+				+ "WHERE a.username={username} "
+				+ "AND n.postID={postID}"
+				+ "DELETE r "
+				+ "RETURN a";
+
+		List<Map<String, String>> resultMap =
+				iDBQueryExecutionManagerInstance
+				.executeQuery(query, queryParameterMap);
+
+		return resultMap;
+
 
 	}
 

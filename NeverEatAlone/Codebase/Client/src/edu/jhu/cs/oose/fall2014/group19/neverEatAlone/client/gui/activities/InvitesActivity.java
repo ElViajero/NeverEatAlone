@@ -2,6 +2,9 @@ package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+
+import org.apache.http.impl.execchain.RequestAbortedException;
 
 import android.app.Activity;
 import android.app.ListActivity;
@@ -14,12 +17,14 @@ import android.widget.ListView;
 import android.widget.TextView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.contracts.IActivityProperties;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.AccountProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.NotificationProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.adapters.MealNotificationAdapter;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.DataCacheHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.NotificationAndPostCacheHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.InvitesView;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
 
 /**
  * 
@@ -35,7 +40,7 @@ public class InvitesActivity extends ListActivity {
 	private ArrayAdapter<IActivityProperties> invitesAdapter;
 	private TextView appNameObject;
 
-	List<IActivityProperties> NotificationList;
+	List<IActivityProperties> notificationList;
 
 	String requestID;
 	String requestType;
@@ -56,7 +61,7 @@ public class InvitesActivity extends ListActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 
-		NotificationList = new ArrayList<IActivityProperties>();
+		notificationList = new ArrayList<IActivityProperties>();
 		initView(savedInstanceState);
 		isCreated = false;
 
@@ -88,7 +93,7 @@ public class InvitesActivity extends ListActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_invites);
 
-		invitesAdapter = new MealNotificationAdapter(this, NotificationList);
+		invitesAdapter = new MealNotificationAdapter(this, notificationList);
 		setListAdapter(invitesAdapter);
 		NotificationAndPostCacheHelper.registerAdapterInstance(invitesAdapter,
 				"meal");
@@ -151,10 +156,12 @@ public class InvitesActivity extends ListActivity {
 	protected void onListItemClick(ListView l, View v, int position, long id) {
 		Intent intent = new Intent(this, MealDetailActivity.class);
 
-		NotificationProperties notification = (NotificationProperties) NotificationList
+		NotificationProperties notification = (NotificationProperties) notificationList
 				.get(position);
 
+		DataCacheHelper.setAccepted(false);
 		DataCacheHelper.setIActivityPropertiesObject(notification);
+
 		startActivity(intent);
 
 	}
@@ -181,5 +188,41 @@ public class InvitesActivity extends ListActivity {
 				AcceptedInvitesActivity.class);
 		InvitesActivity.this.startActivity(intent);
 	}
+
+	@Override
+	protected void onResume(){
+		super.onResume();
+		if(NotificationAndPostCacheHelper.
+				isServerFetchRequired("meal")){
+			fetchNotifications();
+			NotificationAndPostCacheHelper.setServerFetchRequired("meal", false);
+		}
+
+	}
+
+
+	private void fetchNotifications() {
+		notificationList.clear();
+		try {
+			requestID = "Meal";
+			requestType = "fetchNotifications";
+
+			// send the request.
+			List<Map<String, String>> resultMapList = RequestHandlerHelper
+					.getRequestHandlerInstance().handleRequest(this,
+							AccountProperties.getUserAccountInstance().toMap(),
+							requestID, requestType);
+
+			for(Map<String, String> result : resultMapList){
+				if(result.isEmpty())
+					continue;
+				notificationList.add(new NotificationProperties(result));
+			}
+			invitesAdapter.notifyDataSetChanged();
+		} catch (RequestAbortedException e) {
+			return;
+		}
+	}
+
 
 }

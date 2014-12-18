@@ -15,12 +15,14 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.contracts.IActivityProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.AccountProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.NotificationProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.adapters.MealNotificationAdapter;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.DataCacheHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.InvitesView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
@@ -126,6 +128,28 @@ public class AcceptedInvitesActivity extends ListActivity {
 		AcceptedInvitesActivity.this.startActivity(intent);
 	}
 
+
+	/**
+	 * This method goes to the MealDetailActivity when clicking. It also passes
+	 * the mealProperties to the MealDetailActivity.
+	 * 
+	 * @author tejasvamsingh
+	 * @param position
+	 * 
+	 * 
+	 */
+	@Override
+	protected void onListItemClick(ListView l, View v, int position, long id) {
+
+		DataCacheHelper.setAccepted(true);
+		DataCacheHelper.setIActivityPropertiesObject(acceptedInvitesAdapter.getItem(position));
+		Intent intent = new Intent(this, MealDetailActivity.class);
+		startActivity(intent);
+
+	}
+
+
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -180,4 +204,9 @@ public class AcceptedInvitesActivity extends ListActivity {
 		}
 
 	}
+
+
+
+
+
 }

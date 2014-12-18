@@ -86,7 +86,9 @@ IManagementRequestHandler,INotificationManagementRequestHandler{
 
 	}
 
-
+	private List<Map<String,String>> undoAccept(Map<String,String[]> request){
+		return iMealDBRequestHandlerObject.undoAccept(request);
+	}
 
 
 
