@@ -81,9 +81,6 @@ public class ProfileActivity extends Activity {
 
 		
 		ThemeManager.applyDoubleBarTheme(mainLayout, headerLayout,buttonBarTop, buttonBarBottom); 
-//		ThemeManager.applyTheme(mainLayout, headerLayout);
-//		ThemeManager.applyButtonBarTheme(buttonBar);
-//		ThemeManager.applyButtonBarTheme(buttonBarTop);
 		
 		ThemeManager.applyButtonColor(changePasswordButton);
 		ThemeManager.applyButtonColor(editProfileButton);
@@ -92,6 +89,7 @@ public class ProfileActivity extends Activity {
 
 
 	}
+	
 
 	/**
 	 * Method used to initialize ProfileView
@@ -138,6 +136,16 @@ public class ProfileActivity extends Activity {
 				.findViewById(R.id.button_popup_confirm);
 		final Button cancelButton = (Button) popupview
 				.findViewById(R.id.button_popup_cancel);
+		
+		final View mainPopUpView = popupview
+				.findViewById(R.id.textView_popup_deletehint);
+		final View buttonPopUpView = popupview
+				.findViewById(R.id.buttons_delete_account_popup);
+		
+		ThemeManager.applyPopUpTheme(mainPopUpView, buttonPopUpView);
+		ThemeManager.applyButtonColor(confirmButton);
+		ThemeManager.applyButtonColor(cancelButton);
+
 
 		/**
 		 * OnClickListener for the confirm button in the popup window. Account

@@ -20,4 +20,5 @@
     <dimen name="switch_padding">12dp</dimen>
 	<dimen name="edittext_padding">8dp</dimen>
 	<dimen name="title_font_size">42sp</dimen>
+	<dimen name="popup_padding">42dp</dimen>
 </resources>

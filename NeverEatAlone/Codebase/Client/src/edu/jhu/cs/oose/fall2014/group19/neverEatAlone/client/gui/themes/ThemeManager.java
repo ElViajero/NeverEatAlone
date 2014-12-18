@@ -25,6 +25,7 @@ public class ThemeManager {
 	static int mainThemePlainSides = R.drawable.plain_layout_background_light_sides;
 	static int buttonBarTheme = R.drawable.buttonbar_background_light;
 	static int buttonBarThemePlain = R.drawable.plain_buttonbar_background_light;
+	static int popUpTheme = R.drawable.popupwindow_background_light;
 	static int tabTheme = R.drawable.tab_background_light;
 	static int buttonColor = R.drawable.button_background_light;
 	static int editTextColor = R.drawable.edittext_background_light;
@@ -62,15 +63,7 @@ public class ThemeManager {
 
 	/**
 	 * This changes the background colors of the header and the main layout.
-	 * 
-	 * @author Yueling Loh
-	 * 
-	 */
-
-	
-
-	/**
-	 * This changes the background colors of the header and the main layout.
+	 * Assumes the button bar is at the top.
 	 * 
 	 * @author Yueling Loh
 	 * 
@@ -86,7 +79,8 @@ public class ThemeManager {
 	}
 	
 	/**
-	 * This changes the background colors of the header and the main layout.
+	 * This changes the background colors of the header, the main layout and the button bar.
+	 * The button bar is at the bottom.
 	 * 
 	 * @author Yueling Loh
 	 * 
@@ -102,6 +96,13 @@ public class ThemeManager {
 
 	}
 	
+	/**
+	 * This changes the background colors of the header, the main layout and the button bar.
+	 * There is a button bar at the top and the bottom.
+	 * 
+	 * @author Yueling Loh
+	 * 
+	 */
 	public static void applyDoubleBarTheme(View mainView, View headerView,View buttonBarViewTop, View buttonBarViewBottom) {
 
 		if ((mainView == null) || (headerView == null)|| (buttonBarViewTop == null)|| (buttonBarViewBottom == null)) {
@@ -115,7 +116,25 @@ public class ThemeManager {
 	}
 
 	/**
-	 * This changes the background colors of the button bar.
+	 * This changes the background colors of a pop up.
+	 * There is a button bar at the bottom.
+	 * 
+	 * @author Yueling Loh
+	 * 
+	 */
+	public static void applyPopUpTheme(View mainView, View buttonBarViewBottom) {
+
+		if ((mainView == null) || (buttonBarViewBottom == null)) {
+			System.out.println("acitivity is null");
+		}
+		
+		mainView.setBackgroundResource(popUpTheme);
+		buttonBarViewBottom.setBackgroundResource(buttonBarThemePlain);
+
+	}
+	
+	/**
+	 * This changes the background colors of the button bar at the top.
 	 * 
 	 * @author Yueling Loh
 	 * 
