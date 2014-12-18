@@ -36,6 +36,9 @@ public class MealDBRequestHandler implements IMealDBRequestHandler {
 			Map<String, String[]> request) {
 
 
+		LoggerHelper.printrequestMap(request);
+
+
 		// ******************** LOGGING ***************************
 		System.out.println("Reached CreateMealNotification in NotificationDBManager");
 
@@ -49,6 +52,7 @@ public class MealDBRequestHandler implements IMealDBRequestHandler {
 
 		String poster = paramterMap.get("poster");
 		paramterMap.remove("recipientList");
+
 
 
 		//create a params map.
@@ -116,11 +120,13 @@ public class MealDBRequestHandler implements IMealDBRequestHandler {
 				new HashMap<String,Object>();
 
 		queryParameterMap.put("username", parameterMap.get("username"));
+		queryParameterMap.put("postStatus", "OPEN");
 
 		String query = "MATCH (a:User) "
 				+ "WHERE a.username={username} "
 				+ "OPTIONAL MATCH (n:Post)-[:RECIPIENT]->(a) "
 				+ "WHERE NOT (a)-[:ATTENDING]->(n) "
+				+ "AND n.postStatus={postStatus}"
 				+ "RETURN n";
 
 		return iDBQueryExecutionManagerInstance
@@ -212,7 +218,7 @@ public class MealDBRequestHandler implements IMealDBRequestHandler {
 
 		String query = "MATCH (n:Post),(a:User) "
 				+ "WHERE (a)-[:ATTENDING]->(n) "
-				+ "AND a.username={username}"
+				+ "AND a.username={username} "
 				+ "RETURN n";
 
 		List<Map<String, String>> resultMap =

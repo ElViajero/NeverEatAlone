@@ -7,6 +7,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.
 
 public class NotificationProperties implements IActivityProperties {
 
+	private String notificationStatus;
 	private String poster;
 	private String notificationID;
 	private boolean isAccepted;
@@ -78,13 +79,14 @@ public class NotificationProperties implements IActivityProperties {
 
 	public NotificationProperties(String poster, String notificationID,
 			boolean isAccepted, String notificationType,
-			IActivityProperties notificationData) {
+			IActivityProperties notificationData,String notificationStatus) {
 
 		this.poster = poster;
 		this.notificationID = notificationID;
 		this.isAccepted = isAccepted;
 		this.notificationType = notificationType;
 		this.notificationData = notificationData;
+		this.notificationStatus=notificationStatus;
 	}
 
 
@@ -96,6 +98,7 @@ public class NotificationProperties implements IActivityProperties {
 		poster = map.get("poster");
 		notificationID = map.get("postID");
 		notificationType = map.get("postType");
+		notificationStatus=map.get("postStatus");
 		try {
 			notificationData = (IActivityProperties) 
 					ActivityPropertiesHelper.getPropertyTypes(notificationType).newInstance();
@@ -159,9 +162,18 @@ public class NotificationProperties implements IActivityProperties {
 	@Override
 	public void fromMap(Map<String, String> map) {
 
-
-
 	}
+
+
+	public String getNotificationStatus() {
+		return notificationStatus;
+	}
+
+
+	public void setNotificationStatus(String notificationStatus) {
+		this.notificationStatus = notificationStatus;
+	}
+
 
 
 }

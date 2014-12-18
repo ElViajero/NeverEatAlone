@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.contracts.IActivityProperties;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.MessageToasterHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.helpers.GsonHelper;
 
 /**
@@ -19,6 +20,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.h
  */
 public class PostProperties implements IActivityProperties {
 
+	private String postStatus;
 	private static int postIDNumber=0;
 	private String poster;
 	private List<String> recipientList;
@@ -36,6 +38,7 @@ public class PostProperties implements IActivityProperties {
 		this.recipientList = recipientList;
 		this.postData=postData;
 		this.postType =postType;
+		this.postStatus="OPEN";
 	}
 
 	@Override
@@ -61,6 +64,9 @@ public class PostProperties implements IActivityProperties {
 
 		System.out.println("FINAL POST MAP" + requestMap);
 
+
+		if(!requestMap.containsKey("postStatus"))
+			MessageToasterHelper.toastMessage("NO DAMN STU+ADNKAN");
 
 		return requestMap;
 	}
