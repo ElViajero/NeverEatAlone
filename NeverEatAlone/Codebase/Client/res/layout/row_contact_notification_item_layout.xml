@@ -30,7 +30,7 @@
     <Button
         android:id="@+id/contacts_notification_accept"
         android:layout_width="0dp"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_weight="1"
         android:gravity="center_vertical|center_horizontal"
@@ -40,7 +40,7 @@
     <Button
         android:id="@+id/contacts_notification_reject"
         android:layout_width="0dp"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_weight="1"
         android:gravity="center_vertical|center_horizontal"

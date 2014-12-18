@@ -82,7 +82,22 @@ IManagementRequestHandler,INotificationManagementRequestHandler {
 	private List<Map<String,String>> delete(Map<String,String[]> request){
 
 		System.out.println("Reaching DeleteContactRequest");
-		return iContactDBManagerObject.delete(request); 
+		
+		List<Map<String, String>> result=
+				iContactDBManagerObject.delete(request);
+		List<Map<String, String>> notificationMapList =
+				new ArrayList<Map<String,String>>(result);
+		System.out.println("FINISHED DELETE EXECUTION.");
+		LoggerHelper.printresultMap(result);
+
+		if(result.get(0).get("Status").equals("Success")){
+			System.out.println("Successful operation.");
+			notificationMapList.remove(0);
+			iNotificationManagerObject.pushNotification(
+					notificationMapList, Arrays.asList(request.get("recipientList")));
+		}
+			
+		return result; 
 
 	}
 
@@ -103,10 +118,6 @@ IManagementRequestHandler,INotificationManagementRequestHandler {
 		System.out.println("Reaching fetchContact in ContactMRH");
 		return iContactDBManagerObject.fetchRequests(request);
 	}
-
-
-
-
 
 
 
@@ -141,7 +152,10 @@ IManagementRequestHandler,INotificationManagementRequestHandler {
 	@Override
 	public List<Map<String, String>> reject(Map<String, String[]> request) {
 		System.out.println("inside reject in ContactMRH");
-		return null;
+		LoggerHelper.printrequestMap(request);
+		List<Map<String, String>> result = 
+				delete(request);
+		return result;
 	}
 
 }

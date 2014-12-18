@@ -33,6 +33,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.serv
  * 
  * @author tejasvamsingh
  * @author Hai Tang
+ * @author Runze Tang
  */
 public class DisplayContactNotificationActivity extends ListActivity {
 
@@ -157,6 +158,7 @@ public class DisplayContactNotificationActivity extends ListActivity {
 	 * Toggles visibility of buttons for listview.
 	 * 
 	 * @author tejasvamsingh
+	 * @author Runze Tang
 	 * @param v
 	 */
 	private void setButtonsVisible(View v) {
@@ -164,10 +166,17 @@ public class DisplayContactNotificationActivity extends ListActivity {
 		acceptButton.setVisibility(View.INVISIBLE);
 		rejectButton.setVisibility(View.INVISIBLE);
 
-		acceptButton = (Button) v
+		View acceptButtonView = v
 				.findViewById(R.id.contacts_notification_accept);
-		rejectButton = (Button) v
+		View rejectButtonView = v
 				.findViewById(R.id.contacts_notification_reject);
+
+		acceptButton = (Button) acceptButtonView;
+		rejectButton = (Button) rejectButtonView;
+		
+		ThemeManager.applyButtonColor(acceptButtonView);
+		ThemeManager.applyButtonColor(rejectButtonView);
+		
 		acceptButton.setVisibility(View.VISIBLE);
 		rejectButton.setVisibility(View.VISIBLE);
 	}
@@ -200,10 +209,10 @@ public class DisplayContactNotificationActivity extends ListActivity {
 	 */
 	private boolean sendRequest() {
 
+		ContactProperties p = (ContactProperties) selectedNotification
+				.getNotificationData();
 
-		ContactProperties p = (ContactProperties) selectedNotification.getNotificationData();
-
-		System.out.println("selectedNotification : "+ selectedNotification);
+		System.out.println("selectedNotification : " + selectedNotification);
 		List<String> recipientList = new ArrayList<String>();
 		recipientList.add(selectedNotification.getPoster());
 
@@ -219,7 +228,7 @@ public class DisplayContactNotificationActivity extends ListActivity {
 					true);
 			System.out.println("FETCH STATUS :"
 					+ NotificationAndPostCacheHelper
-					.isServerFetchRequired("contact"));
+							.isServerFetchRequired("contact"));
 			contactsNotificationAdapter.remove(selectedNotification);
 			return true;
 
