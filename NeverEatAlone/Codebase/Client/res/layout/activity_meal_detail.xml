@@ -62,7 +62,7 @@
 
     <!-- Main Space -->
 
-    <RelativeLayout
+    <ScrollView
         android:id="@+id/main_mealDetails"
         style="@style/MainLayoutTheme"
         android:layout_above="@+id/buttons_mealDetails"
@@ -252,39 +252,7 @@
                     android:text="ADDITIONAL INFO RESULT"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
             </LinearLayout>
-
-            <!--
-            <LinearLayout
-                android:id="@+id/linearLayout1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_above="@+id/TextView_mealdetails_restaurant"
-                android:layout_centerHorizontal="true" >
-            </LinearLayout>
-
-            <QuickContactBadge
-                android:id="@+id/quickContactBadge1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/TextView_mealdetails_withwhom"
-                android:layout_below="@+id/TextView_mealdetails_withwhom"
-                android:layout_marginTop="50dp" />
-
-            <QuickContactBadge
-                android:id="@+id/quickContactBadge2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/quickContactBadge1"
-                android:layout_toRightOf="@+id/textView_mealdetails_when" />
-
-            <QuickContactBadge
-                android:id="@+id/quickContactBadge3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignRight="@+id/linearLayout1"
-                android:layout_alignTop="@+id/quickContactBadge2" />
-            -->
         </RelativeLayout>
-    </RelativeLayout>
+    </ScrollView>
 
 </RelativeLayout>
