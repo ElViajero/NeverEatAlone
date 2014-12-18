@@ -219,8 +219,32 @@ public class MealDetailActivity extends ListActivity {
 	 * @author: Hai Tang
 	 */
 	public void onDeclineButtonClick(View view) {
-		Intent intent = new Intent(this, TabHostActivity.class);
-		startActivity(intent);
+
+		requestID="Meal";
+		requestType="reject";
+
+		PostProperties postPropertiesObject=
+				PostProperties.notificationToPost(notificationPropertiesObject);
+
+		try{
+
+			List<Map<String, String>> result =
+					RequestHandlerHelper.getRequestHandlerInstance().
+					handleRequest(this,postPropertiesObject.toMap(),requestID,requestType);
+
+			NotificationAndPostCacheHelper.setServerFetchRequired("meal", true);
+			System.out.println("FETCH STATUS :"+
+					NotificationAndPostCacheHelper.isServerFetchRequired("meal"));
+
+
+			Intent intent = new Intent(this, TabHostActivity.class);
+			startActivity(intent);
+
+
+		}catch(RequestAbortedException e){
+			return;
+		}
+
 	}
 
 
