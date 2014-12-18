@@ -1,80 +1,73 @@
-<!-- @author Hai Tang -->
-<!-- @author tejasvamsingh -->
-<!-- @author Runze Tang -->
-<!-- @author Yueling Loh -->
+<!--
+@author tejasvamsingh
+@author Runze Tang
+-->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.MealDetailActivity" >
+    tools:context="edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.MyPostsDetailActivity" >
 
     <!-- Header aligned to top -->
 
     <RelativeLayout
-        android:id="@+id/header_mealDetails"
+        android:id="@+id/header_myPostsDetail"
         style="@style/HeaderTheme" >
 
         <TextView
-            android:id="@+id/textView_mealdetails_title"
+            android:id="@+id/textView_myPostsDetail_title"
             style="@style/HeaderTextTheme"
-            android:text="@string/meal_details" />
+            android:text="@string/my_posts_detail" />
     </RelativeLayout>
 
     <!-- Button Bar -->
 
     <LinearLayout
-        android:id="@+id/buttons_mealDetails"
+        android:id="@+id/buttons_myPostsDetail"
         style="@style/ButtonBarTheme"
         android:layout_alignParentBottom="true"
         android:layout_gravity="center_horizontal"
         android:orientation="horizontal" >
 
         <LinearLayout
-            android:id="@+id/buttons_mealDetails_container"
+            android:id="@+id/buttons_myPostsDetail_container"
             style="@style/ButtonBarTheme"
             android:layout_gravity="center_horizontal"
             android:orientation="horizontal" >
 
             <Button
-                android:id="@+id/button_mealdetails_back"
+                android:id="@+id/button_myPostsDetail_back"
                 style="@style/BarButton"
                 android:layout_marginRight="@dimen/activity_horizontal_margin"
-                android:layout_weight="0.2"
+                android:layout_weight="0.5"
                 android:onClick="onBackButtonClick"
                 android:text="@string/back" />
 
             <Button
-                android:id="@+id/button_mealdetails_decline"
+                android:id="@+id/button_myPostsDetail_close"
                 style="@style/BarButton"
                 android:layout_marginRight="@dimen/activity_horizontal_margin"
-                android:layout_weight="0.4"
-                android:onClick="onDeclineButtonClick"
+                android:layout_weight="0.5"
+                android:onClick="onCloseButtonClick"
                 android:text="@string/decline" />
-
-            <Button
-                android:id="@+id/button_mealdetails_accept"
-                style="@style/BarButton"
-                android:layout_weight="0.4"
-                android:onClick="onAcceptButtonClick"
-                android:text="@string/accept" />
         </LinearLayout>
     </LinearLayout>
 
     <!-- Main Space -->
 
     <RelativeLayout
-        android:id="@+id/main_mealDetails"
+        android:id="@+id/main_myPostsDetail"
         style="@style/MainLayoutTheme"
-        android:layout_above="@+id/buttons_mealDetails"
-        android:layout_below="@+id/header_mealDetails" >
+        android:layout_above="@+id/buttons_myPostsDetail"
+        android:layout_below="@+id/header_myPostsDetail" >
 
         <RelativeLayout
-            android:id="@+id/main_mealDetails_countainer"
+            android:id="@+id/main_myPostsDetail_countainer"
             style="@style/MainLayoutTheme"
             android:layout_alignParentTop="true" >
 
             <TextView
-                android:id="@+id/TextView_mealdetails_when"
+                android:id="@+id/TextView_myPostsDetail_when"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
@@ -86,16 +79,16 @@
                 android:textStyle="bold" />
 
             <LinearLayout
-                android:id="@+id/textView_mealdetails_startTime_container"
+                android:id="@+id/textView_myPostsDetail_startTime_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_below="@+id/TextView_mealdetails_when"
+                android:layout_below="@+id/TextView_myPostsDetail_when"
                 android:layout_marginTop="10dp" >
 
                 <TextView
-                    android:id="@+id/textView_mealdetails_startTime"
+                    android:id="@+id/textView_myPostsDetail_startTime"
                     android:layout_width="0dip"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.3"
@@ -103,7 +96,7 @@
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
                 <TextView
-                    android:id="@+id/textView_mealdetails_startTime_result"
+                    android:id="@+id/textView_myPostsDetail_startTime_result"
                     android:layout_width="0dip"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.7"
@@ -112,17 +105,17 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/textView_mealdetails_endTime_container"
+                android:id="@+id/textView_myPostsDetail_endTime_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_below="@+id/textView_mealdetails_startTime_container"
+                android:layout_below="@+id/textView_myPostsDetail_startTime_container"
                 android:layout_marginTop="10dp"
                 android:orientation="horizontal" >
 
                 <TextView
-                    android:id="@+id/textView_mealdetails_endTime"
+                    android:id="@+id/textView_myPostsDetail_endTime"
                     android:layout_width="0dip"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.3"
@@ -130,7 +123,7 @@
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
                 <TextView
-                    android:id="@+id/textView_mealdetails_endTime_result"
+                    android:id="@+id/textView_myPostsDetail_endTime_result"
                     android:layout_width="0dip"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.7"
@@ -139,27 +132,27 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/TextView_mealdetails_where"
+                android:id="@+id/TextView_myPostsDetail_where"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/textView_mealdetails_endTime_container"
+                android:layout_below="@+id/textView_myPostsDetail_endTime_container"
                 android:layout_marginTop="20dp"
                 android:text="@string/where"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textStyle="bold" />
 
             <LinearLayout
-                android:id="@+id/TextView_mealdetails_restaurant_container"
+                android:id="@+id/TextView_myPostsDetail_restaurant_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_below="@+id/TextView_mealdetails_where"
+                android:layout_below="@+id/TextView_myPostsDetail_where"
                 android:layout_marginTop="10dp"
                 android:orientation="horizontal" >
 
                 <TextView
-                    android:id="@+id/TextView_mealdetails_restaurant"
+                    android:id="@+id/TextView_myPostsDetail_restaurant"
                     android:layout_width="0dip"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.3"
@@ -167,7 +160,7 @@
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
                 <TextView
-                    android:id="@+id/TextView_mealdetails_restaurant_result"
+                    android:id="@+id/TextView_myPostsDetail_restaurant_result"
                     android:layout_width="0dip"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.7"
@@ -176,22 +169,22 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/TextView_mealdetails_withwhom"
+                android:id="@+id/TextView_myPostsDetail_withwhom"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/TextView_mealdetails_restaurant_container"
+                android:layout_below="@+id/TextView_myPostsDetail_restaurant_container"
                 android:layout_marginTop="20dp"
                 android:text="@string/with_whom"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textStyle="bold" />
 
             <LinearLayout
-                android:id="@+id/mealdetails_withwhom_result_container"
+                android:id="@+id/myPostsDetail_withwhom_result_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_below="@+id/TextView_mealdetails_withwhom"
+                android:layout_below="@+id/TextView_myPostsDetail_withwhom"
                 android:layout_marginTop="10dp" >
 
                 <ListView
@@ -205,19 +198,19 @@
                 android:id="@+id/inviteothers_button_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/mealdetails_withwhom_result_container"
+                android:layout_below="@+id/myPostsDetail_withwhom_result_container"
                 android:layout_marginTop="10dp"
                 android:orientation="horizontal" >
 
                 <Button
-                    android:id="@+id/button_mealdetails_inviteothers"
+                    android:id="@+id/button_myPostsDetail_inviteothers"
                     style="@style/BarButton"
                     android:layout_weight="0.5"
                     android:text="@string/invite_others"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
                 <TextView
-                    android:id="@+id/button_mealdetails_padding"
+                    android:id="@+id/button_myPostsDetail_padding"
                     android:layout_width="0dip"
                     android:layout_height="0dip"
                     android:layout_weight="0.5"
@@ -226,7 +219,7 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/textView_mealdetails_additionalinfo"
+                android:id="@+id/textView_myPostsDetail_additionalinfo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/inviteothers_button_container"
@@ -236,12 +229,12 @@
                 android:textStyle="bold" />
 
             <LinearLayout
-                android:id="@+id/mealdetails_additionalinfo_result_container"
+                android:id="@+id/myPostsDetail_additionalinfo_result_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_below="@+id/textView_mealdetails_additionalinfo"
+                android:layout_below="@+id/textView_myPostsDetail_additionalinfo"
                 android:layout_marginTop="10dp" >
 
                 <TextView
@@ -252,38 +245,17 @@
                     android:text="ADDITIONAL INFO RESULT"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
             </LinearLayout>
+        </RelativeLayout>
 
-            <!--
-            <LinearLayout
-                android:id="@+id/linearLayout1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_above="@+id/TextView_mealdetails_restaurant"
-                android:layout_centerHorizontal="true" >
-            </LinearLayout>
+        <RelativeLayout
+            android:id="@+id/main_myPostsDetail_countainer2"
+            style="@style/MainLayoutTheme" >
 
-            <QuickContactBadge
-                android:id="@+id/quickContactBadge1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/TextView_mealdetails_withwhom"
-                android:layout_below="@+id/TextView_mealdetails_withwhom"
-                android:layout_marginTop="50dp" />
-
-            <QuickContactBadge
-                android:id="@+id/quickContactBadge2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignTop="@+id/quickContactBadge1"
-                android:layout_toRightOf="@+id/textView_mealdetails_when" />
-
-            <QuickContactBadge
-                android:id="@+id/quickContactBadge3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignRight="@+id/linearLayout1"
-                android:layout_alignTop="@+id/quickContactBadge2" />
-            -->
+            <ListView
+                android:id="@android:id/list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+            </ListView>
         </RelativeLayout>
     </RelativeLayout>
 

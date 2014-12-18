@@ -43,8 +43,8 @@
         <item name="android:layout_gravity">center_vertical</item>
         <item name="android:gravity">left|center_vertical</item>
         <item name="android:textSize">@dimen/header_text_size</item>
-        <item name="android:drawableLeft">@drawable/ic_logo</item>
-        <item name="android:drawablePadding">@dimen/logo_padding</item>
+       <!--  <item name="android:drawableLeft">@drawable/ic_logo</item>
+        <item name="android:drawablePadding">@dimen/logo_padding</item> -->
     </style>
 
     <!--

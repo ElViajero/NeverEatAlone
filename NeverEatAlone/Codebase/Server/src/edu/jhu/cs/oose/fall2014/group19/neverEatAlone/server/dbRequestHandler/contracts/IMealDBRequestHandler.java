@@ -32,5 +32,9 @@ public interface IMealDBRequestHandler {
 
 	public List<Map<String,String>> fetchAcceptedNotifications(Map<String,String[]> request);
 
+	public List<Map<String,String>> getAttendingContacts(Map<String,String[]> request);
+
+	public List<Map<String,String>> undoAccept(Map<String,String[]> request);
+
 
 }

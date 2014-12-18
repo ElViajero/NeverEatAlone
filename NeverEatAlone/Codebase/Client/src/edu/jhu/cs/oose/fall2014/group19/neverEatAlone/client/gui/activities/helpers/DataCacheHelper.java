@@ -1,19 +1,29 @@
 package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers;
 
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.NotificationProperties;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.contracts.IActivityProperties;
 
 public class DataCacheHelper {
 
-	private static NotificationProperties notificationPropertiesObject;
+	private static IActivityProperties iActivityPropertiesObject;
+	private static boolean isAccepted;
 
-	public static NotificationProperties getNotificationPropertiesObject() {
-		return notificationPropertiesObject;
+	public static IActivityProperties getIActivityPropertiesObject() {
+		return iActivityPropertiesObject;
 	}
 
-	public static void setNotificationPropertiesObject(
-			NotificationProperties notificationPropertiesObject) {
-		DataCacheHelper.notificationPropertiesObject = notificationPropertiesObject;
+	public static void setIActivityPropertiesObject(
+			IActivityProperties notificationPropertiesObject) {
+		DataCacheHelper.iActivityPropertiesObject = notificationPropertiesObject;
 	}
+
+	public static boolean isAccepted() {
+		return isAccepted;
+	}
+
+	public static void setAccepted(boolean isAccepted) {
+		DataCacheHelper.isAccepted = isAccepted;
+	}
+
 
 
 

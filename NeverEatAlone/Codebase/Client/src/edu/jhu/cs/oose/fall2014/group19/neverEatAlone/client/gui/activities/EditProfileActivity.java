@@ -106,6 +106,13 @@ public class EditProfileActivity extends Activity {
 
 		ThemeManager.applyButtonColor(comfirmButton);
 		ThemeManager.applyButtonColor(cancelButton);
+		
+		ThemeManager.applyEditTextColor(nameEditTextObject);
+		ThemeManager.applyEditTextColor(emailEditTextObject);
+		ThemeManager.applyEditTextColor(genderEditTextObject);
+		ThemeManager.applyEditTextColor(workspaceEditTextObject);
+		ThemeManager.applyEditTextColor(aliasEditTextObject);
+
 	}
 
 	/**

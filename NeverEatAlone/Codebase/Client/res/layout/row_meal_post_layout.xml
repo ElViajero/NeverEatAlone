@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- @author tejasvamsingh -->
+<!-- @author tejasvamsingh @author Runze Tang -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
     android:orientation="horizontal" >
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_marginLeft="10dp"
-        android:layout_weight="0.11"
-        android:gravity="left"
+        android:layout_marginStart="10dp"
+        android:layout_weight="4"
+        android:gravity="start"
         android:orientation="vertical" >
 
         <TextView
@@ -32,5 +34,25 @@
             android:textColor="#999999"
             android:textSize="17sp" />
     </LinearLayout>
+
+    <Button
+        android:id="@+id/myPosts_button_detail"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:gravity="center_vertical|center_horizontal"
+        android:onClick="onDetailMyPostsButtonClick"
+        android:text="@string/detail" />
+
+    <Button
+        android:id="@+id/myPosts_button_close"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:gravity="center_vertical|center_horizontal"
+        android:onClick="onCloseMyPostsButtonClick"
+        android:text="@string/close" />
 
 </LinearLayout>

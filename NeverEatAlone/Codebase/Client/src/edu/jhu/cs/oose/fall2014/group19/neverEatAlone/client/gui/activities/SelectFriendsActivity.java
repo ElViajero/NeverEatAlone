@@ -11,13 +11,11 @@ import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
@@ -30,7 +28,6 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.help
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.ContactsView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.helpers.GsonHelper;
 
 /**
  * This activity is used to handle controller operations for select friends
@@ -80,7 +77,7 @@ public class SelectFriendsActivity extends ListActivity {
 		setTitleStyle();
 		applyTheme();
 	}
-	
+
 	/**
 	 * This method applies the GUI's color theme.
 	 * 
@@ -96,19 +93,15 @@ public class SelectFriendsActivity extends ListActivity {
 		View backSelectfriendsButton = contactsView.getView("button_selectfriends_back");
 		View postSelectfriendsButton = contactsView.getView("button_selectfriends_post");
 		View broadcastSelectfriendsButton = contactsView.getView("button_selectfriends_broadcast");
-		View unselectSelectfriendsButton = contactsView.getView("button_selectfriends_unselectall");
+		//		View unselectSelectfriendsButton = contactsView.getView("button_selectfriends_unselectall");
 
-
-		ThemeManager.applyTheme(mainLayout, headerLayout);
-//		ThemeManager.applyPlainTheme(mainLayout, headerLayout, buttonBarButtom);
-		
-		ThemeManager.applyButtonBarTheme(buttonBar);
-		ThemeManager.applyButtonBarTheme(buttonBarButtom);
+		ThemeManager.applyDoubleBarTheme(mainLayout, headerLayout,buttonBar, buttonBarButtom);
+		//		ThemeManager.applyPlainTheme(mainLayout, headerLayout, buttonBarButtom);
 
 		ThemeManager.applyButtonColor(backSelectfriendsButton);
 		ThemeManager.applyButtonColor(postSelectfriendsButton);
 		ThemeManager.applyButtonColor(broadcastSelectfriendsButton);
-		ThemeManager.applyButtonColor(unselectSelectfriendsButton);
+		//		ThemeManager.applyButtonColor(unselectSelectfriendsButton);
 
 
 	}
@@ -234,7 +227,7 @@ public class SelectFriendsActivity extends ListActivity {
 		} catch (RequestAbortedException e) {
 			System.out.println("Already Handled");
 		}
-		
+
 		Intent intent = new Intent(SelectFriendsActivity.this,
 				TabHostActivity.class);
 		SelectFriendsActivity.this.startActivity(intent);
@@ -255,10 +248,7 @@ public class SelectFriendsActivity extends ListActivity {
 	 */
 
 	private void updateView(List<ContactProperties> contactList){
-		selectFriendsAdapter = 
-				new ContactsInformationAdapter(this,contactList);
-		setListAdapter(selectFriendsAdapter);
-
+		selectFriendsAdapter.notifyDataSetChanged();
 	}
 
 }

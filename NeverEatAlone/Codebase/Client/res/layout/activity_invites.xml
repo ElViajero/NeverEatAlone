@@ -73,20 +73,23 @@
             android:id="@+id/layout_invites_container"
             style="@style/MainLayoutTheme" >
 
-            <Switch
+            <!--
+                 <Switch
                 android:id="@+id/switch_availability_status"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:text="@string/availability_status" />
+            -->
 
             <ListView
                 android:id="@android:id/list"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/switch_availability_status"
-                android:layout_marginTop="@dimen/activity_horizontal_margin" >
+                android:layout_height="wrap_content" >
+
+                <!-- android:layout_below="@+id/switch_availability_status" -->
+                <!-- android:layout_marginTop="@dimen/activity_horizontal_margin" -->
             </ListView>
         </RelativeLayout>
     </LinearLayout>

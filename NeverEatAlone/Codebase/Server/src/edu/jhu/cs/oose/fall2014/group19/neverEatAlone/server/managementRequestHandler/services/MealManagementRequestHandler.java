@@ -80,6 +80,17 @@ IManagementRequestHandler,INotificationManagementRequestHandler{
 
 	}
 
+	private List<Map<String,String>> getAttendingContacts(Map<String,String[]> request){
+		System.out.println("Reached getAttendingContacts in MEALMRH");
+		return iMealDBRequestHandlerObject.getAttendingContacts(request);
+
+	}
+
+	private List<Map<String,String>> undoAccept(Map<String,String[]> request){
+		return iMealDBRequestHandlerObject.undoAccept(request);
+	}
+
+
 
 
 
