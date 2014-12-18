@@ -1,0 +1,50 @@
+Iteration 6: Beta Release
+
+Completed the following functionalities with full integration of the server and client: 
+	1.	Send and accept friend request, add friends
+	2.	Create and send notifications (meal invitations) to selected contacts
+	3.	Edit profile information
+	4.	Accept and undo accepting an invitation
+	5.	Show all sent and received notifications
+	6.	Show all received friend requests
+	7.	Show all users who are attending a meal event 
+
+Refined the GUI
+
+
+Debugging, handling contract violations and exceptions
+	1.	Uniqueness check of user name and email in the database
+	2.	Check if the email is in valid pattern 
+	3.	Check meal properties such as starting/ending time and number limit are in the valid range
+	4.	Handled all known exceptions regarding to connecting to the server, greatly increased the stability
+	5.	Finished refactoring and overhaul of design
+	6.	Added more test cases for both server and client projects
+
+
+Features done after the presentation (Add this to a README file)
+	1.	Show all users who are attending a meal event 
+	2.	Undo accepting an invitation 
+	3.	Delete the account including all posts
+
+
+
+Future plan if having more time:
+
+	•	Some functionalities done on the server that need to be integrated to the client:
+
+	1.	Delete the account including all posts
+	2.	Add, delete and modify the Visibility relationship
+	3.	Update Alias property of a contact
+	4.	Delete a contact
+	5.	Reject a friend request 
+
+	•	There are also some extended features that we want to add:
+
+	1.	Set availability status
+	2.	Encryption of password
+	3.	Recover a forgotten password
+	4.	Search contacts by partial pattern marching 
+	5.	Extend the meal invitation to invite other contacts
+	6.	Arrange contacts into groups
+	7.	Add geo information to the location of meal event 
+
