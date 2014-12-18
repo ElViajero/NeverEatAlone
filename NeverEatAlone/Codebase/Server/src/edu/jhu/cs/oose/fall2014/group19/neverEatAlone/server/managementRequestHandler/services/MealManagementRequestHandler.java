@@ -131,8 +131,8 @@ IManagementRequestHandler,INotificationManagementRequestHandler{
 
 	@Override
 	public List<Map<String, String>> reject(Map<String, String[]> request) {
-		// TODO Auto-generated method stub
-		return null;
+		System.out.println("Inside reject in MealMRH");
+		return iMealDBRequestHandlerObject.rejectMealNotification(request);
 	}
 
 

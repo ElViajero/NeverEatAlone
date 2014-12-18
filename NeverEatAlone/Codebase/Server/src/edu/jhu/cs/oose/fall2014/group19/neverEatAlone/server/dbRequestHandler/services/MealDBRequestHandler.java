@@ -11,6 +11,7 @@ import javax.inject.Inject;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.contracts.IDBQueryExecutionManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbRequestHandler.contracts.IMealDBRequestHandler;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbRequestHandler.helpers.DBRequestHandlerHelper;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.logger.helper.LoggerHelper;
 
 /**
  * This class handles notification management related database transactions.
@@ -116,10 +117,10 @@ public class MealDBRequestHandler implements IMealDBRequestHandler {
 
 		queryParameterMap.put("username", parameterMap.get("username"));
 
-		String query = "MATCH (a:User)"
-				+ "WHERE a.username={username}"
+		String query = "MATCH (a:User) "
+				+ "WHERE a.username={username} "
 				+ "OPTIONAL MATCH (n:Post)-[:RECIPIENT]->(a) "
-				+ "WHERE NOT (a)-[:ATTENDING]->(n)"
+				+ "WHERE NOT (a)-[:ATTENDING]->(n) "
 				+ "RETURN n";
 
 		return iDBQueryExecutionManagerInstance
@@ -277,7 +278,7 @@ public class MealDBRequestHandler implements IMealDBRequestHandler {
 
 		String query = "MATCH (a:User)-[r:ATTENDING]->(n:Post) "
 				+ "WHERE a.username={username} "
-				+ "AND n.postID={postID}"
+				+ "AND n.postID={postID} "
 				+ "DELETE r "
 				+ "RETURN a";
 
@@ -289,6 +290,42 @@ public class MealDBRequestHandler implements IMealDBRequestHandler {
 
 
 	}
+
+
+
+	@Override
+	public List<Map<String, String>> rejectMealNotification(
+			Map<String, String[]> request) {
+
+		Map<String, String> parameterMap = 
+				DBRequestHandlerHelper.GetQueryParameterMap(request);
+
+		Map<String,Object> queryParameterMap = 
+				new HashMap<String,Object>();
+
+		System.out.println("USERNAME : "+ parameterMap.get("poster"));
+		System.out.println("POSTID : "+ parameterMap.get("postID"));
+
+		queryParameterMap.put("username", parameterMap.get("poster"));
+		queryParameterMap.put("postID",parameterMap.get("postID"));
+
+		String query = "MATCH (n:Post)-[r:RECIPIENT]->(a:User) "			
+				+ "WHERE a.username={username} "
+				+ "AND n.postID={postID} "
+				+ "OPTIONAL MATCH (a)-[q]->(n)"				
+				+ "DELETE r,q "
+				+ "RETURN a";
+
+		List<Map<String, String>> resultMap =
+				iDBQueryExecutionManagerInstance
+				.executeQuery(query, queryParameterMap);
+
+
+		LoggerHelper.printresultMap(resultMap);
+		return resultMap;
+
+	}
+
 
 
 

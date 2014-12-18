@@ -30,6 +30,8 @@ public interface IMealDBRequestHandler {
 
 	public List<Map<String,String>> acceptMealNotification(Map<String,String[]> request);
 
+	public List<Map<String,String>> rejectMealNotification(Map<String,String[]> request);
+
 	public List<Map<String,String>> fetchAcceptedNotifications(Map<String,String[]> request);
 
 	public List<Map<String,String>> getAttendingContacts(Map<String,String[]> request);
