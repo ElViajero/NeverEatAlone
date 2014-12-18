@@ -1,65 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--@author Hai Tang  -->
+<!-- @author Yueling Loh -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" 
-    android:background="@drawable/layout_popupwindow_background">
+    android:layout_height="match_parent" >
 
+    <!-- Button Bar (Bottom) -->
 
-    <TextView
-        android:id="@+id/textView_popup_delete_account_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="29dp"
-        android:text="@string/delete_account"
-        android:textStyle="bold"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+    <LinearLayout
+        android:id="@+id/buttons_delete_account_popup"
+        style="@style/ButtonBarTheme"
+        android:layout_below="@+id/main_delete_account_popup"
+        android:layout_gravity="center_horizontal"
+        android:orientation="horizontal" >
 
-    <Button
-        android:id="@+id/button_popup_cancel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/button_popup_confirm"
-        android:layout_alignBottom="@+id/button_popup_confirm"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="37dp"
-        android:background="@drawable/button_background_light"
-        android:paddingLeft="50dp"
-        android:paddingRight="50dp"
-        android:text="@string/cancel" />
+        <LinearLayout
+            android:id="@+id/buttons_delete_account_container"
+            style="@style/ButtonBarTheme"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal" >
 
-    <Button
-        android:id="@+id/button_popup_confirm"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textView_popup_delete_account_title"
-        android:layout_marginLeft="32dp"
-        android:layout_marginTop="167dp"
-        android:background="@drawable/button_background_light"
-        android:paddingLeft="50dp"
-        android:paddingRight="50dp"
-        android:text="@string/confirm" />
+            <Button
+                android:id="@+id/button_popup_cancel"
+                style="@style/BarButton"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:onClick="onCancelDeleteButtonClick"
+                android:text="@string/cancel" />
+
+            <Button
+                android:id="@+id/button_popup_confirm"
+                style="@style/BarButton"
+                android:onClick="onConfirmDeleteButtonClick"
+                android:text="@string/confirm" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Main Space -->
 
     <TextView
         android:id="@+id/textView_popup_deletehint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView_popup_delete_account_title"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="57dp"
+        android:layout_above="@+id/buttons_delete_account_popup"
+        android:gravity="center"
+        android:paddingBottom="@dimen/popup_padding"
+        android:paddingTop="@dimen/popup_padding"
         android:text="@string/deletehint"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-
-    <TextView
-        android:id="@+id/textView_popup_accountinfo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/textView_popup_deletehint"
-		android:layout_centerHorizontal="true"
-        android:text="(Temp) Wonder: tang@jhu.edu"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </RelativeLayout>
