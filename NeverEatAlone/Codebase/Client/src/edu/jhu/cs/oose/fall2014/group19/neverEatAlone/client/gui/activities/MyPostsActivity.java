@@ -32,6 +32,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.serv
 /**
  * 
  * This class handles controller operations for the MyPosts page.
+ * 
  * @author tejasvamsingh
  * @author Runze Tang
  */
@@ -104,8 +105,6 @@ public class MyPostsActivity extends ListActivity {
 
 		fetchPosts();
 
-
-
 		setTitleStyle();
 
 		applyTheme();
@@ -151,8 +150,7 @@ public class MyPostsActivity extends ListActivity {
 	 */
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
-		selectedPost = myPostsAdapter
-				.getItem(position);
+		selectedPost = myPostsAdapter.getItem(position);
 		listItemIndex = position;
 		setButtonsVisible(v);
 	}
@@ -160,6 +158,7 @@ public class MyPostsActivity extends ListActivity {
 	/**
 	 * Toggles visibility of buttons for listview.
 	 * 
+	 * @author Runze Tang
 	 * @param v
 	 */
 	private void setButtonsVisible(View v) {
@@ -167,8 +166,15 @@ public class MyPostsActivity extends ListActivity {
 		detailButton.setVisibility(View.INVISIBLE);
 		closeButton.setVisibility(View.INVISIBLE);
 
-		detailButton = (Button) v.findViewById(R.id.myPosts_button_detail);
-		closeButton = (Button) v.findViewById(R.id.myPosts_button_close);
+		View detailButtonView = v.findViewById(R.id.myPosts_button_detail);
+		View closeButtonView = v.findViewById(R.id.myPosts_button_close);
+
+		detailButton = (Button) detailButtonView;
+		closeButton = (Button) closeButtonView;
+
+		ThemeManager.applyButtonColor(detailButtonView);
+		ThemeManager.applyButtonColor(closeButtonView);
+
 		detailButton.setVisibility(View.VISIBLE);
 		closeButton.setVisibility(View.VISIBLE);
 	}
