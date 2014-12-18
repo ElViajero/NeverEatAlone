@@ -55,7 +55,7 @@ public class VisibilityDBRequestHandler implements IVisibilityDBRequestHandler {
 			String query = "MATCH (n:User),(a:User) "
 					+ "WHERE n.username={username} AND "
 					+ "a.username={contact} "
-					+ "CREATE (n)-[r:VISIBLE{creationParameters}]->(a) "
+					+ "CREATE UNIQUE (n)-[r:VISIBLE{creationParameters}]->(a) "
 					+ "RETURN r";
 
 			resultMapList=iDBQueryExecutionManagerInstance

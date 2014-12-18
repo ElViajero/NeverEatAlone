@@ -162,12 +162,22 @@ public class AccountDBRequestHandler implements IAccountDBRequestHandler {
 		System.out.println("deleting user "+queryParameterMap.get("username"));
 
 		//create cypher query to delete node from the database.
-		// first delete the relationships
-		String query =""
+		// first delete all the posts of the user
+
+		String query = "MATCH (a:Post) "
+				+ "WHERE a.poster={username} "
+				+ "OPTIONAL MATCH (a)-[r]-() "
+				+ "DELETE a,r ";
+
+		iDBQueryExecutionManagerInstance
+		.executeQuery(query, queryParameterMap);
+
+		query =""
 				+ "MATCH (n:User) "
 				+ "WHERE n.username={username} "
 				+ "OPTIONAL MATCH (n)-[r]-() "
-				+ "DELETE n,r ";
+				+ "DELETE n,r "
+				+ "RETURN {username} AS username";
 
 		return iDBQueryExecutionManagerInstance
 				.executeQuery(query, queryParameterMap);
