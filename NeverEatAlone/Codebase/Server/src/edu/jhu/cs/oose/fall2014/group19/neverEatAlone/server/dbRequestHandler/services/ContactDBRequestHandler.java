@@ -37,23 +37,23 @@ public class ContactDBRequestHandler implements IContactDBRequestHandler {
 		// ********* LOGGING ********* 
 
 		//format the parameters for the query.		
-		Map<String, String> paramterMap = 
+		Map<String, String> parameterMap = 
 				DBRequestHandlerHelper.GetQueryParameterMap(request);
 
-		System.out.println("parameter map is : "+ paramterMap);
+		System.out.println("parameter map is : "+ parameterMap);
 
 		// ************************ LOGGING ************************
 
-		System.out.println("username :"+paramterMap.get("username"));
-		System.out.println("contact :"+paramterMap.get("contactusername"));
+		System.out.println("username :"+parameterMap.get("username"));
+		System.out.println("contact :"+parameterMap.get("contactusername"));
 
 
 
 		//create a params map.
 		Map<String,Object> queryParameterMap = new HashMap<String,Object>();
-		queryParameterMap.put("username",paramterMap.get("username"));
-		queryParameterMap.put("contactusername",paramterMap.get("contactusername"));
-		queryParameterMap.put("postID", paramterMap.get("postID"));
+		queryParameterMap.put("username",parameterMap.get("username"));
+		queryParameterMap.put("contactusername",parameterMap.get("contactusername"));
+		queryParameterMap.put("postID", parameterMap.get("postID"));
 
 		queryParameterMap.put("alias", ""); 
 
@@ -91,7 +91,7 @@ public class ContactDBRequestHandler implements IContactDBRequestHandler {
 			resultMap.clear();
 		}
 		resultMap.add(0,statusMap);
-		resultMap.add(paramterMap);
+		resultMap.add(parameterMap);
 		//LoggerHelper.printresultMap(resultMap);
 		return resultMap;
 	}
@@ -166,13 +166,25 @@ public class ContactDBRequestHandler implements IContactDBRequestHandler {
 		queryParameterMap.put("username",parameterMap.get("username"));
 		queryParameterMap.put("contactusername",parameterMap.get("contactusername"));
 
-		//create cypher query to add a relation in the database.
-		// contact is always added as two ways
-		String query = "MATCH (n:User)-[r1:KNOWS]->(a:User), (n:User)<-[r2:KNOWS]-(a:User) "
+		//create cypher query to delete relations in the database.
+		// It deletes both KNOWS relationships
+		String query = "MATCH (n:User)-[r:KNOWS]-(a:User) "
 				+ " WHERE n.username = {username} AND a.username = {contactusername} "
-				+ "DELETE r1,r2 ";
-		return iDBQueryExecutionManagerInstance
+				+ "DELETE r "
+				+ "RETURN n.username AS username, a.username AS contactusername";
+		List<Map<String, String>> resultMap = iDBQueryExecutionManagerInstance
 				.executeQuery(query, queryParameterMap);
+		
+		Map<String,String> statusMap=null;
+		if(resultMap.get(0).get("Status").equals("Success")){
+			System.out.println("Successful query.");
+			statusMap = resultMap.get(0);
+			resultMap.clear();
+		}
+		resultMap.add(0,statusMap);
+		resultMap.add(parameterMap);
+
+		return resultMap; 
 
 	}
 
