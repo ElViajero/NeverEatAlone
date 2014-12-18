@@ -99,15 +99,14 @@ public class MyPostsDetailActivity extends ListActivity {
 
 		View backButton = myPostsView.getView("button_myPostsDetail_back");
 		View closeButton = myPostsView.getView("button_myPostsDetail_close");
-
+		View inviteOthersButton = myPostsView
+				.getView("button_myPostsDetail_inviteothers");
 		ThemeManager.applyPlainTheme(mainLayout, headerLayout, buttonBar);
 
 		ThemeManager.applyButtonColor(backButton);
 		ThemeManager.applyButtonColor(closeButton);
-
+		ThemeManager.applyButtonColor(inviteOthersButton);
 	}
-
-
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -142,81 +141,74 @@ public class MyPostsDetailActivity extends ListActivity {
 	 * click handler for the close button.
 	 * 
 	 */
-	public void onCloseButtonClick(View view){
+	public void onCloseButtonClick(View view) {
 		// TODO
 	}
 
-
-
 	private void fetchAttending() {
 
-		requestID="Meal";
-		requestType="getAttendingContacts";
+		requestID = "Meal";
+		requestType = "getAttendingContacts";
 		attendingContactsList.clear();
 
-		try{
+		try {
 
-			List<Map<String, String>> resultMapList =
-					RequestHandlerHelper.getRequestHandlerInstance().
-					handleRequest(this,postPropertiesObject.toMap(),requestID,requestType);
+			List<Map<String, String>> resultMapList = RequestHandlerHelper
+					.getRequestHandlerInstance().handleRequest(this,
+							postPropertiesObject.toMap(), requestID,
+							requestType);
 
+			for (Map<String, String> result : resultMapList) {
 
-			for(Map<String, String> result : resultMapList){
-
-				if(result.isEmpty())
+				if (result.isEmpty())
 					continue;
 
-				attendingContactsList.add(new ContactProperties(result));	
+				attendingContactsList.add(new ContactProperties(result));
 			}
 
 			attendingContactsAdapter.notifyDataSetChanged();
 
-		}catch(RequestAbortedException e){
+		} catch (RequestAbortedException e) {
 
 		}
 	}
 
 	/**
 	 * Populates the fields in the view.
+	 * 
 	 * @author tejasvamsingh
 	 */
 
 	private void populateView() {
 
-
 		Gson gson = GsonHelper.getGsoninstance();
 
 		String postData = postPropertiesObject.getPostData();
 
-		Type stringStringMap = new TypeToken<Map<String, String>>(){}.getType();
+		Type stringStringMap = new TypeToken<Map<String, String>>() {
+		}.getType();
 
-		Map<String,String> postDataMap = 
-				gson.fromJson(postData, stringStringMap);
-
+		Map<String, String> postDataMap = gson.fromJson(postData,
+				stringStringMap);
 
 		MealProperties mealPropertiesObject = new MealProperties(postDataMap);
 
+		TextView textStartTimeTextViewObject = (TextView) myPostsView
+				.getView("textView_myPostsDetail_startTime_result");
+		myPostsView.setValue(textStartTimeTextViewObject, mealPropertiesObject
+				.getStartDateAndTimeProperties().toString());
 
-		TextView textStartTimeTextViewObject = 
-				(TextView) myPostsView.getView("textView_myPostsDetail_startTime_result");
-		myPostsView.setValue(textStartTimeTextViewObject,
-				mealPropertiesObject.getStartDateAndTimeProperties().toString());
+		TextView textEndTimeTextViewObject = (TextView) myPostsView
+				.getView("textView_myPostsDetail_endTime_result");
+		myPostsView.setValue(textEndTimeTextViewObject, mealPropertiesObject
+				.getEndDateAndTimeProperties().toString());
 
-		TextView textEndTimeTextViewObject = 
-				(TextView) myPostsView.getView("textView_myPostsDetail_endTime_result");
-		myPostsView.setValue(textEndTimeTextViewObject,
-				mealPropertiesObject.getEndDateAndTimeProperties().toString() );
-
-		TextView restaurantTextViewObject = 
-				(TextView) myPostsView.getView("TextView_myPostsDetail_restaurant_result");
-
+		TextView restaurantTextViewObject = (TextView) myPostsView
+				.getView("TextView_myPostsDetail_restaurant_result");
 
 		myPostsView.setValue(restaurantTextViewObject,
 				mealPropertiesObject.getlocation());
 
-
 	}
-
-
 
 }
