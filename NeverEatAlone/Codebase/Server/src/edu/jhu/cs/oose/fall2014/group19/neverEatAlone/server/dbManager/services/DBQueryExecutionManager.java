@@ -17,7 +17,11 @@ import org.neo4j.kernel.impl.util.StringLogger;
 
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.contracts.IDBInstanceManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.contracts.IDBQueryExecutionManager;
-
+/**
+ * 
+ * @author tejasvamsingh
+ *
+ */
 
 public class DBQueryExecutionManager implements IDBQueryExecutionManager {
 

@@ -15,7 +15,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.NotificationProperties;
 
 /**
- * 
+ * @author tejasvamsingh
  * This adapter get the contact notification
  * 
  */

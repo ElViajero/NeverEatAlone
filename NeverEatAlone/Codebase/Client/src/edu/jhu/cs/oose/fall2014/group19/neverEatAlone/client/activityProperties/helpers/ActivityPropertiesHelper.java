@@ -12,7 +12,11 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.helpers.GsonHelper;
-
+/**
+ * 
+ * @author tejasvamsingh
+ *
+ */
 public class ActivityPropertiesHelper {
 
 	static Map<String,String> activityPropertTypeMap;

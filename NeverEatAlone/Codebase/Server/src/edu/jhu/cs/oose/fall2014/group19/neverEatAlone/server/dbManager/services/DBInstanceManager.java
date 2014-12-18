@@ -8,7 +8,11 @@ import org.neo4j.graphdb.factory.GraphDatabaseFactory;
 
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.contracts.IDBInstanceManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.contracts.IDBSchemaManager;
-
+/**
+ * 
+ * @author tejasvamsingh
+ *
+ */
 @Singleton
 public class DBInstanceManager implements IDBInstanceManager {
 

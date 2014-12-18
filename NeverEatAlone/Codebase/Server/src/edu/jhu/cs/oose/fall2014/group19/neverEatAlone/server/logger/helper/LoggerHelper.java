@@ -2,7 +2,11 @@ package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.logger.helper;
 
 import java.util.List;
 import java.util.Map;
-
+/**
+ * 
+ * @author tejasvamsingh
+ *
+ */
 public class LoggerHelper {
 
 	public static void printrequestMap(Map<String,String[]> request){

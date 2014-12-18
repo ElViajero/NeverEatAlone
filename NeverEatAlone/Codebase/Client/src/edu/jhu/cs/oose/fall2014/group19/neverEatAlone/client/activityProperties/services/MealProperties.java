@@ -10,7 +10,11 @@ import com.google.gson.reflect.TypeToken;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.contracts.IActivityProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.helpers.ActivityPropertiesHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.helpers.GsonHelper;
-
+/**
+ * 
+ * @author tejasvamsingh
+ *
+ */
 public class MealProperties implements IActivityProperties{
 
 

@@ -4,6 +4,11 @@ import javax.ejb.Local;
 
 import org.neo4j.graphdb.GraphDatabaseService;
 
+/**
+ * 
+ * @author tejasvamsingh
+ *
+ */
 @Local
 public interface IDBInstanceManager {
 	public GraphDatabaseService getGraphDatabaseInstance();

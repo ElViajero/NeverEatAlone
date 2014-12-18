@@ -5,6 +5,11 @@ import java.util.Map;
 
 import javax.ejb.Stateless;
 
+/**
+ * 
+ * @author tejasvamsingh
+ *
+ */
 @Stateless
 public class DBRequestHandlerHelper {
 

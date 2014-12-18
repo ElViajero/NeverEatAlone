@@ -7,7 +7,11 @@ import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Transaction;
 
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.contracts.IDBSchemaManager;
-
+/**
+ * 
+ * @author tejasvamsingh
+ *
+ */
 @Singleton
 public class DBSchemaManager implements IDBSchemaManager {
 

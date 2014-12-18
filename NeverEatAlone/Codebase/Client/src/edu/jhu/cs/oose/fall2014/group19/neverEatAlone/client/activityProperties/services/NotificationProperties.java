@@ -4,7 +4,11 @@ import java.util.Map;
 
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.contracts.IActivityProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.helpers.ActivityPropertiesHelper;
-
+/**
+ * 
+ * @author tejasvamsingh
+ *
+ */
 public class NotificationProperties implements IActivityProperties {
 
 	private String notificationStatus;

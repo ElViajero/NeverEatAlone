@@ -10,7 +10,11 @@ import android.widget.ArrayAdapter;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.contracts.IActivityProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.NotificationProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.PostProperties;
-
+/**
+ * 
+ * @author tejasvamsingh
+ *
+ */
 public class NotificationAndPostCacheHelper {
 
 

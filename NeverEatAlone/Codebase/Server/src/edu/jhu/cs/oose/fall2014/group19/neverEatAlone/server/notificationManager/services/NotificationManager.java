@@ -14,7 +14,11 @@ import com.rabbitmq.client.ConnectionFactory;
 
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.configuration.contracts.IConfigurationHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.notificationManager.contracts.INotificationManager;
-
+/**
+ * 
+ * @author tejasvamsingh
+ *
+ */
 @Stateless
 public class NotificationManager implements INotificationManager {
 
