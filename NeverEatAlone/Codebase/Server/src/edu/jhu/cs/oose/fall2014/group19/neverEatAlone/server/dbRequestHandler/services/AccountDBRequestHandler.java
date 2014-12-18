@@ -138,7 +138,6 @@ public class AccountDBRequestHandler implements IAccountDBRequestHandler {
 
 	/**
 	 * This method deletes the specified account from the database.
-	 * //TODO need to delete the posts posted by this user too.  
 	 * @param request
 	 * @return
 	 */
