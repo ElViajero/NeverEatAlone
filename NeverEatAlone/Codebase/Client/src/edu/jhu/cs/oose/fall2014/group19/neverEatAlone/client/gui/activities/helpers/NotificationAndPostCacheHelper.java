@@ -41,6 +41,7 @@ public class NotificationAndPostCacheHelper {
 				adapterDataMap.put(key, new ArrayList<IActivityProperties>());
 
 			adapterDataMap.get(key).add(notification);
+			isServerFetchRequiredMap.put(key, true);
 		}
 
 		System.out.println("adapter maps : "+adapterDataMap);

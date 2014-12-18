@@ -28,6 +28,7 @@ public class MealNotificationAdapter extends ArrayAdapter<IActivityProperties> {
 	private TextView startTime;
 	private TextView endTime;
 	private TextView location;
+	private TextView status;
 	private Activity activity;
 
 	private List<IActivityProperties> MealNotifications;
@@ -69,6 +70,8 @@ public class MealNotificationAdapter extends ArrayAdapter<IActivityProperties> {
 		poster = (TextView) view.findViewById(R.id.textView_meal_notification_poster);
 		startTime = (TextView) view.findViewById(R.id.textView_meal_notification_startTime);
 		location = (TextView) view.findViewById(R.id.textView_meal_notification_location);
+		status = (TextView) view.findViewById(R.id.textView_meal_notification_status);
+
 
 		NotificationProperties notification = (NotificationProperties) 
 				MealNotifications.get(position);
@@ -79,6 +82,8 @@ public class MealNotificationAdapter extends ArrayAdapter<IActivityProperties> {
 		poster.setText(notification.getPoster());
 		startTime.setText(mealProperties.getStartDateAndTimeProperties().toString());
 		location.setText(mealProperties.getlocation());
+		status.setText(notification.getNotificationStatus());
+
 
 		return view;
 	}
