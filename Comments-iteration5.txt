@@ -1,7 +1,0 @@
-Group 19,
-
-I couldn't get your code to run, but I'm pretty sure this is my fault.
-
-Other than that and the still present naming convention violations (in the server), I feel like your project is firmly in alpha or early beta.
-
-Total Score: 97/100
