@@ -139,6 +139,8 @@ public class EditProfileActivity extends Activity {
 		if (!validator.isValid(email)) {
 			Toast.makeText(this, R.string.invalid_email, Toast.LENGTH_SHORT)
 					.show();
+			
+			// TODO : set the fields right.
 			return;
 		}
 

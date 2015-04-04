@@ -10,8 +10,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.helpers.GsonHelper;
 
 /**
- * This class provides an abstraction
- * for account related properties.
+ * This class provides an abstraction for account related properties.
  * 
  * @author tejasvamsingh
  *
@@ -22,78 +21,75 @@ public class AccountProperties implements IActivityProperties {
 	private String password;
 	private String email;
 	private String currentPostID;
+	private String name;
+
 	// one object because at any time, ther is only
 	// one user who is logged in on one client.
 	private static AccountProperties accountPropertiesInstance;
 
 	/***
 	 * Constructor that accepts strings.
+	 * 
 	 * @param username
 	 * @param password
 	 */
-	public AccountProperties(String username,String password){
+	public AccountProperties(String username, String password) {
 
-
-		this(username,password,"");
+		this(username, password, "");
 
 	}
 
-	public AccountProperties(String username,String password,String email){
+	public AccountProperties(String username, String password, String email) {
 		this.username = username;
 		this.password = password;
-		this.email=email;
+		this.email = email;
+		this.name = "";
 		this.currentPostID = username + "0";
 	}
 
-
-
-	public AccountProperties(Map<String,String> map){
+	public AccountProperties(Map<String, String> map) {
 		fromMap(map);
 	}
 
-
 	/**
-	 * Method that returns a Map 
-	 * corresponding to request properties 
+	 * Method that returns a Map corresponding to request properties
 	 * 
 	 * @return
 	 */
 	@Override
-	public Map<String,Object> toMap(){
+	public Map<String, Object> toMap() {
 
-		Gson gsonObject = 
-				GsonHelper.getGsoninstance();
+		Gson gsonObject = GsonHelper.getGsoninstance();
 
 		String jsonString = gsonObject.toJson(this);
-		System.out.println("json is : " +jsonString);
+		System.out.println("json is : " + jsonString);
 
-		Type stringObjectMap = new TypeToken<Map<String, Object>>(){}.getType();
-		Map<String,Object> requestMap = gsonObject.fromJson(jsonString, stringObjectMap);
-		System.out.println("map is : " +requestMap);
+		Type stringObjectMap = new TypeToken<Map<String, Object>>() {
+		}.getType();
+		Map<String, Object> requestMap = gsonObject.fromJson(jsonString,
+				stringObjectMap);
+		System.out.println("map is : " + requestMap);
 
 		return requestMap;
 
 	}
 
-
-
 	// private helper methods.
 
 	@Override
-	public void fromMap (Map<String,String> map){
+	public void fromMap(Map<String, String> map) {
 		username = map.get("username");
 		password = map.get("password");
 		email = map.get("email");
+		name = map.get("name");
 		currentPostID = map.get("postID");
 
-		accountPropertiesInstance = 
-				new AccountProperties(map.get("username"), map.get("password"));
+		accountPropertiesInstance = new AccountProperties(map.get("username"),
+				map.get("password"));
 		accountPropertiesInstance.setemail(map.get("email"));
 		PostProperties.initPostID(map.get("currentPostID"));
 
 	}
-
-
 
 	// getters, setters and statics
 
@@ -121,14 +117,16 @@ public class AccountProperties implements IActivityProperties {
 		this.email = email;
 	}
 
-
-	public static AccountProperties getUserAccountInstance(){
-		return accountPropertiesInstance;
+	public String getName() {
+		return name;
 	}
 
+	public void setName(String name) {
+		this.name = name;
+	}
 
-
-
-
+	public static AccountProperties getUserAccountInstance() {
+		return accountPropertiesInstance;
+	}
 
 }
