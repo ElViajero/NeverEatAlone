@@ -19,6 +19,7 @@ import android.widget.Toast;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.AccountProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.EmailValidatorHelper;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.MessageToasterHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.ProfileView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
@@ -65,16 +66,39 @@ public class EditProfileActivity extends Activity {
 				.getView("spinner_editprofile_gender");
 		workspaceEditTextObject = (EditText) profileView
 				.getView("editText_editprofile_workspace");
-		profileView.setValue(usernameTextObject, AccountProperties
-				.getUserAccountInstance().getusername());
 
-		emailEditTextObject.setText(AccountProperties.getUserAccountInstance()
-				.getemail());
+		setFields();
 
 		validator = new EmailValidatorHelper();
 
 		setTitleStyle();
 		applyTheme();
+	}
+
+	/**
+	 * 
+	 * This method populates fields based on current values in our user account
+	 * object.
+	 *
+	 * @author tejasvamsingh
+	 */
+	private void setFields() {
+
+		profileView.setValue(usernameTextObject, AccountProperties
+				.getUserAccountInstance().getusername());
+		profileView.setValue(emailEditTextObject, AccountProperties
+				.getUserAccountInstance().getemail());
+		profileView.setValue(nameEditTextObject, AccountProperties
+				.getUserAccountInstance().getName());
+		profileView.setValue(workspaceEditTextObject, AccountProperties
+				.getUserAccountInstance().getWorkPlace());
+
+		String gender = AccountProperties.getUserAccountInstance().getGender();
+		if (gender.equals("Male"))
+			genderSpinnerObject.setSelection(1);
+		else if (gender.equals("Female"))
+			genderSpinnerObject.setSelection(2);
+
 	}
 
 	/**
@@ -142,10 +166,18 @@ public class EditProfileActivity extends Activity {
 		String email = profileView.getValue(emailEditTextObject);
 		String workPlace = profileView.getValue(workspaceEditTextObject);
 
-		AccountProperties a = new AccountProperties(username, password);
-		a.setName(name);
-		a.setemail(email);
-		a.setWorkPlace(workPlace);
+		String gender = genderSpinnerObject.getSelectedItem().toString();
+		MessageToasterHelper.toastMessage(gender);
+		if (gender.equals("--"))
+			gender = "";
+
+		AccountProperties newAccountPropertiesObject = new AccountProperties(
+				username, password);
+
+		newAccountPropertiesObject.setName(name);
+		newAccountPropertiesObject.setemail(email);
+		newAccountPropertiesObject.setWorkPlace(workPlace);
+		newAccountPropertiesObject.setGender(gender);
 
 		if (!validator.isValid(email)) {
 			Toast.makeText(this, R.string.invalid_email, Toast.LENGTH_SHORT)
@@ -158,8 +190,9 @@ public class EditProfileActivity extends Activity {
 		try {
 			// send the request.
 			List<Map<String, String>> resultMapList = RequestHandlerHelper
-					.getRequestHandlerInstance().handleRequest(this, a.toMap(),
-							requestID, requestType);
+					.getRequestHandlerInstance().handleRequest(this,
+							newAccountPropertiesObject.toMap(), requestID,
+							requestType);
 
 			AccountProperties userAccountProperties = AccountProperties
 					.getUserAccountInstance();
@@ -167,6 +200,7 @@ public class EditProfileActivity extends Activity {
 			userAccountProperties.setName(name);
 			userAccountProperties.setemail(email);
 			userAccountProperties.setWorkPlace(workPlace);
+			userAccountProperties.setGender(gender);
 
 			Intent intent = new Intent(this, TabHostActivity.class);
 			this.startActivity(intent);
