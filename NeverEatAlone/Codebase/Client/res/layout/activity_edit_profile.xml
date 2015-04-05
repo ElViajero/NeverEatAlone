@@ -1,4 +1,4 @@
-<!-- @author Hai Tang @author Yueling @author Runze Tang -->
+<!-- @author tejasvamsingh @author Hai Tang @author Yueling @author Runze Tang -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -187,20 +187,20 @@
 
                 <TextView
                     android:id="@+id/textView_editprofile_gender"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"                                                        
                     android:text="@string/gender"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
-                <EditText
-                    android:id="@+id/editText_editprofile_gender"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/edittext_height"
-                    android:layout_weight="0.7"
-                    android:gravity="center"
-                    android:inputType="text"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
+                <Spinner
+                    android:id="@+id/spinner_editprofile_gender"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="400dp"                                                                          
+                    android:entries="@array/gender_array"
+                    android:gravity="center"                    
+                    android:text="select" />
+
             </LinearLayout>
 
             <LinearLayout

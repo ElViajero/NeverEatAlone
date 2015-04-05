@@ -56,7 +56,7 @@
     <string name="name">Name</string>
     <string name="delete_account">Delete Account</string>
     <string name="change_password">Change Password</string>
-    <string name="workspace">Workspace</string>
+    <string name="workspace">Workplace</string>
     <string name="edit">Edit Profile</string>
     <string name="title_activity_edit_profile">EditProfileActivity</string>
     <string name="edit_profile">Edit Profile</string>
@@ -114,4 +114,12 @@
     <string name="close">Close</string>
     <string name="title_activity_my_posts_detail">MyPostsDetailActivity</string>
 	<string name="my_posts_detail">My Posts Details</string>
+	
+	
+	
+	<string-array name="gender_array">
+	    <item>Male</item>
+	    <item>Female</item>
+	    </string-array>
+	
 </resources>

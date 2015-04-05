@@ -3,19 +3,19 @@ package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.ser
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.R;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.AccountProperties;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.EmailValidatorHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.ProfileView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 /**
  * Activity used for edit profile page
@@ -29,7 +29,7 @@ public class EditProfileActivity extends Activity {
 	private TextView usernameTextObject;
 	private EditText nameEditTextObject;
 	private EditText emailEditTextObject;
-	private EditText genderEditTextObject;
+	private Spinner genderSpinnerObject;
 	private EditText workspaceEditTextObject;
 	private EditText aliasEditTextObject;
 	private EmailValidatorHelper validator;
@@ -54,8 +54,8 @@ public class EditProfileActivity extends Activity {
 				.getView("editText_editprofile_name");
 		emailEditTextObject = (EditText) profileView
 				.getView("editText_editprofile_email");
-		genderEditTextObject = (EditText) profileView
-				.getView("editText_editprofile_gender");
+		genderSpinnerObject = (Spinner) profileView
+				.getView("spinner_editprofile_gender");
 		workspaceEditTextObject = (EditText) profileView
 				.getView("editText_editprofile_workspace");
 		aliasEditTextObject = (EditText) profileView
@@ -106,10 +106,10 @@ public class EditProfileActivity extends Activity {
 
 		ThemeManager.applyButtonColor(comfirmButton);
 		ThemeManager.applyButtonColor(cancelButton);
-		
+
 		ThemeManager.applyEditTextColor(nameEditTextObject);
 		ThemeManager.applyEditTextColor(emailEditTextObject);
-		ThemeManager.applyEditTextColor(genderEditTextObject);
+		ThemeManager.applyButtonColor(genderSpinnerObject);
 		ThemeManager.applyEditTextColor(workspaceEditTextObject);
 		ThemeManager.applyEditTextColor(aliasEditTextObject);
 
@@ -132,14 +132,14 @@ public class EditProfileActivity extends Activity {
 		// String username = usernameTextObject.getText().toString();
 		String name = profileView.getValue(nameEditTextObject);
 		String email = profileView.getValue(emailEditTextObject);
-		String gender = profileView.getValue(genderEditTextObject);
+		// String gender = profileView.getValue(genderEditTextObject);
 		String workspace = profileView.getValue(workspaceEditTextObject);
 		String alias = profileView.getValue(aliasEditTextObject);
 
 		if (!validator.isValid(email)) {
 			Toast.makeText(this, R.string.invalid_email, Toast.LENGTH_SHORT)
 					.show();
-			
+
 			// TODO : set the fields right.
 			return;
 		}
