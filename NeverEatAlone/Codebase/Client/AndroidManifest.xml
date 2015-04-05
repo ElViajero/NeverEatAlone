@@ -122,7 +122,8 @@
         </activity>
         <activity
             android:name="edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.services.MyPostsDetailActivity"
-            android:label="@string/title_activity_my_posts_detail" >
+            android:label="@string/title_activity_my_posts_detail"
+            android:launchMode="singleTask" >
         </activity>
     </application>
 
