@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client"
+    package="edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -26,7 +26,7 @@
         <uses-library android:name="android.test.runner" />
 
         <activity
-            android:name=".gui.activities.MainActivity"
+            android:name=".services.MainActivity"
             android:label="@string/app_name"
             android:launchMode="singleTask" >
             <intent-filter>
@@ -36,92 +36,92 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".gui.activities.RegisterActivity"
+            android:name=".services.RegisterActivity"
             android:label="@string/title_activity_register"
             android:launchMode="singleTask" >
         </activity>
         <activity
-            android:name=".gui.activities.TabHostActivity"
+            android:name=".services.TabHostActivity"
             android:label="@string/title_activity_tab_host"
             android:launchMode="singleTask" >
         </activity>
         <activity
-            android:name=".gui.activities.InvitesActivity"
+            android:name=".services.InvitesActivity"
             android:label="@string/title_activity_invites"
             android:launchMode="singleTask" >
         </activity>
         <activity
-            android:name=".gui.activities.ContactsActivity"
+            android:name=".services.ContactsActivity"
             android:label="@string/title_activity_contacts"
             android:launchMode="singleTask" >
         </activity>
         <activity
-            android:name=".gui.activities.ProfileActivity"
+            android:name=".services.ProfileActivity"
             android:label="@string/title_activity_profile"
             android:launchMode="singleTask" >
         </activity>
         <activity
-            android:name=".gui.activities.CreateMealInformationActivity"
+            android:name=".services.CreateMealInformationActivity"
             android:label="@string/title_activity_create_meal_information"
             android:launchMode="singleTask" >
         </activity>
         <activity
-            android:name=".gui.activities.MealDetailActivity"
+            android:name=".services.MealDetailActivity"
             android:label="@string/title_activity_meal_detail"
             android:launchMode="singleTask" >
         </activity>
         <activity
-            android:name=".gui.activities.TweetDetailActivity"
+            android:name=".services.TweetDetailActivity"
             android:label="@string/title_activity_tweet_detail"
             android:launchMode="singleTask" >
         </activity>
         <activity
-            android:name=".gui.activities.EditProfileActivity"
+            android:name=".services.EditProfileActivity"
             android:label="@string/title_activity_edit_profile"
             android:launchMode="singleTask" >
         </activity>
         <activity
-            android:name=".gui.activities.ChangePasswordActivity"
+            android:name=".services.ChangePasswordActivity"
             android:label="@string/title_activity_change_password"
             android:launchMode="singleTask" >
         </activity>
         <activity
-            android:name=".gui.activities.AddFriendsActivity"
+            android:name=".services.AddFriendsActivity"
             android:label="@string/title_activity_add_friends"
             android:launchMode="singleTask" >
         </activity>
         <activity
-            android:name=".gui.activities.SelectFriendsActivity"
+            android:name=".services.SelectFriendsActivity"
             android:label="@string/title_activity_select_friends"
             android:launchMode="singleTask" >
         </activity>
         <activity
-            android:name=".gui.activities.PostInformationActivity"
+            android:name=".services.PostInformationActivity"
             android:label="@string/title_activity_post_information"
             android:launchMode="singleTask" >
         </activity>
         <activity
-            android:name=".gui.activities.DisplayContactNotificationActivity"
+            android:name=".services.DisplayContactNotificationActivity"
             android:label="@string/title_activity_display_contact_notification"
             android:launchMode="singleTask" >
         </activity>
         <activity
-            android:name=".gui.activities.MyPostsActivity"
+            android:name=".services.MyPostsActivity"
             android:label="@string/title_activity_my_posts"
             android:launchMode="singleTask" >
         </activity>
         <activity
-            android:name=".gui.activities.ContactsProfileActivity"
+            android:name=".services.ContactsProfileActivity"
             android:label="@string/title_activity_contacts_profile"
             android:launchMode="singleTask" >
         </activity>
         <activity
-            android:name=".gui.activities.AcceptedInvitesActivity"
+            android:name=".services.AcceptedInvitesActivity"
             android:label="@string/title_activity_accepted_invites"
             android:launchMode="singleTask" >
         </activity>
         <activity
-            android:name="edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.MyPostsDetailActivity"
+            android:name="edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.services.MyPostsDetailActivity"
             android:label="@string/title_activity_my_posts_detail" >
         </activity>
     </application>

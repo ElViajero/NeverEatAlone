@@ -1,4 +1,4 @@
-package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities;
+package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.services;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.R;
 
 /**
  * This class is used to control the post information page.

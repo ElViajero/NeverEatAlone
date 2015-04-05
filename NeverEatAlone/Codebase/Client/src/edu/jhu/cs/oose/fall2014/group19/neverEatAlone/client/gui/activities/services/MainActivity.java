@@ -1,4 +1,4 @@
-package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities;
+package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.services;
 
 
 import java.io.FileNotFoundException;
@@ -20,7 +20,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.AccountProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.NotificationAndPostCacheHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.MessageToasterHelper;

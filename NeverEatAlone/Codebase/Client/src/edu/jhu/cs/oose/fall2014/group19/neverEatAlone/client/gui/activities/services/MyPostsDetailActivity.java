@@ -1,4 +1,4 @@
-package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities;
+package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.services;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.ContactProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.MealProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.PostProperties;

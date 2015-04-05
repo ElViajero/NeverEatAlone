@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.contracts.IView;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.contracts.IView;
 
 /**
  * This class handles all the view components for the Invites related Page.

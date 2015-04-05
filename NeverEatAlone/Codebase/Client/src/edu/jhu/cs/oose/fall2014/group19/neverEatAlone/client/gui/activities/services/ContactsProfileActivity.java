@@ -1,12 +1,5 @@
-package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities;
+package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.services;
 
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R.id;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R.layout;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R.menu;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.AccountProperties;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.ProfileView;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -14,8 +7,11 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.PopupWindow;
 import android.widget.TextView;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.AccountProperties;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.R;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.ProfileView;
 
 /**
  * ProfileActivity is used to set up the view of Profile page
@@ -34,11 +30,10 @@ public class ContactsProfileActivity extends Activity {
 	private Context context;
 	private Activity activity;
 	private ProfileView profileView;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 
-		
 		initView(savedInstanceState);
 		getTargetProfileInfo();
 	}
@@ -54,30 +49,32 @@ public class ContactsProfileActivity extends Activity {
 
 		applyTheme();
 	}
-	
+
 	/**
 	 * This method is used to set GUI colors
 	 * 
 	 * @author Hai Tang
 	 */
 	private void applyTheme() {
-		
+
 		initProfileView();
-		
+
 		View mainLayout = profileView.getView("main_contacts_profile");
 		View headerLayout = profileView.getView("header_contacts_profile");
 		View buttonBar = profileView.getView("buttons_contacts_profile");
-		
-		View backContactsProfileButton = profileView.getView("button_contacts_profile_back");
+
+		View backContactsProfileButton = profileView
+				.getView("button_contacts_profile_back");
 
 		ThemeManager.applyTheme(mainLayout, headerLayout);
 		ThemeManager.applyButtonBarTheme(buttonBar);
 		ThemeManager.applyButtonColor(backContactsProfileButton);
 
 	}
-	
+
 	/**
 	 * Method used to initialize ProfileView
+	 * 
 	 * @author: Hai Tang
 	 */
 	private void initProfileView() {
@@ -85,7 +82,7 @@ public class ContactsProfileActivity extends Activity {
 		activity = this;
 		profileView = new ProfileView(context, activity);
 	}
-	
+
 	/**
 	 * This method is used to set the font style of the title of each page
 	 * 
@@ -95,7 +92,7 @@ public class ContactsProfileActivity extends Activity {
 
 		ThemeManager.setHeaderFont(contactsProfileTitleObject);
 	}
-	
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -114,28 +111,32 @@ public class ContactsProfileActivity extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-	
+
 	/**
 	 * Method for getting profile info from the server and posting it to screen
 	 * 
 	 * @author Hai Tang
 	 */
 	private void getTargetProfileInfo() {
-		//TODO Need to be filled with real target contact's data
+		// TODO Need to be filled with real target contact's data
 		username = AccountProperties.getUserAccountInstance().getusername();
 		email = AccountProperties.getUserAccountInstance().getemail();
 
 		initProfileView();
 
-		contactsProfileTitleObject = (TextView) profileView.getView("contacts_profile");
+		contactsProfileTitleObject = (TextView) profileView
+				.getView("contacts_profile");
 		setTitleStyle();
 		usernameTextViewObject = (TextView) profileView
 				.getView("textView_contactsprofile_username");
-		aliasTextViewObject = (TextView) profileView.getView("textView_contactsprofile_alias");
-		nameTextViewObject = (TextView) profileView.getView("textView_contactsprofile_Name");
+		aliasTextViewObject = (TextView) profileView
+				.getView("textView_contactsprofile_alias");
+		nameTextViewObject = (TextView) profileView
+				.getView("textView_contactsprofile_Name");
 		workspaceTextViewObject = (TextView) profileView
 				.getView("textView_contactsprofile_workspace");
-		emailTextViewObject = (TextView) profileView.getView("textView_contactsprofile_email");
+		emailTextViewObject = (TextView) profileView
+				.getView("textView_contactsprofile_email");
 		genderTextViewObject = (TextView) profileView
 				.getView("textView_contactsprofile_Gender");
 
@@ -148,7 +149,7 @@ public class ContactsProfileActivity extends Activity {
 		profileView.setValue(genderTextViewObject, " ");
 
 	}
-	
+
 	/**
 	 * This method implements the back button
 	 * 
@@ -156,7 +157,8 @@ public class ContactsProfileActivity extends Activity {
 	 */
 	public void onBackButtonClick(View view) {
 
-		Intent intent = new Intent(ContactsProfileActivity.this, TabHostActivity.class);
+		Intent intent = new Intent(ContactsProfileActivity.this,
+				TabHostActivity.class);
 		intent.putExtra("FirstTab", 1);
 		ContactsProfileActivity.this.startActivity(intent);
 	}

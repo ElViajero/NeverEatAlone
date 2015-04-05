@@ -1,4 +1,4 @@
-package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities;
+package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.services;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,12 +16,12 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.contracts.IActivityProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.AccountProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.ContactProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.NotificationProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.PostProperties;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.adapters.ContactsNotificationAdapter;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.NotificationAndPostCacheHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
@@ -173,10 +173,10 @@ public class DisplayContactNotificationActivity extends ListActivity {
 
 		acceptButton = (Button) acceptButtonView;
 		rejectButton = (Button) rejectButtonView;
-		
+
 		ThemeManager.applyButtonColor(acceptButtonView);
 		ThemeManager.applyButtonColor(rejectButtonView);
-		
+
 		acceptButton.setVisibility(View.VISIBLE);
 		rejectButton.setVisibility(View.VISIBLE);
 	}

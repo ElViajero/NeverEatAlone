@@ -1,4 +1,4 @@
-package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities;
+package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.services;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,18 +17,15 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.AccountProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.ContactProperties;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.MealProperties;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.NotificationProperties;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.adapters.ContactsInformationAdapter;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.NotificationAndPostCacheHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.MessageToasterHelper;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.NotificationAndPostCacheHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.ContactsView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.helpers.GsonHelper;
 
 /**
  * This class handles controller operations for the contacts tab
@@ -77,9 +74,12 @@ public class ContactsActivity extends ListActivity {
 
 		initContactView();
 
-		contactTitleObject = (TextView) contactsView.getView("textView_contacts_title");
-		friendRequestButtonObejct = (Button) contactsView.getView("button_contacts_notification");
-		addFriendButtonObject = (Button) contactsView.getView("button_contacts_addcontacts");
+		contactTitleObject = (TextView) contactsView
+				.getView("textView_contacts_title");
+		friendRequestButtonObejct = (Button) contactsView
+				.getView("button_contacts_notification");
+		addFriendButtonObject = (Button) contactsView
+				.getView("button_contacts_addcontacts");
 		contactList = new ArrayList<ContactProperties>();
 		contactsInformationAdapter = new ContactsInformationAdapter(this,
 				contactList);
@@ -87,14 +87,13 @@ public class ContactsActivity extends ListActivity {
 
 		fetchContacts();
 
-
-
 		setTitleStyle();
 		applyTheme();
 	}
 
 	/**
 	 * Method used to initialize ContactView.
+	 * 
 	 * @author: Hai Tang
 	 */
 	private void initContactView() {
@@ -116,8 +115,10 @@ public class ContactsActivity extends ListActivity {
 		View headerLayout = contactsView.getView("header_contacts");
 		View buttonBar = contactsView.getView("buttons_contacts");
 
-		View contactsNotificationButton = contactsView.getView("button_contacts_notification");
-		View addContactsButton = contactsView.getView("button_contacts_addcontacts");
+		View contactsNotificationButton = contactsView
+				.getView("button_contacts_notification");
+		View addContactsButton = contactsView
+				.getView("button_contacts_addcontacts");
 
 		ThemeManager.applyTheme(mainLayout, headerLayout);
 		ThemeManager.applyButtonBarTheme(buttonBar);
@@ -148,36 +149,32 @@ public class ContactsActivity extends ListActivity {
 		requestID = "Contact";
 		requestType = "getAll";
 
+		Map<String, Object> requestMap = new HashMap<String, Object>();
+		requestMap.put("username", AccountProperties.getUserAccountInstance()
+				.getusername());
 
-
-		Map<String,Object> requestMap = new HashMap<String,Object>();
-		requestMap.put("username",
-				AccountProperties.getUserAccountInstance().getusername());
-
-		try{
-
+		try {
 
 			List<Map<String, String>> resultMapList = RequestHandlerHelper
 					.getRequestHandlerInstance().handleRequest(this,
 							requestMap, requestID, requestType);
 			contactList.clear();
-			for(Map<String,String> result : resultMapList){
-				if(result.isEmpty())
+			for (Map<String, String> result : resultMapList) {
+				if (result.isEmpty())
 					continue;
 				contactList.add(new ContactProperties(result));
 			}
 
-			MessageToasterHelper.toastMessage(this, contactList.get(0).getContactusername());
+			MessageToasterHelper.toastMessage(this, contactList.get(0)
+					.getContactusername());
 			contactsInformationAdapter.notifyDataSetChanged();
-			NotificationAndPostCacheHelper.setServerFetchRequired("contact", false);
-
+			NotificationAndPostCacheHelper.setServerFetchRequired("contact",
+					false);
 
 		} catch (RequestAbortedException e) {
 			System.out.println(e.getMessage());
 		}
 	}
-
-
 
 	/**
 	 * Method for add friends button click
@@ -201,28 +198,31 @@ public class ContactsActivity extends ListActivity {
 		ContactsActivity.this.startActivity(intent);
 	}
 
-
 	@Override
-	protected void onResume(){
+	protected void onResume() {
 		super.onResume();
-		System.out.println("FETCH STATUS :"+
-				NotificationAndPostCacheHelper.isServerFetchRequired("contact"));
-		if(NotificationAndPostCacheHelper.isServerFetchRequired("contact"))
+		System.out.println("FETCH STATUS :"
+				+ NotificationAndPostCacheHelper
+						.isServerFetchRequired("contact"));
+		if (NotificationAndPostCacheHelper.isServerFetchRequired("contact"))
 			fetchContacts();
 	}
 
 	/**
-	 * This method goes to the ContactsProfileActivity when clicking specific contacts. It also passes
-	 * the ContactsProperties to the ContactsProfileActivity.
+	 * This method goes to the ContactsProfileActivity when clicking specific
+	 * contacts. It also passes the ContactsProperties to the
+	 * ContactsProfileActivity.
+	 * 
 	 * @author Hai Tang
 	 * @param position
 	 */
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
-		Intent intent = new Intent(ContactsActivity.this, ContactsProfileActivity.class);
+		Intent intent = new Intent(ContactsActivity.this,
+				ContactsProfileActivity.class);
 		ContactsActivity.this.startActivity(intent);
-		
-		//TODO Need to be populated with real contacts data
+
+		// TODO Need to be populated with real contacts data
 	}
-		
+
 }

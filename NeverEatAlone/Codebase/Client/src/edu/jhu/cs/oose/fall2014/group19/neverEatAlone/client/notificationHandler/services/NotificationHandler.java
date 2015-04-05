@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import android.os.AsyncTask;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.TabHostActivity;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.services.TabHostActivity;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.notificationHandler.contracts.INotificationHandler;
 
 /**

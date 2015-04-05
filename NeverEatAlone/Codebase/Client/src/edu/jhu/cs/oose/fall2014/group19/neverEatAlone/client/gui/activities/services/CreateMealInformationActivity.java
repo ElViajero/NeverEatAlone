@@ -1,4 +1,4 @@
-package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities;
+package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.services;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -10,7 +10,6 @@ import android.app.DatePickerDialog.OnDateSetListener;
 import android.app.TimePickerDialog.OnTimeSetListener;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -24,12 +23,11 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.DateAndTimeProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.MealProperties;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.MealView;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.ProfileView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.helpers.GsonHelper;
 
 /**
@@ -53,9 +51,9 @@ public class CreateMealInformationActivity extends FragmentActivity {
 	private Context context;
 	private Activity activity;
 	private MealView mealView;
-//	private View mainLayout;
-//	private View headerLayout;
-//	private View buttonBar;
+	// private View mainLayout;
+	// private View headerLayout;
+	// private View buttonBar;
 
 	// variables to save user selected date and time
 	public int startYear, startMonth, startDay, startHour, startMinute;
@@ -123,8 +121,6 @@ public class CreateMealInformationActivity extends FragmentActivity {
 		createMealInfoTitleObject = (TextView) mealView
 				.getView("CreateMealInformation_text_mealinformation");
 
-
-
 		setTitleStyle();
 		applyTheme();
 	}
@@ -150,38 +146,36 @@ public class CreateMealInformationActivity extends FragmentActivity {
 
 		ThemeManager.setHeaderFont(createMealInfoTitleObject);
 	}
-	
+
 	/**
 	 * This method is used to set GUI colors
 	 * 
 	 * @author: Yueling Loh
 	 */
 	private void applyTheme() {
-		
+
 		initMealView();
 		View mainLayout = mealView.getView("main_createMealInfo");
 		View headerLayout = mealView.getView("header_createMealInfo");
 		View buttonBar = mealView.getView("buttons_createMealInfo");
-		
+
 		View backButton = mealView.getView("CreateMealInformation_button_back");
 		View nextButton = mealView.getView("CreateMealInformation_button_next");
 
 		ThemeManager.applyPlainTheme(mainLayout, headerLayout, buttonBar);
 
 		ThemeManager.applyButtonColor(btnSelectStartDateObject);
-		ThemeManager.applyButtonColor(btnSelectstartTimeObject );
+		ThemeManager.applyButtonColor(btnSelectstartTimeObject);
 		ThemeManager.applyButtonColor(btnSelectEndDateObject);
 		ThemeManager.applyButtonColor(btnSelectendTimeObject);
 		ThemeManager.applyButtonColor(allowFriendInviteSwitchObject);
-		
-		
+
 		ThemeManager.applyButtonColor(backButton);
 		ThemeManager.applyButtonColor(nextButton);
-		
-		ThemeManager.applyEditTextColor(placeEditViewObject);
-		ThemeManager.applyEditTextColor(maxNumberEditViewObject);		
 
-		
+		ThemeManager.applyEditTextColor(placeEditViewObject);
+		ThemeManager.applyEditTextColor(maxNumberEditViewObject);
+
 	}
 
 	@Override

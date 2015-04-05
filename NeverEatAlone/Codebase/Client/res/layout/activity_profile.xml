@@ -8,7 +8,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.ProfileActivity" >
+    tools:context="edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.services.ProfileActivity" >
 
     <!-- Header aligned to top -->
 
@@ -106,7 +106,7 @@
                 android:contentDescription="@string/user_avatar"
                 android:src="@drawable/user_profile" />
 
-   
+   	<!-- Dynamically generated content -->
  			<LinearLayout
                 android:id="@+id/profile_dynamic_layout"
                 android:layout_width="match_parent"

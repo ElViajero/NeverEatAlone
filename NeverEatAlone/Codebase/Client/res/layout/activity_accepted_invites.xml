@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    tools:context="edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.AcceptedInvitesActivity" >
+    tools:context="edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.services.AcceptedInvitesActivity" >
     <!-- Header aligned to top -->
 
     <RelativeLayout

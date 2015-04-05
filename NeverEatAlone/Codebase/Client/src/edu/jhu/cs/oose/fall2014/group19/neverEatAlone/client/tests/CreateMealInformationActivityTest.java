@@ -2,9 +2,9 @@ package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.tests;
 
 import com.robotium.solo.Solo;
 
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.CreateMealInformationActivity;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.TabHostActivity;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.R;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.services.CreateMealInformationActivity;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.services.TabHostActivity;
 import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
 import android.view.View;

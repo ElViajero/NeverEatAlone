@@ -4,7 +4,7 @@ import android.test.ActivityInstrumentationTestCase2;
 
 import com.robotium.solo.Solo;
 
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.ContactsActivity;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.services.ContactsActivity;
 
 public class ContactsActivityTest extends ActivityInstrumentationTestCase2<ContactsActivity> {
 

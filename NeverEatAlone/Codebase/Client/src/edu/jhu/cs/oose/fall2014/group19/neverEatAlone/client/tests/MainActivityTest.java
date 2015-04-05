@@ -6,10 +6,10 @@ import android.widget.EditText;
 
 import com.robotium.solo.Solo;
 
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.MainActivity;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.RegisterActivity;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.TabHostActivity;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.R;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.services.MainActivity;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.services.RegisterActivity;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.services.TabHostActivity;
 
 /**
  * This class tests the activities on the Main(login/register) page

@@ -5,7 +5,7 @@ import android.graphics.Typeface;
 import android.view.View;
 import android.widget.Switch;
 import android.widget.TextView;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.R;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.R;
 
 /**
  * This class handles the GUI themes.

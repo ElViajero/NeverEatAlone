@@ -2,7 +2,7 @@ package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.tests;
 
 import com.robotium.solo.Solo;
 
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.TabHostActivity;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.services.TabHostActivity;
 import android.test.ActivityInstrumentationTestCase2;
 
 public class TabHostActivityTest extends

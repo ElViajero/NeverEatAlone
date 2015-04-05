@@ -2,7 +2,7 @@ package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.tests;
 
 import com.robotium.solo.Solo;
 
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.DisplayMessageActivity;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.services.DisplayMessageActivity;
 import android.test.ActivityInstrumentationTestCase2;
 
 public class DisplayMessageActivityTest extends

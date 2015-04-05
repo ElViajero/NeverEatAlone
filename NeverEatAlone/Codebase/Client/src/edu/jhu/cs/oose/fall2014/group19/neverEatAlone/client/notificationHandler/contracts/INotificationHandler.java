@@ -1,6 +1,6 @@
 package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.notificationHandler.contracts;
 
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.TabHostActivity;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.services.TabHostActivity;
 
 /**
  * Interface that exposes services offered by the notification handler.
