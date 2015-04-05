@@ -1,5 +1,10 @@
 package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.services;
 
+import java.util.List;
+import java.util.Map;
+
+import org.apache.http.impl.execchain.RequestAbortedException;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -16,10 +21,12 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.EmailValidatorHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.ProfileView;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
 
 /**
  * Activity used for edit profile page
  * 
+ * @author tejasvamsingh
  * @author Hai Tang
  * @author Runze Tang
  *
@@ -31,7 +38,7 @@ public class EditProfileActivity extends Activity {
 	private EditText emailEditTextObject;
 	private Spinner genderSpinnerObject;
 	private EditText workspaceEditTextObject;
-	private EditText aliasEditTextObject;
+	// private EditText aliasEditTextObject;
 	private EmailValidatorHelper validator;
 	private TextView editProfileTitle;
 
@@ -58,11 +65,11 @@ public class EditProfileActivity extends Activity {
 				.getView("spinner_editprofile_gender");
 		workspaceEditTextObject = (EditText) profileView
 				.getView("editText_editprofile_workspace");
-		aliasEditTextObject = (EditText) profileView
-				.getView("editText_editprofile_alias");
-
 		profileView.setValue(usernameTextObject, AccountProperties
 				.getUserAccountInstance().getusername());
+
+		emailEditTextObject.setText(AccountProperties.getUserAccountInstance()
+				.getemail());
 
 		validator = new EmailValidatorHelper();
 
@@ -111,7 +118,7 @@ public class EditProfileActivity extends Activity {
 		ThemeManager.applyEditTextColor(emailEditTextObject);
 		ThemeManager.applyButtonColor(genderSpinnerObject);
 		ThemeManager.applyEditTextColor(workspaceEditTextObject);
-		ThemeManager.applyEditTextColor(aliasEditTextObject);
+		// ThemeManager.applyEditTextColor(aliasEditTextObject);
 
 	}
 
@@ -119,34 +126,56 @@ public class EditProfileActivity extends Activity {
 	 * Method used when confirm button is clicked. Gather all the revised
 	 * information and return to TabHost Page.
 	 * 
+	 * @author tejasvamsingh
 	 * @author: Hai Tang
 	 * @author: Yueling Loh
+	 * 
 	 */
-	public void onComfirmButtonClick(View view) {
-		Intent intent = new Intent(EditProfileActivity.this,
-				TabHostActivity.class);
-		// Go to the specific tab.
-		intent.putExtra("FirstTab", 2);
-		EditProfileActivity.this.startActivity(intent);
+	public void onConfirmButtonClick(View view) {
 
-		// String username = usernameTextObject.getText().toString();
+		String username = AccountProperties.getUserAccountInstance()
+				.getusername();
+		String password = AccountProperties.getUserAccountInstance()
+				.getpassword();
+
 		String name = profileView.getValue(nameEditTextObject);
 		String email = profileView.getValue(emailEditTextObject);
-		// String gender = profileView.getValue(genderEditTextObject);
-		String workspace = profileView.getValue(workspaceEditTextObject);
-		String alias = profileView.getValue(aliasEditTextObject);
+		String workPlace = profileView.getValue(workspaceEditTextObject);
+
+		AccountProperties a = new AccountProperties(username, password);
+		a.setName(name);
+		a.setemail(email);
+		a.setWorkPlace(workPlace);
 
 		if (!validator.isValid(email)) {
 			Toast.makeText(this, R.string.invalid_email, Toast.LENGTH_SHORT)
 					.show();
+			return;
+		}
+		String requestID = "Account";
+		String requestType = "update";
 
-			// TODO : set the fields right.
+		try {
+			// send the request.
+			List<Map<String, String>> resultMapList = RequestHandlerHelper
+					.getRequestHandlerInstance().handleRequest(this, a.toMap(),
+							requestID, requestType);
+
+			AccountProperties userAccountProperties = AccountProperties
+					.getUserAccountInstance();
+
+			userAccountProperties.setName(name);
+			userAccountProperties.setemail(email);
+			userAccountProperties.setWorkPlace(workPlace);
+
+			Intent intent = new Intent(this, TabHostActivity.class);
+			this.startActivity(intent);
+
+		} catch (RequestAbortedException e) {
 			return;
 		}
 
-		// Set new values to AccountProperties to show in Profile page
-		AccountProperties.getUserAccountInstance().setemail(email);
-		// TODO Hai's Comment:Need to populate other values
+		// if we reach here, we need to try to send the request to the server.
 
 	}
 

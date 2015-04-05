@@ -117,10 +117,10 @@
 	
 	
 	
+	<!-- This is for the gender spinner in editProfile -->
 	<string-array name="gender_array">
 	    <item>"--"</item>
 	    <item>Male</item>
 	    <item>Female</item>
 	    </string-array>
-	
 </resources>

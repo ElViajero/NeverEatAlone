@@ -252,6 +252,11 @@ public class ProfileActivity extends Activity {
 		userAccountMap.remove("password");
 		userAccountMap.remove("currentPostID");
 
+		LinearLayout rv = (LinearLayout) profileView.getView(// "layout_profile_container");
+				"profile_dynamic_layout");
+
+		rv.removeAllViews();
+
 		for (String key : userAccountMap.keySet()) {
 
 			String capitalizedKey = key.toUpperCase();
@@ -278,8 +283,6 @@ public class ProfileActivity extends Activity {
 			valueView.setGravity(android.view.Gravity.CENTER_HORIZONTAL);
 			linearLayout.addView(valueView);
 
-			LinearLayout rv = (LinearLayout) profileView.getView(// "layout_profile_container");
-					"profile_dynamic_layout");
 			rv.addView(linearLayout);
 
 		}
@@ -320,6 +323,12 @@ public class ProfileActivity extends Activity {
 		 * }
 		 */
 
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		getProfileInfo();
 	}
 
 }

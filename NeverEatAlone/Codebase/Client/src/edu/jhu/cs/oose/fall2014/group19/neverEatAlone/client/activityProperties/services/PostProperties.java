@@ -21,24 +21,23 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.h
 public class PostProperties implements IActivityProperties {
 
 	private String postStatus;
-	private static int postIDNumber=0;
+	private static int postIDNumber = 0;
 	private String poster;
 	private List<String> recipientList;
 	private String postID;
 	private String postType;
 	private String postData;
 
-	public PostProperties(List<String> recipientList,String postType,
-			String postData){
-		poster = 
-				AccountProperties.getUserAccountInstance().getusername();
-		postID = poster+postIDNumber;
+	public PostProperties(List<String> recipientList, String postType,
+			String postData) {
+		poster = AccountProperties.getUserAccountInstance().getusername();
+		postID = poster + "_" + postIDNumber;
 		postIDNumber++;
 
 		this.recipientList = recipientList;
-		this.postData=postData;
-		this.postType =postType;
-		this.postStatus="OPEN";
+		this.postData = postData;
+		this.postType = postType;
+		this.postStatus = "OPEN";
 	}
 
 	@Override
@@ -46,26 +45,27 @@ public class PostProperties implements IActivityProperties {
 
 		Gson gson = GsonHelper.getGsoninstance();
 		String json = gson.toJson(this);
-		System.out.println("json is : " +json);
-		Type stringObjectMap = new TypeToken<Map<String, Object>>(){}.getType();
-		Map<String,Object> requestMap = gson.fromJson(json, stringObjectMap);
-		System.out.println("map is : " +requestMap);
+		System.out.println("json is : " + json);
+		Type stringObjectMap = new TypeToken<Map<String, Object>>() {
+		}.getType();
+		Map<String, Object> requestMap = gson.fromJson(json, stringObjectMap);
+		System.out.println("map is : " + requestMap);
 
 		requestMap.remove("postData");
 
-		Map<String,Object> postDataMap = gson.fromJson(postData, stringObjectMap);
-		System.out.println("map is : " +postDataMap);
+		Map<String, Object> postDataMap = gson.fromJson(postData,
+				stringObjectMap);
+		System.out.println("map is : " + postDataMap);
 
 		for (Map.Entry<String, Object> entry : postDataMap.entrySet()) {
 			String key = entry.getKey();
 			Object value = entry.getValue();
-			requestMap.put(key,value);
+			requestMap.put(key, value);
 		}
 
 		System.out.println("FINAL POST MAP" + requestMap);
 
-
-		if(!requestMap.containsKey("postStatus"))
+		if (!requestMap.containsKey("postStatus"))
 			MessageToasterHelper.toastMessage("NO DAMN STU+ADNKAN");
 
 		return requestMap;
@@ -74,26 +74,31 @@ public class PostProperties implements IActivityProperties {
 	@Override
 	public void fromMap(Map<String, String> map) {
 
+	}
 
-	}	
-
-	public static void initPostID(String PostIDString){
-		postIDNumber=Integer.parseInt(PostIDString.substring(
-				AccountProperties.getUserAccountInstance().getusername().length(),
-				PostIDString.length()));
+	/**
+	 * This method initialized the postID to the most recent unused postID
+	 * number for the given user.
+	 * 
+	 * @param PostIDString
+	 */
+	public static void initPostID(String PostIDString) {
+		postIDNumber = Integer.parseInt(PostIDString.substring(
+				AccountProperties.getUserAccountInstance().getusername()
+						.length() + 1, PostIDString.length()));
 		postIDNumber++;
 
 	}
 
-	public static PostProperties  notificationToPost(NotificationProperties notification){
+	public static PostProperties notificationToPost(
+			NotificationProperties notification) {
 
-		String pType = notification.getNotificationType(); 
+		String pType = notification.getNotificationType();
 		List<String> pRecipientList = new ArrayList<String>();
 		pRecipientList.add(notification.getPoster());
-		String pData =
-				GsonHelper.getGsoninstance().toJson(notification.getNotificationData().toMap());
-		PostProperties post = 
-				new PostProperties(pRecipientList, pType, pData);
+		String pData = GsonHelper.getGsoninstance().toJson(
+				notification.getNotificationData().toMap());
+		PostProperties post = new PostProperties(pRecipientList, pType, pData);
 		post.setPostID(notification.getNotificationID());
 
 		return post;
@@ -115,11 +120,5 @@ public class PostProperties implements IActivityProperties {
 	public void setPostData(String postData) {
 		this.postData = postData;
 	}
-
-
-
-
-
-
 
 }

@@ -22,6 +22,8 @@ public class AccountProperties implements IActivityProperties {
 	private String email;
 	private String currentPostID;
 	private String name;
+	private String gender;
+	private String workPlace;
 
 	// one object because at any time, ther is only
 	// one user who is logged in on one client.
@@ -44,7 +46,9 @@ public class AccountProperties implements IActivityProperties {
 		this.password = password;
 		this.email = email;
 		this.name = "";
-		this.currentPostID = username + "0";
+		this.gender = "";
+		this.workPlace = "";
+		this.currentPostID = username + "_0";
 	}
 
 	public AccountProperties(Map<String, String> map) {
@@ -78,16 +82,23 @@ public class AccountProperties implements IActivityProperties {
 
 	@Override
 	public void fromMap(Map<String, String> map) {
+
 		username = map.get("username");
 		password = map.get("password");
 		email = map.get("email");
 		name = map.get("name");
 		currentPostID = map.get("postID");
+		name = map.get("name");
+		workPlace = map.get("workPlace");
+		gender = map.get("gender");
 
 		accountPropertiesInstance = new AccountProperties(map.get("username"),
 				map.get("password"));
 		accountPropertiesInstance.setemail(map.get("email"));
 		PostProperties.initPostID(map.get("currentPostID"));
+		accountPropertiesInstance.setName(name);
+		accountPropertiesInstance.setWorkPlace(workPlace);
+		accountPropertiesInstance.setGender(gender);
 
 	}
 
@@ -123,6 +134,22 @@ public class AccountProperties implements IActivityProperties {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public String getWorkPlace() {
+		return workPlace;
+	}
+
+	public void setWorkPlace(String workPlace) {
+		this.workPlace = workPlace;
 	}
 
 	public static AccountProperties getUserAccountInstance() {
