@@ -151,6 +151,7 @@ public class AccountDBRequestHandler implements IAccountDBRequestHandler {
 
 		iDBQueryExecutionManagerInstance.executeQuery(query, queryParameterMap);
 
+		// next delete user along with relationships.
 		query = "" + "MATCH (n:User) " + "WHERE n.username={username} "
 				+ "OPTIONAL MATCH (n)-[r]-() " + "DELETE n,r "
 				+ "RETURN {username} AS username";

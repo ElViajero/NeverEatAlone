@@ -1,5 +1,10 @@
 package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.services;
 
+import java.util.List;
+import java.util.Map;
+
+import org.apache.http.impl.execchain.RequestAbortedException;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -21,6 +26,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.BitMapHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.ProfileView;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
 
 /**
  * ProfileActivity is used to set up the view of Profile page
@@ -134,6 +140,7 @@ public class ProfileActivity extends Activity {
 	 * confirmation.
 	 * 
 	 * @author: Hai Tang
+	 * @author tejasvamsingh
 	 */
 	public void onDeleteAccountButtonClick(View view) {
 
@@ -141,6 +148,7 @@ public class ProfileActivity extends Activity {
 
 		final Button confirmButton = (Button) popupview
 				.findViewById(R.id.button_popup_confirm);
+
 		final Button cancelButton = (Button) popupview
 				.findViewById(R.id.button_popup_cancel);
 
@@ -152,22 +160,38 @@ public class ProfileActivity extends Activity {
 		ThemeManager.applyPopUpTheme(mainPopUpView, buttonPopUpView);
 		ThemeManager.applyButtonColor(confirmButton);
 		ThemeManager.applyButtonColor(cancelButton);
+		final ProfileActivity instance = this;
 
 		/**
 		 * OnClickListener for the confirm button in the popup window. Account
 		 * deleted and return to the login page.
 		 * 
+		 * @author tejasvamsingh
 		 * @author: Hai Tang
 		 */
 		confirmButton.setOnClickListener(new Button.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				deleteAccountPopupWindow.dismiss();
+				try {
 
-				Intent intent = new Intent(ProfileActivity.this,
-						MainActivity.class);
-				ProfileActivity.this.startActivity(intent);
+					String requestID = "Account";
+					String requestType = "delete";
+					List<Map<String, String>> resultMapList = RequestHandlerHelper
+							.getRequestHandlerInstance().handleRequest(
+									instance,
+									AccountProperties.getUserAccountInstance()
+											.toMap(), requestID, requestType);
+
+					Intent intent = new Intent(ProfileActivity.this,
+							MainActivity.class);
+					ProfileActivity.this.startActivity(intent);
+
+				} catch (RequestAbortedException e) {
+					return;
+				} finally {
+					deleteAccountPopupWindow.dismiss();
+				}
 			}
 
 		});
@@ -175,6 +199,7 @@ public class ProfileActivity extends Activity {
 		/**
 		 * onClickListener for the cancel button in the popup window
 		 * 
+		 * @author tejasvamsingh
 		 * @author: Hai Tang
 		 */
 		cancelButton.setOnClickListener(new Button.OnClickListener() {
