@@ -79,7 +79,7 @@ public class ProfileView implements IView {
 	public View GetDynamicView() {
 		TextView view = new TextView(context);
 		// view.setWidth(0);
-		view.setTextAppearance(context, android.R.style.TextAppearance_Medium);
+		view.setTextAppearance(context, android.R.style.TextAppearance_Large);
 
 		return view;
 	}

@@ -67,7 +67,8 @@
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:contentDescription="@string/user_avatar"
-                android:src="@drawable/user_profile" />
+                android:src="@drawable/user_profile"
+                android:onClick="onImageClick" />
 
             <LinearLayout
                 android:id="@+id/editProfile_username_layout"

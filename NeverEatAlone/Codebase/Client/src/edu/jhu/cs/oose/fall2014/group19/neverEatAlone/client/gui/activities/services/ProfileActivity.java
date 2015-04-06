@@ -3,6 +3,7 @@ package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.ser
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Pair;
 import android.view.Gravity;
@@ -10,12 +11,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TableRow;
 import android.widget.TextView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.AccountProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.R;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.BitMapHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.ProfileView;
 
@@ -40,6 +43,8 @@ public class ProfileActivity extends Activity {
 	private Context context;
 	private Activity activity;
 	private ProfileView profileView;
+	Bitmap drawnBitmap = null; // currently drawn bitmap. Used to check bitmap
+								// recycling.
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -250,6 +255,17 @@ public class ProfileActivity extends Activity {
 
 		rv.removeAllViews();
 
+		// add the profile image.
+
+		ImageView imageView = (ImageView) profileView
+				.getView("imageView_profile_avatar");
+
+		String avatarString = AccountProperties.getUserAccountInstance()
+				.getAvatar();
+		Bitmap avatarBitmap = BitMapHelper.StringToBitMap(avatarString);
+
+		checkAndSetImageView(imageView, avatarBitmap);
+
 		for (Pair<?, ?> pairObject : AccountProperties.getUserAccountInstance()
 				.getOrderedIterationList()) {
 
@@ -281,44 +297,26 @@ public class ProfileActivity extends Activity {
 			rv.addView(linearLayout);
 
 		}
-		/*
-		 * // username and email are always there. TextView usernameTextView =
-		 * (TextView) profileView .getView("textView_username");
-		 * usernameTextView.setText(username);
-		 * 
-		 * TextView emailTextView = (TextView) profileView
-		 * .getView("textView_email"); emailTextView.setText(email);
-		 * 
-		 * // dynamically instantiate the textViews
-		 * 
-		 * if (!name.equals("")) {
-		 * 
-		 * LinearLayout nameLayout = (LinearLayout) profileView
-		 * .GetDynamicLayout();
-		 * 
-		 * TextView nameView = (TextView) profileView.GetDynamicView();
-		 * nameView.setText("Name");
-		 * 
-		 * nameView.setLayoutParams(new TableRow.LayoutParams(0,
-		 * LayoutParams.WRAP_CONTENT, 0.3f));
-		 * 
-		 * nameLayout.addView(nameView);
-		 * 
-		 * TextView nameValueView = (TextView) profileView.GetDynamicView();
-		 * nameValueView.setText("tse"); nameValueView.setLayoutParams(new
-		 * TableRow.LayoutParams(0, LayoutParams.WRAP_CONTENT, 0.7f));
-		 * 
-		 * nameValueView.setGravity(android.view.Gravity.CENTER_HORIZONTAL);
-		 * nameLayout.addView(nameValueView);
-		 * 
-		 * LinearLayout rv = (LinearLayout) profileView.getView(//
-		 * "layout_profile_container"); "profile_dynamic_layout");
-		 * rv.addView(nameLayout);
-		 * 
-		 * }
-		 */
-
 	}
+
+	/**
+	 * This method checks for bitmap recycling and sets the imageView to the
+	 * correct image.
+	 * 
+	 * @param imageView
+	 * @param avatar
+	 * @author tejasvamsingh
+	 */
+	private void checkAndSetImageView(ImageView imageView, Bitmap avatar) {
+		if (avatar != null)
+			imageView.setImageBitmap(avatar);
+	}
+
+	/**
+	 * Entered when the page resumes.
+	 * 
+	 * @author tejasvamsingh
+	 */
 
 	@Override
 	protected void onResume() {

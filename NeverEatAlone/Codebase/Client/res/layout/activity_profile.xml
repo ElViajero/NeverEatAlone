@@ -99,7 +99,8 @@
             >
             
             <ImageView
-                android:id="@+id/imageView_profile_avatar"
+                android:layout_marginTop="100dp"
+                android:id="@+id/imageView_profile_avatar"                
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
@@ -109,11 +110,13 @@
    	<!-- Dynamically generated content -->
  			<LinearLayout
                 android:id="@+id/profile_dynamic_layout"
+                android:layout_marginTop="200dp"
+                android:layout_marginLeft="150dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/imageView_profile_avatar"
                 android:layout_gravity="center_horizontal"                
-                android:layout_marginTop="@dimen/activity_vertical_margin"
+                
                 android:orientation="vertical" >   
 			</LinearLayout>
             

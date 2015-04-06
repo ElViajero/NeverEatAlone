@@ -29,6 +29,7 @@ public class AccountProperties implements IActivityProperties, IOrderedIterator 
 	private String name;
 	private String gender;
 	private String workPlace;
+	private String avatar;
 
 	// one object because at any time, ther is only
 	// one user who is logged in on one client.
@@ -77,6 +78,7 @@ public class AccountProperties implements IActivityProperties, IOrderedIterator 
 		}.getType();
 		Map<String, Object> requestMap = gsonObject.fromJson(jsonString,
 				stringObjectMap);
+
 		System.out.println("map is : " + requestMap);
 
 		return requestMap;
@@ -104,6 +106,7 @@ public class AccountProperties implements IActivityProperties, IOrderedIterator 
 		accountPropertiesInstance.setName(name);
 		accountPropertiesInstance.setWorkPlace(workPlace);
 		accountPropertiesInstance.setGender(gender);
+		accountPropertiesInstance.setAvatar(map.get("avatar"));
 
 	}
 
@@ -170,7 +173,8 @@ public class AccountProperties implements IActivityProperties, IOrderedIterator 
 
 		List<Pair> orderedIterationList = new ArrayList<Pair>();
 
-		Pair<String, Object> pairObject = new Pair<String, Object>("Username", username);
+		Pair<String, Object> pairObject = new Pair<String, Object>("Username",
+				username);
 		orderedIterationList.add(pairObject);
 		pairObject = new Pair<String, Object>("Email", email);
 		orderedIterationList.add(pairObject);
@@ -183,4 +187,13 @@ public class AccountProperties implements IActivityProperties, IOrderedIterator 
 
 		return orderedIterationList;
 	}
+
+	public String getAvatar() {
+		return avatar;
+	}
+
+	public void setAvatar(String avatar) {
+		this.avatar = avatar;
+	}
+
 }

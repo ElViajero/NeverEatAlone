@@ -8,18 +8,21 @@ import org.apache.http.impl.execchain.RequestAbortedException;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.AccountProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.R;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.BitMapHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.EmailValidatorHelper;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.MessageToasterHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.ProfileView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
@@ -42,18 +45,25 @@ public class EditProfileActivity extends Activity {
 	// private EditText aliasEditTextObject;
 	private EmailValidatorHelper validator;
 	private TextView editProfileTitle;
+	private ImageView imageView;
+	private Bitmap avatarBitmap;
 
 	private Context context;
 	private Activity activity;
 	private ProfileView profileView;
+	private Bitmap drawnBitmap; // currently drawn bitmap. Used to check
+	// bitmap
+	boolean isDrawn;
+
+	// recycling.
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_edit_profile);
-
+		isDrawn = false;
 		initViewObjects();
-
+		System.out.println("inside onCreate");
 		editProfileTitle = (TextView) profileView
 				.getView("textView_Title_Edit_Profile");
 		usernameTextObject = (TextView) profileView
@@ -66,13 +76,15 @@ public class EditProfileActivity extends Activity {
 				.getView("spinner_editprofile_gender");
 		workspaceEditTextObject = (EditText) profileView
 				.getView("editText_editprofile_workspace");
-
+		imageView = (ImageView) profileView
+				.getView("imageView_editprofile_avatar");
 		setFields();
-
 		validator = new EmailValidatorHelper();
 
 		setTitleStyle();
 		applyTheme();
+
+		System.out.println("reached the end of OnCreate");
 	}
 
 	/**
@@ -92,6 +104,10 @@ public class EditProfileActivity extends Activity {
 				.getUserAccountInstance().getName());
 		profileView.setValue(workspaceEditTextObject, AccountProperties
 				.getUserAccountInstance().getWorkPlace());
+
+		checkAndSetImageView();
+
+		System.out.println("reached post");
 
 		String gender = AccountProperties.getUserAccountInstance().getGender();
 		if (gender.equals("Male"))
@@ -124,7 +140,7 @@ public class EditProfileActivity extends Activity {
 	}
 
 	private void applyTheme() {
-		initViewObjects();
+		// initViewObjects();
 
 		View mainLayout = profileView.getView("main_editProfile");
 		View headerLayout = profileView.getView("header_editProfile");
@@ -167,9 +183,6 @@ public class EditProfileActivity extends Activity {
 		String workPlace = profileView.getValue(workspaceEditTextObject);
 
 		String gender = genderSpinnerObject.getSelectedItem().toString();
-		MessageToasterHelper.toastMessage(gender);
-		if (gender.equals("--"))
-			gender = "";
 
 		AccountProperties newAccountPropertiesObject = new AccountProperties(
 				username, password);
@@ -178,6 +191,10 @@ public class EditProfileActivity extends Activity {
 		newAccountPropertiesObject.setemail(email);
 		newAccountPropertiesObject.setWorkPlace(workPlace);
 		newAccountPropertiesObject.setGender(gender);
+
+		if (avatarBitmap != null)
+			newAccountPropertiesObject.setAvatar(BitMapHelper
+					.BitMapToString(avatarBitmap));
 
 		if (!validator.isValid(email)) {
 			Toast.makeText(this, R.string.invalid_email, Toast.LENGTH_SHORT)
@@ -197,13 +214,19 @@ public class EditProfileActivity extends Activity {
 			AccountProperties userAccountProperties = AccountProperties
 					.getUserAccountInstance();
 
+			// getting here means successful query.
 			userAccountProperties.setName(name);
 			userAccountProperties.setemail(email);
 			userAccountProperties.setWorkPlace(workPlace);
 			userAccountProperties.setGender(gender);
 
-			Intent intent = new Intent(this, TabHostActivity.class);
-			this.startActivity(intent);
+			if (avatarBitmap != null)
+				userAccountProperties.setAvatar(BitMapHelper
+						.BitMapToString(avatarBitmap));
+
+			Intent intent = new Intent(EditProfileActivity.this,
+					TabHostActivity.class);
+			EditProfileActivity.this.startActivity(intent);
 
 		} catch (RequestAbortedException e) {
 			return;
@@ -246,4 +269,58 @@ public class EditProfileActivity extends Activity {
 		return super.onOptionsItemSelected(item);
 	}
 
+	/**
+	 * This handles a new image.
+	 * 
+	 * @param view
+	 */
+	public void onImageClick(View view) {
+		Intent in = new Intent();
+		in.setType("image/*");
+		in.setAction(in.ACTION_GET_CONTENT);
+		startActivityForResult(Intent.createChooser(in, "Select Picture"), 1);
+
+	}
+
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (resultCode == RESULT_OK) {
+			if (requestCode == 1) {
+				Uri selectedImageUri = data.getData();
+				imageView.setImageURI(selectedImageUri);
+				imageView.buildDrawingCache();
+				avatarBitmap = imageView.getDrawingCache();
+				drawnBitmap = avatarBitmap;
+			}
+		}
+	}
+
+	/**
+	 * This method checks for bitmap recycling and sets the imageView to the
+	 * correct image.
+	 * 
+	 * @param imageView
+	 * @param avatar
+	 * @author tejasvamsingh
+	 */
+	private void checkAndSetImageView() {
+
+		String avatarString = AccountProperties.getUserAccountInstance()
+				.getAvatar();
+		Bitmap avatarBitmap = BitMapHelper.StringToBitMap(avatarString);
+		if (avatarBitmap != null)
+			imageView.setImageBitmap(avatarBitmap);
+
+	}
+
+	protected void onResume() {
+		super.onResume();
+	}
+
+	protected void onDestroy() {
+		imageView.buildDrawingCache();
+		avatarBitmap = imageView.getDrawingCache();
+		avatarBitmap.recycle();
+		super.onDestroy();
+	}
 }
