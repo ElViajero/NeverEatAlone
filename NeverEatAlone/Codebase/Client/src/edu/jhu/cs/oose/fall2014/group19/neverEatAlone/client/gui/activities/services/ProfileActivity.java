@@ -1,11 +1,10 @@
 package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.services;
 
-import java.util.Map;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Pair;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -246,29 +245,25 @@ public class ProfileActivity extends Activity {
 		profileTitleObject = (TextView) profileView.getView("profile");
 		setTitleStyle();
 
-		Map<String, Object> userAccountMap = AccountProperties
-				.getUserAccountInstance().toMap();
-
-		userAccountMap.remove("password");
-		userAccountMap.remove("currentPostID");
-
 		LinearLayout rv = (LinearLayout) profileView.getView(// "layout_profile_container");
 				"profile_dynamic_layout");
 
 		rv.removeAllViews();
 
-		for (String key : userAccountMap.keySet()) {
+		for (Pair<?, ?> pairObject : AccountProperties.getUserAccountInstance()
+				.getOrderedIterationList()) {
 
-			String capitalizedKey = key.toUpperCase();
+			String key = pairObject.first.toString();
+			String value = pairObject.second.toString();
 
-			if (userAccountMap.get(key).equals(""))
+			if (value.equals(""))
 				continue;
 
 			LinearLayout linearLayout = (LinearLayout) profileView
 					.GetDynamicLayout();
 
 			TextView keyView = (TextView) profileView.GetDynamicView();
-			keyView.setText(capitalizedKey);
+			keyView.setText(key);
 
 			keyView.setLayoutParams(new TableRow.LayoutParams(0,
 					LayoutParams.WRAP_CONTENT, 0.3f));
@@ -276,7 +271,7 @@ public class ProfileActivity extends Activity {
 			linearLayout.addView(keyView);
 
 			TextView valueView = (TextView) profileView.GetDynamicView();
-			valueView.setText(userAccountMap.get(key).toString());
+			valueView.setText(value);
 			valueView.setLayoutParams(new TableRow.LayoutParams(0,
 					LayoutParams.WRAP_CONTENT, 0.7f));
 

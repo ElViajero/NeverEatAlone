@@ -1,12 +1,17 @@
 package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+
+import android.util.Pair;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.contracts.IActivityProperties;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.contracts.IOrderedIterator;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.helpers.GsonHelper;
 
 /**
@@ -15,7 +20,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.h
  * @author tejasvamsingh
  *
  */
-public class AccountProperties implements IActivityProperties {
+public class AccountProperties implements IActivityProperties, IOrderedIterator {
 
 	private String username;
 	private String password;
@@ -156,4 +161,26 @@ public class AccountProperties implements IActivityProperties {
 		return accountPropertiesInstance;
 	}
 
+	/**
+	 * Gives ordered iteration over elements in class.
+	 * 
+	 */
+	@Override
+	public List<Pair> getOrderedIterationList() {
+
+		List<Pair> orderedIterationList = new ArrayList<Pair>();
+
+		Pair<String, Object> pairObject = new Pair<String, Object>("Username", username);
+		orderedIterationList.add(pairObject);
+		pairObject = new Pair<String, Object>("Email", email);
+		orderedIterationList.add(pairObject);
+		pairObject = new Pair<String, Object>("Name", name);
+		orderedIterationList.add(pairObject);
+		pairObject = new Pair<String, Object>("Gender", gender);
+		orderedIterationList.add(pairObject);
+		pairObject = new Pair<String, Object>("Workplace", workPlace);
+		orderedIterationList.add(pairObject);
+
+		return orderedIterationList;
+	}
 }
