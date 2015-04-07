@@ -10,6 +10,7 @@ import javax.inject.Inject;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.contracts.IDBQueryExecutionManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbRequestHandler.contracts.IAccountDBRequestHandler;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbRequestHandler.helpers.DBRequestHandlerHelper;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.securityManager.contracts.ISecurityManager;
 
 /**
  * This class handles account management related database transactions.
@@ -24,6 +25,9 @@ public class AccountDBRequestHandler implements IAccountDBRequestHandler {
 
 	@Inject
 	IDBQueryExecutionManager iDBQueryExecutionManagerInstance;
+
+	@Inject
+	ISecurityManager iSecurtyManagerInstance;
 
 	/**
 	 * This method is responsible for creating an user account in the database.
@@ -41,6 +45,10 @@ public class AccountDBRequestHandler implements IAccountDBRequestHandler {
 		// format the parameters for the query.
 		Map<String, String> parameterMap = DBRequestHandlerHelper
 				.GetQueryParameterMap(request);
+
+		// encrypt password.
+		parameterMap.put("password", iSecurtyManagerInstance
+				.getEncryptedString(parameterMap.get("password")));
 
 		// create a params map.
 		Map<String, Object> queryParameterMap = new HashMap<String, Object>();

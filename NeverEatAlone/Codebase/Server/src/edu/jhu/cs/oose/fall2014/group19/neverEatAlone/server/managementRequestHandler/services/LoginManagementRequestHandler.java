@@ -22,7 +22,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.reflectionManager.c
 
 public class LoginManagementRequestHandler implements IManagementRequestHandler {
 
-	@Inject ILoginDBRequestHandler iLoginManagerObject;
+	@Inject ILoginDBRequestHandler iLoginDBRequestHandlerObject;
 	@Inject IReflectionManager iReflectionManagerObject;
 	/**
 	 * This method checks user credentials for a login request.
@@ -37,7 +37,7 @@ public class LoginManagementRequestHandler implements IManagementRequestHandler 
 		System.out.println("Reached CheckCredentialsLoginRequest.");
 		// ********* LOGGING *********
 
-		return iLoginManagerObject.checkCredentials(request);
+		return iLoginDBRequestHandlerObject.checkCredentials(request);
 	}
 
 	@Override
