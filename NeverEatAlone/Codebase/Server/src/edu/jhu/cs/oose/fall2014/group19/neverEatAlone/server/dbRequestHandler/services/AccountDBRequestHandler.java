@@ -47,8 +47,7 @@ public class AccountDBRequestHandler implements IAccountDBRequestHandler {
 				.GetQueryParameterMap(request);
 
 		// encrypt password.
-		parameterMap.put("password", iSecurtyManagerInstance
-				.getEncryptedString(parameterMap.get("password")));
+		encryptPassword(parameterMap);
 
 		// create a params map.
 		Map<String, Object> queryParameterMap = new HashMap<String, Object>();
@@ -80,6 +79,8 @@ public class AccountDBRequestHandler implements IAccountDBRequestHandler {
 		Map<String, String> parameterMap = DBRequestHandlerHelper
 				.GetQueryParameterMap(request);
 
+		encryptPassword(parameterMap);
+
 		// create a params map.
 		Map<String, Object> queryParameterMap = new HashMap<String, Object>();
 		queryParameterMap.put("username", parameterMap.get("username"));
@@ -108,6 +109,9 @@ public class AccountDBRequestHandler implements IAccountDBRequestHandler {
 		// format the parameters for the query.
 		Map<String, String> parameterMap = DBRequestHandlerHelper
 				.GetQueryParameterMap(request);
+
+		// encrypt password
+		encryptPassword(parameterMap);
 
 		// ************************ LOGGING ************************
 		System.out.println("username :" + parameterMap.get("username"));
@@ -143,6 +147,8 @@ public class AccountDBRequestHandler implements IAccountDBRequestHandler {
 		// format the parameters for the query.
 		Map<String, String> parameterMap = DBRequestHandlerHelper
 				.GetQueryParameterMap(request);
+
+		encryptPassword(parameterMap);
 
 		// create a params map.
 		Map<String, Object> queryParameterMap = new HashMap<String, Object>();
@@ -185,6 +191,9 @@ public class AccountDBRequestHandler implements IAccountDBRequestHandler {
 		Map<String, String> parameterMap = DBRequestHandlerHelper
 				.GetQueryParameterMap(request);
 
+		// encrypt password
+		encryptPassword(parameterMap);
+
 		// create a params map.
 		Map<String, Object> queryParameterMap = new HashMap<String, Object>();
 		queryParameterMap.put("username", parameterMap.get("username"));
@@ -195,6 +204,11 @@ public class AccountDBRequestHandler implements IAccountDBRequestHandler {
 		return iDBQueryExecutionManagerInstance.executeQuery(query,
 				queryParameterMap);
 
+	}
+
+	private void encryptPassword(Map<String, String> parameterMap) {
+		parameterMap.put("password", iSecurtyManagerInstance
+				.getEncryptedString(parameterMap.get("password")));
 	}
 
 }

@@ -246,12 +246,13 @@ public class ProfileActivity extends Activity {
 	/**
 	 * Methods for change password button click
 	 * 
+	 * 
 	 * @author: Hai Tang
 	 */
 	public void onChangepasswordButtonClick(View view) {
-		Intent intent = new Intent(ProfileActivity.this,
-				ChangePasswordActivity.class);
-		ProfileActivity.this.startActivity(intent);
+
+		Intent intent = new Intent(this, ChangePasswordActivity.class);
+		this.startActivity(intent);
 	}
 
 	/**

@@ -1,6 +1,5 @@
 package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.services;
 
-
 import java.io.FileNotFoundException;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -17,20 +16,20 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.AccountProperties;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.NotificationAndPostCacheHelper;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.MessageToasterHelper;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.NotificationAndPostCacheHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.LoginView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.notificationHandler.services.NotificationHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
 
 /**
- * This is the main activity that is displayed when the application starts. 
+ * This is the main activity that is displayed when the application starts.
+ * 
  * @author tejasvamsingh
  * @author Yueling Loh
  * @author Hai Tang
@@ -42,10 +41,10 @@ public class MainActivity extends Activity {
 	private EditText passwordEditTextObject = null;
 	private Button loginButtonObject = null;
 	private Button signupButtonObject = null;
-//	private ImageView logoBigObject = null;
+	// private ImageView logoBigObject = null;
 	private String requestID;
 	private String requestType;
-	private boolean isCreated=false;
+	private boolean isCreated = false;
 	private TextView mainTitle;
 	LinearLayout l;
 	private Context context;
@@ -56,7 +55,6 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
 
 		initLoginView();
 
@@ -71,8 +69,8 @@ public class MainActivity extends Activity {
 
 		loginButtonObject = (Button) loginView.getView("button_login");
 		signupButtonObject = (Button) loginView.getView("button_signup");
-//		logoBigObject = (ImageView) loginView.getView("logo_big");
-		
+		// logoBigObject = (ImageView) loginView.getView("logo_big");
+
 		mainTitle = (TextView) loginView.getView("logo_name");
 
 		applyTheme();
@@ -82,12 +80,11 @@ public class MainActivity extends Activity {
 		System.out.println("inside onCreate in MainAcitivty");
 		MessageToasterHelper.toastMessage(this, "inside oncreate");
 
-
-
 	}
 
 	/**
 	 * Method used to initialize LoginView
+	 * 
 	 * @author: Hai Tang
 	 */
 	private void initLoginView() {
@@ -95,7 +92,6 @@ public class MainActivity extends Activity {
 		activity = this;
 		loginView = new LoginView(context, activity);
 	}
-
 
 	/**
 	 * This method applies the GUI's color theme.
@@ -106,59 +102,62 @@ public class MainActivity extends Activity {
 	private void applyTheme() {
 		initLoginView();
 		View mainLayout = loginView.getView("layout_main");
-		
+
 		ThemeManager.applyBackground(mainLayout);
 
 		ThemeManager.applyButtonColor(loginButtonObject);
 		ThemeManager.applyButtonColor(signupButtonObject);
-		
+
 		ThemeManager.setTitleFont(mainTitle);
 	}
 
-
 	/**
 	 * Event handler for client login requests.
+	 * 
 	 * @author tejasvamsingh
 	 * @author Hai Tang
 	 * @param view
-	 * @throws FileNotFoundException 
-	 * @throws URISyntaxException 
+	 * @throws FileNotFoundException
+	 * @throws URISyntaxException
 	 */
-	public void onLoginButtonClick(View view) throws FileNotFoundException, URISyntaxException {
+	public void onLoginButtonClick(View view) throws FileNotFoundException,
+			URISyntaxException {
 		// ThemeManager.setTheme(R.style.DarkTheme);
 
 		String username = loginView.getValue(usernameEditTextObject);
 		String password = loginView.getValue(passwordEditTextObject);
 
 		// create the request properties object.
-		AccountProperties loginProperties  = new AccountProperties(username, password);
-		try{
-			//send the request.
-			List<Map<String, String>> resultMapList = 
-					RequestHandlerHelper.getRequestHandlerInstance().
-					handleRequest(this,loginProperties.toMap(),requestID,requestType) ;		
-			isCreated=true;
-			MessageToasterHelper.toastMessage(this, "Welcome "+username);
+		AccountProperties loginProperties = new AccountProperties(username,
+				password);
+		try {
+			// send the request.
+			List<Map<String, String>> resultMapList = RequestHandlerHelper
+					.getRequestHandlerInstance().handleRequest(this,
+							loginProperties.toMap(), requestID, requestType);
+			isCreated = true;
+			MessageToasterHelper.toastMessage(this, "Welcome " + username);
 
-			//construct the user account.
-			AccountProperties userAccount = new AccountProperties(resultMapList.get(0));
+			// construct the user account.
+			AccountProperties userAccount = new AccountProperties(
+					resultMapList.get(0));
 
-			//start the new activity
+			// we want the user string not the encrypted version.
+			AccountProperties.getUserAccountInstance().setpassword(password);
+
+			// start the new activity
 			Intent intent = new Intent(MainActivity.this, TabHostActivity.class);
 			intent.putExtra("username", username);
 			MainActivity.this.startActivity(intent);
 
-		}catch(RequestAbortedException e){
+		} catch (RequestAbortedException e) {
 			// This is necessary. The exception has
-			//already been handled in the RequestHandler
-			//class.
-			return;}
-
-
+			// already been handled in the RequestHandler
+			// class.
+			return;
+		}
 
 	}
-
-
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -184,10 +183,10 @@ public class MainActivity extends Activity {
 		}
 	}
 
-	/** 
-	 * Called when the user clicks the Sign Up button 
+	/**
+	 * Called when the user clicks the Sign Up button
 	 * */
-	public void onSignUpButtonClick(View view) {		
+	public void onSignUpButtonClick(View view) {
 
 		Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
 		MainActivity.this.startActivity(intent);
@@ -195,24 +194,25 @@ public class MainActivity extends Activity {
 
 	/**
 	 * This method is called when the activity resumes.
+	 * 
 	 * @author tejasvamsingh
 	 */
 	@Override
-	protected void onResume(){
+	protected void onResume() {
 		super.onResume();
 		System.out.println("in onResume");
 		cleanUp();
 	}
 
-
 	/**
-	 * This method is used to free resources and gracefully shutdown 
-	 * request/response and notification frameworks when the login page
-	 * is reached.
+	 * This method is used to free resources and gracefully shutdown
+	 * request/response and notification frameworks when the login page is
+	 * reached.
+	 * 
 	 * @author tejasvamsingh
 	 */
 	private void cleanUp() {
-		if(!isCreated){			
+		if (!isCreated) {
 			return;
 		}
 		RequestHandlerHelper.cleanUp();
