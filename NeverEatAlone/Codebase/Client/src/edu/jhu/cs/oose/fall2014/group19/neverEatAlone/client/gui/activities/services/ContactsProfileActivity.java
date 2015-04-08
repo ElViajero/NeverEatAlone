@@ -207,17 +207,10 @@ public class ContactsProfileActivity extends Activity {
 
 		Bitmap bitmap = BitMapHelper.StringToBitMap(contact
 				.getContactAvatarString());
-		int size = Math.min(bitmap.getWidth(), bitmap.getHeight());
-		int x = (bitmap.getWidth() - size) / 2;
-		int y = (bitmap.getHeight() - size) / 2;
 
-		Bitmap result = Bitmap.createBitmap(bitmap, x, y, size, size);
-
-		if (result != bitmap) {
-			bitmap.recycle();
-		}
-
-		imageViewObject.setImageBitmap(result);
+		MessageToasterHelper.toastMessage("width : " + bitmap.getWidth());
+		MessageToasterHelper.toastMessage("height : " + bitmap.getHeight());
+		imageViewObject.setImageBitmap(bitmap);
 
 	}
 

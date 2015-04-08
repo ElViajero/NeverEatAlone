@@ -64,11 +64,11 @@
 	
             <ImageView
                 android:id="@+id/imageView_contacts_profile_avatar"
-                android:scaleX="2"
-                android:scaleY="2"
                 android:layout_marginTop="100dp"
                 android:layout_width="75dp"
                 android:layout_height="75dp"
+                android:scaleX="2"
+                android:scaleY="2"
                 android:layout_alignLeft="@+id/contacts_profile_username"                
                 android:layout_centerHorizontal="true"
                 android:contentDescription="@string/user_avatar"

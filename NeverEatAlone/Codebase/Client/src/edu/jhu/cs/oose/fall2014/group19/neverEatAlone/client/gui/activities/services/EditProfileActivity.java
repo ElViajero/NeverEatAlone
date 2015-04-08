@@ -183,6 +183,8 @@ public class EditProfileActivity extends Activity {
 		String workPlace = profileView.getValue(workspaceEditTextObject);
 
 		String gender = genderSpinnerObject.getSelectedItem().toString();
+		if (gender.equals("--"))
+			gender = "";
 
 		AccountProperties newAccountPropertiesObject = new AccountProperties(
 				username, password);

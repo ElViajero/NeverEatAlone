@@ -56,8 +56,23 @@ public class AccountDBRequestHandler implements IAccountDBRequestHandler {
 		// create cypher query to create node in the database.
 		String query = "CREATE(n:User{creationParameters}) RETURN n";
 
-		return iDBQueryExecutionManagerInstance.executeQuery(query,
-				queryParameterMap);
+		List<Map<String, String>> resultMapList = iDBQueryExecutionManagerInstance
+				.executeQuery(query, queryParameterMap);
+
+		// add the reason for failure.
+		if (resultMapList.get(0).get("Status").equals("Failed")) {
+			String reason = resultMapList.get(0).get("Reason");
+			if (reason.contains("email"))
+				reason = "Email is tied to an existing account.";
+			else if (reason.contains("username"))
+				reason = "Username is tied to an existing account.";
+			else
+				reason = "Failed";
+			resultMapList.get(0).put("Reason", reason);
+
+		}
+
+		return resultMapList;
 
 	}
 

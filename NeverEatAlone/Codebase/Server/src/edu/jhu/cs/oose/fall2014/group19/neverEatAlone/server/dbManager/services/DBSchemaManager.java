@@ -7,6 +7,7 @@ import org.neo4j.graphdb.GraphDatabaseService;
 import org.neo4j.graphdb.Transaction;
 
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.contracts.IDBSchemaManager;
+
 /**
  * 
  * @author tejasvamsingh
@@ -16,28 +17,25 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbManager.contracts
 public class DBSchemaManager implements IDBSchemaManager {
 
 	@Override
-	public void setDBSchema(GraphDatabaseService graphDatabaseInstance) {		
+	public void setDBSchema(GraphDatabaseService graphDatabaseInstance) {
 
 		System.out.println("Inside setDBSchema in DBManagerSchemaManager");
 
-		try(Transaction tx = graphDatabaseInstance.beginTx()){
+		try (Transaction tx = graphDatabaseInstance.beginTx()) {
 
-			//schema constraints go here
+			// schema constraints go here
 
-			graphDatabaseInstance.schema().
-			constraintFor(DynamicLabel.label("User")).
-			assertPropertyIsUnique("username").create();			
-			graphDatabaseInstance.schema().
-			constraintFor(DynamicLabel.label("User")).
-			assertPropertyIsUnique("email").create();		
-
+			graphDatabaseInstance.schema()
+					.constraintFor(DynamicLabel.label("User"))
+					.assertPropertyIsUnique("username").create();
+			graphDatabaseInstance.schema()
+					.constraintFor(DynamicLabel.label("User"))
+					.assertPropertyIsUnique("email").create();
 			tx.success();
-		}catch(Exception e){
+		} catch (Exception e) {
 			System.out.println("Schema Constraints already defined.");
 			return;
 		}
 	}
 
 }
-
-

@@ -125,7 +125,7 @@ public class ContactDBRequestHandler implements IContactDBRequestHandler {
 				+ "(n)-[:KNOWS]->(a) AND " + "a.username = {username}"
 				+ "RETURN n.username AS username,"
 				+ " n.avatar AS avatar, n.workPlace AS workPlace, "
-				+ "n.gender AS gender ";
+				+ "n.gender AS gender, n.name AS name ";
 
 		return iDBQueryExecutionManagerInstance.executeQuery(query,
 				queryParameterMap);

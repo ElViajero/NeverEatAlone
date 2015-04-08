@@ -57,7 +57,11 @@ public class RequestHandler implements IRequestHandler {
 			resultMapList = requestExecutor.execute(requestList).get();
 
 			if (resultMapList.get(0).get("Status").equals("Failed")) {
-				MessageToasterHelper.toastMessage(activity, "Failed");
+				String reason = "Failed";
+				if (resultMapList.get(0).containsKey("Reason"))
+					reason = resultMapList.get(0).get("Reason");
+
+				MessageToasterHelper.toastMessage(activity, reason);
 				throw new RequestAbortedException("Exception already handled.");
 			}
 
