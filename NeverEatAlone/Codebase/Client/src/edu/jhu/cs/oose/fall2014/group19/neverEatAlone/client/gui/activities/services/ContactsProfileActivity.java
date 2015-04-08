@@ -1,15 +1,27 @@
 package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.services;
 
+import java.util.List;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup.LayoutParams;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.AccountProperties;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.ContactProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.R;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.BitMapHelper;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.DataCacheHelper;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.MessageToasterHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.ProfileView;
 
@@ -115,7 +127,7 @@ public class ContactsProfileActivity extends Activity {
 	/**
 	 * Method for getting profile info from the server and posting it to screen
 	 * 
-	 * @author Hai Tang
+	 * @author tejasvamsingh
 	 */
 	private void getTargetProfileInfo() {
 		// TODO Need to be filled with real target contact's data
@@ -123,30 +135,89 @@ public class ContactsProfileActivity extends Activity {
 		email = AccountProperties.getUserAccountInstance().getemail();
 
 		initProfileView();
+		ContactProperties contact = (ContactProperties) DataCacheHelper
+				.getIActivityPropertiesObject();
 
-		contactsProfileTitleObject = (TextView) profileView
-				.getView("contacts_profile");
-		setTitleStyle();
-		usernameTextViewObject = (TextView) profileView
-				.getView("textView_contactsprofile_username");
-		aliasTextViewObject = (TextView) profileView
-				.getView("textView_contactsprofile_alias");
-		nameTextViewObject = (TextView) profileView
-				.getView("textView_contactsprofile_Name");
-		workspaceTextViewObject = (TextView) profileView
-				.getView("textView_contactsprofile_workspace");
-		emailTextViewObject = (TextView) profileView
-				.getView("textView_contactsprofile_email");
-		genderTextViewObject = (TextView) profileView
-				.getView("textView_contactsprofile_Gender");
+		// set the avatar
+		setAvatar(contact);
 
-		profileView.setValue(usernameTextViewObject, "Friend's Name");
-		profileView.setValue(emailTextViewObject, " ");
-		// TODO: Need to be filled with real Strings
-		profileView.setValue(aliasTextViewObject, " ");
-		profileView.setValue(nameTextViewObject, " ");
-		profileView.setValue(workspaceTextViewObject, " ");
-		profileView.setValue(genderTextViewObject, " ");
+		LinearLayout parentLinearLayout = (LinearLayout) findViewById(R.id.contactProfile_dynamicLinearLayout);
+
+		List<Pair> orderedIterationList = contact.getOrderedIterationList();
+
+		MessageToasterHelper.toastMessage(orderedIterationList.size() + "");
+
+		for (Pair<?, ?> pair : orderedIterationList) {
+			String key = "";
+			String value = "";
+			try {
+				key = pair.first.toString();
+				value = pair.second.toString();
+			} catch (NullPointerException e) {
+				continue;
+			}
+
+			if (value.equals(""))
+				continue;
+
+			LinearLayout keyValueLayout = (LinearLayout) profileView
+					.GetDynamicLayout();
+			TextView keyTextView = (TextView) profileView.GetDynamicView();
+			TextView valueTextView = (TextView) profileView.GetDynamicView();
+
+			keyTextView.setText(key);
+			valueTextView.setText(value);
+			setTextViewLayout(keyTextView, valueTextView);
+
+			keyValueLayout.addView(keyTextView);
+			keyValueLayout.addView(valueTextView);
+
+			parentLinearLayout.addView(keyValueLayout);
+
+		}
+
+	}
+
+	/**
+	 * This helper method sets the spacing between text views.
+	 * 
+	 * @param keyTextView
+	 * @param valueTextView
+	 */
+	private void setTextViewLayout(TextView keyTextView, TextView valueTextView) {
+		keyTextView.setLayoutParams(new TableRow.LayoutParams(0,
+				LayoutParams.WRAP_CONTENT, 0.5f));
+		valueTextView.setLayoutParams(new TableRow.LayoutParams(0,
+				LayoutParams.WRAP_CONTENT, 0.5f));
+
+		keyTextView.setGravity(android.view.Gravity.CENTER_HORIZONTAL);
+		valueTextView.setGravity(android.view.Gravity.CENTER_HORIZONTAL);
+	}
+
+	/**
+	 * This method sets the avatar of the contact.
+	 * 
+	 * @author tejasvamsingh
+	 * @param contact
+	 */
+	private void setAvatar(ContactProperties contact) {
+
+		ImageView imageViewObject = (ImageView) profileView
+				.getView("imageView_contacts_profile_avatar");
+
+		Bitmap bitmap = BitMapHelper.StringToBitMap(contact
+				.getContactAvatarString());
+		int size = Math.min(bitmap.getWidth(), bitmap.getHeight());
+		int x = (bitmap.getWidth() - size) / 2;
+		int y = (bitmap.getHeight() - size) / 2;
+
+		Bitmap result = Bitmap.createBitmap(bitmap, x, y, size, size);
+
+		if (result != bitmap) {
+			bitmap.recycle();
+		}
+
+		imageViewObject.setImageBitmap(result);
 
 	}
 

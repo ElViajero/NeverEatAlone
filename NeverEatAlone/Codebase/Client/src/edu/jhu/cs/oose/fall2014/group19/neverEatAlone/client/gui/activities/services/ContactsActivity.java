@@ -21,6 +21,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.ContactProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.adapters.ContactsInformationAdapter;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.DataCacheHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.MessageToasterHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.NotificationAndPostCacheHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
@@ -213,16 +214,18 @@ public class ContactsActivity extends ListActivity {
 	 * contacts. It also passes the ContactsProperties to the
 	 * ContactsProfileActivity.
 	 * 
+	 * @author tejasvamsingh
 	 * @author Hai Tang
 	 * @param position
 	 */
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
+
+		DataCacheHelper.setIActivityPropertiesObject(contactList.get(position));
 		Intent intent = new Intent(ContactsActivity.this,
 				ContactsProfileActivity.class);
 		ContactsActivity.this.startActivity(intent);
 
-		// TODO Need to be populated with real contacts data
 	}
 
 }

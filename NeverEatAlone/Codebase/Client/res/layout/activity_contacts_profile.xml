@@ -60,173 +60,30 @@
         <RelativeLayout
             android:id="@+id/main_contacts_profile_container"
             style="@style/MainLayoutTheme"
-            android:layout_alignParentTop="true" >
-
+            android:layout_alignParentTop="true">
+	
             <ImageView
                 android:id="@+id/imageView_contacts_profile_avatar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/contacts_profile_username"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
+                android:scaleX="2"
+                android:scaleY="2"
+                android:layout_marginTop="100dp"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+                android:layout_alignLeft="@+id/contacts_profile_username"                
+                android:layout_centerHorizontal="true"
                 android:contentDescription="@string/user_avatar"
                 android:src="@drawable/user_profile" />
-
-            <LinearLayout
-                android:id="@+id/contacts_profile_username_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/imageView_contacts_profile_avatar"
-                android:layout_marginTop="20dp" >
-
-                <TextView
-                    android:id="@+id/contacts_profile_username"
-                    android:layout_width="0dip"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.3"
-                    android:text="@string/username"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                <TextView
-                    android:id="@+id/textView_contactsprofile_username"
-                    android:layout_width="0dip"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.7"
-                    android:gravity="center_horizontal"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/contacts_profile_alias_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/contacts_profile_username_container"
-                android:layout_marginTop="20dp" >
-
-                <TextView
-                    android:id="@+id/contacts_profile_alias"
-                    android:layout_width="0dip"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.3"
-                    android:text="@string/alias"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                <TextView
-                    android:id="@+id/textView_contactsprofile_alias"
-                    android:layout_width="0dip"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.7"
-                    android:gravity="center_horizontal"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/contacts_profile_name_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/contacts_profile_alias_container"
-                android:layout_marginTop="20dp" >
-
-                <TextView
-                    android:id="@+id/contacts_profile_name"
-                    android:layout_width="0dip"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.3"
-                    android:text="@string/name"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                <TextView
-                    android:id="@+id/textView_contactsprofile_Name"
-                    android:layout_width="0dip"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.7"
-                    android:gravity="center_horizontal"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/contacts_profile_email_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/contacts_profile_name_container"
-                android:layout_marginTop="20dp" >
-
-                <TextView
-                    android:id="@+id/contacts_profile_email"
-                    android:layout_width="0dip"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.3"
-                    android:text="@string/email"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                <TextView
-                    android:id="@+id/textView_contactsprofile_email"
-                    android:layout_width="0dip"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.7"
-                    android:gravity="center_horizontal"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/contacts_profile_gender_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/contacts_profile_email_container"
-                android:layout_marginTop="20dp" >
-
-                <TextView
-                    android:id="@+id/contacts_profile_gender"
-                    android:layout_width="0dip"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.3"
-                    android:text="@string/gender"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                <TextView
-                    android:id="@+id/textView_contactsprofile_Gender"
-                    android:layout_width="0dip"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.7"
-                    android:gravity="center_horizontal"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/contacts_profile_workspace_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/contacts_profile_gender_container"
-                android:layout_marginTop="20dp" >
-
-                <TextView
-                    android:id="@+id/contacts_profile_workspace"
-                    android:layout_width="0dip"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.3"
-                    android:text="@string/workspace"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                <TextView
-                    android:id="@+id/textView_contactsprofile_workspace"
-                    android:layout_width="0dip"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.7"
-                    android:gravity="center_horizontal"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
-            </LinearLayout>
+                       
+			<LinearLayout
+			    android:id="@+id/contactProfile_dynamicLinearLayout"
+			    android:layout_marginTop="100dp"
+			    android:layout_below="@+id/imageView_contacts_profile_avatar"
+			    android:orientation="vertical"
+			    android:gravity="center_horizontal"
+			    android:layout_width="match_parent"
+			    android:layout_height="match_parent"
+			    ></LinearLayout>
+           
         </RelativeLayout>
     </RelativeLayout>
 
