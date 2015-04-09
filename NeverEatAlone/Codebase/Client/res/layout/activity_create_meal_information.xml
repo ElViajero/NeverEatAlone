@@ -163,13 +163,22 @@
                     android:layout_weight="1"
                     android:text="@string/restaurant" />
 
-                <EditText
+                <!-- <EditText
                     android:id="@+id/edit_restaurant"
                     style="@style/RegularEditText"
                     android:layout_height="@dimen/edittext_height"
                     android:gravity="center"
                     android:layout_weight="2"
-                    android:inputType="text" />
+                    android:inputType="text" /> -->
+                  
+                  <AutoCompleteTextView
+					android:id="@+id/edit_restaurant_auto"
+                    style="@style/RegularEditText"
+                    android:layout_height="@dimen/edittext_height"
+                    android:gravity="center"
+                    android:layout_weight="2"
+                    android:inputType="text" />  
+                    
             </LinearLayout>
 
             <TextView

@@ -30,6 +30,7 @@ public class AccountProperties implements IActivityProperties, IOrderedIterator 
 	private String gender;
 	private String workPlace;
 	private String avatar;
+	private LocationProperties locationProperties;
 
 	// one object because at any time, ther is only
 	// one user who is logged in on one client.
@@ -55,6 +56,7 @@ public class AccountProperties implements IActivityProperties, IOrderedIterator 
 		this.gender = "";
 		this.workPlace = "";
 		this.currentPostID = username + "_0";
+		this.locationProperties = new LocationProperties();
 	}
 
 	public AccountProperties(Map<String, String> map) {
@@ -78,6 +80,10 @@ public class AccountProperties implements IActivityProperties, IOrderedIterator 
 		}.getType();
 		Map<String, Object> requestMap = gsonObject.fromJson(jsonString,
 				stringObjectMap);
+
+		requestMap.remove("locationProperties"); // we want to the location name
+													// not lat,long values.
+		requestMap.put("location", locationProperties.getLocationName());
 
 		System.out.println("map is : " + requestMap);
 
@@ -194,6 +200,14 @@ public class AccountProperties implements IActivityProperties, IOrderedIterator 
 
 	public void setAvatar(String avatar) {
 		this.avatar = avatar;
+	}
+
+	public LocationProperties getLocationProperties() {
+		return locationProperties;
+	}
+
+	public void setLocationProperties(LocationProperties locationProperties) {
+		this.locationProperties = locationProperties;
 	}
 
 }

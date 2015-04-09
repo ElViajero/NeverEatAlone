@@ -1,21 +1,30 @@
 package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.services;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
+
+import org.apache.http.impl.execchain.RequestAbortedException;
 
 import android.app.Activity;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.app.TimePickerDialog.OnTimeSetListener;
 import android.content.Context;
 import android.content.Intent;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -23,11 +32,17 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
+
+import com.google.android.gms.common.api.GoogleApiClient;
+
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.AccountProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.DateAndTimeProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.MealProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.R;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.MessageToasterHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.MealView;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.helpers.GsonHelper;
 
 /**
@@ -40,7 +55,8 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.h
  * 
  */
 
-public class CreateMealInformationActivity extends FragmentActivity {
+public class CreateMealInformationActivity extends FragmentActivity implements
+		LocationListener {
 
 	private Button btnSelectStartDateObject, btnSelectstartTimeObject,
 			btnSelectEndDateObject, btnSelectendTimeObject;
@@ -51,6 +67,14 @@ public class CreateMealInformationActivity extends FragmentActivity {
 	private Context context;
 	private Activity activity;
 	private MealView mealView;
+	private GoogleApiClient googleAPIClientObject;
+	private AutoCompleteTextView restaurantAutoCompleteTextView;
+	LocationManager locationManagerObject;
+	LocationListener locationListenerObject;
+	static boolean isListFetched = false;
+	String[] item = { "One", "Two", "Three" };
+	List<String> nearbyPlacesList;
+	ArrayAdapter<String> restaurantAutoCompleteArrayAdapter;
 	// private View mainLayout;
 	// private View headerLayout;
 	// private View buttonBar;
@@ -67,6 +91,7 @@ public class CreateMealInformationActivity extends FragmentActivity {
 	 */
 	public CreateMealInformationActivity() {
 		initiCalendar();
+
 	}
 
 	/**
@@ -99,6 +124,7 @@ public class CreateMealInformationActivity extends FragmentActivity {
 	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_create_meal_information);
 
@@ -114,7 +140,12 @@ public class CreateMealInformationActivity extends FragmentActivity {
 		btnSelectendTimeObject = (Button) mealView
 				.getView("CreateMealInformation_button_endTime");
 
-		placeEditViewObject = (EditText) mealView.getView("edit_restaurant");
+		// placeEditViewObject = (EditText) mealView.getView("edit_restaurant");
+		restaurantAutoCompleteTextView = (AutoCompleteTextView) mealView
+				.getView("edit_restaurant_auto");
+
+		nearbyPlacesList = new ArrayList<String>();
+
 		maxNumberEditViewObject = (EditText) mealView.getView("edit_maxnumber");
 		allowFriendInviteSwitchObject = (Switch) mealView
 				.getView("switch_allowfriendinvite");
@@ -123,6 +154,48 @@ public class CreateMealInformationActivity extends FragmentActivity {
 
 		setTitleStyle();
 		applyTheme();
+		locationManagerObject = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+		locationManagerObject.requestLocationUpdates(
+				LocationManager.NETWORK_PROVIDER, 5, 0, this);
+
+	}
+
+	private void fetchAutoCompleteFields() {
+		if (isListFetched)
+			return;
+
+		isListFetched = true;
+		try {
+
+			MessageToasterHelper.toastMessage(AccountProperties
+					.getUserAccountInstance().getLocationProperties().toMap()
+					+ "");
+
+			// send the request.
+			List<Map<String, String>> resultMapList = RequestHandlerHelper
+					.getRequestHandlerInstance().handleRequest(
+							this,
+							AccountProperties.getUserAccountInstance()
+									.getLocationProperties().toMap(),
+							"Location", "getNearbyPlaces");
+
+			nearbyPlacesList = new ArrayList<String>();
+
+			for (Map<String, String> map : resultMapList) {
+				nearbyPlacesList.add(map.get("name"));
+			}
+			restaurantAutoCompleteArrayAdapter = new ArrayAdapter<String>(this,
+					android.R.layout.simple_dropdown_item_1line,
+					nearbyPlacesList);
+			restaurantAutoCompleteTextView
+					.setAdapter(restaurantAutoCompleteArrayAdapter);
+
+			MessageToasterHelper.toastMessage(nearbyPlacesList + "resultMap");
+
+		} catch (RequestAbortedException e) {
+			return;
+		}
+
 	}
 
 	/**
@@ -173,7 +246,8 @@ public class CreateMealInformationActivity extends FragmentActivity {
 		ThemeManager.applyButtonColor(backButton);
 		ThemeManager.applyButtonColor(nextButton);
 
-		ThemeManager.applyEditTextColor(placeEditViewObject);
+		// ThemeManager.applyEditTextColor(placeEditViewObject);
+		ThemeManager.applyEditTextColor(restaurantAutoCompleteTextView);
 		ThemeManager.applyEditTextColor(maxNumberEditViewObject);
 
 	}
@@ -420,7 +494,8 @@ public class CreateMealInformationActivity extends FragmentActivity {
 
 		initMealView();
 
-		String location = mealView.getValue(placeEditViewObject);
+		// String location = mealView.getValue(placeEditViewObject);
+		String location = mealView.getValue(restaurantAutoCompleteTextView);
 		String maxNumberOfInvitees = mealView.getValue(maxNumberEditViewObject);
 		String isNotificationExtendible = allowFriendInviteSwitchObject
 				.isChecked() ? "YES" : "NO";
@@ -487,6 +562,42 @@ public class CreateMealInformationActivity extends FragmentActivity {
 		intent.putExtra("mealProperties",
 				GsonHelper.getGsoninstance().toJson(mealPropertiesMap));
 		CreateMealInformationActivity.this.startActivity(intent);
+
+	}
+
+	@Override
+	public void onLocationChanged(Location location) {
+		// TODO Auto-generated method stub
+
+		double latitude = location.getLatitude();
+		double longitude = location.getLongitude();
+
+		// MessageToasterHelper.toastMessage("latitude : " + latitude);
+		// MessageToasterHelper.toastMessage("longitude : " + longitude);
+
+		AccountProperties.getUserAccountInstance().getLocationProperties()
+				.setLatitude(latitude);
+		AccountProperties.getUserAccountInstance().getLocationProperties()
+				.setLongitude(longitude);
+		fetchAutoCompleteFields();
+
+	}
+
+	@Override
+	public void onStatusChanged(String provider, int status, Bundle extras) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void onProviderEnabled(String provider) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void onProviderDisabled(String provider) {
+		// TODO Auto-generated method stub
 
 	}
 }

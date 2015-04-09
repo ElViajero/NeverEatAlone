@@ -9,12 +9,10 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbRequestHandler.co
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.managementRequestHandler.contracts.IManagementRequestHandler;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.reflectionManager.contracts.IReflectionManager;
 
-
 /**
  * 
- * This class manages all login related requests.
- * The operations handled by this class include 
- * checking user credentials for a login request. 
+ * This class manages all login related requests. The operations handled by this
+ * class include checking user credentials for a login request.
  * 
  * @author tejasvamsingh
  *
@@ -22,8 +20,11 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.reflectionManager.c
 
 public class LoginManagementRequestHandler implements IManagementRequestHandler {
 
-	@Inject ILoginDBRequestHandler iLoginDBRequestHandlerObject;
-	@Inject IReflectionManager iReflectionManagerObject;
+	@Inject
+	ILoginDBRequestHandler iLoginDBRequestHandlerObject;
+	@Inject
+	IReflectionManager iReflectionManagerObject;
+
 	/**
 	 * This method checks user credentials for a login request.
 	 * 
@@ -31,9 +32,10 @@ public class LoginManagementRequestHandler implements IManagementRequestHandler 
 	 * @return
 	 */
 
-	private List<Map<String,String>> checkCredentials(Map<String,String[]> request){
+	private List<Map<String, String>> checkCredentials(
+			Map<String, String[]> request) {
 
-		// ********* LOGGING ********* 
+		// ********* LOGGING *********
 		System.out.println("Reached CheckCredentialsLoginRequest.");
 		// ********* LOGGING *********
 
