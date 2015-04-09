@@ -60,7 +60,7 @@ public class LocationManagementRequestHandler implements
 				+ ","
 				+ longitude
 				+ "&radius="
-				+ radius + "&types=" + type + "&key=";
+				+ radius + "&types=" + type + "&key=" + locationAPIKey;
 
 		Map<String, Object> responseMap = requestExecutorHelper
 				.executeRequest(requestURLString);
@@ -103,14 +103,64 @@ public class LocationManagementRequestHandler implements
 	@SuppressWarnings("unused")
 	private List<Map<String, String>> getLocation(Map<String, String[]> request) {
 
+		System.out
+				.println("Reached getLocation in LocationManagementRequestHandler");
+
 		String latitude = request.get("latitude")[0];
 		String longitude = request.get("longitude")[0];
 
 		String requestURLString = "https://maps.googleapis.com/"
 				+ "maps/api/geocode/json?" + "latlng=" + latitude + ","
-				+ longitude + "&key=";
+				+ longitude + "&key=" + locationAPIKey;
 
-		return null;
+		Map<String, Object> responseMap = requestExecutorHelper
+				.executeRequest(requestURLString);
+
+		List<Map<String, String>> locationMapList = new ArrayList<Map<String, String>>();
+
+		Map<String, String> statusMap = new HashMap<String, String>();
+		statusMap.put("Status", "Failed"); // initially we don't know if
+		// our request succeeds.
+
+		locationMapList.add(statusMap);
+
+		if (responseMap == null) // if null we weren't able to determine the
+									// location.
+			return locationMapList;
+
+		try {
+
+			// check if result succeeded.
+			if (responseMap.get("status").toString().equalsIgnoreCase("OK")) {
+
+				// first change the status of our request.
+				locationMapList.get(0).put("Status", "Success");
+
+				// next process the location
+				@SuppressWarnings("unchecked")
+				List<Map<String, Object>> resultMapList = (List<Map<String, Object>>) responseMap
+						.get("results");
+
+				// get the location
+				for (Map<String, Object> restaurantMap : resultMapList) {
+					String locationName = restaurantMap
+							.get("formatted_address").toString();
+					String[] parts = locationName.split(",");
+
+					if (parts.length == 3) {
+						Map<String, String> locationMap = new HashMap<String, String>();
+						System.out.println("LOCATION IS :::  " + locationName);
+						locationMap.put("locationName", locationName);
+						locationMapList.add(locationMap);
+					}
+				}
+			}
+
+		} catch (NullPointerException e) {
+			return locationMapList;
+		}
+
+		return locationMapList;
 	}
 
 	@Override

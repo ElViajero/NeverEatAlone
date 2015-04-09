@@ -37,6 +37,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.AccountProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.DateAndTimeProperties;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.LocationProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.MealProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.MessageToasterHelper;
@@ -572,14 +573,54 @@ public class CreateMealInformationActivity extends FragmentActivity implements
 		double latitude = location.getLatitude();
 		double longitude = location.getLongitude();
 
-		// MessageToasterHelper.toastMessage("latitude : " + latitude);
-		// MessageToasterHelper.toastMessage("longitude : " + longitude);
+		// check if the location has changed significantly.
 
-		AccountProperties.getUserAccountInstance().getLocationProperties()
-				.setLatitude(latitude);
-		AccountProperties.getUserAccountInstance().getLocationProperties()
-				.setLongitude(longitude);
-		fetchAutoCompleteFields();
+		LocationProperties newLocation = new LocationProperties(latitude,
+				longitude);
+
+		if (LocationProperties.hasLocationChanged(AccountProperties
+				.getUserAccountInstance().getLocationProperties(), newLocation)) {
+
+			AccountProperties.getUserAccountInstance().getLocationProperties()
+					.setLatitude(latitude);
+			AccountProperties.getUserAccountInstance().getLocationProperties()
+					.setLongitude(longitude);
+			getLocation();
+		}
+
+		// check if the location has changed significantly
+
+		// fetchAutoCompleteFields();
+
+	}
+
+	private void getLocation() {
+		try {
+
+			// send the request.
+			List<Map<String, String>> resultMapList = RequestHandlerHelper
+					.getRequestHandlerInstance().handleRequest(
+							this,
+							AccountProperties.getUserAccountInstance()
+									.getLocationProperties().toMap(),
+							"Location", "getLocation");
+
+			nearbyPlacesList = new ArrayList<String>();
+
+			for (Map<String, String> map : resultMapList) {
+				AccountProperties.getUserAccountInstance()
+						.getLocationProperties()
+						.setLocationName(map.get("locationName"));
+				break;
+			}
+
+			MessageToasterHelper.toastMessage("My location is : "
+					+ AccountProperties.getUserAccountInstance()
+							.getLocationProperties().getLocationName());
+
+		} catch (RequestAbortedException e) {
+			return;
+		}
 
 	}
 

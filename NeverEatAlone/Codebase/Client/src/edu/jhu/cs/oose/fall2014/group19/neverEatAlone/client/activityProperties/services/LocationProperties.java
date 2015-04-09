@@ -29,6 +29,12 @@ public class LocationProperties implements IActivityProperties {
 		locationName = "";
 	}
 
+	public LocationProperties(double latitude, double longitude) {
+		this.latitude = String.valueOf(latitude);
+		this.longitude = String.valueOf(longitude);
+		locationName = "";
+	}
+
 	@Override
 	public Map<String, Object> toMap() {
 
@@ -69,6 +75,33 @@ public class LocationProperties implements IActivityProperties {
 
 	public void setLocationName(String locationName) {
 		this.locationName = locationName;
+	}
+
+	/**
+	 * 
+	 * This method checks if the location change is significant.
+	 * 
+	 * @author tejasvamsingh
+	 * @param initialLocation
+	 * @param newLocation
+	 * @return
+	 */
+	public static boolean hasLocationChanged(
+			LocationProperties initialLocation, LocationProperties newLocation) {
+
+		double initialLatitude = initialLocation.getLatitude();
+		double newLatitude = newLocation.getLatitude();
+
+		if (Math.abs(initialLatitude - newLatitude) > .1)
+			return true;
+
+		double initalLongitude = initialLocation.getLongitude();
+		double newLongitude = newLocation.getLongitude();
+
+		if (Math.abs(initalLongitude - newLongitude) > .1)
+			return true;
+
+		return false;
 	}
 
 }
