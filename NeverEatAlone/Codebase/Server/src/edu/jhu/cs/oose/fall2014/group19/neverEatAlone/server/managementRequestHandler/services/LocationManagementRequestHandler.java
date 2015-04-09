@@ -21,6 +21,8 @@ public class LocationManagementRequestHandler implements
 
 	Map<String, Map<String, Object>> nearbyPlacesMap;
 
+	final String locationAPIKey = "";
+
 	/**
 	 * This method returns a list of places that are nearby to the provided
 	 * location.
@@ -33,6 +35,12 @@ public class LocationManagementRequestHandler implements
 	private List<Map<String, String>> getNearbyPlaces(
 			Map<String, String[]> request) {
 
+		String latitude = request.get("latitude")[0];
+		String longitude = request.get("longitude")[0];
+		String location = request.get("locationName")[0];
+
+		// if(location.equals(""))
+
 		System.out.println("inside the right deal");
 
 		List<Map<String, String>> placeNameMapList = new ArrayList<Map<String, String>>();
@@ -42,9 +50,7 @@ public class LocationManagementRequestHandler implements
 		// worst case
 		// return an
 		// empty list.
-		String latitude = request.get("latitude")[0];
-		String longitude = request.get("longitude")[0];
-		String location = request.get("locationName")[0];
+
 		String radius = "500";
 		String type = "restaurant";
 
@@ -54,10 +60,7 @@ public class LocationManagementRequestHandler implements
 				+ ","
 				+ longitude
 				+ "&radius="
-				+ radius
-				+ "&types="
-				+ type
-				+ "&key=AIzaSyDCVufbJIFNiZtLdbezooXr8jfAqKUzYVo";
+				+ radius + "&types=" + type + "&key=";
 
 		Map<String, Object> responseMap = requestExecutorHelper
 				.executeRequest(requestURLString);
@@ -99,6 +102,13 @@ public class LocationManagementRequestHandler implements
 
 	@SuppressWarnings("unused")
 	private List<Map<String, String>> getLocation(Map<String, String[]> request) {
+
+		String latitude = request.get("latitude")[0];
+		String longitude = request.get("longitude")[0];
+
+		String requestURLString = "https://maps.googleapis.com/"
+				+ "maps/api/geocode/json?" + "latlng=" + latitude + ","
+				+ longitude + "&key=";
 
 		return null;
 	}
