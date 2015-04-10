@@ -63,7 +63,13 @@ public class LocationFinder extends AsyncTask<Void, Void, Void> {
 						locationProperties.setLongitude(location.getLongitude());
 						if (LocationProperties.hasLocationChanged(
 								DataCacheHelper.getCachedLocation(),
-								locationProperties)) {
+								locationProperties) // multiple users same
+													// device
+								|| LocationProperties.hasLocationChanged(
+										DataCacheHelper.getCachedLocation(),
+										AccountProperties
+												.getUserAccountInstance()
+												.getLocationProperties())) {
 
 							MessageToasterHelper
 									.toastMessage("Inside onPost : Loca : "
@@ -84,6 +90,8 @@ public class LocationFinder extends AsyncTask<Void, Void, Void> {
 							DataCacheHelper
 									.setCachedLocation(locationProperties);
 						}
+
+						// multiple users same device log in/ log out clause
 
 					}
 				});
@@ -161,6 +169,7 @@ public class LocationFinder extends AsyncTask<Void, Void, Void> {
 
 	@Override
 	protected Void doInBackground(Void... params) {
+		timeToCheck = 0;
 		while (timeToCheck <= 10000 && !firstTime)
 			timeToCheck++;
 		if (firstTime)

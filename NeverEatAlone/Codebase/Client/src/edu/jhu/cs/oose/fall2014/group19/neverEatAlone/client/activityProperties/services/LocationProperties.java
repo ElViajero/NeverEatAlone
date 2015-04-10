@@ -104,4 +104,12 @@ public class LocationProperties implements IActivityProperties {
 		return false;
 	}
 
+	@Override
+	public boolean equals(Object o) {
+
+		LocationProperties other = (LocationProperties) o;
+		return (other.latitude == latitude && other.longitude == longitude);
+
+	}
+
 }
