@@ -66,8 +66,7 @@ public class DBQueryExecutionManager implements IDBQueryExecutionManager {
 			ExecutionResult result) {
 
 		// ************** LOGGING ************************
-		System.out
-				.println("Inside DBRequestHnadlerHelper: getting result maplist");
+		System.out.println("Inside GetResultMapList: getting result maplist");
 		// ************** LOGGING ************************
 
 		// initialize the map to return.

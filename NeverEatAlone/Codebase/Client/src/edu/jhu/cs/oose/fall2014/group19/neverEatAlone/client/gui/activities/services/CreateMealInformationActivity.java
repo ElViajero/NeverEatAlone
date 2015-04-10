@@ -40,6 +40,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.LocationProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.MealProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.R;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.DataCacheHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.MessageToasterHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.MealView;
@@ -73,9 +74,9 @@ public class CreateMealInformationActivity extends FragmentActivity implements
 	LocationManager locationManagerObject;
 	LocationListener locationListenerObject;
 	static boolean isListFetched = false;
-	String[] item = { "One", "Two", "Three" };
-	List<String> nearbyPlacesList;
+
 	ArrayAdapter<String> restaurantAutoCompleteArrayAdapter;
+
 	// private View mainLayout;
 	// private View headerLayout;
 	// private View buttonBar;
@@ -129,6 +130,8 @@ public class CreateMealInformationActivity extends FragmentActivity implements
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_create_meal_information);
 
+		MessageToasterHelper
+				.toastMessage("inside onCreate in CreateMealInformationActivity");
 		initMealView();
 
 		// get the references of buttons
@@ -145,7 +148,17 @@ public class CreateMealInformationActivity extends FragmentActivity implements
 		restaurantAutoCompleteTextView = (AutoCompleteTextView) mealView
 				.getView("edit_restaurant_auto");
 
-		nearbyPlacesList = new ArrayList<String>();
+		if (DataCacheHelper.getAdapter("restaurantAutoComplete") == null) {
+			restaurantAutoCompleteArrayAdapter = new ArrayAdapter<String>(this,
+					android.R.layout.simple_dropdown_item_1line,
+					new ArrayList<String>());
+
+			DataCacheHelper.registerAdapter(restaurantAutoCompleteArrayAdapter,
+					"restaurantAutoComplete");
+
+			restaurantAutoCompleteTextView
+					.setAdapter(restaurantAutoCompleteArrayAdapter);
+		}
 
 		maxNumberEditViewObject = (EditText) mealView.getView("edit_maxnumber");
 		allowFriendInviteSwitchObject = (Switch) mealView
@@ -161,16 +174,9 @@ public class CreateMealInformationActivity extends FragmentActivity implements
 
 	}
 
+	@SuppressWarnings("unchecked")
 	private void fetchAutoCompleteFields() {
-		if (isListFetched)
-			return;
-
-		isListFetched = true;
 		try {
-
-			MessageToasterHelper.toastMessage(AccountProperties
-					.getUserAccountInstance().getLocationProperties().toMap()
-					+ "");
 
 			// send the request.
 			List<Map<String, String>> resultMapList = RequestHandlerHelper
@@ -180,18 +186,16 @@ public class CreateMealInformationActivity extends FragmentActivity implements
 									.getLocationProperties().toMap(),
 							"Location", "getNearbyPlaces");
 
-			nearbyPlacesList = new ArrayList<String>();
+			restaurantAutoCompleteArrayAdapter = (ArrayAdapter<String>) DataCacheHelper
+					.getAdapter("restaurantAutoComplete");
 
 			for (Map<String, String> map : resultMapList) {
-				nearbyPlacesList.add(map.get("name"));
+				restaurantAutoCompleteArrayAdapter.add(map.get("name"));
 			}
-			restaurantAutoCompleteArrayAdapter = new ArrayAdapter<String>(this,
-					android.R.layout.simple_dropdown_item_1line,
-					nearbyPlacesList);
-			restaurantAutoCompleteTextView
-					.setAdapter(restaurantAutoCompleteArrayAdapter);
 
-			MessageToasterHelper.toastMessage(nearbyPlacesList + "resultMap");
+			restaurantAutoCompleteArrayAdapter.notifyDataSetChanged();
+			DataCacheHelper.registerAdapter(restaurantAutoCompleteArrayAdapter,
+					"restaurantAutoComplete");
 
 		} catch (RequestAbortedException e) {
 			return;
@@ -586,6 +590,7 @@ public class CreateMealInformationActivity extends FragmentActivity implements
 			AccountProperties.getUserAccountInstance().getLocationProperties()
 					.setLongitude(longitude);
 			getLocation();
+			fetchAutoCompleteFields();
 		}
 
 		// check if the location has changed significantly
@@ -597,15 +602,16 @@ public class CreateMealInformationActivity extends FragmentActivity implements
 	private void getLocation() {
 		try {
 
+			Map<String, Object> requestMap = AccountProperties
+					.getUserAccountInstance().toMap();
+
+			requestMap.putAll(AccountProperties.getUserAccountInstance()
+					.getLocationProperties().toMap());
+
 			// send the request.
 			List<Map<String, String>> resultMapList = RequestHandlerHelper
-					.getRequestHandlerInstance().handleRequest(
-							this,
-							AccountProperties.getUserAccountInstance()
-									.getLocationProperties().toMap(),
-							"Location", "getLocation");
-
-			nearbyPlacesList = new ArrayList<String>();
+					.getRequestHandlerInstance().handleRequest(this,
+							requestMap, "Location", "getLocation");
 
 			for (Map<String, String> map : resultMapList) {
 				AccountProperties.getUserAccountInstance()
@@ -639,6 +645,20 @@ public class CreateMealInformationActivity extends FragmentActivity implements
 	@Override
 	public void onProviderDisabled(String provider) {
 		// TODO Auto-generated method stub
+
+	}
+
+	@SuppressWarnings("unchecked")
+	protected void onResume() {
+		super.onResume();
+
+		restaurantAutoCompleteArrayAdapter = (ArrayAdapter<String>) DataCacheHelper
+				.getAdapter("restaurantAutoComplete");
+		restaurantAutoCompleteTextView
+				.setAdapter(restaurantAutoCompleteArrayAdapter);
+		locationManagerObject = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+		locationManagerObject.requestLocationUpdates(
+				LocationManager.NETWORK_PROVIDER, 5, 0, this);
 
 	}
 }

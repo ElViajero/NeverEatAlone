@@ -31,6 +31,10 @@ public class DBSchemaManager implements IDBSchemaManager {
 			graphDatabaseInstance.schema()
 					.constraintFor(DynamicLabel.label("User"))
 					.assertPropertyIsUnique("email").create();
+			graphDatabaseInstance.schema()
+					.constraintFor(DynamicLabel.label("Location"))
+					.assertPropertyIsUnique("locationName").create();
+
 			tx.success();
 		} catch (Exception e) {
 			System.out.println("Schema Constraints already defined.");

@@ -26,6 +26,7 @@ public class SecurityManager implements ISecurityManager {
 	public String getEncryptedString(String unencryptedString) {
 
 		System.out.println("inside getEncryptedString in SecurityManager");
+		System.out.println("the string is " + unencryptedString);
 		MessageDigest messageDigestObject;
 
 		try {

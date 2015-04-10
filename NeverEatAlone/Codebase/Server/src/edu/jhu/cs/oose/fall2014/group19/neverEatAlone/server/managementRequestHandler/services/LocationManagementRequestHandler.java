@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbRequestHandler.contracts.ILocationDBRequestHandler;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.managementRequestHandler.contracts.IManagementRequestHandler;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.managementRequestHandler.helpers.RequestExecutorHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.reflectionManager.contracts.IReflectionManager;
@@ -18,10 +19,12 @@ public class LocationManagementRequestHandler implements
 	IReflectionManager iReflectionManagerObject;
 	@Inject
 	RequestExecutorHelper requestExecutorHelper;
+	@Inject
+	ILocationDBRequestHandler iLocationDBRequestHandler;
 
 	Map<String, Map<String, Object>> nearbyPlacesMap;
 
-	final String locationAPIKey = "";
+	final String locationAPIKey = "AIzaSyDCVufbJIFNiZtLdbezooXr8jfAqKUzYVo";
 
 	/**
 	 * This method returns a list of places that are nearby to the provided
@@ -38,6 +41,8 @@ public class LocationManagementRequestHandler implements
 		String latitude = request.get("latitude")[0];
 		String longitude = request.get("longitude")[0];
 		String location = request.get("locationName")[0];
+		String radius = "1000";
+		String type = "restaurant";
 
 		// if(location.equals(""))
 
@@ -50,9 +55,6 @@ public class LocationManagementRequestHandler implements
 		// worst case
 		// return an
 		// empty list.
-
-		String radius = "500";
-		String type = "restaurant";
 
 		String requestURLString = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?"
 				+ "location="
@@ -106,6 +108,7 @@ public class LocationManagementRequestHandler implements
 		System.out
 				.println("Reached getLocation in LocationManagementRequestHandler");
 
+		String username = request.get("username")[0];
 		String latitude = request.get("latitude")[0];
 		String longitude = request.get("longitude")[0];
 
@@ -154,13 +157,53 @@ public class LocationManagementRequestHandler implements
 						locationMapList.add(locationMap);
 					}
 				}
+
 			}
+
+			persistLocation(locationMapList, username);
 
 		} catch (NullPointerException e) {
 			return locationMapList;
 		}
 
 		return locationMapList;
+	}
+
+	/**
+	 * This method persists the location of the user. It gets called implicitly
+	 * by getLocation.
+	 * 
+	 * @author tejasvamsingh
+	 * @param locationMapList
+	 */
+	private void persistLocation(List<Map<String, String>> locationMapList,
+			String username) {
+
+		System.out.println("locationMapList is : " + locationMapList);
+
+		Map<String, String[]> requestMap = new HashMap<String, String[]>();
+		requestMap.put("username", new String[1]);
+		requestMap.get("username")[0] = username;
+
+		int numLocations = locationMapList.size();// 1 is the status map
+		requestMap.put("locationName", new String[numLocations - 1]);
+
+		int index = 0;
+		for (Map<String, String> locationMap : locationMapList) {
+			if (!locationMap.containsKey("locationName"))
+				continue;
+			String location = locationMap.get("locationName");
+			System.out.println("location in persistLocation is : " + location);
+			requestMap.get("locationName")[index] = location;
+			index++;
+		}
+
+		List<Map<String, String>> result = iLocationDBRequestHandler
+				.updateUserLocation(requestMap);
+
+		if (result.get(0).get("Status").equals("Success"))
+			System.out.println("SUCCESSFUL LOCATION UPDATE");
+
 	}
 
 	@Override
@@ -171,6 +214,7 @@ public class LocationManagementRequestHandler implements
 
 		return iReflectionManagerObject.invokeMethod(this,
 				request.get("requestType")[0], request);
+
 	}
 
 }
