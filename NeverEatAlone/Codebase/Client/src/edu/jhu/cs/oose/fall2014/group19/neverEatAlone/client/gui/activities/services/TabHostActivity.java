@@ -16,9 +16,9 @@ import android.view.View;
 import android.widget.TabHost;
 import android.widget.TabHost.TabSpec;
 import android.widget.TextView;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.AccountProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.NotificationProperties;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.MessageToasterHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.NotificationAndPostCacheHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
@@ -65,24 +65,18 @@ public class TabHostActivity extends TabActivity {
 		notificationMapListJSon = "[{}]";
 		super.onCreate(savedInstanceState);
 
-
-
-
 		Intent i = getIntent();
 		int tabToOpen = i.getIntExtra("FirstTab", 0);
 
-		notificationCache=new HashSet<NotificationProperties>();
+		notificationCache = new HashSet<NotificationProperties>();
 		fetchNotifications();
-
 
 		// Initialize the view and cache.
 		InitView(tabToOpen);
 		// Obtain the data required for the activity class
 		username = getIntent().getStringExtra("username");
-		//start the notifcations framework.
-
+		// start the notifcations framework.
 		NotificationHelper.init(this, username);
-
 
 	}
 
@@ -166,8 +160,8 @@ public class TabHostActivity extends TabActivity {
 			List<Map<String, String>> notificationMapList) {
 
 		System.out.println("in updateNotification");
-		for(Map<String, String> notification : notificationMapList){
-			if(notification.isEmpty())
+		for (Map<String, String> notification : notificationMapList) {
+			if (notification.isEmpty())
 				continue;
 			notificationCache.add(new NotificationProperties(notification));
 		}
@@ -176,7 +170,7 @@ public class TabHostActivity extends TabActivity {
 
 	private void fetchNotifications() {
 		MessageToasterHelper.toastMessage("INside FEtCH");
-		notificationCache.clear();		
+		notificationCache.clear();
 		try {
 			requestID = "Meal";
 			requestType = "fetchNotifications";

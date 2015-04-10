@@ -10,6 +10,8 @@ import org.apache.http.impl.execchain.RequestAbortedException;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.location.LocationManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -24,6 +26,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.help
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.NotificationAndPostCacheHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.LoginView;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.locationManager.services.LocationFinder;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.notificationHandler.services.NotificationHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
 
@@ -145,6 +148,9 @@ public class MainActivity extends Activity {
 			// we want the user string not the encrypted version.
 			AccountProperties.getUserAccountInstance().setpassword(password);
 
+			// start the location service.
+			startLocationService();
+
 			// start the new activity
 			Intent intent = new Intent(MainActivity.this, TabHostActivity.class);
 			intent.putExtra("username", username);
@@ -156,6 +162,14 @@ public class MainActivity extends Activity {
 			// class.
 			return;
 		}
+
+	}
+
+	private void startLocationService() {
+		LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+		LocationFinder locationFinder = new LocationFinder(this,
+				locationManager);
+		locationFinder.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
 	}
 

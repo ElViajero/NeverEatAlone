@@ -4,17 +4,13 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 import java.util.Map;
-
-import org.apache.http.impl.execchain.RequestAbortedException;
 
 import android.app.Activity;
 import android.app.DatePickerDialog.OnDateSetListener;
 import android.app.TimePickerDialog.OnTimeSetListener;
 import android.content.Context;
 import android.content.Intent;
-import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -35,16 +31,13 @@ import android.widget.Toast;
 
 import com.google.android.gms.common.api.GoogleApiClient;
 
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.AccountProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.DateAndTimeProperties;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.LocationProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.MealProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.DataCacheHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.MessageToasterHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.MealView;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.helpers.GsonHelper;
 
 /**
@@ -57,8 +50,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.h
  * 
  */
 
-public class CreateMealInformationActivity extends FragmentActivity implements
-		LocationListener {
+public class CreateMealInformationActivity extends FragmentActivity {
 
 	private Button btnSelectStartDateObject, btnSelectstartTimeObject,
 			btnSelectEndDateObject, btnSelectendTimeObject;
@@ -145,6 +137,21 @@ public class CreateMealInformationActivity extends FragmentActivity implements
 				.getView("CreateMealInformation_button_endTime");
 
 		// placeEditViewObject = (EditText) mealView.getView("edit_restaurant");
+		initAutoComplete();
+
+		maxNumberEditViewObject = (EditText) mealView.getView("edit_maxnumber");
+		allowFriendInviteSwitchObject = (Switch) mealView
+				.getView("switch_allowfriendinvite");
+		createMealInfoTitleObject = (TextView) mealView
+				.getView("CreateMealInformation_text_mealinformation");
+
+		setTitleStyle();
+		applyTheme();
+
+	}
+
+	@SuppressWarnings("unchecked")
+	private void initAutoComplete() {
 		restaurantAutoCompleteTextView = (AutoCompleteTextView) mealView
 				.getView("edit_restaurant_auto");
 
@@ -160,47 +167,11 @@ public class CreateMealInformationActivity extends FragmentActivity implements
 					.setAdapter(restaurantAutoCompleteArrayAdapter);
 		}
 
-		maxNumberEditViewObject = (EditText) mealView.getView("edit_maxnumber");
-		allowFriendInviteSwitchObject = (Switch) mealView
-				.getView("switch_allowfriendinvite");
-		createMealInfoTitleObject = (TextView) mealView
-				.getView("CreateMealInformation_text_mealinformation");
+		restaurantAutoCompleteArrayAdapter = (ArrayAdapter<String>) DataCacheHelper
+				.getAdapter("restaurantAutoComplete");
 
-		setTitleStyle();
-		applyTheme();
-		locationManagerObject = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-		locationManagerObject.requestLocationUpdates(
-				LocationManager.NETWORK_PROVIDER, 5, 0, this);
-
-	}
-
-	@SuppressWarnings("unchecked")
-	private void fetchAutoCompleteFields() {
-		try {
-
-			// send the request.
-			List<Map<String, String>> resultMapList = RequestHandlerHelper
-					.getRequestHandlerInstance().handleRequest(
-							this,
-							AccountProperties.getUserAccountInstance()
-									.getLocationProperties().toMap(),
-							"Location", "getNearbyPlaces");
-
-			restaurantAutoCompleteArrayAdapter = (ArrayAdapter<String>) DataCacheHelper
-					.getAdapter("restaurantAutoComplete");
-
-			for (Map<String, String> map : resultMapList) {
-				restaurantAutoCompleteArrayAdapter.add(map.get("name"));
-			}
-
-			restaurantAutoCompleteArrayAdapter.notifyDataSetChanged();
-			DataCacheHelper.registerAdapter(restaurantAutoCompleteArrayAdapter,
-					"restaurantAutoComplete");
-
-		} catch (RequestAbortedException e) {
-			return;
-		}
-
+		restaurantAutoCompleteTextView
+				.setAdapter(restaurantAutoCompleteArrayAdapter);
 	}
 
 	/**
@@ -570,95 +541,4 @@ public class CreateMealInformationActivity extends FragmentActivity implements
 
 	}
 
-	@Override
-	public void onLocationChanged(Location location) {
-		// TODO Auto-generated method stub
-
-		double latitude = location.getLatitude();
-		double longitude = location.getLongitude();
-
-		// check if the location has changed significantly.
-
-		LocationProperties newLocation = new LocationProperties(latitude,
-				longitude);
-
-		if (LocationProperties.hasLocationChanged(AccountProperties
-				.getUserAccountInstance().getLocationProperties(), newLocation)) {
-
-			AccountProperties.getUserAccountInstance().getLocationProperties()
-					.setLatitude(latitude);
-			AccountProperties.getUserAccountInstance().getLocationProperties()
-					.setLongitude(longitude);
-			getLocation();
-			fetchAutoCompleteFields();
-		}
-
-		// check if the location has changed significantly
-
-		// fetchAutoCompleteFields();
-
-	}
-
-	private void getLocation() {
-		try {
-
-			Map<String, Object> requestMap = AccountProperties
-					.getUserAccountInstance().toMap();
-
-			requestMap.putAll(AccountProperties.getUserAccountInstance()
-					.getLocationProperties().toMap());
-
-			// send the request.
-			List<Map<String, String>> resultMapList = RequestHandlerHelper
-					.getRequestHandlerInstance().handleRequest(this,
-							requestMap, "Location", "getLocation");
-
-			for (Map<String, String> map : resultMapList) {
-				AccountProperties.getUserAccountInstance()
-						.getLocationProperties()
-						.setLocationName(map.get("locationName"));
-				break;
-			}
-
-			MessageToasterHelper.toastMessage("My location is : "
-					+ AccountProperties.getUserAccountInstance()
-							.getLocationProperties().getLocationName());
-
-		} catch (RequestAbortedException e) {
-			return;
-		}
-
-	}
-
-	@Override
-	public void onStatusChanged(String provider, int status, Bundle extras) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void onProviderEnabled(String provider) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void onProviderDisabled(String provider) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@SuppressWarnings("unchecked")
-	protected void onResume() {
-		super.onResume();
-
-		restaurantAutoCompleteArrayAdapter = (ArrayAdapter<String>) DataCacheHelper
-				.getAdapter("restaurantAutoComplete");
-		restaurantAutoCompleteTextView
-				.setAdapter(restaurantAutoCompleteArrayAdapter);
-		locationManagerObject = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-		locationManagerObject.requestLocationUpdates(
-				LocationManager.NETWORK_PROVIDER, 5, 0, this);
-
-	}
 }
