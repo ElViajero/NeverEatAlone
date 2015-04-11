@@ -8,11 +8,13 @@ import java.util.Map;
 import org.apache.http.impl.execchain.RequestAbortedException;
 
 import android.app.Activity;
-import android.app.ListActivity;
+import android.app.ListFragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -25,7 +27,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.help
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.MessageToasterHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.NotificationAndPostCacheHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.ContactsView;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.FragmentView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
 
 /**
@@ -34,7 +36,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.serv
  * @author tejasvamsingh
  * @author Hai Tang
  */
-public class ContactsActivity extends ListActivity {
+public class ContactsActivity extends ListFragment {
 
 	private ArrayAdapter<ContactProperties> contactsInformationAdapter;
 	private TextView contactTitleObject;
@@ -42,16 +44,26 @@ public class ContactsActivity extends ListActivity {
 	private Button addFriendButtonObject;
 	private Context context;
 	private Activity activity;
-	private ContactsView contactsView;
+	private FragmentView fragmentView;
 
 	String requestType;
 	String requestID;
+	View rootView;
 
 	List<ContactProperties> contactList;
 
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+
+		rootView = inflater.inflate(R.layout.activity_contacts, container,
+				false);
 		initView(savedInstanceState);
+		// initContactView();
+		// ThemeManager.applyButtonBarTheme(rootView
+		// .findViewById(R.id.buttons_contacts));
+
+		return rootView;
+
 	}
 
 	/**
@@ -62,28 +74,26 @@ public class ContactsActivity extends ListActivity {
 	 *            This method update the GUI
 	 */
 	private void initView(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_contacts);
 
 		initContactView();
-		contactTitleObject = (TextView) contactsView
+		contactTitleObject = (TextView) fragmentView
 				.getView("textView_contacts_title");
-		friendRequestButtonObejct = (Button) contactsView
+		friendRequestButtonObejct = (Button) fragmentView
 				.getView("button_contacts_notification");
-		addFriendButtonObject = (Button) contactsView
+		addFriendButtonObject = (Button) fragmentView
 				.getView("button_contacts_addcontacts");
 
 		initContactView();
 
-		contactTitleObject = (TextView) contactsView
+		contactTitleObject = (TextView) fragmentView
 				.getView("textView_contacts_title");
-		friendRequestButtonObejct = (Button) contactsView
+		friendRequestButtonObejct = (Button) fragmentView
 				.getView("button_contacts_notification");
-		addFriendButtonObject = (Button) contactsView
+		addFriendButtonObject = (Button) fragmentView
 				.getView("button_contacts_addcontacts");
 		contactList = new ArrayList<ContactProperties>();
-		contactsInformationAdapter = new ContactsInformationAdapter(this,
-				contactList);
+		contactsInformationAdapter = new ContactsInformationAdapter(
+				getActivity(), contactList);
 		setListAdapter(contactsInformationAdapter);
 
 		fetchContacts();
@@ -93,14 +103,14 @@ public class ContactsActivity extends ListActivity {
 	}
 
 	/**
-	 * Method used to initialize ContactView.
+	 * Method used to initialize the ContactView. Slighly different from others
+	 * since this is a fragment.
 	 * 
-	 * @author: Hai Tang
+	 * @author tejasvamsingh
 	 */
 	private void initContactView() {
-		context = this;
-		activity = this;
-		contactsView = new ContactsView(context, activity);
+		context = rootView.getContext();
+		fragmentView = new FragmentView(context, rootView);
 	}
 
 	/**
@@ -112,13 +122,20 @@ public class ContactsActivity extends ListActivity {
 	private void applyTheme() {
 		initContactView();
 
-		View mainLayout = contactsView.getView("main_contacts");
-		View headerLayout = contactsView.getView("header_contacts");
-		View buttonBar = contactsView.getView("buttons_contacts");
+		View mainLayout = fragmentView.getView("main_contacts");
+		View headerLayout = fragmentView.getView("header_contacts");
+		View buttonBar = fragmentView.getView("buttons_contacts");
 
-		View contactsNotificationButton = contactsView
+		if (mainLayout == null)
+			System.out.println("main layout is null");
+		if (headerLayout == null)
+			System.out.println("header layout is null");
+		if (buttonBar == null)
+			System.out.println("button bar is null");
+
+		View contactsNotificationButton = fragmentView
 				.getView("button_contacts_notification");
-		View addContactsButton = contactsView
+		View addContactsButton = fragmentView
 				.getView("button_contacts_addcontacts");
 
 		ThemeManager.applyTheme(mainLayout, headerLayout);
@@ -157,7 +174,7 @@ public class ContactsActivity extends ListActivity {
 		try {
 
 			List<Map<String, String>> resultMapList = RequestHandlerHelper
-					.getRequestHandlerInstance().handleRequest(this,
+					.getRequestHandlerInstance().handleRequest(getActivity(),
 							requestMap, requestID, requestType);
 			contactList.clear();
 			for (Map<String, String> result : resultMapList) {
@@ -166,7 +183,7 @@ public class ContactsActivity extends ListActivity {
 				contactList.add(new ContactProperties(result));
 			}
 
-			MessageToasterHelper.toastMessage(this, contactList.get(0)
+			MessageToasterHelper.toastMessage(getActivity(), contactList.get(0)
 					.getContactusername());
 			contactsInformationAdapter.notifyDataSetChanged();
 			NotificationAndPostCacheHelper.setServerFetchRequired("contact",
@@ -183,8 +200,7 @@ public class ContactsActivity extends ListActivity {
 	 * @author: Hai Tang
 	 */
 	public void onAddFriendsButtonClick(View view) {
-		Intent intent = new Intent(ContactsActivity.this,
-				AddFriendsActivity.class);
+		Intent intent = new Intent(getActivity(), AddFriendsActivity.class);
 		ContactsActivity.this.startActivity(intent);
 	}
 
@@ -194,13 +210,13 @@ public class ContactsActivity extends ListActivity {
 	 * 
 	 */
 	public void onContactNotificationButtonClick(View view) {
-		Intent intent = new Intent(ContactsActivity.this,
+		Intent intent = new Intent(getActivity(),
 				DisplayContactNotificationActivity.class);
 		ContactsActivity.this.startActivity(intent);
 	}
 
 	@Override
-	protected void onResume() {
+	public void onResume() {
 		super.onResume();
 		System.out.println("FETCH STATUS :"
 				+ NotificationAndPostCacheHelper
@@ -219,11 +235,10 @@ public class ContactsActivity extends ListActivity {
 	 * @param position
 	 */
 	@Override
-	protected void onListItemClick(ListView l, View v, int position, long id) {
+	public void onListItemClick(ListView l, View v, int position, long id) {
 
 		DataCacheHelper.setIActivityPropertiesObject(contactList.get(position));
-		Intent intent = new Intent(ContactsActivity.this,
-				ContactsProfileActivity.class);
+		Intent intent = new Intent(getActivity(), ContactsProfileActivity.class);
 		ContactsActivity.this.startActivity(intent);
 
 	}

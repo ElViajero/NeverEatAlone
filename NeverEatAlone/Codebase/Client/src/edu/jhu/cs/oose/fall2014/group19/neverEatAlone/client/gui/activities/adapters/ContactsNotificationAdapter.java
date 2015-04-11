@@ -9,19 +9,17 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.contracts.IActivityProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.ContactProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.NotificationProperties;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.R;
 
 /**
- * @author tejasvamsingh
- * This adapter get the contact notification
+ * @author tejasvamsingh This adapter get the contact notification
  * 
  */
 public class ContactsNotificationAdapter extends
-ArrayAdapter<IActivityProperties> {
-
+		ArrayAdapter<IActivityProperties> {
 
 	private List<IActivityProperties> contactInfoList;
 	private Activity context;
@@ -60,17 +58,18 @@ ArrayAdapter<IActivityProperties> {
 		// TODO
 		// Need revise here
 
-		Button accept = (Button) rowView.findViewById(R.id.contacts_notification_accept);
-		Button reject = (Button) rowView.findViewById(R.id.contacts_notification_reject);
+		Button accept = (Button) rowView
+				.findViewById(R.id.contacts_notification_accept);
+		Button reject = (Button) rowView
+				.findViewById(R.id.contacts_notification_reject);
 		accept.setVisibility(View.INVISIBLE);
 		reject.setVisibility(View.INVISIBLE);
 
-		NotificationProperties notification = (NotificationProperties)
-				contactInfoList.get(position);
+		NotificationProperties notification = (NotificationProperties) contactInfoList
+				.get(position);
 
-		ContactProperties contactPropertiesObject =(ContactProperties)
-				notification.getNotificationData();
-
+		ContactProperties contactPropertiesObject = (ContactProperties) notification
+				.getNotificationData();
 
 		name.setText(contactPropertiesObject.getContactusername()
 				+ " wants to add you as a friend!");

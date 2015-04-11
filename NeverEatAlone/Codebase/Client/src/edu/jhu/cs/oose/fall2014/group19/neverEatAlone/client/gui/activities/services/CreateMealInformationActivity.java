@@ -28,9 +28,6 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
-
-import com.google.android.gms.common.api.GoogleApiClient;
-
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.DateAndTimeProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.MealProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.R;
@@ -61,7 +58,7 @@ public class CreateMealInformationActivity extends FragmentActivity {
 	private Context context;
 	private Activity activity;
 	private MealView mealView;
-	private GoogleApiClient googleAPIClientObject;
+
 	private AutoCompleteTextView restaurantAutoCompleteTextView;
 	LocationManager locationManagerObject;
 	LocationListener locationListenerObject;

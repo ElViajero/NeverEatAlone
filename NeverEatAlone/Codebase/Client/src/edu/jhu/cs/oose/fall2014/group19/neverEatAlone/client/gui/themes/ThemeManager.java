@@ -31,7 +31,7 @@ public class ThemeManager {
 	static int editTextColor = R.drawable.edittext_background_light;
 	static int availabilityBGColor = R.drawable.availability_background_light;
 	static int availabilityThumbColor = R.drawable.availability_thumb_light;
-	
+
 	/**
 	 * LEGACY: TO BE DELETED
 	 * 
@@ -44,7 +44,6 @@ public class ThemeManager {
 
 		mainView.setBackgroundResource(mainTheme);
 	}
-
 
 	/**
 	 * This changes the background color.
@@ -73,21 +72,24 @@ public class ThemeManager {
 		if ((mainView == null) || (headerView == null)) {
 			System.out.println("acitivity is null");
 		}
+
 		mainView.setBackgroundResource(mainTheme);
 		headerView.setBackgroundResource(headerTheme);
 
 	}
-	
+
 	/**
-	 * This changes the background colors of the header, the main layout and the button bar.
-	 * The button bar is at the bottom.
+	 * This changes the background colors of the header, the main layout and the
+	 * button bar. The button bar is at the bottom.
 	 * 
 	 * @author Yueling Loh
 	 * 
 	 */
-	public static void applyPlainTheme(View mainView, View headerView,View buttonBarView) {
+	public static void applyPlainTheme(View mainView, View headerView,
+			View buttonBarView) {
 
-		if ((mainView == null) || (headerView == null)|| (buttonBarView == null)) {
+		if ((mainView == null) || (headerView == null)
+				|| (buttonBarView == null)) {
 			System.out.println("acitivity is null");
 		}
 		mainView.setBackgroundResource(mainThemePlain);
@@ -95,17 +97,19 @@ public class ThemeManager {
 		buttonBarView.setBackgroundResource(buttonBarThemePlain);
 
 	}
-	
+
 	/**
-	 * This changes the background colors of the header, the main layout and the button bar.
-	 * There is a button bar at the top and the bottom.
+	 * This changes the background colors of the header, the main layout and the
+	 * button bar. There is a button bar at the top and the bottom.
 	 * 
 	 * @author Yueling Loh
 	 * 
 	 */
-	public static void applyDoubleBarTheme(View mainView, View headerView,View buttonBarViewTop, View buttonBarViewBottom) {
+	public static void applyDoubleBarTheme(View mainView, View headerView,
+			View buttonBarViewTop, View buttonBarViewBottom) {
 
-		if ((mainView == null) || (headerView == null)|| (buttonBarViewTop == null)|| (buttonBarViewBottom == null)) {
+		if ((mainView == null) || (headerView == null)
+				|| (buttonBarViewTop == null) || (buttonBarViewBottom == null)) {
 			System.out.println("acitivity is null");
 		}
 		headerView.setBackgroundResource(headerTheme);
@@ -116,8 +120,8 @@ public class ThemeManager {
 	}
 
 	/**
-	 * This changes the background colors of a pop up.
-	 * There is a button bar at the bottom.
+	 * This changes the background colors of a pop up. There is a button bar at
+	 * the bottom.
 	 * 
 	 * @author Yueling Loh
 	 * 
@@ -127,12 +131,12 @@ public class ThemeManager {
 		if ((mainView == null) || (buttonBarViewBottom == null)) {
 			System.out.println("acitivity is null");
 		}
-		
+
 		mainView.setBackgroundResource(popUpTheme);
 		buttonBarViewBottom.setBackgroundResource(buttonBarThemePlain);
 
 	}
-	
+
 	/**
 	 * This changes the background colors of the button bar at the top.
 	 * 
@@ -158,7 +162,6 @@ public class ThemeManager {
 
 	}
 
-	
 	/**
 	 * This changes the button colors.
 	 * 
@@ -174,7 +177,7 @@ public class ThemeManager {
 		buttonView.setBackgroundResource(buttonColor);
 
 	}
-	
+
 	public static void applyAvailabilityColor(Switch switchView) {
 
 		if (switchView == null) {
@@ -220,7 +223,7 @@ public class ThemeManager {
 		tv.setTextColor(Color.parseColor("#00B9FF"));
 
 	}
-	
+
 	public static void setTitleFont(TextView tv) {
 
 		if (tv == null) {
@@ -232,7 +235,7 @@ public class ThemeManager {
 		tv.setTypeface(tf);
 
 	}
-	
+
 	/**
 	 * This changes the Tab font.
 	 * 
@@ -250,7 +253,7 @@ public class ThemeManager {
 		tv.setTypeface(tf);
 
 	}
-	
+
 	/**
 	 * This sets the theme.
 	 * 
@@ -258,8 +261,8 @@ public class ThemeManager {
 	 * 
 	 */
 	public static void setTheme(int mainThemeType, int headerThemeType) {
-		mainTheme = //mainThemeType;
-				headerTheme = headerThemeType;
+		mainTheme = // mainThemeType;
+		headerTheme = headerThemeType;
 	}
 
 }

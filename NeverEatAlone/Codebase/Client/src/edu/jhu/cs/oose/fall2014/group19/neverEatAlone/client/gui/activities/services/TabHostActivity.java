@@ -115,7 +115,7 @@ public class TabHostActivity extends TabActivity {
 		View contactsTabview = createTabView(TabHost.getContext(), "Contacts");
 		TabContacts.setIndicator(contactsTabview);
 		// TabContacts.setIndicator("Contacts");
-		TabContacts.setContent(new Intent(this, ContactsActivity.class));
+		TabContacts.setContent(new Intent(this, ContactTabbedActivity.class));
 
 		// Set Profile tabs
 		View profileTabview = createTabView(TabHost.getContext(), "Profile");

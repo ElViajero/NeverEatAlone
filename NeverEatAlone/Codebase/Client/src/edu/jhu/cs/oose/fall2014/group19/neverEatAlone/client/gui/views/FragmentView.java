@@ -1,6 +1,5 @@
 package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views;
 
-import android.app.Activity;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,15 +13,14 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.cont
  * @author Hai Tang
  *
  */
-public class ContactsView implements IView {
+public class FragmentView implements IView {
 
 	private View viewObject = null;
 	private String value = null;
 
 	Context context;
-	Activity activity; // This changes. It's a fragment so we're querying the
-						// root
-						// view.
+	View rootView; // This changes. It's a fragment so we're querying the root
+					// view.
 
 	/**
 	 * The constructor is used to get the content from the ContactsActivity in
@@ -30,9 +28,9 @@ public class ContactsView implements IView {
 	 * 
 	 * @author Hai Tang
 	 */
-	public ContactsView(Context context, Activity activity) {
+	public FragmentView(Context context, View activity) {
 		this.context = context;
-		this.activity = activity;
+		this.rootView = activity;
 	}
 
 	/**
@@ -45,7 +43,7 @@ public class ContactsView implements IView {
 
 		int resourceID = context.getResources().getIdentifier(viewName, "id",
 				context.getPackageName());
-		viewObject = activity.findViewById(resourceID);
+		viewObject = rootView.findViewById(resourceID);
 
 		return viewObject;
 	}

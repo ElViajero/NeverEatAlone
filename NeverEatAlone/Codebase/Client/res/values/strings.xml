@@ -113,14 +113,18 @@
     <string name="detail">Details</string>
     <string name="close">Close</string>
     <string name="title_activity_my_posts_detail">MyPostsDetailActivity</string>
-	<string name="my_posts_detail">My Posts Details</string>
-	
-	
-	
-	<!-- This is for the gender spinner in editProfile -->
-	<string-array name="gender_array">
-	    <item>"--"</item>
-	    <item>Male</item>
-	    <item>Female</item>
-	    </string-array>
+    <string name="my_posts_detail">My Posts Details</string>
+
+    <!-- This is for the gender spinner in editProfile -->
+    <string-array name="gender_array">
+        <item>"--"</item>
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+
+    <string name="title_activity_contact_tabbed">ContactTabbedActivity</string>
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
+
 </resources>

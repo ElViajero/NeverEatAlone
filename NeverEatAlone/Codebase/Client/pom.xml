@@ -38,24 +38,20 @@
 		</plugins>
 	</build>
 	<dependencies>
-		<dependency>
-			<groupId>android.support</groupId>
-			<artifactId>compatibility-v4</artifactId>
-			<version>21.0.1</version>
-		</dependency>
-		<dependency>
-			<groupId>android.support</groupId>
-			<artifactId>compatibility-v7-appcompat</artifactId>
-			<version>21.0.1</version>
-			<type>apklib</type>
-		</dependency>
+		
 
+			
 		<dependency>
 			<groupId>android.support</groupId>
-			<artifactId>compatibility-v7-appcompat</artifactId>
-			<version>21.0.1</version>
+			<artifactId>compatibility-v13</artifactId>
+			<version>21.0.1</version>			
 			<type>jar</type>
+			 <exclusion>
+                <groupId>android.support</groupId>
+                <artifactId>compatibility-v4</artifactId>
+              </exclusion>
 		</dependency>
+		
 
 		<dependency>
 			<groupId>commons-codec</groupId>
