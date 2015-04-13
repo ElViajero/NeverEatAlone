@@ -24,7 +24,7 @@ public class LocationManagementRequestHandler implements
 
 	Map<String, Map<String, Object>> nearbyPlacesMap;
 
-	final String locationAPIKey = "AIzaSyDCVufbJIFNiZtLdbezooXr8jfAqKUzYVo";
+	final String locationAPIKey = "";
 
 	/**
 	 * This method returns a list of places that are nearby to the provided
