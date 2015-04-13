@@ -4,6 +4,7 @@ import java.util.Locale;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentActivity;
@@ -85,7 +86,9 @@ public class ContactTabbedActivity extends FragmentActivity {
 			// Return a PlaceholderFragment (defined as a static inner class
 			// below).
 			if (position == 0)
-				return new ContactsActivity();
+				return new ContactsActivity("getAll");
+			if (position == 1)
+				return new ContactsActivity("getNearby");
 
 			return PlaceholderFragment.newInstance(position + 1);
 		}
@@ -142,6 +145,22 @@ public class ContactTabbedActivity extends FragmentActivity {
 					container, false);
 			return rootView;
 		}
+	}
+
+	public void onAddFriendsButtonClick(View view) {
+		Intent intent = new Intent(this, AddFriendsActivity.class);
+		this.startActivity(intent);
+	}
+
+	/**
+	 * Method for contact notification button click
+	 * 
+	 * 
+	 */
+	public void onContactNotificationButtonClick(View view) {
+		Intent intent = new Intent(this,
+				DisplayContactNotificationActivity.class);
+		this.startActivity(intent);
 	}
 
 }

@@ -231,4 +231,31 @@ public class ContactDBRequestHandler implements IContactDBRequestHandler {
 
 	}
 
+	/**
+	 * This method return contacts that are nearby
+	 * 
+	 * @author tejasvamsingh
+	 */
+	@Override
+	public List<Map<String, String>> getNearby(Map<String, String[]> request) {
+
+		Map<String, String> parameterMap = DBRequestHandlerHelper
+				.GetQueryParameterMap(request);
+
+		Map<String, Object> queryParameterMap = new HashMap<String, Object>();
+
+		queryParameterMap.put("username", parameterMap.get("username"));
+
+		String query = "MATCH (a:User)-[:KNOWS]->(b:User), (a)<-[:KNOWS]-(b), "
+				+ "(a)-[:LOCATED_IN]->(l:Location), "
+				+ "(b)-[:LOCATED_IN]->(l) " + "WHERE a.username={username} "
+				+ "RETURN b.username AS username, " + "b.avatar AS avatar, "
+				+ "b.workPlace AS workPlace, " + "b.gender AS gender, "
+				+ "b.name AS name";
+
+		return iDBQueryExecutionManagerInstance.executeQuery(query,
+				queryParameterMap);
+
+	}
+
 }

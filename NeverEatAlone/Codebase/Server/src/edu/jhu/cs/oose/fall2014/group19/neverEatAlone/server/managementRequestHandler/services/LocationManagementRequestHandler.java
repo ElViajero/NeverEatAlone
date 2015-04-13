@@ -24,7 +24,7 @@ public class LocationManagementRequestHandler implements
 
 	Map<String, Map<String, Object>> nearbyPlacesMap;
 
-	final String locationAPIKey = "";
+	final String locationAPIKey = "AIzaSyDCVufbJIFNiZtLdbezooXr8jfAqKUzYVo";
 
 	/**
 	 * This method returns a list of places that are nearby to the provided
@@ -63,31 +63,33 @@ public class LocationManagementRequestHandler implements
 				+ longitude
 				+ "&radius="
 				+ radius + "&types=" + type + "&key=" + locationAPIKey;
-		/*
-		 * Map<String, Object> responseMap = requestExecutorHelper
-		 * .executeRequest(requestURLString); if (responseMap == null) return
-		 * placeNameMapList;
-		 * 
-		 * System.out.println(responseMap.size());
-		 * System.out.println(responseMap.keySet());
-		 * 
-		 * // we actually got some data back if
-		 * (responseMap.get("status").toString().equalsIgnoreCase("OK")) {
-		 * 
-		 * List<Map<String, Object>> resultMapList = (List<Map<String, Object>>)
-		 * responseMap .get("results");
-		 * 
-		 * // add the restaurant names and locality information. for
-		 * (Map<String, Object> restaurantMap : resultMapList) { Map<String,
-		 * String> placeMap = new HashMap<>(); placeMap.put("name",
-		 * restaurantMap.get("name").toString() + "," +
-		 * restaurantMap.get("vicinity").toString());
-		 * System.out.println("placemap :  " + placeMap);
-		 * placeNameMapList.add(placeMap); }
-		 * System.out.println("placemapList :  " + placeNameMapList);
-		 * 
-		 * }
-		 */
+
+		Map<String, Object> responseMap = requestExecutorHelper
+				.executeRequest(requestURLString);
+		if (responseMap == null)
+			return placeNameMapList;
+
+		System.out.println(responseMap.size());
+		System.out.println(responseMap.keySet());
+
+		// we actually got some data back if
+		if (responseMap.get("status").toString().equalsIgnoreCase("OK")) {
+
+			List<Map<String, Object>> resultMapList = (List<Map<String, Object>>) responseMap
+					.get("results");
+
+			// add the restaurant names and locality information. for
+			for (Map<String, Object> restaurantMap : resultMapList) {
+				Map<String, String> placeMap = new HashMap<>();
+				placeMap.put("name", restaurantMap.get("name").toString() + ","
+						+ restaurantMap.get("vicinity").toString());
+				System.out.println("placemap :  " + placeMap);
+				placeNameMapList.add(placeMap);
+			}
+			System.out.println("placemapList :  " + placeNameMapList);
+
+		}
+
 		return placeNameMapList;
 	}
 
@@ -113,52 +115,59 @@ public class LocationManagementRequestHandler implements
 		String requestURLString = "https://maps.googleapis.com/"
 				+ "maps/api/geocode/json?" + "latlng=" + latitude + ","
 				+ longitude + "&key=" + locationAPIKey;
-		/*
-		 * Map<String, Object> responseMap = requestExecutorHelper
-		 * .executeRequest(requestURLString);
-		 * 
-		 * List<Map<String, String>> locationMapList = new ArrayList<Map<String,
-		 * String>>();
-		 * 
-		 * Map<String, String> statusMap = new HashMap<String, String>();
-		 * statusMap.put("Status", "Failed"); // initially we don't know if //
-		 * our request succeeds.
-		 * 
-		 * locationMapList.add(statusMap);
-		 * 
-		 * if (responseMap == null) // if null we weren't able to determine the
-		 * // location. return locationMapList;
-		 * 
-		 * try {
-		 * 
-		 * // check if result succeeded. if
-		 * (responseMap.get("status").toString().equalsIgnoreCase("OK")) {
-		 * 
-		 * // first change the status of our request.
-		 * locationMapList.get(0).put("Status", "Success");
-		 * 
-		 * // next process the location
-		 * 
-		 * @SuppressWarnings("unchecked") List<Map<String, Object>>
-		 * resultMapList = (List<Map<String, Object>>) responseMap
-		 * .get("results");
-		 * 
-		 * // get the location for (Map<String, Object> restaurantMap :
-		 * resultMapList) { String locationName = restaurantMap
-		 * .get("formatted_address").toString(); String[] parts =
-		 * locationName.split(",");
-		 * 
-		 * if (parts.length == 3) { Map<String, String> locationMap = new
-		 * HashMap<String, String>(); System.out.println("LOCATION IS :::  " +
-		 * locationName); locationMap.put("locationName", locationName);
-		 * locationMapList.add(locationMap); } }
-		 * 
-		 * }
-		 * 
-		 * persistLocation(locationMapList, username);
-		 * 
-		 * } catch (NullPointerException e) { return locationMapList; }
-		 */
+
+		Map<String, Object> responseMap = requestExecutorHelper
+				.executeRequest(requestURLString);
+
+		List<Map<String, String>> locationMapList = new ArrayList<Map<String, String>>();
+
+		Map<String, String> statusMap = new HashMap<String, String>();
+		statusMap.put("Status", "Failed"); // initially we don't know if //
+		// our request succeeds.
+
+		locationMapList.add(statusMap);
+
+		if (responseMap == null) // if null we weren't able to determine the
+			// location.
+			return locationMapList;
+
+		try {
+
+			// check if result succeeded. if
+			if (responseMap.get("status").toString().equalsIgnoreCase("OK")) {
+
+				// first change the status of our request.
+				locationMapList.get(0).put("Status", "Success");
+
+				// next process the location
+
+				@SuppressWarnings("unchecked")
+				List<Map<String, Object>> resultMapList = (List<Map<String, Object>>) responseMap
+						.get("results");
+
+				// get the location for (Map<String, Object> restaurantMap :
+
+				for (Map<String, Object> restaurantMap : resultMapList) {
+					String locationName = restaurantMap
+							.get("formatted_address").toString();
+					String[] parts = locationName.split(",");
+
+					if (parts.length == 3) {
+						Map<String, String> locationMap = new HashMap<String, String>();
+						System.out.println("LOCATION IS :::  " + locationName);
+						locationMap.put("locationName", locationName);
+						locationMapList.add(locationMap);
+					}
+				}
+
+			}
+
+			persistLocation(locationMapList, username);
+
+		} catch (NullPointerException e) {
+			return locationMapList;
+		}
+
 		return null;
 	}
 

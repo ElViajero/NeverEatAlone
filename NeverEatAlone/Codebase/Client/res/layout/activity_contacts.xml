@@ -18,7 +18,11 @@
         <TextView
             android:id="@+id/textView_contacts_title"
             style="@style/HeaderTextTheme"
-            android:text="@string/contacts" />
+            android:text="@string/contacts"/>
+        
+        <TextView
+            android:id="@+id/textView_swipe_title"  
+            style="@style/HeaderTextTheme"/>
     </RelativeLayout>
 
     <!-- Button Header -->

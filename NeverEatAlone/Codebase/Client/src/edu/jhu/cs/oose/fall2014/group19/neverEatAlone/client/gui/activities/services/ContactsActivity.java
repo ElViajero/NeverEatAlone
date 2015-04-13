@@ -2,8 +2,10 @@ package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.ser
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.http.impl.execchain.RequestAbortedException;
 
@@ -40,15 +42,20 @@ public class ContactsActivity extends ListFragment {
 
 	private ArrayAdapter<ContactProperties> contactsInformationAdapter;
 	private TextView contactTitleObject;
+	private TextView swipeTitleObject;
 	private Button friendRequestButtonObejct;
 	private Button addFriendButtonObject;
 	private Context context;
 	private Activity activity;
 	private FragmentView fragmentView;
 
-	String requestType;
+	String requestType = "getAll";
 	String requestID;
 	View rootView;
+
+	public ContactsActivity(String requestType) {
+		this.requestType = requestType;
+	}
 
 	List<ContactProperties> contactList;
 
@@ -78,6 +85,8 @@ public class ContactsActivity extends ListFragment {
 		initContactView();
 		contactTitleObject = (TextView) fragmentView
 				.getView("textView_contacts_title");
+		swipeTitleObject = (TextView) fragmentView
+				.getView("textView_swipe_title");
 		friendRequestButtonObejct = (Button) fragmentView
 				.getView("button_contacts_notification");
 		addFriendButtonObject = (Button) fragmentView
@@ -153,6 +162,18 @@ public class ContactsActivity extends ListFragment {
 	 */
 	private void setTitleStyle() {
 
+		if (requestType.equals("getAll")) {
+			contactTitleObject.setText("All Contacts");
+			swipeTitleObject.setText("Nearby >>");
+			contactTitleObject.setGravity(android.view.Gravity.LEFT);
+			swipeTitleObject.setGravity(android.view.Gravity.RIGHT);
+		} else {
+			contactTitleObject.setText("Nearby Contacts");
+			contactTitleObject.setGravity(android.view.Gravity.RIGHT);
+			swipeTitleObject.setGravity(android.view.Gravity.LEFT);
+			swipeTitleObject.setText("<< All");
+		}
+
 		ThemeManager.setHeaderFont(contactTitleObject);
 	}
 
@@ -165,7 +186,7 @@ public class ContactsActivity extends ListFragment {
 	private void fetchContacts() {
 
 		requestID = "Contact";
-		requestType = "getAll";
+		// requestType = "getAll";
 
 		Map<String, Object> requestMap = new HashMap<String, Object>();
 		requestMap.put("username", AccountProperties.getUserAccountInstance()
@@ -176,12 +197,17 @@ public class ContactsActivity extends ListFragment {
 			List<Map<String, String>> resultMapList = RequestHandlerHelper
 					.getRequestHandlerInstance().handleRequest(getActivity(),
 							requestMap, requestID, requestType);
+
 			contactList.clear();
+			Set<ContactProperties> contactSet = new HashSet<ContactProperties>();
+
 			for (Map<String, String> result : resultMapList) {
 				if (result.isEmpty())
 					continue;
-				contactList.add(new ContactProperties(result));
+				contactSet.add(new ContactProperties(result));
 			}
+
+			contactList.addAll(contactSet);
 
 			MessageToasterHelper.toastMessage(getActivity(), contactList.get(0)
 					.getContactusername());
