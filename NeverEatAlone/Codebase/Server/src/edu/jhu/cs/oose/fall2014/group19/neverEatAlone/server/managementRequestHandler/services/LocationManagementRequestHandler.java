@@ -17,8 +17,10 @@ public class LocationManagementRequestHandler implements
 
 	@Inject
 	IReflectionManager iReflectionManagerObject;
+
 	@Inject
 	RequestExecutorHelper requestExecutorHelper;
+
 	@Inject
 	ILocationDBRequestHandler iLocationDBRequestHandler;
 

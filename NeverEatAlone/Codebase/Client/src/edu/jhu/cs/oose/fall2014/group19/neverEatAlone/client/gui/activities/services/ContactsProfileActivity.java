@@ -81,6 +81,9 @@ public class ContactsProfileActivity extends Activity {
 		ThemeManager.applyTheme(mainLayout, headerLayout);
 		ThemeManager.applyButtonBarTheme(buttonBar);
 		ThemeManager.applyButtonColor(backContactsProfileButton);
+		contactsProfileTitleObject = (TextView) profileView
+				.getView("contacts_profile");
+		setTitleStyle();
 
 	}
 
