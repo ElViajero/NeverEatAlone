@@ -65,9 +65,9 @@ public class LocationManagementRequestHandler implements
 				+ longitude
 				+ "&radius="
 				+ radius + "&types=" + type + "&key=" + locationAPIKey;
-		// Map<String, Object> responseMap = null;
-		Map<String, Object> responseMap = requestExecutorHelper
-				.executeRequest(requestURLString);
+		Map<String, Object> responseMap = null;
+		// Map<String, Object> responseMap = requestExecutorHelper
+		// .executeRequest(requestURLString);
 		if (responseMap == null)
 			return placeNameMapList;
 
@@ -118,9 +118,9 @@ public class LocationManagementRequestHandler implements
 				+ "maps/api/geocode/json?" + "latlng=" + latitude + ","
 				+ longitude + "&key=" + locationAPIKey;
 
-		// Map<String, Object> responseMap = null;
-		Map<String, Object> responseMap = requestExecutorHelper
-				.executeRequest(requestURLString);
+		Map<String, Object> responseMap = null;
+		// Map<String, Object> responseMap = requestExecutorHelper
+		// .executeRequest(requestURLString);
 
 		List<Map<String, String>> locationMapList = new ArrayList<Map<String, String>>();
 

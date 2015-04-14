@@ -27,21 +27,19 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.h
 
 /**
  * 
- * This class handles asynchronous notification fetches
- * from a queue.
+ * This class handles asynchronous notification fetches from a queue.
+ * 
  * @author tejasvamsingh
  *
  */
 
-public class NotificationExecutor extends AsyncTask<String, List<Map<String,String>>,List<Map<String,String>>> {
-
-
-
+public class NotificationExecutor extends
+		AsyncTask<String, List<Map<String, String>>, List<Map<String, String>>> {
 
 	TabHostActivity activityObject;
 
 	// If it's being used on a thread separate from the UI thread,
-	//make it static if it has to be global variable.
+	// make it static if it has to be global variable.
 
 	static String IPAddress;
 	static Channel ChannelObject;
@@ -52,26 +50,28 @@ public class NotificationExecutor extends AsyncTask<String, List<Map<String,Stri
 	static ConnectionFactory factoryObject;
 	static Connection connectionObject;
 	static boolean cleanBit;
-
-
+	static int timeOutWait = 0;
+	static boolean isFirstTime = true;
 
 	/**
 	 * 
-	 * Set up method to be called the first time that the app registers
-	 * to be notified.
+	 * Set up method to be called the first time that the app registers to be
+	 * notified.
 	 * 
 	 * @author tejasvamsingh
 	 * @param tabHostActivity
 	 */
-	public NotificationExecutor(TabHostActivity tabHostActivity,String username){
+	public NotificationExecutor(TabHostActivity tabHostActivity, String username) {
 		activityObject = tabHostActivity;
-		gsonObject = GsonHelper.getGsoninstance();	
-		this.username = AccountProperties.getUserAccountInstance().getusername();
-		cleanBit=false;
+		gsonObject = GsonHelper.getGsoninstance();
+		this.username = AccountProperties.getUserAccountInstance()
+				.getusername();
+		cleanBit = false;
 
-		//handling the try/catch stuff here makes sense for now.
+		// handling the try/catch stuff here makes sense for now.
 		try {
-			IPAddress = ConfigurationHelper.getConfigurationInstance().getIPAddress();
+			IPAddress = ConfigurationHelper.getConfigurationInstance()
+					.getIPAddress();
 
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -79,13 +79,11 @@ public class NotificationExecutor extends AsyncTask<String, List<Map<String,Stri
 		} catch (URISyntaxException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} 
-		System.out.println("The IP in NotificationExecutor is :" + IPAddress );
+		}
+		System.out.println("The IP in NotificationExecutor is :" + IPAddress);
 
 		System.out.flush();
 	}
-
-
 
 	public NotificationExecutor() {
 		// TODO Auto-generated constructor stub
@@ -93,39 +91,41 @@ public class NotificationExecutor extends AsyncTask<String, List<Map<String,Stri
 
 	/**
 	 * Polling method that monitors queue for messages.
+	 * 
 	 * @author tejasvamsingh
 	 * 
 	 */
 	@Override
 	protected List<Map<String, String>> doInBackground(String... params) {
 
+		// String username = params[0];
+		// username=username;
+		Type stringStringMap = new TypeToken<List<Map<String, String>>>() {
+		}.getType();
 
-		//String username = params[0];
-		//username=username;
-		Type stringStringMap = new TypeToken<List<Map<String, String>>>(){}.getType();
-
-		try{
+		try {
 			initConsumptionFramework();
 
-			System.out.println(" [*] Waiting for messages. To exit press CTRL+C");
-			List<Map<String,String>> resultMapList = new ArrayList<Map<String,String>>();
-			while(true){
-				QueueingConsumer.Delivery delivery = consumerObject.nextDelivery(3000);
-				if(delivery==null)						
+			System.out
+					.println(" [*] Waiting for messages. To exit press CTRL+C");
+			List<Map<String, String>> resultMapList = new ArrayList<Map<String, String>>();
+			while (true) {
+				QueueingConsumer.Delivery delivery = consumerObject
+						.nextDelivery(3000);
+				if (delivery == null)
 					break;
 				String message = new String(delivery.getBody());
-				List<Map<String,String>> currentResultMapList= gsonObject.fromJson(message,stringStringMap);
+				List<Map<String, String>> currentResultMapList = gsonObject
+						.fromJson(message, stringStringMap);
 				resultMapList.addAll(currentResultMapList);
 				System.out.println(" [x] Received '" + message + "'");
 			}
 
-
-
 			return resultMapList;
 
-
-		}catch(IOException e){
-			System.out.println("IOException in NotificationExecutor." + e.getMessage());
+		} catch (IOException e) {
+			System.out.println("IOException in NotificationExecutor."
+					+ e.getMessage());
 			return null;
 		} catch (ShutdownSignalException e) {
 			// TODO Auto-generated catch block
@@ -138,42 +138,50 @@ public class NotificationExecutor extends AsyncTask<String, List<Map<String,Stri
 			e.printStackTrace();
 		}
 
-
 		return null;
 
 	}
 
-
 	/**
 	 * Publish partial results to the UI thread.
+	 * 
 	 * @author tejasvamsingh
 	 * @param resultMapList
 	 */
 
 	@Override
-	protected void onPostExecute(List<Map<String,String>> resultMapList){
+	protected void onPostExecute(List<Map<String, String>> resultMapList) {
 
-		//		System.out.println("Entering onPostExecute");
-		if(resultMapList==null)
-			MessageToasterHelper.toastMessage(activityObject,
-					"Could not connect to notification server.");
+		timeOutWait++;
+		// System.out.println("Entering onPostExecute");
+		if (resultMapList == null) {
+			// MessageToasterHelper.toastMessage("timeout : " + timeOutWait);
+			if (timeOutWait == 1000 || isFirstTime) {
 
-		else if(!resultMapList.isEmpty()){
+				MessageToasterHelper.toastMessage(activityObject,
+						"Could not connect to notification server.");
+				timeOutWait = 0;
+				isFirstTime = false;
+			}
+		}
+
+		else if (!resultMapList.isEmpty()) {
 			System.out.println("NotificationMap is not empty.");
 			activityObject.UpdateNotificationCache(resultMapList);
 		}
 
 		System.out.println("Reaching here regularly");
-		if(!cleanBit){
-			//System.out.println("CleanBit is false");
-			new NotificationExecutor(activityObject,username).executeOnExecutor(THREAD_POOL_EXECUTOR, username);
+		if (!cleanBit) {
+			// System.out.println("CleanBit is false");
+			new NotificationExecutor(activityObject, username)
+					.executeOnExecutor(THREAD_POOL_EXECUTOR, username);
 		}
 	}
 
-	public static void cleanUp(){		
-		cleanBit=true;
+	public static void cleanUp() {
+		cleanBit = true;
 		try {
-			//ChannelObject.queueDelete(username);			
+			// ChannelObject.queueDelete(username);
 			ChannelObject.basicCancel(username);
 
 			ChannelObject.close();
@@ -183,48 +191,42 @@ public class NotificationExecutor extends AsyncTask<String, List<Map<String,Stri
 			System.out.println("username is :" + username);
 			System.out.println("IOException in cleanUp" + e.getMessage());
 
-			ChannelObject=null;
-			consumerObject=null;
-			factoryObject=null;
+			ChannelObject = null;
+			consumerObject = null;
+			factoryObject = null;
 
 			return;
-		}
-		catch (NullPointerException e){
+		} catch (NullPointerException e) {
 			System.out.println("NullPointer in onPostExecute");
 			return;
-		}finally{
+		} finally {
 
-			ChannelObject=null;
-			consumerObject=null;
-			factoryObject=null;	
+			ChannelObject = null;
+			consumerObject = null;
+			factoryObject = null;
 		}
-
-
-
 
 	}
 
-
-	private static void initConsumptionFramework() throws IOException{
-		System.out.println("Inside initConsumptionFrameowork in NotificationExecutor.");
-		if(ChannelObject==null){
+	private static void initConsumptionFramework() throws IOException {
+		System.out
+				.println("Inside initConsumptionFrameowork in NotificationExecutor.");
+		if (ChannelObject == null) {
 			factoryObject = new ConnectionFactory();
 			factoryObject.setHost(IPAddress);
 			connectionObject = factoryObject.newConnection();
 			ChannelObject = connectionObject.createChannel();
-			System.out.println("username is : "+username);
+			System.out.println("username is : " + username);
 			ChannelObject.queueDeclare(username, false, false, false, null);
-			consumerObject =  new QueueingConsumer(ChannelObject);
-			ChannelObject.basicConsume(username, true,username,
-					false,true,null, consumerObject);
-
+			consumerObject = new QueueingConsumer(ChannelObject);
+			ChannelObject.basicConsume(username, true, username, false, true,
+					null, consumerObject);
 
 		}
 	}
 
-	public static void setCleanUpBit(boolean clean){
+	public static void setCleanUpBit(boolean clean) {
 		cleanBit = clean;
 	}
 
 }
-
