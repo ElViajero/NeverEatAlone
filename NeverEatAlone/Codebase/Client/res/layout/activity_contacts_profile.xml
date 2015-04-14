@@ -32,24 +32,29 @@
             android:id="@+id/buttons_contacts_profile_container"
             style="@style/ButtonBarTheme"
             android:layout_gravity="center_horizontal"
+            android:baselineAligned="false"
             android:orientation="horizontal" >
 
             <Button
                 android:id="@+id/button_contacts_profile_back"
                 style="@style/BarButton"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
                 android:layout_marginRight="@dimen/activity_horizontal_margin"
                 android:onClick="onBackButtonClick"
                 android:text="@string/back" />
+            <Button
+                android:id="@+id/button_contacts_profile_delete"                
+                style="@style/BarButton"                
+                android:paddingBottom="-10dp"
+                android:paddingTop="-10dp"
+                android:onClick="onDeleteContactButtonClick"
+                android:text="@string/delete_contact" />
+                
 
-            <RelativeLayout
-                android:id="@+id/button_placeholder"
-                android:layout_width="0dip"
-                android:layout_height="0dip"
-                android:layout_weight="0.5" >
-            </RelativeLayout>
+
         </LinearLayout>
     </LinearLayout>
-
+    
     <!-- Main Space -->
 
     <RelativeLayout

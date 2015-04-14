@@ -244,11 +244,15 @@ public class ContactsActivity extends ListFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
+		MessageToasterHelper.toastMessage("INSIDE OnResume in ContactActivity");
 		System.out.println("FETCH STATUS :"
 				+ NotificationAndPostCacheHelper
 						.isServerFetchRequired("contact"));
-		if (NotificationAndPostCacheHelper.isServerFetchRequired("contact"))
+		if (NotificationAndPostCacheHelper.isServerFetchRequired("contact")) {
+			contactList.clear(); // you may no longer have any contacts.
+			contactsInformationAdapter.notifyDataSetChanged();
 			fetchContacts();
+		}
 	}
 
 	/**

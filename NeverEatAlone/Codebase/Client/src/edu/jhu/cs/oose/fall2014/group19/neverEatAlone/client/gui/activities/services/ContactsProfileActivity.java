@@ -1,6 +1,9 @@
 package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.services;
 
 import java.util.List;
+import java.util.Map;
+
+import org.apache.http.impl.execchain.RequestAbortedException;
 
 import android.app.Activity;
 import android.content.Context;
@@ -22,8 +25,10 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.BitMapHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.DataCacheHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.MessageToasterHelper;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.NotificationAndPostCacheHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.ProfileView;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
 
 /**
  * ProfileActivity is used to set up the view of Profile page
@@ -42,6 +47,7 @@ public class ContactsProfileActivity extends Activity {
 	private Context context;
 	private Activity activity;
 	private ProfileView profileView;
+	private ContactProperties contact;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +80,8 @@ public class ContactsProfileActivity extends Activity {
 		View mainLayout = profileView.getView("main_contacts_profile");
 		View headerLayout = profileView.getView("header_contacts_profile");
 		View buttonBar = profileView.getView("buttons_contacts_profile");
+		View deleteContactButton = profileView
+				.getView("button_contacts_profile_delete");
 
 		View backContactsProfileButton = profileView
 				.getView("button_contacts_profile_back");
@@ -81,6 +89,7 @@ public class ContactsProfileActivity extends Activity {
 		ThemeManager.applyTheme(mainLayout, headerLayout);
 		ThemeManager.applyButtonBarTheme(buttonBar);
 		ThemeManager.applyButtonColor(backContactsProfileButton);
+		ThemeManager.applyButtonColor(deleteContactButton);
 		contactsProfileTitleObject = (TextView) profileView
 				.getView("contacts_profile");
 		setTitleStyle();
@@ -138,7 +147,7 @@ public class ContactsProfileActivity extends Activity {
 		email = AccountProperties.getUserAccountInstance().getemail();
 
 		initProfileView();
-		ContactProperties contact = (ContactProperties) DataCacheHelper
+		contact = (ContactProperties) DataCacheHelper
 				.getIActivityPropertiesObject();
 
 		// set the avatar
@@ -229,4 +238,39 @@ public class ContactsProfileActivity extends Activity {
 		intent.putExtra("FirstTab", 1);
 		ContactsProfileActivity.this.startActivity(intent);
 	}
+
+	/**
+	 * This method implements the delete contact button
+	 * 
+	 * @author tejasvamsingh
+	 */
+	public void onDeleteContactButtonClick(View view) {
+
+		try {
+
+			String requestID = "Contact";
+			String requestType = "delete";
+
+			Map<String, Object> requestMap = AccountProperties
+					.getUserAccountInstance().toMap();
+
+			requestMap.putAll(contact.toMap());
+
+			List<Map<String, String>> result = RequestHandlerHelper
+					.getRequestHandlerInstance().handleRequest(this,
+							requestMap, requestID, requestType);
+
+			// set the server fetch bit.
+			NotificationAndPostCacheHelper.setServerFetchRequired("contact",
+					true);
+
+			Intent intent = new Intent(ContactsProfileActivity.this,
+					TabHostActivity.class);
+			intent.putExtra("FirstTab", 1);
+			ContactsProfileActivity.this.startActivity(intent);
+
+		} catch (RequestAbortedException e) {
+		}
+	}
+
 }

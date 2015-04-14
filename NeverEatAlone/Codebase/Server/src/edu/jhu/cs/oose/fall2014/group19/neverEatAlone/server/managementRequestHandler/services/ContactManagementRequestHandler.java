@@ -99,12 +99,14 @@ public class ContactManagementRequestHandler implements
 		System.out.println("FINISHED DELETE EXECUTION.");
 		LoggerHelper.printresultMap(result);
 
-		if (result.get(0).get("Status").equals("Success")) {
-			System.out.println("Successful operation.");
-			notificationMapList.remove(0);
-			iNotificationManagerObject.pushNotification(notificationMapList,
-					Arrays.asList(request.get("recipientList")));
-		}
+		// NOTIFY CONTACTS HERE.
+		/*
+		 * if (result.get(0).get("Status").equals("Success")) {
+		 * System.out.println("Successful operation.");
+		 * notificationMapList.remove(0);
+		 * iNotificationManagerObject.pushNotification(notificationMapList,
+		 * Arrays.asList(request.get("recipientList"))); }
+		 */
 
 		return result;
 

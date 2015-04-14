@@ -138,6 +138,7 @@ public class MainActivity extends Activity {
 			List<Map<String, String>> resultMapList = RequestHandlerHelper
 					.getRequestHandlerInstance().handleRequest(this,
 							loginProperties.toMap(), requestID, requestType);
+
 			isCreated = true;
 			MessageToasterHelper.toastMessage(this, "Welcome " + username);
 
