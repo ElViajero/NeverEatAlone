@@ -53,6 +53,9 @@ public class ContactsActivity extends ListFragment {
 	String requestID;
 	View rootView;
 
+	public ContactsActivity() {
+	}
+
 	public ContactsActivity(String requestType) {
 		this.requestType = requestType;
 	}
