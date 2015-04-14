@@ -151,7 +151,8 @@ public class NotificationExecutor extends
 
 	@Override
 	protected void onPostExecute(List<Map<String, String>> resultMapList) {
-
+		boolean couldNotConnect = false;
+		;
 		timeOutWait++;
 		// System.out.println("Entering onPostExecute");
 		if (resultMapList == null) {
@@ -162,7 +163,10 @@ public class NotificationExecutor extends
 						"Could not connect to notification server.");
 				timeOutWait = 0;
 				isFirstTime = false;
+				couldNotConnect = true;
 			}
+			resetConnection();
+
 		}
 
 		else if (!resultMapList.isEmpty()) {
@@ -173,6 +177,8 @@ public class NotificationExecutor extends
 		System.out.println("Reaching here regularly");
 		if (!cleanBit) {
 			// System.out.println("CleanBit is false");
+			if (couldNotConnect)
+				MessageToasterHelper.toastMessage("attempting reconnect");
 			new NotificationExecutor(activityObject, username)
 					.executeOnExecutor(THREAD_POOL_EXECUTOR, username);
 		}
@@ -211,7 +217,8 @@ public class NotificationExecutor extends
 	private static void initConsumptionFramework() throws IOException {
 		System.out
 				.println("Inside initConsumptionFrameowork in NotificationExecutor.");
-		if (ChannelObject == null) {
+		if (ChannelObject == null || factoryObject == null
+				|| connectionObject == null) {
 			factoryObject = new ConnectionFactory();
 			factoryObject.setHost(IPAddress);
 			connectionObject = factoryObject.newConnection();
@@ -227,6 +234,14 @@ public class NotificationExecutor extends
 
 	public static void setCleanUpBit(boolean clean) {
 		cleanBit = clean;
+	}
+
+	private static void resetConnection() {
+
+		ChannelObject = null;
+		factoryObject = null;
+		connectionObject = null;
+
 	}
 
 }
