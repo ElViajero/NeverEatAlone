@@ -54,6 +54,8 @@ public class ContactsInformationAdapter extends ArrayAdapter<ContactProperties> 
 					.findViewById(R.id.contacts_check);
 			viewHolder.avatar = (ImageView) view
 					.findViewById(R.id.contacts_avatar);
+			ContactProperties contact = (ContactProperties) viewHolder.checkbox
+					.getTag();
 			viewHolder.checkbox
 					.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
@@ -78,8 +80,10 @@ public class ContactsInformationAdapter extends ArrayAdapter<ContactProperties> 
 		ContactProperties contact = contactInfoList.get(position);
 		String avatarString = contact.getContactAvatarString();
 		ViewHolder holder = (ViewHolder) view.getTag();
+
 		holder.name.setText(contactInfoList.get(position).getContactusername());
 		holder.checkbox.setChecked(contactInfoList.get(position).isChecked());
+
 		if (avatarString != null)
 			holder.avatar.setImageBitmap(BitMapHelper
 					.StringToBitMap(avatarString));

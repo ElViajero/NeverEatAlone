@@ -19,6 +19,7 @@ import android.widget.TextView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.AccountProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.NotificationProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.R;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.DataCacheHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.MessageToasterHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.NotificationAndPostCacheHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
@@ -62,6 +63,7 @@ public class TabHostActivity extends TabActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 
+		DataCacheHelper.setGenericFlag(false);
 		notificationMapListJSon = "[{}]";
 		super.onCreate(savedInstanceState);
 
@@ -169,6 +171,7 @@ public class TabHostActivity extends TabActivity {
 	}
 
 	private void fetchNotifications() {
+		MessageToasterHelper.contextObject = getApplicationContext();
 		MessageToasterHelper.toastMessage("INside FEtCH");
 		notificationCache.clear();
 		try {
@@ -188,6 +191,12 @@ public class TabHostActivity extends TabActivity {
 		} catch (RequestAbortedException e) {
 			return;
 		}
+	}
+
+	protected void onResume() {
+		super.onResume();
+		MessageToasterHelper.contextObject = getApplicationContext();
+		DataCacheHelper.setGenericFlag(false);
 	}
 
 }

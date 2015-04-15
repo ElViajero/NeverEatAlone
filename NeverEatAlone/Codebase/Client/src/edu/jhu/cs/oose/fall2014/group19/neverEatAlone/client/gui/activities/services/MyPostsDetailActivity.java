@@ -21,10 +21,10 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.ContactProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.MealProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.PostProperties;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.adapters.ContactsInformationAdapter;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.DataCacheHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
@@ -98,7 +98,7 @@ public class MyPostsDetailActivity extends ListActivity {
 		View buttonBar = myPostsView.getView("buttons_myPostsDetail");
 
 		View backButton = myPostsView.getView("button_myPostsDetail_back");
-		View closeButton = myPostsView.getView("button_myPostsDetail_close");
+		View closeButton = myPostsView.getView("button_myPostsDetail_edit");
 		View inviteOthersButton = myPostsView
 				.getView("button_myPostsDetail_inviteothers");
 		ThemeManager.applyPlainTheme(mainLayout, headerLayout, buttonBar);
@@ -138,11 +138,16 @@ public class MyPostsDetailActivity extends ListActivity {
 	}
 
 	/**
-	 * click handler for the close button.
+	 * click handler for the edit profile button.
 	 * 
 	 */
-	public void onCloseButtonClick(View view) {
-		// TODO
+	public void onEditPostButtonClick(View view) {
+
+		DataCacheHelper.setGenericFlag(true);
+		// MessageToasterHelper.toastMessage("edit clicked");
+		Intent i = new Intent(this, CreateMealInformationActivity.class);
+		startActivity(i);
+
 	}
 
 	private void fetchAttending() {

@@ -115,6 +115,7 @@
     <string name="title_activity_my_posts_detail">MyPostsDetailActivity</string>
     <string name="my_posts_detail">My Posts Details</string>
     <string name="delete_contact">Delete Contact</string>
+    <string name="edit_post">Edit Post</string>
 
     <!-- This is for the gender spinner in editProfile -->
     <string-array name="gender_array">
