@@ -15,7 +15,6 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.AccountProperties;
@@ -24,7 +23,6 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.adapters.ContactsInformationAdapter;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.DataCacheHelper;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.MessageToasterHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.NotificationAndPostCacheHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.ContactsView;
@@ -42,7 +40,7 @@ public class SelectFriendsActivity extends ListActivity {
 
 	private String requestID;
 	private String requestType;
-	private ArrayAdapter<ContactProperties> selectFriendsAdapter;
+	private ContactsInformationAdapter selectFriendsAdapter;
 	List<ContactProperties> contactList;
 	private String postData;
 	private TextView selectFriendTitle;
@@ -90,6 +88,7 @@ public class SelectFriendsActivity extends ListActivity {
 
 		fetchContacts();
 		selectFriendsAdapter = new ContactsInformationAdapter(this, contactList);
+		selectFriendsAdapter.setShowCheckboxes(true);
 		setListAdapter(selectFriendsAdapter);
 
 		setTitleStyle();
@@ -126,12 +125,13 @@ public class SelectFriendsActivity extends ListActivity {
 
 		for (ContactProperties contact : contactList) {
 			if (populateFromPost.getRecipientList().contains(
-					contact.getContactusername()))
+					contact.getContactusername())) {
 				contact.setChecked(true);
-			if (contact.isChecked())
-				MessageToasterHelper.toastMessage("checked : "
-						+ contact.getContactusername());
+				selectFriendsAdapter.addUncheckableContact(contact);
+			}
+
 		}
+
 		selectFriendsAdapter.notifyDataSetChanged();
 	}
 

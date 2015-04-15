@@ -201,6 +201,7 @@
                 </ListView>
             </LinearLayout>
 
+            <!-- 
             <LinearLayout
                 android:id="@+id/inviteothers_button_container"
                 android:layout_width="match_parent"
@@ -224,12 +225,12 @@
                     android:gravity="center_horizontal"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
             </LinearLayout>
-
+ -->
             <TextView
                 android:id="@+id/textView_mealdetails_additionalinfo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/inviteothers_button_container"
+                android:layout_below="@+id/mealdetails_withwhom_result_container"
                 android:layout_marginTop="20dp"
                 android:text="@string/additional_information"
                 android:textAppearance="?android:attr/textAppearanceMedium"
