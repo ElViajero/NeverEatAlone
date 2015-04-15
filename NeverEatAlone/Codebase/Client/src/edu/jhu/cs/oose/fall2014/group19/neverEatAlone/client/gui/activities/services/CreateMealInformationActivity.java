@@ -60,6 +60,8 @@ public class CreateMealInformationActivity extends FragmentActivity {
 	private TextView createMealInfoTitleObject;
 	private EditText placeEditViewObject;
 	private EditText maxNumberEditViewObject;
+	private EditText additionalInformation;
+
 	private Switch allowFriendInviteSwitchObject;
 	private Context context;
 	private Activity activity;
@@ -130,6 +132,10 @@ public class CreateMealInformationActivity extends FragmentActivity {
 					.getlocation());
 			maxNumberEditViewObject.setText(mealPropertiesObject
 					.getMaxNumberOfInvitees());
+
+			additionalInformation.setText(mealPropertiesObject
+					.getAdditionalInformation());
+
 			DateAndTimeProperties startDateAndTimeProperties = mealPropertiesObject
 					.getStartDateAndTimeProperties();
 			startYear = startDateAndTimeProperties.getYear();
@@ -203,6 +209,9 @@ public class CreateMealInformationActivity extends FragmentActivity {
 				.getView("CreateMealInformation_button_endDate");
 		btnSelectendTimeObject = (Button) mealView
 				.getView("CreateMealInformation_button_endTime");
+
+		additionalInformation = (EditText) mealView
+				.getView("edit_additionalInformation");
 
 		// placeEditViewObject = (EditText) mealView.getView("edit_restaurant");
 		initAutoComplete();
@@ -293,7 +302,7 @@ public class CreateMealInformationActivity extends FragmentActivity {
 		// ThemeManager.applyEditTextColor(placeEditViewObject);
 		ThemeManager.applyEditTextColor(restaurantAutoCompleteTextView);
 		ThemeManager.applyEditTextColor(maxNumberEditViewObject);
-
+		ThemeManager.applyEditTextColor(additionalInformation);
 	}
 
 	@Override
@@ -543,6 +552,8 @@ public class CreateMealInformationActivity extends FragmentActivity {
 		String maxNumberOfInvitees = mealView.getValue(maxNumberEditViewObject);
 		String isNotificationExtendible = allowFriendInviteSwitchObject
 				.isChecked() ? "YES" : "NO";
+		String additionalInformationString = mealView
+				.getValue(additionalInformation);
 
 		if (location.equals("")) {
 			Toast.makeText(this, R.string.location_empty, Toast.LENGTH_SHORT)
@@ -597,7 +608,8 @@ public class CreateMealInformationActivity extends FragmentActivity {
 		// Create a Meal Object
 		MealProperties mealProperties = new MealProperties(location,
 				maxNumberOfInvitees, isNotificationExtendible,
-				startDateAndTimeProperties, endDateAndTimeProperties);
+				startDateAndTimeProperties, endDateAndTimeProperties,
+				additionalInformationString);
 
 		// this happens if we are editing a previous post.
 		if (populateFromPost != null) {

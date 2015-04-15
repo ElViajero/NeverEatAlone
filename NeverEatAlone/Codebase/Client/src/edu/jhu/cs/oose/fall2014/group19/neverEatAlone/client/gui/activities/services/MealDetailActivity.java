@@ -276,6 +276,11 @@ public class MealDetailActivity extends ListActivity {
 		mealView.setValue(restaurantTextViewObject,
 				mealPropertiesObject.getlocation());
 
+		TextView additionalInformation = (TextView) mealView
+				.getView("TextView_additionalinfo");
+		additionalInformation.setText(mealPropertiesObject
+				.getAdditionalInformation());
+
 	}
 
 	private void fetchAttending() {
