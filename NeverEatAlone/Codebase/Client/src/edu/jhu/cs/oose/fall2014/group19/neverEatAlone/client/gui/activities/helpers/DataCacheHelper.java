@@ -20,6 +20,8 @@ public class DataCacheHelper {
 	private static Map<String, ArrayAdapter<?>> adapterCache;
 	private static LocationProperties cachedLocation;
 
+	private static boolean genericFlag;
+
 	public static IActivityProperties getIActivityPropertiesObject() {
 		return iActivityPropertiesObject;
 	}
@@ -58,6 +60,14 @@ public class DataCacheHelper {
 			cachedLocation = AccountProperties.getUserAccountInstance()
 					.getLocationProperties();
 		return cachedLocation;
+	}
+
+	public static boolean getGenericFlag() {
+		return genericFlag;
+	}
+
+	public static void setGenericFlag(boolean genericFlag) {
+		DataCacheHelper.genericFlag = genericFlag;
 	}
 
 }

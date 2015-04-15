@@ -18,12 +18,13 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.R;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.contracts.IActivityProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.AccountProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.ContactProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.PostProperties;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.adapters.ContactsInformationAdapter;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.DataCacheHelper;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.MessageToasterHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.NotificationAndPostCacheHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.ContactsView;
@@ -48,14 +49,30 @@ public class SelectFriendsActivity extends ListActivity {
 	private Context context;
 	private Activity activity;
 	private ContactsView contactsView;
+	private PostProperties populateFromPost;
+
+	public SelectFriendsActivity() {
+
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-
+		populateFromPost = null;
+		// check if we're editing a post
+		if (DataCacheHelper.getGenericFlag()
+				&& DataCacheHelper.getIActivityPropertiesObject() != null) {
+			try {
+				populateFromPost = (PostProperties) DataCacheHelper
+						.getIActivityPropertiesObject();
+			} catch (ClassCastException e) {
+			} finally {
+				DataCacheHelper.setGenericFlag(false);
+			}
+		}
 		initView(savedInstanceState);
 		postData = getIntent().getStringExtra("mealProperties");
-	}
 
+	}
 
 	/**
 	 * Method used to initialize the view.
@@ -68,7 +85,8 @@ public class SelectFriendsActivity extends ListActivity {
 		setContentView(R.layout.activity_select_friends);
 
 		initContactView();
-		selectFriendTitle = (TextView) contactsView.getView("textView_selectfriends_title");
+		selectFriendTitle = (TextView) contactsView
+				.getView("textView_selectfriends_title");
 
 		fetchContacts();
 		selectFriendsAdapter = new ContactsInformationAdapter(this, contactList);
@@ -76,6 +94,45 @@ public class SelectFriendsActivity extends ListActivity {
 
 		setTitleStyle();
 		applyTheme();
+
+		setSelectedContacts();
+	}
+
+	/**
+	 * This method selects contacts that were original recipients in case of an
+	 * edited post.
+	 * 
+	 * @author tejasvamsingh
+	 */
+	private void setSelectedContacts() {
+		if (populateFromPost == null)
+			return;
+
+		// get the recipients for the post being edited.
+
+		try {
+			List<Map<String, String>> result = RequestHandlerHelper
+					.getRequestHandlerInstance().handleRequest(this,
+							populateFromPost.toMap(), "Meal", "getRecipients");
+			List<String> recipientList = new ArrayList<String>();
+			for (Map<String, String> map : result) {
+				if (map.containsKey("recipientUsername"))
+					recipientList.add(map.get("recipientUsername"));
+			}
+			populateFromPost.setRecipientList(recipientList);
+
+		} catch (RequestAbortedException e) {
+		}
+
+		for (ContactProperties contact : contactList) {
+			if (populateFromPost.getRecipientList().contains(
+					contact.getContactusername()))
+				contact.setChecked(true);
+			if (contact.isChecked())
+				MessageToasterHelper.toastMessage("checked : "
+						+ contact.getContactusername());
+		}
+		selectFriendsAdapter.notifyDataSetChanged();
 	}
 
 	/**
@@ -88,26 +145,33 @@ public class SelectFriendsActivity extends ListActivity {
 		View mainLayout = contactsView.getView("layout_selectfriends");
 		View headerLayout = contactsView.getView("header_selectfriends");
 		View buttonBar = contactsView.getView("buttons_selectfriends");
-		View buttonBarButtom = contactsView.getView("buttons_selectfriends_buttom");
+		View buttonBarButtom = contactsView
+				.getView("buttons_selectfriends_buttom");
 
-		View backSelectfriendsButton = contactsView.getView("button_selectfriends_back");
-		View postSelectfriendsButton = contactsView.getView("button_selectfriends_post");
-		View broadcastSelectfriendsButton = contactsView.getView("button_selectfriends_broadcast");
-		//		View unselectSelectfriendsButton = contactsView.getView("button_selectfriends_unselectall");
+		View backSelectfriendsButton = contactsView
+				.getView("button_selectfriends_back");
+		View postSelectfriendsButton = contactsView
+				.getView("button_selectfriends_post");
+		View broadcastSelectfriendsButton = contactsView
+				.getView("button_selectfriends_broadcast");
+		// View unselectSelectfriendsButton =
+		// contactsView.getView("button_selectfriends_unselectall");
 
-		ThemeManager.applyDoubleBarTheme(mainLayout, headerLayout,buttonBar, buttonBarButtom);
-		//		ThemeManager.applyPlainTheme(mainLayout, headerLayout, buttonBarButtom);
+		ThemeManager.applyDoubleBarTheme(mainLayout, headerLayout, buttonBar,
+				buttonBarButtom);
+		// ThemeManager.applyPlainTheme(mainLayout, headerLayout,
+		// buttonBarButtom);
 
 		ThemeManager.applyButtonColor(backSelectfriendsButton);
 		ThemeManager.applyButtonColor(postSelectfriendsButton);
 		ThemeManager.applyButtonColor(broadcastSelectfriendsButton);
-		//		ThemeManager.applyButtonColor(unselectSelectfriendsButton);
-
+		// ThemeManager.applyButtonColor(unselectSelectfriendsButton);
 
 	}
 
 	/**
 	 * Method used to initialize ContactView.
+	 * 
 	 * @author: Hai Tang
 	 */
 	private void initContactView() {
@@ -158,7 +222,6 @@ public class SelectFriendsActivity extends ListActivity {
 
 	}
 
-
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -185,6 +248,11 @@ public class SelectFriendsActivity extends ListActivity {
 	 */
 
 	public void onBackButtonClick(View view) {
+		if (populateFromPost != null) {
+			DataCacheHelper.setGenericFlag(true);
+			populateFromPost = null;
+		}
+
 		Intent intent = new Intent(SelectFriendsActivity.this,
 				CreateMealInformationActivity.class);
 		SelectFriendsActivity.this.startActivity(intent);
@@ -199,6 +267,8 @@ public class SelectFriendsActivity extends ListActivity {
 
 		requestID = "Meal";
 		requestType = "create";
+		if (populateFromPost != null)
+			requestType = "update";
 
 		List<String> recipientList = new ArrayList<String>();
 
@@ -209,12 +279,20 @@ public class SelectFriendsActivity extends ListActivity {
 
 		if (recipientList.isEmpty()) {
 			Toast.makeText(this, R.string.no_invitees, Toast.LENGTH_SHORT)
-			.show();
+					.show();
 			return;
 		}
 
-		IActivityProperties postProperties = new PostProperties(recipientList,
+		PostProperties postProperties = new PostProperties(recipientList,
 				"meal", postData);
+
+		// if we're editing
+		if (populateFromPost != null) {
+			postProperties.setPostID(populateFromPost.getPostID());
+			requestType = "update";
+			populateFromPost = null;
+			DataCacheHelper.setGenericFlag(false);
+		}
 
 		try {
 			List<Map<String, String>> resultMapList = RequestHandlerHelper
@@ -222,7 +300,6 @@ public class SelectFriendsActivity extends ListActivity {
 							postProperties.toMap(), requestID, requestType);
 
 			NotificationAndPostCacheHelper.addPost(postProperties, "mealPost");
-
 
 		} catch (RequestAbortedException e) {
 			System.out.println("Already Handled");
@@ -233,11 +310,10 @@ public class SelectFriendsActivity extends ListActivity {
 		SelectFriendsActivity.this.startActivity(intent);
 	}
 
-
-	public void onBroadcastButtonClick(View view){
-		for(ContactProperties contact : contactList){
-			contact.setChecked(true);			
-		}		
+	public void onBroadcastButtonClick(View view) {
+		for (ContactProperties contact : contactList) {
+			contact.setChecked(true);
+		}
 		updateView(contactList);
 	}
 
@@ -247,7 +323,7 @@ public class SelectFriendsActivity extends ListActivity {
 	 * @author: Hai Tang
 	 */
 
-	private void updateView(List<ContactProperties> contactList){
+	private void updateView(List<ContactProperties> contactList) {
 		selectFriendsAdapter.notifyDataSetChanged();
 	}
 

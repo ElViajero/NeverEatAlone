@@ -121,4 +121,12 @@ public class PostProperties implements IActivityProperties {
 		this.postData = postData;
 	}
 
+	public List<String> getRecipientList() {
+		return recipientList;
+	}
+
+	public void setRecipientList(List<String> recipientList) {
+		this.recipientList = recipientList;
+	}
+
 }

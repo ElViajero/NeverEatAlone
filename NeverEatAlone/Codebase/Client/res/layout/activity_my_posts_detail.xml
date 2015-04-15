@@ -44,12 +44,12 @@
                 android:text="@string/back" />
 
             <Button
-                android:id="@+id/button_myPostsDetail_close"
+                android:id="@+id/button_myPostsDetail_edit"
                 style="@style/BarButton"
                 android:layout_marginRight="@dimen/activity_horizontal_margin"
                 android:layout_weight="0.5"
-                android:onClick="onCloseButtonClick"
-                android:text="@string/decline" />
+                android:onClick="onEditPostButtonClick"
+                android:text="@string/edit_post" />
         </LinearLayout>
     </LinearLayout>
 
@@ -244,6 +244,7 @@
                     android:layout_weight="1"
                     android:text="ADDITIONAL INFO RESULT"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
+                
             </LinearLayout>
         </RelativeLayout>
 

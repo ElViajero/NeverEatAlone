@@ -1,5 +1,6 @@
 package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.services;
 
+import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -28,8 +29,13 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
+
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.DateAndTimeProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.MealProperties;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.PostProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.DataCacheHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.MessageToasterHelper;
@@ -64,6 +70,11 @@ public class CreateMealInformationActivity extends FragmentActivity {
 	LocationListener locationListenerObject;
 	static boolean isListFetched = false;
 
+	private PostProperties populateFromPost;
+
+	private boolean isPostBeingEdited = false; // set to true if we are
+												// editing a post.
+
 	ArrayAdapter<String> restaurantAutoCompleteArrayAdapter;
 
 	// private View mainLayout;
@@ -80,9 +91,69 @@ public class CreateMealInformationActivity extends FragmentActivity {
 	 * @author Runze Tang
 	 * 
 	 */
+
 	public CreateMealInformationActivity() {
 		initiCalendar();
+	}
 
+	/**
+	 * 
+	 * This method helps set the initial value of fields in case we are editing
+	 * a post.
+	 * 
+	 */
+	private void populateFromPost() {
+		populateFromPost = null;
+		// if (!isPostBeingEdited)
+		// return;
+		if (DataCacheHelper.getGenericFlag()
+				&& DataCacheHelper.getIActivityPropertiesObject() != null) {
+			try {
+				populateFromPost = (PostProperties) DataCacheHelper
+						.getIActivityPropertiesObject();
+			} catch (ClassCastException e) {
+			} finally {
+				DataCacheHelper.setGenericFlag(false);
+			}
+		}
+		if (populateFromPost != null) {
+			Gson gson = GsonHelper.getGsoninstance();
+			String postData = populateFromPost.getPostData();
+			Type stringStringMap = new TypeToken<Map<String, String>>() {
+			}.getType();
+
+			Map<String, String> postDataMap = gson.fromJson(postData,
+					stringStringMap);
+			MealProperties mealPropertiesObject = new MealProperties(
+					postDataMap);
+			restaurantAutoCompleteTextView.setText(mealPropertiesObject
+					.getlocation());
+			maxNumberEditViewObject.setText(mealPropertiesObject
+					.getMaxNumberOfInvitees());
+			DateAndTimeProperties startDateAndTimeProperties = mealPropertiesObject
+					.getStartDateAndTimeProperties();
+			startYear = startDateAndTimeProperties.getYear();
+			startMonth = startDateAndTimeProperties.getMonth();
+			startDay = startDateAndTimeProperties.getDay();
+			startHour = startDateAndTimeProperties.getHour();
+			startMinute = startDateAndTimeProperties.getMinute();
+
+			DateAndTimeProperties endDateAndTimeProperties = mealPropertiesObject
+					.getEndDateAndTimeProperties();
+			endYear = endDateAndTimeProperties.getYear();
+			endMonth = endDateAndTimeProperties.getMonth();
+			endDay = endDateAndTimeProperties.getDay();
+			endHour = endDateAndTimeProperties.getHour();
+			endMinute = endDateAndTimeProperties.getMinute();
+			btnSelectStartDateObject.setText(startDateAndTimeProperties
+					.getDateString());
+			btnSelectstartTimeObject.setText(startDateAndTimeProperties
+					.getTimeString());
+			btnSelectEndDateObject.setText(endDateAndTimeProperties
+					.getDateString());
+			btnSelectendTimeObject.setText(endDateAndTimeProperties
+					.getTimeString());
+		}
 	}
 
 	/**
@@ -144,7 +215,7 @@ public class CreateMealInformationActivity extends FragmentActivity {
 
 		setTitleStyle();
 		applyTheme();
-
+		populateFromPost();
 	}
 
 	@SuppressWarnings("unchecked")
@@ -528,6 +599,13 @@ public class CreateMealInformationActivity extends FragmentActivity {
 				maxNumberOfInvitees, isNotificationExtendible,
 				startDateAndTimeProperties, endDateAndTimeProperties);
 
+		// this happens if we are editing a previous post.
+		if (populateFromPost != null) {
+			DataCacheHelper.setGenericFlag(true);
+			populateFromPost = null;
+		}
+
+		// the same old passing to the next activity.
 		Map<String, Object> mealPropertiesMap = mealProperties.toMap();
 
 		Intent intent = new Intent(CreateMealInformationActivity.this,
