@@ -17,7 +17,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -40,7 +39,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.serv
  */
 public class ContactsActivity extends ListFragment {
 
-	private ArrayAdapter<ContactProperties> contactsInformationAdapter;
+	private ContactsInformationAdapter contactsInformationAdapter;
 	private TextView contactTitleObject;
 	private TextView swipeTitleObject;
 	private Button friendRequestButtonObejct;
@@ -106,6 +105,7 @@ public class ContactsActivity extends ListFragment {
 		contactList = new ArrayList<ContactProperties>();
 		contactsInformationAdapter = new ContactsInformationAdapter(
 				getActivity(), contactList);
+		contactsInformationAdapter.setShowCheckboxes(false);
 		setListAdapter(contactsInformationAdapter);
 
 		fetchContacts();

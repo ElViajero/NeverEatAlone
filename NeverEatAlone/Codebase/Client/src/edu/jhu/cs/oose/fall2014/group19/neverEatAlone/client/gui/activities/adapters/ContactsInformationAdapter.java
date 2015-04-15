@@ -1,5 +1,6 @@
 package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.adapters;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
@@ -28,12 +29,16 @@ public class ContactsInformationAdapter extends ArrayAdapter<ContactProperties> 
 
 	private List<ContactProperties> contactInfoList;
 	private Activity context;
+	private boolean showCheckboxes;
+
+	private List<ContactProperties> unCheckableContactsList;
 
 	public ContactsInformationAdapter(Activity activity,
 			List<ContactProperties> contactInfoList) {
 		super(activity, R.layout.row_contact_item_layout, contactInfoList);
 		this.context = activity;
 		this.contactInfoList = contactInfoList;
+		unCheckableContactsList = new ArrayList<ContactProperties>();
 	}
 
 	static class ViewHolder {
@@ -52,6 +57,11 @@ public class ContactsInformationAdapter extends ArrayAdapter<ContactProperties> 
 			viewHolder.name = (TextView) view.findViewById(R.id.contacts_name);
 			viewHolder.checkbox = (CheckBox) view
 					.findViewById(R.id.contacts_check);
+			if (!showCheckboxes)
+				viewHolder.checkbox.setVisibility(android.view.View.GONE);
+			if (unCheckableContactsList.contains(contactInfoList.get(position)))
+				viewHolder.checkbox.setClickable(false);
+
 			viewHolder.avatar = (ImageView) view
 					.findViewById(R.id.contacts_avatar);
 			ContactProperties contact = (ContactProperties) viewHolder.checkbox
@@ -89,4 +99,26 @@ public class ContactsInformationAdapter extends ArrayAdapter<ContactProperties> 
 					.StringToBitMap(avatarString));
 		return view;
 	}
+
+	public boolean isShowCheckboxes() {
+		return showCheckboxes;
+	}
+
+	public void setShowCheckboxes(boolean showCheckboxes) {
+		this.showCheckboxes = showCheckboxes;
+	}
+
+	public List<ContactProperties> getUnCheckableContactsList() {
+		return unCheckableContactsList;
+	}
+
+	public void setUnCheckableContactsList(
+			List<ContactProperties> unCheckableContactsList) {
+		this.unCheckableContactsList = unCheckableContactsList;
+	}
+
+	public void addUncheckableContact(ContactProperties contact) {
+		unCheckableContactsList.add(contact);
+	}
+
 }

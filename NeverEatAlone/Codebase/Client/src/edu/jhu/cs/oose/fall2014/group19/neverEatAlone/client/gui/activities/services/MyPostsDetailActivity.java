@@ -72,6 +72,13 @@ public class MyPostsDetailActivity extends ListActivity {
 				.getIActivityPropertiesObject();
 
 		fetchAttending();
+
+		if (attendingContactsList.isEmpty()) {
+			TextView withWhom = (TextView) myPostsView
+					.getView("TextView_myPostsDetail_withwhom");
+			withWhom.setText("With Whom?\n\nNo attendees yet.");
+		}
+
 		populateView();
 		setTitleStyle();
 		applyTheme();
@@ -99,13 +106,13 @@ public class MyPostsDetailActivity extends ListActivity {
 
 		View backButton = myPostsView.getView("button_myPostsDetail_back");
 		View closeButton = myPostsView.getView("button_myPostsDetail_edit");
-		View inviteOthersButton = myPostsView
-				.getView("button_myPostsDetail_inviteothers");
+		// View inviteOthersButton = myPostsView
+		// .getView("button_myPostsDetail_inviteothers");
 		ThemeManager.applyPlainTheme(mainLayout, headerLayout, buttonBar);
 
 		ThemeManager.applyButtonColor(backButton);
 		ThemeManager.applyButtonColor(closeButton);
-		ThemeManager.applyButtonColor(inviteOthersButton);
+		// ThemeManager.applyButtonColor(inviteOthersButton);
 	}
 
 	@Override

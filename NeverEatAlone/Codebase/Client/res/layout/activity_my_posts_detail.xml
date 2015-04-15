@@ -193,7 +193,7 @@
                     android:layout_height="wrap_content" >
                 </ListView>
             </LinearLayout>
-
+<!-- 
             <LinearLayout
                 android:id="@+id/inviteothers_button_container"
                 android:layout_width="match_parent"
@@ -208,6 +208,7 @@
                     android:layout_weight="0.5"
                     android:text="@string/invite_others"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
+                     
 
                 <TextView
                     android:id="@+id/button_myPostsDetail_padding"
@@ -217,14 +218,15 @@
                     android:gravity="center_horizontal"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
             </LinearLayout>
-
+ -->
+ 
             <TextView
                 android:id="@+id/textView_myPostsDetail_additionalinfo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/inviteothers_button_container"
+                android:layout_below="@+id/myPostsDetail_withwhom_result_container"
                 android:layout_marginTop="20dp"
-                android:text="@string/additional_information"
+                android:text="@string/additional_information"                
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textStyle="bold" />
 

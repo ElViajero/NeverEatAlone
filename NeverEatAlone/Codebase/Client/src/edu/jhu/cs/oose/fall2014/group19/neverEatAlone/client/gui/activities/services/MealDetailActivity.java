@@ -14,17 +14,16 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
 
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.ContactProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.MealProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.NotificationProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.PostProperties;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.adapters.ContactsInformationAdapter;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.DataCacheHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.MessageToasterHelper;
@@ -45,9 +44,8 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestProperties.h
  */
 public class MealDetailActivity extends ListActivity {
 
-
 	List<ContactProperties> attendingList;
-	private ArrayAdapter<ContactProperties> attendingAdapter;
+	private ContactsInformationAdapter attendingAdapter;
 	private Context context;
 	private Activity activity;
 	private MealView mealView;
@@ -58,8 +56,9 @@ public class MealDetailActivity extends ListActivity {
 
 	/**
 	 * 
-	 *Called when the activity is first created.
-	 *@author tejasvamsingh
+	 * Called when the activity is first created.
+	 *
+	 * @author tejasvamsingh
 	 *
 	 */
 	@Override
@@ -68,36 +67,35 @@ public class MealDetailActivity extends ListActivity {
 		setContentView(R.layout.activity_meal_detail);
 
 		initMealView();
-		mealDetailTitleObject = (TextView) mealView.getView("textView_mealdetails_title");
+		mealDetailTitleObject = (TextView) mealView
+				.getView("textView_mealdetails_title");
 
-		notificationPropertiesObject=
-				(NotificationProperties) DataCacheHelper.getIActivityPropertiesObject();
+		notificationPropertiesObject = (NotificationProperties) DataCacheHelper
+				.getIActivityPropertiesObject();
 
 		setTitleStyle();
 		populateView();
 		applyTheme();
 
-		attendingList= new ArrayList<ContactProperties>();
-		attendingAdapter=new ContactsInformationAdapter(this, attendingList);
-		setListAdapter(attendingAdapter);
+		attendingList = new ArrayList<ContactProperties>();
+		attendingAdapter = new ContactsInformationAdapter(this, attendingList);
+		attendingAdapter.setShowCheckboxes(false);
 
+		setListAdapter(attendingAdapter);
 
 		fetchAttending();
 
-		if(DataCacheHelper.isAccepted()){
-			Button accept = (Button)mealView.getView("button_mealdetails_accept");
+		if (DataCacheHelper.isAccepted()) {
+			Button accept = (Button) mealView
+					.getView("button_mealdetails_accept");
 			accept.setText("Undo Accept");
 		}
 
-
 	}
-
-
-
-
 
 	/**
 	 * Method used to initialize MealView
+	 * 
 	 * @author: Hai Tang
 	 */
 	private void initMealView() {
@@ -133,17 +131,17 @@ public class MealDetailActivity extends ListActivity {
 		View backButton = mealView.getView("button_mealdetails_back");
 		View declineButton = mealView.getView("button_mealdetails_decline");
 		View acceptButton = mealView.getView("button_mealdetails_accept");
-		View inviteOthersButton = mealView.getView("button_mealdetails_inviteothers");
+		// View inviteOthersButton =
+		// mealView.getView("button_mealdetails_inviteothers");
 
-		ThemeManager.applyPlainTheme(mainLayout, headerLayout,buttonBar);
+		ThemeManager.applyPlainTheme(mainLayout, headerLayout, buttonBar);
 
 		ThemeManager.applyButtonColor(backButton);
 		ThemeManager.applyButtonColor(declineButton);
 		ThemeManager.applyButtonColor(acceptButton);
-		ThemeManager.applyButtonColor(inviteOthersButton);
+		// ThemeManager.applyButtonColor(inviteOthersButton);
 
 	}
-
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -181,37 +179,38 @@ public class MealDetailActivity extends ListActivity {
 	 */
 	public void onAcceptButtonClick(View view) {
 
-		requestID ="Meal";
-		requestType ="accept";
+		requestID = "Meal";
+		requestType = "accept";
 
-		if(DataCacheHelper.isAccepted())
-			requestType="undoAccept";
+		if (DataCacheHelper.isAccepted())
+			requestType = "undoAccept";
 
-		PostProperties postPropertiesObject=
-				PostProperties.notificationToPost(notificationPropertiesObject);
+		PostProperties postPropertiesObject = PostProperties
+				.notificationToPost(notificationPropertiesObject);
 
-		try{
+		try {
 
-			List<Map<String, String>> result =
-					RequestHandlerHelper.getRequestHandlerInstance().
-					handleRequest(this,postPropertiesObject.toMap(),requestID,requestType);
+			List<Map<String, String>> result = RequestHandlerHelper
+					.getRequestHandlerInstance().handleRequest(this,
+							postPropertiesObject.toMap(), requestID,
+							requestType);
 
 			NotificationAndPostCacheHelper.setServerFetchRequired("meal", true);
-			System.out.println("FETCH STATUS :"+
-					NotificationAndPostCacheHelper.isServerFetchRequired("meal"));
+			System.out.println("FETCH STATUS :"
+					+ NotificationAndPostCacheHelper
+							.isServerFetchRequired("meal"));
 
-			notificationPropertiesObject.setAccepted(!DataCacheHelper.isAccepted());
+			notificationPropertiesObject.setAccepted(!DataCacheHelper
+					.isAccepted());
 
 			Intent intent = new Intent(this, TabHostActivity.class);
 			startActivity(intent);
 
-
-		}catch(RequestAbortedException e){
+		} catch (RequestAbortedException e) {
 			return;
 		}
 
 	}
-
 
 	/**
 	 * Method used for decline button click
@@ -220,107 +219,95 @@ public class MealDetailActivity extends ListActivity {
 	 */
 	public void onDeclineButtonClick(View view) {
 
-		requestID="Meal";
-		requestType="reject";
+		requestID = "Meal";
+		requestType = "reject";
 
-		PostProperties postPropertiesObject=
-				PostProperties.notificationToPost(notificationPropertiesObject);
+		PostProperties postPropertiesObject = PostProperties
+				.notificationToPost(notificationPropertiesObject);
 
-		try{
+		try {
 
-			List<Map<String, String>> result =
-					RequestHandlerHelper.getRequestHandlerInstance().
-					handleRequest(this,postPropertiesObject.toMap(),requestID,requestType);
+			List<Map<String, String>> result = RequestHandlerHelper
+					.getRequestHandlerInstance().handleRequest(this,
+							postPropertiesObject.toMap(), requestID,
+							requestType);
 
 			NotificationAndPostCacheHelper.setServerFetchRequired("meal", true);
-			System.out.println("FETCH STATUS :"+
-					NotificationAndPostCacheHelper.isServerFetchRequired("meal"));
-
+			System.out.println("FETCH STATUS :"
+					+ NotificationAndPostCacheHelper
+							.isServerFetchRequired("meal"));
 
 			Intent intent = new Intent(this, TabHostActivity.class);
 			startActivity(intent);
 
-
-		}catch(RequestAbortedException e){
+		} catch (RequestAbortedException e) {
 			return;
 		}
 
 	}
 
-
 	/**
 	 * Populates the fields in the view.
+	 * 
 	 * @author tejasvamsingh
 	 */
 
 	private void populateView() {
 
-
 		Gson gson = GsonHelper.getGsoninstance();
 
+		MealProperties mealPropertiesObject = (MealProperties) notificationPropertiesObject
+				.getNotificationData();
 
+		TextView textStartTimeTextViewObject = (TextView) mealView
+				.getView("textView_mealdetails_startTime_result");
+		mealView.setValue(textStartTimeTextViewObject, mealPropertiesObject
+				.getStartDateAndTimeProperties().toString());
 
-		MealProperties mealPropertiesObject = (MealProperties)
-				notificationPropertiesObject.getNotificationData();
+		TextView textEndTimeTextViewObject = (TextView) mealView
+				.getView("textView_mealdetails_endTime_result");
+		mealView.setValue(textEndTimeTextViewObject, mealPropertiesObject
+				.getEndDateAndTimeProperties().toString());
 
-
-		TextView textStartTimeTextViewObject = 
-				(TextView) mealView.getView("textView_mealdetails_startTime_result");
-		mealView.setValue(textStartTimeTextViewObject,
-				mealPropertiesObject.getStartDateAndTimeProperties().toString());
-
-		TextView textEndTimeTextViewObject = 
-				(TextView) mealView.getView("textView_mealdetails_endTime_result");
-		mealView.setValue(textEndTimeTextViewObject,
-				mealPropertiesObject.getEndDateAndTimeProperties().toString() );
-
-		TextView restaurantTextViewObject = 
-				(TextView) mealView.getView("TextView_mealdetails_restaurant_result");
+		TextView restaurantTextViewObject = (TextView) mealView
+				.getView("TextView_mealdetails_restaurant_result");
 
 		MessageToasterHelper.toastMessage(mealPropertiesObject.getlocation());
 		mealView.setValue(restaurantTextViewObject,
 				mealPropertiesObject.getlocation());
 
-
 	}
-
-
 
 	private void fetchAttending() {
 
-		requestID="Meal";
-		requestType="getAttendingContacts";
+		requestID = "Meal";
+		requestType = "getAttendingContacts";
 		attendingList.clear();
-		PostProperties postPropertiesObject=
-				PostProperties.notificationToPost(notificationPropertiesObject);
+		PostProperties postPropertiesObject = PostProperties
+				.notificationToPost(notificationPropertiesObject);
 
-		attendingList.add(new ContactProperties(
-				notificationPropertiesObject.getPoster()));	
+		attendingList.add(new ContactProperties(notificationPropertiesObject
+				.getPoster()));
 
+		try {
 
+			List<Map<String, String>> resultMapList = RequestHandlerHelper
+					.getRequestHandlerInstance().handleRequest(this,
+							postPropertiesObject.toMap(), requestID,
+							requestType);
 
-		try{
+			for (Map<String, String> result : resultMapList) {
 
-			List<Map<String, String>> resultMapList =
-					RequestHandlerHelper.getRequestHandlerInstance().
-					handleRequest(this,postPropertiesObject.toMap(),requestID,requestType);
-
-
-			for(Map<String, String> result : resultMapList){
-
-				if(result.isEmpty())
+				if (result.isEmpty())
 					continue;
 
-				attendingList.add(new ContactProperties(result));	
+				attendingList.add(new ContactProperties(result));
 			}
 
-
-		}catch(RequestAbortedException e){
+		} catch (RequestAbortedException e) {
 
 		}
 		attendingAdapter.notifyDataSetChanged();
 	}
-
-
 
 }
