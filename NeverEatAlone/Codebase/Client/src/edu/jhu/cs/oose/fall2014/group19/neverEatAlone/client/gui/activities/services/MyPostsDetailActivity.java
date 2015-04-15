@@ -48,6 +48,7 @@ public class MyPostsDetailActivity extends ListActivity {
 	private Activity activity;
 	private MealView myPostsView;
 	private TextView myPostsDetailTitleObject;
+	private TextView additionalInformation;
 	private String requestID;
 	private String requestType;
 	private PostProperties postPropertiesObject;
@@ -78,6 +79,8 @@ public class MyPostsDetailActivity extends ListActivity {
 					.getView("TextView_myPostsDetail_withwhom");
 			withWhom.setText("With Whom?\n\nNo attendees yet.");
 		}
+
+		// additionalInformation.setText(postPropertiesObject.get);
 
 		populateView();
 		setTitleStyle();
@@ -218,9 +221,14 @@ public class MyPostsDetailActivity extends ListActivity {
 		TextView restaurantTextViewObject = (TextView) myPostsView
 				.getView("TextView_myPostsDetail_restaurant_result");
 
+		additionalInformation = (TextView) myPostsView
+				.getView("TextView_additionalinfo_result");
+
 		myPostsView.setValue(restaurantTextViewObject,
 				mealPropertiesObject.getlocation());
 
+		myPostsView.setValue(additionalInformation,
+				mealPropertiesObject.getAdditionalInformation());
 	}
 
 }
