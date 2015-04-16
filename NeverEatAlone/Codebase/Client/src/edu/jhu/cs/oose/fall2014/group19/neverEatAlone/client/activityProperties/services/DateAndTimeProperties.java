@@ -47,6 +47,11 @@ public class DateAndTimeProperties implements IActivityProperties {
 		this.hour = String.valueOf(hour);
 		this.minute = String.valueOf(minute);
 
+		if (this.minute.length() == 1)
+			this.minute = "0" + this.minute;
+		if (this.hour.length() == 1)
+			this.hour = "0" + this.hour;
+
 	}
 
 	public DateAndTimeProperties(Map<String, String> map) {

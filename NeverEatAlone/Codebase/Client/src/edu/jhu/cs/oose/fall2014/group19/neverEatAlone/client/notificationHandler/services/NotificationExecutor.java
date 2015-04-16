@@ -219,15 +219,19 @@ public class NotificationExecutor extends
 				.println("Inside initConsumptionFrameowork in NotificationExecutor.");
 		if (ChannelObject == null || factoryObject == null
 				|| connectionObject == null) {
-			factoryObject = new ConnectionFactory();
-			factoryObject.setHost(IPAddress);
-			connectionObject = factoryObject.newConnection();
-			ChannelObject = connectionObject.createChannel();
-			System.out.println("username is : " + username);
-			ChannelObject.queueDeclare(username, false, false, false, null);
-			consumerObject = new QueueingConsumer(ChannelObject);
-			ChannelObject.basicConsume(username, true, username, false, true,
-					null, consumerObject);
+			try {
+				factoryObject = new ConnectionFactory();
+				factoryObject.setHost(IPAddress);
+				connectionObject = factoryObject.newConnection();
+				ChannelObject = connectionObject.createChannel();
+				System.out.println("username is : " + username);
+				ChannelObject.queueDeclare(username, false, false, false, null);
+				consumerObject = new QueueingConsumer(ChannelObject);
+				ChannelObject.basicConsume(username, true, username, false,
+						true, null, consumerObject);
+			} catch (NullPointerException e) {
+				return;
+			}
 
 		}
 	}

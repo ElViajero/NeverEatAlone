@@ -1,6 +1,7 @@
 package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.services;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -16,11 +17,12 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.contracts.IActivityProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.AccountProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.NotificationProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.PostProperties;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.comparators.services.PostDateTimeComparator;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.adapters.MealPostAdapter;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.DataCacheHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.MessageToasterHelper;
@@ -97,14 +99,16 @@ public class MyPostsActivity extends ListActivity {
 		closeButton = new Button(getApplicationContext());
 		postList = new ArrayList<IActivityProperties>();
 		myPostsAdapter = new MealPostAdapter(this, postList);
-
 		setListAdapter(myPostsAdapter);
-
 		NotificationAndPostCacheHelper.registerAdapterInstance(myPostsAdapter,
 				"mealPost");
 
 		fetchPosts();
 
+		Collections.sort(postList, new PostDateTimeComparator());
+
+		PostProperties p = (PostProperties) postList.get(0);
+		MessageToasterHelper.toastMessage("postList : " + p.getPostData());
 		setTitleStyle();
 
 		applyTheme();
