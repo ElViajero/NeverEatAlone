@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.google.gson.reflect.TypeToken;
@@ -78,15 +79,15 @@ public class MealPostAdapter extends ArrayAdapter<IActivityProperties> {
 
 		status = (TextView) view.findViewById(R.id.textView_meal_post_status);
 
-		Button closeButton = (Button) view
-				.findViewById(R.id.myPosts_button_close);
+		// Button closeButton = (Button) view
+		// .findViewById(R.id.myPosts_button_close);
 		Button detailsButton = (Button) view
 				.findViewById(R.id.myPosts_button_detail);
 
-		closeButton.setVisibility(android.view.View.GONE);
+		// closeButton.setVisibility(android.view.View.GONE);
 		detailsButton.setVisibility(android.view.View.GONE);
 
-		closeButton.setVisibility(View.INVISIBLE);
+		// closeButton.setVisibility(View.INVISIBLE);
 		detailsButton.setVisibility(View.INVISIBLE);
 
 		PostProperties post = (PostProperties) MealNotifications.get(position);
@@ -109,9 +110,13 @@ public class MealPostAdapter extends ArrayAdapter<IActivityProperties> {
 		if (post.getPostStatus().equalsIgnoreCase("OPEN"))
 			status.setTextColor(Color.GREEN);
 		else if (post.getPostStatus().equalsIgnoreCase("CLOSED"))
-			status.setTextColor(Color.DKGRAY);
+			status.setTextColor(Color.GRAY);
 		else if (post.getPostStatus().equalsIgnoreCase("CANCELLED"))
 			status.setTextColor(Color.RED);
+
+		Spinner postStatusSpinner = (Spinner) view
+				.findViewById(R.id.spinner_meal_post_status);
+		postStatusSpinner.setVisibility(android.view.View.INVISIBLE);
 
 		return view;
 	}

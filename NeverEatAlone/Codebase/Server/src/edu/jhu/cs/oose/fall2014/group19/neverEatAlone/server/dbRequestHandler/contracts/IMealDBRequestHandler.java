@@ -50,4 +50,6 @@ public interface IMealDBRequestHandler {
 
 	public List<Map<String, String>> getRecipients(Map<String, String[]> request);
 
+	public List<Map<String, String>> changeStatus(Map<String, String[]> request);
+
 }

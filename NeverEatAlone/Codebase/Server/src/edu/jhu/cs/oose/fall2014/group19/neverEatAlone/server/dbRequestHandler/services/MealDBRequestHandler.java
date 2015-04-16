@@ -320,4 +320,22 @@ public class MealDBRequestHandler implements IMealDBRequestHandler {
 				queryParameterMap);
 
 	}
+
+	@Override
+	public List<Map<String, String>> changeStatus(Map<String, String[]> request) {
+
+		Map<String, String> paramterMap = DBRequestHandlerHelper
+				.GetQueryParameterMap(request);
+
+		Map<String, Object> queryParameterMap = new HashMap<String, Object>();
+		queryParameterMap.put("postID", paramterMap.get("postID"));
+		queryParameterMap.put("postStatus", paramterMap.get("postStatus"));
+
+		String query = "MATCH (n:Post) " + "WHERE n.postID={postID} "
+				+ "SET n.postStatus={postStatus} " + "RETURN n";
+
+		return iDBQueryExecutionManagerInstance.executeQuery(query,
+				queryParameterMap);
+
+	}
 }

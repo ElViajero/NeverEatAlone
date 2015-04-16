@@ -2,6 +2,7 @@ package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.ser
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,15 +14,18 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.contracts.IActivityProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.AccountProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.NotificationProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.PostProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.comparators.services.PostDateTimeComparator;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.constraintChecker.services.changePostStatusConstraintChecker;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.adapters.MealPostAdapter;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.DataCacheHelper;
@@ -53,9 +57,13 @@ public class MyPostsActivity extends ListActivity {
 	IActivityProperties selectedPost;
 	int listItemIndex;
 	Button detailButton;
-	Button closeButton;
+	// Button closeButton;
+	Spinner postStatusSpinner;
+	TextView postStatusTextView;
 
 	List<IActivityProperties> postList;
+
+	int lastPosition;
 
 	/**
 	 * This constructor is responsible for obtaining notifications and updating
@@ -96,7 +104,11 @@ public class MyPostsActivity extends ListActivity {
 		setContentView(R.layout.activity_my_posts);
 
 		detailButton = new Button(getApplicationContext());
-		closeButton = new Button(getApplicationContext());
+		// closeButton = new Button(getApplicationContext());
+		postStatusSpinner = new Spinner(getApplicationContext());
+		postStatusTextView = new TextView(getApplicationContext());
+		lastPosition = -1;
+
 		postList = new ArrayList<IActivityProperties>();
 		myPostsAdapter = new MealPostAdapter(this, postList);
 		setListAdapter(myPostsAdapter);
@@ -149,38 +161,118 @@ public class MyPostsActivity extends ListActivity {
 	/**
 	 * This method handles click events on the listview.
 	 * 
+	 * @author tejasvamsingh
 	 * @param position
 	 * 
 	 */
 	@Override
 	protected void onListItemClick(ListView l, View v, int position, long id) {
+		MessageToasterHelper.toastMessage("clicked : " + position + ": "
+				+ lastPosition);
 		selectedPost = myPostsAdapter.getItem(position);
 		listItemIndex = position;
+		setSpinnerVisible(v);
 		setButtonsVisible(v);
+
+	}
+
+	/**
+	 * @author tejasvamsingh
+	 * @param v
+	 * @param object
+	 */
+	private void setSpinnerVisible(View v) {
+
+		postStatusSpinner.setVisibility(View.INVISIBLE);
+		postStatusTextView.setVisibility(View.VISIBLE);
+
+		postStatusSpinner = (Spinner) v
+				.findViewById(R.id.spinner_meal_post_status);
+		postStatusTextView = (TextView) v
+				.findViewById(R.id.textView_meal_post_status);
+		final PostProperties p = (PostProperties) selectedPost;
+
+		int pos = 0;
+		if (p.getPostStatus().equalsIgnoreCase("CLOSED"))
+			pos = 1;
+		else if (p.getPostStatus().equalsIgnoreCase("CANCELLED"))
+			pos = 2;
+
+		postStatusSpinner.setSelection(pos);
+
+		ThemeManager.applyButtonColor(postStatusSpinner);
+		postStatusTextView.setVisibility(View.GONE);
+		postStatusSpinner.setVisibility(View.VISIBLE);
+		final MyPostsActivity activityReference = this;
+		postStatusSpinner
+				.setOnItemSelectedListener(new Spinner.OnItemSelectedListener() {
+
+					@Override
+					public void onItemSelected(AdapterView<?> parent,
+							View view, int position, long id) {
+
+						String selectedItem = postStatusSpinner
+								.getSelectedItem().toString();
+						String previousStatus = p.getPostStatus();
+
+						Map<String, Object> constraintMap = new HashMap<String, Object>();
+						constraintMap.put("previousStatus", previousStatus);
+						constraintMap.put("newStatus", selectedItem);
+
+						if (new changePostStatusConstraintChecker()
+								.areConstraintsSatisfied(constraintMap)) {
+
+							try {
+								p.setPostStatus(selectedItem);
+
+								List<Map<String, String>> result = RequestHandlerHelper
+										.getRequestHandlerInstance()
+										.handleRequest(activityReference,
+												p.toMap(), "Meal",
+												"changeStatus");
+
+								// reaching here means successful query.
+								myPostsAdapter.notifyDataSetChanged();
+
+							} catch (RequestAbortedException e) {
+								p.setPostStatus(previousStatus);
+							}
+						}
+
+					}
+
+					@Override
+					public void onNothingSelected(AdapterView<?> parent) {
+						// TODO Auto-generated method stub
+
+					}
+
+				});
+
 	}
 
 	/**
 	 * Toggles visibility of buttons for listview.
 	 * 
-	 * @author Runze Tang
+	 * @author tejasvamsingh
 	 * @param v
 	 */
 	private void setButtonsVisible(View v) {
 
 		detailButton.setVisibility(View.INVISIBLE);
-		closeButton.setVisibility(View.INVISIBLE);
+		// closeButton.setVisibility(View.INVISIBLE);
 
 		View detailButtonView = v.findViewById(R.id.myPosts_button_detail);
-		View closeButtonView = v.findViewById(R.id.myPosts_button_close);
+		// View closeButtonView = v.findViewById(R.id.myPosts_button_close);
 
 		detailButton = (Button) detailButtonView;
-		closeButton = (Button) closeButtonView;
+		// closeButton = (Button) closeButtonView;
 
 		ThemeManager.applyButtonColor(detailButtonView);
-		ThemeManager.applyButtonColor(closeButtonView);
+		// ThemeManager.applyButtonColor(closeButtonView);
 
 		detailButton.setVisibility(View.VISIBLE);
-		closeButton.setVisibility(View.VISIBLE);
+		// closeButton.setVisibility(View.VISIBLE);
 	}
 
 	/**

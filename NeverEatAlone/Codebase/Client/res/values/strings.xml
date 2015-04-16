@@ -127,7 +127,7 @@
     
     <!-- This is for the post status spinner in editProfile -->
     <string-array name="post_status_array">
-        <item>OPEN</item>
+        <item><FONT COLOR="#00FF00">OPEN</FONT></item>
         <item>CLOSED</item>
         <item>CANCELLED</item>
     </string-array>

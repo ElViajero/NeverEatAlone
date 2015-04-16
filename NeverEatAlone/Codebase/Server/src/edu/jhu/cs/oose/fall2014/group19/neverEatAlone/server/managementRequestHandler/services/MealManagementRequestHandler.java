@@ -161,4 +161,38 @@ public class MealManagementRequestHandler implements IManagementRequestHandler,
 		return iMealDBRequestHandlerObject.getRecipients(request);
 	}
 
+	/**
+	 * This method changes the status of the notification from "OPEN","CLOSED",
+	 * "CANCELLED".
+	 * 
+	 * @author tejasvamsingh
+	 * @param request
+	 * @return
+	 */
+	private List<Map<String, String>> changeStatus(Map<String, String[]> request) {
+
+		System.out
+				.println("Inside changeStatus in MealManagementRequestHandler");
+		List<Map<String, String>> result = iMealDBRequestHandlerObject
+				.changeStatus(request);
+		List<Map<String, String>> recipientListMap = getRecipients(request);
+
+		List<String> recipientList = new ArrayList<String>();
+
+		// notify the recipients.
+
+		List<Map<String, String>> notificationMapList = new ArrayList<Map<String, String>>(
+				result);
+		notificationMapList.remove(0);
+
+		for (Map<String, String> map : recipientListMap) {
+			if (map.containsKey("recipientUsername"))
+				recipientList.add(map.get("recipientUsername"));
+		}
+
+		iNotificationManagerObject.pushNotification(notificationMapList,
+				recipientList);
+
+		return result;
+	}
 }
