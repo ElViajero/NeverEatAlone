@@ -123,6 +123,14 @@
         <item>Male</item>
         <item>Female</item>
     </string-array>
+    
+    
+    <!-- This is for the post status spinner in editProfile -->
+    <string-array name="post_status_array">
+        <item>OPEN</item>
+        <item>CLOSED</item>
+        <item>CANCELLED</item>
+    </string-array>
 
     <string name="title_activity_contact_tabbed">ContactTabbedActivity</string>
     <string name="title_section1">Section 1</string>

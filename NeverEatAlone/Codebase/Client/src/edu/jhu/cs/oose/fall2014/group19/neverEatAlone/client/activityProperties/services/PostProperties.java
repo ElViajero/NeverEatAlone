@@ -100,6 +100,7 @@ public class PostProperties implements IActivityProperties {
 				notification.getNotificationData().toMap());
 		PostProperties post = new PostProperties(pRecipientList, pType, pData);
 		post.setPostID(notification.getNotificationID());
+		post.setPostStatus(notification.getNotificationStatus());
 
 		return post;
 
@@ -127,6 +128,14 @@ public class PostProperties implements IActivityProperties {
 
 	public void setRecipientList(List<String> recipientList) {
 		this.recipientList = recipientList;
+	}
+
+	public String getPostStatus() {
+		return postStatus;
+	}
+
+	public void setPostStatus(String postStatus) {
+		this.postStatus = postStatus;
 	}
 
 }

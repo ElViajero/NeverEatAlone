@@ -8,7 +8,7 @@
 
     <LinearLayout
         android:layout_width="0dp"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginStart="10dp"
         android:layout_weight="4"
@@ -34,23 +34,35 @@
             android:textColor="#999999"
             android:textSize="17sp" />
     </LinearLayout>
+    
+    
+    
+    
+     <TextView
+        android:id="@+id/textView_meal_post_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"        
+        android:text="STATUS :"               
+        android:textStyle="bold"        
+        android:textColor="#999999"
+        android:textSize="20sp" 
+        android:layout_marginLeft="10dp"
+        android:layout_gravity="center_horizontal|center_vertical"
+        />
+
 
     <Button
         android:id="@+id/myPosts_button_detail"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:layout_weight="1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"                
         android:gravity="center_vertical|center_horizontal"
         android:onClick="onDetailMyPostsButtonClick"
         android:text="@string/detail" />
 
     <Button
         android:id="@+id/myPosts_button_close"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:layout_weight="1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:gravity="center_vertical|center_horizontal"
         android:onClick="onCloseMyPostsButtonClick"
         android:text="@string/close" />
