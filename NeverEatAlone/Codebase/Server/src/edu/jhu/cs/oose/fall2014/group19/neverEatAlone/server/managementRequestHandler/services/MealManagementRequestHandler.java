@@ -195,4 +195,10 @@ public class MealManagementRequestHandler implements IManagementRequestHandler,
 
 		return result;
 	}
+
+	private List<Map<String, String>> deleteOld(Map<String, String[]> request) {
+		System.out.println("inside deleteOld in MealManagementRequestHandler");
+		return iMealDBRequestHandlerObject.deleteOldPosts(request);
+	}
+
 }

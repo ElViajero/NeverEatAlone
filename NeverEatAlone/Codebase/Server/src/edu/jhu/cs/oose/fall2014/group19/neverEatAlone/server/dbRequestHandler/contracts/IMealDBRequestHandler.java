@@ -52,4 +52,7 @@ public interface IMealDBRequestHandler {
 
 	public List<Map<String, String>> changeStatus(Map<String, String[]> request);
 
+	public List<Map<String, String>> deleteOldPosts(
+			Map<String, String[]> request);
+
 }

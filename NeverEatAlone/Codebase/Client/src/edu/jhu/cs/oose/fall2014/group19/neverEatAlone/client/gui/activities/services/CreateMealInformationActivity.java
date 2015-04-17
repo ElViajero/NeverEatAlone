@@ -177,7 +177,7 @@ public class CreateMealInformationActivity extends FragmentActivity {
 		endMonth = startMonth;
 		startDay = c.get(Calendar.DAY_OF_MONTH);
 		endDay = startDay;
-		startHour = c.get(Calendar.HOUR);
+		startHour = c.get(Calendar.HOUR_OF_DAY);
 		endHour = startHour;
 		startMinute = c.get(Calendar.MINUTE);
 		endMinute = startMinute;

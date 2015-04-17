@@ -1,5 +1,6 @@
 package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.dbRequestHandler.services;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -336,6 +337,70 @@ public class MealDBRequestHandler implements IMealDBRequestHandler {
 
 		return iDBQueryExecutionManagerInstance.executeQuery(query,
 				queryParameterMap);
+
+	}
+
+	@Override
+	public List<Map<String, String>> deleteOldPosts(
+			Map<String, String[]> request) {
+
+		System.out.println("Inside deleteOldPosts in MealDBRequestHandler");
+
+		List<Map<String, String>> postMapList = fetchPosts(request);
+		String currentDateAndTimeString = request
+				.get("currentDateAndTimeString")[0];
+
+		List<String> postsToBeDeletedList = new ArrayList<String>();
+		List<Map<String, String>> result = null;
+		postMapList.remove(0);
+
+		for (Map<String, String> postMap : postMapList) {
+
+			String month = postMap.get("endmonth");
+			String day = postMap.get("endday");
+			String year = postMap.get("endyear");
+			String hour = postMap.get("endhour");
+			String minute = postMap.get("endminute");
+
+			String postDateAndTimeString = month + "/" + day + "/" + year
+					+ "   " + hour + ":" + minute;
+
+			System.out.println("post date and time string is : "
+					+ postDateAndTimeString);
+			System.out.println("current date and time string is : "
+					+ currentDateAndTimeString);
+
+			int compVal = postDateAndTimeString
+					.compareTo(currentDateAndTimeString);
+
+			System.out.println("comp val : " + compVal);
+			if (compVal < 0) {
+				System.out.println("LESS POST IN HERE");
+				postsToBeDeletedList.add(postMap.get("postID"));
+			}
+		}
+
+		for (String postToBeDeleted : postsToBeDeletedList) {
+
+			System.out.println("DELETING POST WITH ID : " + postToBeDeleted);
+
+			Map<String, Object> queryParameters = new HashMap<String, Object>();
+			queryParameters.put("postID", postToBeDeleted);
+
+			String query = "MATCH (n:Post) " + "WHERE n.postID={postID} "
+					+ "OPTIONAL MATCH (n)-[r]-() " + "DELETE r,n";
+
+			result = iDBQueryExecutionManagerInstance.executeQuery(query,
+					queryParameters);
+		}
+
+		if (result == null) {
+			result = new ArrayList<Map<String, String>>();
+			Map<String, String> statusMap = new HashMap<String, String>();
+			statusMap.put("Status", "Success");
+			result.add(statusMap);
+		}
+		return result;
 
 	}
 }

@@ -49,6 +49,7 @@ public class AccountProperties implements IActivityProperties, IOrderedIterator 
 	}
 
 	public AccountProperties(String username, String password, String email) {
+
 		this.username = username;
 		this.password = password;
 		this.email = email;

@@ -21,6 +21,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.AccountProperties;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.DateAndTimeProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.MessageToasterHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.NotificationAndPostCacheHelper;
@@ -148,6 +149,9 @@ public class MainActivity extends Activity {
 			// we want the user string not the encrypted version.
 			AccountProperties.getUserAccountInstance().setpassword(password);
 
+			// delete old posts
+			deleteOldPosts();
+
 			// start the location service.
 			startLocationService();
 
@@ -235,4 +239,21 @@ public class MainActivity extends Activity {
 
 	}
 
+	/**
+	 * This method removes posts that w
+	 */
+	private void deleteOldPosts() {
+
+		try {
+			Map<String, Object> requestMap = AccountProperties
+					.getUserAccountInstance().toMap();
+			requestMap.put("currentDateAndTimeString", DateAndTimeProperties
+					.getCurrentDateAndTimeProperties().toString());
+			RequestHandlerHelper.getRequestHandlerInstance().handleRequest(
+					this, requestMap, "Meal", "deleteOld");
+
+		} catch (RequestAbortedException e) {
+		}
+
+	}
 }

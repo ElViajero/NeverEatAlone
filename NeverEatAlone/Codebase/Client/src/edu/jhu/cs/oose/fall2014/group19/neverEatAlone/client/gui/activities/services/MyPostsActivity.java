@@ -119,8 +119,6 @@ public class MyPostsActivity extends ListActivity {
 
 		Collections.sort(postList, new PostDateTimeComparator());
 
-		PostProperties p = (PostProperties) postList.get(0);
-		MessageToasterHelper.toastMessage("postList : " + p.getPostData());
 		setTitleStyle();
 
 		applyTheme();

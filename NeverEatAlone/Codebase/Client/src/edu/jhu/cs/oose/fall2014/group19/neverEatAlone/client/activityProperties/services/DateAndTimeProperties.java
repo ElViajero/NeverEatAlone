@@ -172,7 +172,7 @@ public class DateAndTimeProperties implements IActivityProperties {
 	public static DateAndTimeProperties getCurrentDateAndTimeProperties() {
 		Calendar c = Calendar.getInstance();
 		currentDateAndTimeProperties = new DateAndTimeProperties(
-				c.get(Calendar.DAY_OF_MONTH), c.get(Calendar.MONTH),
+				c.get(Calendar.DAY_OF_MONTH), c.get(Calendar.MONTH) + 1,
 				c.get(Calendar.YEAR), c.get(Calendar.HOUR_OF_DAY),
 				c.get(Calendar.MINUTE));
 		return currentDateAndTimeProperties;
