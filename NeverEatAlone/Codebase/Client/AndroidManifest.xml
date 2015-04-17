@@ -34,6 +34,7 @@
             android:launchMode="singleTask" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -41,7 +42,7 @@
             android:name=".services.RegisterActivity"
             android:label="@string/title_activity_register"
             android:launchMode="singleTask" >
-        </activity>        
+        </activity>
         <activity
             android:name=".services.TabHostActivity"
             android:label="@string/title_activity_tab_host"
@@ -127,13 +128,15 @@
             android:label="@string/title_activity_my_posts_detail"
             android:launchMode="singleTask" >
         </activity>
-        
         <activity
             android:name=".services.ContactTabbedActivity"
-            android:label="@string/title_activity_contact_tabbed"		                     
+            android:label="@string/title_activity_contact_tabbed"
             android:launchMode="singleTask" >
-        </activity>        
-        
+        </activity>
+        <activity
+            android:name=".services.SelectFriendsFragmentActivity"
+            android:label="@string/title_activity_select_friends_fragment" >
+        </activity>
     </application>
 
 </manifest>

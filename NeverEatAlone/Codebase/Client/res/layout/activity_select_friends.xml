@@ -18,6 +18,10 @@
             android:id="@+id/textView_selectfriends_title"
             style="@style/HeaderTextTheme"
             android:text="@string/select_friends" />
+        
+        <TextView
+            android:id="@+id/textView_swipe_title"  
+            style="@style/HeaderTextTheme"/>
     </RelativeLayout>
 
  <!--     Button Header -->

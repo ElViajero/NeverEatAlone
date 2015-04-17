@@ -123,8 +123,7 @@
         <item>Male</item>
         <item>Female</item>
     </string-array>
-    
-    
+
     <!-- This is for the post status spinner in editProfile -->
     <string-array name="post_status_array">
         <item><FONT COLOR="#00FF00">OPEN</FONT></item>
@@ -136,5 +135,6 @@
     <string name="title_section1">Section 1</string>
     <string name="title_section2">Section 2</string>
     <string name="title_section3">Section 3</string>
+    <string name="title_activity_select_friends_fragment">SelectFriendsFragmentActivity</string>
 
 </resources>

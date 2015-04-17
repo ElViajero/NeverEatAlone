@@ -369,6 +369,7 @@ public class CreateMealInformationActivity extends FragmentActivity {
 		args.putInt("month", endMonth);
 		args.putInt("day", endDay);
 		enddate.setArguments(args);
+
 		// Set Call back to capture selected date
 		enddate.setCallBack(onenddate);
 		enddate.show(getSupportFragmentManager(), "Date Picker");
@@ -621,7 +622,7 @@ public class CreateMealInformationActivity extends FragmentActivity {
 		Map<String, Object> mealPropertiesMap = mealProperties.toMap();
 
 		Intent intent = new Intent(CreateMealInformationActivity.this,
-				SelectFriendsActivity.class);
+				SelectFriendsFragmentActivity.class);
 		intent.putExtra("mealProperties",
 				GsonHelper.getGsoninstance().toJson(mealPropertiesMap));
 		CreateMealInformationActivity.this.startActivity(intent);
