@@ -214,6 +214,10 @@ public class ContactsProfileActivity extends Activity {
 	 */
 	private void setAvatar(ContactProperties contact) {
 
+		if (contact.getContactAvatarString() == null
+				|| contact.getContactAvatarString().equals(""))
+			return;
+
 		ImageView imageViewObject = (ImageView) profileView
 				.getView("imageView_contacts_profile_avatar");
 

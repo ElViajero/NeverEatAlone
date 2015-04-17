@@ -1,5 +1,6 @@
 package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.services;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -20,9 +21,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.AccountProperties;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.constraintChecker.services.validEmailContraintChecker;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.BitMapHelper;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.EmailValidatorHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.ProfileView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
@@ -42,8 +43,8 @@ public class EditProfileActivity extends Activity {
 	private EditText emailEditTextObject;
 	private Spinner genderSpinnerObject;
 	private EditText workspaceEditTextObject;
+
 	// private EditText aliasEditTextObject;
-	private EmailValidatorHelper validator;
 	private TextView editProfileTitle;
 	private ImageView imageView;
 	private Bitmap avatarBitmap;
@@ -79,7 +80,6 @@ public class EditProfileActivity extends Activity {
 		imageView = (ImageView) profileView
 				.getView("imageView_editprofile_avatar");
 		setFields();
-		validator = new EmailValidatorHelper();
 
 		setTitleStyle();
 		applyTheme();
@@ -198,7 +198,12 @@ public class EditProfileActivity extends Activity {
 			newAccountPropertiesObject.setAvatar(BitMapHelper
 					.BitMapToString(avatarBitmap));
 
-		if (!validator.isValid(email)) {
+		// Create a constraint map
+		Map<String, Object> constraintMap = new HashMap<String, Object>();
+		constraintMap.put("email", email);
+
+		if (!new validEmailContraintChecker()
+				.areConstraintsSatisfied(constraintMap)) {
 			Toast.makeText(this, R.string.invalid_email, Toast.LENGTH_SHORT)
 					.show();
 			return;

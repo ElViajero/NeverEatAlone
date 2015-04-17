@@ -81,7 +81,6 @@ public class MainActivity extends Activity {
 		requestID = "Login";
 		requestType = "checkCredentials";
 		System.out.println("inside onCreate in MainAcitivty");
-		MessageToasterHelper.toastMessage(this, "inside oncreate");
 
 	}
 

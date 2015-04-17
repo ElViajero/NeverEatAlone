@@ -57,6 +57,7 @@ public class AccountProperties implements IActivityProperties, IOrderedIterator 
 		this.workPlace = "";
 		this.currentPostID = username + "_0";
 		this.locationProperties = new LocationProperties();
+		this.avatar = "";
 	}
 
 	public AccountProperties(Map<String, String> map) {

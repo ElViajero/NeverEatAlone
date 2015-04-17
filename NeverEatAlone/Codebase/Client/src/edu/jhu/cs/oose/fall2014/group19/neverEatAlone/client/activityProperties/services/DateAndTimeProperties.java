@@ -1,6 +1,7 @@
 package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services;
 
 import java.lang.reflect.Type;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,6 +28,8 @@ public class DateAndTimeProperties implements IActivityProperties {
 	String hour;
 	String minute;
 	static String prefix = "";
+
+	private static DateAndTimeProperties currentDateAndTimeProperties;
 
 	// constructors
 	public DateAndTimeProperties(int day, int month, int year, int hour,
@@ -164,6 +167,15 @@ public class DateAndTimeProperties implements IActivityProperties {
 
 	public String getTimeString() {
 		return hour + ":" + minute;
+	}
+
+	public static DateAndTimeProperties getCurrentDateAndTimeProperties() {
+		Calendar c = Calendar.getInstance();
+		currentDateAndTimeProperties = new DateAndTimeProperties(
+				c.get(Calendar.DAY_OF_MONTH), c.get(Calendar.MONTH),
+				c.get(Calendar.YEAR), c.get(Calendar.HOUR_OF_DAY),
+				c.get(Calendar.MINUTE));
+		return currentDateAndTimeProperties;
 	}
 
 }
