@@ -121,7 +121,7 @@ public class ProfileActivity extends Activity {
 	 * @author: Yueling Loh
 	 */
 	private void setTitleStyle() {
-
+		profileTitleObject.setGravity(android.view.Gravity.CENTER);
 		ThemeManager.setHeaderFont(profileTitleObject);
 	}
 

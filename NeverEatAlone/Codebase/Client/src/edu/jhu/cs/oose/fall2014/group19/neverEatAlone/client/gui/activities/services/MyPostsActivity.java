@@ -9,11 +9,14 @@ import java.util.Map;
 import org.apache.http.impl.execchain.RequestAbortedException;
 
 import android.app.Activity;
-import android.app.ListActivity;
+import android.app.ListFragment;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -29,10 +32,9 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.constraintChecker.s
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.adapters.MealPostAdapter;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.DataCacheHelper;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.MessageToasterHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.NotificationAndPostCacheHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.InvitesView;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.FragmentView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
 
 /**
@@ -42,9 +44,11 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.serv
  * @author tejasvamsingh
  * @author Runze Tang
  */
-public class MyPostsActivity extends ListActivity {
+public class MyPostsActivity extends ListFragment {
 
-	private TextView titleNameObject;
+	private TextView myPostsTitle;
+	private TextView myPostsSwipeTitle;
+
 	private ArrayAdapter<IActivityProperties> myPostsAdapter;
 	String requestID;
 	String requestType;
@@ -52,7 +56,7 @@ public class MyPostsActivity extends ListActivity {
 	boolean isCreated;
 	private Context context;
 	private Activity activity;
-	private InvitesView invitesView;
+	private FragmentView invitesView;
 
 	IActivityProperties selectedPost;
 	int listItemIndex;
@@ -60,6 +64,10 @@ public class MyPostsActivity extends ListActivity {
 	// Button closeButton;
 	Spinner postStatusSpinner;
 	TextView postStatusTextView;
+
+	Button createInviteButton;
+
+	private View rootView;
 
 	List<IActivityProperties> postList;
 
@@ -71,13 +79,63 @@ public class MyPostsActivity extends ListActivity {
 	 * 
 	 * @author tejasvamsingh
 	 */
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
 
-		MessageToasterHelper.toastMessage("Inside CREATE");
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
 
+		rootView = inflater.inflate(R.layout.activity_my_posts, container,
+				false);
 		initView(savedInstanceState);
 		isCreated = false;
+		setCreateInviteButtonHandler();
+		setDetailButtonHandler();
+		return rootView;
+
+	}
+
+	/**
+	 * 
+	 * This method handles details button click event.
+	 * 
+	 * @author tejasvamsingh
+	 */
+
+	private void setDetailButtonHandler() {
+
+		View.OnClickListener detailsButtonOnClickListener = new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				DataCacheHelper.setIActivityPropertiesObject(selectedPost);
+				Intent intent = new Intent(getActivity(),
+						MyPostsDetailActivity.class);
+				startActivity(intent);
+
+			}
+		};
+
+		detailButton.setOnClickListener(detailsButtonOnClickListener);
+
+	}
+
+	/**
+	 * This method sets the onclick handler for the create invites button.
+	 * 
+	 * @author tejasvamsingh
+	 */
+	private void setCreateInviteButtonHandler() {
+
+		View.OnClickListener createInviteButtonClickListener = new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(getActivity(),
+						CreateMealInformationActivity.class);
+				getActivity().startActivity(intent);
+			}
+		};
+
+		createInviteButton.setOnClickListener(createInviteButtonClickListener);
 
 	}
 
@@ -87,9 +145,8 @@ public class MyPostsActivity extends ListActivity {
 	 * @author tejasvamsingh
 	 */
 	private void initInvitesView() {
-		context = this;
-		activity = this;
-		invitesView = new InvitesView(context, activity);
+		context = rootView.getContext();
+		invitesView = new FragmentView(context, rootView);
 	}
 
 	/**
@@ -101,16 +158,15 @@ public class MyPostsActivity extends ListActivity {
 	private void initView(Bundle savedInstanceState) {
 
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_my_posts);
 
-		detailButton = new Button(getApplicationContext());
+		detailButton = new Button(rootView.getContext());
 		// closeButton = new Button(getApplicationContext());
-		postStatusSpinner = new Spinner(getApplicationContext());
-		postStatusTextView = new TextView(getApplicationContext());
+		postStatusSpinner = new Spinner(rootView.getContext());
+		postStatusTextView = new TextView(rootView.getContext());
 		lastPosition = -1;
 
 		postList = new ArrayList<IActivityProperties>();
-		myPostsAdapter = new MealPostAdapter(this, postList);
+		myPostsAdapter = new MealPostAdapter(getActivity(), postList);
 		setListAdapter(myPostsAdapter);
 		NotificationAndPostCacheHelper.registerAdapterInstance(myPostsAdapter,
 				"mealPost");
@@ -126,18 +182,29 @@ public class MyPostsActivity extends ListActivity {
 	}
 
 	/**
+	 * 
 	 * This method is used to set the font style of the title of each page
+	 * 
+	 * @author tejasvamsingh
 	 * 
 	 */
 	private void setTitleStyle() {
 		initInvitesView();
-		titleNameObject = (TextView) invitesView.getView("my_posts");
-		ThemeManager.setHeaderFont(titleNameObject);
+		myPostsTitle = (TextView) invitesView.getView("my_posts_title");
+		myPostsSwipeTitle = (TextView) invitesView.getView("my_posts_swipe");
+		myPostsSwipeTitle.setGravity(android.view.Gravity.RIGHT);
+		myPostsTitle.setGravity(android.view.Gravity.CENTER);
+
+		myPostsSwipeTitle.setText(">>");
+		myPostsSwipeTitle.setTextColor(Color.GRAY);
+
+		ThemeManager.setHeaderFont(myPostsTitle);
 	}
 
 	/**
 	 * This method applies the GUI's color theme.
 	 * 
+	 * @author tejasvamsingh
 	 * @author Hai Tang
 	 * 
 	 */
@@ -147,12 +214,15 @@ public class MyPostsActivity extends ListActivity {
 		View mainLayout = invitesView.getView("layout_my_posts");
 		View headerLayout = invitesView.getView("header_my_posts");
 		View buttonBar = invitesView.getView("my_posts_buttons_layout");
-		View backButton = invitesView.getView("my_posts_button_back");
+		// View backButton = invitesView.getView("my_posts_button_back");
+
+		createInviteButton = (Button) invitesView
+				.getView("my_posts_button_create");
 
 		ThemeManager.applyTheme(mainLayout, headerLayout);
 		ThemeManager.applyButtonBarTheme(buttonBar);
 
-		ThemeManager.applyButtonColor(backButton);
+		ThemeManager.applyButtonColor(createInviteButton);
 
 	}
 
@@ -164,9 +234,8 @@ public class MyPostsActivity extends ListActivity {
 	 * 
 	 */
 	@Override
-	protected void onListItemClick(ListView l, View v, int position, long id) {
-		MessageToasterHelper.toastMessage("clicked : " + position + ": "
-				+ lastPosition);
+	public void onListItemClick(ListView l, View v, int position, long id) {
+
 		selectedPost = myPostsAdapter.getItem(position);
 		listItemIndex = position;
 		setSpinnerVisible(v);
@@ -201,7 +270,7 @@ public class MyPostsActivity extends ListActivity {
 		ThemeManager.applyButtonColor(postStatusSpinner);
 		postStatusTextView.setVisibility(View.GONE);
 		postStatusSpinner.setVisibility(View.VISIBLE);
-		final MyPostsActivity activityReference = this;
+		// final MyPostsActivity activityReference = getActivity();
 		postStatusSpinner
 				.setOnItemSelectedListener(new Spinner.OnItemSelectedListener() {
 
@@ -225,7 +294,7 @@ public class MyPostsActivity extends ListActivity {
 
 								List<Map<String, String>> result = RequestHandlerHelper
 										.getRequestHandlerInstance()
-										.handleRequest(activityReference,
+										.handleRequest(getActivity(),
 												p.toMap(), "Meal",
 												"changeStatus");
 
@@ -264,25 +333,14 @@ public class MyPostsActivity extends ListActivity {
 		// View closeButtonView = v.findViewById(R.id.myPosts_button_close);
 
 		detailButton = (Button) detailButtonView;
-		// closeButton = (Button) closeButtonView;
+
+		setDetailButtonHandler();
 
 		ThemeManager.applyButtonColor(detailButtonView);
 		// ThemeManager.applyButtonColor(closeButtonView);
 
 		detailButton.setVisibility(View.VISIBLE);
 		// closeButton.setVisibility(View.VISIBLE);
-	}
-
-	/**
-	 * Handler for the detail button.
-	 * 
-	 * @param view
-	 */
-	public void onDetailMyPostsButtonClick(View view) {
-
-		DataCacheHelper.setIActivityPropertiesObject(selectedPost);
-		Intent intent = new Intent(this, MyPostsDetailActivity.class);
-		startActivity(intent);
 	}
 
 	/**
@@ -302,7 +360,7 @@ public class MyPostsActivity extends ListActivity {
 	 */
 	public void onBackButtonClick(View view) {
 
-		Intent intent = new Intent(MyPostsActivity.this, TabHostActivity.class);
+		Intent intent = new Intent(getActivity(), TabHostActivity.class);
 		MyPostsActivity.this.startActivity(intent);
 	}
 
@@ -315,7 +373,7 @@ public class MyPostsActivity extends ListActivity {
 
 		try {
 			List<Map<String, String>> resultMapList = RequestHandlerHelper
-					.getRequestHandlerInstance().handleRequest(this,
+					.getRequestHandlerInstance().handleRequest(getActivity(),
 							AccountProperties.getUserAccountInstance().toMap(),
 							requestID, requestType);
 

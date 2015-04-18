@@ -94,7 +94,7 @@ public class ContactsInformationAdapter extends ArrayAdapter<ContactProperties> 
 		holder.name.setText(contactInfoList.get(position).getContactusername());
 		holder.checkbox.setChecked(contactInfoList.get(position).isChecked());
 
-		if (avatarString != null)
+		if (avatarString != null && avatarString != "")
 			holder.avatar.setImageBitmap(BitMapHelper
 					.StringToBitMap(avatarString));
 		return view;

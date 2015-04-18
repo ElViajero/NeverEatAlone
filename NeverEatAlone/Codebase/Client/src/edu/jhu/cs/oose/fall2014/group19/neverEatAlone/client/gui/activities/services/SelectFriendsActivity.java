@@ -13,6 +13,7 @@ import android.app.Activity;
 import android.app.ListFragment;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -323,15 +324,18 @@ public class SelectFriendsActivity extends ListFragment {
 
 		if (requestType.equals("getAll")) {
 			selectFriendTitle.setText("All Contacts");
-			swipeTitle.setText("Nearby >>");
-			selectFriendTitle.setGravity(android.view.Gravity.LEFT);
+			swipeTitle.setText(">>");
+			swipeTitle.setTextColor(Color.GRAY);
 			swipeTitle.setGravity(android.view.Gravity.RIGHT);
 		} else {
 			selectFriendTitle.setText("Nearby Contacts");
-			selectFriendTitle.setGravity(android.view.Gravity.RIGHT);
+
 			swipeTitle.setGravity(android.view.Gravity.LEFT);
-			swipeTitle.setText("<< All");
+			swipeTitle.setText("<<");
+			swipeTitle.setTextColor(Color.GRAY);
+
 		}
+		selectFriendTitle.setGravity(android.view.Gravity.CENTER);
 		ThemeManager.setHeaderFont(selectFriendTitle);
 	}
 

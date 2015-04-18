@@ -13,6 +13,7 @@ import android.app.Activity;
 import android.app.ListFragment;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -167,15 +168,18 @@ public class ContactsActivity extends ListFragment {
 
 		if (requestType.equals("getAll")) {
 			contactTitleObject.setText("All Contacts");
-			swipeTitleObject.setText("Nearby >>");
-			contactTitleObject.setGravity(android.view.Gravity.LEFT);
+			swipeTitleObject.setText(">>");
 			swipeTitleObject.setGravity(android.view.Gravity.RIGHT);
-		} else {
-			contactTitleObject.setText("Nearby Contacts");
-			contactTitleObject.setGravity(android.view.Gravity.RIGHT);
-			swipeTitleObject.setGravity(android.view.Gravity.LEFT);
-			swipeTitleObject.setText("<< All");
 		}
+
+		else {
+			contactTitleObject.setText("Nearby Contacts");
+			swipeTitleObject.setGravity(android.view.Gravity.LEFT);
+			swipeTitleObject.setText("<<");
+		}
+
+		swipeTitleObject.setTextColor(Color.GRAY);
+		contactTitleObject.setGravity(android.view.Gravity.CENTER);
 
 		ThemeManager.setHeaderFont(contactTitleObject);
 	}

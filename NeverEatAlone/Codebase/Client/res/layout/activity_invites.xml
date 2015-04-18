@@ -16,9 +16,16 @@
         style="@style/HeaderTheme" >
 
         <TextView
-            android:id="@+id/app_name"
+            android:id="@+id/invites_title"
             style="@style/HeaderTextTheme"
-            android:text="@string/app_name" />
+            android:text="@string/invites" />
+        <TextView
+            android:id="@+id/invites_swipe_left"
+            style="@style/HeaderTextTheme"/>
+        <TextView
+            android:id="@+id/invites_swipe_right"
+            style="@style/HeaderTextTheme"/>
+        
     </RelativeLayout>
 
     <!-- Button Header -->
@@ -37,6 +44,7 @@
             android:baselineAligned="false"
             android:orientation="horizontal" >
 
+            <!-- 
             <Button
                 android:id="@+id/invites_button_my_posts"
                 style="@style/BarButton"
@@ -51,14 +59,14 @@
                 android:layout_marginRight="@dimen/activity_horizontal_margin"
                 android:layout_weight="0.33"
                 android:onClick="onAcceptedInvitesButtonClick"
-                android:text="@string/accepted_invites" />
+                android:text="@string/accepted_invites" /> -->
 
             <Button
                 android:id="@+id/invites_button_create"
                 style="@style/BarButton"
-                android:layout_weight="0.33"
-                android:onClick="onCreateButtonClick"
+                android:layout_weight="0.33"                
                 android:text="@string/create" />
+            
         </LinearLayout>
     </LinearLayout>
     <!-- Main Space -->

@@ -122,6 +122,7 @@ public class DisplayContactNotificationActivity extends ListActivity {
 		friendRequestTitleObject = (TextView) contactsView
 				.getView("textView_friendsrequest_title");
 
+		friendRequestTitleObject.setGravity(android.view.Gravity.CENTER);
 		ThemeManager.setHeaderFont(friendRequestTitleObject);
 	}
 

@@ -113,7 +113,7 @@ public class ContactsProfileActivity extends Activity {
 	 * @author: Hai Tang
 	 */
 	private void setTitleStyle() {
-
+		contactsProfileTitleObject.setGravity(android.view.Gravity.CENTER);
 		ThemeManager.setHeaderFont(contactsProfileTitleObject);
 	}
 

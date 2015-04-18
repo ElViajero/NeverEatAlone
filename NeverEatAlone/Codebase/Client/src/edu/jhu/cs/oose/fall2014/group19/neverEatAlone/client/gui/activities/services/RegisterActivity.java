@@ -110,6 +110,7 @@ public class RegisterActivity extends Activity {
 	 * @author: Yueling Loh
 	 */
 	private void setTitleStyle() {
+		registerTitle.setGravity(android.view.Gravity.CENTER);
 		ThemeManager.setHeaderFont(registerTitle);
 	}
 

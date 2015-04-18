@@ -61,11 +61,20 @@
         android:layout_above="@+id/buttons_myPostsDetail"
         android:layout_below="@+id/header_myPostsDetail" >
 
+        <ScrollView
+        android:id="@+id/scroll_my_posts_detail"
+        style="@style/MainLayoutTheme"
+        android:layout_width="fill_parent"
+        android:scrollbars="none"        
+                >
+        
         <RelativeLayout
             android:id="@+id/main_myPostsDetail_countainer"
             style="@style/MainLayoutTheme"
-            android:layout_alignParentTop="true" >
+             >
 
+        
+            
             <TextView
                 android:id="@+id/TextView_myPostsDetail_when"
                 android:layout_width="wrap_content"
@@ -193,32 +202,6 @@
                     android:layout_height="wrap_content" >
                 </ListView>
             </LinearLayout>
-<!-- 
-            <LinearLayout
-                android:id="@+id/inviteothers_button_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/myPostsDetail_withwhom_result_container"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal" >
-
-                <Button
-                    android:id="@+id/button_myPostsDetail_inviteothers"
-                    style="@style/BarButton"
-                    android:layout_weight="0.5"
-                    android:text="@string/invite_others"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
-                     
-
-                <TextView
-                    android:id="@+id/button_myPostsDetail_padding"
-                    android:layout_width="0dip"
-                    android:layout_height="0dip"
-                    android:layout_weight="0.5"
-                    android:gravity="center_horizontal"
-                    android:textAppearance="?android:attr/textAppearanceMedium" />
-            </LinearLayout>
- -->
  
             <TextView
                 android:id="@+id/textView_myPostsDetail_additionalinfo"
@@ -248,17 +231,8 @@
                 
             </LinearLayout>
         </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/main_myPostsDetail_countainer2"
-            style="@style/MainLayoutTheme" >
-
-            <ListView
-                android:id="@android:id/list"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
-            </ListView>
-        </RelativeLayout>
+        </ScrollView>
     </RelativeLayout>
 
+        
 </RelativeLayout>

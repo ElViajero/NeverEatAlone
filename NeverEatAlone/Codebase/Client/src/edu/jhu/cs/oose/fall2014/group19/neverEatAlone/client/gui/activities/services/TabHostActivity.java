@@ -109,7 +109,7 @@ public class TabHostActivity extends TabActivity {
 		View invitesTabview = createTabView(TabHost.getContext(), "Invites");
 		TabInvites.setIndicator(invitesTabview);
 		// TabInvites.setIndicator("Invites");
-		Intent intent = new Intent(this, InvitesActivity.class);
+		Intent intent = new Intent(this, InvitesFragmentActivity.class);
 		intent.putExtra("notificationMapListJSon", notificationMapListJSon);
 		TabInvites.setContent(intent);
 

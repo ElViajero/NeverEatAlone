@@ -91,7 +91,8 @@
         android:id="@+id/main_profile"
         style="@style/MainLayoutTheme"
         android:layout_above="@+id/buttons_profile"
-        android:layout_below="@+id/buttons_profile_top">
+        android:layout_below="@+id/buttons_profile_top"
+        android:scrollbars="none">
 
         <RelativeLayout
             android:id="@+id/layout_profile_container"

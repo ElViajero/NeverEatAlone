@@ -12,9 +12,14 @@
         style="@style/HeaderTheme" >
 
         <TextView
-            android:id="@+id/my_posts"
+            android:id="@+id/my_posts_title"
             style="@style/HeaderTextTheme"
             android:text="@string/my_posts" />
+        <TextView
+            android:id="@+id/my_posts_swipe"
+            style="@style/HeaderTextTheme"/>
+        
+        
     </RelativeLayout>
 
     <!-- Button Header -->
@@ -31,20 +36,27 @@
             style="@style/ButtonBarTheme"
             android:layout_gravity="center_horizontal"
             android:orientation="horizontal" >
-
+            
+            <Button
+                android:id="@+id/my_posts_button_create"
+                style="@style/BarButton"
+                android:layout_weight="0.33"                
+                android:text="@string/create" />
+<!-- 
             <Button
                 android:id="@+id/my_posts_button_back"
                 style="@style/BarButton"
                 android:layout_marginRight="@dimen/activity_horizontal_margin"
                 android:onClick="onBackButtonClick"
                 android:text="@string/back" />
-
+ 
             <RelativeLayout
                 android:id="@+id/button_placeholder"
                 android:layout_width="0dip"
                 android:layout_height="0dip"
                 android:layout_weight="0.5" >
             </RelativeLayout>
+            -->
         </LinearLayout>
     </LinearLayout>
 
