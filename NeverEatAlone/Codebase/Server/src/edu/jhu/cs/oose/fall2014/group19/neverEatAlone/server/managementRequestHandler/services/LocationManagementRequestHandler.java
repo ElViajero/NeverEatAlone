@@ -67,7 +67,7 @@ public class LocationManagementRequestHandler implements
 				+ radius + "&types=" + type + "&key=" + locationAPIKey;
 		// Map<String, Object> responseMap = null;
 		Map<String, Object> responseMap = requestExecutorHelper
-				.executeRequest(requestURLString);
+				.executePostRequest(requestURLString);
 		if (responseMap == null)
 			return placeNameMapList;
 
@@ -120,7 +120,7 @@ public class LocationManagementRequestHandler implements
 
 		// Map<String, Object> responseMap = null;
 		Map<String, Object> responseMap = requestExecutorHelper
-				.executeRequest(requestURLString);
+				.executePostRequest(requestURLString);
 
 		List<Map<String, String>> locationMapList = new ArrayList<Map<String, String>>();
 

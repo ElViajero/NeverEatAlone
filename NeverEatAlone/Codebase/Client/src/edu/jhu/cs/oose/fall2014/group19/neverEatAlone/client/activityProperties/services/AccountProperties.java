@@ -89,6 +89,9 @@ public class AccountProperties implements IActivityProperties, IOrderedIterator 
 
 		System.out.println("map is : " + requestMap);
 
+		if (email == null || email.equals(""))
+			requestMap.remove("email");
+
 		return requestMap;
 
 	}
@@ -100,7 +103,9 @@ public class AccountProperties implements IActivityProperties, IOrderedIterator 
 
 		username = map.get("username");
 		password = map.get("password");
-		email = map.get("email");
+
+		if (map.containsKey("email"))
+			email = map.get("email");
 		name = map.get("name");
 		currentPostID = map.get("postID");
 		name = map.get("name");

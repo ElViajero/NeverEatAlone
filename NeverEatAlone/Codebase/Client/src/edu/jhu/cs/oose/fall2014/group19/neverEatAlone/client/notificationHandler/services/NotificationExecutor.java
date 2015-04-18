@@ -110,6 +110,10 @@ public class NotificationExecutor extends
 					.println(" [*] Waiting for messages. To exit press CTRL+C");
 			List<Map<String, String>> resultMapList = new ArrayList<Map<String, String>>();
 			while (true) {
+
+				if (consumerObject == null)
+					break;
+
 				QueueingConsumer.Delivery delivery = consumerObject
 						.nextDelivery(3000);
 				if (delivery == null)
@@ -221,7 +225,12 @@ public class NotificationExecutor extends
 				|| connectionObject == null) {
 			try {
 				factoryObject = new ConnectionFactory();
+
 				factoryObject.setHost(IPAddress);
+				factoryObject.setUsername(AccountProperties
+						.getUserAccountInstance().getusername());
+				factoryObject.setPassword(AccountProperties
+						.getUserAccountInstance().getpassword());
 				connectionObject = factoryObject.newConnection();
 				ChannelObject = connectionObject.createChannel();
 				System.out.println("username is : " + username);
