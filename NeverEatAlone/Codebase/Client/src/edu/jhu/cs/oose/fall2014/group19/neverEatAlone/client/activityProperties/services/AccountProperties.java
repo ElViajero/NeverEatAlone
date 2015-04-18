@@ -103,7 +103,7 @@ public class AccountProperties implements IActivityProperties, IOrderedIterator 
 
 		username = map.get("username");
 		password = map.get("password");
-
+		email = "";
 		if (map.containsKey("email"))
 			email = map.get("email");
 		name = map.get("name");
@@ -114,7 +114,7 @@ public class AccountProperties implements IActivityProperties, IOrderedIterator 
 
 		accountPropertiesInstance = new AccountProperties(map.get("username"),
 				map.get("password"));
-		accountPropertiesInstance.setemail(map.get("email"));
+		accountPropertiesInstance.setemail(email);
 		PostProperties.initPostID(map.get("currentPostID"));
 		accountPropertiesInstance.setName(name);
 		accountPropertiesInstance.setWorkPlace(workPlace);
