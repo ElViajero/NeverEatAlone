@@ -137,6 +137,10 @@
             android:name=".services.SelectFriendsFragmentActivity"
             android:label="@string/title_activity_select_friends_fragment" >
         </activity>
+        <activity
+            android:name=".services.InvitesFragmentActivity"
+            android:label="@string/title_activity_invites_fragment" >
+        </activity>
     </application>
 
 </manifest>

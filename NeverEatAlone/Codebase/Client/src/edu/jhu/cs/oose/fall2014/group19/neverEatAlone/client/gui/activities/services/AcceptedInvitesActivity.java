@@ -7,14 +7,17 @@ import java.util.Map;
 import org.apache.http.impl.execchain.RequestAbortedException;
 
 import android.app.Activity;
-import android.app.ListActivity;
+import android.app.ListFragment;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.view.Menu;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.contracts.IActivityProperties;
@@ -24,7 +27,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.adapters.MealNotificationAdapter;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.DataCacheHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.InvitesView;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.FragmentView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
 
 /**
@@ -33,39 +36,72 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.serv
  * @author tejasvamsingh
  *
  */
-public class AcceptedInvitesActivity extends ListActivity {
+public class AcceptedInvitesActivity extends ListFragment {
 
 	private TextView acceptedInvitesTitleObject;
+	private TextView acceptedInvitesSwipeTitleObject;
 	private Context context;
 	private Activity activity;
-	private InvitesView invitesView;
+	private FragmentView invitesView;
 	private String requestID;
 	private String requestType;
+
+	Button createInviteButton;
 
 	private ArrayAdapter<IActivityProperties> acceptedInvitesAdapter;
 	private List<IActivityProperties> acceptedInvitesList;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_accepted_invites);
+	private View rootView;
+
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+
+		rootView = inflater.inflate(R.layout.activity_accepted_invites,
+				container, false);
 
 		initView(savedInstanceState);
 		initInvitesView();
 		acceptedInvitesTitleObject = (TextView) invitesView
 				.getView("accepted_invites_title");
+		acceptedInvitesSwipeTitleObject = (TextView) invitesView
+				.getView("accepted_invites_swipe_title");
+
 		setTitleStyle();
+		setCreateInviteButtonHandler();
+
+		return rootView;
+
+	}
+
+	/**
+	 * This method sets the onclick handler for the create invites button.
+	 * 
+	 * @author tejasvamsingh
+	 */
+	private void setCreateInviteButtonHandler() {
+
+		View.OnClickListener createInviteButtonClickListener = new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(getActivity(),
+						CreateMealInformationActivity.class);
+				getActivity().startActivity(intent);
+			}
+		};
+
+		createInviteButton.setOnClickListener(createInviteButtonClickListener);
 	}
 
 	/**
 	 * Method used to initialize the InvitesView
 	 * 
+	 * @author tejasvamsingh
 	 * @author: Hai Tang
 	 */
 	private void initInvitesView() {
-		context = this;
-		activity = this;
-		invitesView = new InvitesView(context, activity);
+		context = rootView.getContext();
+		invitesView = new FragmentView(context, rootView);
 	}
 
 	/**
@@ -77,11 +113,10 @@ public class AcceptedInvitesActivity extends ListActivity {
 	 */
 	private void initView(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_accepted_invites);
 
 		acceptedInvitesList = new ArrayList<IActivityProperties>();
 
-		acceptedInvitesAdapter = new MealNotificationAdapter(this,
+		acceptedInvitesAdapter = new MealNotificationAdapter(getActivity(),
 				acceptedInvitesList);
 		setListAdapter(acceptedInvitesAdapter);
 		fetchAcceptedInvites();
@@ -97,6 +132,10 @@ public class AcceptedInvitesActivity extends ListActivity {
 	 */
 	private void setTitleStyle() {
 
+		acceptedInvitesSwipeTitleObject.setText("<<");
+		acceptedInvitesSwipeTitleObject.setTextColor(Color.GRAY);
+		acceptedInvitesSwipeTitleObject.setGravity(android.view.Gravity.LEFT);
+		acceptedInvitesTitleObject.setGravity(android.view.Gravity.CENTER);
 		ThemeManager.setHeaderFont(acceptedInvitesTitleObject);
 	}
 
@@ -111,20 +150,22 @@ public class AcceptedInvitesActivity extends ListActivity {
 		View headerLayout = invitesView.getView("header_accepted_invites");
 		View buttonBar = invitesView.getView("buttons_accepted_invites");
 
-		View backAcceptedInviteButton = invitesView
-				.getView("accepted_invites_button_back");
+		// View backAcceptedInviteButton = invitesView
+		// .getView("accepted_invites_button_back");
+
+		createInviteButton = (Button) invitesView
+				.getView("accepted_invites_button_create");
 
 		ThemeManager.applyTheme(mainLayout, headerLayout);
 		ThemeManager.applyButtonBarTheme(buttonBar);
-		ThemeManager.applyButtonColor(backAcceptedInviteButton);
+		ThemeManager.applyButtonColor(createInviteButton);
 
 	}
 
 	public void onBackButtonClick(View view) {
 		// Intent intent = new Intent(RegisterActivity.this,
 		// MainActivity.class);
-		Intent intent = new Intent(AcceptedInvitesActivity.this,
-				TabHostActivity.class);
+		Intent intent = new Intent(getActivity(), TabHostActivity.class);
 		AcceptedInvitesActivity.this.startActivity(intent);
 	}
 
@@ -138,21 +179,14 @@ public class AcceptedInvitesActivity extends ListActivity {
 	 * 
 	 */
 	@Override
-	protected void onListItemClick(ListView l, View v, int position, long id) {
+	public void onListItemClick(ListView l, View v, int position, long id) {
 
 		DataCacheHelper.setAccepted(true);
 		DataCacheHelper.setIActivityPropertiesObject(acceptedInvitesAdapter
 				.getItem(position));
-		Intent intent = new Intent(this, MealDetailActivity.class);
+		Intent intent = new Intent(getActivity(), MealDetailActivity.class);
 		startActivity(intent);
 
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.accepted_invites, menu);
-		return true;
 	}
 
 	@Override
@@ -181,7 +215,7 @@ public class AcceptedInvitesActivity extends ListActivity {
 		try {
 
 			List<Map<String, String>> resultMapList = RequestHandlerHelper
-					.getRequestHandlerInstance().handleRequest(this,
+					.getRequestHandlerInstance().handleRequest(getActivity(),
 							AccountProperties.getUserAccountInstance().toMap(),
 							requestID, requestType);
 
@@ -200,6 +234,12 @@ public class AcceptedInvitesActivity extends ListActivity {
 			return;
 		}
 
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		fetchAcceptedInvites();
 	}
 
 }

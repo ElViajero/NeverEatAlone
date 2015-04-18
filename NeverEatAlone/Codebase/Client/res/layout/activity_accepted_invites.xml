@@ -17,6 +17,10 @@
             android:id="@+id/accepted_invites_title"
             style="@style/HeaderTextTheme"
             android:text="@string/accepted_invites" />
+        <TextView
+            android:id="@+id/accepted_invites_swipe_title"
+            style="@style/HeaderTextTheme"
+            android:text="@string/accepted_invites" />
     </RelativeLayout>
     
     <!-- Button Header -->
@@ -34,7 +38,7 @@
             android:layout_gravity="center_horizontal"
             android:baselineAligned="false"
             android:orientation="horizontal" >
-
+<!-- 
             <Button
                 android:id="@+id/accepted_invites_button_back"
                 style="@style/BarButton"
@@ -42,13 +46,20 @@
                 android:onClick="onBackButtonClick"
                 android:text="@string/back"
                 android:textAppearance="?android:attr/textAppearanceSmall" />
-
+                 -->
+			<Button
+                android:id="@+id/accepted_invites_button_create"
+                style="@style/BarButton"
+                android:layout_weight="0.33"                
+                android:text="@string/create" />
+<!-- 
             <RelativeLayout
                 android:id="@+id/button_placeholder"
                 android:layout_width="0dip"
                 android:layout_height="0dip"
                 android:layout_weight="0.5" >
-            </RelativeLayout>
+            </RelativeLayout> -->
+            
         </LinearLayout> 
     </LinearLayout>
     

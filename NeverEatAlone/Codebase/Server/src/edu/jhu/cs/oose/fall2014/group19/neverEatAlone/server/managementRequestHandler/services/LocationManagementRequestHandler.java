@@ -26,7 +26,7 @@ public class LocationManagementRequestHandler implements
 
 	Map<String, Map<String, Object>> nearbyPlacesMap;
 
-	final String locationAPIKey = "AIzaSyDCVufbJIFNiZtLdbezooXr8jfAqKUzYVo";
+	final String locationAPIKey = "";
 
 	/**
 	 * This method returns a list of places that are nearby to the provided
@@ -65,9 +65,9 @@ public class LocationManagementRequestHandler implements
 				+ longitude
 				+ "&radius="
 				+ radius + "&types=" + type + "&key=" + locationAPIKey;
-		// Map<String, Object> responseMap = null;
-		Map<String, Object> responseMap = requestExecutorHelper
-				.executePostRequest(requestURLString);
+		Map<String, Object> responseMap = null;
+		// Map<String, Object> responseMap = requestExecutorHelper
+		// .executePostRequest(requestURLString);
 		if (responseMap == null)
 			return placeNameMapList;
 
@@ -118,9 +118,9 @@ public class LocationManagementRequestHandler implements
 				+ "maps/api/geocode/json?" + "latlng=" + latitude + ","
 				+ longitude + "&key=" + locationAPIKey;
 
-		// Map<String, Object> responseMap = null;
-		Map<String, Object> responseMap = requestExecutorHelper
-				.executePostRequest(requestURLString);
+		 Map<String, Object> responseMap = null;
+		//Map<String, Object> responseMap = requestExecutorHelper
+			//	.executePostRequest(requestURLString);
 
 		List<Map<String, String>> locationMapList = new ArrayList<Map<String, String>>();
 

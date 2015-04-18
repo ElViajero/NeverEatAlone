@@ -111,7 +111,7 @@ public class MealDetailActivity extends ListActivity {
 	 * @author: Yueling Loh
 	 */
 	private void setTitleStyle() {
-
+		mealDetailTitleObject.setGravity(android.view.Gravity.CENTER);
 		ThemeManager.setHeaderFont(mealDetailTitleObject);
 
 	}

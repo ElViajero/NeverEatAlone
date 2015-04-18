@@ -95,7 +95,7 @@ public class MyPostsDetailActivity extends ListActivity {
 	}
 
 	private void setTitleStyle() {
-
+		myPostsDetailTitleObject.setGravity(android.view.Gravity.CENTER);
 		ThemeManager.setHeaderFont(myPostsDetailTitleObject);
 
 	}
@@ -142,7 +142,8 @@ public class MyPostsDetailActivity extends ListActivity {
 	 * 
 	 */
 	public void onBackButtonClick(View view) {
-		Intent intent = new Intent(this, MyPostsActivity.class);
+		InvitesFragmentActivity.setFragmentpostion(0);
+		Intent intent = new Intent(this, InvitesFragmentActivity.class);
 		startActivity(intent);
 
 	}

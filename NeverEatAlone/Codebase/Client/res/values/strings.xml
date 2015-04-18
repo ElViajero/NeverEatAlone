@@ -116,6 +116,7 @@
     <string name="my_posts_detail">My Posts Details</string>
     <string name="delete_contact">Delete Contact</string>
     <string name="edit_post">Edit Post</string>
+    <string name="invites">Invites</string>
 
     <!-- This is for the gender spinner in editProfile -->
     <string-array name="gender_array">
@@ -136,5 +137,6 @@
     <string name="title_section2">Section 2</string>
     <string name="title_section3">Section 3</string>
     <string name="title_activity_select_friends_fragment">SelectFriendsFragmentActivity</string>
+    <string name="title_activity_invites_fragment">InvitesFragmentActivity</string>
 
 </resources>

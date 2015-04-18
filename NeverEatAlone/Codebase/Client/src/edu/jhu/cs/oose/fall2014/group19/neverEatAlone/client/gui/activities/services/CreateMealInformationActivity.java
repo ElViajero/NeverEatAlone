@@ -269,7 +269,7 @@ public class CreateMealInformationActivity extends FragmentActivity {
 	 * @author: Yueling Loh
 	 */
 	private void setTitleStyle() {
-
+		createMealInfoTitleObject.setGravity(android.view.Gravity.CENTER);
 		ThemeManager.setHeaderFont(createMealInfoTitleObject);
 	}
 

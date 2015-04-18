@@ -97,6 +97,7 @@ public class ChangePasswordActivity extends Activity {
 	 * 
 	 */
 	private void setTitleStyle() {
+		changePasswordTitle.setGravity(android.view.Gravity.CENTER);
 		ThemeManager.setHeaderFont(changePasswordTitle);
 	}
 

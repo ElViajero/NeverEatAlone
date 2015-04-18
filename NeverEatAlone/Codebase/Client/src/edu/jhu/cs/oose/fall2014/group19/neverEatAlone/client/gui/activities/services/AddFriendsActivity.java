@@ -116,6 +116,7 @@ public class AddFriendsActivity extends Activity {
 	 * @author: Yueling Loh
 	 */
 	private void setTitleStyle() {
+		addFriendTextViewTitleObject.setGravity(android.view.Gravity.CENTER);
 		ThemeManager.setHeaderFont(addFriendTextViewTitleObject);
 	}
 

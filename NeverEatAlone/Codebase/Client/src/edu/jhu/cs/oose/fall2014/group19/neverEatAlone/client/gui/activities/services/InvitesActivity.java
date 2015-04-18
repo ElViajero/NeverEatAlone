@@ -7,23 +7,27 @@ import java.util.Map;
 import org.apache.http.impl.execchain.RequestAbortedException;
 
 import android.app.Activity;
-import android.app.ListActivity;
+import android.app.ListFragment;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.contracts.IActivityProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.AccountProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.NotificationProperties;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.adapters.MealNotificationAdapter;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.DataCacheHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.NotificationAndPostCacheHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.InvitesView;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.FragmentView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
 
 /**
@@ -35,10 +39,15 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.serv
  * @author Runze Tang
  *
  */
-public class InvitesActivity extends ListActivity {
+public class InvitesActivity extends ListFragment {
 
 	private ArrayAdapter<IActivityProperties> invitesAdapter;
-	private TextView appNameObject;
+
+	private TextView invitesTitleObject;
+	private TextView invitesSwipeLeftObject;
+	private TextView invitesSwipeRightObject;
+
+	Button createInviteButton;
 
 	List<IActivityProperties> notificationList;
 
@@ -48,7 +57,9 @@ public class InvitesActivity extends ListActivity {
 	boolean isCreated;
 	private Context context;
 	private Activity activity;
-	private InvitesView invitesView;
+	private FragmentView invitesView;
+
+	private View rootView;
 
 	/**
 	 * This constructor is responsible for obtaining notifications and updating
@@ -58,18 +69,48 @@ public class InvitesActivity extends ListActivity {
 	 * @author Hai Tang
 	 * @author Yueling Loh
 	 */
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+
+		rootView = inflater
+				.inflate(R.layout.activity_invites, container, false);
 
 		notificationList = new ArrayList<IActivityProperties>();
 		initView(savedInstanceState);
 		isCreated = false;
-
 		initInvitesView();
-
-		appNameObject = (TextView) invitesView.getView("app_name");
+		invitesTitleObject = (TextView) invitesView.getView("invites_title");
+		invitesSwipeLeftObject = (TextView) invitesView
+				.getView("invites_swipe_left");
+		invitesSwipeRightObject = (TextView) invitesView
+				.getView("invites_swipe_right");
 
 		setTitleStyle();
+		setCreateInviteButtonHandler();
+
+		return rootView;
+
+	}
+
+	/**
+	 * This method sets the onclick handler for the create invites button.
+	 * 
+	 * @author tejasvamsingh
+	 */
+	private void setCreateInviteButtonHandler() {
+
+		View.OnClickListener createInviteButtonClickListener = new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(getActivity(),
+						CreateMealInformationActivity.class);
+				getActivity().startActivity(intent);
+			}
+		};
+
+		createInviteButton.setOnClickListener(createInviteButtonClickListener);
+
 	}
 
 	/**
@@ -78,9 +119,9 @@ public class InvitesActivity extends ListActivity {
 	 * @author: Hai Tang
 	 */
 	private void initInvitesView() {
-		context = this;
-		activity = this;
-		invitesView = new InvitesView(context, activity);
+		context = rootView.getContext();
+		// activity = this;
+		invitesView = new FragmentView(context, rootView);
 	}
 
 	/**
@@ -91,9 +132,9 @@ public class InvitesActivity extends ListActivity {
 	 */
 	private void initView(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_invites);
 
-		invitesAdapter = new MealNotificationAdapter(this, notificationList);
+		invitesAdapter = new MealNotificationAdapter(getActivity(),
+				notificationList);
 		setListAdapter(invitesAdapter);
 		NotificationAndPostCacheHelper.registerAdapterInstance(invitesAdapter,
 				"meal");
@@ -105,12 +146,21 @@ public class InvitesActivity extends ListActivity {
 	/**
 	 * This method is used to set the font style of the title of each page
 	 * 
+	 * @author tejasvamsingh
 	 * @author: Hai Tang
 	 * @author: Yueling Loh
 	 */
 	private void setTitleStyle() {
 
-		ThemeManager.setHeaderFont(appNameObject);
+		invitesSwipeLeftObject.setText("<<");
+		invitesSwipeLeftObject.setTextColor(Color.GRAY);
+		invitesSwipeLeftObject.setGravity(android.view.Gravity.LEFT);
+		invitesSwipeRightObject.setText(">>");
+		invitesSwipeRightObject.setTextColor(Color.GRAY);
+		invitesSwipeRightObject.setGravity(android.view.Gravity.RIGHT);
+
+		invitesTitleObject.setGravity(android.view.Gravity.CENTER);
+		ThemeManager.setHeaderFont(invitesTitleObject);
 	}
 
 	/**
@@ -126,10 +176,12 @@ public class InvitesActivity extends ListActivity {
 		View headerLayout = invitesView.getView("header_invites");
 		View buttonBar = invitesView.getView("buttons_invites");
 
-		View createInviteButton = invitesView.getView("invites_button_create");
-		View myInvitesButton = invitesView.getView("invites_button_my_posts");
-		View acceptedInvitesButton = invitesView
-				.getView("invites_button_accepted_invites");
+		createInviteButton = (Button) invitesView
+				.getView("invites_button_create");
+		// View myInvitesButton =
+		// invitesView.getView("invites_button_my_posts");
+		// View acceptedInvitesButton = invitesView
+		// .getView("invites_button_accepted_invites");
 		// Switch availabilitySwitch = (Switch)
 		// invitesView.getView("switch_availability_status");
 
@@ -137,8 +189,8 @@ public class InvitesActivity extends ListActivity {
 		ThemeManager.applyButtonBarTheme(buttonBar);
 
 		ThemeManager.applyButtonColor(createInviteButton);
-		ThemeManager.applyButtonColor(myInvitesButton);
-		ThemeManager.applyButtonColor(acceptedInvitesButton);
+		// ThemeManager.applyButtonColor(myInvitesButton);
+		// ThemeManager.applyButtonColor(acceptedInvitesButton);
 		// ThemeManager.applyAvailabilityColor(availabilitySwitch);
 
 	}
@@ -153,8 +205,8 @@ public class InvitesActivity extends ListActivity {
 	 * 
 	 */
 	@Override
-	protected void onListItemClick(ListView l, View v, int position, long id) {
-		Intent intent = new Intent(this, MealDetailActivity.class);
+	public void onListItemClick(ListView l, View v, int position, long id) {
+		Intent intent = new Intent(getActivity(), MealDetailActivity.class);
 
 		NotificationProperties notification = (NotificationProperties) notificationList
 				.get(position);
@@ -166,40 +218,16 @@ public class InvitesActivity extends ListActivity {
 
 	}
 
-	public void onCreateButtonClick(View view) {
-		// Intent intent = new Intent(RegisterActivity.this,
-		// MainActivity.class);
-		Intent intent = new Intent(InvitesActivity.this,
-				CreateMealInformationActivity.class);
-		InvitesActivity.this.startActivity(intent);
-	}
-
-	public void onMyPostsButtonClick(View view) {
-		// Intent intent = new Intent(RegisterActivity.this,
-		// MainActivity.class);
-		Intent intent = new Intent(InvitesActivity.this, MyPostsActivity.class);
-		InvitesActivity.this.startActivity(intent);
-	}
-
-	public void onAcceptedInvitesButtonClick(View view) {
-		// Intent intent = new Intent(RegisterActivity.this,
-		// MainActivity.class);
-		Intent intent = new Intent(InvitesActivity.this,
-				AcceptedInvitesActivity.class);
-		InvitesActivity.this.startActivity(intent);
-	}
-
 	@Override
-	protected void onResume(){
+	public void onResume() {
 		super.onResume();
-		if(NotificationAndPostCacheHelper.
-				isServerFetchRequired("meal")){
+		if (NotificationAndPostCacheHelper.isServerFetchRequired("meal")) {
 			fetchNotifications();
-			NotificationAndPostCacheHelper.setServerFetchRequired("meal", false);
+			NotificationAndPostCacheHelper
+					.setServerFetchRequired("meal", false);
 		}
 
 	}
-
 
 	private void fetchNotifications() {
 		notificationList.clear();
@@ -209,12 +237,12 @@ public class InvitesActivity extends ListActivity {
 
 			// send the request.
 			List<Map<String, String>> resultMapList = RequestHandlerHelper
-					.getRequestHandlerInstance().handleRequest(this,
+					.getRequestHandlerInstance().handleRequest(getActivity(),
 							AccountProperties.getUserAccountInstance().toMap(),
 							requestID, requestType);
 
-			for(Map<String, String> result : resultMapList){
-				if(result.isEmpty())
+			for (Map<String, String> result : resultMapList) {
+				if (result.isEmpty())
 					continue;
 				notificationList.add(new NotificationProperties(result));
 			}
@@ -223,6 +251,5 @@ public class InvitesActivity extends ListActivity {
 			return;
 		}
 	}
-
 
 }

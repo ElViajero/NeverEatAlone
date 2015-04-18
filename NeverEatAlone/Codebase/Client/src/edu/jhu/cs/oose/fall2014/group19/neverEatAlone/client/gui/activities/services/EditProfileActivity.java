@@ -136,6 +136,7 @@ public class EditProfileActivity extends Activity {
 	 * @author: Yueling Loh
 	 */
 	private void setTitleStyle() {
+		editProfileTitle.setGravity(android.view.Gravity.CENTER);
 		ThemeManager.setHeaderFont(editProfileTitle);
 	}
 

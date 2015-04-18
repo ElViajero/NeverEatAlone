@@ -2,10 +2,5 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/pager"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"    
-    tools:context="edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.services.ContactTabbedActivity"    
-/>
-
-
-
-
+    android:layout_height="match_parent"
+    tools:context="edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.services.InvitesFragmentActivity" />
