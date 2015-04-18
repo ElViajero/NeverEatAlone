@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -54,6 +55,7 @@ public class MyPostsDetailActivity extends ListActivity {
 	private PostProperties postPropertiesObject;
 
 	List<ContactProperties> attendingContactsList;
+	Button backButton;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -143,7 +145,7 @@ public class MyPostsDetailActivity extends ListActivity {
 	 */
 	public void onBackButtonClick(View view) {
 		InvitesFragmentActivity.setFragmentpostion(0);
-		Intent intent = new Intent(this, InvitesFragmentActivity.class);
+		Intent intent = new Intent(this, TabHostActivity.class);
 		startActivity(intent);
 
 	}
