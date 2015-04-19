@@ -66,7 +66,8 @@
         android:id="@+id/main_mealDetails"
         style="@style/MainLayoutTheme"
         android:layout_above="@+id/buttons_mealDetails"
-        android:layout_below="@+id/header_mealDetails" >
+        android:layout_below="@+id/header_mealDetails"
+        android:scrollbars="none" >
 
         <RelativeLayout
             android:id="@+id/main_mealDetails_countainer"

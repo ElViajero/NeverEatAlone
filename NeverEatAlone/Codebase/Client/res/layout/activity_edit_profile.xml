@@ -54,7 +54,12 @@
         style="@style/MainLayoutTheme"
         android:layout_above="@+id/buttons_editProfile"
         android:layout_below="@+id/header_editProfile" >
-
+<ScrollView
+        android:id="@+id/scroll_my_posts_detail"
+        style="@style/MainLayoutTheme"
+        android:layout_width="fill_parent"
+        android:scrollbars="none"        
+                >
         <RelativeLayout
             android:id="@+id/layout_editProfile_container"
             style="@style/MainLayoutTheme"
@@ -205,6 +210,7 @@
                     android:textAppearance="?android:attr/textAppearanceMedium" />
             </LinearLayout>
         </RelativeLayout>
+        </ScrollView>
     </LinearLayout>
 
 </RelativeLayout>

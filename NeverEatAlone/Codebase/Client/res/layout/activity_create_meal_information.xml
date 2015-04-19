@@ -52,11 +52,29 @@
     </LinearLayout>
     <!-- Main Space -->
 
+
+
+
     <RelativeLayout
         android:id="@+id/main_createMealInfo"
         style="@style/MainLayoutTheme"
-        android:layout_above="@+id/buttons_createMealInfo"
-        android:layout_below="@+id/header_createMealInfo" >
+                    android:layout_above="@+id/buttons_createMealInfo"
+        android:layout_below="@+id/header_createMealInfo">
+	
+	<ScrollView
+        android:id="@+id/scroll_my_posts_detail"
+        style="@style/MainLayoutTheme"
+        android:layout_width="fill_parent"
+        android:scrollbars="none"
+            
+        	        >
+        
+        <RelativeLayout
+            android:id="@+id/main_CreateMeal_countainer"
+            style="@style/MainLayoutTheme"
+             >
+    
+        
 
         <LinearLayout
             android:id="@+id/CreateMealInformation_layout"
@@ -185,10 +203,11 @@
                 android:id="@+id/CreateMealInformation_text_other"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="@string/other_information"
+                android:layout_marginTop="20dp"
+                android:text="@string/additional_info"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
+            <!-- 
             <LinearLayout
                 android:id="@+id/CreateMealInformation_layout_maxnumber"
                 android:layout_width="match_parent"
@@ -219,43 +238,49 @@
                         android:layout_weight="1"
                         android:inputType="number" />
                 </LinearLayout>
-            </LinearLayout>
+            </LinearLayout> 
             
-            
-             <LinearLayout
+            -->
+             
+             <!-- <LinearLayout
                 android:id="@+id/CreateMealInformation_layout_additionalInformation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
                 android:orientation="horizontal" >
+                -->
+               
 
-                <TextView
+       <!--          <TextView
                     android:id="@+id/CreateMealInformation_text_additionalInformation"
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"                    
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/additional_info" />
+                     -->
 
-                <LinearLayout
+<!--                  <LinearLayout
                     android:id="@+id/edit_additionalInformation_container"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:orientation="horizontal">
+                    android:layout_height="wrap_content"                    
+                    android:layout_weight="2"                    
+                    android:orientation="horizontal"> -->
 
-                    <EditText
+                        <EditText
                         android:id="@+id/edit_additionalInformation"
-                        style="@style/RegularEditText"                        
-                        android:gravity="center"
-                        android:layout_weight="1"
+                        style="@style/RegularEditText"                                                
                     android:inputType="textMultiLine"
                     android:minHeight="@dimen/edittext_height"
-					android:layout_height="wrap_content"/>
+                    android:minWidth="@dimen/edittext_width"
+                    android:layout_marginTop="10dp"
+					android:layout_height="wrap_content"
+					android:layout_width="wrap_content"/>
                     
-                </LinearLayout>
-            </LinearLayout>
+                 <!-- </LinearLayout>
+  	    </LinearLayout>--> 
 
+             <!-- 
             <LinearLayout
                 android:id="@+id/CreateMealInformation_layout_allowfriendinvite"
                 android:layout_width="match_parent"
@@ -277,7 +302,9 @@
                     android:textOff="@string/capital_no"
                     android:textOn="@string/capital_yes" />
             </LinearLayout>
+             -->
         </LinearLayout>
     </RelativeLayout>
-
+</ScrollView>
+</RelativeLayout>
 </RelativeLayout>

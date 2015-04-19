@@ -1,10 +1,9 @@
 package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.services;
 
 import java.lang.reflect.Type;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 import android.app.Activity;
@@ -16,7 +15,6 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -25,10 +23,8 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -36,6 +32,7 @@ import com.google.gson.reflect.TypeToken;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.DateAndTimeProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.MealProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.PostProperties;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.constraintChecker.services.CreateMealInformationConstraintChecker;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.DataCacheHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.MessageToasterHelper;
@@ -59,10 +56,10 @@ public class CreateMealInformationActivity extends FragmentActivity {
 			btnSelectEndDateObject, btnSelectendTimeObject;
 	private TextView createMealInfoTitleObject;
 	private EditText placeEditViewObject;
-	private EditText maxNumberEditViewObject;
+	// private EditText maxNumberEditViewObject;
 	private EditText additionalInformation;
 
-	private Switch allowFriendInviteSwitchObject;
+	// private Switch allowFriendInviteSwitchObject;
 	private Context context;
 	private Activity activity;
 	private MealView mealView;
@@ -130,8 +127,8 @@ public class CreateMealInformationActivity extends FragmentActivity {
 					postDataMap);
 			restaurantAutoCompleteTextView.setText(mealPropertiesObject
 					.getlocation());
-			maxNumberEditViewObject.setText(mealPropertiesObject
-					.getMaxNumberOfInvitees());
+			// maxNumberEditViewObject.setText(mealPropertiesObject
+			// .getMaxNumberOfInvitees());
 
 			additionalInformation.setText(mealPropertiesObject
 					.getAdditionalInformation());
@@ -151,6 +148,7 @@ public class CreateMealInformationActivity extends FragmentActivity {
 			endDay = endDateAndTimeProperties.getDay();
 			endHour = endDateAndTimeProperties.getHour();
 			endMinute = endDateAndTimeProperties.getMinute();
+
 			btnSelectStartDateObject.setText(startDateAndTimeProperties
 					.getDateString());
 			btnSelectstartTimeObject.setText(startDateAndTimeProperties
@@ -165,6 +163,7 @@ public class CreateMealInformationActivity extends FragmentActivity {
 	/**
 	 * Set the calendar to initial.
 	 * 
+	 * @author tejasvamsingh
 	 * @author Runze Tang
 	 * 
 	 */
@@ -178,9 +177,32 @@ public class CreateMealInformationActivity extends FragmentActivity {
 		startDay = c.get(Calendar.DAY_OF_MONTH);
 		endDay = startDay;
 		startHour = c.get(Calendar.HOUR_OF_DAY);
-		endHour = startHour;
+		endHour = startHour == 23 ? 0 : startHour + 1;
 		startMinute = c.get(Calendar.MINUTE);
 		endMinute = startMinute;
+
+	}
+
+	private void setEndTimeButtonText() {
+		btnSelectendTimeObject.setText(timeToString(endHour) + ":"
+				+ timeToString(endMinute));
+	}
+
+	private void setEndDateButtonText(int dummyMonthEnd) {
+		btnSelectEndDateObject.setText(timeToString(endDay) + "-"
+				+ timeToString(dummyMonthEnd) + "-" + endYear);
+
+	}
+
+	private void setStartTimeButtonText() {
+		btnSelectstartTimeObject.setText(timeToString(startHour) + ":"
+				+ timeToString(startMinute));
+
+	}
+
+	private void setStartDateButtonText(int dummyMonthStart) {
+		btnSelectStartDateObject.setText(timeToString(startDay) + "-"
+				+ timeToString(dummyMonthStart) + "-" + startYear);
 	}
 
 	/**
@@ -210,15 +232,21 @@ public class CreateMealInformationActivity extends FragmentActivity {
 		btnSelectendTimeObject = (Button) mealView
 				.getView("CreateMealInformation_button_endTime");
 
+		setStartDateButtonText(startMonth + 1);
+		setStartTimeButtonText();
+		setEndDateButtonText(endMonth + 1);
+		setEndTimeButtonText();
+
 		additionalInformation = (EditText) mealView
 				.getView("edit_additionalInformation");
 
 		// placeEditViewObject = (EditText) mealView.getView("edit_restaurant");
 		initAutoComplete();
 
-		maxNumberEditViewObject = (EditText) mealView.getView("edit_maxnumber");
-		allowFriendInviteSwitchObject = (Switch) mealView
-				.getView("switch_allowfriendinvite");
+		// maxNumberEditViewObject = (EditText)
+		// mealView.getView("edit_maxnumber");
+		// allowFriendInviteSwitchObject = (Switch) mealView
+		// .getView("switch_allowfriendinvite");
 		createMealInfoTitleObject = (TextView) mealView
 				.getView("CreateMealInformation_text_mealinformation");
 
@@ -294,14 +322,14 @@ public class CreateMealInformationActivity extends FragmentActivity {
 		ThemeManager.applyButtonColor(btnSelectstartTimeObject);
 		ThemeManager.applyButtonColor(btnSelectEndDateObject);
 		ThemeManager.applyButtonColor(btnSelectendTimeObject);
-		ThemeManager.applyButtonColor(allowFriendInviteSwitchObject);
+		// ThemeManager.applyButtonColor(allowFriendInviteSwitchObject);
 
 		ThemeManager.applyButtonColor(backButton);
 		ThemeManager.applyButtonColor(nextButton);
 
 		// ThemeManager.applyEditTextColor(placeEditViewObject);
 		ThemeManager.applyEditTextColor(restaurantAutoCompleteTextView);
-		ThemeManager.applyEditTextColor(maxNumberEditViewObject);
+		// ThemeManager.applyEditTextColor(maxNumberEditViewObject);
 		ThemeManager.applyEditTextColor(additionalInformation);
 	}
 
@@ -425,8 +453,7 @@ public class CreateMealInformationActivity extends FragmentActivity {
 			startMonth = monthOfYear;
 			int dummyMonthStart = startMonth + 1;
 			startDay = dayOfMonth;
-			btnSelectStartDateObject.setText(timeToString(startDay) + "-"
-					+ timeToString(dummyMonthStart) + "-" + startYear);
+			setStartDateButtonText(dummyMonthStart);
 		}
 	};
 
@@ -444,8 +471,7 @@ public class CreateMealInformationActivity extends FragmentActivity {
 			endMonth = monthOfYear;
 			int dummyMonthEnd = endMonth + 1;
 			endDay = dayOfMonth;
-			btnSelectEndDateObject.setText(timeToString(endDay) + "-"
-					+ timeToString(dummyMonthEnd) + "-" + endYear);
+			setEndDateButtonText(dummyMonthEnd);
 		}
 	};
 
@@ -460,8 +486,7 @@ public class CreateMealInformationActivity extends FragmentActivity {
 		public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 			startHour = hourOfDay;
 			startMinute = minute;
-			btnSelectstartTimeObject.setText(timeToString(hourOfDay) + ":"
-					+ timeToString(minute));
+			setStartTimeButtonText();
 		}
 	};
 
@@ -476,8 +501,7 @@ public class CreateMealInformationActivity extends FragmentActivity {
 		public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 			endHour = hourOfDay;
 			endMinute = minute;
-			btnSelectendTimeObject.setText(timeToString(hourOfDay) + ":"
-					+ timeToString(minute));
+			setEndTimeButtonText();
 		}
 	};
 
@@ -550,83 +574,67 @@ public class CreateMealInformationActivity extends FragmentActivity {
 
 		// String location = mealView.getValue(placeEditViewObject);
 		String location = mealView.getValue(restaurantAutoCompleteTextView);
-		String maxNumberOfInvitees = mealView.getValue(maxNumberEditViewObject);
-		String isNotificationExtendible = allowFriendInviteSwitchObject
-				.isChecked() ? "YES" : "NO";
+		String maxNumberOfInvitees = "";// mealView.getValue(maxNumberEditViewObject);
+		String isNotificationExtendible = "";// = allowFriendInviteSwitchObject
+		// .isChecked() ? "YES" : "NO";
 		String additionalInformationString = mealView
 				.getValue(additionalInformation);
 
-		if (location.equals("")) {
-			Toast.makeText(this, R.string.location_empty, Toast.LENGTH_SHORT)
-					.show();
-			return;
-		}
-		if (maxNumberOfInvitees.length() == 0) {
-			Toast.makeText(this, R.string.number_invitees_empty,
-					Toast.LENGTH_SHORT).show();
-			return;
-		}
-		if (Integer.parseInt(maxNumberOfInvitees) < 2) {
-			Toast.makeText(this, R.string.invitees_not_enough,
-					Toast.LENGTH_SHORT).show();
-			return;
-		}
+		Map<String, Object> constraintMap = new HashMap<String, Object>();
 
-		// converts the date into a java date type and checks if start date is
-		// after end date
-		SimpleDateFormat ft = new SimpleDateFormat("yyyy:mm:dd:HH:MM");
-		String startDateStr = startYear + ":" + startMonth + ":" + startDay
-				+ ":" + startHour + ":" + startMinute;
-		String endDateStr = endYear + ":" + endMonth + ":" + endDay + ":"
-				+ endHour + ":" + endMinute;
-		Date startDate, endDate;
-		try {
+		constraintMap.put("startDay", startDay);
+		constraintMap.put("startHour", startHour);
+		constraintMap.put("startMinute", startMinute);
 
-			startDate = ft.parse(startDateStr);
-			endDate = ft.parse(endDateStr);
-			if (startDate.after(endDate)) {
-				Toast.makeText(this, R.string.date_error, Toast.LENGTH_SHORT)
-						.show();
-				return;
+		constraintMap.put("startMonth", startMonth);
+		constraintMap.put("startYear", startYear);
+
+		constraintMap.put("endDay", endDay);
+		constraintMap.put("endHour", endHour);
+		constraintMap.put("endMinute", endMinute);
+
+		constraintMap.put("endMonth", endMonth);
+		constraintMap.put("endYear", endYear);
+
+		constraintMap.put("location", location);
+
+		if (new CreateMealInformationConstraintChecker()
+				.areConstraintsSatisfied(constraintMap)) {
+
+			// ************************** PAGE onE REQUEST CREATIon STARTS HERE
+			// **************************
+
+			int dummyStartMonth = startMonth + 1;
+			int dummyEndMonth = endMonth + 1;
+			// Create Date and Time Properties Objects
+			DateAndTimeProperties startDateAndTimeProperties = new DateAndTimeProperties(
+					startDay, dummyStartMonth, startYear, startHour,
+					startMinute);
+
+			DateAndTimeProperties endDateAndTimeProperties = new DateAndTimeProperties(
+					endDay, dummyEndMonth, endYear, endHour, endMinute);
+
+			// Create a Meal Object
+			MealProperties mealProperties = new MealProperties(location,
+					maxNumberOfInvitees, isNotificationExtendible,
+					startDateAndTimeProperties, endDateAndTimeProperties,
+					additionalInformationString);
+
+			// this happens if we are editing a previous post.
+			if (populateFromPost != null) {
+				DataCacheHelper.setGenericFlag(true);
+				populateFromPost = null;
 			}
-		} catch (Exception e) {
-			Log.e("CreatMealInfo", "date parsing error");
-			return;
+
+			// the same old passing to the next activity.
+			Map<String, Object> mealPropertiesMap = mealProperties.toMap();
+
+			Intent intent = new Intent(CreateMealInformationActivity.this,
+					SelectFriendsFragmentActivity.class);
+			intent.putExtra("mealProperties", GsonHelper.getGsoninstance()
+					.toJson(mealPropertiesMap));
+			CreateMealInformationActivity.this.startActivity(intent);
+
 		}
-
-		// ************************** PAGE onE REQUEST CREATIon STARTS HERE
-		// **************************
-
-		int dummyStartMonth = startMonth + 1;
-		int dummyEndMonth = endMonth + 1;
-		// Create Date and Time Properties Objects
-		DateAndTimeProperties startDateAndTimeProperties = new DateAndTimeProperties(
-				startDay, dummyStartMonth, startYear, startHour, startMinute);
-
-		DateAndTimeProperties endDateAndTimeProperties = new DateAndTimeProperties(
-				endDay, dummyEndMonth, endYear, endHour, endMinute);
-
-		// Create a Meal Object
-		MealProperties mealProperties = new MealProperties(location,
-				maxNumberOfInvitees, isNotificationExtendible,
-				startDateAndTimeProperties, endDateAndTimeProperties,
-				additionalInformationString);
-
-		// this happens if we are editing a previous post.
-		if (populateFromPost != null) {
-			DataCacheHelper.setGenericFlag(true);
-			populateFromPost = null;
-		}
-
-		// the same old passing to the next activity.
-		Map<String, Object> mealPropertiesMap = mealProperties.toMap();
-
-		Intent intent = new Intent(CreateMealInformationActivity.this,
-				SelectFriendsFragmentActivity.class);
-		intent.putExtra("mealProperties",
-				GsonHelper.getGsoninstance().toJson(mealPropertiesMap));
-		CreateMealInformationActivity.this.startActivity(intent);
-
 	}
-
 }
