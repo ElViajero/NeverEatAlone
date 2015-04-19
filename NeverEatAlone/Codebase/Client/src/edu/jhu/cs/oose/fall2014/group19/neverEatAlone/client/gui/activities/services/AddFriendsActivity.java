@@ -102,7 +102,9 @@ public class AddFriendsActivity extends Activity {
 		View searchButton = contactsView.getView("button_addfriends_search");
 		View backButton = contactsView.getView("button_addfriends_back");
 
-		ThemeManager.applyPlainTheme(mainLayout, headerLayout, buttonBar);
+		// ThemeManager.applyPlainTheme(mainLayout, headerLayout, buttonBar);
+		ThemeManager.applyTheme(mainLayout, headerLayout);
+		ThemeManager.applyButtonBarTheme(buttonBar);
 
 		ThemeManager.applyButtonColor(searchButton);
 		ThemeManager.applyButtonColor(backButton);

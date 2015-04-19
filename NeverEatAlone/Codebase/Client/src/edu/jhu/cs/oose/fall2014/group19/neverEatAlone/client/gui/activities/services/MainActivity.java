@@ -106,8 +106,9 @@ public class MainActivity extends Activity {
 		initLoginView();
 		View mainLayout = loginView.getView("layout_main");
 
-		ThemeManager.applyBackground(mainLayout);
+		// ThemeManager.applyBackground(mainLayout);
 
+		ThemeManager.applyTheme(mainLayout);
 		ThemeManager.applyButtonColor(loginButtonObject);
 		ThemeManager.applyButtonColor(signupButtonObject);
 

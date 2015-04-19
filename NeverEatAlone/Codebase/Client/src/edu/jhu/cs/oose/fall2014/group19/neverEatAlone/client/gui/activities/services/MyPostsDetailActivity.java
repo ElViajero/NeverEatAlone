@@ -113,7 +113,9 @@ public class MyPostsDetailActivity extends ListActivity {
 		View closeButton = myPostsView.getView("button_myPostsDetail_edit");
 		// View inviteOthersButton = myPostsView
 		// .getView("button_myPostsDetail_inviteothers");
-		ThemeManager.applyPlainTheme(mainLayout, headerLayout, buttonBar);
+		// ThemeManager.applyPlainTheme(mainLayout, headerLayout, buttonBar);
+		ThemeManager.applyTheme(mainLayout, headerLayout);
+		ThemeManager.applyButtonBarTheme(buttonBar);
 
 		ThemeManager.applyButtonColor(backButton);
 		ThemeManager.applyButtonColor(closeButton);

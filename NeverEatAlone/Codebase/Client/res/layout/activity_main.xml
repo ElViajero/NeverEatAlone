@@ -1,12 +1,35 @@
 <!-- @author Yueling Loh -->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!-- @author tejasvamsingh -->
+
+
+    
+<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/layout_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/layout_main" 
     android:gravity="center_vertical"
     android:orientation="vertical" >
 
+
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center_vertical|center_horizontal"
+     >
+    
+ 
+    <LinearLayout 
+       android:id="@+id/main_container_linear" 
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:layout_gravity="center_vertical|center_horizontal"
+       android:gravity="center_vertical"
+    android:orientation="vertical" 
+       >
+    
+    
+    
     <!-- Section 1: Blank Space -->
 
     <RelativeLayout
@@ -48,7 +71,7 @@
     <RelativeLayout
         android:id="@+id/main_layout_section3_blank"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="100dp"
         android:layout_weight="0.1" >
     </RelativeLayout>
 
@@ -68,7 +91,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginBottom="@dimen/activity_horizontal_margin"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:orientation="horizontal" >
 
             <RelativeLayout
@@ -131,6 +154,17 @@
             </RelativeLayout>
         </LinearLayout>
     </RelativeLayout>
+    
+    
+    <!--  New Section : Blank Space ! -->
+    
+    <RelativeLayout
+        android:id="@+id/main_layout_section7"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_weight="0.1" >
+    </RelativeLayout>
+    
 
     <!-- Section 5: Login + Register Buttons -->
 
@@ -147,7 +181,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginBottom="@dimen/activity_horizontal_margin"
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
             android:orientation="horizontal" >
 
             <RelativeLayout
@@ -218,5 +252,6 @@
         android:layout_height="0dp"
         android:layout_weight="0.1" >
     </RelativeLayout>
-
+</LinearLayout>
+</ScrollView>
 </LinearLayout>

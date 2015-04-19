@@ -140,5 +140,22 @@
         <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
         <item name="android:gravity">center</item>
     </style>
+    
+    <!--  Spinner sytles 
+    @author tejasvamsingh -->
+        
+        
+     <style name="customtheme" parent="@android:style/Theme.NoTitleBar">
+     <item name="android:spinnerItemStyle">@style/SpinnerItem</item>
+     <item name="android:spinnerDropDownItemStyle">@style/SpinnerDropDownItem</item>
+    </style>
+     <style name="SpinnerItem" parent="@android:style/Widget.TextView.SpinnerItem">
+        <item name="android:textColor">#FFFFFF</item>        
+    </style>
+    <style name="SpinnerDropDownItem" parent="@android:style/Widget.DropDownItem.Spinner">
+         <item name="android:background">@drawable/spinner_dropdown_drawable</item>
+        <item name="android:textColor">#FFFFFF</item>        
+    </style>
+    
 
 </resources>

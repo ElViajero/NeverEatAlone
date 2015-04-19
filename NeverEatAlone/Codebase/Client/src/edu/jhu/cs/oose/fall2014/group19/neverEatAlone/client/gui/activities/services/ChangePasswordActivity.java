@@ -85,8 +85,12 @@ public class ChangePasswordActivity extends Activity {
 		confirmPasswordEditText = (EditText) profileView
 				.getView("editText_changepassword_confirmpassword");
 
-		ThemeManager.applyPlainTheme(mainLayout, headerLayout, buttonBar);
-
+		// ThemeManager.applyPlainTheme(mainLayout, headerLayout, buttonBar);
+		ThemeManager.applyTheme(mainLayout, headerLayout);
+		ThemeManager.applyButtonBarTheme(buttonBar);
+		// ThemeManager.applyButtonColor(oldPasswordEditText);
+		// ThemeManager.applyButtonColor(newPasswordEditText);
+		// ThemeManager.applyButtonColor(confirmPasswordEditText);
 		ThemeManager.applyButtonColor(confirmButton);
 		ThemeManager.applyButtonColor(cancelButton);
 

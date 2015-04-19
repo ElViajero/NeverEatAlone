@@ -150,7 +150,9 @@ public class EditProfileActivity extends Activity {
 		View comfirmButton = profileView.getView("button_editprofile_comfirm");
 		View cancelButton = profileView.getView("button_editprofile_cancel");
 
-		ThemeManager.applyPlainTheme(mainLayout, headerLayout, buttonBar);
+		// ThemeManager.applyPlainTheme(mainLayout, headerLayout, buttonBar);
+		ThemeManager.applyTheme(mainLayout, headerLayout);
+		ThemeManager.applyButtonBarTheme(buttonBar);
 
 		ThemeManager.applyButtonColor(comfirmButton);
 		ThemeManager.applyButtonColor(cancelButton);

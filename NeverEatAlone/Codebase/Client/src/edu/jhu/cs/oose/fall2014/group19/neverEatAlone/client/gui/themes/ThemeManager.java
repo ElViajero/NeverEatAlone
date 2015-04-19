@@ -3,6 +3,7 @@ package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Switch;
 import android.widget.TextView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.R;
@@ -20,14 +21,16 @@ public class ThemeManager {
 
 	static int frontTheme = R.drawable.layout_background_light_outer;
 	static int headerTheme = R.drawable.header_background_light;
-	static int mainTheme = R.drawable.layout_background_light;
+	static int mainTheme = R.drawable.header_background_light; // layout_background_tejas;//
+	// layout_background_light;
 	static int mainThemePlain = R.drawable.plain_layout_background_light;
 	static int mainThemePlainSides = R.drawable.plain_layout_background_light_sides;
-	static int buttonBarTheme = R.drawable.buttonbar_background_light;
+	static int buttonBarTheme = R.drawable.header_background_light;// layout_background_tejas;//
+																	// buttonbar_background_light;
 	static int buttonBarThemePlain = R.drawable.plain_buttonbar_background_light;
 	static int popUpTheme = R.drawable.popupwindow_background_light;
 	static int tabTheme = R.drawable.tab_background_light;
-	static int buttonColor = R.drawable.button_background_light;
+	static int buttonColor = R.drawable.tejas_button_background;// button_background_light;
 	static int editTextColor = R.drawable.edittext_background_light;
 	static int availabilityBGColor = R.drawable.availability_background_light;
 	static int availabilityThumbColor = R.drawable.availability_thumb_light;
@@ -114,8 +117,8 @@ public class ThemeManager {
 		}
 		headerView.setBackgroundResource(headerTheme);
 		buttonBarViewTop.setBackgroundResource(buttonBarTheme);
-		mainView.setBackgroundResource(mainThemePlainSides);
-		buttonBarViewBottom.setBackgroundResource(buttonBarThemePlain);
+		mainView.setBackgroundResource(headerTheme);// mainThemePlainSides);
+		buttonBarViewBottom.setBackgroundResource(buttonBarTheme);// buttonBarThemePlain);
 
 	}
 
@@ -175,6 +178,13 @@ public class ThemeManager {
 		}
 
 		buttonView.setBackgroundResource(buttonColor);
+		try {
+			Button button = (Button) buttonView;
+			button.setTextColor(Color.WHITE);
+		} catch (ClassCastException e) {
+
+			return;
+		}
 
 	}
 

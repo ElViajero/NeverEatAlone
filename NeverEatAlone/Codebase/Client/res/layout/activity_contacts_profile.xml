@@ -62,6 +62,15 @@
         style="@style/MainLayoutTheme"
         android:layout_below="@+id/buttons_contacts_profile" >
 
+        
+        <ScrollView
+        android:id="@+id/scroll_my_posts_detail"
+        style="@style/MainLayoutTheme"
+        android:layout_width="fill_parent"
+        android:scrollbars="none">
+    
+        
+        
         <RelativeLayout
             android:id="@+id/main_contacts_profile_container"
             style="@style/MainLayoutTheme"
@@ -90,6 +99,7 @@
 			    ></LinearLayout>
            
         </RelativeLayout>
+        </ScrollView>
     </RelativeLayout>
 
 </RelativeLayout>

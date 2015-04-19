@@ -120,6 +120,7 @@ public class MealDetailActivity extends ListActivity {
 	 * This method applies the GUI's color theme.
 	 * 
 	 * @author Yueling Loh
+	 * @author tejasvamsingh
 	 */
 	private void applyTheme() {
 
@@ -134,7 +135,10 @@ public class MealDetailActivity extends ListActivity {
 		// View inviteOthersButton =
 		// mealView.getView("button_mealdetails_inviteothers");
 
-		ThemeManager.applyPlainTheme(mainLayout, headerLayout, buttonBar);
+		// ThemeManager.applyPlainTheme(mainLayout, headerLayout, buttonBar);
+
+		ThemeManager.applyTheme(mainLayout, headerLayout);
+		ThemeManager.applyButtonBarTheme(buttonBar);
 
 		ThemeManager.applyButtonColor(backButton);
 		ThemeManager.applyButtonColor(declineButton);

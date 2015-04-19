@@ -29,7 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="poster Name"
-            android:textColor="#222222"
+            android:textColor="#FF00FF"
             android:textSize="19sp"
             android:textStyle="bold" />
 

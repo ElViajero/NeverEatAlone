@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- @author tejasvamsingh -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle"    >
+
+      <gradient        
+          android:startColor="#00000000"
+          android:endColor="#00000000"
+          android:angle="270"
+           />
+      
+      <stroke
+          android:width="2dp"
+          android:color="#0078A6" />
+      
+      <corners
+          android:radius="8dp" />
+      
+      <padding
+          android:left="@dimen/button_padding"
+          android:right="@dimen/button_padding"
+          android:top="@dimen/button_padding"
+          android:bottom="@dimen/button_padding" />
+
+</shape>

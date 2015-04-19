@@ -96,8 +96,10 @@ public class RegisterActivity extends Activity {
 		View registerButton = loginView.getView("button_register_cancel");
 		View cancelButton = loginView.getView("button_register_register");
 
-		ThemeManager.applyPlainTheme(mainLayout, headerLayout, buttonBar);
+		// ThemeManager.applyPlainTheme(mainLayout, headerLayout, buttonBar);
 
+		ThemeManager.applyTheme(mainLayout, headerLayout);
+		ThemeManager.applyButtonBarTheme(buttonBar);
 		ThemeManager.applyButtonColor(registerButton);
 		ThemeManager.applyButtonColor(cancelButton);
 

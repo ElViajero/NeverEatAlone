@@ -65,9 +65,7 @@
         android:id="@+id/scroll_my_posts_detail"
         style="@style/MainLayoutTheme"
         android:layout_width="fill_parent"
-        android:scrollbars="none"
-            
-        	        >
+        android:scrollbars="none">
         
         <RelativeLayout
             android:id="@+id/main_CreateMeal_countainer"

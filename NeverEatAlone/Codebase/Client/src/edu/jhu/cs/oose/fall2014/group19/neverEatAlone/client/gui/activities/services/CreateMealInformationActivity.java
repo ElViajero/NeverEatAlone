@@ -316,7 +316,9 @@ public class CreateMealInformationActivity extends FragmentActivity {
 		View backButton = mealView.getView("CreateMealInformation_button_back");
 		View nextButton = mealView.getView("CreateMealInformation_button_next");
 
-		ThemeManager.applyPlainTheme(mainLayout, headerLayout, buttonBar);
+		// ThemeManager.applyPlainTheme(mainLayout, headerLayout, buttonBar);
+		ThemeManager.applyTheme(mainLayout, headerLayout);
+		ThemeManager.applyButtonBarTheme(buttonBar);
 
 		ThemeManager.applyButtonColor(btnSelectStartDateObject);
 		ThemeManager.applyButtonColor(btnSelectstartTimeObject);
