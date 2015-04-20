@@ -150,7 +150,8 @@
      <item name="android:spinnerDropDownItemStyle">@style/SpinnerDropDownItem</item>
     </style>
      <style name="SpinnerItem" parent="@android:style/Widget.TextView.SpinnerItem">
-        <item name="android:textColor">#FFFFFF</item>        
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:gravity">center</item>        
     </style>
     <style name="SpinnerDropDownItem" parent="@android:style/Widget.DropDownItem.Spinner">
          <item name="android:background">@drawable/spinner_dropdown_drawable</item>

@@ -1,3 +1,4 @@
+
 <!--
 @author tejasvamsingh
 @author Hai Tang 
@@ -114,7 +115,7 @@
  			<LinearLayout
                 android:id="@+id/profile_dynamic_layout"
                 android:layout_marginTop="100dp"
-                android:layout_marginLeft="150dp"
+                android:layout_marginLeft="100dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/imageView_profile_avatar"

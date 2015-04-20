@@ -165,19 +165,22 @@
                 android:layout_marginTop="@dimen/activity_horizontal_margin"
                 android:orientation="horizontal" >
 
+                
                 <TextView
                     android:id="@+id/textView_editprofile_gender"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"                                                        
-                    android:text="@string/gender"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"    
+                	android:layout_weight="0.3"                                                        
+                    android:text="@string/gender"                    
                     android:textAppearance="?android:attr/textAppearanceMedium" />
-
+ 
                 <Spinner
                     android:id="@+id/spinner_editprofile_gender"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="400dp"                                                                          
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"                                                                                              
                     android:entries="@array/gender_array"
+                    android:layout_weight="0.7"
+                    android:layout_gravity="center_horizontal"                                       
                     android:gravity="center"                    
                     android:text="select" />
 
