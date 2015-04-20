@@ -146,6 +146,7 @@ public class ChangePasswordActivity extends Activity {
 				// go back to the profile activity
 				Intent intent = new Intent(this, ProfileActivity.class);
 				this.startActivity(intent);
+				RequestHandlerHelper.cleanUp();
 
 			} catch (RequestAbortedException e) {
 				AccountProperties.getUserAccountInstance().setpassword(
