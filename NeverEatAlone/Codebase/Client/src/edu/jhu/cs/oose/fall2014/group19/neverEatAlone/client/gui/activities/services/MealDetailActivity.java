@@ -295,8 +295,10 @@ public class MealDetailActivity extends ListActivity {
 		PostProperties postPropertiesObject = PostProperties
 				.notificationToPost(notificationPropertiesObject);
 
-		attendingList.add(new ContactProperties(notificationPropertiesObject
-				.getPoster()));
+		attendingList
+				.add(ContactProperties
+						.getContactProperties(notificationPropertiesObject
+								.getPoster()));
 
 		try {
 
@@ -318,5 +320,4 @@ public class MealDetailActivity extends ListActivity {
 		}
 		attendingAdapter.notifyDataSetChanged();
 	}
-
 }

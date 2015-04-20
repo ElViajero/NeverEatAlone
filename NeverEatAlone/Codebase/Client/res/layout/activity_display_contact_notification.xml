@@ -18,6 +18,12 @@
             android:id="@+id/textView_friendsrequest_title"
             style="@style/HeaderTextTheme"
             android:text="@string/friends_request" />
+        <TextView
+            android:id="@+id/textView_friendsrequest_swipe_title"
+            style="@style/HeaderTextTheme"            
+            android:gravity="right"
+            android:text=">>" />
+        
     </RelativeLayout>
 
     <!-- Button Header -->
@@ -35,12 +41,13 @@
             android:layout_gravity="center_horizontal"
             android:orientation="horizontal" >
 
-            <Button
+            <!-- <Button
                 android:id="@+id/friendsRequest_button_back"
                 style="@style/BarButton"
                 android:layout_marginRight="@dimen/activity_horizontal_margin"
                 android:onClick="onBackButtonClick"
                 android:text="@string/back" />
+                -->
 
             <RelativeLayout
                 android:id="@+id/button_placeholder"

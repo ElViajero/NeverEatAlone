@@ -29,6 +29,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeMan
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.LoginView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.locationManager.services.LocationFinder;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.notificationHandler.services.NotificationHelper;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.requests.GetContactsExecutableRequest;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
 
 /**
@@ -156,6 +157,9 @@ public class MainActivity extends Activity {
 			// start the location service.
 			startLocationService();
 
+			// fetchContacts
+			fetchContacts();
+
 			// start the new activity
 			Intent intent = new Intent(MainActivity.this, TabHostActivity.class);
 			intent.putExtra("username", username);
@@ -255,6 +259,13 @@ public class MainActivity extends Activity {
 
 		} catch (RequestAbortedException e) {
 		}
+
+	}
+
+	private void fetchContacts() {
+
+		GetContactsExecutableRequest getContactsExecutableRequest = new GetContactsExecutableRequest();
+		getContactsExecutableRequest.executeRequest(this);
 
 	}
 }

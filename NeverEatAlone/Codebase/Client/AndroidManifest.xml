@@ -141,6 +141,10 @@
             android:name=".services.InvitesFragmentActivity"
             android:label="@string/title_activity_invites_fragment" >
         </activity>
+        <activity
+            android:name=".services.NearbyContactsActivity"
+            android:label="@string/title_activity_nearby_contacts" >
+        </activity>
     </application>
 
 </manifest>

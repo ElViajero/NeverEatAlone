@@ -50,53 +50,36 @@ public class ContactsInformationAdapter extends ArrayAdapter<ContactProperties> 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		View view = null;
-		if (convertView == null) {
-			LayoutInflater inflator = context.getLayoutInflater();
-			view = inflator.inflate(R.layout.row_contact_item_layout, null);
-			final ViewHolder viewHolder = new ViewHolder();
-			viewHolder.name = (TextView) view.findViewById(R.id.contacts_name);
-			viewHolder.checkbox = (CheckBox) view
-					.findViewById(R.id.contacts_check);
-			if (!showCheckboxes)
-				viewHolder.checkbox.setVisibility(android.view.View.GONE);
-			if (unCheckableContactsList.contains(contactInfoList.get(position)))
-				viewHolder.checkbox.setClickable(false);
+		LayoutInflater inflator = context.getLayoutInflater();
+		view = inflator.inflate(R.layout.row_contact_item_layout, null);
+		ImageView avatar = (ImageView) view.findViewById(R.id.contacts_avatar);
+		TextView username = (TextView) view.findViewById(R.id.contacts_name);
+		CheckBox checkbox = (CheckBox) view.findViewById(R.id.contacts_check);
 
-			viewHolder.avatar = (ImageView) view
-					.findViewById(R.id.contacts_avatar);
-			ContactProperties contact = (ContactProperties) viewHolder.checkbox
-					.getTag();
-			viewHolder.checkbox
-					.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+		final ContactProperties contactProperties = contactInfoList
+				.get(position);
 
-						@Override
-						public void onCheckedChanged(CompoundButton buttonView,
-								boolean isChecked) {
-							ContactProperties contact = (ContactProperties) viewHolder.checkbox
-									.getTag();
-							contact.setChecked(buttonView.isChecked());
-						}
-					});
+		if (!showCheckboxes)
+			checkbox.setVisibility(android.view.View.GONE);
+		if (unCheckableContactsList.contains(contactInfoList.get(position)))
+			checkbox.setClickable(false);
 
-			view.setTag(viewHolder);
-			viewHolder.checkbox.setTag(contactInfoList.get(position));
-		} else {
-			// System.out.println("contactInfoList" + contactInfoList);
-			view = convertView;
-			((ViewHolder) view.getTag()).checkbox.setTag(contactInfoList
-					.get(position));
-		}
+		checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
-		ContactProperties contact = contactInfoList.get(position);
-		String avatarString = contact.getContactAvatarString();
-		ViewHolder holder = (ViewHolder) view.getTag();
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView,
+					boolean isChecked) {
+				contactProperties.setChecked(buttonView.isChecked());
+			}
+		});
 
-		holder.name.setText(contactInfoList.get(position).getContactusername());
-		holder.checkbox.setChecked(contactInfoList.get(position).isChecked());
-
+		String avatarString = contactProperties.getContactAvatarString();
 		if (avatarString != null && avatarString != "")
-			holder.avatar.setImageBitmap(BitMapHelper
-					.StringToBitMap(avatarString));
+			avatar.setImageBitmap(BitMapHelper.StringToBitMap(avatarString));
+
+		username.setText(contactInfoList.get(position).getContactusername());
+		checkbox.setChecked(contactInfoList.get(position).isChecked());
+
 		return view;
 	}
 

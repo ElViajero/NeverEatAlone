@@ -1,6 +1,4 @@
 <!--
- @author Hai Tang  
- @author Yueling Loh 
  @author tejasvamsingh
 -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -12,16 +10,16 @@
     <!-- Header aligned to top -->
 
     <RelativeLayout
-        android:id="@+id/header_contacts"
+        android:id="@+id/header_nearby_contacts"
         style="@style/HeaderTheme" >
 
         <TextView
-            android:id="@+id/textView_contacts_title"
+            android:id="@+id/textView_nearby_contacts_title"
             style="@style/HeaderTextTheme"
             android:text="@string/contacts"/>
         
         <TextView
-            android:id="@+id/textView_swipe_title"  
+            android:id="@+id/textView_nearby_swipe_title"  
             style="@style/HeaderTextTheme"/>
         
     </RelativeLayout>
@@ -29,9 +27,9 @@
     <!-- Button Header -->
 
     <LinearLayout
-        android:id="@+id/buttons_contacts"
+        android:id="@+id/buttons_nearby_contacts"
         style="@style/ButtonBarTheme"
-        android:layout_below="@+id/header_contacts"
+        android:layout_below="@+id/header_nearby_contacts"
         android:layout_gravity="center_horizontal"
         android:orientation="horizontal" >
 
@@ -42,7 +40,7 @@
             android:orientation="horizontal" >
 
             <!-- <Button
-                android:id="@+id/button_contacts_notification"
+                android:id="@+id/button_nearby_contacts_notification"
                 style="@style/BarButton"
                 android:layout_marginEnd="@dimen/activity_horizontal_margin"
                 android:layout_marginRight="@dimen/activity_horizontal_margin"
@@ -50,7 +48,7 @@
                 android:text="@string/contact_notification" />-->
 
             <Button
-                android:id="@+id/button_contacts_addcontacts"
+                android:id="@+id/button_nearby_contacts_addcontacts"
                 style="@style/BarButton"
                 android:onClick="onAddFriendsButtonClick"
                 android:paddingBottom="-10dp"
@@ -62,12 +60,12 @@
     <!-- Main Space -->
 
     <LinearLayout
-        android:id="@+id/main_contacts"
+        android:id="@+id/main_nearby_contacts"
         style="@style/MainLayoutTheme"
-        android:layout_below="@+id/buttons_contacts" >
+        android:layout_below="@+id/buttons_nearby_contacts" >
 
         <RelativeLayout
-            android:id="@+id/layout_contacts_container"
+            android:id="@+id/layout_nearby_contacts_container"
             style="@style/MainLayoutTheme" >
 
             <ListView

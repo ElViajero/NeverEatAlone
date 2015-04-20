@@ -121,8 +121,8 @@ public class ContactDBRequestHandler implements IContactDBRequestHandler {
 
 		// Fetch the contact via query
 
-		String query = "MATCH (a:User)-[r:KNOWS]->(n:User) " + "WHERE "
-				+ "(n)-[:KNOWS]->(a) AND " + "a.username = {username}"
+		String query = "MATCH (a:User)-[r:KNOWS]->(n:User), (a)<-[:KNOWS]-(n) "
+				+ "WHERE a.username = {username}"
 				+ "RETURN n.username AS username,"
 				+ " n.avatar AS avatar, n.workPlace AS workPlace, "
 				+ "n.gender AS gender, n.name AS name ";
@@ -224,7 +224,9 @@ public class ContactDBRequestHandler implements IContactDBRequestHandler {
 
 		String query = "MATCH (a:User)-[r:KNOWS]->(b:User) "
 				+ "WHERE NOT (b)-[:KNOWS]->(a) " + "AND b.username={username} "
-				+ "RETURN a.username AS username, a.username AS poster,r";
+				+ "RETURN a.username AS username, a.username AS poster, "
+				+ "a.avatar AS avatar, a.workPlace AS workPlace, "
+				+ "a.gender AS gender, a.name AS name , r";
 
 		return iDBQueryExecutionManagerInstance.executeQuery(query,
 				queryParameterMap);

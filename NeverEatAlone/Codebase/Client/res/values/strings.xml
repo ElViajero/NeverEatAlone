@@ -87,7 +87,7 @@
     <string name="empty_password">No password provided.</string>
     <string name="different_passwords">Passwords do not match.</string>
     <string name="contacts">Contacts</string>
-    <string name="friends_request">Friend Request</string>
+    <string name="friends_request">Friend Requests</string>
     <string name="availability_status">Availability Status:</string>
     <string name="meal_details">Meal Details</string>
     <string name="app_logo">App Logo</string>
@@ -138,5 +138,6 @@
     <string name="title_section3">Section 3</string>
     <string name="title_activity_select_friends_fragment">SelectFriendsFragmentActivity</string>
     <string name="title_activity_invites_fragment">InvitesFragmentActivity</string>
+    <string name="title_activity_nearby_contacts">NearbyContactsActivity</string>
 
 </resources>

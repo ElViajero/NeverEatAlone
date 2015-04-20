@@ -1,20 +1,25 @@
 package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.services;
 
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.ListFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.R;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.NotificationAlertHelper;
 
 public class ContactTabbedActivity extends FragmentActivity {
 
@@ -32,12 +37,15 @@ public class ContactTabbedActivity extends FragmentActivity {
 	 */
 	ViewPager mViewPager;
 
+	Map<Integer, String> tagMap;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.activity_contact_tabbed);
+		tagMap = new HashMap<Integer, String>();
 
 		// Create the adapter that will return a fragment for each of the three
 		// primary sections of the activity.
@@ -46,6 +54,33 @@ public class ContactTabbedActivity extends FragmentActivity {
 		// Set up the ViewPager with the sections adapter.
 		mViewPager = (ViewPager) findViewById(R.id.pager);
 		mViewPager.setAdapter(mSectionsPagerAdapter);
+
+		if (NotificationAlertHelper.isAlertEnabled("contact")) {
+			mViewPager.setCurrentItem(0);
+		} else
+			mViewPager.setCurrentItem(1);
+
+		mViewPager.setOnPageChangeListener(new OnPageChangeListener() {
+
+			@Override
+			public void onPageSelected(int arg0) {
+				mSectionsPagerAdapter.getListFragment(arg0).onResume();
+				;
+
+			}
+
+			@Override
+			public void onPageScrolled(int arg0, float arg1, int arg2) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void onPageScrollStateChanged(int arg0) {
+				// TODO Auto-generated method stub
+
+			}
+		});
 
 	}
 
@@ -74,8 +109,11 @@ public class ContactTabbedActivity extends FragmentActivity {
 	 */
 	public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
+		FragmentManager fragmentManager;
+
 		public SectionsPagerAdapter(FragmentManager fm) {
 			super(fm);
+			fragmentManager = fm;
 			// TODO Auto-generated constructor stub
 		}
 
@@ -85,10 +123,15 @@ public class ContactTabbedActivity extends FragmentActivity {
 			// getItem is called to instantiate the fragment for the given page.
 			// Return a PlaceholderFragment (defined as a static inner class
 			// below).
-			if (position == 0)
-				return new ContactsActivity("getAll");
+
+			if (position == 0) {
+				NotificationAlertHelper.disableNotificationAlert("contact");
+				return new DisplayContactNotificationActivity();
+			}
 			if (position == 1)
-				return new ContactsActivity("getNearby");
+				return new ContactsActivity();
+			if (position == 2)
+				return new NearbyContactsActivity();
 
 			return PlaceholderFragment.newInstance(position + 1);
 		}
@@ -96,7 +139,7 @@ public class ContactTabbedActivity extends FragmentActivity {
 		@Override
 		public int getCount() {
 			// Show 2 total pages.
-			return 2;
+			return 3;
 		}
 
 		@Override
@@ -111,6 +154,21 @@ public class ContactTabbedActivity extends FragmentActivity {
 
 			}
 			return null;
+		}
+
+		@Override
+		public Object instantiateItem(ViewGroup container, int position) {
+			Object obj = super.instantiateItem(container, position);
+
+			ListFragment f = (ListFragment) obj;
+			tagMap.put(position, f.getTag());
+			return obj;
+
+		}
+
+		public ListFragment getListFragment(int position) {
+			return (ListFragment) fragmentManager.findFragmentByTag(tagMap
+					.get(position));
 		}
 	}
 
@@ -161,6 +219,16 @@ public class ContactTabbedActivity extends FragmentActivity {
 		Intent intent = new Intent(this,
 				DisplayContactNotificationActivity.class);
 		this.startActivity(intent);
+	}
+
+	public void onResume() {
+		super.onResume();
+
+		if (NotificationAlertHelper.isAlertEnabled("contact")) {
+
+			mViewPager.setCurrentItem(0);
+		} else
+			mViewPager.setCurrentItem(1);
 	}
 
 }

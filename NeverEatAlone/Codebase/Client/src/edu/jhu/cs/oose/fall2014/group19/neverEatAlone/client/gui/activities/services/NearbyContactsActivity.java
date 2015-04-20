@@ -1,7 +1,13 @@
 package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.services;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import org.apache.http.impl.execchain.RequestAbortedException;
 
 import android.app.Activity;
 import android.app.ListFragment;
@@ -15,14 +21,16 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.AccountProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.ContactProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.adapters.ContactsInformationAdapter;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.DataCacheHelper;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.MessageToasterHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.NotificationAndPostCacheHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.FragmentView;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.requests.GetContactsExecutableRequest;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
 
 /**
  * This class handles controller operations for the contacts tab
@@ -30,7 +38,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.requ
  * @author tejasvamsingh
  * @author Hai Tang
  */
-public class ContactsActivity extends ListFragment {
+public class NearbyContactsActivity extends ListFragment {
 
 	private ContactsInformationAdapter contactsInformationAdapter;
 	private TextView contactTitleObject;
@@ -41,7 +49,7 @@ public class ContactsActivity extends ListFragment {
 	private Activity activity;
 	private FragmentView fragmentView;
 
-	String requestType = "getAll";
+	String requestType = "getNearby";
 	String requestID;
 	View rootView;
 
@@ -50,8 +58,8 @@ public class ContactsActivity extends ListFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 
-		rootView = inflater.inflate(R.layout.activity_contacts, container,
-				false);
+		rootView = inflater.inflate(R.layout.activity_nearby_contacts,
+				container, false);
 		initView(savedInstanceState);
 		// initContactView();
 		// ThemeManager.applyButtonBarTheme(rootView
@@ -71,23 +79,25 @@ public class ContactsActivity extends ListFragment {
 	private void initView(Bundle savedInstanceState) {
 
 		initContactView();
+
 		contactTitleObject = (TextView) fragmentView
-				.getView("textView_contacts_title");
+				.getView("textView_nearby_contacts_title");
+
 		swipeTitleObject = (TextView) fragmentView
-				.getView("textView_swipe_title");
+				.getView("textView_nearby_swipe_title");
 		// friendRequestButtonObejct = (Button) fragmentView
 		// .getView("button_contacts_notification");
 		addFriendButtonObject = (Button) fragmentView
-				.getView("button_contacts_addcontacts");
+				.getView("button_nearby_contacts_addcontacts");
 
 		initContactView();
 
 		contactTitleObject = (TextView) fragmentView
-				.getView("textView_contacts_title");
+				.getView("textView_nearby_contacts_title");
 		// friendRequestButtonObejct = (Button) fragmentView
 		// .getView("button_contacts_notification");
 		addFriendButtonObject = (Button) fragmentView
-				.getView("button_contacts_addcontacts");
+				.getView("button_nearby_contacts_addcontacts");
 		contactList = new ArrayList<ContactProperties>();
 		contactsInformationAdapter = new ContactsInformationAdapter(
 				getActivity(), contactList);
@@ -120,9 +130,9 @@ public class ContactsActivity extends ListFragment {
 	private void applyTheme() {
 		initContactView();
 
-		View mainLayout = fragmentView.getView("main_contacts");
-		View headerLayout = fragmentView.getView("header_contacts");
-		View buttonBar = fragmentView.getView("buttons_contacts");
+		View mainLayout = fragmentView.getView("main_nearby_contacts");
+		View headerLayout = fragmentView.getView("header_nearby_contacts");
+		View buttonBar = fragmentView.getView("buttons_nearby_contacts");
 
 		if (mainLayout == null)
 			System.out.println("main layout is null");
@@ -134,7 +144,7 @@ public class ContactsActivity extends ListFragment {
 		// View contactsNotificationButton = fragmentView
 		// .getView("button_contacts_notification");
 		View addContactsButton = fragmentView
-				.getView("button_contacts_addcontacts");
+				.getView("button_nearby_contacts_addcontacts");
 
 		ThemeManager.applyTheme(mainLayout, headerLayout);
 		ThemeManager.applyButtonBarTheme(buttonBar);
@@ -146,14 +156,14 @@ public class ContactsActivity extends ListFragment {
 	/**
 	 * This method is used to set the font style of the title of each page
 	 * 
-	 * @author: Hai Tang
-	 * @author: Yueling Loh
+	 * @author tejasvamsingh
+	 * 
 	 */
 	private void setTitleStyle() {
 
-		contactTitleObject.setText("All Contacts");
-		swipeTitleObject.setText(">>");
-		swipeTitleObject.setGravity(android.view.Gravity.RIGHT);
+		contactTitleObject.setText("Nearby Contacts");
+		swipeTitleObject.setGravity(android.view.Gravity.LEFT);
+		swipeTitleObject.setText("<<");
 
 		swipeTitleObject.setTextColor(Color.GRAY);
 		contactTitleObject.setGravity(android.view.Gravity.CENTER);
@@ -167,25 +177,41 @@ public class ContactsActivity extends ListFragment {
 	 * @author tejasvamsingh
 	 * @return
 	 */
-	@SuppressWarnings("unchecked")
 	private void fetchContacts() {
 
-		contactList = (List<ContactProperties>) DataCacheHelper
-				.getCachedResult("contact");
+		requestID = "Contact";
+		// requestType = "getAll";
 
-		if (contactList == null
-				|| NotificationAndPostCacheHelper
-						.isServerFetchRequired("contact")) {
+		Map<String, Object> requestMap = new HashMap<String, Object>();
+		requestMap.put("username", AccountProperties.getUserAccountInstance()
+				.getusername());
 
-			GetContactsExecutableRequest getContactsExecutableRequest = new GetContactsExecutableRequest();
-			getContactsExecutableRequest.executeRequest(getActivity());
-			contactList = (List<ContactProperties>) DataCacheHelper
-					.getCachedResult("contact");
+		try {
+
+			List<Map<String, String>> resultMapList = RequestHandlerHelper
+					.getRequestHandlerInstance().handleRequest(getActivity(),
+							requestMap, requestID, requestType);
+
+			contactList.clear();
+			Set<ContactProperties> contactSet = new HashSet<ContactProperties>();
+
+			for (Map<String, String> result : resultMapList) {
+				if (result.isEmpty())
+					continue;
+				contactSet.add(new ContactProperties(result));
+			}
+
+			contactList.addAll(contactSet);
+
+			MessageToasterHelper.toastMessage(getActivity(), contactList.get(0)
+					.getContactusername());
+			contactsInformationAdapter.notifyDataSetChanged();
+			NotificationAndPostCacheHelper.setServerFetchRequired("contact",
+					false);
+
+		} catch (RequestAbortedException e) {
+			System.out.println(e.getMessage());
 		}
-
-		contactsInformationAdapter.clear();
-		contactsInformationAdapter.addAll(contactList);
-
 	}
 
 	/**
@@ -195,7 +221,7 @@ public class ContactsActivity extends ListFragment {
 	 */
 	public void onAddFriendsButtonClick(View view) {
 		Intent intent = new Intent(getActivity(), AddFriendsActivity.class);
-		ContactsActivity.this.startActivity(intent);
+		getActivity().startActivity(intent);
 	}
 
 	/**
@@ -206,13 +232,21 @@ public class ContactsActivity extends ListFragment {
 	public void onContactNotificationButtonClick(View view) {
 		Intent intent = new Intent(getActivity(),
 				DisplayContactNotificationActivity.class);
-		ContactsActivity.this.startActivity(intent);
+		getActivity().startActivity(intent);
 	}
 
 	@Override
 	public void onResume() {
 		super.onResume();
-		fetchContacts();
+		MessageToasterHelper.toastMessage("INSIDE OnResume in ContactActivity");
+		System.out.println("FETCH STATUS :"
+				+ NotificationAndPostCacheHelper
+						.isServerFetchRequired("contact"));
+		if (NotificationAndPostCacheHelper.isServerFetchRequired("contact")) {
+			contactList.clear(); // you may no longer have any contacts.
+			contactsInformationAdapter.notifyDataSetChanged();
+			fetchContacts();
+		}
 	}
 
 	/**

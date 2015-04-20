@@ -2,6 +2,7 @@ package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -27,6 +28,8 @@ public class ContactProperties implements IActivityProperties, IOrderedIterator 
 	private String contactName;
 	private String contactGender;
 	private String contactWorkplace;
+
+	static Map<String, ContactProperties> contactPropertiesMap;
 
 	private boolean isChecked;
 
@@ -91,6 +94,10 @@ public class ContactProperties implements IActivityProperties, IOrderedIterator 
 		contactGender = map.get("gender");
 		contactWorkplace = map.get("workPlace");
 		isChecked = false;
+
+		if (contactPropertiesMap == null)
+			contactPropertiesMap = new HashMap<String, ContactProperties>();
+		contactPropertiesMap.put(contactusername, this);
 	}
 
 	@Override
@@ -158,6 +165,10 @@ public class ContactProperties implements IActivityProperties, IOrderedIterator 
 
 	public void setContactWorkplace(String contactWorkplace) {
 		this.contactWorkplace = contactWorkplace;
+	}
+
+	public static ContactProperties getContactProperties(String contactUsername) {
+		return contactPropertiesMap.get(contactUsername);
 	}
 
 }

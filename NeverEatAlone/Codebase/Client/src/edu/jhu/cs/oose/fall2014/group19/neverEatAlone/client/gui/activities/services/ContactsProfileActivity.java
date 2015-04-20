@@ -267,6 +267,8 @@ public class ContactsProfileActivity extends Activity {
 			// set the server fetch bit.
 			NotificationAndPostCacheHelper.setServerFetchRequired("contact",
 					true);
+			// invalidate the cache
+			DataCacheHelper.cacheResults("contact", null);
 
 			Intent intent = new Intent(ContactsProfileActivity.this,
 					TabHostActivity.class);

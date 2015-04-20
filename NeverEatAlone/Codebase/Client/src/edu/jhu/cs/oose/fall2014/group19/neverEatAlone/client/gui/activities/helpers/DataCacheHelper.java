@@ -1,6 +1,7 @@
 package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import android.widget.ArrayAdapter;
@@ -19,6 +20,8 @@ public class DataCacheHelper {
 	private static boolean isAccepted;
 	private static Map<String, ArrayAdapter<?>> adapterCache;
 	private static LocationProperties cachedLocation;
+
+	private static Map<String, List<?>> cachedListDataMap;
 
 	private static boolean genericFlag;
 
@@ -68,6 +71,16 @@ public class DataCacheHelper {
 
 	public static void setGenericFlag(boolean genericFlag) {
 		DataCacheHelper.genericFlag = genericFlag;
+	}
+
+	public static void cacheResults(String key, List<?> list) {
+		if (cachedListDataMap == null)
+			cachedListDataMap = new HashMap<String, List<?>>();
+		cachedListDataMap.put(key, list);
+	}
+
+	public static List<?> getCachedResult(String key) {
+		return cachedListDataMap.get(key);
 	}
 
 }

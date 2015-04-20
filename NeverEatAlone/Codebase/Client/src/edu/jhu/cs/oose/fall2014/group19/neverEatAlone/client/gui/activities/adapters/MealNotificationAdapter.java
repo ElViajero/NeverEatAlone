@@ -8,11 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.contracts.IActivityProperties;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.ContactProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.MealProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.NotificationProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.R;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.BitMapHelper;
 
 /**
  * @author Hai Tang
@@ -78,6 +81,9 @@ public class MealNotificationAdapter extends ArrayAdapter<IActivityProperties> {
 		status = (TextView) view
 				.findViewById(R.id.textView_meal_notification_status);
 
+		ImageView avatar = (ImageView) view
+				.findViewById(R.id.imageView_meal_notification_avatar);
+
 		NotificationProperties notification = (NotificationProperties) MealNotifications
 				.get(position);
 
@@ -91,6 +97,13 @@ public class MealNotificationAdapter extends ArrayAdapter<IActivityProperties> {
 		String notificationStatus = notification.getNotificationStatus();
 		status.setText(notificationStatus);
 		status.setBackgroundColor(Color.BLACK);
+
+		String avatarString = ContactProperties.getContactProperties(
+				notification.getPoster()).getContactAvatarString();
+
+		if (avatarString != null && avatarString != "")
+			avatar.setImageBitmap(BitMapHelper.StringToBitMap(avatarString));
+
 		if (notificationStatus.equalsIgnoreCase("OPEN"))
 			status.setTextColor(Color.GREEN);
 		else if (notificationStatus.equalsIgnoreCase("CLOSED"))

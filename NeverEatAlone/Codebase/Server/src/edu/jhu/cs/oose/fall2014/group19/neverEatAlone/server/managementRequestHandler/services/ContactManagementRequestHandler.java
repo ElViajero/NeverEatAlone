@@ -96,8 +96,8 @@ public class ContactManagementRequestHandler implements
 				.delete(request);
 		List<Map<String, String>> notificationMapList = new ArrayList<Map<String, String>>(
 				result);
-		System.out.println("FINISHED DELETE EXECUTION.");
-		LoggerHelper.printresultMap(result);
+		// System.out.println("FINISHED DELETE EXECUTION.");
+		// LoggerHelper.printresultMap(result);
 
 		// NOTIFY CONTACTS HERE.
 		/*

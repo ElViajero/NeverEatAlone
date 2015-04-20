@@ -21,9 +21,11 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.DataCacheHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.MessageToasterHelper;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.NotificationAlertHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.NotificationAndPostCacheHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.notificationHandler.services.NotificationHelper;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.requests.GetContactNotificationExecutableRequest;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
 
 //Cannot extends Activity
@@ -51,6 +53,10 @@ public class TabHostActivity extends TabActivity {
 	TabHost TabHost;
 	String notificationMapListJSon;
 
+	static View invitesTabView;
+	static View contactsTabView;
+	static View profileTabView;
+
 	Set<NotificationProperties> notificationCache;
 
 	/**
@@ -70,15 +76,20 @@ public class TabHostActivity extends TabActivity {
 		Intent i = getIntent();
 		int tabToOpen = i.getIntExtra("FirstTab", 0);
 
+		// Initialize the view and cache.
+		InitView(tabToOpen);
+
 		notificationCache = new HashSet<NotificationProperties>();
 		fetchNotifications();
 
-		// Initialize the view and cache.
-		InitView(tabToOpen);
 		// Obtain the data required for the activity class
 		username = getIntent().getStringExtra("username");
 		// start the notifcations framework.
 		NotificationHelper.init(this, username);
+
+		// fetch any contact requests from the server
+		GetContactNotificationExecutableRequest x = new GetContactNotificationExecutableRequest();
+		x.executeRequest(this);
 
 	}
 
@@ -106,22 +117,22 @@ public class TabHostActivity extends TabActivity {
 		// that will be opened when particular Tab will be selected
 
 		// Set Invite tab
-		View invitesTabview = createTabView(TabHost.getContext(), "Invites");
-		TabInvites.setIndicator(invitesTabview);
+		invitesTabView = createTabView(TabHost.getContext(), "Invites");
+		TabInvites.setIndicator(invitesTabView);
 		// TabInvites.setIndicator("Invites");
 		Intent intent = new Intent(this, InvitesFragmentActivity.class);
 		intent.putExtra("notificationMapListJSon", notificationMapListJSon);
 		TabInvites.setContent(intent);
 
 		// Set Contacts tabs
-		View contactsTabview = createTabView(TabHost.getContext(), "Contacts");
-		TabContacts.setIndicator(contactsTabview);
+		contactsTabView = createTabView(TabHost.getContext(), "Contacts");
+		TabContacts.setIndicator(contactsTabView);
 		// TabContacts.setIndicator("Contacts");
 		TabContacts.setContent(new Intent(this, ContactTabbedActivity.class));
 
 		// Set Profile tabs
-		View profileTabview = createTabView(TabHost.getContext(), "Profile");
-		TabProfile.setIndicator(profileTabview);
+		profileTabView = createTabView(TabHost.getContext(), "Profile");
+		TabProfile.setIndicator(profileTabView);
 		// TabProfile.setIndicator("Profile");
 		TabProfile.setContent(new Intent(this, ProfileActivity.class));
 
@@ -149,6 +160,13 @@ public class TabHostActivity extends TabActivity {
 		TextView tv = (TextView) view.findViewById(R.id.tabsText);
 		tv.setText(string);
 		ThemeManager.setTabFont(tv);
+
+		if (string.equalsIgnoreCase("Contacts"))
+			NotificationAlertHelper.registerNotificationAlertView("contact",
+					view);
+		else if (string.equalsIgnoreCase("Invites"))
+			NotificationAlertHelper.registerNotificationAlertView("meal", view);
+
 		return view;
 	}
 
