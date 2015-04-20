@@ -49,13 +49,13 @@ public class GetContactsExecutableRequest implements IExecutableRequest {
 
 			contactList.addAll(contactSet);
 
-			DataCacheHelper.cacheResults("contact", contactList);
-
 			NotificationAndPostCacheHelper.setServerFetchRequired("contact",
 					false);
 
 		} catch (RequestAbortedException e) {
 			System.out.println(e.getMessage());
+		} finally {
+			DataCacheHelper.cacheResults("contact", contactList);
 		}
 
 	}
