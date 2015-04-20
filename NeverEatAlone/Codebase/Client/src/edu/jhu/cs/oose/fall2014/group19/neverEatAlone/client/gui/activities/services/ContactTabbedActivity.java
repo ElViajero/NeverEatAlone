@@ -37,7 +37,7 @@ public class ContactTabbedActivity extends FragmentActivity {
 	 */
 	ViewPager mViewPager;
 
-	Map<Integer, String> tagMap;
+	static Map<Integer, String> tagMap;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +45,8 @@ public class ContactTabbedActivity extends FragmentActivity {
 		super.onCreate(savedInstanceState);
 
 		setContentView(R.layout.activity_contact_tabbed);
-		tagMap = new HashMap<Integer, String>();
+		if (tagMap == null)
+			tagMap = new HashMap<Integer, String>();
 
 		// Create the adapter that will return a fragment for each of the three
 		// primary sections of the activity.

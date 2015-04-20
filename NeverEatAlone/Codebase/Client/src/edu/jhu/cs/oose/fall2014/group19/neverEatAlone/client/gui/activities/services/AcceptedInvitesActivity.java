@@ -210,7 +210,11 @@ public class AcceptedInvitesActivity extends ListFragment {
 		requestID = "Meal";
 		requestType = "fetchAccepted";
 
-		acceptedInvitesList.clear();
+		try {
+			acceptedInvitesList.clear();
+		} catch (NullPointerException e) {
+			return;
+		}
 
 		try {
 

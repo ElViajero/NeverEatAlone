@@ -3,6 +3,7 @@ package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.requestHandler.ser
 import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
@@ -17,8 +18,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.codec.binary.StringUtils;
+import org.apache.openejb.util.Base64;
+
 import com.google.gson.Gson;
 
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.authenticationManager.contracts.IAuthenticationManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.server.requestDispatcher.contracts.IRequestDispatcher;
 
 /**
@@ -37,6 +42,9 @@ public class RequestHandler extends HttpServlet {
 
 	@Inject
 	IRequestDispatcher iRequestDispatcherObject;
+
+	@Inject
+	IAuthenticationManager authenticationManager;
 
 	List<Map<String, String>> result = new ArrayList<Map<String, String>>();
 
@@ -84,6 +92,8 @@ public class RequestHandler extends HttpServlet {
 		System.out.println("Reached doPost in RequestHandler");
 		AsyncContext startAsync = request.startAsync();
 
+		System.out.println("HEADER : " + request.getHeader("Authorization"));
+
 		startAsync.addListener(new AsyncListener() {
 
 			@Override
@@ -118,13 +128,35 @@ public class RequestHandler extends HttpServlet {
 
 			@Override
 			public void run() {
+
 				Map<String, String[]> map = startAsync.getRequest()
 						.getParameterMap();
-				result = iRequestDispatcherObject.dispatchRequest(map);
+
+				// set default failure.
+				result.add(new HashMap<String, String>());
+				result.get(0).put("Status", "Failed");
+				result.get(0).put("Reason",
+						"Unauthorized request. Please log in again.");
+				// authenticate using token
+
+				Base64 decoder = new Base64();
+				String authorization = request.getHeader("Authorization");
+				String base64Credentials = authorization.substring(
+						"Basic".length()).trim();
+				byte[] userPassBytesArray = Base64
+						.decodeBase64(base64Credentials.getBytes());
+				String userPassString = StringUtils
+						.newStringUtf8(userPassBytesArray);
+				System.out.println("User credentials : " + userPassString);
+
+				if (authenticationManager.isUserAuthenticated(userPassString)) {
+					System.out.println("user is authenticated.");
+					result = iRequestDispatcherObject.dispatchRequest(map);
+				}
+
 				startAsync.complete();
 			}
 		});
 
 	}
-
 }

@@ -106,6 +106,7 @@ public class NotificationAndPostCacheHelper {
 	public static void cleanUp() {
 		adapterMap = null;
 		adapterDataMap = null;
+		isServerFetchRequiredMap = null;
 	}
 
 	public static void addPost(IActivityProperties post, String key) {
@@ -146,7 +147,7 @@ public class NotificationAndPostCacheHelper {
 	}
 
 	public static void clearAdapterDataMap(String key) {
-		if (adapterDataMap.containsKey(key))
+		if (adapterDataMap != null && adapterDataMap.containsKey(key))
 			adapterDataMap.get(key).clear();
 	}
 

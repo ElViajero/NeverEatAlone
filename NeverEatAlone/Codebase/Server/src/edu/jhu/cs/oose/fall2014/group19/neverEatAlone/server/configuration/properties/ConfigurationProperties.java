@@ -6,13 +6,14 @@ public class ConfigurationProperties {
 	private String Protocol;
 	private String ServerPort;
 	private String ServerURL;
+	private String NotificationManagementPort;
 
-	public String GetIPAddress(){
+	public String GetIPAddress() {
 		return IPAddress;
 	}
 
-	public void SetIPAdress(String ipAddress){
-		IPAddress=ipAddress;
+	public void SetIPAdress(String ipAddress) {
+		IPAddress = ipAddress;
 	}
 
 	public String getProtocol() {
@@ -39,8 +40,12 @@ public class ConfigurationProperties {
 		ServerURL = serverURL;
 	}
 
+	public String getNotificationManagementPort() {
+		return NotificationManagementPort;
+	}
 
-
-
+	public void setNotificationManagementPort(String notificationManagementPort) {
+		NotificationManagementPort = notificationManagementPort;
+	}
 
 }

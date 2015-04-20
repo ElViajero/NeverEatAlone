@@ -135,15 +135,18 @@
         </activity>
         <activity
             android:name=".services.SelectFriendsFragmentActivity"
-            android:label="@string/title_activity_select_friends_fragment" >
+            android:label="@string/title_activity_select_friends_fragment" 
+            android:launchMode="singleTask">
         </activity>
         <activity
             android:name=".services.InvitesFragmentActivity"
-            android:label="@string/title_activity_invites_fragment" >
+            android:label="@string/title_activity_invites_fragment"
+            android:launchMode="singleTask" >
         </activity>
         <activity
             android:name=".services.NearbyContactsActivity"
-            android:label="@string/title_activity_nearby_contacts" >
+            android:label="@string/title_activity_nearby_contacts" 
+            android:launchMode="singleTask">
         </activity>
     </application>
 

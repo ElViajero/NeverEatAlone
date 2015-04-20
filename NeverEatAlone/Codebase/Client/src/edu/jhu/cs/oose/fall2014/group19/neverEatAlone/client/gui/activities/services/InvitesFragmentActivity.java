@@ -1,13 +1,17 @@
 package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.services;
 
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.ListFragment;
 import android.os.Bundle;
 import android.support.v13.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -31,11 +35,14 @@ public class InvitesFragmentActivity extends FragmentActivity {
 	 * The {@link ViewPager} that will host the section contents.
 	 */
 	ViewPager mViewPager;
+	static Map<Integer, String> tagMap;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_invites_fragment);
+		if (tagMap == null)
+			tagMap = new HashMap<Integer, String>();
 
 		// Create the adapter that will return a fragment for each of the three
 		// primary sections of the activity.
@@ -46,6 +53,29 @@ public class InvitesFragmentActivity extends FragmentActivity {
 		mViewPager.setAdapter(mSectionsPagerAdapter);
 		mViewPager.setCurrentItem(fragmentpostion);
 		fragmentpostion = 1;
+
+		mViewPager.setOnPageChangeListener(new OnPageChangeListener() {
+
+			@Override
+			public void onPageSelected(int arg0) {
+
+				mSectionsPagerAdapter.getListFragment(arg0).onResume();
+
+			}
+
+			@Override
+			public void onPageScrolled(int arg0, float arg1, int arg2) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void onPageScrollStateChanged(int arg0) {
+				// TODO Auto-generated method stub
+
+			}
+		});
+
 	}
 
 	@Override
@@ -80,9 +110,11 @@ public class InvitesFragmentActivity extends FragmentActivity {
 	 * one of the sections/tabs/pages.
 	 */
 	public class SectionsPagerAdapter extends FragmentPagerAdapter {
+		FragmentManager fragmentManager;
 
 		public SectionsPagerAdapter(FragmentManager fm) {
 			super(fm);
+			fragmentManager = fm;
 		}
 
 		@Override
@@ -118,6 +150,22 @@ public class InvitesFragmentActivity extends FragmentActivity {
 			}
 			return null;
 		}
+
+		@Override
+		public Object instantiateItem(ViewGroup container, int position) {
+			Object obj = super.instantiateItem(container, position);
+
+			ListFragment f = (ListFragment) obj;
+			tagMap.put(position, f.getTag());
+			return obj;
+
+		}
+
+		public ListFragment getListFragment(int position) {
+			return (ListFragment) fragmentManager.findFragmentByTag(tagMap
+					.get(position));
+		}
+
 	}
 
 	/**
@@ -158,6 +206,7 @@ public class InvitesFragmentActivity extends FragmentActivity {
 		super.onResume();
 		mViewPager.setCurrentItem(fragmentpostion);
 		fragmentpostion = 1;
+
 	}
 
 }

@@ -13,11 +13,11 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.DataCacheHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.NotificationAlertHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.NotificationAndPostCacheHelper;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.contracts.IExecutableRequest;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.contracts.IRequestExecutor;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
 
 public class GetContactNotificationExecutableRequest implements
-		IExecutableRequest {
+		IRequestExecutor {
 
 	@Override
 	public void executeRequest(Activity activity) {

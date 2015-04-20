@@ -21,7 +21,10 @@
             android:text="@string/contacts"/>
         
         <TextView
-            android:id="@+id/textView_swipe_title"  
+            android:id="@+id/textView_swipe_title_right"  
+            style="@style/HeaderTextTheme"/>
+        <TextView
+            android:id="@+id/textView_swipe_title_left"  
             style="@style/HeaderTextTheme"/>
         
     </RelativeLayout>

@@ -80,7 +80,14 @@ public class DataCacheHelper {
 	}
 
 	public static List<?> getCachedResult(String key) {
-		return cachedListDataMap.get(key);
+		return cachedListDataMap == null ? null : cachedListDataMap.get(key);
 	}
 
+	public static void cleanUp() {
+		cachedListDataMap = null;
+		adapterCache = null;
+		genericFlag = false;
+		iActivityPropertiesObject = null;
+		isAccepted = false;
+	}
 }

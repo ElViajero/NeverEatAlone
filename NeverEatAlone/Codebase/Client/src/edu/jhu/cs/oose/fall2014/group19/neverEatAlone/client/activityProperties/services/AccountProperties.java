@@ -217,4 +217,9 @@ public class AccountProperties implements IActivityProperties, IOrderedIterator 
 		this.locationProperties = locationProperties;
 	}
 
+	public static void setUserAccountInstance(
+			AccountProperties accountPropertiesInstance) {
+		AccountProperties.accountPropertiesInstance = accountPropertiesInstance;
+	}
+
 }

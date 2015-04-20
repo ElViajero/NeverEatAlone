@@ -88,6 +88,7 @@ public class RequestHandler implements IRequestHandler {
 	@Override
 	public void cleanUp() {
 		RequestExecutor.cleanUp();
+
 	}
 
 	/**

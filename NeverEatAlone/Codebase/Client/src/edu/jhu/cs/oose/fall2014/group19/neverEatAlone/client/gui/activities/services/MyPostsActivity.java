@@ -24,8 +24,6 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.contracts.IActivityProperties;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.AccountProperties;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.NotificationProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.PostProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.comparators.services.PostDateTimeComparator;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.constraintChecker.services.changePostStatusConstraintChecker;
@@ -35,6 +33,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.help
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.NotificationAndPostCacheHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.FragmentView;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.requests.FetchPostRequestExecutor;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
 
 /**
@@ -366,34 +365,29 @@ public class MyPostsActivity extends ListFragment {
 
 	private void fetchPosts() {
 
-		requestID = "Meal";
-		requestType = "fetchPosts";
+		postList = (List<IActivityProperties>) DataCacheHelper
+				.getCachedResult("mealPost");
 
-		NotificationAndPostCacheHelper.clearAdapterDataMap("mealPost");
+		if (postList == null
+				|| NotificationAndPostCacheHelper
+						.isServerFetchRequired("mealPost")) {
 
-		try {
-			List<Map<String, String>> resultMapList = RequestHandlerHelper
-					.getRequestHandlerInstance().handleRequest(getActivity(),
-							AccountProperties.getUserAccountInstance().toMap(),
-							requestID, requestType);
+			FetchPostRequestExecutor fetchPostRequestExecutor = new FetchPostRequestExecutor();
+			fetchPostRequestExecutor.executeRequest(getActivity());
+			postList = (List<IActivityProperties>) DataCacheHelper
+					.getCachedResult("mealPost");
+			myPostsAdapter.clear();
+			myPostsAdapter.addAll(postList);
 
-			for (Map<String, String> result : resultMapList) {
-
-				if (result.isEmpty())
-					continue;
-
-				NotificationProperties notification = new NotificationProperties(
-						result);
-
-				NotificationAndPostCacheHelper.addPost(
-						PostProperties.notificationToPost(notification),
-						"mealPost");
-			}
-
-		} catch (RequestAbortedException e) {
-			System.out.println("Already Handled");
 		}
+		// myPostsAdapter.notifyDataSetChanged();
 
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		fetchPosts();
 	}
 
 }

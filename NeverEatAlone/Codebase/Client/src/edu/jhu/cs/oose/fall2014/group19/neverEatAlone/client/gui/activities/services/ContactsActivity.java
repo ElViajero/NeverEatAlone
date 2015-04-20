@@ -34,7 +34,8 @@ public class ContactsActivity extends ListFragment {
 
 	private ContactsInformationAdapter contactsInformationAdapter;
 	private TextView contactTitleObject;
-	private TextView swipeTitleObject;
+	private TextView swipeTitleRightObject;
+	private TextView swipeTitleLeftObject;
 	// private Button friendRequestButtonObejct;
 	private Button addFriendButtonObject;
 	private Context context;
@@ -73,10 +74,11 @@ public class ContactsActivity extends ListFragment {
 		initContactView();
 		contactTitleObject = (TextView) fragmentView
 				.getView("textView_contacts_title");
-		swipeTitleObject = (TextView) fragmentView
-				.getView("textView_swipe_title");
-		// friendRequestButtonObejct = (Button) fragmentView
-		// .getView("button_contacts_notification");
+		swipeTitleRightObject = (TextView) fragmentView
+				.getView("textView_swipe_title_right");
+		swipeTitleLeftObject = (TextView) fragmentView
+				.getView("textView_swipe_title_left");
+
 		addFriendButtonObject = (Button) fragmentView
 				.getView("button_contacts_addcontacts");
 
@@ -84,8 +86,7 @@ public class ContactsActivity extends ListFragment {
 
 		contactTitleObject = (TextView) fragmentView
 				.getView("textView_contacts_title");
-		// friendRequestButtonObejct = (Button) fragmentView
-		// .getView("button_contacts_notification");
+
 		addFriendButtonObject = (Button) fragmentView
 				.getView("button_contacts_addcontacts");
 		contactList = new ArrayList<ContactProperties>();
@@ -152,10 +153,11 @@ public class ContactsActivity extends ListFragment {
 	private void setTitleStyle() {
 
 		contactTitleObject.setText("All Contacts");
-		swipeTitleObject.setText(">>");
-		swipeTitleObject.setGravity(android.view.Gravity.RIGHT);
-
-		swipeTitleObject.setTextColor(Color.GRAY);
+		swipeTitleRightObject.setText(">>");
+		swipeTitleRightObject.setGravity(android.view.Gravity.RIGHT);
+		swipeTitleLeftObject.setText("<<");
+		swipeTitleLeftObject.setGravity(android.view.Gravity.LEFT);
+		swipeTitleRightObject.setTextColor(Color.GRAY);
 		contactTitleObject.setGravity(android.view.Gravity.CENTER);
 
 		ThemeManager.setHeaderFont(contactTitleObject);

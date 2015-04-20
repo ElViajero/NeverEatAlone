@@ -23,6 +23,7 @@ import android.widget.TextView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.AccountProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.DateAndTimeProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.R;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.DataCacheHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.MessageToasterHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.NotificationAndPostCacheHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
@@ -135,6 +136,12 @@ public class MainActivity extends Activity {
 		// create the request properties object.
 		AccountProperties loginProperties = new AccountProperties(username,
 				password);
+
+		AccountProperties.setUserAccountInstance(loginProperties);
+
+		MessageToasterHelper.toastMessage("account properties :"
+				+ AccountProperties.getUserAccountInstance().getusername());
+
 		try {
 			// send the request.
 			List<Map<String, String>> resultMapList = RequestHandlerHelper
@@ -166,9 +173,7 @@ public class MainActivity extends Activity {
 			MainActivity.this.startActivity(intent);
 
 		} catch (RequestAbortedException e) {
-			// This is necessary. The exception has
-			// already been handled in the RequestHandler
-			// class.
+			RequestHandlerHelper.cleanUp();
 			return;
 		}
 
@@ -241,6 +246,7 @@ public class MainActivity extends Activity {
 		RequestHandlerHelper.cleanUp();
 		NotificationHelper.cleanUp();
 		NotificationAndPostCacheHelper.cleanUp();
+		DataCacheHelper.cleanUp();
 
 	}
 

@@ -65,7 +65,7 @@ public class AccountManagementRequestHandler implements
 	private void createNotificationServerUser(String username, String password,
 			Map<String, String> requestParameters) {
 		requestParameters.put("password", password);
-		requestParameters.put("tags", "monitoring");
+		requestParameters.put("tags", "management");
 
 		String requestURLString = "http://10.0.0.3:15672/api/users/" + username;
 
