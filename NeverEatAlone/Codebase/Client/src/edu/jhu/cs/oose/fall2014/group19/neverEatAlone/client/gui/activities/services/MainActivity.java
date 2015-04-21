@@ -294,7 +294,7 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		System.out.println("in onResume");
+		MessageToasterHelper.isMessageToastable = true;
 		cleanUp();
 	}
 
@@ -339,5 +339,12 @@ public class MainActivity extends Activity {
 		GetContactsExecutableRequest getContactsExecutableRequest = new GetContactsExecutableRequest();
 		getContactsExecutableRequest.executeRequest(this);
 
+	}
+
+	@Override
+	public void onPause() {
+
+		MessageToasterHelper.isMessageToastable = false;
+		super.onPause();
 	}
 }

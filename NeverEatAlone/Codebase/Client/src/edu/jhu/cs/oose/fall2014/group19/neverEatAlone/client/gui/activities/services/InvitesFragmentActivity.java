@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.R;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.MessageToasterHelper;
 
 public class InvitesFragmentActivity extends FragmentActivity {
 
@@ -204,9 +205,15 @@ public class InvitesFragmentActivity extends FragmentActivity {
 	@Override
 	public void onResume() {
 		super.onResume();
+		MessageToasterHelper.isMessageToastable = true;
 		mViewPager.setCurrentItem(fragmentpostion);
 		fragmentpostion = 1;
+	}
 
+	@Override
+	public void onPause() {
+		MessageToasterHelper.isMessageToastable = false;
+		super.onPause();
 	}
 
 }

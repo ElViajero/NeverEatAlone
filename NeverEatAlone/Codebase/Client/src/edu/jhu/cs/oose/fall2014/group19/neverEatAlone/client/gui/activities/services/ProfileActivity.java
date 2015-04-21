@@ -24,6 +24,7 @@ import android.widget.TextView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.AccountProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.BitMapHelper;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.MessageToasterHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.ProfileView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
@@ -347,7 +348,15 @@ public class ProfileActivity extends Activity {
 	@Override
 	protected void onResume() {
 		super.onResume();
+		MessageToasterHelper.isMessageToastable = true;
 		getProfileInfo();
+	}
+
+	@Override
+	protected void onPause() {
+		MessageToasterHelper.isMessageToastable = true;
+		MessageToasterHelper.isMessageToastable = false;
+		super.onPause();
 	}
 
 }

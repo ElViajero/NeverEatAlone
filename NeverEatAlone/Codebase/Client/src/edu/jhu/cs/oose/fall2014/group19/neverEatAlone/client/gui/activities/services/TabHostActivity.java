@@ -213,7 +213,14 @@ public class TabHostActivity extends TabActivity {
 	protected void onResume() {
 		super.onResume();
 		MessageToasterHelper.contextObject = getApplicationContext();
+		MessageToasterHelper.isMessageToastable = true;
 		DataCacheHelper.setGenericFlag(false);
+	}
+
+	@Override
+	public void onPause() {
+		MessageToasterHelper.isMessageToastable = false;
+		super.onPause();
 	}
 
 }

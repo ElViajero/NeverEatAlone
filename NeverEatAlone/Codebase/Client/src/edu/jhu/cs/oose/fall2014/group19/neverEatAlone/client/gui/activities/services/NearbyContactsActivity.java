@@ -26,6 +26,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.adapters.ContactsInformationAdapter;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.DataCacheHelper;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.MessageToasterHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.NotificationAndPostCacheHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.FragmentView;
@@ -235,9 +236,7 @@ public class NearbyContactsActivity extends ListFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		System.out.println("FETCH STATUS :"
-				+ NotificationAndPostCacheHelper
-						.isServerFetchRequired("contact"));
+		MessageToasterHelper.isMessageToastable = true;
 		if (NotificationAndPostCacheHelper.isServerFetchRequired("contact")) {
 			contactList.clear(); // you may no longer have any contacts.
 			contactsInformationAdapter.notifyDataSetChanged();
@@ -261,6 +260,12 @@ public class NearbyContactsActivity extends ListFragment {
 		Intent intent = new Intent(getActivity(), ContactsProfileActivity.class);
 		getActivity().startActivity(intent);
 
+	}
+
+	@Override
+	public void onPause() {
+		MessageToasterHelper.isMessageToastable = false;
+		super.onPause();
 	}
 
 }

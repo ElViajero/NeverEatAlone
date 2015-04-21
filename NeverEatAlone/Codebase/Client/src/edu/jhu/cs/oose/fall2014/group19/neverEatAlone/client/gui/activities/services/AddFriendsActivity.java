@@ -204,4 +204,17 @@ public class AddFriendsActivity extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		MessageToasterHelper.isMessageToastable = true;
+	}
+
+	@Override
+	protected void onPause() {
+
+		MessageToasterHelper.isMessageToastable = false;
+		super.onPause();
+	}
 }

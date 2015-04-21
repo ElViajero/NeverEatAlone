@@ -24,6 +24,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.constraintChecker.services.validEmailContraintChecker;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.BitMapHelper;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.MessageToasterHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.ProfileView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
@@ -325,6 +326,7 @@ public class EditProfileActivity extends Activity {
 
 	protected void onResume() {
 		super.onResume();
+		MessageToasterHelper.isMessageToastable = true;
 	}
 
 	protected void onDestroy() {
@@ -332,5 +334,12 @@ public class EditProfileActivity extends Activity {
 		avatarBitmap = imageView.getDrawingCache();
 		avatarBitmap.recycle();
 		super.onDestroy();
+	}
+
+	@Override
+	protected void onPause() {
+
+		MessageToasterHelper.isMessageToastable = false;
+		super.onPause();
 	}
 }

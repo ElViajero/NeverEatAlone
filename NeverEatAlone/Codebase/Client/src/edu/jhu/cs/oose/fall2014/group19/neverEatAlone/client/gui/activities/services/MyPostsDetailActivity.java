@@ -28,6 +28,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.adapters.ContactsInformationAdapter;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.DataCacheHelper;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.MessageToasterHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.MealView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
@@ -235,4 +236,16 @@ public class MyPostsDetailActivity extends ListActivity {
 				mealPropertiesObject.getAdditionalInformation());
 	}
 
+	@Override
+	public void onResume() {
+		super.onResume();
+		MessageToasterHelper.isMessageToastable = true;
+	}
+
+	@Override
+	public void onPause() {
+
+		MessageToasterHelper.isMessageToastable = false;
+		super.onPause();
+	}
 }

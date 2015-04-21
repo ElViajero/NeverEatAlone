@@ -30,6 +30,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.constraintChecker.s
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.adapters.MealPostAdapter;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.DataCacheHelper;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.MessageToasterHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.NotificationAndPostCacheHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.FragmentView;
@@ -396,7 +397,14 @@ public class MyPostsActivity extends ListFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
+		MessageToasterHelper.isMessageToastable = true;
 		fetchPosts();
+	}
+
+	@Override
+	public void onPause() {
+		MessageToasterHelper.isMessageToastable = false;
+		super.onPause();
 	}
 
 }

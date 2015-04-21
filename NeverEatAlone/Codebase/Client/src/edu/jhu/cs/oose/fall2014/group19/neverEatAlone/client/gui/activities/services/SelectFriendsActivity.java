@@ -28,6 +28,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.adapters.ContactsInformationAdapter;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.DataCacheHelper;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.MessageToasterHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.NotificationAndPostCacheHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.FragmentView;
@@ -198,6 +199,9 @@ public class SelectFriendsActivity extends ListFragment {
 				} catch (RequestAbortedException e) {
 					System.out.println("Already Handled");
 				}
+
+				NotificationAndPostCacheHelper.setServerFetchRequired(
+						"mealPost", true);
 
 				Intent intent = new Intent(getActivity(), TabHostActivity.class);
 				SelectFriendsActivity.this.startActivity(intent);
@@ -394,6 +398,19 @@ public class SelectFriendsActivity extends ListFragment {
 
 	private void updateView(List<ContactProperties> contactList) {
 		selectFriendsAdapter.notifyDataSetChanged();
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		MessageToasterHelper.isMessageToastable = true;
+	}
+
+	@Override
+	public void onPause() {
+		MessageToasterHelper.isMessageToastable = true;
+		MessageToasterHelper.isMessageToastable = false;
+		super.onPause();
 	}
 
 }

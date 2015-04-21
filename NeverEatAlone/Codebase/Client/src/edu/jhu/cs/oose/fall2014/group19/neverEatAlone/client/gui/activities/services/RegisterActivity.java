@@ -193,4 +193,17 @@ public class RegisterActivity extends Activity {
 		Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
 		RegisterActivity.this.startActivity(intent);
 	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		MessageToasterHelper.isMessageToastable = true;
+	}
+
+	@Override
+	protected void onPause() {
+		MessageToasterHelper.isMessageToastable = true;
+		MessageToasterHelper.isMessageToastable = false;
+		super.onPause();
+	}
 }

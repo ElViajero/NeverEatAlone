@@ -43,6 +43,18 @@ public class NotificationAndPostCacheHelper {
 			if (!adapterDataMap.containsKey(key))
 				adapterDataMap.put(key, new ArrayList<IActivityProperties>());
 
+			String status = notification.getNotificationStatus();
+			if (status.equalsIgnoreCase("CLOSED")
+					|| status.equalsIgnoreCase("CANCELLED")) {
+
+				for (IActivityProperties a : adapterDataMap.get(key)) {
+					NotificationProperties n = (NotificationProperties) a;
+					if (n.getNotificationID().equals(
+							notification.getNotificationID()))
+						adapterDataMap.get(key).remove(a);
+				}
+			}
+
 			adapterDataMap.get(key).add(notification);
 			isServerFetchRequiredMap.put(key, true);
 			NotificationAlertHelper.enableNotificationAlert(key);

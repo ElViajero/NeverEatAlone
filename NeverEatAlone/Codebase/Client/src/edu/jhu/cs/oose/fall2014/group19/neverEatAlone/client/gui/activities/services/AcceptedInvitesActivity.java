@@ -21,6 +21,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.adapters.MealNotificationAdapter;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.DataCacheHelper;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.MessageToasterHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.NotificationAndPostCacheHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.FragmentView;
@@ -115,6 +116,7 @@ public class AcceptedInvitesActivity extends ListFragment {
 		acceptedInvitesAdapter = new MealNotificationAdapter(getActivity(),
 				acceptedInvitesList);
 		setListAdapter(acceptedInvitesAdapter);
+
 		fetchAcceptedInvites();
 
 		applyTheme();
@@ -212,8 +214,7 @@ public class AcceptedInvitesActivity extends ListFragment {
 					acceptedInvitesList);
 
 		if (acceptedInvitesList == null
-				|| NotificationAndPostCacheHelper
-						.isServerFetchRequired("contact")) {
+				|| NotificationAndPostCacheHelper.isServerFetchRequired("meal")) {
 			FetchAcceptedInvitesRequestExecutor fetchAcceptedInvitesRequestExecutor = new FetchAcceptedInvitesRequestExecutor();
 			fetchAcceptedInvitesRequestExecutor.executeRequest(getActivity());
 			acceptedInvitesList = (List<IActivityProperties>) DataCacheHelper
@@ -237,7 +238,15 @@ public class AcceptedInvitesActivity extends ListFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
+		MessageToasterHelper.isMessageToastable = true;
 		fetchAcceptedInvites();
+	}
+
+	@Override
+	public void onPause() {
+
+		MessageToasterHelper.isMessageToastable = false;
+		super.onPause();
 	}
 
 }

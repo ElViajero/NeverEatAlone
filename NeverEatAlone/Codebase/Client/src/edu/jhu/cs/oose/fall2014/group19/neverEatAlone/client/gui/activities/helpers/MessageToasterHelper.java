@@ -14,6 +14,7 @@ import android.widget.Toast;
 public class MessageToasterHelper {
 
 	public static Context contextObject;
+	public static boolean isMessageToastable;
 
 	/**
 	 * This method toasts messages to the screen.
@@ -21,15 +22,19 @@ public class MessageToasterHelper {
 	 * @author tejasvamsingh
 	 */
 	public static void toastMessage(Activity activity, String message) {
-		Toast.makeText(contextObject, message, Toast.LENGTH_SHORT).show();
+		if (isMessageToastable)
+			Toast.makeText(contextObject, message, Toast.LENGTH_SHORT).show();
 	}
 
+	/**
+	 * An override thats simpler to use.
+	 * 
+	 * @author tejasvamsingh
+	 * @param message
+	 */
 	public static void toastMessage(String message) {
-		if (contextObject == null)
-			System.out.println("context object is NULL :  :  : "
-					+ contextObject);
-
-		Toast.makeText(contextObject, message, Toast.LENGTH_SHORT).show();
+		if (isMessageToastable)
+			Toast.makeText(contextObject, message, Toast.LENGTH_SHORT).show();
 	}
 
 	/**
@@ -38,6 +43,7 @@ public class MessageToasterHelper {
 	 * @author Yueling Loh
 	 */
 	public static void toastMessage(Activity activity, int stringID) {
-		Toast.makeText(contextObject, stringID, Toast.LENGTH_SHORT).show();
+		if (isMessageToastable)
+			Toast.makeText(contextObject, stringID, Toast.LENGTH_SHORT).show();
 	}
 }

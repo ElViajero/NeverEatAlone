@@ -7,9 +7,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.R;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.MessageToasterHelper;
 
 /**
  * This class is used to control the post information page.
+ * 
  * @author Hai Tang
  *
  */
@@ -22,6 +24,7 @@ public class PostInformationActivity extends Activity {
 
 	/**
 	 * Method used to initialize the view
+	 * 
 	 * @author: Hai Tang
 	 */
 	private void initView(Bundle savedInstanceState) {
@@ -50,19 +53,34 @@ public class PostInformationActivity extends Activity {
 
 	/**
 	 * Method used for back button click
+	 * 
 	 * @author: Hai Tang
 	 */
-	public void onBackButtonClick(View view){
+	public void onBackButtonClick(View view) {
 		Intent intent = new Intent(this, SelectFriendsActivity.class);
 		startActivity(intent);
 	}
 
 	/**
 	 * Method used for post button click
+	 * 
 	 * @author: Hai Tang
 	 */
-	public void onPostButtonClick(View view){
+	public void onPostButtonClick(View view) {
 		Intent intent = new Intent(this, TabHostActivity.class);
 		startActivity(intent);
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		MessageToasterHelper.isMessageToastable = true;
+	}
+
+	@Override
+	protected void onPause() {
+
+		MessageToasterHelper.isMessageToastable = false;
+		super.onPause();
 	}
 }

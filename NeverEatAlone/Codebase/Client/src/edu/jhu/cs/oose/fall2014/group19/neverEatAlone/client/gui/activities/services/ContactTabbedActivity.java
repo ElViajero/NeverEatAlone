@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.R;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.MessageToasterHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.NotificationAlertHelper;
 
 public class ContactTabbedActivity extends FragmentActivity {
@@ -230,6 +231,13 @@ public class ContactTabbedActivity extends FragmentActivity {
 			mViewPager.setCurrentItem(0);
 		} else
 			mViewPager.setCurrentItem(1);
+		MessageToasterHelper.isMessageToastable = true;
+	}
+
+	@Override
+	public void onPause() {
+		MessageToasterHelper.isMessageToastable = false;
+		super.onPause();
 	}
 
 }
