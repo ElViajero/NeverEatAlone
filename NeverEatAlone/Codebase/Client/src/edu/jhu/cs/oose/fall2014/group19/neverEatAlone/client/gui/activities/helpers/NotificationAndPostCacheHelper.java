@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import android.app.ListFragment;
 import android.widget.ArrayAdapter;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.contracts.IActivityProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.NotificationProperties;
@@ -18,11 +19,13 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.
  */
 public class NotificationAndPostCacheHelper {
 
-	private static Map<String, ArrayAdapter<IActivityProperties>> adapterMap;
+	private static Map<String, ArrayAdapter<?>> adapterMap;
 	private static Map<String, List<IActivityProperties>> adapterDataMap;
 	private static Map<String, Boolean> isServerFetchRequiredMap;
 	private static Map<String, IActivityProperties> myPostMap;
 	private static Map<String, List<String>> attendingMap;
+	private static Map<String, ListFragment> activityMap;
+	public static boolean recievedNotification;
 
 	public static void setNotificationCache(
 			Collection<NotificationProperties> notificationCache) {
@@ -53,30 +56,36 @@ public class NotificationAndPostCacheHelper {
 							notification.getNotificationID()))
 						adapterDataMap.get(key).remove(a);
 				}
-			}
+			} else
+				adapterDataMap.get(key).add(notification);
 
-			adapterDataMap.get(key).add(notification);
+			DataCacheHelper.setGenericFlag(true);
+			refreshActivity("acceptedMeal");
+
 			isServerFetchRequiredMap.put(key, true);
 			NotificationAlertHelper.enableNotificationAlert(key);
+
 		}
 
 		System.out.println("adapter maps : " + adapterDataMap);
 		populateAdapters();
+		notificationCache.clear();
 	}
 
 	private static void populateAdapters() {
 
-		for (Map.Entry<String, ArrayAdapter<IActivityProperties>> entry : adapterMap
-				.entrySet()) {
-			entry.getValue().addAll(adapterDataMap.get(entry.getKey()));
+		for (Map.Entry<String, ArrayAdapter<?>> entry : adapterMap.entrySet()) {
+			ArrayAdapter<IActivityProperties> a = (ArrayAdapter<IActivityProperties>) entry
+					.getValue();
+			a.addAll(adapterDataMap.get(entry.getKey()));
 		}
 
 	}
 
 	private static void clearAdapters() {
-		for (Map.Entry<String, ArrayAdapter<IActivityProperties>> entry : adapterMap
-				.entrySet()) {
-			System.out.println("entry is " + entry);
+		for (Map.Entry<String, ArrayAdapter<?>> entry : adapterMap.entrySet()) {
+			ArrayAdapter<IActivityProperties> a = (ArrayAdapter<IActivityProperties>) entry
+					.getValue();
 			entry.getValue().clear();
 			adapterDataMap.get(entry.getKey()).clear();
 		}
@@ -84,7 +93,7 @@ public class NotificationAndPostCacheHelper {
 
 	private static void initMaps() {
 		if (adapterMap == null) {
-			adapterMap = new HashMap<String, ArrayAdapter<IActivityProperties>>();
+			adapterMap = new HashMap<String, ArrayAdapter<?>>();
 			adapterDataMap = new HashMap<String, List<IActivityProperties>>();
 			isServerFetchRequiredMap = new HashMap<String, Boolean>();
 			myPostMap = new HashMap<String, IActivityProperties>();
@@ -92,8 +101,8 @@ public class NotificationAndPostCacheHelper {
 		}
 	}
 
-	public static void registerAdapterInstance(
-			ArrayAdapter<IActivityProperties> adapter, String adapterType) {
+	public static void registerAdapterInstance(ArrayAdapter<?> adapter,
+			String adapterType) {
 		initMaps();
 		adapterMap.put(adapterType, adapter);
 		if (!adapterDataMap.containsKey(adapterType))
@@ -137,19 +146,31 @@ public class NotificationAndPostCacheHelper {
 	public static void populateAdapter(String key) {
 		if (adapterMap.containsKey(key)) {
 			adapterMap.get(key).clear();
-			adapterMap.get(key).addAll(adapterDataMap.get(key));
+			ArrayAdapter<IActivityProperties> a = (ArrayAdapter<IActivityProperties>) adapterMap
+					.get(key);
+			a.addAll(adapterDataMap.get(key));
+			a.notifyDataSetChanged();
 		}
 	}
 
 	private static void handleResponse(NotificationProperties notification) {
 
 		MessageToasterHelper.toastMessage(notification.getPoster()
-				+ " has accepted " + notification.getNotificationType()
+				+ " has accepted your " + notification.getNotificationType()
 				+ " invitation.");
 
 		isServerFetchRequiredMap.put(notification.getNotificationID(), true);
+		isServerFetchRequiredMap.put(notification.getNotificationType(), true);
 		isServerFetchRequiredMap.put(notification.getNotificationType()
 				+ "Post", true);
+		refreshActivity(notification.getNotificationType());
+
+	}
+
+	private static void refreshActivity(String key) {
+
+		if (activityMap != null && activityMap.containsKey(key))
+			activityMap.get(key).onResume();
 
 	}
 
@@ -160,6 +181,12 @@ public class NotificationAndPostCacheHelper {
 	public static void clearAdapterDataMap(String key) {
 		if (adapterDataMap != null && adapterDataMap.containsKey(key))
 			adapterDataMap.get(key).clear();
+	}
+
+	public static void registerActivity(String key, ListFragment activity) {
+		if (activityMap == null)
+			activityMap = new HashMap<String, ListFragment>();
+		activityMap.put(key, activity);
 	}
 
 }

@@ -46,7 +46,9 @@ public class RequestHandler extends HttpServlet {
 	@Inject
 	IAuthenticationManager authenticationManager;
 
-	List<Map<String, String>> result = new ArrayList<Map<String, String>>();
+	List<Map<String, String>> result;
+
+	ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(10);
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -94,6 +96,11 @@ public class RequestHandler extends HttpServlet {
 
 		System.out.println("HEADER : " + request.getHeader("Authorization"));
 
+		String requestID = request.getParameterMap().get("requestID")[0];
+		String requestType = request.getParameterMap().get("requestType")[0];
+
+		System.out.println("Request is : " + requestID + " " + requestType);
+
 		startAsync.addListener(new AsyncListener() {
 
 			@Override
@@ -122,13 +129,12 @@ public class RequestHandler extends HttpServlet {
 			}
 		});
 
-		ScheduledThreadPoolExecutor executor = new ScheduledThreadPoolExecutor(
-				10);
-		executor.execute(new Runnable() {
+		// executor.execute(new Runnable() {
+		startAsync.start(new Runnable() {
 
 			@Override
 			public void run() {
-
+				result = new ArrayList<Map<String, String>>();
 				Map<String, String[]> map = startAsync.getRequest()
 						.getParameterMap();
 

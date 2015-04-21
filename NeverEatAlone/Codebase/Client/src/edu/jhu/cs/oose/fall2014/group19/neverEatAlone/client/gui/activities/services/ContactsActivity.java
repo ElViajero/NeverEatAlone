@@ -96,6 +96,9 @@ public class ContactsActivity extends ListFragment {
 		contactsInformationAdapter.setShowCheckboxes(false);
 		setListAdapter(contactsInformationAdapter);
 
+		ListFragment frag = this;
+		NotificationAndPostCacheHelper.registerActivity("contact", frag);
+
 		fetchContacts();
 
 		setTitleStyle();
@@ -184,10 +187,17 @@ public class ContactsActivity extends ListFragment {
 			getContactsExecutableRequest.executeRequest(getActivity());
 			contactList = (List<ContactProperties>) DataCacheHelper
 					.getCachedResult("contact");
+
+			contactsInformationAdapter.clear();
+			contactsInformationAdapter.addAll(contactList);
+			contactsInformationAdapter.notifyDataSetChanged();
 		}
 
-		contactsInformationAdapter.clear();
-		contactsInformationAdapter.addAll(contactList);
+		if (contactList.size() != contactsInformationAdapter.getCount()) {
+			contactsInformationAdapter.clear();
+			contactsInformationAdapter.addAll(contactList);
+			contactsInformationAdapter.notifyDataSetChanged();
+		}
 
 	}
 

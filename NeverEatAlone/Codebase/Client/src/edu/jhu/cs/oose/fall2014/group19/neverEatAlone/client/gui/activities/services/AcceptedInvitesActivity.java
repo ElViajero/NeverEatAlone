@@ -116,7 +116,7 @@ public class AcceptedInvitesActivity extends ListFragment {
 		acceptedInvitesAdapter = new MealNotificationAdapter(getActivity(),
 				acceptedInvitesList);
 		setListAdapter(acceptedInvitesAdapter);
-
+		NotificationAndPostCacheHelper.registerActivity("acceptedMeal", this);
 		fetchAcceptedInvites();
 
 		applyTheme();
@@ -214,7 +214,8 @@ public class AcceptedInvitesActivity extends ListFragment {
 					acceptedInvitesList);
 
 		if (acceptedInvitesList == null
-				|| NotificationAndPostCacheHelper.isServerFetchRequired("meal")) {
+				|| NotificationAndPostCacheHelper.isServerFetchRequired("meal")
+				|| DataCacheHelper.getGenericFlag()) {
 			FetchAcceptedInvitesRequestExecutor fetchAcceptedInvitesRequestExecutor = new FetchAcceptedInvitesRequestExecutor();
 			fetchAcceptedInvitesRequestExecutor.executeRequest(getActivity());
 			acceptedInvitesList = (List<IActivityProperties>) DataCacheHelper
@@ -223,6 +224,7 @@ public class AcceptedInvitesActivity extends ListFragment {
 			acceptedInvitesAdapter.clear();
 			acceptedInvitesAdapter.addAll(acceptedInvitesList);
 			acceptedInvitesAdapter.notifyDataSetChanged();
+			DataCacheHelper.setGenericFlag(false);
 		}
 
 		if (acceptedInvitesAdapter == null

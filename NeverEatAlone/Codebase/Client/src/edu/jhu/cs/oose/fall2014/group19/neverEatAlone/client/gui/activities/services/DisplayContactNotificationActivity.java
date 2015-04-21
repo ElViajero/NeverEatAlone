@@ -31,6 +31,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.help
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.FragmentView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.requests.GetContactNotificationExecutableRequest;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.requests.GetContactsExecutableRequest;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
 
 /**
@@ -240,7 +241,6 @@ public class DisplayContactNotificationActivity extends ListFragment {
 		ContactProperties p = (ContactProperties) selectedNotification
 				.getNotificationData();
 
-		System.out.println("selectedNotification : " + selectedNotification);
 		List<String> recipientList = new ArrayList<String>();
 		recipientList.add(selectedNotification.getPoster());
 
@@ -260,6 +260,11 @@ public class DisplayContactNotificationActivity extends ListFragment {
 					.getCachedResult("contactRequest");
 			contactList.remove(selectedNotification);
 			contactsNotificationAdapter.notifyDataSetChanged();
+
+			// fetch the contacts again.
+			GetContactsExecutableRequest request = new GetContactsExecutableRequest();
+			request.executeRequest(getActivity());
+
 			return true;
 
 		} catch (RequestAbortedException e) {

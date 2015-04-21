@@ -139,6 +139,9 @@ public class RequestExecutorHelper {
 		} catch (IOException e) {
 			e.printStackTrace();
 			return false;
+		} catch (Exception e) {
+			return false;
 		}
+
 	}
 }
