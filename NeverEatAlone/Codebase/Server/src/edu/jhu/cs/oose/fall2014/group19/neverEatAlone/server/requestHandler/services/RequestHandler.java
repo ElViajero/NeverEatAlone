@@ -137,8 +137,11 @@ public class RequestHandler extends HttpServlet {
 				result.get(0).put("Status", "Failed");
 				result.get(0).put("Reason",
 						"Unauthorized request. Please log in again.");
-				// authenticate using token
 
+				if (request.getHeader("Authorization") == null)
+					startAsync.complete();
+
+				// authenticate using token
 				Base64 decoder = new Base64();
 				String authorization = request.getHeader("Authorization");
 				String base64Credentials = authorization.substring(

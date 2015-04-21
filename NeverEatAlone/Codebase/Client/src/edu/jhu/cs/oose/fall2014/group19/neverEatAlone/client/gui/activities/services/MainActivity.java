@@ -9,7 +9,10 @@ import java.util.Map;
 import org.apache.http.impl.execchain.RequestAbortedException;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.location.LocationManager;
 import android.os.AsyncTask;
@@ -32,6 +35,7 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeMan
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.LoginView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.locationManager.services.LocationFinder;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.notificationHandler.services.NotificationHelper;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.requests.DeletetLocationRequestExecutor;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.requests.GetContactsExecutableRequest;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
 
@@ -132,8 +136,8 @@ public class MainActivity extends Activity {
 			URISyntaxException {
 		// ThemeManager.setTheme(R.style.DarkTheme);
 
-		String username = loginView.getValue(usernameEditTextObject);
-		String password = loginView.getValue(passwordEditTextObject);
+		final String username = loginView.getValue(usernameEditTextObject);
+		final String password = loginView.getValue(passwordEditTextObject);
 
 		// create the request properties object.
 		AccountProperties loginProperties = new AccountProperties(username,
@@ -169,17 +173,8 @@ public class MainActivity extends Activity {
 				// delete old posts
 				deleteOldPosts();
 
-				// start the location service.
-				startLocationService();
-
-				// fetchContacts
-				fetchContacts();
-
-				// start the new activity
-				Intent intent = new Intent(MainActivity.this,
-						TabHostActivity.class);
-				intent.putExtra("username", username);
-				MainActivity.this.startActivity(intent);
+				// get permission to use location services.
+				createLocationAlert(username);
 
 			} catch (RequestAbortedException e) {
 				RequestHandlerHelper.cleanUp();
@@ -187,6 +182,67 @@ public class MainActivity extends Activity {
 			}
 		}
 
+	}
+
+	/**
+	 * 
+	 * Helper method to create an alert dialog asking for permission to use
+	 * location services.
+	 * 
+	 * @author tejasvamsingh
+	 * 
+	 * @param username
+	 */
+	private void createLocationAlert(final String username) {
+
+		new AlertDialog.Builder(this)
+				.setTitle("Permission to Use Location")
+				.setMessage(
+						"NeverEatAlone would like to use your approximate location to find nearby contacts and places to eat.")
+				.setPositiveButton("Allow", new OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						startLocationService();
+						// fetchContacts
+						fetchContacts();
+						// start the new activity
+						Intent intent = new Intent(MainActivity.this,
+								TabHostActivity.class);
+						intent.putExtra("username", username);
+						MainActivity.this.startActivity(intent);
+
+					}
+				})
+				.setNegativeButton("Don't Allow",
+						new DialogInterface.OnClickListener() {
+
+							@Override
+							public void onClick(DialogInterface dialog,
+									int which) {
+								// fetchContacts
+								fetchContacts();
+
+								deleteLocation();
+
+								// start the new activity
+								Intent intent = new Intent(MainActivity.this,
+										TabHostActivity.class);
+								intent.putExtra("username", username);
+								MainActivity.this.startActivity(intent);
+
+							}
+
+						}).show();
+	}
+
+	/**
+	 * Helper method that deletes the user's lacation.
+	 */
+	private void deleteLocation() {
+
+		DeletetLocationRequestExecutor deletetLocationRequestExecutor = new DeletetLocationRequestExecutor();
+		deletetLocationRequestExecutor.executeRequest(this);
 	}
 
 	private void startLocationService() {

@@ -18,4 +18,7 @@ public interface ILocationDBRequestHandler {
 	public List<Map<String, String>> updateUserLocation(
 			Map<String, String[]> request);
 
+	public List<Map<String, String>> deleteUserLocation(
+			Map<String, String[]> request);
+
 }

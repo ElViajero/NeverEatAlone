@@ -86,4 +86,23 @@ public class LocationDBRequestHandler implements ILocationDBRequestHandler {
 
 		return resultMapList;
 	}
+
+	@Override
+	public List<Map<String, String>> deleteUserLocation(
+			Map<String, String[]> request) {
+
+		System.out
+				.println("Reached deleteUserLocation in LocationDBRequestHandler");
+
+		Map<String, Object> queryParameters = new HashMap<String, Object>();
+		queryParameters.put("username", request.get("username")[0]);
+
+		String query = "MATCH (a:User) "
+				+ "OPTIONAL MATCH (a:User)-[r:LOCATED_IN]->(:Location) "
+				+ "WHERE a.username={username} " + "DELETE r";
+
+		return iDBQueryExecutionManagerInstance.executeQuery(query,
+				queryParameters);
+
+	}
 }

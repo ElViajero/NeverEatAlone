@@ -225,4 +225,8 @@ public class LocationManagementRequestHandler implements
 
 	}
 
+	private List<Map<String, String>> delete(Map<String, String[]> request) {
+		return iLocationDBRequestHandler.deleteUserLocation(request);
+	}
+
 }
