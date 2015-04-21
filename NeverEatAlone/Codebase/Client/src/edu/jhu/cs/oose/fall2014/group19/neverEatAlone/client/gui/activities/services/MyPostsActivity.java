@@ -376,6 +376,9 @@ public class MyPostsActivity extends ListFragment {
 			fetchPostRequestExecutor.executeRequest(getActivity());
 			postList = (List<IActivityProperties>) DataCacheHelper
 					.getCachedResult("mealPost");
+			myPostsAdapter.clear();
+			myPostsAdapter.addAll(postList);
+			myPostsAdapter.notifyDataSetChanged();
 
 		}
 

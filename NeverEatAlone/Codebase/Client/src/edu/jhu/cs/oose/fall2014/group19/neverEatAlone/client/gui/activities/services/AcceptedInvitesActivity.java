@@ -2,9 +2,6 @@ package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.ser
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-
-import org.apache.http.impl.execchain.RequestAbortedException;
 
 import android.app.Activity;
 import android.app.ListFragment;
@@ -21,14 +18,13 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.contracts.IActivityProperties;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.AccountProperties;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.NotificationProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.adapters.MealNotificationAdapter;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.DataCacheHelper;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.NotificationAndPostCacheHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.FragmentView;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.requests.FetchAcceptedInvitesRequestExecutor;
 
 /**
  * 
@@ -205,37 +201,35 @@ public class AcceptedInvitesActivity extends ListFragment {
 	/**
 	 * @author tejasvamsingh
 	 */
+	@SuppressWarnings("unchecked")
 	private void fetchAcceptedInvites() {
 
-		requestID = "Meal";
-		requestType = "fetchAccepted";
+		acceptedInvitesList = (List<IActivityProperties>) DataCacheHelper
+				.getCachedResult("acceptedMeal");
 
-		try {
-			acceptedInvitesList.clear();
-		} catch (NullPointerException e) {
-			return;
+		if (acceptedInvitesAdapter == null)
+			acceptedInvitesAdapter = new MealNotificationAdapter(getActivity(),
+					acceptedInvitesList);
+
+		if (acceptedInvitesList == null
+				|| NotificationAndPostCacheHelper
+						.isServerFetchRequired("contact")) {
+			FetchAcceptedInvitesRequestExecutor fetchAcceptedInvitesRequestExecutor = new FetchAcceptedInvitesRequestExecutor();
+			fetchAcceptedInvitesRequestExecutor.executeRequest(getActivity());
+			acceptedInvitesList = (List<IActivityProperties>) DataCacheHelper
+					.getCachedResult("acceptedMeal");
+
+			acceptedInvitesAdapter.clear();
+			acceptedInvitesAdapter.addAll(acceptedInvitesList);
+			acceptedInvitesAdapter.notifyDataSetChanged();
 		}
 
-		try {
-
-			List<Map<String, String>> resultMapList = RequestHandlerHelper
-					.getRequestHandlerInstance().handleRequest(getActivity(),
-							AccountProperties.getUserAccountInstance().toMap(),
-							requestID, requestType);
-
-			for (Map<String, String> result : resultMapList) {
-
-				if (result.isEmpty())
-					continue;
-				System.out.println("RESULT IS :" + result);
-				acceptedInvitesList.add(new NotificationProperties(result));
-			}
-
-			System.out.println("accepted invite list : " + acceptedInvitesList);
+		if (acceptedInvitesAdapter == null
+				|| acceptedInvitesAdapter.getCount() != acceptedInvitesList
+						.size()) {
+			acceptedInvitesAdapter.clear();
+			acceptedInvitesAdapter.addAll(acceptedInvitesList);
 			acceptedInvitesAdapter.notifyDataSetChanged();
-
-		} catch (RequestAbortedException e) {
-			return;
 		}
 
 	}
