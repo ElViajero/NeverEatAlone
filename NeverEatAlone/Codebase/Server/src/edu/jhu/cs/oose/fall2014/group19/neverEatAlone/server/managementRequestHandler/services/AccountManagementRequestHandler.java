@@ -47,9 +47,22 @@ public class AccountManagementRequestHandler implements
 		String password = request.get("password")[0];
 
 		Map<String, String> requestParameters = new HashMap<String, String>();
-		createNotificationServerUser(username, password, requestParameters);
+		boolean createdNotificationCredentials = createNotificationServerUser(
+				username, password, requestParameters);
 
-		return iAccountManagerObject.create(request);
+		List<Map<String, String>> result = iAccountManagerObject
+				.create(request);
+
+		if (!createdNotificationCredentials) {
+			result.get(0).put("Status", "Failed");
+			result.get(0)
+					.put("Reason",
+							"Failed to authorize user on the notification server. Please try again or user a different username/password combination.");
+
+			// roll back account creation.
+			delete(request);
+		}
+		return result;
 	}
 
 	/**
@@ -62,8 +75,8 @@ public class AccountManagementRequestHandler implements
 	 * @param password
 	 * @param requestParameters
 	 */
-	private void createNotificationServerUser(String username, String password,
-			Map<String, String> requestParameters) {
+	private boolean createNotificationServerUser(String username,
+			String password, Map<String, String> requestParameters) {
 		requestParameters.put("password", password);
 		requestParameters.put("tags", "management");
 
@@ -85,7 +98,7 @@ public class AccountManagementRequestHandler implements
 		requestURLString = "http://10.0.0.3:15672/api/permissions/%2f/"
 				+ username;
 
-		requestExecutorHelper.executePutRequest(requestParameters,
+		return requestExecutorHelper.executePutRequest(requestParameters,
 				requestURLString, credentialsMap);
 	}
 
@@ -120,7 +133,27 @@ public class AccountManagementRequestHandler implements
 		System.out.println("reached UpdateAccountRequest");
 		// ********* LOGGING *********
 
-		return iAccountManagerObject.update(request);
+		List<Map<String, String>> result = iAccountManagerObject
+				.update(request);
+
+		if (result.get(0).get("Status").equals("Success")) {
+			String username = request.get("username")[0];
+			String password = request.get("password")[0];// update notification
+															// credentials
+			Map<String, String> requestParameters = new HashMap<String, String>();
+			boolean createdNotificationUser = createNotificationServerUser(
+					username, password, requestParameters);
+
+			if (!createdNotificationUser) {
+				result.get(0)
+						.put("Reason",
+								"Failed to authorize user on the notification server. Please try again later. Password was updated.");
+
+			}
+
+		}
+		return result;
+
 	}
 
 	private List<Map<String, String>> getInfo(Map<String, String[]> request) {

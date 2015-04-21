@@ -100,7 +100,7 @@ public class RequestExecutorHelper {
 	 * @param requestURLString
 	 * @param credentialsMap
 	 */
-	public void executePutRequest(Map<String, String> requestParameters,
+	public boolean executePutRequest(Map<String, String> requestParameters,
 			String requestURLString, Map<String, String> credentialsMap) {
 
 		try {
@@ -129,12 +129,16 @@ public class RequestExecutorHelper {
 			out.write(keyArg.toString());
 			out.close();
 			httpCon.getInputStream();
+			return true;
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
+			return false;
 		} catch (ProtocolException e) {
 			e.printStackTrace();
+			return false;
 		} catch (IOException e) {
 			e.printStackTrace();
+			return false;
 		}
 	}
 }

@@ -149,7 +149,13 @@ public class RequestHandler extends HttpServlet {
 						.newStringUtf8(userPassBytesArray);
 				System.out.println("User credentials : " + userPassString);
 
-				if (authenticationManager.isUserAuthenticated(userPassString)) {
+				// we also want to let a registering user through..
+				String requestID = map.get("requestID")[0];
+				String requestType = map.get("requestType")[0];
+
+				if (authenticationManager.isUserAuthenticated(userPassString)
+						|| (requestID.equals("Account") && requestType
+								.equals("create"))) {
 					System.out.println("user is authenticated.");
 					result = iRequestDispatcherObject.dispatchRequest(map);
 				}
