@@ -2,6 +2,6 @@
 	"IPAddress" : "10.0.0.3" ,
 	"Protocol" : "http://" ,
 	"ServerPort" : "8080" ,
-	"NotificationManagementPort" : "15672"
+	"NotificationManagementPort" : "15672",
 	"ServerURL" : "/NeverEatAloneServer/RequestHandler"
 }

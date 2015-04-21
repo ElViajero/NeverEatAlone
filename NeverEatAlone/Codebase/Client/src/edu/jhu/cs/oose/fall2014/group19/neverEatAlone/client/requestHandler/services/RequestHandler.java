@@ -61,7 +61,9 @@ public class RequestHandler implements IRequestHandler {
 				if (resultMapList.get(0).containsKey("Reason"))
 					reason = resultMapList.get(0).get("Reason");
 
-				MessageToasterHelper.toastMessage(activity, reason);
+				if (!reason.equalsIgnoreCase("EMPTY"))
+					MessageToasterHelper.toastMessage(activity, reason);
+
 				throw new RequestAbortedException("Exception already handled.");
 			}
 

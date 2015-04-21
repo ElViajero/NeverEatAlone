@@ -82,7 +82,6 @@ public class NotificationAndPostCacheHelper {
 
 	public static void registerAdapterInstance(
 			ArrayAdapter<IActivityProperties> adapter, String adapterType) {
-		MessageToasterHelper.toastMessage("INSIDE REGISTER ADAPTER");
 		initMaps();
 		adapterMap.put(adapterType, adapter);
 		if (!adapterDataMap.containsKey(adapterType))

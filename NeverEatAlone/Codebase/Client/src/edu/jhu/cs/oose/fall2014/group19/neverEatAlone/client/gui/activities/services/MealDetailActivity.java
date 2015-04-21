@@ -26,7 +26,6 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.adapters.ContactsInformationAdapter;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.DataCacheHelper;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.MessageToasterHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.NotificationAndPostCacheHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.MealView;
@@ -276,7 +275,6 @@ public class MealDetailActivity extends ListActivity {
 		TextView restaurantTextViewObject = (TextView) mealView
 				.getView("TextView_mealdetails_restaurant_result");
 
-		MessageToasterHelper.toastMessage(mealPropertiesObject.getlocation());
 		mealView.setValue(restaurantTextViewObject,
 				mealPropertiesObject.getlocation());
 

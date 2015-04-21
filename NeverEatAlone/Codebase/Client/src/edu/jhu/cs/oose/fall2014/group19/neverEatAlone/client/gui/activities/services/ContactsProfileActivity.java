@@ -24,7 +24,6 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.BitMapHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.DataCacheHelper;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.MessageToasterHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.NotificationAndPostCacheHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.ProfileView;
@@ -157,8 +156,6 @@ public class ContactsProfileActivity extends Activity {
 
 		List<Pair> orderedIterationList = contact.getOrderedIterationList();
 
-		MessageToasterHelper.toastMessage(orderedIterationList.size() + "");
-
 		for (Pair<?, ?> pair : orderedIterationList) {
 			String key = "";
 			String value = "";
@@ -224,8 +221,6 @@ public class ContactsProfileActivity extends Activity {
 		Bitmap bitmap = BitMapHelper.StringToBitMap(contact
 				.getContactAvatarString());
 
-		MessageToasterHelper.toastMessage("width : " + bitmap.getWidth());
-		MessageToasterHelper.toastMessage("height : " + bitmap.getHeight());
 		imageViewObject.setImageBitmap(bitmap);
 
 	}

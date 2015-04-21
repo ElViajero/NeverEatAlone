@@ -16,7 +16,6 @@ import android.widget.ArrayAdapter;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.AccountProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.LocationProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.DataCacheHelper;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.MessageToasterHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.requestHandler.services.RequestHandlerHelper;
 
 public class LocationFinder extends AsyncTask<Void, Void, Void> {
@@ -71,9 +70,6 @@ public class LocationFinder extends AsyncTask<Void, Void, Void> {
 												.getUserAccountInstance()
 												.getLocationProperties())) {
 
-							MessageToasterHelper
-									.toastMessage("Inside onPost : Loca : "
-											+ locationProperties);
 							AccountProperties
 									.getUserAccountInstance()
 									.getLocationProperties()
@@ -156,10 +152,6 @@ public class LocationFinder extends AsyncTask<Void, Void, Void> {
 						.setLocationName(map.get("locationName"));
 				break;
 			}
-
-			MessageToasterHelper.toastMessage("My location is : "
-					+ AccountProperties.getUserAccountInstance()
-							.getLocationProperties().getLocationName());
 
 		} catch (RequestAbortedException e) {
 			return;

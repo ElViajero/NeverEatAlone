@@ -159,7 +159,6 @@ public class MyPostsDetailActivity extends ListActivity {
 	public void onEditPostButtonClick(View view) {
 
 		DataCacheHelper.setGenericFlag(true);
-		// MessageToasterHelper.toastMessage("edit clicked");
 		Intent i = new Intent(this, CreateMealInformationActivity.class);
 		startActivity(i);
 

@@ -118,14 +118,16 @@ public class LocationManagementRequestHandler implements
 				+ "maps/api/geocode/json?" + "latlng=" + latitude + ","
 				+ longitude + "&key=" + locationAPIKey;
 
-		 Map<String, Object> responseMap = null;
-		//Map<String, Object> responseMap = requestExecutorHelper
-			//	.executePostRequest(requestURLString);
+		Map<String, Object> responseMap = null;
+		// Map<String, Object> responseMap = requestExecutorHelper
+		// .executePostRequest(requestURLString);
 
 		List<Map<String, String>> locationMapList = new ArrayList<Map<String, String>>();
 
 		Map<String, String> statusMap = new HashMap<String, String>();
-		statusMap.put("Status", "Failed"); // initially we don't know if //
+		statusMap.put("Status", "Failed");
+		statusMap.put("Reason", "Could not connect to location services.");
+		// initially we don't know if //
 		// our request succeeds.
 
 		locationMapList.add(statusMap);

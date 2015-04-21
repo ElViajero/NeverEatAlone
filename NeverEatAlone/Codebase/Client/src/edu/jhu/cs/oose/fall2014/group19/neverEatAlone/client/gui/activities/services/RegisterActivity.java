@@ -167,6 +167,8 @@ public class RegisterActivity extends Activity {
 			AccountProperties registerProperties = new AccountProperties(
 					username, password);
 
+			AccountProperties.setUserAccountInstance(registerProperties);
+
 			// Get the request Map
 			Map<String, Object> requestMap = registerProperties.toMap();
 

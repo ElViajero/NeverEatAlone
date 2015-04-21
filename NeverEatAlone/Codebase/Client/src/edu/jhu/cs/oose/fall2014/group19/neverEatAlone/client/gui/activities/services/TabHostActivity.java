@@ -190,7 +190,6 @@ public class TabHostActivity extends TabActivity {
 
 	private void fetchNotifications() {
 		MessageToasterHelper.contextObject = getApplicationContext();
-		MessageToasterHelper.toastMessage("INside FEtCH");
 		notificationCache.clear();
 		try {
 			requestID = "Meal";

@@ -26,7 +26,6 @@ import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.adapters.ContactsInformationAdapter;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.DataCacheHelper;
-import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.MessageToasterHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.NotificationAndPostCacheHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.themes.ThemeManager;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.views.FragmentView;
@@ -203,8 +202,6 @@ public class NearbyContactsActivity extends ListFragment {
 
 			contactList.addAll(contactSet);
 
-			MessageToasterHelper.toastMessage(getActivity(), contactList.get(0)
-					.getContactusername());
 			contactsInformationAdapter.notifyDataSetChanged();
 			NotificationAndPostCacheHelper.setServerFetchRequired("contact",
 					false);
@@ -238,7 +235,6 @@ public class NearbyContactsActivity extends ListFragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		MessageToasterHelper.toastMessage("INSIDE OnResume in ContactActivity");
 		System.out.println("FETCH STATUS :"
 				+ NotificationAndPostCacheHelper
 						.isServerFetchRequired("contact"));

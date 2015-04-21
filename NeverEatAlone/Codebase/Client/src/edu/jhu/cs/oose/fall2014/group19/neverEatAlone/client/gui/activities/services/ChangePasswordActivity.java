@@ -44,7 +44,6 @@ public class ChangePasswordActivity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		MessageToasterHelper.toastMessage("Inside OCCC");
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_change_password);
 

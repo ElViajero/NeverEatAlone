@@ -92,6 +92,11 @@ public class DBQueryExecutionManager implements IDBQueryExecutionManager {
 		// entries
 		ResourceIterator<Map<String, Object>> rows = result.iterator();
 
+		if (!rows.hasNext()) {
+			resultMapList.get(0).put("Reason", "EMPTY");
+			return resultMapList;
+		}
+
 		// index of element in the maplist
 		int index = 0;
 

@@ -2,6 +2,7 @@ package edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.ser
 
 import java.io.FileNotFoundException;
 import java.net.URISyntaxException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -22,6 +23,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.AccountProperties;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.activityProperties.services.DateAndTimeProperties;
+import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.constraintChecker.services.RegistrationAndLoginContraintChecker;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.R;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.DataCacheHelper;
 import edu.jhu.cs.oose.fall2014.group19.neverEatAlone.client.gui.activities.helpers.MessageToasterHelper;
@@ -139,42 +141,50 @@ public class MainActivity extends Activity {
 
 		AccountProperties.setUserAccountInstance(loginProperties);
 
-		MessageToasterHelper.toastMessage("account properties :"
-				+ AccountProperties.getUserAccountInstance().getusername());
+		Map<String, Object> constraintMap = new HashMap<String, Object>();
 
-		try {
-			// send the request.
-			List<Map<String, String>> resultMapList = RequestHandlerHelper
-					.getRequestHandlerInstance().handleRequest(this,
-							loginProperties.toMap(), requestID, requestType);
+		constraintMap.put("username", username);
+		constraintMap.put("password", password);
 
-			isCreated = true;
-			MessageToasterHelper.toastMessage(this, "Welcome " + username);
+		if (new RegistrationAndLoginContraintChecker()
+				.areConstraintsSatisfied(constraintMap)) {
+			try {
+				// send the request.
+				List<Map<String, String>> resultMapList = RequestHandlerHelper
+						.getRequestHandlerInstance()
+						.handleRequest(this, loginProperties.toMap(),
+								requestID, requestType);
 
-			// construct the user account.
-			AccountProperties userAccount = new AccountProperties(
-					resultMapList.get(0));
+				isCreated = true;
+				MessageToasterHelper.toastMessage(this, "Welcome " + username);
 
-			// we want the user string not the encrypted version.
-			AccountProperties.getUserAccountInstance().setpassword(password);
+				// construct the user account.
+				AccountProperties userAccount = new AccountProperties(
+						resultMapList.get(0));
 
-			// delete old posts
-			deleteOldPosts();
+				// we want the user string not the encrypted version.
+				AccountProperties.getUserAccountInstance()
+						.setpassword(password);
 
-			// start the location service.
-			startLocationService();
+				// delete old posts
+				deleteOldPosts();
 
-			// fetchContacts
-			fetchContacts();
+				// start the location service.
+				startLocationService();
 
-			// start the new activity
-			Intent intent = new Intent(MainActivity.this, TabHostActivity.class);
-			intent.putExtra("username", username);
-			MainActivity.this.startActivity(intent);
+				// fetchContacts
+				fetchContacts();
 
-		} catch (RequestAbortedException e) {
-			RequestHandlerHelper.cleanUp();
-			return;
+				// start the new activity
+				Intent intent = new Intent(MainActivity.this,
+						TabHostActivity.class);
+				intent.putExtra("username", username);
+				MainActivity.this.startActivity(intent);
+
+			} catch (RequestAbortedException e) {
+				RequestHandlerHelper.cleanUp();
+				return;
+			}
 		}
 
 	}
